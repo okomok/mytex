@@ -1,0 +1,163 @@
+\ProvidesPackage{strd}
+
+\usepackage{amsmath,mathtools}
+\usepackage{tikz}
+\usepackage[active,tightpage]{preview}
+\usetikzlibrary{backgrounds,shapes,positioning,fit,calc}
+
+\newcommand{\strd}[1]{%
+    \begin{tikzpicture}[]
+        \begin{scope}[auto,execute at begin node=$,execute at end node=$]
+            #1;
+        \end{scope}
+    \end{tikzpicture}%
+}
+
+\newcommand{\strdbg}[1]{%
+    \begin{pgfonlayer}{background}
+        #1;
+    \end{pgfonlayer}%
+}
+
+\newcommand{\strdscope}[2]{%
+    \begin{scope}[#1]
+        #2
+    \end{scope}%
+}
+
+\newcommand{\strdpreview}[1]{%
+    \begin{preview}
+        \begin{math}
+            #1
+        \end{math}
+    \end{preview}%
+}
+
+\newcommand{\strdgathered}[1]{%
+    \begin{gathered}
+        \strd{#1}
+    \end{gathered}%
+}
+
+\newcommand{\strdstrut}{%
+    \strut%
+}
+
+\tikzset{strd twocell/.style={rounded corners,draw,inner sep=2pt,outer sep=0pt}}
+\tikzset{strd onecell/.style={coordinate}}
+\tikzset{strd stringlabel/.style={font=\tiny,inner sep=0pt}}
+\tikzset{strd stringendlabel/.style={font=\scriptsize,inner sep=1pt}}
+\tikzset{strd valigned/.style={baseline={([yshift=-0.5ex]current bounding box.center)}}}
+\tikzset{strd textvaligned/.style={text height=0.7em,text depth=0.2em}}
+\tikzset{strd dot/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
+\tikzset{strd cornering/.style={}}
+
+\newcommand{\strdcap}[2]{%
+    \node[strd twocell] (#1) at (0,0) {#2};
+    \strdleg{#1}
+    \strdbg {
+        \node[strd twocell,draw=none,fit=(#1) (#1 Left) (#1 Right)] (#1 fit) {};
+    }%
+}
+
+\newcommand{\strdleg}[1]{%
+    \node[strd onecell] (#1 LeftCorner) at ($(#1)+(-0.5,-0.3)$) {};
+    \node[strd onecell] (#1 Left) at ($(#1)+(-0.5,-0.5)$) {};
+    \node[strd onecell] (#1 RightCorner) at ($(#1)+(0.5,-0.3)$) {};
+    \node[strd onecell] (#1 Right) at ($(#1)+(0.5,-0.5)$) {};
+    \draw[strd cornering] {
+        (#1) -- (#1 LeftCorner) -- (#1 Left)
+        (#1) -- (#1 RightCorner) -- (#1 Right)
+    };%
+}
+
+\newcommand{\strdmult}[2]{%
+    \node[strd onecell] (#2 Res) at (#1) {};
+    \node[strd dot] (#2) at ($(#1)+(0,-0.5)$) {};
+    \strdleg{#2}
+    \draw {
+        (#2 Res) -- (#2)
+    };%
+}
+
+\newcommand{\strdcup}[2]{%
+    \strdop {
+        \strdcap{#1}{#2}
+    }%
+}
+
+\newcommand{\strdfit}[2]{%
+    \strdbg {
+        \node[strd twocell,draw=none,fit=#1] (#2 fit) {};
+    }%
+}
+
+\newcommand{\strdline}[2]{%
+    \node[strd onecell] (#2 Top) at (#1) {};
+    \node[strd onecell] (#2) at ($(#1)+(0,-0.5)$) {};
+    \node[strd onecell] (#2 Bottom) at ($(#1)+(0,-1)$) {};
+    \draw {
+        (#2 Top) -- (#2 Bottom)
+    };
+    \strdfit{(#2 Top)(#2 Bottom)}{#2};%
+}
+
+\newcommand{\strddown}[2]{%
+    \node[strd onecell] (#2 From) at (#1) {};
+    \node[strd onecell] (#2) at ($(#1)+(0,-0.125)$) {};
+    \node[strd onecell] (#2 To) at ($(#1)+(0,-0.25)$) {};
+    \draw {
+        (#2 From) -- (#2 To)
+    };%
+}
+
+\newcommand{\strdup}[2]{%
+    \node[strd onecell] (#2 Bottom) at (#1) {};
+    \node[strd onecell] (#2) at ($(#1)+(0,0.125)$) {};
+    \node[strd onecell] (#2 Top) at ($(#1)+(0,0.25)$) {};
+    \draw {
+        (#2 Top) -- (#2 Bottom)
+    };%
+}
+
+\newcommand{\strdpend}[3]{%
+    \node[strd onecell] (#2 Res) at (#1) {}; 
+    \node[strd twocell] (#2) at ($(#1)+(0,-0.5)$) {#3};
+    \draw {
+        (#1) -- (#2) 
+    };%
+    \strdbg {
+        \node[strd twocell,draw=none,fit=(#2) (#2 Res)] (#2 fit) {};
+    }%
+}
+
+\newcommand{\strdfunlabel}[3]{%
+    \node[strd stringlabel,#2] at (#1) {#3};%
+}
+
+\newcommand{\strdhomlabel}[3]{%
+    \node[strd stringlabel,strd textvaligned,left] at (#1) {#2};
+    \node[strd stringlabel,strd textvaligned,right] at (#1) {#3};%
+}
+
+\newcommand{\strdmcatlabel}[3]{%
+    \node[strd stringendlabel,#2] at (#1) {#3};%
+}
+
+\newcommand{\strdop}[1]{%
+    \begin{scope}[yscale=-1]
+        #1;
+    \end{scope}%
+}
+
+\newcommand{\strddual}[1]{%
+    \begin{scope}[xscale=-1]
+        #1;
+    \end{scope}%
+}
+
+\newcommand{\strdshift}[3]{%
+    \begin{scope}[xshift=#1,yshift=#2] 
+        #3;
+    \end{scope}%
+}

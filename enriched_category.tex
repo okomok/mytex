@@ -1,0 +1,43 @@
+\documentclass[]{article}
+\usepackage{amsmath,mathtools}
+\usepackage{tikz,strd}
+\usepackage[active,tightpage]{preview}
+
+\usetikzlibrary{shapes,scopes}
+
+\begin{document}
+
+\strdpreview {
+    \strdgathered {
+        \strdmult{0,0}{y}
+        \strdmcatlabel{y Res}{above}{\mathcal{A}(A,C)}
+        \strdmcatlabel{y Left}{below}{\mathcal{A}(A,B)}
+        \strdmcatlabel{y Right}{below}{\mathcal{A}(B,C)}
+    }
+    =
+    \strdgathered {
+        \strdmult{0,0}{x}
+        \strdmcatlabel{x}{above right}{\mathcal{A}}
+        \strddown{x Left}{l}
+        \strdhomlabel{l}{A}{B}
+        \strddown{x Right}{r}
+        \strdhomlabel{r}{B}{C}
+        \strdop{ \strddown{x Res}{s} }
+        \strdhomlabel{s}{A}{C}
+    }
+}
+
+\strdpreview {
+    \strdgathered {
+        \strdline{0,0}{y}
+        \strdmcatlabel{y Bottom}{below}{\mathcal{A}(A,A')}
+    }
+    \coloneqq 
+    \strdgathered {
+        \strdline{0,0}{x}
+        \strdhomlabel{x}{A}{A'}
+        \strdmcatlabel{x Bottom}{below}{\mathcal{A}}
+    }
+}
+
+\end{document}
