@@ -3,40 +3,71 @@
 \usepackage{tikz,strd}
 \usepackage[active,tightpage]{preview}
 
-\usetikzlibrary{shapes,scopes}
-
 \begin{document}
 
 \strdpreview {
     \strdgathered {
-        \strdmult{0,0}{y}
-        \strdmcatlabel{y Res}{above}{\mathcal{A}(A,C)}
-        \strdmcatlabel{y Left}{below}{\mathcal{A}(A,B)}
-        \strdmcatlabel{y Right}{below}{\mathcal{A}(B,C)}
+        \strdmid{0,0}{ac}
+        \strdjunc{ac To}{m}
+        \strdleft{m}{ab}
+        \strdright{m}{bc}
+        \strdstart{ac From}{\mathcal{A}}
+        \strdhomobj{ac}{A}{C}
+        \strdhomobj{ab}{A}{B}
+        \strdhomobj{bc}{B}{C}
     }
-    =
+    \coloneqq   
     \strdgathered {
-        \strdmult{0,0}{x}
-        \strdmcatlabel{x}{above right}{\mathcal{A}}
-        \strddown{x Left}{l}
-        \strdhomlabel{l}{A}{B}
-        \strddown{x Right}{r}
-        \strdhomlabel{r}{B}{C}
-        \strdop{ \strddown{x Res}{s} }
-        \strdhomlabel{s}{A}{C}
+        \strdmid{0,0}{ac}
+        \strdtwocell{ac To}{m}{M}
+        \strdxscale{1.2}{ \strdleft{m}{ab} }
+        \strdxscale{1.2}{ \strdright{m}{bc} }
+        \strdstart{ac From}{\mathcal{A}(A,C)}
+        \strdend{ab To}{\mathcal{A}(A,B)}
+        \strdend{bc To}{\mathcal{A}(B,C)}
     }
 }
 
 \strdpreview {
     \strdgathered {
-        \strdline{0,0}{y}
-        \strdmcatlabel{y Bottom}{below}{\mathcal{A}(A,A')}
+        \strdmid{0,0}{a}
+        \strdhomobj{a}{A}{A'}
+        \strdend{a To}{\mathcal{A}}
     }
     \coloneqq 
     \strdgathered {
-        \strdline{0,0}{x}
-        \strdhomlabel{x}{A}{A'}
-        \strdmcatlabel{x Bottom}{below}{\mathcal{A}}
+        \strdmid{0,0}{a}
+        \strdend{a To}{\mathcal{A}(A,A')}
+    }
+}
+
+\strdpreview {
+\iffalse
+    \strdgathered {
+        \strdyscale{0.6}{ \strdmid{0,0}{from} }
+        \strdtwocell{from To}{g}{g}
+        \strdyscale{1}{ \strdmid{g}{sf} }
+        \strdtwocell{sf To}{f}{f}
+        \strdyscale{0.6}{ \strdmid{f}{to} }
+        \strdfun{from From}{above}{C}
+        \strdfun{to To}{below}{A}
+        \strdfun{sf}{left}{B}
+    }
+\fi
+    \begin{gathered}
+        A \overset{f}{\to} B \overset{g}{\to} C
+    \end{gathered}
+    \coloneqq
+    \strdgathered {
+        \strdyscale{0.6}{ \strdmid{0,0}{ac} }
+        \strdjunc{ac To}{m}
+        \strdleft{m}{ab}
+        \strdright{m}{bc}
+        \strdhomobj{ab}{A}{B}
+        \strdtwocell{ab To}{f}{f}
+        \strdhomobj{bc}{B}{C}
+        \strdtwocell{bc To}{g}{g}
+        \strdhomobj{ac}{A}{C}
     }
 }
 

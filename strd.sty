@@ -5,6 +5,10 @@
 \usepackage[active,tightpage]{preview}
 \usetikzlibrary{backgrounds,shapes,positioning,fit,calc}
 
+\pgfdeclarelayer{twocell}
+\pgfsetlayers{background,main,twocell}
+
+
 \newcommand{\strd}[1]{%
     \begin{tikzpicture}[]
         \begin{scope}[auto,execute at begin node=$,execute at end node=$]
@@ -43,105 +47,86 @@
     \strut%
 }
 
-\tikzset{strd twocell/.style={rounded corners,draw,inner sep=2pt,outer sep=0pt}}
-\tikzset{strd onecell/.style={coordinate}}
-\tikzset{strd stringlabel/.style={font=\tiny,inner sep=0pt}}
-\tikzset{strd stringendlabel/.style={font=\scriptsize,inner sep=1pt}}
+% no transparent color?
+\tikzset{strd 2cell/.style={font=\scriptsize,rounded corners,draw,fill=white,inner sep=2pt}}
+
+\tikzset{strd 1cell/.style={coordinate}}
+\tikzset{strd edgelabel/.style={font=\tiny,inner sep=0pt,strd textvaligned}}
+\tikzset{strd endlabel/.style={font=\scriptsize,inner sep=1pt,strd textvaligned}}
 \tikzset{strd valigned/.style={baseline={([yshift=-0.5ex]current bounding box.center)}}}
-\tikzset{strd textvaligned/.style={text height=0.7em,text depth=0.2em}}
-\tikzset{strd dot/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
-\tikzset{strd cornering/.style={}}
+\tikzset{strd textvaligned/.style={text height=0.5em,text depth=0.1em}}
+\tikzset{strd junc/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
+\tikzset{strd cornering/.style={rounded corners}}
 
-\newcommand{\strdcap}[2]{%
-    \node[strd twocell] (#1) at (0,0) {#2};
-    \strdleg{#1}
-    \strdbg {
-        \node[strd twocell,draw=none,fit=(#1) (#1 Left) (#1 Right)] (#1 fit) {};
-    }%
+\newcommand{\strdjunc}[2]{%
+    \node[strd junc] (#2) at (#1) {};%
 }
 
-\newcommand{\strdleg}[1]{%
-    \node[strd onecell] (#1 LeftCorner) at ($(#1)+(-0.5,-0.3)$) {};
-    \node[strd onecell] (#1 Left) at ($(#1)+(-0.5,-0.5)$) {};
-    \node[strd onecell] (#1 RightCorner) at ($(#1)+(0.5,-0.3)$) {};
-    \node[strd onecell] (#1 Right) at ($(#1)+(0.5,-0.5)$) {};
+\newcommand{\strdtwocell}[3]{%
+    \begin{pgfonlayer}{twocell}
+        \node[strd 2cell] (#2) at (#1) {#3};
+    \end{pgfonlayer}
+}
+
+\newcommand{\strdleft}[2]{%
+    \node[strd 1cell] (#2 From) at (#1) {};
+    \node[strd 1cell] (#2 Corner) at ($(#1)+(-0.5,-0.3)$) {};
+    \node[strd 1cell] (#2) at ($(#1)+(-0.5,-0.5)$) {};
+    \node[strd 1cell] (#2 To) at ($(#1)+(-0.5,-0.8)$) {};
     \draw[strd cornering] {
-        (#1) -- (#1 LeftCorner) -- (#1 Left)
-        (#1) -- (#1 RightCorner) -- (#1 Right)
+        (#2 From) -- (#2 Corner) -- (#2 To)
     };%
 }
 
-\newcommand{\strdmult}[2]{%
-    \node[strd onecell] (#2 Res) at (#1) {};
-    \node[strd dot] (#2) at ($(#1)+(0,-0.5)$) {};
-    \strdleg{#2}
+\newcommand{\strdmid}[2]{%
+    \node[strd 1cell] (#2 From) at (#1) {};
+    \node[strd 1cell] (#2) at ($(#1)+(0,-0.4)$) {};
+    \node[strd 1cell] (#2 To) at ($(#1)+(0,-0.8)$) {};
     \draw {
-        (#2 Res) -- (#2)
+        (#2 From) -- (#2) -- (#2 To)
     };%
 }
 
-\newcommand{\strdcup}[2]{%
-    \strdop {
-        \strdcap{#1}{#2}
-    }%
+\newcommand{\strdright}[2]{%
+    \strddual { \strdleft{#1}{#2} }%
 }
 
 \newcommand{\strdfit}[2]{%
     \strdbg {
-        \node[strd twocell,draw=none,fit=#1] (#2 fit) {};
+        \node[strd 2cell,draw=none,fit=#1] (#2 fit) {};
     }%
 }
 
-\newcommand{\strdline}[2]{%
-    \node[strd onecell] (#2 Top) at (#1) {};
-    \node[strd onecell] (#2) at ($(#1)+(0,-0.5)$) {};
-    \node[strd onecell] (#2 Bottom) at ($(#1)+(0,-1)$) {};
-    \draw {
-        (#2 Top) -- (#2 Bottom)
-    };
-    \strdfit{(#2 Top)(#2 Bottom)}{#2};%
-}
-
-\newcommand{\strddown}[2]{%
-    \node[strd onecell] (#2 From) at (#1) {};
-    \node[strd onecell] (#2) at ($(#1)+(0,-0.125)$) {};
-    \node[strd onecell] (#2 To) at ($(#1)+(0,-0.25)$) {};
-    \draw {
-        (#2 From) -- (#2 To)
-    };%
-}
-
-\newcommand{\strdup}[2]{%
-    \node[strd onecell] (#2 Bottom) at (#1) {};
-    \node[strd onecell] (#2) at ($(#1)+(0,0.125)$) {};
-    \node[strd onecell] (#2 Top) at ($(#1)+(0,0.25)$) {};
-    \draw {
-        (#2 Top) -- (#2 Bottom)
-    };%
-}
-
 \newcommand{\strdpend}[3]{%
-    \node[strd onecell] (#2 Res) at (#1) {}; 
-    \node[strd twocell] (#2) at ($(#1)+(0,-0.5)$) {#3};
+    \node[strd 1cell] (#2 Res) at (#1) {}; 
+    \node[strd 2cell] (#2) at ($(#1)+(0,-0.5)$) {#3};
     \draw {
         (#1) -- (#2) 
     };%
     \strdbg {
-        \node[strd twocell,draw=none,fit=(#2) (#2 Res)] (#2 fit) {};
+        \node[strd 2cell,draw=none,fit=(#2) (#2 Res)] (#2 fit) {};
     }%
 }
 
-\newcommand{\strdfunlabel}[3]{%
-    \node[strd stringlabel,#2] at (#1) {#3};%
+\newcommand{\strdfun}[3]{%
+    \node[strd edgelabel,#2] at (#1) {#3};%
 }
 
-\newcommand{\strdhomlabel}[3]{%
-    \node[strd stringlabel,strd textvaligned,left] at (#1) {#2};
-    \node[strd stringlabel,strd textvaligned,right] at (#1) {#3};%
+\newcommand{\strdhomobj}[3]{%
+    \node[strd edgelabel,left] at (#1) {#2};
+    \node[strd edgelabel,right] at (#1) {#3};%
+}
+
+\newcommand{\strdstart}[2]{%
+    \node[strd endlabel,above] at (#1) {#2};%
+}
+
+\newcommand{\strdend}[2]{%
+    \node[strd endlabel,below] at (#1) {#2};%
 }
 
 \newcommand{\strdmcatlabel}[3]{%
-    \node[strd stringendlabel,#2] at (#1) {#3};%
+    \node[strd endlabel,#2] at (#1) {#3};%
 }
 
 \newcommand{\strdop}[1]{%
@@ -153,6 +138,18 @@
 \newcommand{\strddual}[1]{%
     \begin{scope}[xscale=-1]
         #1;
+    \end{scope}%
+}
+
+\newcommand{\strdxscale}[2]{%
+    \begin{scope}[xscale=#1]
+        #2;
+    \end{scope}%
+}
+
+\newcommand{\strdyscale}[2]{%
+    \begin{scope}[yscale=#1]
+        #2;
     \end{scope}%
 }
 
