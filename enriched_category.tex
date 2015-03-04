@@ -5,68 +5,135 @@
 
 \begin{document}
 
+% associativity
+\strdpreview{
+    \newcommand{\mymult}{
+        \strdline{\strdorigin}{ad}
+        \strdleft{ad}{ac}
+        \strdright{ad}{cd}
+        \strdline{cd}{cd2}
+        \strdleft{ac}{ab}
+        \strdright{ac}{bc}
+        \strdstart{ad}{\mathcal{A}}
+        \strdhomobj{ad}{A}{D}
+        \strdhomobj{bc}{B}{C}
+    }
+    \strdgathered{
+        \mymult
+        \strdhomobj{ac}{A}{C}
+        \strdhomobj{ab}{A}{B}
+        \strdhomobj{cd End}{C}{D}
+    }
+    =
+    \strdgathered{
+        \strddual{\mymult}
+        \strdhomobj{ac}{B}{D}
+        \strdhomobj{ab}{C}{D}
+        \strdhomobj{cd End}{A}{B}
+    }
+}
+
+% unitality
+\strdpreview{
+    \newcommand{\myunital}{
+        \strdline{\strdorigin}{ab}
+        \strdleft{ab}{ab2}
+        \strdyscale{0.5}{\strdline{ab2}{ab3}}
+        \strdright{ab}{bb}
+        \strdjunc{bb}{u}
+        \strdhomobj{ab}{A}{B}
+    }
+    \strdgathered{
+        \myunital
+        \strdhomobj{bb}{B}{B}
+        \strdhomobj{ab2 End}{A}{B}
+        \strdstart{ab}{\mathcal{A}}
+    }
+    =
+    \strdgathered{
+        \strdyscale{2}{
+            \strdline{\strdorigin}{ab}
+            \strdhomobj{ab}{A}{B}
+            \strdstart{ab}{\mathcal{A}}
+        }
+    }
+    =
+    \strdgathered{
+        \strddual{\myunital}
+        \strdhomobj{bb}{A}{A}
+        \strdhomobj{ab2 End}{A}{B}
+        \strdstart{ab}{\mathcal{A}}
+    }
+}
+
+% syntax
+\strdpreview{
+    \strdgathered{
+        \strdline{\strdorigin}{a}
+        \strdhomobj{a}{A}{A'}
+        \strdstart{a}{\mathcal{A}}
+    }
+    \coloneqq 
+    \strdgathered{
+        \strdline{\strdorigin}{a}
+        \strdstart{a}{\mathcal{A}(A,A')}
+    }
+}
+
 \strdpreview {
     \strdgathered {
-        \strdmid{0,0}{ac}
-        \strdjunc{ac To}{m}
+        \strdline{\strdorigin}{ac}
+        \strdjunc{ac}{m}
         \strdleft{m}{ab}
         \strdright{m}{bc}
-        \strdstart{ac From}{\mathcal{A}}
+        \strdstart{ac}{\mathcal{A}}
         \strdhomobj{ac}{A}{C}
         \strdhomobj{ab}{A}{B}
         \strdhomobj{bc}{B}{C}
     }
-    \coloneqq   
+    \coloneqq
     \strdgathered {
-        \strdmid{0,0}{ac}
-        \strdtwocell{ac To}{m}{M}
+        \strdline{\strdorigin}{ac}
+        \strdtwocell{ac}{m}{M}
         \strdxscale{1.2}{ \strdleft{m}{ab} }
         \strdxscale{1.2}{ \strdright{m}{bc} }
-        \strdstart{ac From}{\mathcal{A}(A,C)}
-        \strdend{ab To}{\mathcal{A}(A,B)}
-        \strdend{bc To}{\mathcal{A}(B,C)}
+        \strdstart{ac}{\mathcal{A}(A,C)}
+        \strdend{ab}{\mathcal{A}(A,B)}
+        \strdend{bc}{\mathcal{A}(B,C)}
     }
 }
 
-\strdpreview {
-    \strdgathered {
-        \strdmid{0,0}{a}
-        \strdhomobj{a}{A}{A'}
-        \strdend{a To}{\mathcal{A}}
+\strdpreview{
+    \strdgathered{
+        \strdline{\strdorigin}{aa}
+        \strdjunc{aa}{u}
+        \strdhomobj{aa}{A}{A}
+        \strdstart{aa}{\mathcal{A}}
     }
-    \coloneqq 
-    \strdgathered {
-        \strdmid{0,0}{a}
-        \strdend{a To}{\mathcal{A}(A,A')}
+    \coloneqq
+    \strdgathered{
+        \strdline{\strdorigin}{aa}
+        \strdtwocell{aa}{u}{j}
+        \strdhomobj{aa}{A}{A}
+        \strdstart{aa}{\mathcal{A}}
     }
 }
 
+% underlying category
 \strdpreview {
-\iffalse
-    \strdgathered {
-        \strdyscale{0.6}{ \strdmid{0,0}{from} }
-        \strdtwocell{from To}{g}{g}
-        \strdyscale{1}{ \strdmid{g}{sf} }
-        \strdtwocell{sf To}{f}{f}
-        \strdyscale{0.6}{ \strdmid{f}{to} }
-        \strdfun{from From}{above}{C}
-        \strdfun{to To}{below}{A}
-        \strdfun{sf}{left}{B}
-    }
-\fi
     \begin{gathered}
         A \overset{f}{\to} B \overset{g}{\to} C
     \end{gathered}
     \coloneqq
     \strdgathered {
-        \strdyscale{0.6}{ \strdmid{0,0}{ac} }
-        \strdjunc{ac To}{m}
+        \strdyscale{1}{ \strdline{\strdorigin}{ac} }
+        \strdjunc{ac}{m}
         \strdleft{m}{ab}
         \strdright{m}{bc}
         \strdhomobj{ab}{A}{B}
-        \strdtwocell{ab To}{f}{f}
+        \strdtwocell{ab}{f}{f}
         \strdhomobj{bc}{B}{C}
-        \strdtwocell{bc To}{g}{g}
+        \strdtwocell{bc}{g}{g}
         \strdhomobj{ac}{A}{C}
     }
 }
