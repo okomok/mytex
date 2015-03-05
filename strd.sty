@@ -59,34 +59,37 @@
 \tikzset{strd junc/.style={circle,draw=black,fill=black,minimum size=2pt,inner sep=0pt}}
 \tikzset{strd cornering/.style={rounded corners=2pt}}
 
+
+% edges
+
+\newcommand{\strdcoord}[3]{%
+    \node[strd coord] (#3 Start) at (#1,#2) {};
+    \node[strd coord] (#3) at (#1,#2) {};
+    \node[strd coord] (#3 End) at (#1,#2) {};%
+}
+
 \newcommand{\strddeclareorigin}{%
-    \node[strd coord] (strdorigin Start) at (0,0) {};
-    \node[strd coord] (strdorigin) at (0,0) {};
-    \node[strd coord] (strdorigin End) at (0,0) {};%
+    \strdcoord{0}{0}{strdorigin}%
 }
 
 \newcommand{\strdorigin}{strdorigin}
 
-\newcommand{\strdjunc}[2]{%
-    \node[strd junc] (#2 Start) at (#1 End) {};
-    \node[strd junc] (#2) at (#1 End) {};
-    \node[strd junc] (#2 End) at (#1 End) {};%
-}
-
-\newcommand{\strdtwocell}[3]{%
-    \begin{pgfonlayer}{twocell}
-        \node[strd coord] (#2 Start) at (#1 End) {};
-        \node[strd 2cell] (#2) at (#1 End) {#3};
-        \node[strd coord] (#2 End) at (#1 End) {};
-    \end{pgfonlayer}%
-}
-
 \newcommand{\strdleft}[2]{%
-    \node[strd coord,strd junc] (#2 Start) at (#1 End) {};
+    \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2 Corner) at ($(#1 End)+(-0.5,-0.3)$) {};
     \node[strd coord] (#2) at ($(#1 End)+(-0.5,-0.4)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(-0.5,-0.7)$) {};
-    \draw[strd cornering] {
+    \draw[strd cornering]{
+        (#2 Start) -- (#2 Corner) -- (#2 End)
+    };%
+}
+
+\newcommand{\strdunleft}[2]{%
+    \node[strd coord] (#2 Start) at (#1 End) {};
+    \node[strd coord] (#2) at ($(#1 End)+(0,-0.3)$) {};
+    \node[strd coord] (#2 Corner) at ($(#1 End)+(0,-0.4)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(0.5,-0.7)$) {};
+    \draw[strd cornering]{
         (#2 Start) -- (#2 Corner) -- (#2 End)
     };%
 }
@@ -95,28 +98,46 @@
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2) at ($(#1 End)+(0,-0.35)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.7)$) {};
-    \draw {
+    \draw{
         (#2 Start) -- (#2) -- (#2 End)
     };%
 }
 
 \newcommand{\strdright}[2]{%
-    \strddual { \strdleft{#1}{#2} }%
+    \strddual{ \strdleft{#1}{#2} }%
+}
+
+\newcommand{\strdunright}[2]{%
+    \strddual{ \strdunleft{#1}{#2} }%
 }
 
 \newcommand{\strdfit}[2]{%
-    \strdbg {
+    \strdbg{
         \node[strd 2cell,draw=none,fit=#1] (#2 fit) {};
     }%
+}
+
+\newcommand{\strdjunc}[2]{%
+    \node[strd junc] (#2 Start) at (#1 End) {};
+    \node[strd junc] (#2) at (#1 End) {};
+    \node[strd junc] (#2 End) at (#1 End) {};%
+}
+
+\newcommand{\strdcell}[3]{%
+    \begin{pgfonlayer}{twocell}
+        \node[strd 2cell] (#2 Stard) at (#1 End) {#3};
+        \node[strd 2cell] (#2) at (#1 End) {#3};
+        \node[strd 2cell] (#2 End) at (#1 End) {#3};
+    \end{pgfonlayer}%
 }
 
 \newcommand{\strdpend}[3]{%
     \node[strd coord] (#2 Res) at (#1) {}; 
     \node[strd 2cell] (#2) at ($(#1)+(0,-0.5)$) {#3};
-    \draw {
+    \draw{
         (#1) -- (#2) 
     };%
-    \strdbg {
+    \strdbg{
         \node[strd 2cell,draw=none,fit=(#2) (#2 Res)] (#2 fit) {};
     }%
 }

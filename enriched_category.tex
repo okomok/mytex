@@ -94,12 +94,12 @@
     \coloneqq
     \strdgathered {
         \strdline{\strdorigin}{ac}
-        \strdtwocell{ac}{m}{M}
-        \strdxscale{1.2}{ \strdleft{m}{ab} }
-        \strdxscale{1.2}{ \strdright{m}{bc} }
+        \strdxscale{1.2}{ \strdleft{ac}{ab} }
+        \strdxscale{1.2}{ \strdright{ac}{bc} }
         \strdstart{ac}{\mathcal{A}(A,C)}
         \strdend{ab}{\mathcal{A}(A,B)}
         \strdend{bc}{\mathcal{A}(B,C)}
+        \strdcell{ac}{m}{M}
     }
 }
 
@@ -113,9 +113,8 @@
     \coloneqq
     \strdgathered{
         \strdline{\strdorigin}{aa}
-        \strdtwocell{aa}{u}{j}
-        \strdhomobj{aa}{A}{A}
-        \strdstart{aa}{\mathcal{A}}
+        \strdcell{aa}{u}{j}
+        \strdstart{aa}{\mathcal{A}(A,A)}
     }
 }
 
@@ -131,9 +130,9 @@
         \strdleft{m}{ab}
         \strdright{m}{bc}
         \strdhomobj{ab}{A}{B}
-        \strdtwocell{ab}{f}{f}
+        \strdcell{ab}{f}{f}
         \strdhomobj{bc}{B}{C}
-        \strdtwocell{bc}{g}{g}
+        \strdcell{bc}{g}{g}
         \strdhomobj{ac}{A}{C}
     }
 }
