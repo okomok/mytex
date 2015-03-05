@@ -1,7 +1,6 @@
 \documentclass[]{article}
 \usepackage{amsmath,mathtools}
 \usepackage{tikz,strd}
-\usepackage[active,tightpage]{preview}
 
 \begin{document}
 
@@ -14,22 +13,22 @@
         \strdline{cd}{cd2}
         \strdleft{ac}{ab}
         \strdright{ac}{bc}
-        \strdstart{ad}{\mathcal{A}}
-        \strdhomobj{ad}{A}{D}
-        \strdhomobj{bc}{B}{C}
+        \strdstartlabel{ad}{\mathcal{A}}
+        \strdhomobjlabel{ad}{A}{D}
+        \strdhomobjlabel{bc}{B}{C}
     }
     \strdgathered{
         \mymult
-        \strdhomobj{ac}{A}{C}
-        \strdhomobj{ab}{A}{B}
-        \strdhomobj{cd End}{C}{D}
+        \strdhomobjlabel{ac}{A}{C}
+        \strdhomobjlabel{ab}{A}{B}
+        \strdhomobjlabel{cd End}{C}{D}
     }
     =
     \strdgathered{
-        \strddual{\mymult}
-        \strdhomobj{ac}{B}{D}
-        \strdhomobj{ab}{C}{D}
-        \strdhomobj{cd End}{A}{B}
+        \strdxflip{\mymult}
+        \strdhomobjlabel{ac}{B}{D}
+        \strdhomobjlabel{ab}{C}{D}
+        \strdhomobjlabel{cd End}{A}{B}
     }
 }
 
@@ -41,28 +40,28 @@
         \strdyscale{0.5}{\strdline{ab2}{ab3}}
         \strdright{ab}{bb}
         \strdjunc{bb}{u}
-        \strdhomobj{ab}{A}{B}
+        \strdhomobjlabel{ab}{A}{B}
     }
     \strdgathered{
         \myunital
-        \strdhomobj{bb}{B}{B}
-        \strdhomobj{ab2 End}{A}{B}
-        \strdstart{ab}{\mathcal{A}}
+        \strdhomobjlabel{bb}{B}{B}
+        \strdhomobjlabel{ab2 End}{A}{B}
+        \strdstartlabel{ab}{\mathcal{A}}
     }
     =
     \strdgathered{
         \strdyscale{2}{
             \strdline{\strdorigin}{ab}
-            \strdhomobj{ab}{A}{B}
-            \strdstart{ab}{\mathcal{A}}
+            \strdhomobjlabel{ab}{A}{B}
+            \strdstartlabel{ab}{\mathcal{A}}
         }
     }
     =
     \strdgathered{
-        \strddual{\myunital}
-        \strdhomobj{bb}{A}{A}
-        \strdhomobj{ab2 End}{A}{B}
-        \strdstart{ab}{\mathcal{A}}
+        \strdxflip{\myunital}
+        \strdhomobjlabel{bb}{A}{A}
+        \strdhomobjlabel{ab2 End}{A}{B}
+        \strdstartlabel{ab}{\mathcal{A}}
     }
 }
 
@@ -70,13 +69,13 @@
 \strdpreview{
     \strdgathered{
         \strdline{\strdorigin}{a}
-        \strdhomobj{a}{A}{A'}
-        \strdstart{a}{\mathcal{A}}
+        \strdhomobjlabel{a}{A}{A'}
+        \strdstartlabel{a}{\mathcal{A}}
     }
     \coloneqq 
     \strdgathered{
         \strdline{\strdorigin}{a}
-        \strdstart{a}{\mathcal{A}(A,A')}
+        \strdstartlabel{a}{\mathcal{A}(A,A')}
     }
 }
 
@@ -86,35 +85,35 @@
         \strdjunc{ac}{m}
         \strdleft{m}{ab}
         \strdright{m}{bc}
-        \strdstart{ac}{\mathcal{A}}
-        \strdhomobj{ac}{A}{C}
-        \strdhomobj{ab}{A}{B}
-        \strdhomobj{bc}{B}{C}
+        \strdstartlabel{ac}{\mathcal{A}}
+        \strdhomobjlabel{ac}{A}{C}
+        \strdhomobjlabel{ab}{A}{B}
+        \strdhomobjlabel{bc}{B}{C}
     }
     \coloneqq
-    \strdgathered {
+    \strdgathered { \strdxscale{1.2} {
         \strdline{\strdorigin}{ac}
-        \strdxscale{1.2}{ \strdleft{ac}{ab} }
-        \strdxscale{1.2}{ \strdright{ac}{bc} }
-        \strdstart{ac}{\mathcal{A}(A,C)}
-        \strdend{ab}{\mathcal{A}(A,B)}
-        \strdend{bc}{\mathcal{A}(B,C)}
-        \strdcell{ac}{m}{M}
-    }
+        \strdleft{ac}{ab}
+        \strdright{ac}{bc}
+        \strdstartlabel{ac}{\mathcal{A}(A,C)}
+        \strdendlabel{ab}{\mathcal{A}(A,B)}
+        \strdendlabel{bc}{\mathcal{A}(B,C)}
+        \strdcelllabel{ac End}{m}{M}
+    } }
 }
 
 \strdpreview{
     \strdgathered{
         \strdline{\strdorigin}{aa}
         \strdjunc{aa}{u}
-        \strdhomobj{aa}{A}{A}
-        \strdstart{aa}{\mathcal{A}}
+        \strdhomobjlabel{aa}{A}{A}
+        \strdstartlabel{aa}{\mathcal{A}}
     }
     \coloneqq
     \strdgathered{
         \strdline{\strdorigin}{aa}
-        \strdcell{aa}{u}{j}
-        \strdstart{aa}{\mathcal{A}(A,A)}
+        \strdcelllabel{aa End}{u}{j}
+        \strdstartlabel{aa}{\mathcal{A}(A,A)}
     }
 }
 
@@ -129,11 +128,11 @@
         \strdjunc{ac}{m}
         \strdleft{m}{ab}
         \strdright{m}{bc}
-        \strdhomobj{ab}{A}{B}
-        \strdcell{ab}{f}{f}
-        \strdhomobj{bc}{B}{C}
-        \strdcell{bc}{g}{g}
-        \strdhomobj{ac}{A}{C}
+        \strdhomobjlabel{ab}{A}{B}
+        \strdcelllabel{ab End}{f}{f}
+        \strdhomobjlabel{bc}{B}{C}
+        \strdcelllabel{bc End}{g}{g}
+        \strdhomobjlabel{ac}{A}{C}
     }
 }
 

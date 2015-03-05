@@ -5,9 +5,8 @@
 \usepackage[active,tightpage]{preview}
 \usetikzlibrary{backgrounds,shapes,positioning,fit,calc}
 
-\pgfdeclarelayer{twocell}
-\pgfsetlayers{background,main,twocell}
-
+\pgfdeclarelayer{strdcelllabellayer}
+\pgfsetlayers{background,main,strdcelllabellayer}
 
 \newcommand{\strd}[1]{%
     \begin{tikzpicture}[]
@@ -49,18 +48,18 @@
 }
 
 % no transparent color?
-\tikzset{strd 2cell/.style={font=\scriptsize,rounded corners,draw,fill=white,inner sep=2pt}}
+\tikzset{strd celllabel/.style={font=\scriptsize,rounded corners,draw,fill=white,inner sep=2pt}}
 
 \tikzset{strd coord/.style={coordinate}}
 \tikzset{strd edgelabel/.style={font=\tiny,inner sep=0pt,strd textvaligned}}
 \tikzset{strd endlabel/.style={font=\scriptsize,inner sep=1pt,strd textvaligned}}
 \tikzset{strd valigned/.style={baseline={([yshift=-0.5ex]current bounding box.center)}}}
 \tikzset{strd textvaligned/.style={text height=0.5em,text depth=0.1em}}
-\tikzset{strd junc/.style={circle,draw=black,fill=black,minimum size=2pt,inner sep=0pt}}
+\tikzset{strd junc/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
 \tikzset{strd cornering/.style={rounded corners=2pt}}
 
 
-% edges
+% strings
 
 \newcommand{\strdcoord}[3]{%
     \node[strd coord] (#3 Start) at (#1,#2) {};
@@ -104,16 +103,16 @@
 }
 
 \newcommand{\strdright}[2]{%
-    \strddual{ \strdleft{#1}{#2} }%
+    \strdxflip{ \strdleft{#1}{#2} }%
 }
 
 \newcommand{\strdunright}[2]{%
-    \strddual{ \strdunleft{#1}{#2} }%
+    \strdxflip{ \strdunleft{#1}{#2} }%
 }
 
 \newcommand{\strdfit}[2]{%
     \strdbg{
-        \node[strd 2cell,draw=none,fit=#1] (#2 fit) {};
+        \node[strd celllabel,draw=none,fit=#1] (#2 fit) {};
     }%
 }
 
@@ -123,39 +122,25 @@
     \node[strd junc] (#2 End) at (#1 End) {};%
 }
 
-\newcommand{\strdcell}[3]{%
-    \begin{pgfonlayer}{twocell}
-        \node[strd 2cell] (#2 Stard) at (#1 End) {#3};
-        \node[strd 2cell] (#2) at (#1 End) {#3};
-        \node[strd 2cell] (#2 End) at (#1 End) {#3};
+
+% labels
+
+\newcommand{\strdcelllabel}[3]{%
+    \begin{pgfonlayer}{strdcelllabellayer}
+        \node[strd celllabel] (#2) at (#1) {#3};
     \end{pgfonlayer}%
 }
 
-\newcommand{\strdpend}[3]{%
-    \node[strd coord] (#2 Res) at (#1) {}; 
-    \node[strd 2cell] (#2) at ($(#1)+(0,-0.5)$) {#3};
-    \draw{
-        (#1) -- (#2) 
-    };%
-    \strdbg{
-        \node[strd 2cell,draw=none,fit=(#2) (#2 Res)] (#2 fit) {};
-    }%
-}
-
-\newcommand{\strdfun}[3]{%
-    \node[strd edgelabel,#2] at (#1) {#3};%
-}
-
-\newcommand{\strdhomobj}[3]{%
+\newcommand{\strdhomobjlabel}[3]{%
     \node[strd edgelabel,left] at (#1) {#2};
     \node[strd edgelabel,right] at (#1) {#3};%
 }
 
-\newcommand{\strdstart}[2]{%
+\newcommand{\strdstartlabel}[2]{%
     \node[strd endlabel,above] at (#1 Start) {#2};%
 }
 
-\newcommand{\strdend}[2]{%
+\newcommand{\strdendlabel}[2]{%
     \node[strd endlabel,below] at (#1 End) {#2};%
 }
 
@@ -163,14 +148,17 @@
     \node[strd endlabel,#2] at (#1) {#3};%
 }
 
-\newcommand{\strdop}[1]{%
-    \begin{scope}[yscale=-1]
+
+% transformations
+
+\newcommand{\strdxflip}[1]{%
+    \begin{scope}[xscale=-1]
         #1;
     \end{scope}%
 }
 
-\newcommand{\strddual}[1]{%
-    \begin{scope}[xscale=-1]
+\newcommand{\strdyflip}[1]{%
+    \begin{scope}[yscale=-1]
         #1;
     \end{scope}%
 }
