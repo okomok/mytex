@@ -72,7 +72,7 @@
         \strdhomobjlabel{a}{A}{A'}
         \strdstartlabel{a}{\mathcal{A}}
     }
-    \coloneqq 
+    \strddefeq 
     \strdgathered{
         \strdline{\strdorigin}{a}
         \strdstartlabel{a}{\mathcal{A}(A,A')}
@@ -90,7 +90,7 @@
         \strdhomobjlabel{ab}{A}{B}
         \strdhomobjlabel{bc}{B}{C}
     }
-    \coloneqq
+    \strddefeq
     \strdgathered { \strdxscale{1.2} {
         \strdline{\strdorigin}{ac}
         \strdleft{ac}{ab}
@@ -98,7 +98,7 @@
         \strdstartlabel{ac}{\mathcal{A}(A,C)}
         \strdendlabel{ab}{\mathcal{A}(A,B)}
         \strdendlabel{bc}{\mathcal{A}(B,C)}
-        \strdcelllabel{ac End}{m}{M}
+        \strdpointlabel{ac End}{m}{M}
     } }
 }
 
@@ -109,10 +109,10 @@
         \strdhomobjlabel{aa}{A}{A}
         \strdstartlabel{aa}{\mathcal{A}}
     }
-    \coloneqq
+    \strddefeq
     \strdgathered{
         \strdline{\strdorigin}{aa}
-        \strdcelllabel{aa End}{u}{j}
+        \strdpointlabel{aa End}{u}{j}
         \strdstartlabel{aa}{\mathcal{A}(A,A)}
     }
 }
@@ -122,17 +122,29 @@
     \begin{gathered}
         A \overset{f}{\to} B \overset{g}{\to} C
     \end{gathered}
-    \coloneqq
-    \strdgathered {
+    \strddefeq
+    \strdgathered{
         \strdyscale{1}{ \strdline{\strdorigin}{ac} }
         \strdjunc{ac}{m}
         \strdleft{m}{ab}
         \strdright{m}{bc}
         \strdhomobjlabel{ab}{A}{B}
-        \strdcelllabel{ab End}{f}{f}
+        \strdpointlabel{ab End}{f}{f}
         \strdhomobjlabel{bc}{B}{C}
-        \strdcelllabel{bc End}{g}{g}
+        \strdpointlabel{bc End}{g}{g}
         \strdhomobjlabel{ac}{A}{C}
+    }
+}
+
+\strdpreview{
+    \strdgathered{
+        \strdline{\strdorigin}{o}
+        \strdleft{o}{l}
+        \strdleft{l}{ll}
+        \strdunleft{ll}{ull}
+        \strdcoord{1}{0}{o2}
+        \strdline{o2}{l2}
+        
     }
 }
 

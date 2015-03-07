@@ -5,8 +5,8 @@
 \usepackage[active,tightpage]{preview}
 \usetikzlibrary{backgrounds,shapes,positioning,fit,calc}
 
-\pgfdeclarelayer{strdcelllabellayer}
-\pgfsetlayers{background,main,strdcelllabellayer}
+\pgfdeclarelayer{strdpointlabellayer}
+\pgfsetlayers{background,main,strdpointlabellayer}
 
 \newcommand{\strd}[1]{%
     \begin{tikzpicture}[]
@@ -43,12 +43,11 @@
     \end{gathered}%
 }
 
-\newcommand{\strdstrut}{%
-    \strut%
-}
+\newcommand{\strdstrut}{\strut}
+\newcommand{\strddefeq}{\coloneqq}
 
 % no transparent color?
-\tikzset{strd celllabel/.style={font=\scriptsize,rounded corners,draw,fill=white,inner sep=2pt}}
+\tikzset{strd pointlabel/.style={font=\scriptsize,rounded corners,draw,fill=white,inner sep=2pt}}
 
 \tikzset{strd coord/.style={coordinate}}
 \tikzset{strd edgelabel/.style={font=\tiny,inner sep=0pt,strd textvaligned}}
@@ -56,7 +55,7 @@
 \tikzset{strd valigned/.style={baseline={([yshift=-0.5ex]current bounding box.center)}}}
 \tikzset{strd textvaligned/.style={text height=0.5em,text depth=0.1em}}
 \tikzset{strd junc/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
-\tikzset{strd cornering/.style={rounded corners=2pt}}
+\tikzset{strd cornering/.style={}}
 
 
 % strings
@@ -75,7 +74,7 @@
 
 \newcommand{\strdleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2 Corner) at ($(#1 End)+(-0.5,-0.3)$) {};
+    \node[strd coord] (#2 Corner) at ($(#1 End)+(-0.5,-0.25)$) {};
     \node[strd coord] (#2) at ($(#1 End)+(-0.5,-0.4)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(-0.5,-0.7)$) {};
     \draw[strd cornering]{
@@ -86,7 +85,7 @@
 \newcommand{\strdunleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2) at ($(#1 End)+(0,-0.3)$) {};
-    \node[strd coord] (#2 Corner) at ($(#1 End)+(0,-0.4)$) {};
+    \node[strd coord] (#2 Corner) at ($(#1 End)+(0,-0.45)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(0.5,-0.7)$) {};
     \draw[strd cornering]{
         (#2 Start) -- (#2 Corner) -- (#2 End)
@@ -112,7 +111,7 @@
 
 \newcommand{\strdfit}[2]{%
     \strdbg{
-        \node[strd celllabel,draw=none,fit=#1] (#2 fit) {};
+        \node[strd pointlabel,draw=none,fit=#1] (#2 fit) {};
     }%
 }
 
@@ -125,9 +124,9 @@
 
 % labels
 
-\newcommand{\strdcelllabel}[3]{%
-    \begin{pgfonlayer}{strdcelllabellayer}
-        \node[strd celllabel] (#2) at (#1) {#3};
+\newcommand{\strdpointlabel}[3]{%
+    \begin{pgfonlayer}{strdpointlabellayer}
+        \node[strd pointlabel] (#2) at (#1) {#3};
     \end{pgfonlayer}%
 }
 
@@ -171,6 +170,18 @@
 
 \newcommand{\strdyscale}[2]{%
     \begin{scope}[yscale=#1]
+        #2;
+    \end{scope}%
+}
+
+\newcommand{\strdxshift}[2]{%
+    \begin{scope}[xshift=#1] 
+        #2;
+    \end{scope}%
+}
+
+\newcommand{\strdyshift}[2]{%
+    \begin{scope}[yshift=#1] 
         #2;
     \end{scope}%
 }
