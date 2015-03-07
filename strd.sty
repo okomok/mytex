@@ -212,7 +212,9 @@
     \end{scope}%
 }
 
-\newcommand{\strdnodraw}[1]{%
+\newcommand{\strdvoid}[1]{}
+
+\newcommand{\strdnone}[1]{%
     \begin{scope}[every path/.style=strd none,every node/.style=strd none] 
         #1;
     \end{scope}%
