@@ -25,7 +25,7 @@
     }
     =
     \strdgathered{
-        \strdxflip{\mymult}
+        \strdflip{\mymult}
         \strdhomobjlabel{ac}{B}{D}
         \strdhomobjlabel{ab}{C}{D}
         \strdhomobjlabel{cd End}{A}{B}
@@ -58,7 +58,7 @@
     }
     =
     \strdgathered{
-        \strdxflip{\myunital}
+        \strdflip{\myunital}
         \strdhomobjlabel{bb}{A}{A}
         \strdhomobjlabel{ab2 End}{A}{B}
         \strdstartlabel{ab}{\mathcal{A}}
@@ -98,7 +98,7 @@
         \strdstartlabel{ac}{\mathcal{A}(A,C)}
         \strdendlabel{ab}{\mathcal{A}(A,B)}
         \strdendlabel{bc}{\mathcal{A}(B,C)}
-        \strdpointlabel{ac End}{m}{M}
+        \strdcelllabel{ac End}{m}{M}
     } }
 }
 
@@ -112,7 +112,7 @@
     \strddefeq
     \strdgathered{
         \strdline{\strdorigin}{aa}
-        \strdpointlabel{aa End}{u}{j}
+        \strdcelllabel{aa End}{u}{j}
         \strdstartlabel{aa}{\mathcal{A}(A,A)}
     }
 }
@@ -123,17 +123,17 @@
         A \overset{f}{\to} B \overset{g}{\to} C
     \end{gathered}
     \strddefeq
-    \strdgathered{
+    \strdgathered{ \strdidentity {
         \strdyscale{1}{ \strdline{\strdorigin}{ac} }
         \strdjunc{ac}{m}
         \strdleft{m}{ab}
         \strdright{m}{bc}
         \strdhomobjlabel{ab}{A}{B}
-        \strdpointlabel{ab End}{f}{f}
+        \strdcelllabel{ab End}{f}{f}
         \strdhomobjlabel{bc}{B}{C}
-        \strdpointlabel{bc End}{g}{g}
+        \strdcelllabel{bc End}{g}{g}
         \strdhomobjlabel{ac}{A}{C}
-    }
+    } }
 }
 
 \strdpreview{
@@ -142,9 +142,10 @@
         \strdleft{o}{l}
         \strdleft{l}{ll}
         \strdunleft{ll}{ull}
-        \strdcoord{1}{0}{o2}
+        \strdcoordat{1}{0}{o2}
         \strdline{o2}{l2}
-        
+        \strdlineleft{o}{ol}
+        \strdidentity{ \strdlineright{o}{or} }
     }
 }
 
