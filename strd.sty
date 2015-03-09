@@ -13,13 +13,13 @@
 
 % no transparent color?
 \tikzset{strd celllabel/.style={font=\scriptsize,rounded corners,draw,fill=white,inner sep=2pt}}
-\tikzset{strd edgelabel/.style={font=\tiny,inner sep=0pt,strd textvaligned}}
+\tikzset{strd edgelabel/.style={font=\scriptsize,inner sep=0pt,strd textvaligned}}
 \tikzset{strd endlabel/.style={font=\scriptsize,inner sep=1pt,strd textvaligned}}
 \tikzset{strd valigned/.style={baseline={([yshift=-0.5ex]current bounding box.center)}}}
 \tikzset{strd textvaligned/.style={text height=0.5em,text depth=0.1em}}
 \tikzset{strd coord/.style={coordinate}}
 \tikzset{strd junc/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
-\tikzset{strd cornering/.style={rounded corners=2pt}}
+\tikzset{strd cornering/.style={rounded corners=1pt}}
 \tikzset{strd bijection/.style={rounded corners=0pt}}
 \tikzset{strd mapping/.style={rounded corners=2pt}}
 \tikzset{strd mathnodes/.style={execute at begin node=$,execute at end node=$}}
@@ -96,9 +96,9 @@
 % golden ratio
 \newcommand{\strdleft}[2]{%
     \node[strd coord,strd junc] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2 Corner) at ($(#1 End)+(-0.5,-0.3)$) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-0.5,-0.5)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(-0.5,-0.8)$) {};
+    \node[strd coord] (#2 Corner) at ($(#1 End)+(-0.4,-0.24)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-0.4,-0.38)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(-0.4,-0.64)$) {};
     \draw[strd cornering]{
         (#2 Start) -- (#2 Corner) -- (#2 End)
     };%
@@ -124,17 +124,21 @@
 
 \newcommand{\strdline}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(0,-0.4)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.8)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(0,-0.32)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.64)$) {};
     \draw{
         (#2 Start) -- (#2 End)
     };%
 }
 
+\newcommand{\strdhalfline}[2]{%
+    \strdscale{1}{0.5}{\strdline{#1}{#2}}%
+}
+
 \newcommand{\strdlineleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-0.25,0)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(-0.5,0)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-0.2,0)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(-0.4,0)$) {};
     \draw{
         (#2 Start) -- (#2 End)
     };%
@@ -162,11 +166,6 @@
     \node[strd coord] (#2 End) at (#1 End) {};%
 }
 
-\newcommand{\strdcell}[2]{%
-    \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd junc] (#2) at ($(#1 End)+(0,-0.25) {};
-    \node[strd coord] (#2 End) at (#2) {};%
-}
 
 % labels
 
@@ -261,10 +260,10 @@
 
 \newcommand{\strdbypassleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-0.25,0)$) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-0.25,-0.4)$) {};
-    \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-0.25,-0.8)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.8)$) {};
+    \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-0.4,0)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-0.4,-0.4)$) {};
+    \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-0.4,-0.64)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.64)$) {};
     \draw{
         (#2 Start) -- (#2 StartCorner) -- (#2 EndCorner) -- (#2 End)
     };%
@@ -305,7 +304,7 @@
     \strdjump{#1}{#2}
     \strdshiftleft{#1}{#2 Left}
     \strdline{#2 Left}{#2 Left} % funny name-conflict
-    \strdshiftright{#1}{#2 Right} 
+    \strdshiftright{#1}{#2 Right}
     \strdline{#2 Right}{#2 Right}%
 }
 

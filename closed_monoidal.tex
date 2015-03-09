@@ -3,42 +3,57 @@
 
 \begin{document}
 
+\newcommand{\myf}[1]{
+    \strdline{#1}{fz}
+    \strdleft{fz}{fy}
+    \strdright{fz}{fx}
+    \strdcelllabel{fz End}{f}
+    \strdlinelabel{fz}{}{Z}
+    \strdlinelabel{fy}{}{Y}
+    \strdlinelabel{fx}{}{X}
+}
+
+\newcommand{\mybf}[1]{
+    \strdline{#1}{bfyz}
+    \strdscale{1.8}{2}{ \strdbijection{bfyz}{bfbox} }
+    \myf{bfyz}
+    \strdline{bfbox}{bfx}
+    \strdihomlabel{bfyz}{Y}{Z}
+    \strdlinelabel{bfx}{}{X}
+}
+
+\newcommand{\myh}[1]{
+    \strdline{#1}{hx'}
+    \strdcelllabel{hx' Start}{h}
+    \strdlinelabel{hx'}{}{X'}
+}
+    
+
 % bijections
 \strdpreview{
     \strdgathered{
-        \strdassign{myfb}{
-            \strdassign{myf}{
-                \strdbranch{\strdorigin}{f}
-                \strdcelllabel{f}{f}
-                \strdlinelabel{f Branch}{}{Z}
-                \strdlinelabel{f Left}{}{Y}
-                \strdlinelabel{f Right}{}{X}
-                \strdcoord{f Branch Start}{z}
-                \strdcoord{f Left End}{y}
-                \strdcoord{f Right End}{x}
-            }
-            \strdreverse{ \strdline{z}{yz} }
-            \strdscale{3}{2}{ \strdbijection{z}{bj} }
-            \strdline{bj}{x}
-            \strdihomlabel{yz}{Y}{Z}
-            \strdlinelabel{x}{}{X}
-        }
+        \mybf{\strdorigin}
     }
 }
 
 \strdpreview{
     \strdgathered{
-        \strdline{\strdorigin}{z}
-        \strdscale{3}{2}{ \strdbijection{z}{bj} }
-        \strdline{z}{yz}
-        \strdline{yz}{x}
-        \strdparallel{bj}{xy}
-        \strdlinelabel{z}{}{Z}
-        \strdihomlabel{yz}{Y}{Z}
-        \strdcelllabel{yz End}{g}
-        \strdlinelabel{x}{}{X}
-        \strdlinelabel{xy Left}{}{Y}
-        \strdlinelabel{xy Right}{}{X}
+        \strdassign{mygb}{
+            \strdassign{myg}{
+                \strdline{\strdorigin}{yz}
+                \strdline{yz}{x}
+                \strdcelllabel{yz End}{g}
+                \strdihomlabel{yz}{Y}{Z}
+                \strdlinelabel{x}{}{X}
+                \strdcoord{yz Start}{yzc}
+            }
+            \strdreverse{\strdline{yzc}{z}}
+            \strdscale{1.8}{2}{ \strdbijection{yzc}{bj} }
+            \strdparallel{bj}{xy}
+            \strdlinelabel{z}{}{Z}
+            \strdlinelabel{xy Left}{}{Y}
+            \strdlinelabel{xy Right}{}{X}
+        }
     }
 }
 
@@ -46,21 +61,17 @@
 
 \strdpreview{
     \strdgathered{
-        \myfb
-        \strdassign{myh}{
-            \strdline{x}{x'}
-            \strdcelllabel{x End}{h}
-            \strdlinelabel{x'}{}{X'}
-        }
+        \mybf{\strdorigin}
+        \myh{bfx}
     }
     =
     \strdgathered{
-        \myf
-        \myh
-        \strdline{y}{y2}
-        \strdscale{3.2}{3}{\strdbijection{z}{bj}}
-        \strdline{bj}{x'}
-        \strdreverse{\strdline{z}{yz}}
+        \strdline{\strdorigin}{yz}
+        \myf{yz}
+        \myh{fx}
+        \strdline{fy}{y2}
+        \strdscale{2}{3}{\strdbijection{yz}{box}}
+        \strdline{box}{x'}
         \strdlinelabel{x'}{}{X'}
         \strdihomlabel{yz}{Y}{Z}
     }
