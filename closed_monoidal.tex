@@ -9,15 +9,14 @@
     \strdright{fz}{fx}
     \strdcelllabel{fz End}{f}
     \strdlinelabel{fz}{}{Z}
-    \strdlinelabel{fy}{}{Y}
     \strdlinelabel{fx}{}{X}
 }
 
 \newcommand{\mybf}[1]{
     \strdline{#1}{bfyz}
-    \strdscale{1.8}{2}{ \strdbijection{bfyz}{bfbox} }
+    \strdscale{2}{2}{ \strdbijection{bfyz}{bfbox} }
     \myf{bfyz}
-    \strdline{bfbox}{bfx}
+    \strdline{fx}{bfx}
     \strdihomlabel{bfyz}{Y}{Z}
     \strdlinelabel{bfx}{}{X}
 }
@@ -29,10 +28,40 @@
 }
     
 
+% syntax
+
+\strdpreview{
+    \strdgathered{
+        \strdline{\strdorigin}{xy}
+        \strdihomlabel{xy}{X}{Y}
+    }
+    \iffalse
+    \strddefeq
+    \strdgathered{
+        \strdline{\strdorigin}{xy}
+        \strdlinelabel{xy}{}{[X,Y]}
+    }
+    \fi
+    \strddefeq
+    \strdgathered{
+        \strdline{\strdorigin}{xy}
+        \strdstartlabel{xy}{(\mathcal{V})}
+        \strdlinelabel{xy}{X}{Y}
+    }
+    \iffalse
+    \strddefeq
+    \strdgathered{
+        \strdline{\strdorigin}{xy}
+        \strdstartlabel{xy}{(\mathcal{V})(X,Y)}
+    }
+    \fi
+ }
+
 % bijections
 \strdpreview{
     \strdgathered{
         \mybf{\strdorigin}
+        \strdlinelabel{fy}{}{Y}
     }
 }
 
@@ -41,14 +70,14 @@
         \strdassign{mygb}{
             \strdassign{myg}{
                 \strdline{\strdorigin}{yz}
-                \strdline{yz}{x}
+                \strdright{yz}{x}
                 \strdcelllabel{yz End}{g}
                 \strdihomlabel{yz}{Y}{Z}
                 \strdlinelabel{x}{}{X}
                 \strdcoord{yz Start}{yzc}
             }
             \strdreverse{\strdline{yzc}{z}}
-            \strdscale{1.8}{2}{ \strdbijection{yzc}{bj} }
+            \strdscale{2}{2}{ \strdbijection{yzc}{bj} }
             \strdparallel{bj}{xy}
             \strdlinelabel{z}{}{Z}
             \strdlinelabel{xy Left}{}{Y}
@@ -63,6 +92,7 @@
     \strdgathered{
         \mybf{\strdorigin}
         \myh{bfx}
+        \strdlinelabel{fy}{}{Y}
     }
     =
     \strdgathered{
@@ -71,9 +101,111 @@
         \myh{fx}
         \strdline{fy}{y2}
         \strdscale{2}{3}{\strdbijection{yz}{box}}
-        \strdline{box}{x'}
+        \strdline{hx'}{x'}
         \strdlinelabel{x'}{}{X'}
         \strdihomlabel{yz}{Y}{Z}
+        \strdlinelabel{fy End}{}{Y}
+    }
+}
+
+\strdpreview{
+    \strdgathered{
+        \strdline{\strdorigin}{z}
+        \strdlinelabel{z}{}{Z}
+        \strdline{z}{yz}
+        \strdihomlabel{yz}{Y}{Z}
+        \strdcelllabel{yz End}{g}
+        \strdright{yz}{x}
+        \strdlinelabel{x}{}{X}
+        \strdscale{2}{2}{\strdbijection{z}{zbox}}
+        \strdparallel{zbox}{yx}
+        \strdlinelabel{yx Right}{}{X}
+        \strdcelllabel{yx Right End}{h}
+        \strdline{yx Right}{x'}
+        \strdlinelabel{x'}{}{X'}
+        \strdline{yx Left}{y}
+        \strdlinelabel{y Start}{}{Y}
+    }
+    =
+    \strdgathered{
+        \strdline{\strdorigin}{z}
+        \strdlinelabel{z}{}{Z}
+        \strdline{z}{yz}
+        \strdihomlabel{yz}{Y}{Z}
+        \strdcelllabel{yz End}{g}
+        \strdright{yz}{x}
+        \strdlinelabel{x}{}{X}
+        \strdcelllabel{x End}{h}
+        \strdline{x}{x'}
+        \strdscale{2}{3}{\strdbijection{z}{zbox}}
+        \strdlinelabel{x'}{}{X'}
+        \strdparallel{zbox}{yx'}
+        \strdlinelabel{yx' Left}{}{Y}
+        \strdlinelabel{yx' Right}{}{X'}
+    }
+}
+
+% bijection functoriality
+\strdpreview{
+    \strdgathered{
+        \strdline{\strdorigin}{yz'}
+        \strdihomlabel{yz'}{Y}{Z'}
+        \newcommand{\myl}{
+            \strdxscale{2}{\strdleft{yz'}{yz}}
+            \strdline{yz}{z}
+            \strdleft{z}{y}
+            \strdright{z}{x}
+            \strdscale{2}{2}{\strdbijection{yz}{lbox}}
+        }
+        \strdidentity{
+            \myl
+            \strdline{x}{x2}
+            \strdihomlabel{yz}{Y}{Z}
+            \strdlinelabel{z}{}{Z}
+            \strdlinelabel{y}{}{Y}
+            \strdlinelabel{x}{}{X}
+            \strdlinelabel{x2}{}{X}
+            \strdcelllabel{z End}{f}
+        }
+        \strdflip{
+            \myl
+            \strdline{y}{x2}
+            \strdihomlabel{yz}{Z}{Z'}
+            \strdlinelabel{z}{}{Z'}
+            \strdlinelabel{y}{}{X'}
+            \strdlinelabel{x}{}{Z}
+            \strdlinelabel{x2}{}{X'}
+            \strdcelllabel{z End}{g}
+        }
+    }
+    =
+    \strdgathered{
+        \strdline{\strdorigin}{yz'}
+        \strdihomlabel{yz'}{Y}{Z'}
+        \strdline{yz'}{z'}
+        \strdlinelabel{z'}{}{Z'}
+        \strdcelllabel{z' End}{g}
+        \strdleft{z'}{z}
+        \strdlinelabel{z}{}{Z}
+        \strdleft{z}{y}
+        \strdlinelabel{y}{}{Y}
+        \strdright{z}{x}
+        \strdlinelabel{x}{}{X}
+        \strdxscale{1}{\strdright{z'}{x'}}
+        \strdline{x'}{x'2}
+        \strdlinelabel{x'2 Start}{}{X'}
+        \strdline{x}{x2}
+        \strdlinelabel{x2}{}{X}
+        \strdline{x'2}{x'3}
+        \strdlinelabel{x'3}{}{X'}
+        \strdyscale{3}{
+            \strdpathwith{strd bijection}{
+                \strdxscale{3}{\strdbypassleft{yz'}{yz'l}}
+                \strdxscale{2}{\strdbypassright{yz'}{yz'r}}
+            }
+        }
+        %\strdscale{3}{3}{\strdbijection{yz'}{bj}}
+        \strdcelllabel{z End}{f}
     }
 }
 \end{document}

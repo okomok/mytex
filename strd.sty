@@ -19,7 +19,7 @@
 \tikzset{strd textvaligned/.style={text height=0.5em,text depth=0.1em}}
 \tikzset{strd coord/.style={coordinate}}
 \tikzset{strd junc/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
-\tikzset{strd cornering/.style={rounded corners=1pt}}
+\tikzset{strd cornering/.style={rounded corners=0pt}}
 \tikzset{strd bijection/.style={rounded corners=0pt}}
 \tikzset{strd mapping/.style={rounded corners=2pt}}
 \tikzset{strd mathnodes/.style={execute at begin node=$,execute at end node=$}}
@@ -97,7 +97,7 @@
 \newcommand{\strdleft}[2]{%
     \node[strd coord,strd junc] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2 Corner) at ($(#1 End)+(-0.4,-0.24)$) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-0.4,-0.38)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-0.4,-0.37)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(-0.4,-0.64)$) {};
     \draw[strd cornering]{
         (#2 Start) -- (#2 Corner) -- (#2 End)
