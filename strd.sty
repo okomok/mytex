@@ -1,6 +1,6 @@
 \ProvidesPackage{strd}
 
-\usepackage{amsmath,mathtools}
+\usepackage{amsmath,mathtools,etoolbox}
 \usepackage{tikz}
 \usepackage[active,tightpage]{preview}
 \usetikzlibrary{backgrounds,shapes,positioning,fit,calc}
@@ -19,7 +19,9 @@
 \tikzset{strd textvaligned/.style={text height=0.5em,text depth=0.1em}}
 \tikzset{strd coord/.style={coordinate}}
 \tikzset{strd junc/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
-\tikzset{strd cornering/.style={}}
+\tikzset{strd cornering/.style={rounded corners=2pt}}
+\tikzset{strd bijection/.style={rounded corners=0pt}}
+\tikzset{strd mapping/.style={rounded corners=2pt}}
 \tikzset{strd mathnodes/.style={execute at begin node=$,execute at end node=$}}
 \tikzset{strd none/.style={opacity=0,text opacity=0,fill opacity=0}}
 
@@ -55,12 +57,25 @@
 }
 
 
-% strings
+% string constructors
+%   A string 's' is a triple of nodes 's Start', 's' and 's End'.
+
+\newcommand{\strdrange}[4]{%
+    \node[strd coord] (#1 Start) at (#2) {};
+    \node[strd coord] (#1) at (#3) {};
+    \node[strd coord] (#1 End) at (#4) {};%
+}
 
 \newcommand{\strdcoordat}[3]{%
     \node[strd coord] (#3 Start) at (#1,#2) {};
     \node[strd coord] (#3) at (#1,#2) {};
     \node[strd coord] (#3 End) at (#1,#2) {};%
+}
+
+\newcommand{\strdcoord}[2]{%
+    \node[strd coord] (#2 Start) at (#1) {};
+    \node[strd coord] (#2) at (#1) {};
+    \node[strd coord] (#2 End) at (#1) {};%
 }
 
 \newcommand{\strddeclareorigin}{%
@@ -69,17 +84,21 @@
 
 \newcommand{\strdorigin}{strdorigin}
 
-\newcommand{\strdcoord}[2]{%
-    \node[strd coord] (#2 Start) at (#1 End) {};
+
+% string combinators
+
+\newcommand{\strdempty}[2]{%
     \node[strd coord] (#2) at (#1 End) {};
-    \node[strd coord] (#2 End) at (#1 End) {};%
+    \node[strd coord] (#2 Start) at (#2) {};
+    \node[strd coord] (#2 End) at (#2) {};%
 }
 
+% golden ratio
 \newcommand{\strdleft}[2]{%
     \node[strd coord,strd junc] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2 Corner) at ($(#1 End)+(-0.5,-0.25)$) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-0.5,-0.4)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(-0.5,-0.7)$) {};
+    \node[strd coord] (#2 Corner) at ($(#1 End)+(-0.5,-0.3)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-0.5,-0.5)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(-0.5,-0.8)$) {};
     \draw[strd cornering]{
         (#2 Start) -- (#2 Corner) -- (#2 End)
     };%
@@ -92,8 +111,8 @@
 \newcommand{\strdunleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2) at ($(#1 End)+(0,-0.3)$) {};
-    \node[strd coord] (#2 Corner) at ($(#1 End)+(0,-0.45)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(0.5,-0.7)$) {};
+    \node[strd coord] (#2 Corner) at ($(#1 End)+(0,-0.5)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(0.5,-0.8)$) {};
     \draw[strd cornering]{
         (#2 Start) -- (#2 Corner) -- (#2 End)
     };%
@@ -105,8 +124,8 @@
 
 \newcommand{\strdline}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(0,-0.35)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.7)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(0,-0.4)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.8)$) {};
     \draw{
         (#2 Start) -- (#2 End)
     };%
@@ -125,11 +144,16 @@
     \strdflip{ \strdlineleft{#1}{#2} }%
 }
 
-% remove me
-\newcommand{\strdfit}[2]{%
-    \strdbg{
-        \node[strd celllabel,draw=none,fit=#1] (#2 fit) {};
-    }%
+\newcommand{\strdjump}[2]{%
+    \strdnone{ \strdline{#1}{#2} }%
+}
+
+\newcommand{\strdshiftleft}[2]{%
+    \strdnone{ \strdlineleft{#1}{#2} }%
+}
+
+\newcommand{\strdshiftright}[2]{%
+    \strdnone{ \strdlineright{#1}{#2} }%
 }
 
 \newcommand{\strdjunc}[2]{%
@@ -138,18 +162,28 @@
     \node[strd coord] (#2 End) at (#1 End) {};%
 }
 
+\newcommand{\strdcell}[2]{%
+    \node[strd coord] (#2 Start) at (#1 End) {};
+    \node[strd junc] (#2) at ($(#1 End)+(0,-0.25) {};
+    \node[strd coord] (#2 End) at (#2) {};%
+}
 
 % labels
 
-\newcommand{\strdcelllabel}[3]{%
+\newcommand{\strdcelllabel}[2]{%
     \begin{pgfonlayer}{strdcelllabellayer}
-        \node[strd celllabel] (#2) at (#1) {#3};
+        \node[strd celllabel] at (#1) {#2};
     \end{pgfonlayer}%
 }
 
-\newcommand{\strdhomobjlabel}[3]{%
+\newcommand{\strdlinelabel}[3]{%
     \node[strd edgelabel,left] at (#1) {#2};
     \node[strd edgelabel,right] at (#1) {#3};%
+}
+
+\newcommand{\strdihomlabel}[3]{%
+    \node[strd edgelabel,left] at (#1) {[#2};
+    \node[strd edgelabel,right] at (#1) {#3]};%
 }
 
 \newcommand{\strdstartlabel}[2]{%
@@ -167,8 +201,6 @@
 
 
 % transformations
-
-\newcommand{\strdidentity}[1]{#1}
 
 \newcommand{\strdflip}[1]{%
     \begin{scope}[xscale=-1]
@@ -194,29 +226,21 @@
     \end{scope}%
 }
 
-\newcommand{\strdxshift}[2]{%
-    \begin{scope}[xshift=#1] 
-        #2;
-    \end{scope}%
-}
-
-\newcommand{\strdyshift}[2]{%
-    \begin{scope}[yshift=#1] 
-        #2;
-    \end{scope}%
-}
-
-\newcommand{\strdshift}[3]{%
-    \begin{scope}[xshift=#1,yshift=#2] 
+\newcommand{\strdscale}[3]{%
+    \begin{scope}[xscale=#1,yscale=#2] 
         #3;
     \end{scope}%
 }
 
-\newcommand{\strdvoid}[1]{}
-
 \newcommand{\strdnone}[1]{%
     \begin{scope}[every path/.style=strd none,every node/.style=strd none] 
         #1;
+    \end{scope}%
+}
+
+\newcommand{\strdpathwith}[2]{%
+    \begin{scope}[every path/.style=#1]
+        #2;
     \end{scope}%
 }
 
@@ -225,7 +249,63 @@
 
 \newcommand{\strdstrut}{\strut}
 \newcommand{\strddefeq}{\coloneqq}
+\newcommand{\strdidentity}[1]{#1}
+\newcommand{\strdvoid}[1]{}
 
-\newcommand\strddef[2]{%
-    \expandafter\newcommand\csname #1\endcsname{#2}%
+\newcommand\strdassign[2]{%
+    \global\csdef{#1}{#2}
+    #2
 }
+
+% other strings
+
+\newcommand{\strdbypassleft}[2]{%
+    \node[strd coord] (#2 Start) at (#1 End) {};
+    \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-0.25,0)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-0.25,-0.4)$) {};
+    \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-0.25,-0.8)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.8)$) {};
+    \draw{
+        (#2 Start) -- (#2 StartCorner) -- (#2 EndCorner) -- (#2 End)
+    };%
+}
+
+\newcommand{\strdbypassright}[2]{%
+    \strdflip{ \strdbypassleft{#1}{#2} }%
+}
+
+\newcommand{\strdrectangle}[2]{%
+    \strdbypassleft{#1}{#2 Left}
+    \strdjump{#1}{#2}
+    \strdbypassright{#1}{#2 Right}%
+}
+
+\newcommand{\strdbijection}[2]{%
+    \strdpathwith{strd bijection}{
+        \strdrectangle{#1}{#2}
+    }%
+}
+
+\newcommand{\strdmapping}[2]{%
+    \strdpathwith{strd mapping}{
+        \strdrectangle{#1}{#2}
+    }%
+}
+
+% composed strings
+
+\newcommand{\strdbranch}[2]{%
+    \strdline{#1}{#2 Branch}
+    \strdleft{#2 Branch}{#2 Left}
+    \strdright{#2 Branch}{#2 Right}
+    \strdyscale{2}{ \strdjump{#1}{#2} }%
+}
+
+\newcommand{\strdparallel}[2]{%
+    \strdjump{#1}{#2}
+    \strdshiftleft{#1}{#2 Left}
+    \strdline{#2 Left}{#2 Left} % funny name-conflict
+    \strdshiftright{#1}{#2 Right} 
+    \strdline{#2 Right}{#2 Right}%
+}
+

@@ -1,0 +1,68 @@
+\documentclass{article}
+\usepackage{tikz,strd}
+
+\begin{document}
+
+% bijections
+\strdpreview{
+    \strdgathered{
+        \strdassign{myfb}{
+            \strdassign{myf}{
+                \strdbranch{\strdorigin}{f}
+                \strdcelllabel{f}{f}
+                \strdlinelabel{f Branch}{}{Z}
+                \strdlinelabel{f Left}{}{Y}
+                \strdlinelabel{f Right}{}{X}
+                \strdcoord{f Branch Start}{z}
+                \strdcoord{f Left End}{y}
+                \strdcoord{f Right End}{x}
+            }
+            \strdreverse{ \strdline{z}{yz} }
+            \strdscale{3}{2}{ \strdbijection{z}{bj} }
+            \strdline{bj}{x}
+            \strdihomlabel{yz}{Y}{Z}
+            \strdlinelabel{x}{}{X}
+        }
+    }
+}
+
+\strdpreview{
+    \strdgathered{
+        \strdline{\strdorigin}{z}
+        \strdscale{3}{2}{ \strdbijection{z}{bj} }
+        \strdline{z}{yz}
+        \strdline{yz}{x}
+        \strdparallel{bj}{xy}
+        \strdlinelabel{z}{}{Z}
+        \strdihomlabel{yz}{Y}{Z}
+        \strdcelllabel{yz End}{g}
+        \strdlinelabel{x}{}{X}
+        \strdlinelabel{xy Left}{}{Y}
+        \strdlinelabel{xy Right}{}{X}
+    }
+}
+
+% naturality of X
+
+\strdpreview{
+    \strdgathered{
+        \myfb
+        \strdassign{myh}{
+            \strdline{x}{x'}
+            \strdcelllabel{x End}{h}
+            \strdlinelabel{x'}{}{X'}
+        }
+    }
+    =
+    \strdgathered{
+        \myf
+        \myh
+        \strdline{y}{y2}
+        \strdscale{3.2}{3}{\strdbijection{z}{bj}}
+        \strdline{bj}{x'}
+        \strdreverse{\strdline{z}{yz}}
+        \strdlinelabel{x'}{}{X'}
+        \strdihomlabel{yz}{Y}{Z}
+    }
+}
+\end{document}
