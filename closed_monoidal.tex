@@ -35,20 +35,18 @@
         \strdline{\strdorigin}{xy}
         \strdihomlabel{xy}{X}{Y}
     }
-    \iffalse
     \strddefeq
     \strdgathered{
         \strdline{\strdorigin}{xy}
-        \strdlinelabel{xy}{}{[X,Y]}
+        \strdstartlabel{xy}{[X,Y]}
     }
-    \fi
+    \iffalse
     \strddefeq
     \strdgathered{
         \strdline{\strdorigin}{xy}
         \strdstartlabel{xy}{(\mathcal{V})}
         \strdlinelabel{xy}{X}{Y}
     }
-    \iffalse
     \strddefeq
     \strdgathered{
         \strdline{\strdorigin}{xy}
@@ -83,6 +81,61 @@
             \strdlinelabel{xy Left}{}{Y}
             \strdlinelabel{xy Right}{}{X}
         }
+    }
+}
+
+
+% units
+
+\strdpreview{
+    \strdgathered{
+        \strdline{\strdorigin}{z}
+        \strdlinelabel{z}{}{Z}
+        \strdxscale{1}{
+            \strdleft{z}{y}
+            \strdright{z}{yz}
+        }
+        \strdlinelabel{y}{Y}{}
+        \strdihomlabel{yz}{Y}{Z}
+        \strdcelllabel{z End}{\epsilon}
+    } 
+    \strddefeq
+    \strdgathered{
+        \strdline{\strdorigin}{z}
+        \strdlinelabel{z}{}{Z}
+        \strdline{z}{yz}
+        \strdihomlabel{yz}{Y}{Z}
+        \strdsplitleft{yz}{y} \strdlinelabel{y}{Y}{} 
+        \strdsplitright{yz}{yz2} \strdihomlabel{yz2}{Y}{Z}
+        \strdscale{1}{1}{\strdbijection{z}{yzbox}}
+    }
+}
+
+% lemma
+
+\strdpreview{
+    \strdgathered{
+        \strdline{\strdorigin}{z'} \strdlinelabel{z'}{}{Z'}
+        
+        \strdleft{z'}{z}
+        \strdxscale{2}{\strdright{z'}{zz'}} \strdihomlabel{zz'}{Z}{Z'}
+        \strdcelllabel{z' End}{\epsilon}
+        
+        \strdyscale{3}{\strdline{z}{z2}} \strdlinelabel{z2}{}{Z}
+        \strdline{zz'}{gz'} \strdlinelabel{gz'}{}{Z'}
+
+        \strdleft{gz'}{gz} \strdlinelabel{gz}{}{Z}
+        \strdright{gz'}{gx'} \strdlinelabel{gx'}{}{X'}
+        \strdcelllabel{gz' End}{h}
+        \strdscale{2}{2}{\strdbijection{zz'}}
+        
+        \strdline{gx'}{x'} \strdlinelabel{x'}{}{X'}
+    } =
+    \strdgathered{
+        \strdline{\strdorigin}{gz'} \strdlinelabel{gz'}{}{Z'}
+        \strdleft{gz'}{gz} \strdlinelabel{gz}{}{Z}
+        \strdright{gz'}{gx'} \strdlinelabel{gx'}{}{X'}
+        \strdcelllabel{gz' End}{h}
     }
 }
 
@@ -145,11 +198,12 @@
     }
 }
 
-% bijection functoriality
+% currying functoriality
 \strdpreview{
     \strdgathered{
         \strdline{\strdorigin}{yz'}
         \strdihomlabel{yz'}{Y}{Z'}
+        \strdjunc{yz' End}
         \newcommand{\myl}{
             \strdxscale{2}{\strdleft{yz'}{yz}}
             \strdline{yz}{z}
@@ -208,4 +262,9 @@
         \strdcelllabel{z End}{f}
     }
 }
+
+% naturality between Hom functors
+
+
+
 \end{document}
