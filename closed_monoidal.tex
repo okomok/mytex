@@ -277,9 +277,8 @@
         \strdleft{y}{x} \strdlinelabel{x}{}{X}
         \strdright{y}{xy} \strdihomlabel{xy}{X}{Y}
         \strdline{xy}{xy2} \strdihomlabel{xy2}{X}{Y}
-        \strdxscale{2}{\strdright{z}{yz}}
-        \strdline{yz}{yz2} \strdihomlabel{yz2 Start}{Y}{Z}
-        \strdline{yz2}{yz3} \strdihomlabel{yz3}{Y}{Z}
+        \strdscale{2}{2}{\strdright{z}{yz}} \strdihomlabel{yz}{Y}{Z}
+        \strdline{yz}{yz2} \strdihomlabel{yz2}{Y}{Z}
         \strdscale{3}{3}{\strdbijection{xz}{box}}
     }
 }
@@ -305,6 +304,7 @@
 % iso to underlying
 \strdpreview{
     \strdgathered{
+        \strdidentity{
         \strdline{\strdorigin}{xx} \strdihomlabel{xx}{X}{Y}
         \strdline{xx}{x} \strdlinelabel{x}{}{Y} \strdcelllabel{x End}{f}
         \strdleft{x}{x2} \strdlinelabel{x2}{}{X}
@@ -313,6 +313,7 @@
             \strdline{i}{i2} \strdlinelabel{i2}{}{I}
         }
         \strdscale{2}{2}{\strdbijection{xx}{box}}
+    }
     }
 }
 

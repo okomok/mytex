@@ -208,11 +208,6 @@
     \node[strd endlabel,below] at (#1 End) {#2};%
 }
 
-% remove me
-\newcommand{\strdmcatlabel}[3]{%
-    \node[strd endlabel,#2] at (#1) {#3};%
-}
-
 
 % transformations
 
@@ -252,8 +247,14 @@
     \end{scope}%
 }
 
+\newcommand{\strdnolabels}[1]{%
+    \begin{scope}[every node/.style=strd none] 
+        #1;
+    \end{scope}%
+}
+
 \newcommand{\strdpathwith}[2]{%
-    \begin{scope}[every path/.style=#1]
+    \begin{scope}[every path/.append style=#1]
         #2;
     \end{scope}%
 }
