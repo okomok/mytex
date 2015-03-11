@@ -12,8 +12,8 @@
 % styles
 
 % no transparent color?
-\tikzset{strd celllabel/.style={font=\small,rounded corners,draw,fill=white,inner sep=2pt}}
-\tikzset{strd linelabel/.style={font=\scriptsize,inner sep=0pt,strd textvaligned}}
+\tikzset{strd celllabel/.style={font=\small,rounded rectangle,draw,fill=white,inner sep=1.2pt}}
+\tikzset{strd linelabel/.style={font=\scriptsize,inner sep=0.2pt,strd textvaligned}}
 \tikzset{strd endlabel/.style={font=\small,inner sep=1pt,strd textvaligned}}
 \tikzset{strd valigned/.style={baseline={([yshift=-0.5ex]current bounding box.center)}}}
 \tikzset{strd textvaligned/.style={text height=1.5ex,text depth=0.25ex}}
@@ -33,13 +33,6 @@
         \strddeclareorigin
         #1;
     \end{tikzpicture}%
-}
-
-%remove me
-\newcommand{\strdbg}[1]{%
-    \begin{pgfonlayer}{background}
-        #1;
-    \end{pgfonlayer}%
 }
 
 \newcommand{\strdpreview}[1]{%

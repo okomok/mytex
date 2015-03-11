@@ -1,0 +1,97 @@
+\documentclass{article}
+\usepackage{strd}
+
+\begin{document}
+
+% enriched functor
+\strdpreview{
+    \left(
+    \strdgathered{
+        \strdline{\strdorigin}{tatb} \strdlinelabel{tatb}{TA}{TB} \strdcelllabel{tatb End}{T_{A,B}}
+        \strdline{tatb}{ab} \strdlinelabel{ab}{A}{B}
+        \strdstartlabel{tatb}{\mathcal{B}}
+        \strdendlabel{ab}{\mathcal{A}}
+    }
+    \right)_{\!\!\!A,B \in \mathcal{A}} 
+}
+
+% enriched functoriality
+\strdpreview{
+    \strdgathered{
+        \strdline{\strdorigin}{tatc} \strdlinelabel{tatc}{TA}{TC} \strdjunc{tatb End}
+        \strdleft{tatc}{tatb} \strdlinelabel{tatb}{TA}{TB} \strdcelllabel{tatb End}{T}
+        \strdline{tatb}{ab} \strdlinelabel{ab}{A}{B}
+        \strdstartlabel{tatc}{\mathcal{B}}
+        \strdendlabel{ab}{\mathcal{A}}
+        \strdright{tatc}{tbtc} \strdlinelabel{tbtc}{TB}{TC} \strdcelllabel{tbtc End}{T}
+        \strdline{tbtc}{bc} \strdlinelabel{bc}{B}{C}
+        \strdendlabel{bc}{\mathcal{A}}
+    }
+    =
+    \strdgathered{
+        \strdline{\strdorigin}{tatc} \strdlinelabel{tatc}{TA}{TC} \strdcelllabel{tatc End}{T}
+        \strdline{tatc}{ac} \strdlinelabel{ac}{A}{C} \strdjunc{ac End}
+        \strdleft{ac}{ab} \strdlinelabel{ab}{A}{B}
+        \strdright{ac}{bc} \strdlinelabel{bc}{B}{C}
+        \strdstartlabel{tatc}{\mathcal{B}}
+        \strdendlabel{ab}{\mathcal{A}}
+        \strdendlabel{bc}{\mathcal{A}}
+    }
+}
+\strdpreview{
+    \strdgathered{
+        \strdline{\strdorigin}{tata} \strdlinelabel{tata}{TA}{TA} \strdcelllabel{tata End}{T}
+        \strdline{tata}{aa} \strdlinelabel{aa}{A}{A} \strdjunc{aa End}
+        \strdstartlabel{tata}{\mathcal{B}}
+    }
+    =
+    \strdgathered{
+        \strdline{\strdorigin}{tata} \strdlinelabel{tata}{TA}{TA} \strdjunc{tata End}
+        \strdstartlabel{tata}{\mathcal{B}}
+    }
+}
+
+% underlying 1-functor
+\strdpreview{
+    \strdgathered{
+        \strdline{\strdorigin}{ab} \strdlinelabel{ab}{A}{B} \strdcelllabel{ab End}{f}
+        \strdstartlabel{ab}{\mathcal{A}}
+    }
+    \xmapsto{T_0}
+    \strdgathered{
+        \strdline{\strdorigin}{tatb} \strdlinelabel{tatb}{TA}{TB} \strdcelllabel{tatb End}{T}
+        \strdstartlabel{tatb}{\mathcal{B}}
+        \strdline{tatb}{ab} \strdlinelabel{ab}{A}{B} \strdcelllabel{ab End}{f}
+    }
+}
+
+% enriched natural transformation
+\strdpreview{
+    \left(
+    \strdgathered{
+        \strdline{\strdorigin}{tasa} \strdlinelabel{tasa}{TA}{SA} \strdcelllabel{tasa End}{\alpha_A}
+        \strdstartlabel{tasa}{\mathcal{B}}
+    }
+    \right) _ {\!\!\!A \in \mathcal{A}}
+}
+
+% enriched naturality
+\strdpreview{
+    \strdgathered{
+        \strdline{\strdorigin}{tasb} \strdlinelabel{tasb}{TA}{SB} \strdstartlabel{tasb}{\mathcal{B}}
+            \strdjunc{tasb End}
+        \strdleft{tasb}{tatb} \strdlinelabel{tatb}{TA}{TB} \strdcelllabel{tatb End}{T}
+        \strdline{tatb}{ab} \strdlinelabel{ab}{A}{B} \strdendlabel{ab}{\mathcal{A}}
+        \strdright{tasb}{tbsb} \strdlinelabel{tbsb}{TB}{SB} \strdcelllabel{tbsb End}{\alpha}
+    }
+    =
+    \strdgathered{
+        \strdline{\strdorigin}{tasb} \strdlinelabel{tasb}{TA}{SB}
+            \strdstartlabel{tasb}{\mathcal{B}} \strdjunc{tasb End}
+        \strdleft{tasb}{tasa} \strdlinelabel{tasa}{TA}{SA} \strdcelllabel{tasa End}{\alpha}
+        \strdright{tasb}{sasb} \strdlinelabel{sasb}{SA}{SB} \strdcelllabel{sasb End}{S}
+        \strdline{sasb}{ab} \strdlinelabel{ab}{A}{B} \strdendlabel{ab}{\mathcal{A}}
+    }
+}
+
+\end{document}
