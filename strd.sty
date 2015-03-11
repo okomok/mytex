@@ -12,11 +12,11 @@
 % styles
 
 % no transparent color?
-\tikzset{strd celllabel/.style={font=\scriptsize,rounded corners,draw,fill=white,inner sep=2pt}}
-\tikzset{strd edgelabel/.style={font=\scriptsize,inner sep=0pt,strd textvaligned}}
-\tikzset{strd endlabel/.style={font=\scriptsize,inner sep=1pt,strd textvaligned}}
+\tikzset{strd celllabel/.style={font=\small,rounded corners,draw,fill=white,inner sep=2pt}}
+\tikzset{strd linelabel/.style={font=\scriptsize,inner sep=0pt,strd textvaligned}}
+\tikzset{strd endlabel/.style={font=\small,inner sep=1pt,strd textvaligned}}
 \tikzset{strd valigned/.style={baseline={([yshift=-0.5ex]current bounding box.center)}}}
-\tikzset{strd textvaligned/.style={text height=0.5em,text depth=0.1em}}
+\tikzset{strd textvaligned/.style={text height=1.5ex,text depth=0.25ex}}
 \tikzset{strd coord/.style={coordinate}}
 \tikzset{strd junc/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
 \tikzset{strd cornering/.style={rounded corners=2pt}}
@@ -87,18 +87,23 @@
 
 % string combinators
 
+% golden ratio
+\newcommand{\strdxunit}{0.5}
+\newcommand{\strdyunit}{0.8}
+\newcommand{\strdhalfxunit}{0.25}
+\newcommand{\strdhalfyunit}{0.4}
+
 \newcommand{\strdempty}[2]{%
     \node[strd coord] (#2) at (#1 End) {};
     \node[strd coord] (#2 Start) at (#2) {};
     \node[strd coord] (#2 End) at (#2) {};%
 }
 
-% golden ratio
 \newcommand{\strdleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2 Corner) at ($(#1 End)+(-0.4,-0.24)$) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-0.4,-0.37)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(-0.4,-0.64)$) {};
+    \node[strd coord] (#2 End) at ($(#2 Start)+(-\strdxunit,-\strdyunit)$) {};
+    \node[strd coord] (#2 Corner) at ($(#2 End)+(0,\strdxunit)$) {};
+    \node[strd coord] (#2) at ($(#2 Start)+(-\strdxunit,-0.44)$) {};
     \draw[strd cornering]{
         (#2 Start) -- (#2 Corner) -- (#2 End)
     };%
@@ -133,8 +138,8 @@
 
 \newcommand{\strdline}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(0,-0.32)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.64)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(0,-\strdhalfyunit)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(0,-\strdyunit)$) {};
     \draw{
         (#2 Start) -- (#2 End)
     };%
@@ -146,8 +151,8 @@
 
 \newcommand{\strdlineleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-0.2,0)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(-0.4,0)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-\strdhalfxunit,0)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(-\strdxunit,0)$) {};
     \draw{
         (#2 Start) -- (#2 End)
     };%
@@ -183,13 +188,16 @@
 }
 
 \newcommand{\strdlinelabel}[3]{%
-    \node[strd edgelabel,left] at (#1) {#2};
-    \node[strd edgelabel,right] at (#1) {#3};%
+    \node[strd linelabel,left] at (#1) {#2};
+    \node[strd linelabel,right] at (#1) {#3};%
 }
 
+\newcommand{\strdlsbracket}{\raisebox{0.075em}{[}}
+\newcommand{\strdrsbracket}{\raisebox{0.075em}{]}}
+
 \newcommand{\strdihomlabel}[3]{%
-    \node[strd edgelabel,left] at (#1) {[#2};
-    \node[strd edgelabel,right] at (#1) {#3]};%
+    \node[strd linelabel,left] at (#1) {\strdlsbracket#2};
+    \node[strd linelabel,right] at (#1) {#3\strdrsbracket};%
 }
 
 \newcommand{\strdstartlabel}[2]{%
@@ -267,10 +275,10 @@
 
 \newcommand{\strdbypassleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-0.4,0)$) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-0.4,-0.4)$) {};
-    \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-0.4,-0.64)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.64)$) {};
+    \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-\strdxunit,0)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-\strdxunit,-\strdhalfyunit)$) {};
+    \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-\strdxunit,-\strdyunit)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(0,-\strdyunit)$) {};
     \draw{
         (#2 Start) -- (#2 StartCorner) -- (#2 EndCorner) -- (#2 End)
     };%
@@ -298,8 +306,10 @@
     }%
 }
 
+
 % composed strings
 
+% remove me
 \newcommand{\strdbranch}[2]{%
     \strdline{#1}{#2 Branch}
     \strdleft{#2 Branch}{#2 Left}

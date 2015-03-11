@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[landscape]{article}
 \usepackage{tikz,strd}
 
 \begin{document}
@@ -198,12 +198,14 @@
     }
 }
 
-% currying functoriality
+
+% functoriality of currying
+
 \strdpreview{
     \strdgathered{
         \strdline{\strdorigin}{yz'}
         \strdihomlabel{yz'}{Y}{Z'}
-        \strdjunc{yz' End}
+        \strdcelllabel{yz' End}{M}
         \newcommand{\myl}{
             \strdxscale{2}{\strdleft{yz'}{yz}}
             \strdline{yz}{z}
@@ -252,19 +254,66 @@
         \strdlinelabel{x2}{}{X}
         \strdline{x'2}{x'3}
         \strdlinelabel{x'3}{}{X'}
-        \strdyscale{3}{
-            \strdpathwith{strd bijection}{
-                \strdxscale{3}{\strdbypassleft{yz'}{yz'l}}
-                \strdxscale{2}{\strdbypassright{yz'}{yz'r}}
-            }
-        }
-        %\strdscale{3}{3}{\strdbijection{yz'}{bj}}
+        \strdxscale{0.5}{\strdshiftleft{yz'}{yz's}}
+        \strdscale{2.5}{3}{\strdbijection{yz's}{box}}
         \strdcelllabel{z End}{f}
     }
 }
 
-% naturality between Hom functors
+
+% Self-enrichment
+
+\strdpreview{
+    \strdgathered{
+        \strdline{\strdorigin}{xz} \strdihomlabel{xz}{X}{Z} \strdcelllabel{xz End}{M}
+        \strdleft{xz}{xy} \strdihomlabel{xy}{X}{Y}
+        \strdright{xz}{yz} \strdihomlabel{yz}{Y}{Z}
+    }
+    \strddefeq
+    \strdgathered{
+        \strdline{\strdorigin}{xz} \strdihomlabel{xz}{X}{Z}
+        \strdline{xz}{z} \strdlinelabel{z}{}{Z} \strdcelllabel{z End}{\epsilon}
+        \strdleft{z}{y} \strdlinelabel{y}{}{Y} \strdcelllabel{y End}{\epsilon}
+        \strdleft{y}{x} \strdlinelabel{x}{}{X}
+        \strdright{y}{xy} \strdihomlabel{xy}{X}{Y}
+        \strdline{xy}{xy2} \strdihomlabel{xy2}{X}{Y}
+        \strdxscale{2}{\strdright{z}{yz}}
+        \strdline{yz}{yz2} \strdihomlabel{yz2 Start}{Y}{Z}
+        \strdline{yz2}{yz3} \strdihomlabel{yz3}{Y}{Z}
+        \strdscale{3}{3}{\strdbijection{xz}{box}}
+    }
+}
+
+\strdpreview{
+    \strdgathered{
+        \strdline{\strdorigin}{xx} \strdihomlabel{xx}{X}{X} \strdcelllabel{xx End}{j}
+    }
+    \strddefeq
+    \strdgathered{
+        \strdline{\strdorigin}{xx} \strdihomlabel{xx}{X}{X}
+        \strdline{xx}{x} \strdlinelabel{x}{}{X} \strdcelllabel{x End}{\lambda}
+        \strdleft{x}{x2} \strdlinelabel{x2}{}{X}
+        \strdpathwith{dotted}{
+            \strdright{x}{i} \strdlinelabel{i}{}{I}
+            \strdline{i}{i2} \strdlinelabel{i2}{}{I}
+        }
+        \strdscale{2}{2}{\strdbijection{xx}{box}}
+    }
+}
 
 
+% iso to underlying
+\strdpreview{
+    \strdgathered{
+        \strdline{\strdorigin}{xx} \strdihomlabel{xx}{X}{Y}
+        \strdline{xx}{x} \strdlinelabel{x}{}{Y} \strdcelllabel{x End}{f}
+        \strdleft{x}{x2} \strdlinelabel{x2}{}{X}
+        \strdpathwith{dotted}{
+            \strdright{x}{i} \strdlinelabel{i}{}{I}
+            \strdline{i}{i2} \strdlinelabel{i2}{}{I}
+        }
+        \strdscale{2}{2}{\strdbijection{xx}{box}}
+    }
+}
 
 \end{document}
