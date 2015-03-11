@@ -18,6 +18,16 @@
 % enriched functoriality
 \strdpreview{
     \strdgathered{
+        \strdline{\strdorigin}{tatc} \strdlinelabel{tatc}{TA}{TC} \strdcelllabel{tatc End}{T}
+        \strdline{tatc}{ac} \strdlinelabel{ac}{A}{C} \strdjunc{ac End}
+        \strdleft{ac}{ab} \strdlinelabel{ab}{A}{B}
+        \strdright{ac}{bc} \strdlinelabel{bc}{B}{C}
+        \strdstartlabel{tatc}{\mathcal{B}}
+        \strdendlabel{ab}{\mathcal{A}}
+        \strdendlabel{bc}{\mathcal{A}}
+    }
+    =
+    \strdgathered{
         \strdline{\strdorigin}{tatc} \strdlinelabel{tatc}{TA}{TC} \strdjunc{tatb End}
         \strdleft{tatc}{tatb} \strdlinelabel{tatb}{TA}{TB} \strdcelllabel{tatb End}{T}
         \strdline{tatb}{ab} \strdlinelabel{ab}{A}{B}
@@ -25,16 +35,6 @@
         \strdendlabel{ab}{\mathcal{A}}
         \strdright{tatc}{tbtc} \strdlinelabel{tbtc}{TB}{TC} \strdcelllabel{tbtc End}{T}
         \strdline{tbtc}{bc} \strdlinelabel{bc}{B}{C}
-        \strdendlabel{bc}{\mathcal{A}}
-    }
-    =
-    \strdgathered{
-        \strdline{\strdorigin}{tatc} \strdlinelabel{tatc}{TA}{TC} \strdcelllabel{tatc End}{T}
-        \strdline{tatc}{ac} \strdlinelabel{ac}{A}{C} \strdjunc{ac End}
-        \strdleft{ac}{ab} \strdlinelabel{ab}{A}{B}
-        \strdright{ac}{bc} \strdlinelabel{bc}{B}{C}
-        \strdstartlabel{tatc}{\mathcal{B}}
-        \strdendlabel{ab}{\mathcal{A}}
         \strdendlabel{bc}{\mathcal{A}}
     }
 }
@@ -88,7 +88,7 @@
     \strdgathered{
         \strdline{\strdorigin}{tasb} \strdlinelabel{tasb}{TA}{SB}
             \strdstartlabel{tasb}{\mathcal{B}} \strdjunc{tasb End}
-        \strdleft{tasb}{tasa} \strdlinelabel{tasa}{TA}{SA} \strdcelllabel{tasa End}{\alpha}
+            \strdscale{1}{1}{\strdleft{tasb}{tasa}} \strdlinelabel{tasa}{TA}{SA} \strdcelllabel{tasa End}{\alpha}
         \strdright{tasb}{sasb} \strdlinelabel{sasb}{SA}{SB} \strdcelllabel{sasb End}{S}
         \strdline{sasb}{ab} \strdlinelabel{ab}{A}{B} \strdendlabel{ab}{\mathcal{A}}
     }

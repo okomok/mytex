@@ -12,7 +12,7 @@
 % styles
 
 % no transparent color?
-\tikzset{strd celllabel/.style={font=\small,rounded rectangle,draw,fill=white,inner sep=1.2pt}}
+\tikzset{strd celllabel/.style={font=\small,rounded rectangle,rounded rectangle arc length=90 ,draw,fill=white,inner sep=1.2pt}}
 \tikzset{strd linelabel/.style={font=\scriptsize,inner sep=0.2pt,strd textvaligned}}
 \tikzset{strd endlabel/.style={font=\small,inner sep=1pt,strd textvaligned}}
 \tikzset{strd valigned/.style={baseline={([yshift=-0.5ex]current bounding box.center)}}}
@@ -98,7 +98,7 @@
     \node[strd coord] (#2 Corner) at ($(#2 End)+(0,\strdxunit)$) {};
     \node[strd coord] (#2) at ($(#2 Start)+(-\strdxunit,-0.44)$) {};
     \draw[strd cornering]{
-        (#2 Start) -- (#2 Corner) -- (#2 End)
+        (#2 Start) parabola (#2 Corner) -- (#2 End)
     };%
 }
 
