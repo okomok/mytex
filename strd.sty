@@ -262,8 +262,13 @@
 
 \newcommand\strdassign[2]{%
     \global\csdef{#1}{#2}
-    #2
+    #2%
 }
+
+\newcommand{\strdfamily}[2]{%
+    \left(#2\right)_{\!\!\!#1}%
+}
+
 
 % other strings
 

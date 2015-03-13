@@ -51,6 +51,37 @@
     }
 }
 
+% identity functor
+\strdpreview{
+    \left(
+    \strdgathered{
+        \strdline{\strdorigin}{ab} \strdlinelabel{ab}{A}{B} \strdstartlabel{ab}{\mathcal{A}}
+        \strdline{ab}{ab2} \strdlinelabel{ab2}{A}{B} \strdcelllabel{ab2 Start}{1}
+        \strdendlabel{ab2}{\mathcal{A}}
+    } \strddefeq
+    \strdgathered{
+        \strdline{\strdorigin}{ab} \strdlinelabel{ab}{A}{B} \strdstartlabel{ab}{\mathcal{A}}
+    }
+    \right)_{\!\!\!A,B \in \mathcal{A}} 
+}
+
+% composite functor
+\strdpreview{
+    \left(
+    \strdgathered{
+        \strdline{\strdorigin}{qtaqtb} \strdlinelabel{qtaqtb}{QTA}{QTB} \strdstartlabel{qtaqtb}{\mathcal{C}}
+        \strdline{qtaqtb}{ab} \strdlinelabel{ab}{A}{B} \strdcelllabel{ab Start}{QT}
+        \strdendlabel{ab}{\mathcal{A}}
+    } \strddefeq
+    \strdgathered{
+        \strdline{\strdorigin}{qtaqtb} \strdlinelabel{qtaqtb}{QTA}{QTB} \strdstartlabel{qtaqtb}{\mathcal{C}}
+        \strdline{qtaqtb}{tatb} \strdlinelabel{tatb}{TA}{TB} \strdcelllabel{tatb Start}{Q}
+        \strdline{tatb}{ab} \strdlinelabel{ab}{A}{B} \strdcelllabel{ab Start}{T}
+        \strdendlabel{ab}{\mathcal{A}}
+    }
+    \right)_{\!\!\!A,B \in \mathcal{A}} 
+}
+
 % underlying 1-functor
 \strdpreview{
     \strdgathered{
@@ -91,6 +122,64 @@
             \strdscale{1}{1}{\strdleft{tasb}{tasa}} \strdlinelabel{tasa}{TA}{SA} \strdcelllabel{tasa End}{\alpha}
         \strdright{tasb}{sasb} \strdlinelabel{sasb}{SA}{SB} \strdcelllabel{sasb End}{S}
         \strdline{sasb}{ab} \strdlinelabel{ab}{A}{B} \strdendlabel{ab}{\mathcal{A}}
+    }
+}
+
+% identity enriched natural transformation
+\strdpreview{
+    \strdfamily{A \in \mathcal{A}}{
+        \strdgathered{
+            \strdline{\strdorigin}{tata} \strdlinelabel{tata}{TA}{TA} \strdcelllabel{tata End}{1}
+            \strdstartlabel{tata}{\mathcal{B}}
+        } \strddefeq
+        \strdgathered{
+            \strdline{\strdorigin}{tata} \strdlinelabel{tata}{TA}{TA} \strdjunc{tata End}
+            \strdstartlabel{tata}{\mathcal{B}}
+        }
+    }
+}
+
+% vertical composition
+\strdpreview{
+    \strdfamily{A \in \mathcal{A}}{
+        \strdgathered{
+            \strdline{\strdorigin}{tara} \strdlinelabel{tara}{TA}{RA} \strdstartlabel{tara}{\mathcal{B}}
+            \strdcelllabel{tara End}{\beta \cdot \alpha}
+        } \strddefeq
+        \strdgathered{
+            \strdline{\strdorigin}{tara} \strdlinelabel{tara}{TA}{RA} \strdstartlabel{tara}{\mathcal{B}}
+            \strdjunc{tara End}
+            \strdleft{tara}{tasa} \strdlinelabel{tasa}{TA}{SA} \strdcelllabel{tasa End}{\alpha}
+            \strdright{tara}{sara} \strdlinelabel{sara}{SA}{RA} \strdcelllabel{sara End}{\beta}
+        }
+    } 
+}
+
+% horizontal composition
+\strdpreview{
+    \strdfamily{A \in \mathcal{A}}{
+        \strdgathered{
+            \strdline{\strdorigin}{qtapsa} \strdlinelabel{qtapsa}{QTA}{PSA} \strdstartlabel{qtapsa}{\mathcal{C}}
+            \strdcelllabel{qtapsa End}{\beta \star \alpha}
+        } \strddefeq
+        \strdgathered{
+            \strdline{\strdorigin}{qtapsa} \strdlinelabel{qtapsa}{QTA}{PSA} \strdstartlabel{qtapsa}{\mathcal{C}}
+            \strdxscale{1.5}{
+                \strdleft{qtapsa}{qtaqsa} \strdlinelabel{qtaqsa}{QTA}{QSA} \strdcelllabel{qtaqsa End}{Q}
+                \strdright{qtapsa}{qsapsa} \strdlinelabel{qsapsa}{QSA}{PSA} \strdcelllabel{qsapsa End}{\beta}
+            }
+            \strdline{qtaqsa}{tasa} \strdlinelabel{tasa}{TA}{SA} \strdcelllabel{tasa End}{\alpha}
+            \strdjunc{qtapsa End}
+        } =
+        \strdgathered{
+            \strdline{\strdorigin}{qtapsa} \strdlinelabel{qtapsa}{QTA}{PSA} \strdstartlabel{qtapsa}{\mathcal{C}}
+            \strdxscale{1.5}{
+                \strdleft{qtapsa}{qtapta} \strdlinelabel{qtapta}{QTA}{PTA} \strdcelllabel{qtapta End}{\beta}
+                \strdright{qtapsa}{ptapsa} \strdlinelabel{ptapsa}{PTA}{PSA} \strdcelllabel{ptapsa End}{P}
+            }
+            \strdline{ptapsa}{tasa} \strdlinelabel{tasa}{TA}{SA} \strdcelllabel{tasa End}{\alpha}
+            \strdjunc{qtapsa End}
+        }
     }
 }
 
