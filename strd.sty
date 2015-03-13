@@ -96,7 +96,7 @@
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2 End) at ($(#2 Start)+(-\strdxunit,-\strdyunit)$) {};
     \node[strd coord] (#2 Corner) at ($(#2 End)+(0,\strdxunit)$) {};
-    \node[strd coord] (#2) at ($(#2 Start)+(-\strdxunit,-0.44)$) {};
+    \node[strd coord] (#2) at ($(#2 Start)+(-\strdxunit,-\strdhalfyunit)$) {};
     \draw[strd cornering]{
         (#2 Start) parabola (#2 Corner) -- (#2 End)
     };%
@@ -117,11 +117,11 @@
 
 \newcommand{\strdunleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(0,-0.27)$) {};
-    \node[strd coord] (#2 Corner) at ($(#1 End)+(0,-0.4)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(0.4,-0.64)$) {};
+    \node[strd coord] (#2 End) at ($(#2 Start)+(\strdxunit,-\strdyunit)$) {};
+    \node[strd coord] (#2 Corner) at ($(#2 Start)+(0,-\strdxunit)$) {};
+    \node[strd coord] (#2) at ($(#2 Start)+(0,-\strdhalfyunit)$) {};
     \draw[strd cornering]{
-        (#2 Start) -- (#2 Corner) -- (#2 End)
+        (#2 Start) -- (#2 Corner) parabola[bend at end] (#2 End)
     };%
 }
 

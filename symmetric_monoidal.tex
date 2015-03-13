@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage{strd}
+
+\begin{document}
+
+% syntax
+\strdpreview{
+    \strdgathered{
+        \strdunleft{\strdorigin}{a} \strdlinelabel{a}{}{A}
+        \strdright{a}{a2} \strdlinelabel{a2}{}{A}
+        \strdxscale{2}{\strdshiftright{\strdorigin}{bs}} 
+        \strdunright{bs}{b} \strdlinelabel{b}{}{B}
+        \strdleft{b}{b2} \strdlinelabel{b2}{}{B}
+        \strdcelllabel{a End}{s}
+    }
+    :=
+    \strdgathered{
+        \strdunleft{\strdorigin}{a} \strdlinelabel{a}{}{A}
+        \strdright{a}{a2} \strdlinelabel{a2}{}{A}
+        \strdxscale{2}{\strdshiftright{\strdorigin}{bs}} 
+        \strdunright{bs}{b} \strdlinelabel{b}{}{B}
+        \strdleft{b}{b2} \strdlinelabel{b2}{}{B}
+ %       \strdjunc{a End}{s}
+    }
+}
+
+% naturality
+\strdpreview{
+    \strdgathered{
+        \strdunleft{\strdorigin}{a} \strdlinelabel{a}{}{A}
+        \strdright{a}{a2} \strdlinelabel{a2}{}{A} \strdcelllabel{a2 End}{f}
+        \strdline{a2}{z} \strdlinelabel{z}{}{Z}
+        \strdxscale{2}{\strdshiftright{\strdorigin}{bs}} 
+        \strdunright{bs}{b} \strdlinelabel{b}{}{B}
+        \strdleft{b}{b2}
+        \strdline{b2}{b3} \strdlinelabel{b3}{}{B}
+ %       \strdjunc{a End}
+    }
+    =
+    \strdgathered{
+        \strdline{\strdorigin}{a} \strdlinelabel{a}{}{A} \strdcelllabel{a End}{f}
+        \strdunleft{a}{z} \strdlinelabel{z}{}{Z}
+        \strdright{z}{z2} \strdlinelabel{z2}{}{Z}
+        \strdxscale{2}{\strdshiftright{\strdorigin}{bs}} 
+        \strdline{bs}{b} \strdlinelabel{b}{}{B}
+        \strdunright{b}{b2} 
+        \strdleft{b2}{b3} \strdlinelabel{b3}{}{B}
+ %       \strdjunc{z End}
+    }
+}
+
+\end{document}
