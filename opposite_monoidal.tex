@@ -1,0 +1,87 @@
+\documentclass{article}
+\usepackage{strd,cat}
+
+\begin{document}
+
+% opposite enriched category
+
+\strdpreview{
+    \strdgathered{
+        \strdsidelabeled{line}{\strdorigin}{A}{B}
+        \strdstartlabel{AB}{\mathcal{A}^{\operatorname{op}}}
+    } \strddefeq
+    \strdgathered{
+        \strdsidelabeled{line}{\strdorigin}{B}{A}
+        \strdstartlabel{BA}{\mathcal{A}}
+    }
+}
+
+\strdpreview{
+    \strdgathered{
+        \strdsidelabeled{line}{\strdorigin}{A}{C}
+        \strdstartlabel{AC}{\mathcal{A}^{\operatorname{op}}}
+        \strdsidelabeled{left}{AC}{A}{B}
+        \strdsidelabeled{right}{AC}{B}{C}
+        \strdjunc{AC End}
+    } \strddefeq
+    \strdgathered{
+        \strdsidelabeled{line}{\strdorigin}{C}{A}
+        \strdstartlabel{CA}{\mathcal{A}}
+        \strdnolabels{\strdsidelabeled{left}{CA}{C}{B}}
+        \strdnolabels{\strdsidelabeled{right}{CA}{B}{A}}
+        \strdjunc{CA End}
+        \strdunleft{CB}{CB2} \strdsidelabel{CB2 Start}{C}{B}
+        \strdunright{BA}{BA2} \strdsidelabel{BA2 Start}{B}{A}
+        \strdright{CB2}{CB3} \strdsidelabel{CB3}{C}{B}
+        \strdleft{BA2}{BA3} \strdsidelabel{BA3}{B}{A}
+    }
+}
+
+\strdpreview{
+    \strdgathered{
+        \strdsidelabeled{line}{\strdorigin}{A}{A}
+        \strdstartlabel{AA}{\mathcal{A}^{\operatorname{op}}}
+        \strdjunc{AA End} 
+    } \strddefeq
+    \strdgathered{
+        \strdsidelabeled{line}{\strdorigin}{A}{A}
+        \strdstartlabel{AA}{\mathcal{A}}
+        \strdjunc{AA End} 
+    }
+}
+
+% opposite enriched functor
+
+\strdpreview{
+    \strdgathered{
+        \strdline{\strdorigin}{tatb} \strdsidelabel{tatb}{\catop{T}A}{\catop{T}B}
+        \strdcelllabel{tatb End}{\catop{T}}
+        \strdsidelabeled{line}{tatb}{A}{B}
+        \strdstartlabel{tatb}{\catop{\mathcal{B}}}
+        \strdendlabel{AB}{\catop{\mathcal{A}}}
+    } \strddefeq
+    \strdgathered{
+        \strdsidelabeled{line}{\strdorigin}{TB}{TA}
+        \strdcelllabel{TBTA End}{T}
+        \strdsidelabeled{line}{TBTA}{B}{A}
+        \strdstartlabel{TBTA}{\mathcal{B}}
+        \strdendlabel{BA}{\mathcal{A}}
+    }
+}
+
+% opposite natural transformation
+
+\strdpreview{
+    \strdgathered{
+        \strdline{\strdorigin}{SATA} \strdsidelabel{SATA}{\catop{S}A}{\catop{T}A}
+        \strdcelllabel{SATA End}{\catop{\alpha}}
+        \strdstartlabel{SATA}{\catop{\mathcal{B}}}
+    } \catdefeq
+    \strdgathered{
+        \strdsidelabeled{line}{\strdorigin}{TA}{SA}
+        \strdcelllabel{TASA End}{\alpha}
+        \strdstartlabel{TASA}{\mathcal{B}}
+    }
+}
+
+\end{document}
