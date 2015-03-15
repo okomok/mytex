@@ -1,0 +1,113 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+
+\begin{document}
+
+% monoidal product of enriched categories 
+
+\strdpreview{
+    \strdgathered{
+        \strdmid{\strdorigin}{ABA'B'} \strdsidelabel{ABA'B'}{(A,B)}{(A',B')}
+        \strdstartlabel{ABA'B'}{\mathcal{A} \otimes \mathcal{B}}
+    } \mydefeq
+    \strdgathered{
+        \strdsidelabeled{mid}{\strdorigin}{B}{B'}
+        \strdxscale{1.2}{\strdshiftright{\strdorigin}{SAA'}}
+        \strdsidelabeled{mid}{SAA'}{A}{A'}
+        \strdstartlabel{BB'}{\mathcal{B}}
+        \strdstartlabel{AA'}{\mathcal{A}}
+    }
+}
+
+\strdpreview{
+    \strdgathered{
+        \strdmid{\strdorigin}{ABA''B''} \strdsidelabel{ABA''B''}{(A,B)}{(A'',B'')}
+        \strdstartlabel{ABA''B''}{\mathcal{A} \otimes \mathcal{B}}
+        \strdxscale{2.2}{
+            \strdleft{ABA''B''}{ABA'B'} \strdsidelabel{ABA'B'}{(A,B)}{(A',B')}
+            \strdright{ABA''B''}{A'B'A''B''} \strdsidelabel{A'B'A''B''}{(A',B')}{(A'',B'')}
+        }
+        \strddotlabel{ABA''B'' End}
+    } \mydefeq
+    \strdgathered{
+        \strdsidelabeled{mid}{\strdorigin}{B}{B''}
+        \strdleft{BB''}{BB'}
+        \strdsidelabeled{rbag}{BB''}{B'}{B''}
+        \strdright{B'B''}{B'B''2} \strdsidelabel{B'B''2}{B'}{B''}
+        \strdxscale{4}{\strdshiftright{\strdorigin}{SA}}
+        \strdsidelabeled{mid}{SA}{A}{A''}
+        \strdright{AA''}{A'A''}
+        \strdsidelabeled{lbag}{AA''}{A}{A'}
+        \strdleft{AA'}{AA'2} \strdsidelabel{AA'2}{A}{A'}
+        \strdmid{BB'}{BB'2} \strdsidelabel{BB'2}{B}{B'}
+        \strdmid{A'A''}{A'A''2} \strdsidelabel{A'A''2}{A'}{A''}
+        \strdstartlabel{BB''}{\mathcal{B}}
+        \strdstartlabel{AA''}{\mathcal{A}}
+        \strddotlabel{BB'' End}
+        \strddotlabel{AA'' End}
+    }
+}
+
+\strdpreview{
+    \strdgathered{
+        \strdmid{\strdorigin}{ABA'B'} \strdsidelabel{ABA'B'}{(A,B)}{(A',B')}
+        \strdstartlabel{ABA'B'}{\mathcal{A} \otimes \mathcal{B}}
+        \strddotlabel{ABA'B' End}
+    } \mydefeq
+    \strdgathered{
+        \strdsidelabeled{mid}{\strdorigin}{B}{B'}
+        \strdxscale{1.2}{\strdshiftright{\strdorigin}{SAA'}}
+        \strdsidelabeled{mid}{SAA'}{A}{A'}
+        \strdstartlabel{BB'}{\mathcal{B}}
+        \strdstartlabel{AA'}{\mathcal{A}}
+        \strddotlabel{BB' End}
+        \strddotlabel{AA' End}
+    }
+}
+
+% functor product
+\strdpreview{
+    \strdgathered{
+        \strdmid{\strdorigin}{U} \strdsidelabel{U}{(T \otimes S)(A,B)}{(T \otimes S)(A',B')}
+        \strdmid{U}{D} \strdsidelabel{D}{(A,B)}{(A',B')}
+        \strdcelllabel{U End}{T \otimes S}
+        \strdstartlabel{U}{\mathcal{C} \otimes \mathcal{D}}
+        \strdendlabel{D}{\mathcal{A} \otimes \mathcal{B}}
+    } \mydefeq
+    \strdgathered{
+        \strdsidelabeled{mid}{\strdorigin}{SB}{SB'}
+        \strdcelllabel{SBSB' End}{S}
+        \strdsidelabeled{mid}{SBSB'}{B}{B'}
+
+        \strdxscale{2.2}{\strdshiftright{\strdorigin}{R}}
+        \strdsidelabeled{mid}{R}{TA}{TA'}
+        \strdcelllabel{TATA' End}{T}
+        \strdsidelabeled{mid}{TATA'}{A}{A'}
+
+        \strdstartlabel{SBSB'}{\mathcal{D}}
+        \strdstartlabel{TATA'}{\mathcal{C}}
+        \strdendlabel{BB'}{\mathcal{B}}
+        \strdendlabel{AA'}{\mathcal{A}}
+    }
+}
+
+\strdpreview{
+    \strdgathered{
+        \strdmid{\strdorigin}{U} \strdsidelabel{U}{(T \otimes S)(A,B)}{(T' \otimes S')(A,B)}
+        \strdcelllabel{U End}{\alpha \otimes \beta}
+        \strdstartlabel{U}{\mathcal{C} \otimes \mathcal{D}}
+    } \mydefeq
+    \strdgathered{
+        \strdsidelabeled{mid}{\strdorigin}{SB}{S'B}
+        \strdcelllabel{SBS'B End}{\beta}
+
+        \strdxscale{2.2}{\strdshiftright{\strdorigin}{R}}
+        \strdsidelabeled{mid}{R}{TA}{T'A}
+        \strdcelllabel{TAT'A End}{\alpha}
+
+        \strdstartlabel{SBS'B}{\mathcal{D}}
+        \strdstartlabel{TAT'A}{\mathcal{C}}
+    }
+}
+
+\end{document}

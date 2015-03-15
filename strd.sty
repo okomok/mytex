@@ -18,7 +18,7 @@
 \tikzset{strd valigned/.style={baseline={([yshift=-0.5ex]current bounding box.center)}}}
 \tikzset{strd textvaligned/.style={text height=1.5ex,text depth=0.25ex}}
 \tikzset{strd coord/.style={coordinate}}
-\tikzset{strd junc/.style={circle,draw=black,fill=black,minimum size=2pt,inner sep=0pt}}
+\tikzset{strd dot/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
 \tikzset{strd cornering/.style={rounded corners=2pt}}
 \tikzset{strd mathnodes/.style={execute at begin node=$,execute at end node=$}}
 \tikzset{strd none/.style={opacity=0,text opacity=0,fill opacity=0}}
@@ -42,6 +42,7 @@
 }
 
 \newcommand{\strdgathered}[1]{%
+    \! % why needed?
     \begin{gathered}
         \strd{#1}
     \end{gathered}%
@@ -83,6 +84,8 @@
 \newcommand{\strdyunit}{0.8}
 \newcommand{\strdhalfxunit}{0.25}
 \newcommand{\strdhalfyunit}{0.4}
+\newcommand{\strdunitdiff}{0.3}
+\newcommand{\strdunitrest}{0.2}
 
 \newcommand{\strdempty}[2]{%
     \node[strd coord] (#2) at (#1 End) {};
@@ -136,11 +139,11 @@
     };%
 }
 
-\newcommand{\strdhalfline}[2]{%
+\newcommand{\strdhalfmid}[2]{%
     \strdscale{1}{0.5}{\strdmid{#1}{#2}}%
 }
 
-\newcommand{\strdmidleft}[2]{%
+\newcommand{\strdleftminus}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2) at ($(#1 End)+(-\strdhalfxunit,0)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(-\strdxunit,0)$) {};
@@ -149,8 +152,8 @@
     };%
 }
 
-\newcommand{\strdmidright}[2]{%
-    \strdflip{\strdmidleft{#1}{#2}}%
+\newcommand{\strdrightminus}[2]{%
+    \strdflip{\strdleftminus{#1}{#2}}%
 }
 
 \newcommand{\strdsubset}[2]{%
@@ -168,16 +171,29 @@
     \strdflip{\strdsubset{#1}{#2}}%
 }
 
+\newcommand{\strdlbag}[2]{%
+    \node[strd coord] (#2 Start) at (#1 End) {};
+    \node[strd coord] (#2 StartCorner) at ($(#2 Start)+(-\strdxunit,-\strdunitdiff)$) {};
+    \node[strd coord] (#2) at ($(#2 Start)+(-\strdxunit,-\strdhalfyunit)$) {};
+    \node[strd coord] (#2 EndCorner) at ($(#2 StartCorner)+(0,-\strdunitrest)$) {};
+    \node[strd coord] (#2 End) at ($(#2 EndCorner)+(-\strdxunit,-\strdunitdiff)$) {};
+    \draw[strd cornering]{
+        (#2 Start) parabola (#2 StartCorner) -- (#2 EndCorner) parabola[bend at end] (#2 End)
+    };%
+}
+
+\newcommand{\strdrbag}[2]{\strdflip{\strdlbag{#1}{#2}}}
+
 \newcommand{\strdjump}[2]{%
     \strdnone{ \strdmid{#1}{#2} }%
 }
 
 \newcommand{\strdshiftleft}[2]{%
-    \strdnone{ \strdmidleft{#1}{#2} }%
+    \strdnone{ \strdleftminus{#1}{#2} }%
 }
 
 \newcommand{\strdshiftright}[2]{%
-    \strdnone{ \strdmidright{#1}{#2} }%
+    \strdnone{ \strdrightminus{#1}{#2} }%
 }
 
 \newcommand{\strdsqsubset}[2]{%
@@ -205,7 +221,7 @@
 % labels
 
 \newcommand{\strddotlabel}[1]{%
-    \node[strd junc] at (#1) {};%
+    \node[strd dot] at (#1) {};%
 }
 
 \newcommand{\strdcelllabel}[2]{%
