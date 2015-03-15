@@ -1,0 +1,17 @@
+\ProvidesPackage{my}
+
+\usepackage{amsmath,mathtools,etoolbox}
+
+\newcommand{\mydefeq}{\coloneqq}
+
+\newcommand{\myidentity}[1]{#1}
+\newcommand{\mycomment}[1]{}
+
+\newcommand\myassign[2]{%
+    \global\csdef{#1}{#2}
+    #2%
+}
+
+\newcommand{\myfamily}[2]{%
+    \left(#2\right)_{\!\!\!#1}%
+}

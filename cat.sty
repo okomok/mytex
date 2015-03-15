@@ -6,3 +6,16 @@
 
 \newcommand{\catdefeq}{\coloneqq}
 
+\newcommand{\catstrut}{\strut}
+\newcommand{\catidentity}[1]{#1}
+\newcommand{\catvoid}[1]{}
+
+\newcommand\catassign[2]{%
+    \global\csdef{#1}{#2}
+    #2%
+}
+
+\newcommand{\catfamily}[2]{%
+    \left(#2\right)_{\!\!\!#1}%
+}
+

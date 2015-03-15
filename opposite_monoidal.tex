@@ -7,46 +7,44 @@
 
 \strdpreview{
     \strdgathered{
-        \strdsidelabeled{line}{\strdorigin}{A}{B}
+        \strdsidelabeled{mid}{\strdorigin}{A}{B}
         \strdstartlabel{AB}{\mathcal{A}^{\operatorname{op}}}
-    } \strddefeq
+    } \catdefeq
     \strdgathered{
-        \strdsidelabeled{line}{\strdorigin}{B}{A}
+        \strdsidelabeled{mid}{\strdorigin}{B}{A}
         \strdstartlabel{BA}{\mathcal{A}}
     }
 }
 
 \strdpreview{
     \strdgathered{
-        \strdsidelabeled{line}{\strdorigin}{A}{C}
+        \strdsidelabeled{mid}{\strdorigin}{A}{C}
         \strdstartlabel{AC}{\mathcal{A}^{\operatorname{op}}}
         \strdsidelabeled{left}{AC}{A}{B}
         \strdsidelabeled{right}{AC}{B}{C}
-        \strdjunc{AC End}
-    } \strddefeq
+        \strddotlabel{AC End}
+    } \catdefeq
     \strdgathered{
-        \strdsidelabeled{line}{\strdorigin}{C}{A}
+        \strdsidelabeled{mid}{\strdorigin}{C}{A}
         \strdstartlabel{CA}{\mathcal{A}}
-        \strdnolabels{\strdsidelabeled{left}{CA}{C}{B}}
-        \strdnolabels{\strdsidelabeled{right}{CA}{B}{A}}
-        \strdjunc{CA End}
-        \strdunleft{CB}{CB2} \strdsidelabel{CB2 Start}{C}{B}
-        \strdunright{BA}{BA2} \strdsidelabel{BA2 Start}{B}{A}
-        \strdright{CB2}{CB3} \strdsidelabel{CB3}{C}{B}
-        \strdleft{BA2}{BA3} \strdsidelabel{BA3}{B}{A}
+        \strdsidelabeled{subset}{CA}{C}{B}
+        \strdsidelabeled{supset}{CA}{B}{A}
+        \strddotlabel{CA End}
+        \strdright{CB}{CB2} \strdsidelabel{CB2}{C}{B}
+        \strdleft{BA}{BA2} \strdsidelabel{BA2}{B}{A}
     }
 }
 
 \strdpreview{
     \strdgathered{
-        \strdsidelabeled{line}{\strdorigin}{A}{A}
+        \strdsidelabeled{mid}{\strdorigin}{A}{A}
         \strdstartlabel{AA}{\mathcal{A}^{\operatorname{op}}}
-        \strdjunc{AA End} 
-    } \strddefeq
+        \strddotlabel{AA End} 
+    } \catdefeq
     \strdgathered{
-        \strdsidelabeled{line}{\strdorigin}{A}{A}
+        \strdsidelabeled{mid}{\strdorigin}{A}{A}
         \strdstartlabel{AA}{\mathcal{A}}
-        \strdjunc{AA End} 
+        \strddotlabel{AA End} 
     }
 }
 
@@ -54,16 +52,16 @@
 
 \strdpreview{
     \strdgathered{
-        \strdline{\strdorigin}{tatb} \strdsidelabel{tatb}{\catop{T}A}{\catop{T}B}
+        \strdmid{\strdorigin}{tatb} \strdsidelabel{tatb}{\catop{T}A}{\catop{T}B}
         \strdcelllabel{tatb End}{\catop{T}}
-        \strdsidelabeled{line}{tatb}{A}{B}
+        \strdsidelabeled{mid}{tatb}{A}{B}
         \strdstartlabel{tatb}{\catop{\mathcal{B}}}
         \strdendlabel{AB}{\catop{\mathcal{A}}}
-    } \strddefeq
+    } \catdefeq
     \strdgathered{
-        \strdsidelabeled{line}{\strdorigin}{TB}{TA}
+        \strdsidelabeled{mid}{\strdorigin}{TB}{TA}
         \strdcelllabel{TBTA End}{T}
-        \strdsidelabeled{line}{TBTA}{B}{A}
+        \strdsidelabeled{mid}{TBTA}{B}{A}
         \strdstartlabel{TBTA}{\mathcal{B}}
         \strdendlabel{BA}{\mathcal{A}}
     }
@@ -73,12 +71,12 @@
 
 \strdpreview{
     \strdgathered{
-        \strdline{\strdorigin}{SATA} \strdsidelabel{SATA}{\catop{S}A}{\catop{T}A}
+        \strdmid{\strdorigin}{SATA} \strdsidelabel{SATA}{\catop{S}A}{\catop{T}A}
         \strdcelllabel{SATA End}{\catop{\alpha}}
         \strdstartlabel{SATA}{\catop{\mathcal{B}}}
     } \catdefeq
     \strdgathered{
-        \strdsidelabeled{line}{\strdorigin}{TA}{SA}
+        \strdsidelabeled{mid}{\strdorigin}{TA}{SA}
         \strdcelllabel{TASA End}{\alpha}
         \strdstartlabel{TASA}{\mathcal{B}}
     }
