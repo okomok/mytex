@@ -12,22 +12,23 @@
 % styles
 
 % no transparent color?
-\tikzset{strd celllabel/.style={font=\small,rounded rectangle,rounded rectangle arc length=90 ,draw,fill=white,inner sep=1.2pt}}
+\tikzset{strd celllabel/.style={font=\small,rounded rectangle,very thin,rounded rectangle arc length=90 ,draw,fill=white,inner sep=1.2pt}}
 \tikzset{strd linelabel/.style={font=\scriptsize,inner sep=0.2pt,strd textvaligned}}
 \tikzset{strd endlabel/.style={font=\small,inner sep=1pt,strd textvaligned}}
 \tikzset{strd valigned/.style={baseline={([yshift=-0.5ex]current bounding box.center)}}}
 \tikzset{strd textvaligned/.style={text height=1.5ex,text depth=0.25ex}}
 \tikzset{strd coord/.style={coordinate}}
 \tikzset{strd dot/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
-\tikzset{strd cornering/.style={rounded corners=2pt}}
 \tikzset{strd mathnodes/.style={execute at begin node=$,execute at end node=$}}
 \tikzset{strd none/.style={opacity=0,text opacity=0,fill opacity=0}}
+\tikzset{strd picture/.style={strd mathnodes}}
+\tikzset{strd draw/.style={very thin, rounded corners=2pt}}
 
 
 % environmentals 
 
 \newcommand{\strd}[1]{%
-    \begin{tikzpicture}[strd mathnodes]
+    \begin{tikzpicture}[strd picture]
         \strddeclareorigin
         #1;
     \end{tikzpicture}%
@@ -98,7 +99,7 @@
     \node[strd coord] (#2 End) at ($(#2 Start)+(-\strdxunit,-\strdyunit)$) {};
     \node[strd coord] (#2 Corner) at ($(#2 End)+(0,\strdxunit)$) {};
     \node[strd coord] (#2) at ($(#2 Start)+(-\strdxunit,-\strdhalfyunit)$) {};
-    \draw[strd cornering]{
+    \draw[strd draw]{
         (#2 Start) parabola (#2 Corner) -- (#2 End)
     };%
 }
@@ -121,7 +122,7 @@
     \node[strd coord] (#2 End) at ($(#2 Start)+(\strdxunit,-\strdyunit)$) {};
     \node[strd coord] (#2 Corner) at ($(#2 Start)+(0,-\strdxunit)$) {};
     \node[strd coord] (#2) at ($(#2 Start)+(0,-\strdhalfyunit)$) {};
-    \draw[strd cornering]{
+    \draw[strd draw]{
         (#2 Start) -- (#2 Corner) parabola[bend at end] (#2 End)
     };%
 }
@@ -134,7 +135,7 @@
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2) at ($(#1 End)+(0,-\strdhalfyunit)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(0,-\strdyunit)$) {};
-    \draw{
+    \draw[strd draw]{
         (#2 Start) -- (#2 End)
     };%
 }
@@ -147,7 +148,7 @@
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2) at ($(#1 End)+(-\strdhalfxunit,0)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(-\strdxunit,0)$) {};
-    \draw{
+    \draw[strd draw]{
         (#2 Start) -- (#2 End)
     };%
 }
@@ -162,7 +163,7 @@
     \node[strd coord] (#2 StartCorner) at ($(#2 End)+(-\strdxunit,\strdxunit)$) {};
     \node[strd coord] (#2 EndCorner) at ($(#2 Start)+(-\strdxunit,-\strdxunit)$) {};
     \node[strd coord] (#2) at ($(#2 Start)+(-\strdxunit,-\strdhalfyunit)$) {};
-    \draw[strd cornering]{
+    \draw[strd draw]{
         (#2 Start) parabola (#2 StartCorner) -- (#2 EndCorner) parabola[bend at end] (#2 End)
     };%
 }
@@ -177,7 +178,7 @@
     \node[strd coord] (#2) at ($(#2 Start)+(-\strdxunit,-\strdhalfyunit)$) {};
     \node[strd coord] (#2 EndCorner) at ($(#2 StartCorner)+(0,-\strdunitrest)$) {};
     \node[strd coord] (#2 End) at ($(#2 EndCorner)+(-\strdxunit,-\strdunitdiff)$) {};
-    \draw[strd cornering]{
+    \draw[strd draw]{
         (#2 Start) parabola (#2 StartCorner) -- (#2 EndCorner) parabola[bend at end] (#2 End)
     };%
 }
@@ -202,7 +203,7 @@
     \node[strd coord] (#2) at ($(#1 End)+(-\strdxunit,-\strdhalfyunit)$) {};
     \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-\strdxunit,-\strdyunit)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(0,-\strdyunit)$) {};
-    \draw{
+    \draw[strd draw]{
         (#2 Start) -- (#2 StartCorner) -- (#2 EndCorner) -- (#2 End)
     };%
 }
@@ -296,14 +297,17 @@
     \end{scope}%
 }
 
-\newcommand{\strdpathwith}[2]{%
+\newcommand{\strdpathis}[2]{%
     \begin{scope}[every path/.append style=#1]
         #2;
     \end{scope}%
 }
 
-\newcommand{\strdsolid}[1]{\strdpathwith{solid}{#1}}
-\newcommand{\strddotted}[1]{\strdpathwith{dotted}{#1}}
+\newcommand{\strdnodeis}[2]{%
+    \begin{scope}[every node/.append style=#1]
+        #2;
+    \end{scope}%
+}
 
 
 % category-theoric strings
@@ -312,16 +316,18 @@
 \tikzset{strd mapping/.style={rounded corners=2pt}}
 
 \newcommand{\strdbijection}[2]{%
-    \strdpathwith{strd bijection}{
+    \strdpathis{strd bijection}{
         \strdsquare{#1}{#2}
     }%
 }
 
 \newcommand{\strdmapping}[2]{%
-    \strdpathwith{strd mapping}{
+    \strdpathis{strd mapping}{
         \strdsquare{#1}{#2}
     }%
 }
+
+\newcommand{\strdimplicit}[1]{\strdpathis{densely dotted}{#1}}
 
 
 % composed strings
