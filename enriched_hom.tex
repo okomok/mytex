@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+
+\begin{document}
+
+\strdpreview{
+    \strdgathered{
+        \strdmid{\strdorigin}{U} \strdihomlabel{U}{\mathcal{A}(A,B)}{\mathcal{A}(A',B')}
+        \strdsidelabeled{left}{U}{B}{B'}
+        \strdsidelabeled{right}{U}{A'}{A}
+        \strdcelllabel{U End}{\operatorname{Hom}_{\mathcal{A}}}
+        \strdendlabel{BB'}{\mathcal{A}}
+        \strdendlabel{A'A}{\mathcal{A}}
+    } \mydefeq
+    \strdgathered{
+        \strdmid{\strdorigin}{U} \strdihomlabel{U}{\mathcal{A}(A,B)}{\mathcal{A}(A',B')}
+        \strdshiftright{U}{U2}
+        \strdsidelabeled{mid}{U2}{A'}{B'}
+        \strdcircle{A'B'}{A'B'C} \strdsidelabel{A'B'C Left}{A'}{A} \strdsidelabel{A'B'C Right}{A}{B'}
+        \strdxscale{2}{\strdleft{A'B'C}{AB'2} \strdsidelabel{AB'2}{A}{B'}}
+        \strdxscale{1}{\strdsidelabeled{left}{AB'2}{A}{B}}
+        \strdsidelabeled{right}{AB'2}{B}{B'}
+        \strdxscale{1}{\strdright{A'B'C}{A'A0}}
+        \strdsidelabeled{mid}{A'A0}{A'}{A}
+        \strddotlabel{A'B' End}
+        \strddotlabel{AB'2 End}
+     %   \strdxscale{2}{\strdshiftright{U}{Box}}
+        \strdscale{3}{4}{\strdbijection{U}{Unused}}
+        \strdmid{A'A}{A'A2} \strdsidelabel{A'A2}{A'}{A}
+        \strdmid{BB'}{BB'2} \strdsidelabel{BB'2}{B}{B'}
+        \strdendlabel{BB'2}{\mathcal{A}}
+        \strdendlabel{A'A2}{\mathcal{A}}
+    }
+}
+
+\strdpreview{
+    \left(
+        \strdgathered{
+            \strdsidelabeled{mid}{\strdorigin}{A'}{A}
+            \strdstartlabel{A'A}{\mathcal{A}}
+            \strdcelllabel{A'A End}{f}
+        },
+        \strdgathered{
+            \strdsidelabeled{mid}{\strdorigin}{B}{B'}
+            \strdstartlabel{BB'}{\mathcal{A}}
+            \strdcelllabel{BB' End}{g}
+        }
+    \right) \xmapsto{\operatorname{hom} _ {\mathcal{A}}}
+    \strdgathered{
+        \strdmid{\strdorigin}{U} \strdihomlabel{U}{\mathcal{A}(A,B)}{\mathcal{A}(A',B')}
+        \strdsidelabeled{left}{U}{B}{B'}
+        \strdsidelabeled{right}{U}{A'}{A}
+        \strdcelllabel{U End}{\operatorname{Hom}_{\mathcal{A}}}
+        \strdcelllabel{BB' End}{g}
+        \strdcelllabel{A'A End}{f}
+    } 
+}
+
+\end{document}

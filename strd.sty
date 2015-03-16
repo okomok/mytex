@@ -71,10 +71,7 @@
     \node[strd coord] (#2 End) at (#1) {};%
 }
 
-\newcommand{\strddeclareorigin}{%
-    \strdcoordat{0}{0}{strdorigin}%
-}
-
+\newcommand{\strddeclareorigin}{\strdcoordat{0}{0}{strdorigin}}
 \newcommand{\strdorigin}{strdorigin}
 
 
@@ -104,18 +101,14 @@
     };%
 }
 
-\newcommand{\strdright}[2]{%
-    \strdflip{ \strdleft{#1}{#2} }%
-}
+\newcommand{\strdright}[2]{\strdflip{ \strdleft{#1}{#2} }}
 
 \newcommand{\strdsplitleft}[2]{%
     \strdxscale{0.5}{\strdshiftleft{#1}{#2 Start}}
     \strdleft{#2 Start}{#2}%
 }
 
-\newcommand{\strdsplitright}[2]{%
-    \strdflip{\strdsplitleft{#1}{#2}}%
-}
+\newcommand{\strdsplitright}[2]{\strdflip{\strdsplitleft{#1}{#2}}}
 
 \newcommand{\strdunleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
@@ -127,9 +120,7 @@
     };%
 }
 
-\newcommand{\strdunright}[2]{%
-    \strdflip{ \strdunleft{#1}{#2} }%
-}
+\newcommand{\strdunright}[2]{\strdflip{\strdunleft{#1}{#2}}}
 
 \newcommand{\strdmid}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
@@ -140,9 +131,7 @@
     };%
 }
 
-\newcommand{\strdhalfmid}[2]{%
-    \strdscale{1}{0.5}{\strdmid{#1}{#2}}%
-}
+\newcommand{\strdhalfmid}[2]{\strdscale{1}{0.5}{\strdmid{#1}{#2}}}
 
 \newcommand{\strdleftminus}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
@@ -153,9 +142,7 @@
     };%
 }
 
-\newcommand{\strdrightminus}[2]{%
-    \strdflip{\strdleftminus{#1}{#2}}%
-}
+\newcommand{\strdrightminus}[2]{\strdflip{\strdleftminus{#1}{#2}}}
 
 \newcommand{\strdsubset}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
@@ -168,9 +155,7 @@
     };%
 }
 
-\newcommand{\strdsupset}[2]{%
-    \strdflip{\strdsubset{#1}{#2}}%
-}
+\newcommand{\strdsupset}[2]{\strdflip{\strdsubset{#1}{#2}}}
 
 \newcommand{\strdlbag}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
@@ -184,38 +169,50 @@
 }
 
 \newcommand{\strdrbag}[2]{\strdflip{\strdlbag{#1}{#2}}}
+\newcommand{\strdjump}[2]{\strdnone{\strdmid{#1}{#2}}}
+\newcommand{\strdshiftleft}[2]{\strdnone{\strdleftminus{#1}{#2}}}
+\newcommand{\strdshiftright}[2]{\strdnone{\strdrightminus{#1}{#2}}}
 
-\newcommand{\strdjump}[2]{%
-    \strdnone{ \strdmid{#1}{#2} }%
-}
-
-\newcommand{\strdshiftleft}[2]{%
-    \strdnone{ \strdleftminus{#1}{#2} }%
-}
-
-\newcommand{\strdshiftright}[2]{%
-    \strdnone{ \strdrightminus{#1}{#2} }%
-}
-
-\newcommand{\strdsqsubset}[2]{%
+\newcommand{\strdsqsubsetcoords}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-\strdxunit,0)$) {};
     \node[strd coord] (#2) at ($(#1 End)+(-\strdxunit,-\strdhalfyunit)$) {};
     \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-\strdxunit,-\strdyunit)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(0,-\strdyunit)$) {};
+}
+
+\newcommand{\strdsqsupsetcoords}[2]{\strdflip{\strdsqsubsetcoords{#1}{#2}}}
+
+\newcommand{\strdsquarecoords}[2]{%
+    \strdsqsubsetcoords{#1}{#2 Left}
+    \strdsqsupsetcoords{#1}{#2 Right}%
+}
+
+% remove me?
+\newcommand{\strdsqsubset}[2]{%
+    \strdsqsubsetcoords{#1}{#2}
     \draw[strd draw]{
         (#2 Start) -- (#2 StartCorner) -- (#2 EndCorner) -- (#2 End)
     };%
 }
 
-\newcommand{\strdsqsupset}[2]{%
-    \strdflip{ \strdsqsubset{#1}{#2} }%
-}
+% remove me?
+\newcommand{\strdsqsupset}[2]{\strdflip{\strdsqsubset{#1}{#2}}}
 
+% remove me?
 \newcommand{\strdsquare}[2]{%
     \strdsqsubset{#1}{#2 Left}
     \strdjump{#1}{#2}
     \strdsqsupset{#1}{#2 Right}%
+}
+
+\newcommand{\strdsquarewith}[3]{%
+    \strdjump{#2}{#3}
+    \strdsquarecoords{#2}{#3}
+    \draw[#1]{
+        (#3 Left Start) -- (#3 Left StartCorner) -- (#3 Left EndCorner) -- (#3 Left End)
+        (#3 Right Start) -- (#3 Right StartCorner) -- (#3 Right EndCorner) -- (#3 Right End)
+    };%
 }
 
 
@@ -240,8 +237,8 @@
 \newcommand{\strdrsbracket}{\raisebox{0.075em}{]}}
 
 \newcommand{\strdihomlabel}[3]{%
-    \node[strd linelabel,left] at (#1) {\strdlsbracket#2};
-    \node[strd linelabel,right] at (#1) {#3\strdrsbracket};%
+    \node[strd linelabel,left] at (#1) {[#2};
+    \node[strd linelabel,right] at (#1) {#3]};%
 }
 
 \newcommand{\strdstartlabel}[2]{%
@@ -298,7 +295,7 @@
 }
 
 \newcommand{\strdpathis}[2]{%
-    \begin{scope}[every path/.append style=#1]
+    \begin{scope}[every path/.style=#1]
         #2;
     \end{scope}%
 }
@@ -315,17 +312,8 @@
 \tikzset{strd bijection/.style={rounded corners=0pt}}
 \tikzset{strd mapping/.style={rounded corners=2pt}}
 
-\newcommand{\strdbijection}[2]{%
-    \strdpathis{strd bijection}{
-        \strdsquare{#1}{#2}
-    }%
-}
-
-\newcommand{\strdmapping}[2]{%
-    \strdpathis{strd mapping}{
-        \strdsquare{#1}{#2}
-    }%
-}
+\newcommand{\strdbijection}[2]{\strdsquarewith{strd bijection}{#1}{#2}}
+\newcommand{\strdmapping}[2]{\strdsquarewith{strd mapping}{#1}{#2}}
 
 \newcommand{\strdimplicit}[1]{\strdpathis{densely dotted}{#1}}
 
@@ -348,6 +336,12 @@
     \strdmid{#2 Right}{#2 Right}%
 }
 
+\newcommand{\strdcircle}[2]{%
+    \strdsubset{#1}{#2 Left}
+    \strdsupset{#1}{#2 Right}
+    \strdnone{\strdmid{#1}{#2}}%
+}
+
 
 % command combinators
 
@@ -355,4 +349,11 @@
     \ifcsdef{strd#1}{\csuse{strd#1}{#2}{#3#4}}{}
     \strdsidelabel{#3#4}{#3}{#4}%
 }
+
+% remove me
+\newcommand{\strdleftshifted}[3]{%
+    \strdshiftleft{#2}{#3 xx}
+    \ifcsdef{strd#1}{\csuse{strd#1}{#3 xx}{#3}}{}
+}
+\newcommand{\strdrightshifted}[3]{\strdflip{\strdleftshifted{#1}{#2}{#3}}}
 
