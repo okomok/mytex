@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage{strd,cat,my}
+\usepackage{strd,cat,my,amssymb}
 
 \begin{document}
 
@@ -45,7 +45,7 @@
             \strdstartlabel{BB'}{\mathcal{A}}
             \strdcelllabel{BB' End}{g}
         }
-    \right) \xmapsto{\operatorname{hom} _ {\mathcal{A}}}
+    \right) \mapsto % \overset{\operatorname{hom} _ {\mathcal{A}}}{\mapsto}
     \strdgathered{
         \strdmid{\strdorigin}{U} \strdihomlabel{U}{\mathcal{A}(A,B)}{\mathcal{A}(A',B')}
         \strdsidelabeled{left}{U}{B}{B'}
@@ -53,7 +53,53 @@
         \strdcelllabel{U End}{\operatorname{Hom}_{\mathcal{A}}}
         \strdcelllabel{BB' End}{g}
         \strdcelllabel{A'A End}{f}
+    } \sim
+    \strdgathered{
+        \strdsidelabeled{mid}{\strdorigin}{A'}{B'}
+        \strdcircle{A'B'}{A'B'C} \strdsidelabel{A'B'C Left}{A'}{A} \strdsidelabel{A'B'C Right}{A}{B'}
+        \strdxscale{2}{\strdleft{A'B'C}{AB'2} \strdsidelabel{AB'2}{A}{B'}}
+        \strdleft{AB'2}{AB0}
+        \strdsidelabeled{mid}{AB0}{A}{B}
+        \strdsidelabeled{right}{AB'2}{B}{B'}
+        \strdxscale{1}{\strdright{A'B'C}{A'A0}}
+        \strdsidelabeled{mid}{A'A0}{A'}{A}
+        \strddotlabel{A'B' End}
+        \strddotlabel{AB'2 End}
+        \strdcelllabel{BB' End}{g}
+        \strdcelllabel{A'A End}{f}
+        \strdstartlabel{A'B'}{\mathcal{A}}
     } 
 }
+
+\strdpreview{
+    \left(
+        \strdgathered{
+            \strdsidelabeled{mid}{\strdorigin}{A'}{A}
+            \strdstartlabel{A'A}{\mathcal{A}}
+            \strdcelllabel{A'A End}{f}
+        },
+        \strdgathered{
+            \strdsidelabeled{mid}{\strdorigin}{B}{B'}
+            \strdstartlabel{BB'}{\mathcal{A}}
+            \strdcelllabel{BB' End}{g}
+        }
+    \right) \overset{\operatorname{hom} _ {\mathcal{A}}}{\mapsto}
+    \strdgathered{
+        \strdsidelabeled{mid}{\strdorigin}{A'}{B'}
+        \strdcircle{A'B'}{A'B'C} \strdsidelabel{A'B'C Left}{A'}{A} \strdsidelabel{A'B'C Right}{A}{B'}
+        \strdxscale{2}{\strdleft{A'B'C}{AB'2} \strdsidelabel{AB'2}{A}{B'}}
+        \strdleft{AB'2}{AB0}
+        \strdsidelabeled{mid}{AB0}{A}{B}
+        \strdsidelabeled{right}{AB'2}{B}{B'}
+        \strdxscale{1}{\strdright{A'B'C}{A'A0}}
+        \strdsidelabeled{mid}{A'A0}{A'}{A}
+        \strddotlabel{A'B' End}
+        \strddotlabel{AB'2 End}
+        \strdcelllabel{BB' End}{g}
+        \strdcelllabel{A'A End}{f}
+        \strdstartlabel{A'B'}{\mathcal{A}}
+    } 
+}
+
 
 \end{document}

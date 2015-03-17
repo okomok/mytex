@@ -3,7 +3,7 @@
 \usepackage{amsmath,mathtools,etoolbox}
 \usepackage{tikz}
 \usepackage[active,tightpage]{preview}
-\usetikzlibrary{backgrounds,shapes,positioning,fit,calc}
+\usetikzlibrary{backgrounds,shapes,calc}
 
 \pgfdeclarelayer{strdcelllabellayer}
 \pgfsetlayers{background,main,strdcelllabellayer}
@@ -12,7 +12,7 @@
 % styles
 
 % no transparent color?
-\tikzset{strd celllabel/.style={font=\small,rounded rectangle,very thin,rounded rectangle arc length=90 ,draw,fill=white,inner sep=1.2pt}}
+\tikzset{strd celllabel/.style={font=\small,rounded rectangle,very thin,solid,rounded corners=0pt,rounded rectangle arc length=90,draw,fill=white,inner sep=1.2pt}}
 \tikzset{strd linelabel/.style={font=\scriptsize,inner sep=0.2pt,strd textvaligned}}
 \tikzset{strd endlabel/.style={font=\small,inner sep=1pt,strd textvaligned}}
 \tikzset{strd valigned/.style={baseline={([yshift=-0.5ex]current bounding box.center)}}}
@@ -21,14 +21,14 @@
 \tikzset{strd dot/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
 \tikzset{strd mathnodes/.style={execute at begin node=$,execute at end node=$}}
 \tikzset{strd none/.style={opacity=0,text opacity=0,fill opacity=0}}
-\tikzset{strd picture/.style={strd mathnodes}}
-\tikzset{strd draw/.style={very thin, rounded corners=2pt}}
+\tikzset{strd path/.style={strd mathnodes,very thin,rounded corners=2pt}}
+\tikzset{strd draw/.style={}}
 
 
 % environmentals 
 
 \newcommand{\strd}[1]{%
-    \begin{tikzpicture}[strd picture]
+    \begin{tikzpicture}[strd path]
         \strddeclareorigin
         #1;
     \end{tikzpicture}%
@@ -75,7 +75,7 @@
 \newcommand{\strdorigin}{strdorigin}
 
 
-% string combinators
+% strings
 
 % golden ratio
 \newcommand{\strdxunit}{0.5}
@@ -100,14 +100,12 @@
         (#2 Start) parabola (#2 Corner) -- (#2 End)
     };%
 }
-
 \newcommand{\strdright}[2]{\strdflip{ \strdleft{#1}{#2} }}
 
 \newcommand{\strdsplitleft}[2]{%
     \strdxscale{0.5}{\strdshiftleft{#1}{#2 Start}}
     \strdleft{#2 Start}{#2}%
 }
-
 \newcommand{\strdsplitright}[2]{\strdflip{\strdsplitleft{#1}{#2}}}
 
 \newcommand{\strdunleft}[2]{%
@@ -119,7 +117,6 @@
         (#2 Start) -- (#2 Corner) parabola[bend at end] (#2 End)
     };%
 }
-
 \newcommand{\strdunright}[2]{\strdflip{\strdunleft{#1}{#2}}}
 
 \newcommand{\strdmid}[2]{%
@@ -130,7 +127,6 @@
         (#2 Start) -- (#2 End)
     };%
 }
-
 \newcommand{\strdhalfmid}[2]{\strdscale{1}{0.5}{\strdmid{#1}{#2}}}
 
 \newcommand{\strdleftminus}[2]{%
@@ -141,7 +137,6 @@
         (#2 Start) -- (#2 End)
     };%
 }
-
 \newcommand{\strdrightminus}[2]{\strdflip{\strdleftminus{#1}{#2}}}
 
 \newcommand{\strdsubset}[2]{%
@@ -154,7 +149,6 @@
         (#2 Start) parabola (#2 StartCorner) -- (#2 EndCorner) parabola[bend at end] (#2 End)
     };%
 }
-
 \newcommand{\strdsupset}[2]{\strdflip{\strdsubset{#1}{#2}}}
 
 \newcommand{\strdlbag}[2]{%
@@ -167,52 +161,32 @@
         (#2 Start) parabola (#2 StartCorner) -- (#2 EndCorner) parabola[bend at end] (#2 End)
     };%
 }
-
 \newcommand{\strdrbag}[2]{\strdflip{\strdlbag{#1}{#2}}}
+
 \newcommand{\strdjump}[2]{\strdnone{\strdmid{#1}{#2}}}
+
 \newcommand{\strdshiftleft}[2]{\strdnone{\strdleftminus{#1}{#2}}}
 \newcommand{\strdshiftright}[2]{\strdnone{\strdrightminus{#1}{#2}}}
 
-\newcommand{\strdsqsubsetcoords}[2]{%
+
+% square strings
+
+\newcommand{\strdsqsubset}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-\strdxunit,0)$) {};
     \node[strd coord] (#2) at ($(#1 End)+(-\strdxunit,-\strdhalfyunit)$) {};
     \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-\strdxunit,-\strdyunit)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(0,-\strdyunit)$) {};
-}
-
-\newcommand{\strdsqsupsetcoords}[2]{\strdflip{\strdsqsubsetcoords{#1}{#2}}}
-
-\newcommand{\strdsquarecoords}[2]{%
-    \strdsqsubsetcoords{#1}{#2 Left}
-    \strdsqsupsetcoords{#1}{#2 Right}%
-}
-
-% remove me?
-\newcommand{\strdsqsubset}[2]{%
-    \strdsqsubsetcoords{#1}{#2}
     \draw[strd draw]{
         (#2 Start) -- (#2 StartCorner) -- (#2 EndCorner) -- (#2 End)
     };%
 }
-
-% remove me?
 \newcommand{\strdsqsupset}[2]{\strdflip{\strdsqsubset{#1}{#2}}}
 
-% remove me?
 \newcommand{\strdsquare}[2]{%
     \strdsqsubset{#1}{#2 Left}
-    \strdjump{#1}{#2}
-    \strdsqsupset{#1}{#2 Right}%
-}
-
-\newcommand{\strdsquarewith}[3]{%
-    \strdjump{#2}{#3}
-    \strdsquarecoords{#2}{#3}
-    \draw[#1]{
-        (#3 Left Start) -- (#3 Left StartCorner) -- (#3 Left EndCorner) -- (#3 Left End)
-        (#3 Right Start) -- (#3 Right StartCorner) -- (#3 Right EndCorner) -- (#3 Right End)
-    };%
+    \strdsqsupset{#1}{#2 Right}
+    \strdjump{#1}{#2}%
 }
 
 
@@ -252,69 +226,29 @@
 
 % transformations
 
-\newcommand{\strdflip}[1]{%
-    \begin{scope}[xscale=-1]
-        #1;
-    \end{scope}%
-}
-
-\newcommand{\strdreverse}[1]{%
-    \begin{scope}[yscale=-1]
-        #1;
-    \end{scope}%
-}
-
-\newcommand{\strdxscale}[2]{%
-    \begin{scope}[xscale=#1]
+\newcommand{\strdscope}[2]{%
+    \begin{scope}[#1]
         #2;
     \end{scope}%
 }
 
-\newcommand{\strdyscale}[2]{%
-    \begin{scope}[yscale=#1]
-        #2;
-    \end{scope}%
-}
-
-\newcommand{\strdscale}[3]{%
-    \begin{scope}[xscale=#1,yscale=#2] 
-        #3;
-    \end{scope}%
-}
-
-\newcommand{\strdnone}[1]{%
-    \begin{scope}[every path/.style=strd none,every node/.style=strd none] 
-        #1;
-    \end{scope}%
-}
-
-\newcommand{\strdnolabels}[1]{%
-    \begin{scope}[every node/.style=strd none] 
-        #1;
-    \end{scope}%
-}
-
-\newcommand{\strdpathis}[2]{%
-    \begin{scope}[every path/.style=#1]
-        #2;
-    \end{scope}%
-}
-
-\newcommand{\strdnodeis}[2]{%
-    \begin{scope}[every node/.append style=#1]
-        #2;
-    \end{scope}%
-}
+\newcommand{\strdflip}[1]{\strdscope{xscale=-1}{#1}}
+\newcommand{\strdreverse}[1]{\strdscope{yscale=-1}{#1}}
+\newcommand{\strdxscale}[2]{\strdscope{xscale=#1}{#2}}
+\newcommand{\strdyscale}[2]{\strdscope{yscale=#1}{#2}}
+\newcommand{\strdscale}[3]{\strdscope{xscale=#1,yscale=#2}{#3}}
+\newcommand{\strdnone}[1]{\strdscope{every path/.style=strd none,every node/.style=strd none}{#1}}
+\newcommand{\strdnolabels}[1]{\strdscope{every node/.style=strd none}{#1}}
+\newcommand{\strdpathis}[2]{\strdscope{every path/.style=#1}{#2}}
+\newcommand{\strdnodeis}[2]{\strdscope{every node/.append style=#1}{#2}}
 
 
 % category-theoric strings
 
-\tikzset{strd bijection/.style={rounded corners=0pt}}
+\tikzset{strd bijection/.style={solid,thin,rounded corners=0pt}}
 \tikzset{strd mapping/.style={rounded corners=2pt}}
 
-\newcommand{\strdbijection}[2]{\strdsquarewith{strd bijection}{#1}{#2}}
-\newcommand{\strdmapping}[2]{\strdsquarewith{strd mapping}{#1}{#2}}
-
+\newcommand{\strdbijection}[2]{\strdpathis{strd bijection}{\strdsquare{#1}{#2}}}
 \newcommand{\strdimplicit}[1]{\strdpathis{densely dotted}{#1}}
 
 
@@ -356,4 +290,5 @@
     \ifcsdef{strd#1}{\csuse{strd#1}{#3 xx}{#3}}{}
 }
 \newcommand{\strdrightshifted}[3]{\strdflip{\strdleftshifted{#1}{#2}{#3}}}
+
 

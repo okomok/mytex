@@ -1,6 +1,6 @@
 \ProvidesPackage{my}
 
-\usepackage{amsmath,mathtools,etoolbox}
+\usepackage{amsmath,mathtools,etoolbox,tikz}
 
 \newcommand{\mydefeq}{\coloneqq}
 
@@ -17,3 +17,12 @@
 }
 
 \newcommand{\mydash}{\text{--}}
+
+\newcommand{\mymapsto}[2]{%
+    \begin{gathered}
+        \begin{tikzpicture}[font=\scriptsize]
+            \path[|->] (0,0) edge node[above] {$#1$} node[below] {$#2$} (0.5,0); 
+        \end{tikzpicture}
+    \end{gathered}%
+}
+
