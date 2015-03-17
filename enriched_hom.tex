@@ -68,7 +68,18 @@
         \strdcelllabel{BB' End}{g}
         \strdcelllabel{A'A End}{f}
         \strdstartlabel{A'B'}{\mathcal{A}}
-    } 
+    } =
+    \strdgathered{
+        \strdsidelabeled{mid}{\strdorigin}{A'}{B'}
+        \strddotlabel{A'B' End}
+        \strdxscale{1}{\strdsidelabeled{left}{A'B'}{A'}{A}}
+        \strdxscale{1}{\strdsidelabeled{right}{A'B'}{B}{B'}}
+        \strdcelllabel{A'A End}{f}
+        \strdcelllabel{BB' End}{g}
+        \strdmid{A'B'}{AB0}
+        \strdsidelabeled{mid}{AB0}{A}{B}
+        \strdstartlabel{A'B'}{\mathcal{A}}
+    }
 }
 
 \strdpreview{
@@ -101,5 +112,12 @@
     } 
 }
 
+\strdpreview{
+    \strdgathered{
+        \strdmid{\strdorigin}{U}
+        \strdleft{U}{L}
+        \strdright{U}{R}
+    }
+}
 
 \end{document}
