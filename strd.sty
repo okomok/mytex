@@ -31,17 +31,26 @@
     \end{tikzpicture}%
 }
 
+% remove me
 \newcommand{\strdpreview}[1]{%
     \begin{preview}
         #1
     \end{preview}%
 }
 
+% remove me
 \newcommand{\strdgathered}[1]{%
     \! % why needed?
     \begin{gathered}
         \strd{#1}
     \end{gathered}%
+}
+
+\newcommand{\strdenv}[2]{%
+    % \! % why needed?
+    \begin{#1}
+        \strd{#1}
+    \end{#1}%
 }
 
 

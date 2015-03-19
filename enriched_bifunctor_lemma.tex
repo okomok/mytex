@@ -48,4 +48,44 @@
     \hereT
 }}
 
+\strdpreview{\myenv{math}{\myenv{aligned}{
+    \strdgathered{
+        \strdmid{\strdorigin}{U} \strdsidelabel{U}{T(A,B)}{T(A',B')}
+        \strdsidelabeled{left}{U}{B}{B'}
+        \strdsidelabeled{right}{U}{A}{A'}
+        \strdstartlabel{U}{\mathcal{C}}
+        \strdendlabel{BB'}{\mathcal{B}}
+        \strdendlabel{AA'}{\mathcal{A}}
+        \strdcelllabel{U End}{T}
+    } &=
+    \strdgathered{
+            \strdmid{\strdorigin}{U} \strdsidelabel{U}{T(A,B)}{T(A',B')}
+        \strdxscale{2.4}{
+            \strdleft{U}{L} \strdsidelabel{L}{T(A,B)}{T(A,B')}
+            \strdright{U}{R} \strdsidelabel{R}{T(A,B')}{T(A',B')}
+        }
+        \strdsidelabeled{mid}{L}{B}{B'} \strdsidelabeled{mid}{R}{A}{A'}
+        \strdcelllabel{L End}{T(A,\mydash)} \strdcelllabel{R End}{T(\mydash,B')}
+        \strddotlabel{U End}
+        \strdstartlabel{U}{\mathcal{C}}
+        \strdendlabel{BB'}{\mathcal{B}}
+        \strdendlabel{AA'}{\mathcal{A}}
+    } \\ &=
+    \strdgathered{
+        \strdmid{\strdorigin}{U} \strdsidelabel{U}{T(A,B)}{T(A',B')}
+        \strddotlabel{U End}
+        \strdxscale{2.4}{
+            \strdleft{U}{L} \strdsidelabel{L}{T(A,B)}{T(A',B)}
+            \strdright{U}{R} \strdsidelabel{R}{T(A',B)}{T(A',B')}
+            \strdsidelabeled{unleft}{L}{A}{A'} \strdsidelabeled{unright}{R}{B}{B'}
+            \strdcelllabel{L End}{T(\mydash,B)} \strdcelllabel{R End}{T(A',\mydash)}
+            \strdright{AA'}{AA'2} \strdsidelabel{AA'2}{A}{A'}
+            \strdleft{BB'}{BB'2} \strdsidelabel{BB'2}{B}{B'}
+            \strdstartlabel{U}{\mathcal{C}}
+            \strdendlabel{BB'2}{\mathcal{B}}
+            \strdendlabel{AA'2}{\mathcal{A}}
+        }
+    }
+}}}
+
 \end{document}
