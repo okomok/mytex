@@ -1,0 +1,51 @@
+\documentclass{article}
+\usepackage{strd,cat,my,amssymb,amsmath}
+
+\begin{document}
+
+\strdpreview{\myequation{
+    \myassign{hereT}{\strdgathered{
+        \strdmid{\strdorigin}{U} \strdsidelabel{U}{T^A B}{T_{B'}A'}
+        \strdxscale{1.6}{
+            \strdleft{U}{L} \strdsidelabel{L}{T^A B}{T^A B'}
+            \strdright{U}{R} \strdsidelabel{R}{T_{B'}A}{T_{B'}A'}
+        }
+        \strdsidelabeled{mid}{L}{B}{B'} \strdsidelabeled{mid}{R}{A}{A'}
+        \strdcelllabel{L End}{T^A} \strdcelllabel{R End}{T_{B'}}
+        \strddotlabel{U End}
+        \strdstartlabel{U}{\mathcal{C}}
+        \strdendlabel{BB'}{\mathcal{B}}
+        \strdendlabel{AA'}{\mathcal{A}}
+    } } =
+    \strdgathered{
+        \strdmid{\strdorigin}{U} \strdsidelabel{U}{T_B A}{T^{A'}B'}
+        \strddotlabel{U End}
+        \strdxscale{1.6}{
+            \strdleft{U}{L} \strdsidelabel{L}{T_B A}{T_B A'}
+            \strdright{U}{R} \strdsidelabel{R}{T^{A'}B}{T^{A'}B'}
+            \strdsidelabeled{unleft}{L}{A}{A'} \strdsidelabeled{unright}{R}{B}{B'}
+            \strdcelllabel{L End}{T_B} \strdcelllabel{R End}{T^{A'}}
+            \strdright{AA'}{AA'2} \strdsidelabel{AA'2}{A}{A'}
+            \strdleft{BB'}{BB'2} \strdsidelabel{BB'2}{B}{B'}
+            \strdstartlabel{U}{\mathcal{C}}
+            \strdendlabel{BB'2}{\mathcal{B}}
+            \strdendlabel{AA'2}{\mathcal{A}}
+        }
+    }
+}}
+
+
+\strdpreview{\myequation{
+    \strdgathered{
+        \strdmid{\strdorigin}{U} \strdsidelabel{U}{T(A,B)}{T(A',B')}
+        \strdsidelabeled{left}{U}{B}{B'}
+        \strdsidelabeled{right}{U}{A}{A'}
+        \strdstartlabel{U}{\mathcal{C}}
+        \strdendlabel{BB'}{\mathcal{B}}
+        \strdendlabel{AA'}{\mathcal{A}}
+        \strdcelllabel{U End}{T}
+    } \mydefeq
+    \hereT
+}}
+
+\end{document}

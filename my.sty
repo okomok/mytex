@@ -1,6 +1,6 @@
 \ProvidesPackage{my}
 
-\usepackage{amsmath,mathtools,etoolbox,tikz}
+\usepackage{amsmath,mathtools,etoolbox}
 
 \newcommand{\mydefeq}{\coloneqq}
 
@@ -18,11 +18,23 @@
 
 \newcommand{\mydash}{\text{--}}
 
-\newcommand{\mymapsto}[2]{%
-    \begin{gathered}
-        \begin{tikzpicture}[font=\scriptsize]
-            \path[|->] (0,0) edge node[above] {$#1$} node[below] {$#2$} (0.5,0); 
-        \end{tikzpicture}
-    \end{gathered}%
+\newcommand{\myforall}[2]{%
+    \ensuremath{({} ^ \forall #1)(#2)}%
+}
+
+\newcommand{\myexists}[2]{%
+    \ensuremath{({} ^ \exists #1)(#2)}%
+}
+
+\newcommand{\mymath}[1]{%
+    \begin{math}
+        #1
+    \end{math}%
+}
+
+\newcommand{\myequation}[1]{%
+    \begin{equation}
+        #1
+    \end{equation}%
 }
 

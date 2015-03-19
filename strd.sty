@@ -33,9 +33,7 @@
 
 \newcommand{\strdpreview}[1]{%
     \begin{preview}
-        \begin{math}
-            #1
-        \end{math}
+        #1
     \end{preview}%
 }
 
@@ -193,6 +191,7 @@
     \node[strd dot] at (#1) {};%
 }
 
+% order matters; pgfonlayer would reset path styles.
 \newcommand{\strdcelllabel}[2]{%
     \node[strd celllabel] at (#1) {#2};%
 }
