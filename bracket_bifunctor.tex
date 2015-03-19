@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage{strd,cat,my,textcomp}
+
+\begin{document}
+
+\myenvv{preview}{math}{
+    \left(
+        \strdenv{gathered}{
+            \strdlabeled{mid}{\strdorigin}{side}{}{A}
+            \strdlabeled{mid}{A}{side}{}{A'}
+            \strdcelllabel{A End}{f}
+%            \strdlabeled{mid}{\strdorigin}{ihom}{A'}{A}
+%            \strdcelllabel{A'A End}{f}
+        },
+        \strdenv{gathered}{
+            \strdlabeled{mid}{\strdorigin}{side}{}{B'}
+            \strdlabeled{mid}{B'}{side}{}{B}
+            \strdcelllabel{B' End}{g}
+%            \strdlabeled{mid}{A}{side}{}{A'}
+%            \strdlabeled{mid}{\strdorigin}{ihom}{B}{B'}
+%            \strdcelllabel{BB' End}{g}
+        }
+    \right) \overset{[\mydash,\mydash]}{\mapsto}
+    \strdenv{gathered}{
+        \strdlabeled{mid}{\strdorigin}{ihom}{A'}{B'}
+        \strdlabeled{left}{A'B'}{ihom}{A'}{A}
+        \strdlabeled{right}{A'B'}{ihom}{B}{B'}
+        \strdmid{A'B'}{A'B'0}
+        \strdlabeled{mid}{A'B'0}{ihom}{A}{B}
+        \strddotlabel{A'B' End}
+        \strdbijlabel{A'A End}{f}
+        \strdbijlabel{BB' End}{g}
+    }
+}
+
+\end{document}

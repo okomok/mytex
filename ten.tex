@@ -1,0 +1,94 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+
+\begin{document}
+
+\myinn{preview}{math}{
+    \strdin{gathered}{
+        \strdmid{\strdorigin}{U} \strdihomlabel{U}{X \otimes Y}{X' \otimes Y'}
+        \strdlabeled{left}{U}{ihom}{Y}{Y'}
+        \strdlabeled{right}{U}{ihom}{X}{X'}
+        \strdcelllabel{U End}{\operatorname{Ten}}
+    } \mydefeq
+    \strdin{gathered}{
+        \strdmid{\strdorigin}{U} \strdihomlabel{U}{X \otimes Y}{X' \otimes Y'}
+        \strdxscale{2}{\strdparallel{U}{YX'}} \strdsidelabel{YX' Left}{}{Y'} \strdsidelabel{YX' Right}{}{X'}
+        \strdleft{YX' Left}{Y0} \strdlabeled{rbag}{YX' Left}{ihom}{Y}{Y'}
+        \strdlabeled{lbag}{YX' Right}{side}{}{X} \strdright{YX' Right}{XX'0}
+        \strdcelllabel{Y0 Start}{\epsilon} \strdcelllabel{X Start}{\epsilon}
+        \strdleft{X}{X2}  \strdsidelabel{X2}{}{X}
+        \strdlabeled{mid}{XX'0}{ihom}{X}{X'}
+        \strdlabeled{mid}{Y0}{side}{}{Y}
+%        \strdxscale{3}{\strdright{X}{XX'2}}  \strdihomlabel{XX'2}{X}{X'}
+%        \strdxscale{3}{\strdleft{X}{Y2}} \strdsidelabel{Y2}{}{Y}
+        \strdxscale{1}{\strdright{X}{YY'2}} \strdihomlabel{YY'2}{Y}{Y'}
+        \strdmid{XX'}{XX'2} \strdihomlabel{XX'2}{X}{X'}
+        \strdmid{YY'2}{YY'3} \strdihomlabel{YY'3}{Y}{Y'}
+        \strdscale{4}{3}{\strdbijection{U}{Box}}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdin{gathered}{
+        \strdparallel{\strdorigin}{U0}
+        \strdsidelabel{U0 Left}{}{Y'}
+        \strdsidelabel{U0 Right}{}{X'}
+        \strdmid{U0}{U} \strdihomlabel{U}{X \otimes Y}{X' \otimes Y'}
+        \strdlabeled{left}{U}{ihom}{Y}{Y'}
+        \strdlabeled{right}{U}{ihom}{X}{X'}
+        \strdcelllabel{U End}{\operatorname{Ten}}
+        \strdyscale{1.5}{\strdjump{U}{U2}}
+        \strdparallel{U2}{U3}
+        \strdsidelabel{U3 Left}{}{Y}
+        \strdsidelabel{U3 Right}{}{X}
+        \strdcelllabel{YY' End}{g}
+        \strdcelllabel{XX' End}{f}
+        \strdscale{2.5}{2.5}{\strdbijection{U0}{Box}}
+    } = 
+    \strdin{gathered}{
+        \strdxscale{0.5}{\strdparallel{\strdorigin}{U0}} \strdsidelabel{U0 Left}{}{Y'} \strdsidelabel{U0 Right}{}{X'}
+        \strdlabeled{mid}{U0 Left}{side}{}{Y}
+        \strdlabeled{mid}{U0 Right}{side}{}{X}
+        \strdbijlabel{Y Start}{g}
+        \strdbijlabel{X Start}{f}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdin{gathered}{
+        \strdmid{\strdorigin}{U} \strdihomlabel{U}{\mathcal{A}(A_1,A_2) \otimes \mathcal{B}(B_1,B_2)}{\mathcal{A}(A'_1,A'_2) \otimes \mathcal{B}(B'_1,B'_2)}
+  %      \strdxscale{3}{\strdleft{U}{LL} \strdright{U}{RR}}
+        \strdcircle{U}{LR} \strdsidelabel{LR Left}{A_2}{A'_2} \strdsidelabel{LR Right}{B'_1}{B_1}
+        \strdcelllabel{U End}{\operatorname{Hom}_{\mathcal{A} \otimes \mathcal{B}}}
+        \strdlabeled{left}{LR}{side}{B'_1}{B_1}
+        \strdlabeled{right}{LR}{side}{A_2}{A'_2}
+  %      \strdlabeled{mid}{LL}{side}{B_2}{B'_2}
+%        \strdlabeled{mid}{RR}{side}{A'_1}{A_1}
+        \strdscale{3}{2}{\strdlabeled{left}{U}{side}{B_2}{B'_2}}
+        \strdscale{3}{2}{\strdlabeled{right}{U}{side}{A'_1}{A_1}}
+        \strdcelllabel{U End}{\operatorname{Hom}_{\mathcal{A} \otimes \mathcal{B}}}
+        \strdendlabel{B_2B'_2}{\mathcal{B}}
+        \strdendlabel{B'_1B_1}{\mathcal{B}}
+        \strdendlabel{A_2A'_2}{\mathcal{A}}
+        \strdendlabel{A'_1A_1}{\mathcal{A}}
+    } =
+    \strdin{gathered}{
+        \strdmid{\strdorigin}{U} \strdihomlabel{U}{\mathcal{A}(A_1,A_2) \otimes \mathcal{B}(B_1,B_2)}{\mathcal{A}(A'_1,A'_2) \otimes \mathcal{B}(B'_1,B'_2)}
+        \strdxscale{3}{\strdleft{U}{L} \strdright{U}{R}}
+        \strdcelllabel{U End}{\operatorname{Ten}}
+        \strdihomlabel{L}{\mathcal{B}(B_1,B_2)}{\mathcal{B}(B'_1,B'_2)}
+        \strdihomlabel{R}{\mathcal{A}(A_1,A_2)}{\mathcal{A}(A'_1,A'_2)}
+        \strdlabeled{left}{L}{side}{B_2}{B'_2}
+        \strdlabeled{right}{L}{side}{B'_1}{B_1}
+        \strdlabeled{left}{R}{side}{A_2}{A'_2}
+        \strdlabeled{right}{R}{side}{A'_1}{A_1}
+        \strdendlabel{B_2B'_2}{\mathcal{B}}
+        \strdendlabel{B'_1B_1}{\mathcal{B}}
+        \strdendlabel{A_2A'_2}{\mathcal{A}}
+        \strdendlabel{A'_1A_1}{\mathcal{A}}
+        \strdcelllabel{L End}{\operatorname{Hom}_{\mathcal{B}}}
+        \strdcelllabel{R End}{\operatorname{Hom}_{\mathcal{A}}}
+    }
+}
+
+\end{document}
