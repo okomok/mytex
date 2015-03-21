@@ -1,0 +1,161 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+
+\begin{document}
+
+\myinn{preview}{math}{
+    \strdin{gathered}{
+        \strdmid{\strdorigin}{U} \strdsidelabel{U}{T(A,B,C)}{T(A\mydprime,B\mydprime,C\mydprime)}
+        \strdxscale{3.5}{
+            \strdleft{U}{L} \strdsidelabel{L}{T(A,B,C)}{T(A\myprime,B\myprime,C\myprime)}
+            \strdright{U}{R} \strdsidelabel{R}{T(A\myprime,B\myprime,C\myprime)}{T(A\mydprime,B\mydprime,C\mydprime)}
+        }
+        \strdxscale{1.5}{
+            \strdleft{L}{LL} \strdsidelabel{LL}{C}{C\myprime}
+            \strdmid{L}{LM} \strdsidelabel{LM}{B}{B\myprime}
+            \strdright{L}{LR} \strdsidelabel{LR}{A}{A\myprime}
+        }
+        
+        \strdxscale{1.5}{
+            \strdleft{R}{RL} \strdsidelabel{RL}{C\myprime}{C\mydprime}
+            \strdmid{R}{RM} \strdsidelabel{RM}{B\myprime}{B\mydprime}
+            \strdright{R}{RR} \strdsidelabel{RR}{A\myprime}{A\mydprime}
+        }
+
+        \strdcelllabel{R End}{T}
+        \strdcelllabel{L End}{T}
+        \strdstartlabel{U}{\mathcal{D}}
+        \strdendlabel{LL}{\mathcal{C}}
+        \strdendlabel{LM}{\mathcal{B}}
+        \strdendlabel{LR}{\mathcal{A}}
+        \strdendlabel{RL}{\mathcal{C}}
+        \strdendlabel{RM}{\mathcal{B}}
+        \strdendlabel{RR}{\mathcal{A}}
+        \strddotlabel{U End}
+    } =
+    \strdin{gathered}{
+        \strdmid{\strdorigin}{U} \strdsidelabel{U}{T(A,B,C)}{T(A\mydprime,B\mydprime,C\mydprime)}
+        \strdxscale{1.5}{
+            \strdxscale{2}{
+                \strdleft{U}{L} \strdsidelabel{L}{C}{C\mydprime}
+                \strdmid{U}{M} \strdsidelabel{M}{B}{B\mydprime}
+                \strdright{U}{R} \strdsidelabel{R}{A}{A\mydprime}
+            }
+            \strdxscale{1}{
+                \strdleft{L}{LL} \strdsidelabel{LL}{C}{C\myprime}
+            }
+            \strdxscale{3}{
+                \strdright{L}{LR} \strdsidelabel{LR}{C\myprime}{C\mydprime}
+            }
+
+            \strdxscale{2}{
+                \strdleft{M}{ML} \strdsidelabel{ML}{B}{B\myprime}
+            }
+            \strdxscale{2}{
+                \strdright{M}{MR} \strdsidelabel{MR}{B\myprime}{B\mydprime}
+            }
+
+            \strdxscale{3}{
+                \strdleft{R}{RL} \strdsidelabel{RL}{A}{A\myprime}
+            }
+            \strdxscale{1}{
+                \strdright{R}{RR} \strdsidelabel{RR}{A\myprime}{A\mydprime}
+            }
+        }
+        \strdstartlabel{U}{\mathcal{D}}
+        \strdendlabel{LL}{\mathcal{C}}
+        \strdendlabel{LR}{\mathcal{C}}
+        \strdendlabel{ML}{\mathcal{B}}
+        \strdendlabel{MR}{\mathcal{B}}
+        \strdendlabel{RL}{\mathcal{A}}
+        \strdendlabel{RR}{\mathcal{A}}
+        \strddotlabel{L End}
+        \strddotlabel{M End}
+        \strddotlabel{R End}
+        \strdcelllabel{U End}{T}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdin{gathered}{
+        \strdmid{\strdorigin}{U} \strdsidelabel{U}{T(A,B,C)}{T(A\myprime,B\myprime,C\myprime)}
+        \strdxscale{1.5}{
+            \strdleft{U}{L} \strdsidelabel{L}{C}{C\myprime}
+            \strdmid{U}{M} \strdsidelabel{M}{B}{B\myprime}
+            \strdright{U}{R} \strdsidelabel{R}{A}{A\myprime}
+        }
+        \strdendlabel{L}{\mathcal{C}}
+        \strdendlabel{M}{\mathcal{B}}
+        \strdendlabel{R}{\mathcal{A}}
+        \strdcelllabel{U End}{T}
+        \strdstartlabel{U}{\mathcal{D}}
+    } {\Large=}
+    \strdin{gathered}{
+        \strdmid{\strdorigin}{U} \strdsidelabel{U}{T(A,B,C)}{T(A\myprime,B\myprime,C\myprime)}
+        \strdxscale{6.5}{
+            \strdleft{U}{L} \strdsidelabel{L}{T(A,B,C)}{T(A,B,C\myprime)}
+            \strdmid{U}{M} \strdsidelabel{M}{T(A,B,C\myprime)}{T(A,B\myprime,C\myprime)}
+            \strdright{U}{R} \strdsidelabel{R}{T(A,B\myprime,C\myprime)}{T(A\myprime,B\myprime,C\myprime)}
+        }
+        \strdxscale{1.5}{
+            \strdyscale{1.3}{\strdleft{L}{LL}} \strdsidelabel{LL}{C}{C\myprime}
+            \strdmid{L}{LM} \strdsidelabel{LM}{B}{B}
+            \strdright{L}{LR} \strdsidelabel{LR}{A}{A}
+            \strddotlabel{LM End}
+            \strddotlabel{LR End}
+        }
+        \strdxscale{1.5}{
+            \strdleft{M}{ML} \strdsidelabel{ML}{C\myprime}{C\myprime}
+            \strdyscale{1.3}{\strdmid{M}{MM}} \strdsidelabel{MM}{B}{B\myprime}
+            \strdright{M}{MR} \strdsidelabel{MR}{A}{A}
+            \strddotlabel{MR End}
+            \strddotlabel{ML End}
+        }
+        \strdxscale{1.5}{
+            \strdyscale{1}{\strdleft{R}{RL}} \strdsidelabel{RL}{C\myprime}{C\myprime}
+            \strdmid{R}{RM} \strdsidelabel{RM}{B\myprime}{B\myprime}
+            \strdyscale{1.3}{\strdright{R}{RR}} \strdsidelabel{RR}{A}{A\myprime}
+            \strddotlabel{RL End}
+            \strddotlabel{RM End}
+        }
+        \strdcelllabel{L End}{T}
+        \strdcelllabel{M End}{T}
+        \strdcelllabel{R End}{T}
+        \strddotlabel{U End}
+        \strdstartlabel{U}{\mathcal{D}}
+        \strdendlabel{LL}{\mathcal{C}}
+        \strdendlabel{MM}{\mathcal{B}}
+        \strdendlabel{RR}{\mathcal{A}}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdfamily{(A,B) \in \mathcal{A} \otimes \mathcal{B}}{
+        \strdin{gathered}{
+            \strdmid{\strdorigin}{U} \strdsidelabel{U}{T(A,B)}{S(A,B)}
+            \strdcelllabel{U End}{\alpha}
+            \strdstartlabel{U}{\mathcal{B}}
+        }
+    }
+}
+
+\myinn{preview}{math}{
+    \strdfamily{A \in \mathcal{A}}{
+        \strdin{gathered}{
+            \strdmid{\strdorigin}{U} \strdsidelabel{U}{T(A,\mydash)}{S(A,\mydash)}
+            \strdcelllabel{U End}{\alpha}
+            \strdstartlabel{U}{\mathcal{B}}
+        }
+    }
+}
+
+\myinn{preview}{math}{
+    \strdfamily{(A,B) \in \mathcal{A} \otimes \mathcal{B}}{
+        \strdin{gathered}{
+            \strdmid{\strdorigin}{U} \strdsidelabel{U}{T(A,B)}{S(A,B)}
+            \strdcelllabel{U End}{\alpha}
+            \strdstartlabel{U}{\mathcal{B}}
+        }
+    }
+}
+\end{document}

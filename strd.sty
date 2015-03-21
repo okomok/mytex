@@ -1,6 +1,6 @@
 \ProvidesPackage{strd}
 
-\usepackage{amsmath,mathtools,etoolbox,my}
+\usepackage{amsmath,mathtools,etoolbox,my,graphicx}
 \usepackage{tikz}
 \usepackage[active,tightpage]{preview}
 \usetikzlibrary{shapes,calc}
@@ -32,7 +32,6 @@
 }
 
 \newcommand{\strdin}[2]{%
-    % \! % why needed?
     \begin{#1}
         \strd{#2}
     \end{#1}%
@@ -283,4 +282,6 @@
 \newcommand{\strdfamily}[2]{%
     \left(#2\right)_{\!\!\!#1}%
 }
+
+\newcommand*{\strdmath}[1]{\scalebox{1.5}{\ensuremath{#1}}}
 
