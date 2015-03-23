@@ -11,6 +11,7 @@
 % no transparent color?
 \tikzset{strd celllabel/.style={font=\small,rounded rectangle,very thin,solid,rounded corners=0pt,rounded rectangle arc length=90,draw,fill=white,inner sep=1.2pt}}
 \tikzset{strd linelabel/.style={font=\scriptsize,inner sep=0.2pt,strd textvaligned}}
+\tikzset{strd doublelinelabel/.style={font=\tiny,inner sep=0.1pt,strd textvaligned}}
 \tikzset{strd endlabel/.style={font=\small,inner sep=1pt,strd textvaligned}}
 \tikzset{strd valigned/.style={baseline={([yshift=-0.5ex]current bounding box.center)}}}
 \tikzset{strd textvaligned/.style={text height=1.5ex,text depth=0.25ex}}
@@ -305,6 +306,8 @@
 
 % double strings
 
+\tikzset{strd doublecolor/.style={gray!35}}
+
 % prefer background; other layers would reset surrounding styles...
 \newcommand{\strdinbackground}[1]{%
     \begin{pgfonlayer}{background}
@@ -316,57 +319,16 @@
     \strdinbackground{
         \strdscope{line width=2.84pt}{\csuse{strd#1}{#2}{#3}}
     }
-    \strdscope{line width=2.44pt,gray!50,shorten >= -0.2pt,shorten <= -0.2pt}{\csuse{strd#1}{#2}{#3 White}}%
+    \strdscope{line width=2.44pt,shorten >= -0.2pt,shorten <= -0.2pt,strd doublecolor}{\csuse{strd#1}{#2}{#3 White}}%
 }
 
-\iffalse
-\newcommand{\strdphalfleft}[2]{%
-    \node[strd coord] (#2 Left Start) at ($(#1 End)+(-0.05,0)$) {};
-    \node[strd coord] (#2 Left) at ($(#1 End)+(-0.55,-0.3)$) {};
-    \node[strd coord] (#2 Left End) at ($(#1 End)+(-0.55,-0.4)$) {};
-    \draw[strd draw]{
-        (#2 Left Start) parabola (#2 Left) -- (#2 Left End)
-    };
-    \node[strd coord] (#2 Right Start) at ($(#1 End)+(0,-0.08)$) {};
-    \node[strd coord] (#2 Right) at ($(#1 End)+(-0.45,-0.3)$) {};
-    \node[strd coord] (#2 Right End) at ($(#1 End)+(-0.45,-0.4)$) {};
-    \draw[strd draw]{
-        (#2 Right Start) parabola (#2 Right) -- (#2 Right End)
-    };
-    \strdscope{}{\strdhalfleft{#1}{#2}}%
-}
-\newcommand{\strdphalfright}[2]{\strdflip{\strdphalfleft{#1}{#2}}}
-
-\newcommand{\strdphalfmid}[2]{%
-    \node[strd coord] (#2 Left Start) at ($(#1 End)+(-0.05,0)$) {};
-    \node[strd coord] (#2 Left) at ($(#1 End)+(-0.05,-0.2)$) {};
-    \node[strd coord] (#2 Left End) at ($(#1 End)+(-0.05,-0.4)$) {};
-    \draw[strd draw]{
-        (#2 Left Start) -- (#2 Left End)
-    };
-    \node[strd coord] (#2 Right Start) at ($(#1 End)+(0.05,0)$) {};
-    \node[strd coord] (#2 Right) at ($(#1 End)+(0.05,-0.2)$) {};
-    \node[strd coord] (#2 Right End) at ($(#1 End)+(0.05,-0.4)$) {};
-    \draw[strd draw]{
-        (#2 Right Start) -- (#2 Right End)
-    };
-    \strdscope{}{\strdhalfmid{#1}{#2}}%
+\newcommand{\strddoublex}[3]{%
+    \strdscope{line width=2.84pt}{\csuse{strd#1}{#2}{#3}}
+    \strdscope{line width=2.44pt,shorten >= -0.2pt,shorten <= -0.2pt,strd doublecolor}{\csuse{strd#1}{#2}{#3 White}}%
 }
 
-\newcommand{\strdphalfunleft}[2]{%
-    \strdnone{\strdhalfunleft{#1}{#2}}
-    \node[strd coord] (#2 Left Start) at ($(#1 End)+(-0.05,0)$) {};
-    \node[strd coord] (#2 Left) at ($(#1 End)+(-0.05,-0.1)$) {};
-    \node[strd coord] (#2 Left End) at ($(#1 End)+(0.45,-0.45)$) {};
-    \draw[strd draw]{
-        (#2 Left Start) -- (#2 Left) parabola[bend at end] (#2 Left End)
-    };
-    \node[strd coord] (#2 Right Start) at ($(#1 End)+(0.05,0)$) {};
-    \node[strd coord] (#2 Right) at ($(#1 End)+(0.05,-0.1)$) {};
-    \node[strd coord] (#2 Right End) at ($(#1 End)+(0.5,-0.35)$) {};
-    \draw[strd draw]{
-        (#2 Right Start) -- (#2 Right) parabola[bend at end] (#2 Right End)
-    };%
+\newcommand{\strddsidelabel}[3]{%
+    \node[strd linelabel,left,xshift=-1pt] at (#1) {#2};
+    \node[strd linelabel,right,xshift=1pt] at (#1) {#3};%
 }
-\newcommand{\strdphalfunright}[2]{\strdflip{\strdphalfunleft{#1}{#2}}}
-\fi
+

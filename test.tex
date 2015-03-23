@@ -1,0 +1,93 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+
+\begin{document}
+
+\myinn{preview}{math}{
+    \strdin{gathered}{
+        \strdscope{-<-}{
+            \strdmid{\strdorigin}{U} \strdsidelabel{U}{A}{B}
+            \strdleft{U}{L} \strdsidelabel{L}{C}{D}
+            \strdunleft{L}{LU} \strdsidelabel{LU}{E}{F}
+            \strdright{U}{R} \strdsidelabel{R}{G}{H}
+            \strdunright{R}{UR} \strdsidelabel{UR}{I}{J}
+        }
+    }
+}
+
+\myinn{preview}{math}{
+    \strdin{gathered}{
+        \strdsubset{\strdorigin}{U}
+        \strdsidelabel{U}{A}{B}
+        \strdsupset{U}{U2}
+        \strdsidelabel{U2}{C}{D}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdin{gathered}{
+        \strddup{\strdorigin}{U}
+        \strdleft{U Left}{L}
+        \strdright{U Right}{R}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdin{gathered}{
+        \strdlbag{\strdorigin}{U}
+        \strdsidelabel{U}{A}{B}
+        \strdrbag{U}{U2}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdin{gathered}{
+        \strddouble{halfmid}{\strdorigin}{U}
+        \strddouble{halfleft}{U}{L}
+        \strddouble{halfright}{U}{R}
+        \strddouble{halfunleft}{L}{UL}
+        \strddouble{halfunright}{R}{UR}
+        \strddouble{halfmid}{UL}{U2}
+        \strdcelllabel{L Start}{a}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdin{gathered}{
+        \strddouble{halfmid}{\strdorigin}{U}
+        \strddouble{halfleft}{U}{L}
+        \strddouble{halfright}{U}{R}
+
+        \strddouble{halfunleft}{L}{UL}
+        \strddouble{halfright}{UL}{ULR}
+
+        \strddoublex{halfunright}{R}{UR}
+        \strddoublex{halfleft}{UL}{ULL}
+        \strdcelllabel{L End}{a}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdin{gathered}{
+        \strddouble{halfmid}{\strdorigin}{U}
+        \strddouble{halfleft}{U}{L}
+        \strddouble{halfmid}{U}{M}
+        \strddouble{halfright}{U}{R}
+
+        \strddoublex{halfmid}{M}{M2}
+        \strddoublex{halfmid}{M2}{M3}
+
+        \strddoublex{halfunleft}{L}{UL}
+        \strddoublex{halfright}{UL}{ULR}
+
+        \strddoublex{halfunright}{R}{UR}
+        \strddoublex{halfleft}{UL}{ULL}
+
+        \strdcelllabel{L End}{a}
+        \strdendlabel{ULL}{A B}
+        \strddsidelabel{R End}{B}{C}
+    }
+}
+
+\end{document}
+
