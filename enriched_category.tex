@@ -1,152 +1,110 @@
 \documentclass[]{article}
-\usepackage{amsmath,mathtools}
-\usepackage{tikz,strd}
+\usepackage{strd,my}
 
 \begin{document}
 
-% associativity
-\strdpreview{
-    \newcommand{\mymult}{
-        \strdline{\strdorigin}{ad}
-        \strdleft{ad}{ac}
-        \strdright{ad}{cd}
-        \strdline{cd}{cd2}
-        \strdleft{ac}{ab}
-        \strdright{ac}{bc}
-        \strdstartlabel{ad}{\mathcal{A}}
-        \strdhomobjlabel{ad}{A}{D}
-        \strdhomobjlabel{bc}{B}{C}
-    }
-    \strdgathered{
-        \mymult
-        \strdhomobjlabel{ac}{A}{C}
-        \strdhomobjlabel{ab}{A}{B}
-        \strdhomobjlabel{cd End}{C}{D}
-    }
-    =
-    \strdgathered{
-        \strdflip{\mymult}
-        \strdhomobjlabel{ac}{B}{D}
-        \strdhomobjlabel{ab}{C}{D}
-        \strdhomobjlabel{cd End}{A}{B}
-    }
-}
-
-% unitality
-\strdpreview{
-    \newcommand{\myunital}{
-        \strdline{\strdorigin}{ab}
-        \strdleft{ab}{ab2}
-        \strdyscale{0.5}{\strdline{ab2}{ab3}}
-        \strdright{ab}{bb}
-        \strdjunc{bb}{u}
-        \strdhomobjlabel{ab}{A}{B}
-    }
-    \strdgathered{
-        \myunital
-        \strdhomobjlabel{bb}{B}{B}
-        \strdhomobjlabel{ab2 End}{A}{B}
-        \strdstartlabel{ab}{\mathcal{A}}
-    }
-    =
-    \strdgathered{
+\myinn{preview}{math}{
+    \strdin{gathered}{
         \strdyscale{2}{
-            \strdline{\strdorigin}{ab}
-            \strdhomobjlabel{ab}{A}{B}
-            \strdstartlabel{ab}{\mathcal{A}}
+            \strddouble{mid}{\strdorigin}{U}
+            \strdstartlabel{U}{\mathcal{A}}
+            \strddsidelabel{U}{A}{A'}
+        }
+    } \mydefeq
+    \strdin{gathered}{
+        \strdyscale{2}{
+            \strdmid{\strdorigin}{U} 
+            \strdstartlabel{U}{\mathcal{A}(A,A')}
         }
     }
-    =
-    \strdgathered{
-        \strdflip{\myunital}
-        \strdhomobjlabel{bb}{A}{A}
-        \strdhomobjlabel{ab2 End}{A}{B}
-        \strdstartlabel{ab}{\mathcal{A}}
+}
+
+\myinn{preview}{math}{
+    \strdin{gathered}{
+        \strddouble{mid}{\strdorigin}{U}
+        \strddouble{left}{U}{L}
+        \strddouble{right}{U}{R}
+        \strdstartlabel{U}{\mathcal{A}}
+    } \mydefeq
+    \strdin{gathered}{
+        \strdscale{2}{1.2}{
+        \strdmid{\strdorigin}{U}
+        \strdleft{U}{L}
+        \strdright{U}{R}
+        \strdstartlabel{U}{\mathcal{A}(A,C)}
+        \strdendlabel{L}{\mathcal{A}(A,B)}
+        \strdendlabel{R}{\mathcal{A}(B,C)}
+        \strdcelllabel{U End}{M}
+    }
     }
 }
 
-% syntax
-\strdpreview{
-    \strdgathered{
-        \strdline{\strdorigin}{a}
-        \strdhomobjlabel{a}{A}{A'}
-        \strdstartlabel{a}{\mathcal{A}}
+\myinn{preview}{math}{
+    \strdin{gathered}{
+        \strdyscale{2}{
+        \strddoublex{mid}{\strdorigin}{U}
+        \strddoubleend{U}
+        \strdstartlabel{U}{\mathcal{A}}
     }
-    \strddefeq 
-    \strdgathered{
-        \strdline{\strdorigin}{a}
-        \strdstartlabel{a}{\mathcal{A}(A,A')}
+    } \mydefeq 
+    \strdin{gathered}{
+        \strdyscale{2}{
+        \strdmid{\strdorigin}{U}
+        \strdstartlabel{U}{\mathcal{A}(A,A)}
+        \strdcelllabel{U End}{j}
     }
-}
-
-\strdpreview {
-    \strdgathered {
-        \strdline{\strdorigin}{ac}
-        \strdjunc{ac}{m}
-        \strdleft{m}{ab}
-        \strdright{m}{bc}
-        \strdstartlabel{ac}{\mathcal{A}}
-        \strdhomobjlabel{ac}{A}{C}
-        \strdhomobjlabel{ab}{A}{B}
-        \strdhomobjlabel{bc}{B}{C}
-    }
-    \strddefeq
-    \strdgathered { \strdxscale{1.2} {
-        \strdline{\strdorigin}{ac}
-        \strdleft{ac}{ab}
-        \strdright{ac}{bc}
-        \strdstartlabel{ac}{\mathcal{A}(A,C)}
-        \strdendlabel{ab}{\mathcal{A}(A,B)}
-        \strdendlabel{bc}{\mathcal{A}(B,C)}
-        \strdcelllabel{ac End}{m}{M}
-    } }
-}
-
-\strdpreview{
-    \strdgathered{
-        \strdline{\strdorigin}{aa}
-        \strdjunc{aa}{u}
-        \strdhomobjlabel{aa}{A}{A}
-        \strdstartlabel{aa}{\mathcal{A}}
-    }
-    \strddefeq
-    \strdgathered{
-        \strdline{\strdorigin}{aa}
-        \strdcelllabel{aa End}{u}{j}
-        \strdstartlabel{aa}{\mathcal{A}(A,A)}
     }
 }
 
-% underlying category
-\strdpreview {
-    \begin{gathered}
-        A \overset{f}{\to} B \overset{g}{\to} C
-    \end{gathered}
-    \strddefeq
-    \strdgathered{ \strdidentity {
-        \strdyscale{1}{ \strdline{\strdorigin}{ac} }
-        \strdjunc{ac}{m}
-        \strdleft{m}{ab}
-        \strdright{m}{bc}
-        \strdhomobjlabel{ab}{A}{B}
-        \strdcelllabel{ab End}{f}{f}
-        \strdhomobjlabel{bc}{B}{C}
-        \strdcelllabel{bc End}{g}{g}
-        \strdhomobjlabel{ac}{A}{C}
-    } }
+\myinn{preview}{math}{
+    \strdin{gathered}{
+        \myassign{LHS}{
+        \strddouble{mid}{\strdorigin}{U}
+        \strddouble{left}{U}{L}
+        \strddouble{left}{L}{LL}
+        \strddouble{right}{L}{LR}
+        \strddouble{right}{U}{R}
+        \strddouble{mid}{R}{R2}
+        \strdstartlabel{U}{\mathcal{A}}
+    }
+    } =
+    \strdin{gathered}{
+        \strdflip{\LHS}
+    }
 }
+ 
 
-\strdpreview{
-    \strdgathered{
-        \strdline{\strdorigin}{o}
-        \strdleft{o}{l}
-        \strdleft{l}{ll}
-        \strdunleft{ll}{ull}
-        \strdcoordat{1}{0}{o2}
-        \strdline{o2}{l2}
-        \strdlineleft{o}{ol}
-        \strdnone{ \strdlineright{o}{or} }
+\myinn{preview}{math}{
+    \strdin{gathered}{
+        \myassign{LHS}{
+        \strddouble{mid}{\strdorigin}{U}
+        \strddouble{left}{U}{L}
+        \strddoubleend{L}
+        \strddouble{right}{U}{R}
+        \strddouble{mid}{R}{R2}
+        \strdstartlabel{U}{\mathcal{A}}
+    } 
+    } = 
+    \strdin{gathered}{
+        \strdyscale{2}{
+            \strddoublex{mid}{\strdorigin}{U}
+            \strdstartlabel{U}{\mathcal{A}}
+        }
+    } =
+    \strdin{gathered}{
+        \strdflip{\LHS}
     }
 }
 
+\myinn{preview}{math}{
+    g \circ f \mydefeq
+    \strdin{gathered}{
+        \strddouble{mid}{\strdorigin}{U}
+        \strddouble{left}{U}{L}
+        \strddouble{right}{U}{R}
+        \strdcelllabel{L End}{f}
+        \strdcelllabel{R End}{g}
+        \strdstartlabel{U}{\mathcal{A}}
+    }
+}
 \end{document}

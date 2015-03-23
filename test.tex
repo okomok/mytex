@@ -42,46 +42,48 @@
 
 \myinn{preview}{math}{
     \strdin{gathered}{
-        \strddouble{halfmid}{\strdorigin}{U}
-        \strddouble{halfleft}{U}{L}
-        \strddouble{halfright}{U}{R}
-        \strddouble{halfunleft}{L}{UL}
-        \strddouble{halfunright}{R}{UR}
-        \strddouble{halfmid}{UL}{U2}
+        \strddouble{mid}{\strdorigin}{U}
+        \strddouble{left}{U}{L}
+        \strddouble{right}{U}{R}
+        \strddouble{unleft}{L}{UL}
+        \strddouble{unright}{R}{UR}
+        \strddouble{mid}{UL}{U2}
         \strdcelllabel{L Start}{a}
     }
 }
 
 \myinn{preview}{math}{
     \strdin{gathered}{
-        \strddouble{halfmid}{\strdorigin}{U}
-        \strddouble{halfleft}{U}{L}
-        \strddouble{halfright}{U}{R}
+        \strdscale{2}{2}{
+        \strddouble{mid}{\strdorigin}{U}
+        \strddouble{left}{U}{L}
+        \strddouble{right}{U}{R}
 
-        \strddouble{halfunleft}{L}{UL}
-        \strddouble{halfright}{UL}{ULR}
+        \strddouble{unleft}{L}{UL}
+        \strddouble{right}{UL}{ULR}
 
-        \strddoublex{halfunright}{R}{UR}
-        \strddoublex{halfleft}{UL}{ULL}
+        \strddoublex{unright}{R}{UR}
+        \strddoublex{left}{UL}{ULL}
         \strdcelllabel{L End}{a}
+    }
     }
 }
 
 \myinn{preview}{math}{
     \strdin{gathered}{
-        \strddouble{halfmid}{\strdorigin}{U}
-        \strddouble{halfleft}{U}{L}
-        \strddouble{halfmid}{U}{M}
-        \strddouble{halfright}{U}{R}
+        \strddouble{mid}{\strdorigin}{U}
+        \strddouble{left}{U}{L}
+        \strddouble{mid}{U}{M}
+        \strddouble{right}{U}{R}
 
-        \strddoublex{halfmid}{M}{M2}
-        \strddoublex{halfmid}{M2}{M3}
+        \strddoublex{mid}{M}{M2}
+        \strddoublex{mid}{M2}{M3}
 
-        \strddoublex{halfunleft}{L}{UL}
-        \strddoublex{halfright}{UL}{ULR}
+        \strddoublex{unleft}{L}{UL}
+        \strddoublex{right}{UL}{ULR}
 
-        \strddoublex{halfunright}{R}{UR}
-        \strddoublex{halfleft}{UL}{ULL}
+        \strddoublex{unright}{R}{UR}
+        \strddoublex{left}{UL}{ULL}
 
         \strdcelllabel{L End}{a}
         \strdendlabel{ULL}{A B}

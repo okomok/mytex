@@ -68,47 +68,40 @@
 
 % strings
 
-% golden ratio
-\newcommand{\strdxunit}{0.5}
-\newcommand{\strdyunit}{0.8}
-\newcommand{\strdhalfxunit}{0.25}
-\newcommand{\strdhalfyunit}{0.4}
-\newcommand{\strdunitdiff}{0.3}
-\newcommand{\strdunitrest}{0.2}
-
 \newcommand{\strdempty}[2]{%
     \node[strd coord] (#2) at (#1 End) {};
     \node[strd coord] (#2 Start) at (#2) {};
     \node[strd coord] (#2 End) at (#2) {};%
 }
 
-\newcommand{\strdhalfleft}[2]{%
+\newcommand{\strdleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-0.5,-0.3)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(-0.5,-0.4)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-0.4,-0.2)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(-0.4,-0.5)$) {};
     \draw[strd draw]{
-        (#2 Start) parabola (#2) -- (#2 End)
+        (#2 Start) -- (#2) -- (#2 End)
     };%
 }
-\newcommand{\strdhalfright}[2]{\strdflip{\strdhalfleft{#1}{#2}}}
+\newcommand{\strdright}[2]{\strdflip{\strdleft{#1}{#2}}}
 
-\newcommand{\strdhalfmid}[2]{%
+\newcommand{\strdmid}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.4)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(0,-0.25)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.5)$) {};
     \draw[strd draw]{
         (#2 Start) -- (#2 End)
     };%
 }
 
-\newcommand{\strdhalfunleft}[2]{%
+\newcommand{\strdunleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(0,-0.1)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(0.5,-0.4)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(0,-0.3)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(0.4,-0.5)$) {};
     \draw[strd draw]{
-        (#2 Start) -- (#2) parabola[bend at end] (#2 End)
+        (#2 Start) -- (#2) -- (#2 End)
     };%
 }
-\newcommand{\strdhalfunright}[2]{\strdflip{\strdhalfunleft{#1}{#2}}}
+\newcommand{\strdunright}[2]{\strdflip{\strdunleft{#1}{#2}}}
 
 \newcommand{\strdconnect}[3]{%
     \node[strd coord] (#3 Start) at (#1 Start) {};
@@ -116,37 +109,10 @@
     \node[strd coord] (#3 End) at (#2 End) {};%
 }
 
-\newcommand{\strdleft}[2]{%
-    \strdhalfleft{#1}{#2 Top}
-    \strdhalfmid{#2 Top}{#2 Bottom}
-    \strdconnect{#2 Top}{#2 Bottom}{#2}%
-}
-\newcommand{\strdright}[2]{\strdflip{\strdleft{#1}{#2}}}
-
-% removeme
-\newcommand{\strdsplitleft}[2]{%
-    \strdxscale{0.5}{\strdlshift{#1}{#2 Start}}
-    \strdleft{#2 Start}{#2}%
-}
-\newcommand{\strdsplitright}[2]{\strdflip{\strdsplitleft{#1}{#2}}}
-
-\newcommand{\strdunleft}[2]{%
-    \strdhalfmid{#1}{#2 Top}
-    \strdhalfunleft{#2 Top}{#2 Bottom}
-    \strdconnect{#2 Top}{#2 Bottom}{#2}%
-}
-\newcommand{\strdunright}[2]{\strdflip{\strdunleft{#1}{#2}}}
-
-\newcommand{\strdmid}[2]{%
-    \strdhalfmid{#1}{#2 Top}
-    \strdhalfmid{#2 Top}{#2 Bottom}
-    \strdconnect{#2 Top}{#2 Bottom}{#2}
-}
-
 \newcommand{\strdlminus}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-0.25,0)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(-0.5,0)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-0.2,0)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(-0.4,0)$) {};
     \draw[strd draw]{
         (#2 Start) -- (#2 End)
     };%
@@ -162,15 +128,15 @@
 }
 
 \newcommand{\strdsubset}[2]{%
-    \strdhalfleft{#1}{#2 Top}
-    \strdhalfunleft{#2 Top}{#2 Bottom}
+    \strdleft{#1}{#2 Top}
+    \strdunleft{#2 Top}{#2 Bottom}
     \strdconnect{#2 Top}{#2 Bottom}{#2}
 }
 \newcommand{\strdsupset}[2]{\strdflip{\strdsubset{#1}{#2}}}
 
 \newcommand{\strdlbag}[2]{%
-    \strdhalfright{#1}{#2 Top}
-    \strdhalfunleft{#2 Top}{#2 Bottom}
+    \strdright{#1}{#2 Top}
+    \strdunleft{#2 Top}{#2 Bottom}
     \strdconnect{#2 Top}{#2 Bottom}{#2}
 }
 \newcommand{\strdrbag}[2]{\strdflip{\strdlbag{#1}{#2}}}
@@ -306,7 +272,7 @@
 
 % double strings
 
-\tikzset{strd doublecolor/.style={gray!35}}
+\tikzset{strd doublecolor/.style={gray!20}}
 
 % prefer background; other layers would reset surrounding styles...
 \newcommand{\strdinbackground}[1]{%
@@ -319,12 +285,18 @@
     \strdinbackground{
         \strdscope{line width=2.84pt}{\csuse{strd#1}{#2}{#3}}
     }
-    \strdscope{line width=2.44pt,shorten >= -0.2pt,shorten <= -0.2pt,strd doublecolor}{\csuse{strd#1}{#2}{#3 White}}%
+    \strdscope{line width=2.44pt,shorten >= -0.1pt,shorten <= -0.1pt,strd doublecolor}{\csuse{strd#1}{#2}{#3 White}}%
 }
 
 \newcommand{\strddoublex}[3]{%
     \strdscope{line width=2.84pt}{\csuse{strd#1}{#2}{#3}}
-    \strdscope{line width=2.44pt,shorten >= -0.2pt,shorten <= -0.2pt,strd doublecolor}{\csuse{strd#1}{#2}{#3 White}}%
+    \strdscope{line width=2.44pt,shorten >= -0.1pt,shorten <= -0.1pt,strd doublecolor}{\csuse{strd#1}{#2}{#3 White}}%
+}
+
+\newcommand{\strddoubleend}[1]{%
+    \strdscope{strd picture}{
+        \strdxscale{0.25}{\strdminus{#1}{#1 End Label}}
+    }
 }
 
 \newcommand{\strddsidelabel}[3]{%
