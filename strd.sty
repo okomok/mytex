@@ -1,9 +1,9 @@
 \ProvidesPackage{strd}
 
-\usepackage{amsmath,mathtools,etoolbox,my,graphicx}
+\usepackage{amsmath,mathtools,etoolbox,my}
 \usepackage{tikz}
 \usepackage[active,tightpage]{preview}
-\usetikzlibrary{shapes,calc}
+\usetikzlibrary{shapes,calc,decorations.markings,backgrounds}
 
 
 % styles
@@ -20,19 +20,21 @@
 \tikzset{strd none/.style={opacity=0,text opacity=0,fill opacity=0}}
 \tikzset{strd picture/.style={strd mathnodes,very thin,rounded corners=2pt}}
 \tikzset{strd draw/.style={}}
-
+\tikzset{-<-/.style={decoration={markings,mark=at position .5 with {\arrow{<}}},postaction={decorate}}}
+\tikzset{nomorepostaction/.code={\let\tikz@postactions\pgfutil@empty}}
 
 % environmentals 
 
 \newcommand{\strd}[1]{%
     \begin{tikzpicture}[strd picture]
-        \strddeclareorigin
+        \strddeclorigin
         #1;
     \end{tikzpicture}%
 }
 
 \newcommand{\strdin}[2]{%
     \begin{#1}
+        \!
         \strd{#2}
     \end{#1}%
 }
@@ -59,7 +61,7 @@
     \node[strd coord] (#2 End) at (#1) {};%
 }
 
-\newcommand{\strddeclareorigin}{\strdcoordat{0}{0}{strdorigin}}
+\newcommand{\strddeclorigin}{\strdcoordat{0}{0}{strdorigin}}
 \newcommand{\strdorigin}{strdorigin}
 
 
@@ -79,84 +81,108 @@
     \node[strd coord] (#2 End) at (#2) {};%
 }
 
-\newcommand{\strdleft}[2]{%
+\newcommand{\strdhalfleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2 End) at ($(#2 Start)+(-\strdxunit,-\strdyunit)$) {};
-    \node[strd coord] (#2 Corner) at ($(#2 End)+(0,\strdxunit)$) {};
-    \node[strd coord] (#2) at ($(#2 Start)+(-\strdxunit,-\strdhalfyunit)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-0.5,-0.3)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(-0.5,-0.4)$) {};
     \draw[strd draw]{
-        (#2 Start) parabola (#2 Corner) -- (#2 End)
+        (#2 Start) parabola (#2) -- (#2 End)
     };%
 }
-\newcommand{\strdright}[2]{\strdflip{ \strdleft{#1}{#2} }}
+\newcommand{\strdhalfright}[2]{\strdflip{\strdhalfleft{#1}{#2}}}
 
+\newcommand{\strdhalfmid}[2]{%
+    \node[strd coord] (#2 Start) at (#1 End) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.4)$) {};
+    \draw[strd draw]{
+        (#2 Start) -- (#2 End)
+    };%
+}
+
+\newcommand{\strdhalfunleft}[2]{%
+    \node[strd coord] (#2 Start) at (#1 End) {};
+    \node[strd coord] (#2) at ($(#1 End)+(0,-0.1)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(0.5,-0.4)$) {};
+    \draw[strd draw]{
+        (#2 Start) -- (#2) parabola[bend at end] (#2 End)
+    };%
+}
+\newcommand{\strdhalfunright}[2]{\strdflip{\strdhalfunleft{#1}{#2}}}
+
+\newcommand{\strdconnect}[3]{%
+    \node[strd coord] (#3 Start) at (#1 Start) {};
+    \node[strd coord] (#3) at (#2 Start) {};
+    \node[strd coord] (#3 End) at (#2 End) {};%
+}
+
+\newcommand{\strdleft}[2]{%
+    \strdhalfleft{#1}{#2 Top}
+    \strdhalfmid{#2 Top}{#2 Bottom}
+    \strdconnect{#2 Top}{#2 Bottom}{#2}%
+}
+\newcommand{\strdright}[2]{\strdflip{\strdleft{#1}{#2}}}
+
+% removeme
 \newcommand{\strdsplitleft}[2]{%
-    \strdxscale{0.5}{\strdshiftleft{#1}{#2 Start}}
+    \strdxscale{0.5}{\strdlshift{#1}{#2 Start}}
     \strdleft{#2 Start}{#2}%
 }
 \newcommand{\strdsplitright}[2]{\strdflip{\strdsplitleft{#1}{#2}}}
 
 \newcommand{\strdunleft}[2]{%
-    \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2 End) at ($(#2 Start)+(\strdxunit,-\strdyunit)$) {};
-    \node[strd coord] (#2 Corner) at ($(#2 Start)+(0,-\strdxunit)$) {};
-    \node[strd coord] (#2) at ($(#2 Start)+(0,-\strdhalfyunit)$) {};
-    \draw[strd draw]{
-        (#2 Start) -- (#2 Corner) parabola[bend at end] (#2 End)
-    };%
+    \strdhalfmid{#1}{#2 Top}
+    \strdhalfunleft{#2 Top}{#2 Bottom}
+    \strdconnect{#2 Top}{#2 Bottom}{#2}%
 }
 \newcommand{\strdunright}[2]{\strdflip{\strdunleft{#1}{#2}}}
 
 \newcommand{\strdmid}[2]{%
-    \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(0,-\strdhalfyunit)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(0,-\strdyunit)$) {};
-    \draw[strd draw]{
-        (#2 Start) -- (#2 End)
-    };%
+    \strdhalfmid{#1}{#2 Top}
+    \strdhalfmid{#2 Top}{#2 Bottom}
+    \strdconnect{#2 Top}{#2 Bottom}{#2}
 }
 
-\newcommand{\strdleftminus}[2]{%
+\newcommand{\strdlminus}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-\strdhalfxunit,0)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(-\strdxunit,0)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-0.25,0)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(-0.5,0)$) {};
     \draw[strd draw]{
         (#2 Start) -- (#2 End)
     };%
 }
-\newcommand{\strdrightminus}[2]{\strdflip{\strdleftminus{#1}{#2}}}
+\newcommand{\strdrminus}[2]{\strdflip{\strdlminus{#1}{#2}}}
+
+\newcommand{\strdminus}[2]{%
+    \strdxscale{0.5}{
+        \strdlminus{#1}{#2 Left}
+        \strdempty{#1}{#2}
+        \strdrminus{#1}{#2 Right}
+    }
+}
 
 \newcommand{\strdsubset}[2]{%
-    \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2 End) at ($(#2 Start)+(0,-\strdyunit)$) {};
-    \node[strd coord] (#2 StartCorner) at ($(#2 End)+(-\strdxunit,\strdxunit)$) {};
-    \node[strd coord] (#2 EndCorner) at ($(#2 Start)+(-\strdxunit,-\strdxunit)$) {};
-    \node[strd coord] (#2) at ($(#2 Start)+(-\strdxunit,-\strdhalfyunit)$) {};
-    \draw[strd draw]{
-        (#2 Start) parabola (#2 StartCorner) -- (#2 EndCorner) parabola[bend at end] (#2 End)
-    };%
+    \strdhalfleft{#1}{#2 Top}
+    \strdhalfunleft{#2 Top}{#2 Bottom}
+    \strdconnect{#2 Top}{#2 Bottom}{#2}
 }
 \newcommand{\strdsupset}[2]{\strdflip{\strdsubset{#1}{#2}}}
 
 \newcommand{\strdlbag}[2]{%
-    \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2 StartCorner) at ($(#2 Start)+(-\strdxunit,-\strdunitdiff)$) {};
-    \node[strd coord] (#2) at ($(#2 Start)+(-\strdxunit,-\strdhalfyunit)$) {};
-    \node[strd coord] (#2 EndCorner) at ($(#2 StartCorner)+(0,-\strdunitrest)$) {};
-    \node[strd coord] (#2 End) at ($(#2 EndCorner)+(-\strdxunit,-\strdunitdiff)$) {};
-    \draw[strd draw]{
-        (#2 Start) parabola (#2 StartCorner) -- (#2 EndCorner) parabola[bend at end] (#2 End)
-    };%
+    \strdhalfright{#1}{#2 Top}
+    \strdhalfunleft{#2 Top}{#2 Bottom}
+    \strdconnect{#2 Top}{#2 Bottom}{#2}
 }
 \newcommand{\strdrbag}[2]{\strdflip{\strdlbag{#1}{#2}}}
 
 \newcommand{\strdjump}[2]{\strdnone{\strdmid{#1}{#2}}}
-
-\newcommand{\strdshiftleft}[2]{\strdnone{\strdleftminus{#1}{#2}}}
-\newcommand{\strdshiftright}[2]{\strdnone{\strdrightminus{#1}{#2}}}
+\newcommand{\strdlshift}[2]{\strdnone{\strdlminus{#1}{#2}}}
+\newcommand{\strdrshift}[2]{\strdnone{\strdrminus{#1}{#2}}}
+\newcommand{\strddup}[2]{\strdnone{\strdminus{#1}{#2}}}
 
 
 % square strings
+
+% todo: strdhalfsqsubset?
 
 \newcommand{\strdsqsubset}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
@@ -249,19 +275,9 @@
 
 % composed strings
 
-% remove me
-\newcommand{\strdbranch}[2]{%
-    \strdmid{#1}{#2 Branch}
-    \strdleft{#2 Branch}{#2 Left}
-    \strdright{#2 Branch}{#2 Right}
-    \strdyscale{2}{ \strdjump{#1}{#2} }%
-}
-
-\newcommand{\strdparallel}[2]{%
-    \strdshiftleft{#1}{#2 Left}
-    \strdmid{#2 Left}{#2 Left} % funny name-conflict
-    \strdshiftright{#1}{#2 Right}
-    \strdmid{#2 Right}{#2 Right}
+\newcommand{\strdcap}[2]{%
+    \strdleft{#1}{#2 Left}
+    \strdright{#1}{#2 Right}
     \strdjump{#1}{#2}%
 }
 
@@ -274,6 +290,7 @@
 
 % command combinators
 
+% remove?
 \newcommand{\strdlabeled}[5]{%
     \csuse{strd#1}{#2}{#4#5}
     \csuse{strd#3label}{#4#5}{#4}{#5}%
@@ -285,3 +302,71 @@
 
 \newcommand*{\strdmath}[1]{\scalebox{1.5}{\ensuremath{#1}}}
 
+
+% double strings
+
+% prefer background; other layers would reset surrounding styles...
+\newcommand{\strdinbackground}[1]{%
+    \begin{pgfonlayer}{background}
+        #1 
+    \end{pgfonlayer}%
+}
+
+\newcommand{\strddouble}[3]{%
+    \strdinbackground{
+        \strdscope{line width=2.84pt}{\csuse{strd#1}{#2}{#3}}
+    }
+    \strdscope{line width=2.44pt,gray!50,shorten >= -0.2pt,shorten <= -0.2pt}{\csuse{strd#1}{#2}{#3 White}}%
+}
+
+\iffalse
+\newcommand{\strdphalfleft}[2]{%
+    \node[strd coord] (#2 Left Start) at ($(#1 End)+(-0.05,0)$) {};
+    \node[strd coord] (#2 Left) at ($(#1 End)+(-0.55,-0.3)$) {};
+    \node[strd coord] (#2 Left End) at ($(#1 End)+(-0.55,-0.4)$) {};
+    \draw[strd draw]{
+        (#2 Left Start) parabola (#2 Left) -- (#2 Left End)
+    };
+    \node[strd coord] (#2 Right Start) at ($(#1 End)+(0,-0.08)$) {};
+    \node[strd coord] (#2 Right) at ($(#1 End)+(-0.45,-0.3)$) {};
+    \node[strd coord] (#2 Right End) at ($(#1 End)+(-0.45,-0.4)$) {};
+    \draw[strd draw]{
+        (#2 Right Start) parabola (#2 Right) -- (#2 Right End)
+    };
+    \strdscope{}{\strdhalfleft{#1}{#2}}%
+}
+\newcommand{\strdphalfright}[2]{\strdflip{\strdphalfleft{#1}{#2}}}
+
+\newcommand{\strdphalfmid}[2]{%
+    \node[strd coord] (#2 Left Start) at ($(#1 End)+(-0.05,0)$) {};
+    \node[strd coord] (#2 Left) at ($(#1 End)+(-0.05,-0.2)$) {};
+    \node[strd coord] (#2 Left End) at ($(#1 End)+(-0.05,-0.4)$) {};
+    \draw[strd draw]{
+        (#2 Left Start) -- (#2 Left End)
+    };
+    \node[strd coord] (#2 Right Start) at ($(#1 End)+(0.05,0)$) {};
+    \node[strd coord] (#2 Right) at ($(#1 End)+(0.05,-0.2)$) {};
+    \node[strd coord] (#2 Right End) at ($(#1 End)+(0.05,-0.4)$) {};
+    \draw[strd draw]{
+        (#2 Right Start) -- (#2 Right End)
+    };
+    \strdscope{}{\strdhalfmid{#1}{#2}}%
+}
+
+\newcommand{\strdphalfunleft}[2]{%
+    \strdnone{\strdhalfunleft{#1}{#2}}
+    \node[strd coord] (#2 Left Start) at ($(#1 End)+(-0.05,0)$) {};
+    \node[strd coord] (#2 Left) at ($(#1 End)+(-0.05,-0.1)$) {};
+    \node[strd coord] (#2 Left End) at ($(#1 End)+(0.45,-0.45)$) {};
+    \draw[strd draw]{
+        (#2 Left Start) -- (#2 Left) parabola[bend at end] (#2 Left End)
+    };
+    \node[strd coord] (#2 Right Start) at ($(#1 End)+(0.05,0)$) {};
+    \node[strd coord] (#2 Right) at ($(#1 End)+(0.05,-0.1)$) {};
+    \node[strd coord] (#2 Right End) at ($(#1 End)+(0.5,-0.35)$) {};
+    \draw[strd draw]{
+        (#2 Right Start) -- (#2 Right) parabola[bend at end] (#2 Right End)
+    };%
+}
+\newcommand{\strdphalfunright}[2]{\strdflip{\strdphalfunleft{#1}{#2}}}
+\fi
