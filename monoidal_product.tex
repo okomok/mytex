@@ -5,84 +5,88 @@
 
 % monoidal product of enriched categories 
 
-\strdpreview{
-    \strdgathered{
-        \strdmid{\strdorigin}{ABA'B'} \strdsidelabel{ABA'B'}{(A,B)}{(A',B')}
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{ABA'B'} \strdroadlabel{ABA'B'}{(A,B)}{(A\myprime,B\myprime)}
         \strdstartlabel{ABA'B'}{\mathcal{A} \otimes \mathcal{B}}
     } \mydefeq
-    \strdgathered{
-        \strdsidelabeled{mid}{\strdorigin}{B}{B'}
-        \strdxscale{1.2}{\strdshiftright{\strdorigin}{SAA'}}
-        \strdsidelabeled{mid}{SAA'}{A}{A'}
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{BB'} \strdroadlabel{BB'}{B}{B\myprime}
+        \strdxscale{1.4}{\strdrshift{\strdorigin}{SAA'}}
+        \strdroad{mid}{SAA'}{AA'} \strdroadlabel{AA'}{A}{A\myprime}
         \strdstartlabel{BB'}{\mathcal{B}}
         \strdstartlabel{AA'}{\mathcal{A}}
     }
 }
 
-\strdpreview{
-    \strdgathered{
-        \strdmid{\strdorigin}{ABA''B''} \strdsidelabel{ABA''B''}{(A,B)}{(A'',B'')}
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{ABA''B''} \strdroadlabel{ABA''B''}{(A,B)}{(A\mydprime,B\mydprime)}
         \strdstartlabel{ABA''B''}{\mathcal{A} \otimes \mathcal{B}}
-        \strdxscale{2.2}{
-            \strdleft{ABA''B''}{ABA'B'} \strdsidelabel{ABA'B'}{(A,B)}{(A',B')}
-            \strdright{ABA''B''}{A'B'A''B''} \strdsidelabel{A'B'A''B''}{(A',B')}{(A'',B'')}
+        \strdxscale{1.5}{
+            \strdroad{left}{ABA''B''}{ABA'B'} \strdroadlabel{ABA'B'}{}{(A\myprime,B\myprime)}
+            \strdroad{right}{ABA''B''}{A'B'A''B''} %\strdroadlabel{A'B'A''B''}{(A',B')}{(A\mydprime,B\mydprime)}
         }
-        \strddotlabel{ABA''B'' End}
+      %  \strddotlabel{ABA''B'' End}
     } \mydefeq
-    \strdgathered{
-        \strdsidelabeled{mid}{\strdorigin}{B}{B''}
-        \strdleft{BB''}{BB'}
-        \strdsidelabeled{rbag}{BB''}{B'}{B''}
-        \strdright{B'B''}{B'B''2} \strdsidelabel{B'B''2}{B'}{B''}
-        \strdxscale{4}{\strdshiftright{\strdorigin}{SA}}
-        \strdsidelabeled{mid}{SA}{A}{A''}
-        \strdright{AA''}{A'A''}
-        \strdsidelabeled{lbag}{AA''}{A}{A'}
-        \strdleft{AA'}{AA'2} \strdsidelabel{AA'2}{A}{A'}
-        \strdmid{BB'}{BB'2} \strdsidelabel{BB'2}{B}{B'}
-        \strdmid{A'A''}{A'A''2} \strdsidelabel{A'A''2}{A'}{A''}
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{BB''} \strdroadlabel{BB''}{B}{B\mydprime}
+        \strdroad{left}{BB''}{BB'} 
+      %  \strdsidelabeled{rbag}{BB''}{B'}{B''}
+      %  \strdright{B'B''}{B'B''2} \strdroadlabel{B'B''2}{B'}{B''}
+        \strdxscale{1.5}{\strdrshift{\strdorigin}{SA}}
+        \strdroad{mid}{SA}{AA''} \strdroadlabel{AA''}{A}{A\mydprime}
+        \strdroadx{right}{AA''}{A'A''}
+        \strdxscale{1.5}{\strdroadx{left}{AA''}{AA'}} \strdroadlabel{AA'}{}{A\myprime}
+   %     \strdsidelabeled{lbag}{AA''}{A}{A'}
+   %     \strdleft{AA'}{AA'2} \strdroadlabel{AA'2}{A}{A'}
+       % \strdroad{mid}{BB'}{BB'2} 
+        \strdroadlabel{BB'}{}{B\myprime}
+        \strdxscale{1.5}{\strdroad{right}{BB''}{B'B''}}% \strdroadlabel{B'B''}{B'}{}
+   %     \strdroad{mid}{A'A''}{A'A''2}
+     %   \strdroadlabel{A'A''}{A'}{}
         \strdstartlabel{BB''}{\mathcal{B}}
         \strdstartlabel{AA''}{\mathcal{A}}
-        \strddotlabel{BB'' End}
-        \strddotlabel{AA'' End}
+    %    \strddotlabel{BB'' End}
+    %    \strddotlabel{AA'' End}
     }
 }
 
-\strdpreview{
-    \strdgathered{
-        \strdmid{\strdorigin}{ABA'B'} \strdsidelabel{ABA'B'}{(A,B)}{(A',B')}
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{ABA'B'} \strdroadlabel{ABA'B'}{(A,B)}{(A\myprime,B\myprime)}
         \strdstartlabel{ABA'B'}{\mathcal{A} \otimes \mathcal{B}}
-        \strddotlabel{ABA'B' End}
+        \strddeadend{ABA'B'}
     } \mydefeq
-    \strdgathered{
-        \strdsidelabeled{mid}{\strdorigin}{B}{B'}
-        \strdxscale{1.2}{\strdshiftright{\strdorigin}{SAA'}}
-        \strdsidelabeled{mid}{SAA'}{A}{A'}
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{BB'} \strdroadlabel{BB'}{B}{B\myprime}
+        \strdxscale{1.4}{\strdrshift{\strdorigin}{SAA'}}
+        \strdroad{mid}{SAA'}{AA'} \strdroadlabel{AA'}{A}{A\myprime}
         \strdstartlabel{BB'}{\mathcal{B}}
         \strdstartlabel{AA'}{\mathcal{A}}
-        \strddotlabel{BB' End}
-        \strddotlabel{AA' End}
+        \strddeadend{BB'}
+        \strddeadend{AA'}
     }
 }
 
 % functor product
-\strdpreview{
-    \strdgathered{
-        \strdmid{\strdorigin}{U} \strdsidelabel{U}{(T \otimes S)(A,B)}{(T \otimes S)(A',B')}
-        \strdmid{U}{D} \strdsidelabel{D}{(A,B)}{(A',B')}
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{(T \otimes S)(A,B)}{(T \otimes S)(A\myprime,B\myprime)}
+        \strdroad{mid}{U}{D} \strdroadlabel{D}{(A,B)}{(A\myprime,B\myprime)}
         \strdcelllabel{U End}{T \otimes S}
         \strdstartlabel{U}{\mathcal{C} \otimes \mathcal{D}}
         \strdendlabel{D}{\mathcal{A} \otimes \mathcal{B}}
     } \mydefeq
-    \strdgathered{
-        \strdsidelabeled{mid}{\strdorigin}{SB}{SB'}
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{SBSB'} \strdroadlabel{SBSB'}{SB}{SB\myprime}
         \strdcelllabel{SBSB' End}{S}
-        \strdsidelabeled{mid}{SBSB'}{B}{B'}
+        \strdroad{mid}{SBSB'}{BB'} \strdroadlabel{BB'}{B}{B\myprime}
 
-        \strdxscale{2.2}{\strdshiftright{\strdorigin}{R}}
-        \strdsidelabeled{mid}{R}{TA}{TA'}
+        \strdxscale{2.2}{\strdrshift{\strdorigin}{R}}
+        \strdroad{mid}{R}{TATA'} \strdroadlabel{TATA'}{TA}{TA\myprime}
         \strdcelllabel{TATA' End}{T}
-        \strdsidelabeled{mid}{TATA'}{A}{A'}
+        \strdroad{mid}{TATA'}{AA'}\strdroadlabel{AA'}{A}{A\myprime}
 
         \strdstartlabel{SBSB'}{\mathcal{D}}
         \strdstartlabel{TATA'}{\mathcal{C}}
@@ -91,18 +95,19 @@
     }
 }
 
-\strdpreview{
-    \strdgathered{
-        \strdmid{\strdorigin}{U} \strdsidelabel{U}{(T \otimes S)(A,B)}{(T' \otimes S')(A,B)}
+% natural transformation product
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{(T \otimes S)(A,B)}{(T\myprime \otimes S\myprime)(A,B)}
         \strdcelllabel{U End}{\alpha \otimes \beta}
         \strdstartlabel{U}{\mathcal{C} \otimes \mathcal{D}}
     } \mydefeq
-    \strdgathered{
-        \strdsidelabeled{mid}{\strdorigin}{SB}{S'B}
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{SBS'B} \strdroadlabel{SBS'B}{SB}{S\myprime B}
         \strdcelllabel{SBS'B End}{\beta}
 
-        \strdxscale{2.2}{\strdshiftright{\strdorigin}{R}}
-        \strdsidelabeled{mid}{R}{TA}{T'A}
+        \strdxscale{2.2}{\strdrshift{\strdorigin}{R}}
+        \strdroad{mid}{R}{TAT'A} \strdroadlabel{TAT'A}{TA}{T\myprime A}
         \strdcelllabel{TAT'A End}{\alpha}
 
         \strdstartlabel{SBS'B}{\mathcal{D}}
@@ -110,29 +115,31 @@
     }
 }
 
+
+
 % unit
 
-\strdpreview{
-    \strdgathered{
-        \strdmid{\strdorigin}{U} \strdsidelabel{U}{\ast}{\ast}
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{\ast}{\ast}
         \strdstartlabel{U}{\mathcal{I}}
     } \mydefeq
-    \strdgathered{
+    \strdpicturein{gathered}{
         \strdimplicit{
-            \strdsidelabeled{mid}{\strdorigin}{}{I}
+            \strdmid{\strdorigin}{I} \strdsidelabel{I}{}{I}
         }
     }
 }
 
-\strdpreview{
-    \strdgathered{
-        \strdmid{\strdorigin}{U} \strdsidelabel{U}{\ast}{\ast}
-        \strdleft{U}{L} \strdsidelabel{L}{\ast}{\ast}
-        \strdright{U}{R} \strdsidelabel{R}{\ast}{\ast}
-        \strddotlabel{U End}
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{\ast}{\ast}
+        \strdroad{left}{U}{L} \strdroadlabel{L}{}{\ast}
+        \strdroad{right}{U}{R} %\strdroadlabel{R}{\ast}{\ast}
+      %  \strddotlabel{U End}
         \strdstartlabel{U}{\mathcal{I}}
     } \mydefeq
-    \strdgathered{ \strdimplicit{
+    \strdpicturein{gathered}{ \strdimplicit{
         \strdmid{\strdorigin}{U} \strdsidelabel{U}{}{I}
         \strdleft{U}{L} \strdsidelabel{L}{}{I}
         \strdright{U}{R} \strdsidelabel{R}{}{I}
@@ -140,20 +147,17 @@
 }}
 }
 
-
-\strdpreview{
-    \strdgathered{
-        \strdmid{\strdorigin}{U} \strdsidelabel{U}{\ast}{\ast}
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{}{\ast}
         \strdstartlabel{U}{\mathcal{I}}
-        \strddotlabel{U End}
+        \strddeadend{U}
     } \mydefeq
-    \strdgathered{
+    \strdpicturein{gathered}{
         \strdimplicit{
-            \strdsidelabeled{mid}{\strdorigin}{}{I}
+            \strdmid{\strdorigin}{I} \strdsidelabel{I}{}{I}
         }
     }
 }
-
-
 
 \end{document}
