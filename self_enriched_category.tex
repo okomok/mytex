@@ -1,0 +1,121 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage{pgf}
+
+\begin{document}
+
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdstartlabel{U}{(\mathcal{V})} \strdroadlabel{U}{X}{Z}
+        \strdroad{left}{U}{L} \strdroadlabel{L}{}{Y}
+        \strdroad{right}{U}{R} 
+    } \mydefeq
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{X}{Z}
+        \strdroadrshift{U}{Us}
+        \strdmid{Us}{BxU} \strdcelllabel{BxU End}{\epsilon}
+        \strdleft{BxU}{BxL}\strdcelllabel{BxL End}{\epsilon}
+        \strdleft{BxL}{BxLL} % \strdsidelabel{BxLL Corner}{X}{}
+        \strdroad{right}{BxU}{BxR}
+        \strdyscale{2}{\strdroad{mid}{BxR}{BxR2}} \strdroadlabel{BxR2 Start}{Y}{Z}
+        \strdroad{right}{BxL}{BxLR}
+        \strdroad{mid}{BxLR}{BxLR2} \strdroadlabel{BxLR2}{X}{Y}
+        \strdscale{3}{3}{\strdlbij{Us}{B}}
+        \strdscale{2}{3}{\strdrbij{Us}{B}}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{o} \strdstartlabel{o}{(\mathcal{V})}
+        \strddeadend{o}
+        \strdroadlabel{o}{X}{X}
+    } \mydefeq
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{o} \strdroadlabel{o}{X}{X}
+        \strdroadrshift{o}{os}
+        \strdmid{os}{bxo} \strdcelllabel{bxo End}{\lambda}
+        \strdleft{bxo}{bxl} \strdsidelabel{bxl Corner}{X}{}
+        \strdimplicit{
+            \strdright{bxo}{bxr}
+            \strdmid{bxr}{r}
+        }
+        \strdscale{2}{2}{\strdbij{os}{b}}
+        \strdsidelabel{r}{}{I}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{o} \strdstartlabel{o}{(\mathcal{V})} \strdroadlabel{o}{Y}{Z\myprime}
+        \strdxscale{2}{
+            \strdroad{left}{o}{l} \strdroadlabel{l}{}{Z}
+            \strdroad{right}{o}{r}
+        }
+        \strdroadrshift{l}{ls}
+        \strdmid{ls}{lbo} \strdcelllabel{lbo End}{f}
+        \strdleft{lbo}{lbol} \strdsidelabel{lbol Corner}{Y}{}
+        \strdright{lbo}{lbor} 
+        \strdmid{lbor}{lbor2} \strdsidelabel{lbor2}{}{X}
+        \strdscale{2}{2}{\strdbij{ls}{lb}}
+
+        \strdroadrshift{r}{rs}
+        \strdmid{rs}{rbo} \strdcelllabel{rbo End}{g}
+        \strdleft{rbo}{rbor} \strdsidelabel{rbor Corner}{Z}{}
+        \strdright{rbo}{rbor} 
+        \strdmid{rbor}{rbor2} \strdsidelabel{rbor2}{}{X\myprime}
+        \strdscale{2}{2}{\strdbij{rs}{rb}}
+    } =
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{o} \strdstartlabel{o}{(\mathcal{V})} \strdroadlabel{o}{Y}{Z\myprime}
+        \strdroadrshift{o}{os}
+        \strdmid{os}{bo} \strdcelllabel{bo End}{g}
+        \strdleft{bo}{bl} \strdsidelabel{$(bl Corner)+(0,0.1)$}{Z}{} \strdcelllabel{bl End}{f}
+        \strdleft{bl}{bll} \strdsidelabel{bll Corner}{Y}{}
+        \strdright{bl}{blr}
+        \strdmid{blr}{blr2} \strdsidelabel{blr2}{}{X}
+        \strdright{bo}{bor}
+        \strdmid{bor}{bor2} 
+        \strdmid{bor2}{bor3} \strdsidelabel{bor3}{}{X\myprime}
+        \strdscale{3}{3}{\strdlbij{os}{b1}}
+        \strdscale{2}{3}{\strdrbij{os}{b2}}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{o} \strdroadlabel{o}{X}{Y}
+        \strdroadrshift{o}{os}
+        \strdmid{os}{bxo} \strdcelllabel{bxo End}{f}
+        \strdleft{bxo}{bxl} \strdsidelabel{bxl Corner}{X}{}
+        \strdimplicit{
+            \strdright{bxo}{bxr}
+            \strdmid{bxr}{r}
+        }
+        \strdscale{2}{2}{\strdbij{os}{b}}
+        \strdsidelabel{r}{}{I}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdfamily{}{
+        \strdpicturein{gathered}{
+            \strdmid{\strdorigin}{o} \strdsidelabel{$(o)+(0,0.1)$}{}{A}
+            \strdcelllabel{o End}{f}
+            \strdmid{o}{o2} \strdsidelabel{$(o2)+(0,-0.1)$}{}{A\myprime}
+        },
+        \strdpicturein{gathered}{
+            \strdmid{\strdorigin}{o} \strdsidelabel{$(o)+(0,0.1)$}{}{B\myprime}
+            \strdcelllabel{o End}{g}
+            \strdmid{o}{o2} \strdsidelabel{$(o2)+(0,-0.1)$}{}{B}
+        }
+    } \overset{[\mydash,\mydash]}{\mapsto}
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{A\myprime}{B\myprime}
+        \strdroad{left}{U}{L} \strdbijlabel{L End}{f}%\strdroadlabel{L}{}{A}
+        \strdyscale{2.25}{\strdroad{mid}{U}{m}} \strdroadlabel{$(m)+(0,-0.3)$}{A}{B}
+        \strdroad{right}{U}{r} \strdbijlabel{r End}{g}%\strdroadlabel{L}{}{A}
+    }
+}
+\end{document}

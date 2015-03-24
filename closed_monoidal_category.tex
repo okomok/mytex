@@ -56,7 +56,7 @@ My pgf version is: \pgfversion
 
 \myinn{preview}{math}{
     \strdpicturein{gathered}{
-        \strdmid{\strdorigin}{U} \strdsidelabel{U}{}{Z}
+        \strdmid{\strdorigin}{U} \strdsidelabel{$(U)+(0,0.05)$}{}{Z}
         \strdroadlshift{U}{U0}
         \strdleft{U}{L} \strdsidelabel{L}{Y}{}
         \strdroad{right}{U0}{R} \strdroadlabel{R}{Y}{Z}
@@ -76,61 +76,67 @@ My pgf version is: \pgfversion
 
 \myinn{preview}{math}{
     \strdpicturein{gathered}{
-        \strdmid{\strdorigin}{Z'}
-        \strdleft{Z'}{ZB}
-        \strdright{Z'}{X'}
+        \strdmid{\strdorigin}{Z'} \strdsidelabel{$(Z')+(0,0.08)$}{}{Z}
+        \strdleft{Z'}{ZB} \strdsidelabel{ZB}{Y}{}
+        \strdright{Z'}{X'} \strdsidelabel{X'}{}{X}
         \strdcelllabel{Z' End}{h}
     } =
     \strdpicturein{gathered}{
-        \strdmid{\strdorigin}{U}
+        \strdmid{\strdorigin}{U} \strdsidelabel{$(U)+(0,0.05)$}{}{Z}
         \strdcelllabel{U End}{\epsilon}
         \strdleft{U}{Z}
-        \strdroad{right}{U}{ZZ'}
+        \strdroad{right}{U}{ZZ'} % \strdroadlabel{ZZ' Corner}{}{Z}
         \strdroadrshift{ZZ'}{ZZ'S}
         \strdmid{ZZ'S}{Z'}
         \strdleft{Z'}{ZB}
         \strdright{Z'}{X'}
-        \strdmid{X'}{X'2}
+        \strdmid{X'}{X'2} \strdsidelabel{X'2}{X}{}
         \strdcelllabel{Z' End}{h}
         \strdscale{1.5}{2}{\strdbij{ZZ'S}{Box}}
-        \strdyscale{3}{\strdmid{Z}{Z2}}
+        \strdyscale{3}{\strdmid{Z}{Z2}} \strdsidelabel{$(Z2)+(0,-0.5)$}{}{Y}
     } 
 }
 
 \myinn{preview}{math}{
     \strdpicturein{gathered}{
-        \strdmid{\strdorigin}{Z}% \strdsidelabel{Z}{}{Z}
+        \strdmid{\strdorigin}{Z} \strdsidelabel{Z}{}{Z}
         \strdroadlshift{Z}{ZS}
-        \strdroad{mid}{ZS}{YZ} %\strdroadlabel{YZ}{Y}{Z}
+        \strdroad{mid}{ZS}{YZ}% \strdroadlabel{YZ}{Y}{Z}
 
         \strdcelllabel{YZ End}{g}
-        \strdright{YZ}{X}% \strdsidelabel{X Corner}{}{X}
+        \strdright{YZ}{X} \strdsidelabel{X Corner}{}{X}
         \strdmid{X}{X2}
         \strdcelllabel{X2 End}{h}
         \strdmid{X2}{X3}
         \strdscale{2}{2}{\strdbij{ZS}{Box}}
         \strdlshift{Box}{Y0}
         \strdyscale{2}{\strdmid{Y0}{Y}}
-     %   \strdsidelabel{Y}{Y}{}
-     %   \strdsidelabel{X3}{}{X'}
-     %   \strdsidelabel{X2}{}{X'}
+        \strdsidelabel{Y}{Y}{}
+        \strdsidelabel{$(X3)+(0,-0.05)$}{}{X'}
+    %    \strdsidelabel{X2}{}{X'}
     } =
     \strdpicturein{gathered}{
-        \strdmid{\strdorigin}{Z}% \strdsidelabel{Z}{}{Z}
+        \strdmid{\strdorigin}{Z} \strdsidelabel{Z}{}{Z}
         \strdroadlshift{Z}{ZS}
         \strdroad{mid}{ZS}{YZ}% \strdroadlabel{YZ}{Y}{Z}
 
         \strdcelllabel{YZ End}{g}
-        \strdright{YZ}{X}% \strdsidelabel{X Corner}{}{X}
+        \strdright{YZ}{X} \strdsidelabel{X Corner}{}{X}
         \strdcelllabel{X End}{h}
         \strdmid{X}{X2}
         \strdmid{X2}{X3}
         \strdscale{2}{3}{\strdbij{ZS}{Box}}
         \strdlshift{Box}{Y0}
         \strdyscale{1}{\strdmid{Y0}{Y}}
-      %  \strdsidelabel{Y}{Y}{}
+        \strdsidelabel{Y}{Y}{}
      %   \strdsidelabel{X2}{}{X'}
-     %   \strdsidelabel{X3}{}{X'}
+        \strdsidelabel{X3}{}{X'}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdevaluation{\strdorigin}{E}
     }
 }
 \end{document}
