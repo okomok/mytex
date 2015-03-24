@@ -1,0 +1,87 @@
+\documentclass{article}
+\usepackage{strd,cat}
+
+\begin{document}
+
+% opposite enriched category
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{AB} \strdroadlabel{AB}{A}{B}
+        \strdstartlabel{AB}{\mathcal{A}^{\operatorname{op}}}
+    } \mydefeq
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{BA} \strdroadlabel{BA}{B}{A}
+        \strdstartlabel{BA}{\mathcal{A}}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{AC} \strdroadlabel{AC}{A}{C}
+        \strdstartlabel{AC}{\mathcal{A}^{\operatorname{op}}}
+        \strdroad{left}{AC}{AB} \strdroadlabel{AB}{}{B}
+        \strdroad{right}{AC}{BC}
+      %  \strddotlabel{AC End}
+    } \mydefeq
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{CA} \strdroadlabel{CA}{C}{A}
+        \strdstartlabel{CA}{\mathcal{A}}
+        \strdyscale{0.5}{
+            \strdroadx{subset}{CA}{CB}
+        }
+      %  \strddotlabel{CA End}
+        \strdroadx{right}{CB}{CB2} \strdroadlabel{CB2}{C}{B}
+        \strdyscale{0.5}{\strdroadx{supset}{CA}{BA}}
+        \strdroadx{left}{BA}{BA2} \strdroadlabel{BA2}{B}{A}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{AA} \strdroadlabel{AA}{}{A}
+        \strdstartlabel{AA}{\mathcal{A}^{\operatorname{op}}}
+        \strddeadend{AA} 
+    } \mydefeq
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{AA} \strdroadlabel{AA}{}{A}
+        \strdstartlabel{AA}{\mathcal{A}}
+        \strddeadend{AA} 
+    }
+}
+
+% opposite enriched functor
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{tatb} \strdroadlabel{tatb}{\catop{T}A}{\catop{T}B}
+        \strdcelllabel{tatb End}{\catop{T}}
+        \strdroad{mid}{tatb}{AB} \strdroadlabel{AB}{A}{B}
+        \strdstartlabel{tatb}{\catop{\mathcal{B}}}
+        \strdendlabel{AB}{\catop{\mathcal{A}}}
+    } \mydefeq
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{TBTA} \strdroadlabel{TBTA}{TB}{TA}
+        \strdcelllabel{TBTA End}{T}
+        \strdroad{mid}{TBTA}{BA} \strdroadlabel{BA}{B}{A} 
+        \strdstartlabel{TBTA}{\mathcal{B}}
+        \strdendlabel{BA}{\mathcal{A}}
+    }
+}
+
+% opposite natural transformation
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{SATA} \strdroadlabel{SATA}{\catop{S}A}{\catop{T}A}
+        \strdcelllabel{SATA End}{\catop{\alpha}}
+        \strdstartlabel{SATA}{\catop{\mathcal{B}}}
+    } \mydefeq
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{TASA} \strdroadlabel{TASA}{TA}{SA}
+        \strdcelllabel{TASA End}{\alpha}
+        \strdstartlabel{TASA}{\mathcal{B}}
+    }
+}
+
+\end{document}
