@@ -1,0 +1,136 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage{pgf}
+
+\begin{document}
+
+\myin{preview}{
+My pgf version is: \pgfversion
+}
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdyscale{2}{
+            \strdroadx{mid}{\strdorigin}{U}
+            \strdroadlabel{U}{X}{Y}
+        }
+    } \mydefeq
+    \strdpicturein{gathered}{
+        \strdyscale{2}{
+            \strdmid{\strdorigin}{U}
+            \strdstartlabel{U}{[X,Y]}
+        }
+    }
+}
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroadx{mid}{\strdorigin}{U} \strdroadlabel{U}{Y}{Z}
+        \strdroadrshift{U}{U0}
+        \strdyscale{1.5}{
+            \strdmid{U0}{U2} \strdsidelabel{U2}{}{Z}
+            \strdleft{U2}{L} \strdsidelabel{L}{Y}{}
+            \strdright{U2}{R} \strdsidelabel{R}{}{X}
+            \strdscale{2}{2}{\strdbij{U0}{Box}}
+        }
+        \strdmid{R}{R2} \strdsidelabel{R2}{}{X}
+        \strdcelllabel{U2 End}{f}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdmid{\strdorigin}{U} \strdsidelabel{U}{}{Z}
+        \strdroadlshift{U}{U0}
+        \strdyscale{1.5}{
+            \strdroad{mid}{U0}{U2} \strdroadlabel{U2}{Y}{Z}
+            \strdright{U2}{R} \strdsidelabel{R}{}{X}
+            \strdscale{2}{2}{\strdbij{U0}{Box}}
+        }
+        \strdmid{R}{R2} \strdsidelabel{R2}{}{X}
+        \strdcelllabel{U2 End}{g}
+        \strdlshift{Box}{Y0}
+        \strdmid{Y0}{Y} \strdsidelabel{Y}{Y}{}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdmid{\strdorigin}{U} \strdsidelabel{U}{}{Z}
+        \strdroadlshift{U}{U0}
+        \strdleft{U}{L} \strdsidelabel{L}{Y}{}
+        \strdroad{right}{U0}{R} \strdroadlabel{R}{Y}{Z}
+        \strdcelllabel{U End}{\epsilon}
+    } \mydefeq
+    \strdpicturein{gathered}{
+        \strdmid{\strdorigin}{U} \strdsidelabel{U}{}{Z}
+        \strdroadlshift{U}{U0}
+        \strdxscale{1.5}{\strdlbij{U0}{Box}}
+        \strdxscale{1.5}{\strdrbij{U0}{BoxR}}
+        \strdroad{mid}{U0}{U1} \strdroadlabel{U1}{Y}{Z}
+        \strdxscale{1.5}{\strddup{Box}{BD}}
+        \strdroad{mid}{BD Right}{U2} \strdroadlabel{U2}{Y}{Z}
+        \strdmid{BD Left}{L} \strdsidelabel{L}{Y}{}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdmid{\strdorigin}{Z'}
+        \strdleft{Z'}{ZB}
+        \strdright{Z'}{X'}
+        \strdcelllabel{Z' End}{h}
+    } =
+    \strdpicturein{gathered}{
+        \strdmid{\strdorigin}{U}
+        \strdcelllabel{U End}{\epsilon}
+        \strdleft{U}{Z}
+        \strdroad{right}{U}{ZZ'}
+        \strdroadrshift{ZZ'}{ZZ'S}
+        \strdmid{ZZ'S}{Z'}
+        \strdleft{Z'}{ZB}
+        \strdright{Z'}{X'}
+        \strdmid{X'}{X'2}
+        \strdcelllabel{Z' End}{h}
+        \strdscale{1.5}{2}{\strdbij{ZZ'S}{Box}}
+        \strdyscale{3}{\strdmid{Z}{Z2}}
+    } 
+}
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdmid{\strdorigin}{Z}% \strdsidelabel{Z}{}{Z}
+        \strdroadlshift{Z}{ZS}
+        \strdroad{mid}{ZS}{YZ} %\strdroadlabel{YZ}{Y}{Z}
+
+        \strdcelllabel{YZ End}{g}
+        \strdright{YZ}{X}% \strdsidelabel{X Corner}{}{X}
+        \strdmid{X}{X2}
+        \strdcelllabel{X2 End}{h}
+        \strdmid{X2}{X3}
+        \strdscale{2}{2}{\strdbij{ZS}{Box}}
+        \strdlshift{Box}{Y0}
+        \strdyscale{2}{\strdmid{Y0}{Y}}
+     %   \strdsidelabel{Y}{Y}{}
+     %   \strdsidelabel{X3}{}{X'}
+     %   \strdsidelabel{X2}{}{X'}
+    } =
+    \strdpicturein{gathered}{
+        \strdmid{\strdorigin}{Z}% \strdsidelabel{Z}{}{Z}
+        \strdroadlshift{Z}{ZS}
+        \strdroad{mid}{ZS}{YZ}% \strdroadlabel{YZ}{Y}{Z}
+
+        \strdcelllabel{YZ End}{g}
+        \strdright{YZ}{X}% \strdsidelabel{X Corner}{}{X}
+        \strdcelllabel{X End}{h}
+        \strdmid{X}{X2}
+        \strdmid{X2}{X3}
+        \strdscale{2}{3}{\strdbij{ZS}{Box}}
+        \strdlshift{Box}{Y0}
+        \strdyscale{1}{\strdmid{Y0}{Y}}
+      %  \strdsidelabel{Y}{Y}{}
+     %   \strdsidelabel{X2}{}{X'}
+     %   \strdsidelabel{X3}{}{X'}
+    }
+}
+\end{document}

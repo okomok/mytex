@@ -11,7 +11,6 @@
 % no transparent color?
 \tikzset{strd celllabel/.style={font=\small,rounded rectangle,very thin,solid,rounded corners=0pt,rounded rectangle arc length=90,draw,fill=white,inner sep=1.2pt}}
 \tikzset{strd linelabel/.style={font=\scriptsize,inner sep=0.2pt,strd textvaligned}}
-\tikzset{strd doublelinelabel/.style={font=\tiny,inner sep=0.1pt,strd textvaligned}}
 \tikzset{strd endlabel/.style={font=\small,inner sep=1pt,strd textvaligned}}
 \tikzset{strd valigned/.style={baseline={([yshift=-0.5ex]current bounding box.center)}}}
 \tikzset{strd textvaligned/.style={text height=1.5ex,text depth=0.25ex}}
@@ -24,19 +23,37 @@
 \tikzset{-<-/.style={decoration={markings,mark=at position .5 with {\arrow{<}}},postaction={decorate}}}
 \tikzset{nomorepostaction/.code={\let\tikz@postactions\pgfutil@empty}}
 
+
+% layers
+%   they reset surrounding line styles!
+
+\pgfdeclarelayer{strd roadlayer}
+\pgfdeclarelayer{strd celllayer}
+\pgfdeclarelayer{strd borderlayer}
+\pgfsetlayers{background,main,strd roadlayer,strd celllayer,strd borderlayer}
+
+\newcommand{\strdonlayer}[2]{%
+    \begin{pgfonlayer}{#1}
+        #2
+    \end{pgfonlayer}
+    % temporary workaround
+    \pgfsetlinewidth{0.2pt}%
+}
+
+
 % environmentals 
 
-\newcommand{\strd}[1]{%
+\newcommand{\strdpicture}[1]{%
     \begin{tikzpicture}[strd picture]
         \strddeclorigin
         #1;
     \end{tikzpicture}%
 }
 
-\newcommand{\strdin}[2]{%
+\newcommand{\strdpicturein}[2]{%
     \begin{#1}
         \!
-        \strd{#2}
+        \strdpicture{#2}
     \end{#1}%
 }
 
@@ -76,10 +93,11 @@
 
 \newcommand{\strdleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-0.4,-0.2)$) {};
+    \node[strd coord] (#2 Corner) at ($(#1 End)+(-0.4,-0.2)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-0.4,-0.35)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(-0.4,-0.5)$) {};
     \draw[strd draw]{
-        (#2 Start) -- (#2) -- (#2 End)
+        (#2 Start) -- (#2 Corner) -- (#2 End)
     };%
 }
 \newcommand{\strdright}[2]{\strdflip{\strdleft{#1}{#2}}}
@@ -95,10 +113,11 @@
 
 \newcommand{\strdunleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(0,-0.3)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(0,-0.15)$) {};
+    \node[strd coord] (#2 Corner) at ($(#1 End)+(0,-0.3)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(0.4,-0.5)$) {};
     \draw[strd draw]{
-        (#2 Start) -- (#2) -- (#2 End)
+        (#2 Start) -- (#2 Corner) -- (#2 End)
     };%
 }
 \newcommand{\strdunright}[2]{\strdflip{\strdunleft{#1}{#2}}}
@@ -149,14 +168,12 @@
 
 % square strings
 
-% todo: strdhalfsqsubset?
-
 \newcommand{\strdsqsubset}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-\strdxunit,0)$) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-\strdxunit,-\strdhalfyunit)$) {};
-    \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-\strdxunit,-\strdyunit)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(0,-\strdyunit)$) {};
+    \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-0.4,0)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-0.4,-0.2)$) {};
+    \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-0.4,-0.5)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.5)$) {};
     \draw[strd draw]{
         (#2 Start) -- (#2 StartCorner) -- (#2 EndCorner) -- (#2 End)
     };%
@@ -178,7 +195,9 @@
 
 % order matters; pgfonlayer would reset path styles.
 \newcommand{\strdcelllabel}[2]{%
-    \node[strd celllabel] at (#1) {#2};%
+    \strdonlayer{strd celllayer}{
+        \node[strd celllabel] at (#1) {#2};
+    }% 
 }
 
 \newcommand{\strdsidelabel}[3]{%
@@ -222,18 +241,36 @@
 \newcommand{\strdpathis}[2]{\strdscope{every path/.style=#1}{#2}}
 \newcommand{\strdnodeis}[2]{\strdscope{every node/.append style=#1}{#2}}
 
-
-% category-theoric strings
-
-\tikzset{strd bijection/.style={solid,thin,rounded corners=0pt}}
-\tikzset{strd mapping/.style={rounded corners=2pt}}
-\newcommand{\strdbijection}[2]{\strdpathis{strd bijection}{\strdsquare{#1}{#2}}}
 \newcommand{\strdimplicit}[1]{\strdpathis{densely dotted}{#1}}
+
+
+% border strings
+
+\tikzset{strd bij/.style={solid,thin,rounded corners=0pt}}
+\tikzset{strd mapping/.style={rounded corners=2pt}}
+
+\newcommand{\strdlbij}[2]{%
+    \strdonlayer{strd borderlayer}{
+        \strdpathis{strd bij}{\strdsqsubset{#1}{#2}}
+    }%
+}
+
+\newcommand{\strdrbij}[2]{%
+    \strdonlayer{strd borderlayer}{
+        \strdpathis{strd bij}{\strdsqsupset{#1}{#2}}
+    }%
+}
+
+\newcommand{\strdbij}[2]{%
+    \strdonlayer{strd borderlayer}{
+        \strdpathis{strd bij}{\strdsquare{#1}{#2}}
+    }%
+}
 
 
 % category-theoric labels
 
-\tikzset{strd bijlabel/.style={font=\small,rectangle,strd bijection,draw,fill=white,inner sep=1.2pt}}
+\tikzset{strd bijlabel/.style={font=\small,rectangle,strd bij,draw,fill=white,inner sep=1.2pt}}
 
 \newcommand{\strdbijlabel}[2]{%
     \node[strd bijlabel] at (#1) {#2};%
@@ -270,37 +307,39 @@
 \newcommand*{\strdmath}[1]{\scalebox{1.5}{\ensuremath{#1}}}
 
 
-% double strings
+% roads
 
-\tikzset{strd doublecolor/.style={gray!20}}
+\tikzset{strd roadcolor/.style={gray!20}}
+\tikzset{strd roadbase/.style={line width=3.05pt}}
+\tikzset{strd roadpave/.style={line width=2.65pt,shorten >= -0.1pt,shorten <= -0.1pt,strd roadcolor}}
 
-% prefer background; other layers would reset surrounding styles...
-\newcommand{\strdinbackground}[1]{%
-    \begin{pgfonlayer}{background}
-        #1 
-    \end{pgfonlayer}%
-}
-
-\newcommand{\strddouble}[3]{%
-    \strdinbackground{
-        \strdscope{line width=2.84pt}{\csuse{strd#1}{#2}{#3}}
-    }
-    \strdscope{line width=2.44pt,shorten >= -0.1pt,shorten <= -0.1pt,strd doublecolor}{\csuse{strd#1}{#2}{#3 White}}%
-}
-
-\newcommand{\strddoublex}[3]{%
-    \strdscope{line width=2.84pt}{\csuse{strd#1}{#2}{#3}}
-    \strdscope{line width=2.44pt,shorten >= -0.1pt,shorten <= -0.1pt,strd doublecolor}{\csuse{strd#1}{#2}{#3 White}}%
-}
-
-\newcommand{\strddoubleend}[1]{%
-    \strdscope{strd picture}{
-        \strdxscale{0.25}{\strdminus{#1}{#1 End Label}}
+\newcommand{\strdroad}[3]{%
+    \strdscope{strd roadbase}{\csuse{strd#1}{#2}{#3}}
+    \strdonlayer{strd roadlayer}{
+        \strdscope{strd roadpave}{\csuse{strd#1}{#2}{#3 Road}}
     }
 }
 
-\newcommand{\strddsidelabel}[3]{%
-    \node[strd linelabel,left,xshift=-1pt] at (#1) {#2};
-    \node[strd linelabel,right,xshift=1pt] at (#1) {#3};%
+\newcommand{\strdroadx}[3]{%
+    \strdscope{strd roadbase}{\csuse{strd#1}{#2}{#3}}
+    \strdscope{strd roadpave}{\csuse{strd#1}{#2}{#3 Road}}%
 }
+
+\newcommand{\strddeadend}[1]{%
+    \draw[strd draw,line width=0.2pt]{
+        ($(#1 End)+(-0.05,0)$) -- ($(#1 End)+(0.05,0)$)
+    };%
+}
+
+\newcommand{\strdroadlabel}[3]{%
+    \node[strd linelabel,left,xshift=-1.5pt] at (#1) {#2};
+    \node[strd linelabel,right,xshift=1.5pt] at (#1) {#3};%
+}
+
+\newcommand{\strdroadlshift}[2]{%
+    \node[strd coord] (#2 Start) at ($(#1 End)+(-0.05,0)$) {};
+    \node[strd coord] (#2) at (#2 Start) {};
+    \node[strd coord] (#2 End) at (#2 Start) {};%
+}
+\newcommand{\strdroadrshift}[2]{\strdflip{\strdroadlshift{#1}{#2}}}
 
