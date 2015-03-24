@@ -1,0 +1,94 @@
+\documentclass{article}
+\usepackage{strd}
+
+\begin{document}
+
+% enriched natural transformation
+\myinn{preview}{math}{
+    \left(
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{tasa} \strdroadlabel{tasa}{TA}{SA} \strdcelllabel{tasa End}{\alpha_A}
+        \strdstartlabel{tasa}{\mathcal{B}}
+    }
+    \right) _ {\!\!\!A \in \mathcal{A}}
+}
+
+% enriched naturality
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{tasb} \strdroadlabel{tasb}{TA}{SB} \strdstartlabel{tasb}{\mathcal{B}}
+            
+        \strdroad{left}{tasb}{tatb} \strdroadlabel{tatb}{}{TB} \strdcelllabel{tatb End}{T}
+        \strdroad{mid}{tatb}{ab} \strdroadlabel{ab}{A}{B} \strdendlabel{ab}{\mathcal{A}}
+        \strdroad{right}{tasb}{tbsb} \strdroadlabel{tbsb}{}{} \strdcelllabel{tbsb End}{\alpha}
+    }
+    =
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{tasb} \strdroadlabel{tasb}{TA}{SB}
+            \strdstartlabel{tasb}{\mathcal{B}} 
+            \strdscale{1}{1}{\strdroad{left}{tasb}{tasa}} \strdroadlabel{tasa}{}{} \strdcelllabel{tasa End}{\alpha}
+        \strdroad{right}{tasb}{sasb} \strdroadlabel{sasb}{SA}{} \strdcelllabel{sasb End}{S}
+        \strdroad{mid}{sasb}{ab} \strdroadlabel{ab}{A}{B} \strdendlabel{ab}{\mathcal{A}}
+    }
+}
+
+% identity enriched natural transformation
+\myinn{preview}{math}{
+    \strdfamily{A \in \mathcal{A}}{
+        \strdpicturein{gathered}{
+            \strdroad{mid}{\strdorigin}{tata} \strdroadlabel{tata}{TA}{TA} \strdcelllabel{tata End}{1}
+            \strdstartlabel{tata}{\mathcal{B}}
+        } \mydefeq
+        \strdpicturein{gathered}{
+            \strdroad{mid}{\strdorigin}{tata} \strdroadlabel{tata}{}{TA} 
+            \strdstartlabel{tata}{\mathcal{B}}
+            \strddeadend{tata}
+        }
+    }
+}
+
+% vertical composition
+\myinn{preview}{math}{
+    \strdfamily{A \in \mathcal{A}}{
+        \strdpicturein{gathered}{
+            \strdroad{mid}{\strdorigin}{tara} \strdroadlabel{tara}{TA}{RA} \strdstartlabel{tara}{\mathcal{B}}
+            \strdcelllabel{tara End}{\beta \cdot \alpha}
+        } \mydefeq
+        \strdpicturein{gathered}{
+            \strdroad{mid}{\strdorigin}{tara} \strdroadlabel{tara}{TA}{RA} \strdstartlabel{tara}{\mathcal{B}}
+            
+            \strdroad{left}{tara}{tasa} \strdroadlabel{tasa}{}{SA} \strdcelllabel{tasa End}{\alpha}
+            \strdroad{right}{tara}{sara} \strdroadlabel{sara}{}{} \strdcelllabel{sara End}{\beta}
+        }
+    } 
+}
+
+% horizontal composition
+\myinn{preview}{math}{
+    \strdfamily{A \in \mathcal{A}}{
+        \strdpicturein{gathered}{
+            \strdroad{mid}{\strdorigin}{qtapsa} \strdroadlabel{qtapsa}{QTA}{PSA} \strdstartlabel{qtapsa}{\mathcal{C}}
+            \strdcelllabel{qtapsa End}{\beta \star \alpha}
+        } \mydefeq
+        \strdpicturein{gathered}{
+            \strdroad{mid}{\strdorigin}{qtapsa} \strdroadlabel{qtapsa}{QTA}{PSA} \strdstartlabel{qtapsa}{\mathcal{C}}
+            \strdxscale{1.5}{
+                \strdroad{left}{qtapsa}{qtaqsa} \strdroadlabel{qtaqsa}{}{QSA} \strdcelllabel{qtaqsa End}{Q}
+                \strdroad{right}{qtapsa}{qsapsa} \strdroadlabel{qsapsa}{}{} \strdcelllabel{qsapsa End}{\beta}
+            }
+            \strdroad{mid}{qtaqsa}{tasa} \strdroadlabel{tasa}{TA}{SA} \strdcelllabel{tasa End}{\alpha}
+            
+        } =
+        \strdpicturein{gathered}{
+            \strdroad{mid}{\strdorigin}{qtapsa} \strdroadlabel{qtapsa}{QTA}{PSA} \strdstartlabel{qtapsa}{\mathcal{C}}
+            \strdxscale{1.5}{
+                \strdroad{left}{qtapsa}{qtapta} \strdroadlabel{qtapta}{}{} \strdcelllabel{qtapta End}{\beta}
+                \strdroad{right}{qtapsa}{ptapsa} \strdroadlabel{ptapsa}{PTA}{} \strdcelllabel{ptapsa End}{P}
+            }
+            \strdroad{mid}{ptapsa}{tasa} \strdroadlabel{tasa}{TA}{SA} \strdcelllabel{tasa End}{\alpha}
+            
+        }
+    }
+}
+
+\end{document}

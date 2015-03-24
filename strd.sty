@@ -93,9 +93,9 @@
 
 \newcommand{\strdleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2 Corner) at ($(#1 End)+(-0.4,-0.2)$) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-0.4,-0.35)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(-0.4,-0.5)$) {};
+    \node[strd coord] (#2 Corner) at ($(#1 End)+(-0.5,-0.3)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-0.5,-0.4)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(-0.5,-0.8)$) {};
     \draw[strd draw]{
         (#2 Start) -- (#2 Corner) -- (#2 End)
     };%
@@ -104,8 +104,8 @@
 
 \newcommand{\strdmid}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(0,-0.25)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.5)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(0,-0.4)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.8)$) {};
     \draw[strd draw]{
         (#2 Start) -- (#2 End)
     };%
@@ -113,9 +113,9 @@
 
 \newcommand{\strdunleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(0,-0.15)$) {};
-    \node[strd coord] (#2 Corner) at ($(#1 End)+(0,-0.3)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(0.4,-0.5)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(0,-0.4)$) {};
+    \node[strd coord] (#2 Corner) at ($(#1 End)+(0,-0.5)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(0.5,-0.8)$) {};
     \draw[strd draw]{
         (#2 Start) -- (#2 Corner) -- (#2 End)
     };%
@@ -130,8 +130,8 @@
 
 \newcommand{\strdlminus}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-0.2,0)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(-0.4,0)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-0.25,0)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(-0.5,0)$) {};
     \draw[strd draw]{
         (#2 Start) -- (#2 End)
     };%
@@ -170,10 +170,10 @@
 
 \newcommand{\strdsqsubset}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-0.4,0)$) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-0.4,-0.2)$) {};
-    \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-0.4,-0.5)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.5)$) {};
+    \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-0.5,0)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-0.5,-0.4)$) {};
+    \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-0.5,-0.8)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.8)$) {};
     \draw[strd draw]{
         (#2 Start) -- (#2 StartCorner) -- (#2 EndCorner) -- (#2 End)
     };%
@@ -333,7 +333,7 @@
 
 \newcommand{\strddeadend}[1]{%
     \strdonlayer{strd borderlayer}{
-        \draw[strd draw,line width=0.2pt]{
+        \draw[strd draw,line width=0.3pt]{
             ($(#1 End)+(-1.525pt,0)$) -- ($(#1 End)+(1.525pt,0)$)
         };
     }%

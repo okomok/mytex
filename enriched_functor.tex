@@ -4,182 +4,116 @@
 \begin{document}
 
 % enriched functor
-\strdpreview{
-    \left(
-    \strdgathered{
-        \strdline{\strdorigin}{tatb} \strdlinelabel{tatb}{TA}{TB} \strdcelllabel{tatb End}{T_{A,B}}
-        \strdline{tatb}{ab} \strdlinelabel{ab}{A}{B}
-        \strdstartlabel{tatb}{\mathcal{B}}
-        \strdendlabel{ab}{\mathcal{A}}
+\myinn{preview}{math}{
+    \strdfamily{A,B \in \mathcal{A}}{
+        \strdpicturein{gathered}{
+            \strdyscale{1.4}{
+            \strdroad{mid}{\strdorigin}{tatb} \strdroadlabel{$(tatb)+(0,0.00)$}{TA}{TB} \strdcelllabel{tatb End}{T_{AB}}
+            \strdroad{mid}{tatb}{ab} \strdroadlabel{$(ab)+(0,-0.00)$}{A}{B}
+            \strdstartlabel{tatb}{\mathcal{B}}
+            \strdendlabel{ab}{\mathcal{A}}
+        }
+        }
     }
-    \right)_{\!\!\!A,B \in \mathcal{A}} 
 }
 
 % enriched functoriality
-\strdpreview{
-    \strdgathered{
-        \strdline{\strdorigin}{tatc} \strdlinelabel{tatc}{TA}{TC} \strdcelllabel{tatc End}{T}
-        \strdline{tatc}{ac} \strdlinelabel{ac}{A}{C} \strdjunc{ac End}
-        \strdleft{ac}{ab} \strdlinelabel{ab}{A}{B}
-        \strdright{ac}{bc} \strdlinelabel{bc}{B}{C}
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdyscale{1.4}{
+        \strdroad{mid}{\strdorigin}{tatc} \strdroadlabel{tatc}{TA}{TC} \strdcelllabel{tatc End}{T}
+        \strdroad{mid}{tatc}{ac} \strdroadlabel{ac}{A}{C} 
+        \strdroad{left}{ac}{ab} \strdroadlabel{ab}{}{B}
+        \strdroad{right}{ac}{bc}% \strdroadlabel{bc}{B}{C}
         \strdstartlabel{tatc}{\mathcal{B}}
         \strdendlabel{ab}{\mathcal{A}}
         \strdendlabel{bc}{\mathcal{A}}
     }
+    }
     =
-    \strdgathered{
-        \strdline{\strdorigin}{tatc} \strdlinelabel{tatc}{TA}{TC} \strdjunc{tatb End}
-        \strdleft{tatc}{tatb} \strdlinelabel{tatb}{TA}{TB} \strdcelllabel{tatb End}{T}
-        \strdline{tatb}{ab} \strdlinelabel{ab}{A}{B}
+    \strdpicturein{gathered}{
+        \strdyscale{1.4}{
+        \strdroad{mid}{\strdorigin}{tatc} \strdroadlabel{tatc}{TA}{TC}
+        \strdroad{left}{tatc}{tatb} \strdroadlabel{$(tatb)+(0.05,0.08)$}{}{TB} \strdcelllabel{tatb End}{T}
+        \strdroad{mid}{tatb}{ab} \strdroadlabel{ab}{A}{B}
         \strdstartlabel{tatc}{\mathcal{B}}
         \strdendlabel{ab}{\mathcal{A}}
-        \strdright{tatc}{tbtc} \strdlinelabel{tbtc}{TB}{TC} \strdcelllabel{tbtc End}{T}
-        \strdline{tbtc}{bc} \strdlinelabel{bc}{B}{C}
+        \strdroad{right}{tatc}{tbtc}% \strdroadlabel{tbtc}{TB}{TC}
+        \strdcelllabel{tbtc End}{T}
+        \strdroad{mid}{tbtc}{bc} \strdroadlabel{bc}{B}{C}
         \strdendlabel{bc}{\mathcal{A}}
+    }
     }
 }
-\strdpreview{
-    \strdgathered{
-        \strdline{\strdorigin}{tata} \strdlinelabel{tata}{TA}{TA} \strdcelllabel{tata End}{T}
-        \strdline{tata}{aa} \strdlinelabel{aa}{A}{A} \strdjunc{aa End}
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdyscale{1.4}{
+        \strdroad{mid}{\strdorigin}{tata} \strdroadlabel{tata}{TA}{TA} \strdcelllabel{tata End}{T}
+        \strdroad{mid}{tata}{aa} \strdroadlabel{aa}{A}{A} 
         \strdstartlabel{tata}{\mathcal{B}}
+        \strddeadend{aa}
+    }
     }
     =
-    \strdgathered{
-        \strdline{\strdorigin}{tata} \strdlinelabel{tata}{TA}{TA} \strdjunc{tata End}
+    \strdpicturein{gathered}{
+        \strdyscale{1.4}{
+        \strdroad{mid}{\strdorigin}{tata} \strdroadlabel{tata}{TA}{TA}
         \strdstartlabel{tata}{\mathcal{B}}
+        \strddeadend{tata}
+    }
     }
 }
 
 % identity functor
-\strdpreview{
-    \left(
-    \strdgathered{
-        \strdline{\strdorigin}{ab} \strdlinelabel{ab}{A}{B} \strdstartlabel{ab}{\mathcal{A}}
-        \strdline{ab}{ab2} \strdlinelabel{ab2}{A}{B} \strdcelllabel{ab2 Start}{1}
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdyscale{1.4}{
+        \strdroad{mid}{\strdorigin}{ab} \strdroadlabel{ab}{A}{B} \strdstartlabel{ab}{\mathcal{A}}
+        \strdroad{mid}{ab}{ab2} \strdroadlabel{ab2}{A}{B} \strdcelllabel{ab2 Start}{1}
         \strdendlabel{ab2}{\mathcal{A}}
-    } \strddefeq
-    \strdgathered{
-        \strdline{\strdorigin}{ab} \strdlinelabel{ab}{A}{B} \strdstartlabel{ab}{\mathcal{A}}
     }
-    \right)_{\!\!\!A,B \in \mathcal{A}} 
+    } \mydefeq
+    \strdpicturein{gathered}{
+        \strdyscale{1.4}{
+        \strdroad{mid}{\strdorigin}{ab} \strdroadlabel{ab}{A}{B} \strdstartlabel{ab}{\mathcal{A}}
+    }
+    }
 }
 
 % composite functor
-\strdpreview{
-    \left(
-    \strdgathered{
-        \strdline{\strdorigin}{qtaqtb} \strdlinelabel{qtaqtb}{QTA}{QTB} \strdstartlabel{qtaqtb}{\mathcal{C}}
-        \strdline{qtaqtb}{ab} \strdlinelabel{ab}{A}{B} \strdcelllabel{ab Start}{QT}
-        \strdendlabel{ab}{\mathcal{A}}
-    } \strddefeq
-    \strdgathered{
-        \strdline{\strdorigin}{qtaqtb} \strdlinelabel{qtaqtb}{QTA}{QTB} \strdstartlabel{qtaqtb}{\mathcal{C}}
-        \strdline{qtaqtb}{tatb} \strdlinelabel{tatb}{TA}{TB} \strdcelllabel{tatb Start}{Q}
-        \strdline{tatb}{ab} \strdlinelabel{ab}{A}{B} \strdcelllabel{ab Start}{T}
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdyscale{1.4}{
+        \strdroad{mid}{\strdorigin}{qtaqtb} \strdroadlabel{qtaqtb}{QTA}{QTB} \strdstartlabel{qtaqtb}{\mathcal{C}}
+        \strdroad{mid}{qtaqtb}{ab} \strdroadlabel{ab}{A}{B} \strdcelllabel{ab Start}{QT}
         \strdendlabel{ab}{\mathcal{A}}
     }
-    \right)_{\!\!\!A,B \in \mathcal{A}} 
+    } \mydefeq
+    \strdpicturein{gathered}{
+        \strdyscale{1.4}{
+        \strdroad{mid}{\strdorigin}{qtaqtb} \strdroadlabel{qtaqtb}{QTA}{QTB} \strdstartlabel{qtaqtb}{\mathcal{C}}
+        \strdroad{mid}{qtaqtb}{tatb} \strdroadlabel{tatb}{TA}{TB} \strdcelllabel{tatb Start}{Q}
+        \strdroad{mid}{tatb}{ab} \strdroadlabel{ab}{A}{B} \strdcelllabel{ab Start}{T}
+        \strdendlabel{ab}{\mathcal{A}}
+    }
+    }
 }
 
 % underlying 1-functor
-\strdpreview{
-    \strdgathered{
-        \strdline{\strdorigin}{ab} \strdlinelabel{ab}{A}{B} \strdcelllabel{ab End}{f}
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdyscale{1.4}{
+        \strdroad{mid}{\strdorigin}{ab} \strdroadlabel{ab}{A}{B} \strdcelllabel{ab End}{f}
         \strdstartlabel{ab}{\mathcal{A}}
     }
-    \xmapsto{T_0}
-    \strdgathered{
-        \strdline{\strdorigin}{tatb} \strdlinelabel{tatb}{TA}{TB} \strdcelllabel{tatb End}{T}
+    }
+    \overset{T_0}{\mapsto}
+    \strdpicturein{gathered}{
+        \strdyscale{1.4}{
+        \strdroad{mid}{\strdorigin}{tatb} \strdroadlabel{tatb}{TA}{TB} \strdcelllabel{tatb End}{T}
         \strdstartlabel{tatb}{\mathcal{B}}
-        \strdline{tatb}{ab} \strdlinelabel{ab}{A}{B} \strdcelllabel{ab End}{f}
+        \strdroad{mid}{tatb}{ab} \strdroadlabel{ab}{A}{B} \strdcelllabel{ab End}{f}
     }
-}
-
-% enriched natural transformation
-\strdpreview{
-    \left(
-    \strdgathered{
-        \strdline{\strdorigin}{tasa} \strdlinelabel{tasa}{TA}{SA} \strdcelllabel{tasa End}{\alpha_A}
-        \strdstartlabel{tasa}{\mathcal{B}}
-    }
-    \right) _ {\!\!\!A \in \mathcal{A}}
-}
-
-% enriched naturality
-\strdpreview{
-    \strdgathered{
-        \strdline{\strdorigin}{tasb} \strdlinelabel{tasb}{TA}{SB} \strdstartlabel{tasb}{\mathcal{B}}
-            \strdjunc{tasb End}
-        \strdleft{tasb}{tatb} \strdlinelabel{tatb}{TA}{TB} \strdcelllabel{tatb End}{T}
-        \strdline{tatb}{ab} \strdlinelabel{ab}{A}{B} \strdendlabel{ab}{\mathcal{A}}
-        \strdright{tasb}{tbsb} \strdlinelabel{tbsb}{TB}{SB} \strdcelllabel{tbsb End}{\alpha}
-    }
-    =
-    \strdgathered{
-        \strdline{\strdorigin}{tasb} \strdlinelabel{tasb}{TA}{SB}
-            \strdstartlabel{tasb}{\mathcal{B}} \strdjunc{tasb End}
-            \strdscale{1}{1}{\strdleft{tasb}{tasa}} \strdlinelabel{tasa}{TA}{SA} \strdcelllabel{tasa End}{\alpha}
-        \strdright{tasb}{sasb} \strdlinelabel{sasb}{SA}{SB} \strdcelllabel{sasb End}{S}
-        \strdline{sasb}{ab} \strdlinelabel{ab}{A}{B} \strdendlabel{ab}{\mathcal{A}}
-    }
-}
-
-% identity enriched natural transformation
-\strdpreview{
-    \strdfamily{A \in \mathcal{A}}{
-        \strdgathered{
-            \strdline{\strdorigin}{tata} \strdlinelabel{tata}{TA}{TA} \strdcelllabel{tata End}{1}
-            \strdstartlabel{tata}{\mathcal{B}}
-        } \strddefeq
-        \strdgathered{
-            \strdline{\strdorigin}{tata} \strdlinelabel{tata}{TA}{TA} \strdjunc{tata End}
-            \strdstartlabel{tata}{\mathcal{B}}
-        }
-    }
-}
-
-% vertical composition
-\strdpreview{
-    \strdfamily{A \in \mathcal{A}}{
-        \strdgathered{
-            \strdline{\strdorigin}{tara} \strdlinelabel{tara}{TA}{RA} \strdstartlabel{tara}{\mathcal{B}}
-            \strdcelllabel{tara End}{\beta \cdot \alpha}
-        } \strddefeq
-        \strdgathered{
-            \strdline{\strdorigin}{tara} \strdlinelabel{tara}{TA}{RA} \strdstartlabel{tara}{\mathcal{B}}
-            \strdjunc{tara End}
-            \strdleft{tara}{tasa} \strdlinelabel{tasa}{TA}{SA} \strdcelllabel{tasa End}{\alpha}
-            \strdright{tara}{sara} \strdlinelabel{sara}{SA}{RA} \strdcelllabel{sara End}{\beta}
-        }
-    } 
-}
-
-% horizontal composition
-\strdpreview{
-    \strdfamily{A \in \mathcal{A}}{
-        \strdgathered{
-            \strdline{\strdorigin}{qtapsa} \strdlinelabel{qtapsa}{QTA}{PSA} \strdstartlabel{qtapsa}{\mathcal{C}}
-            \strdcelllabel{qtapsa End}{\beta \star \alpha}
-        } \strddefeq
-        \strdgathered{
-            \strdline{\strdorigin}{qtapsa} \strdlinelabel{qtapsa}{QTA}{PSA} \strdstartlabel{qtapsa}{\mathcal{C}}
-            \strdxscale{1.5}{
-                \strdleft{qtapsa}{qtaqsa} \strdlinelabel{qtaqsa}{QTA}{QSA} \strdcelllabel{qtaqsa End}{Q}
-                \strdright{qtapsa}{qsapsa} \strdlinelabel{qsapsa}{QSA}{PSA} \strdcelllabel{qsapsa End}{\beta}
-            }
-            \strdline{qtaqsa}{tasa} \strdlinelabel{tasa}{TA}{SA} \strdcelllabel{tasa End}{\alpha}
-            \strdjunc{qtapsa End}
-        } =
-        \strdgathered{
-            \strdline{\strdorigin}{qtapsa} \strdlinelabel{qtapsa}{QTA}{PSA} \strdstartlabel{qtapsa}{\mathcal{C}}
-            \strdxscale{1.5}{
-                \strdleft{qtapsa}{qtapta} \strdlinelabel{qtapta}{QTA}{PTA} \strdcelllabel{qtapta End}{\beta}
-                \strdright{qtapsa}{ptapsa} \strdlinelabel{ptapsa}{PTA}{PSA} \strdcelllabel{ptapsa End}{P}
-            }
-            \strdline{ptapsa}{tasa} \strdlinelabel{tasa}{TA}{SA} \strdcelllabel{tasa End}{\alpha}
-            \strdjunc{qtapsa End}
-        }
     }
 }
 
