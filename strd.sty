@@ -27,10 +27,9 @@
 % layers
 %   they reset surrounding line styles!
 
-\pgfdeclarelayer{strd roadlayer}
-\pgfdeclarelayer{strd celllayer}
-\pgfdeclarelayer{strd borderlayer}
-\pgfsetlayers{background,main,strd roadlayer,strd celllayer,strd borderlayer}
+\pgfdeclarelayer{strd pavelayer}
+\pgfdeclarelayer{strd piecelayer}
+\pgfsetlayers{background,main,strd pavelayer,strd piecelayer}
 
 \newcommand{\strdonlayer}[2]{%
     \begin{pgfonlayer}{#1}
@@ -128,7 +127,7 @@
     \node[strd coord] (#3 End) at (#2 End) {};%
 }
 
-\newcommand{\strdlminus}[2]{%
+\newcommand{\strdhleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2) at ($(#1 End)+(-0.25,0)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(-0.5,0)$) {};
@@ -136,33 +135,43 @@
         (#2 Start) -- (#2 End)
     };%
 }
-\newcommand{\strdrminus}[2]{\strdflip{\strdlminus{#1}{#2}}}
+\newcommand{\strdhright}[2]{\strdflip{\strdhleft{#1}{#2}}}
 
 \newcommand{\strdminus}[2]{%
     \strdxscale{0.5}{
-        \strdlminus{#1}{#2 Left}
+        \strdhleft{#1}{#2 Left}
         \strdempty{#1}{#2}
-        \strdrminus{#1}{#2 Right}
+        \strdhright{#1}{#2 Right}
     }
 }
 
 \newcommand{\strdsubset}[2]{%
-    \strdleft{#1}{#2 Top}
-    \strdunleft{#2 Top}{#2 Bottom}
-    \strdconnect{#2 Top}{#2 Bottom}{#2}
+    \node[strd coord] (#2 Start) at (#1 End) {};
+    \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-0.5,-0.3)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-0.5,-0.4)$) {};
+    \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-0.5,-0.5)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.8)$) {};
+    \draw[strd draw]{
+        (#2 Start) parabola (#2 StartCorner) -- (#2 EndCorner) parabola[bend at end] (#2 End)
+    };%
 }
 \newcommand{\strdsupset}[2]{\strdflip{\strdsubset{#1}{#2}}}
 
-\newcommand{\strdlbag}[2]{%
-    \strdright{#1}{#2 Top}
-    \strdunleft{#2 Top}{#2 Bottom}
-    \strdconnect{#2 Top}{#2 Bottom}{#2}
+\newcommand{\strdlint}[2]{%
+    \node[strd coord] (#2 Start) at (#1 End) {};
+    \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-0.5,-0.3)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-0.5,-0.4)$) {};
+    \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-0.5,-0.5)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(-1,-0.8)$) {};
+    \draw[strd draw]{
+        (#2 Start) parabola (#2 StartCorner) -- (#2 EndCorner) parabola[bend at end] (#2 End)
+    };%
 }
-\newcommand{\strdrbag}[2]{\strdflip{\strdlbag{#1}{#2}}}
+\newcommand{\strdrint}[2]{\strdflip{\strdlint{#1}{#2}}}
 
 \newcommand{\strdjump}[2]{\strdnone{\strdmid{#1}{#2}}}
-\newcommand{\strdlshift}[2]{\strdnone{\strdlminus{#1}{#2}}}
-\newcommand{\strdrshift}[2]{\strdnone{\strdrminus{#1}{#2}}}
+\newcommand{\strdlshift}[2]{\strdnone{\strdhleft{#1}{#2}}}
+\newcommand{\strdrshift}[2]{\strdnone{\strdhright{#1}{#2}}}
 \newcommand{\strddup}[2]{\strdnone{\strdminus{#1}{#2}}}
 
 
@@ -199,7 +208,7 @@
 
 % order matters; pgfonlayer would reset path styles.
 \newcommand{\strdcelllabel}[2]{%
-    \strdonlayer{strd celllayer}{
+    \strdonlayer{strd piecelayer}{
         \node[strd celllabel] at (#1) {#2};
     }% 
 }
@@ -254,19 +263,19 @@
 \tikzset{strd mapping/.style={rounded corners=2pt}}
 
 \newcommand{\strdlbij}[2]{%
-    \strdonlayer{strd borderlayer}{
+    \strdonlayer{strd piecelayer}{
         \strdpathis{strd bij}{\strdsqsubset{#1}{#2}}
     }%
 }
 
 \newcommand{\strdrbij}[2]{%
-    \strdonlayer{strd borderlayer}{
+    \strdonlayer{strd piecelayer}{
         \strdpathis{strd bij}{\strdsqsupset{#1}{#2}}
     }%
 }
 
 \newcommand{\strdbij}[2]{%
-    \strdonlayer{strd borderlayer}{
+    \strdonlayer{strd piecelayer}{
         \strdpathis{strd bij}{\strdsquare{#1}{#2}}
     }%
 }
@@ -277,7 +286,7 @@
 \tikzset{strd bijlabel/.style={font=\small,rectangle,strd bij,draw,fill=white,inner sep=1.2pt}}
 
 \newcommand{\strdbijlabel}[2]{%
-    \strdonlayer{strd celllayer}{
+    \strdonlayer{strd piecelayer}{
         \node[strd bijlabel] at (#1) {#2};
     }%
 }
@@ -321,18 +330,19 @@
 
 \newcommand{\strdroad}[3]{%
     \strdscope{strd roadbase}{\csuse{strd#1}{#2}{#3}}
-    \strdonlayer{strd roadlayer}{
+    \strdonlayer{strd pavelayer}{
         \strdscope{strd roadpave}{\csuse{strd#1}{#2}{#3 Road}}
     }
 }
 
-\newcommand{\strdroadx}[3]{%
+% underpass
+\newcommand{\strdroadu}[3]{%
     \strdscope{strd roadbase}{\csuse{strd#1}{#2}{#3}}
     \strdscope{strd roadpave}{\csuse{strd#1}{#2}{#3 Road}}%
 }
 
 \newcommand{\strddeadend}[1]{%
-    \strdonlayer{strd borderlayer}{
+    \strdonlayer{strd piecelayer}{
         \draw[strd draw,line width=0.4pt]{
             ($(#1 End)+(-1.525pt,0)$) -- ($(#1 End)+(1.525pt,0)$)
         };
