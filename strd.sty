@@ -254,13 +254,14 @@
 \newcommand{\strdpathis}[2]{\strdscope{every path/.style=#1}{#2}}
 \newcommand{\strdnodeis}[2]{\strdscope{every node/.append style=#1}{#2}}
 
-\newcommand{\strdimplicit}[1]{\strdpathis{densely dotted}{#1}}
 
-
-% border strings
+% category-theory specific 
 
 \tikzset{strd bij/.style={solid,thin,rounded corners=0pt}}
+\tikzset{strd bijlabel/.style={font=\small,rectangle,strd bij,draw,fill=white,inner sep=1.2pt}}
 \tikzset{strd mapping/.style={rounded corners=2pt}}
+
+\newcommand{\strdimplicit}[1]{\strdpathis{densely dotted}{#1}}
 
 \newcommand{\strdlbij}[2]{%
     \strdonlayer{strd piecelayer}{
@@ -279,11 +280,6 @@
         \strdpathis{strd bij}{\strdsquare{#1}{#2}}
     }%
 }
-
-
-% category-theoric labels
-
-\tikzset{strd bijlabel/.style={font=\small,rectangle,strd bij,draw,fill=white,inner sep=1.2pt}}
 
 \newcommand{\strdbijlabel}[2]{%
     \strdonlayer{strd piecelayer}{
@@ -309,7 +305,7 @@
 
 % command combinators
 
-% remove?
+% removeme
 \newcommand{\strdlabeled}[5]{%
     \csuse{strd#1}{#2}{#4#5}
     \csuse{strd#3label}{#4#5}{#4}{#5}%
@@ -326,6 +322,7 @@
 
 \tikzset{strd roadcolor/.style={gray!20}}
 \tikzset{strd roadbase/.style={line width=3.05pt}}
+                                                 % overwrite unneeded end color; slightly noisy fix
 \tikzset{strd roadpave/.style={line width=2.65pt,shorten >= -0.2pt,shorten <= -0.2pt,strd roadcolor}}
 
 \newcommand{\strdroad}[3]{%
@@ -361,6 +358,7 @@
 }
 \newcommand{\strdroadrshift}[2]{\strdflip{\strdroadlshift{#1}{#2}}}
 
+% removeme
 \newcommand{\strdevaluation}[2]{%
     \strdmid{#1}{#2 Top}
     \strdleft{#2 Top}{#2 Left}%
@@ -370,6 +368,7 @@
 
 % utilities
 
+% removeme
 \newcommand{\strdassign}[2]{%
     \global\csdef{#1}{\strdnolabels{#2}}
     #2%
