@@ -1,93 +1,60 @@
 \documentclass{article}
 \usepackage{strd,cat,my,amssymb,amsmath}
 
-removeme
-
 \begin{document}
 
-\strdpreview{\myequation{
-    \myassign{hereT}{\strdgathered{
-        \strdmid{\strdorigin}{U} \strdsidelabel{U}{T^A B}{T_{B'}A'}
+\myinn{preview}{math}{
+    \myassign{hereT}{\strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T^A B}{T_{B\myprime}A\myprime}
         \strdxscale{1.6}{
-            \strdleft{U}{L} \strdsidelabel{L}{T^A B}{T^A B'}
-            \strdright{U}{R} \strdsidelabel{R}{T_{B'}A}{T_{B'}A'}
+            \strdroad{left}{U}{L} \strdroadlabel{L}{T^A B}{T^A B\myprime}
+            \strdroad{right}{U}{R} \strdroadlabel{R}{T_{B\myprime}A}{T_{B\myprime}A\myprime}
         }
-        \strdsidelabeled{mid}{L}{B}{B'} \strdsidelabeled{mid}{R}{A}{A'}
-        \strdcelllabel{L End}{T^A} \strdcelllabel{R End}{T_{B'}}
-        \strddotlabel{U End}
+        \strdroad{mid}{L}{BB'} \strdroadlabel{BB'}{B}{B\myprime} \strdroad{mid}{R}{AA'} \strdroadlabel{AA'}{A}{A\myprime}
+        \strdcelllabel{L End}{T^A} \strdcelllabel{R End}{T_{B\myprime}}
         \strdstartlabel{U}{\mathcal{C}}
         \strdendlabel{BB'}{\mathcal{B}}
         \strdendlabel{AA'}{\mathcal{A}}
     } } =
-    \strdgathered{
-        \strdmid{\strdorigin}{U} \strdsidelabel{U}{T_B A}{T^{A'}B'}
-        \strddotlabel{U End}
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T_B A}{T^{A\myprime}B\myprime}
         \strdxscale{1.6}{
-            \strdleft{U}{L} \strdsidelabel{L}{T_B A}{T_B A'}
-            \strdright{U}{R} \strdsidelabel{R}{T^{A'}B}{T^{A'}B'}
-            \strdsidelabeled{unleft}{L}{A}{A'} \strdsidelabeled{unright}{R}{B}{B'}
-            \strdcelllabel{L End}{T_B} \strdcelllabel{R End}{T^{A'}}
-            \strdright{AA'}{AA'2} \strdsidelabel{AA'2}{A}{A'}
-            \strdleft{BB'}{BB'2} \strdsidelabel{BB'2}{B}{B'}
+            \strdroad{left}{U}{L} \strdroadlabel{L}{T_B A}{T_B A\myprime}
+            \strdroad{right}{U}{R} \strdroadlabel{R}{T^{A\myprime}B}{T^{A\myprime}B\myprime}
+            \strdroadx{unleft}{L}{AA'} \strdroadlabel{AA'}{A}{A\myprime}
+            \strdroadx{right}{AA'}{AA'2} \strdroadlabel{AA'2}{A}{A\myprime}
+            \strdroad{unright}{R}{BB'} \strdroadlabel{BB'}{B}{B\myprime}
+            \strdroad{left}{BB'}{BB'2} \strdroadlabel{BB'2}{B}{B\myprime}
             \strdstartlabel{U}{\mathcal{C}}
             \strdendlabel{BB'2}{\mathcal{B}}
             \strdendlabel{AA'2}{\mathcal{A}}
+            \strdcelllabel{L End}{T_B} \strdcelllabel{R End}{T^{A\myprime}}
         }
+    } \myeqdef
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,B)}{T(A\myprime,B\myprime)}
+        \strdroad{left}{U}{BB'} \strdroadlabel{BB'}{B}{B\myprime}
+        \strdroad{right}{U}{AA'} \strdroadlabel{AA'}{A}{A\myprime}
+        \strdstartlabel{U}{\mathcal{C}}
+        \strdendlabel{BB'}{\mathcal{B}}
+        \strdendlabel{AA'}{\mathcal{A}}
+        \strdcelllabel{U End}{T}
     }
-}}
+}
 
 
-\strdpreview{\myequation{
-    \strdgathered{
-        \strdmid{\strdorigin}{U} \strdsidelabel{U}{T(A,B)}{T(A',B')}
-        \strdsidelabeled{left}{U}{B}{B'}
-        \strdsidelabeled{right}{U}{A}{A'}
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,B)}{T(A',B')}
+        \strdroad{left}{U}{BB'} \strdroadlabel{BB'}{B}{B'}
+        \strdroad{right}{U}{AA'} \strdroadlabel{AA'}{A}{A'}
         \strdstartlabel{U}{\mathcal{C}}
         \strdendlabel{BB'}{\mathcal{B}}
         \strdendlabel{AA'}{\mathcal{A}}
         \strdcelllabel{U End}{T}
     } \mydefeq
     \hereT
-}}
+}
 
-\strdpreview{\myenv{math}{\myenv{aligned}{
-    \strdgathered{
-        \strdmid{\strdorigin}{U} \strdsidelabel{U}{T(A,B)}{T(A',B')}
-        \strdsidelabeled{left}{U}{B}{B'}
-        \strdsidelabeled{right}{U}{A}{A'}
-        \strdstartlabel{U}{\mathcal{C}}
-        \strdendlabel{BB'}{\mathcal{B}}
-        \strdendlabel{AA'}{\mathcal{A}}
-        \strdcelllabel{U End}{T}
-    } &=
-    \strdgathered{
-            \strdmid{\strdorigin}{U} \strdsidelabel{U}{T(A,B)}{T(A',B')}
-        \strdxscale{2.4}{
-            \strdleft{U}{L} \strdsidelabel{L}{T(A,B)}{T(A,B')}
-            \strdright{U}{R} \strdsidelabel{R}{T(A,B')}{T(A',B')}
-        }
-        \strdsidelabeled{mid}{L}{B}{B'} \strdsidelabeled{mid}{R}{A}{A'}
-        \strdcelllabel{L End}{T(A,\mydash)} \strdcelllabel{R End}{T(\mydash,B')}
-        \strddotlabel{U End}
-        \strdstartlabel{U}{\mathcal{C}}
-        \strdendlabel{BB'}{\mathcal{B}}
-        \strdendlabel{AA'}{\mathcal{A}}
-    } \\ &=
-    \strdgathered{
-        \strdmid{\strdorigin}{U} \strdsidelabel{U}{T(A,B)}{T(A',B')}
-        \strddotlabel{U End}
-        \strdxscale{2.4}{
-            \strdleft{U}{L} \strdsidelabel{L}{T(A,B)}{T(A',B)}
-            \strdright{U}{R} \strdsidelabel{R}{T(A',B)}{T(A',B')}
-            \strdsidelabeled{unleft}{L}{A}{A'} \strdsidelabeled{unright}{R}{B}{B'}
-            \strdcelllabel{L End}{T(\mydash,B)} \strdcelllabel{R End}{T(A',\mydash)}
-            \strdright{AA'}{AA'2} \strdsidelabel{AA'2}{A}{A'}
-            \strdleft{BB'}{BB'2} \strdsidelabel{BB'2}{B}{B'}
-            \strdstartlabel{U}{\mathcal{C}}
-            \strdendlabel{BB'2}{\mathcal{B}}
-            \strdendlabel{AA'2}{\mathcal{A}}
-        }
-    }
-}}}
 
 \end{document}

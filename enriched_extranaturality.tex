@@ -1,0 +1,101 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+
+\begin{document}
+
+\myinn{preview}{math}{
+    \strdfamily{A \in \mathcal{A}}{
+        \strdpicturein{gathered}{
+            \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{K}{T(A,A)}
+            \strdcelllabel{U End}{\beta}
+            \strdstartlabel{U}{\mathcal{B}}
+        }
+    }
+}
+
+\myinn{preview}{math}{
+    \strdfamily{A \in \mathcal{A}}{
+        \strdpicturein{gathered}{
+            \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,A)}{K}
+            \strdcelllabel{U End}{\beta}
+            \strdstartlabel{U}{\mathcal{B}}
+        }
+    }
+}
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{K}{T(A,B)}
+        \strdxscale{1.5}{
+            \strdroad{left}{U}{L} \strdroadlabel{L}{}{T(A,A)}
+            \strdroad{right}{U}{R} %\strdroadlabel{R}{T(A,A)}{T(A,B)}
+        }
+        \strdroad{mid}{R}{AB} \strdroadlabel{AB}{A}{B}
+        \strdcelllabel{L End}{\beta}
+        \strdcelllabel{R End}{T(A,\mydash)}
+        \strdstartlabel{U}{\mathcal{B}}
+    } =
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{K}{T(A,B)}
+        \strdxscale{1.5}{
+            \strdroad{left}{U}{L} \strdroadlabel{L}{}{T(B,B)}
+            \strdroad{right}{U}{R} %\strdroadlabel{R}{T(B,B)}{T(A,B)}
+        }
+        \strdroad{mid}{R}{AB} \strdroadlabel{AB}{A}{B}
+        \strdcelllabel{L End}{\beta}
+        \strdcelllabel{R End}{T(\mydash,B)}
+        \strdstartlabel{U}{\mathcal{B}}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{K}{T(A,B)}
+        \strdxscale{1.5}{
+            \strdroad{left}{U}{L} \strdroadlabel{L}{}{T(A,A)}
+            \strdroad{right}{U}{R} %\strdroadlabel{R}{T(A,A)}{T(A,B)}
+        }
+        \strdroad{left}{R}{AB0}
+        \strdroad{right}{R}{AA}
+        \strddeadend{AA} \strdroadlabel{AA}{}{A}
+        \strdcelllabel{L End}{\beta}
+        \strdcelllabel{R End}{T}
+        \strdroadlabel{AB0}{A}{B}
+      %  \strdnolabels{\strdyscale{0.5}{\strdroad{mid}{AB0}{AB}}}
+        \strdstartlabel{U}{\mathcal{B}}
+        \strdendlabel{AB0}{\mathcal{A}}
+    } =
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{K}{T(A,B)}
+        \strdxscale{1.5}{
+            \strdroad{left}{U}{L} \strdroadlabel{L}{}{T(B,B)}
+            \strdroad{right}{U}{R} %\strdroadlabel{R}{T(B,B)}{T(A,B)}
+        }
+        \strdroad{right}{R}{AB0}
+        \strdroad{left}{R}{BB}
+        \strddeadend{BB} \strdroadlabel{BB}{}{B}
+        \strdcelllabel{L End}{\beta}
+        \strdcelllabel{R End}{T}
+        \strdroadlabel{AB0}{A}{B}
+      %  \strdnolabels{\strdyscale{0.5}{\strdroad{mid}{AB0}{AB}}}
+        \strdstartlabel{U}{\mathcal{B}}
+        \strdendlabel{AB0}{\mathcal{A}}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{QK}{QT(PD,PD)}
+        \strdcelllabel{U End}{Q\beta P}
+        \strdstartlabel{U}{\mathcal{C}}
+    } \mydefeq
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{QK}{QT(PD,PD)}
+        \strdroad{mid}{U}{D} \strdroadlabel{D}{K}{T(PD,PD)}
+        \strdcelllabel{U End}{Q}
+        \strdcelllabel{D End}{\beta}
+        \strdstartlabel{U}{\mathcal{C}}
+    }
+}
+
+\end{document}

@@ -1,0 +1,154 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+
+\begin{document}
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,B,C)}{T(A\mydprime,B\mydprime,C\mydprime)}
+        \strdxscale{2.5}{
+            \strdroad{left}{U}{L} \strdroadlabel{L}{}{T(A\myprime,B\myprime,C\myprime)}
+            \strdroad{right}{U}{R} %\strdroadlabel{R}{T(A\myprime,B\myprime,C\myprime)}{T(A\mydprime,B\mydprime,C\mydprime)}
+        }
+        \strdxscale{1.5}{
+            \strdroad{left}{L}{LL} \strdroadlabel{LL}{C}{C\myprime}
+            \strdroad{mid}{L}{LM} \strdroadlabel{LM}{B}{B\myprime}
+            \strdroad{right}{L}{LR} \strdroadlabel{LR}{A}{A\myprime}
+        }
+        \strdxscale{1.5}{
+            \strdroad{left}{R}{RL} \strdroadlabel{RL}{C\myprime}{C\mydprime}
+            \strdroad{mid}{R}{RM} \strdroadlabel{RM}{B\myprime}{B\mydprime}
+            \strdroad{right}{R}{RR} \strdroadlabel{RR}{A\myprime}{A\mydprime}
+        }
+        \strdcelllabel{R End}{T}
+        \strdcelllabel{L End}{T}
+        \strdstartlabel{U}{\mathcal{D}}
+        \strdendlabel{LL}{\mathcal{C}}
+        \strdendlabel{LM}{\mathcal{B}}
+        \strdendlabel{LR}{\mathcal{A}}
+        \strdendlabel{RL}{\mathcal{C}}
+        \strdendlabel{RM}{\mathcal{B}}
+        \strdendlabel{RR}{\mathcal{A}}
+    } =
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,B,C)}{T(A\mydprime,B\mydprime,C\mydprime)}
+        \strdxscale{1.5}{
+            \strdxscale{2}{
+                \strdroad{left}{U}{L} \strdroadlabel{L}{C}{C\mydprime}
+                \strdroad{mid}{U}{M} \strdroadlabel{M}{B}{B\mydprime}
+                \strdroad{right}{U}{R} \strdroadlabel{R}{A}{A\mydprime}
+            }
+            \strdxscale{1}{
+                \strdroad{left}{L}{LL} \strdroadlabel{LL}{C}{C\myprime}
+            }
+            \strdxscale{3}{
+                \strdroadx{right}{L}{LR} \strdroadlabel{LR}{C\myprime}{C\mydprime}
+            }
+
+            \strdxscale{2}{
+                \strdroad{left}{M}{ML} \strdroadlabel{ML}{B}{B\myprime}
+            }
+            \strdxscale{2}{
+                \strdroadx{right}{M}{MR} \strdroadlabel{MR}{B\myprime}{B\mydprime}
+            }
+
+            \strdxscale{3}{
+                \strdroad{left}{R}{RL} \strdroadlabel{RL}{A}{A\myprime}
+            }
+            \strdxscale{1}{
+                \strdroad{right}{R}{RR} \strdroadlabel{RR}{A\myprime}{A\mydprime}
+            }
+        }
+        \strdstartlabel{U}{\mathcal{D}}
+        \strdendlabel{LL}{\mathcal{C}}
+        \strdendlabel{LR}{\mathcal{C}}
+        \strdendlabel{ML}{\mathcal{B}}
+        \strdendlabel{MR}{\mathcal{B}}
+        \strdendlabel{RL}{\mathcal{A}}
+        \strdendlabel{RR}{\mathcal{A}}
+        \strdcelllabel{U End}{T}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,B,C)}{T(A\myprime,B\myprime,C\myprime)}
+        \strdxscale{1.5}{
+            \strdroad{left}{U}{L} \strdroadlabel{L}{C}{C\myprime}
+            \strdroad{mid}{U}{M} \strdroadlabel{M}{B}{B\myprime}
+            \strdroad{right}{U}{R} \strdroadlabel{R}{A}{A\myprime}
+        }
+        \strdendlabel{L}{\mathcal{C}}
+        \strdendlabel{M}{\mathcal{B}}
+        \strdendlabel{R}{\mathcal{A}}
+        \strdcelllabel{U End}{T}
+        \strdstartlabel{U}{\mathcal{D}}
+    } =
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,B,C)}{T(A\myprime,B\myprime,C\myprime)}
+        \strdxscale{4.5}{
+            \strdroad{left}{U}{L} \strdroadlabel{L}{}{T(A,B,C\myprime)}
+            \strdroad{mid}{U}{M} \strdroadlabel{M}{}{T(A,B\myprime,C\myprime)}
+            \strdroad{right}{U}{R} %\strdroadlabel{R}{T(A,B\myprime,C\myprime)}{T(A\myprime,B\myprime,C\myprime)}
+        }
+        \strdxscale{1.5}{
+            \strdyscale{1.3}{\strdroad{left}{L}{LL}} \strdroadlabel{LL}{C}{C\myprime}
+            \strdroad{mid}{L}{LM} \strdroadlabel{LM}{}{B}
+            \strdroad{right}{L}{LR} \strdroadlabel{LR}{}{A}
+            \strddeadend{LM}
+            \strddeadend{LR}
+        }
+        \strdxscale{1.5}{
+            \strdroad{left}{M}{ML} \strdroadlabel{ML}{C\myprime}{C\myprime}
+            \strdyscale{1.3}{\strdroad{mid}{M}{MM}} \strdroadlabel{MM}{B}{B\myprime}
+            \strdroad{right}{M}{MR} \strdroadlabel{MR}{}{A}
+            \strddeadend{MR}
+            \strddeadend{ML}
+        }
+        \strdxscale{1.5}{
+            \strdyscale{1}{\strdroad{left}{R}{RL}} \strdroadlabel{RL}{}{C\myprime}
+            \strdroad{mid}{R}{RM} \strdroadlabel{RM}{}{B\myprime}
+            \strdyscale{1.3}{\strdroad{right}{R}{RR}} \strdroadlabel{RR}{A}{A\myprime}
+            \strddeadend{RL}
+            \strddeadend{RM}
+        }
+        \strdcelllabel{L End}{T}
+        \strdcelllabel{M End}{T}
+        \strdcelllabel{R End}{T}
+        \strdstartlabel{U}{\mathcal{D}}
+        \strdendlabel{LL}{\mathcal{C}}
+        \strdendlabel{MM}{\mathcal{B}}
+        \strdendlabel{RR}{\mathcal{A}}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdfamily{(A,B) \in \mathcal{A} \otimes \mathcal{B}}{
+        \strdpicturein{gathered}{
+            \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,B)}{S(A,B)}
+            \strdcelllabel{U End}{\alpha}
+            \strdstartlabel{U}{\mathcal{B}}
+        }
+    }
+}
+
+\myinn{preview}{math}{
+    \strdfamily{A \in \mathcal{A}}{
+        \strdpicturein{gathered}{
+            \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,\mydash)}{S(A,\mydash)}
+            \strdcelllabel{U End}{\alpha}
+            \strdstartlabel{U}{\mathcal{B}}
+        }
+    }
+}
+
+\myinn{preview}{math}{
+    \strdfamily{(A,B) \in \mathcal{A} \otimes \mathcal{B}}{
+        \strdpicturein{gathered}{
+            \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,B)}{S(A,B)}
+            \strdcelllabel{U End}{\alpha}
+            \strdstartlabel{U}{\mathcal{B}}
+        }
+    }
+}
+\end{document}

@@ -8,7 +8,6 @@
 
 % styles
 
-% no transparent color?
 \tikzset{strd celllabel/.style={font=\small,rounded rectangle,very thin,solid,rounded corners=0pt,rounded rectangle arc length=90,draw,fill=white,inner sep=1.2pt}}
 \tikzset{strd linelabel/.style={font=\scriptsize,inner sep=0.2pt,strd textvaligned}}
 \tikzset{strd endlabel/.style={font=\small,inner sep=1pt,strd textvaligned}}
@@ -28,8 +27,8 @@
 %   they reset surrounding line styles!
 
 \pgfdeclarelayer{strd pavelayer}
-\pgfdeclarelayer{strd piecelayer}
-\pgfsetlayers{background,main,strd pavelayer,strd piecelayer}
+\pgfdeclarelayer{strd labellayer}
+\pgfsetlayers{background,main,strd pavelayer,strd labellayer}
 
 \newcommand{\strdonlayer}[2]{%
     \begin{pgfonlayer}{#1}
@@ -208,31 +207,38 @@
 
 % order matters; pgfonlayer would reset path styles.
 \newcommand{\strdcelllabel}[2]{%
-    \strdonlayer{strd piecelayer}{
+    \strdonlayer{strd labellayer}{
         \node[strd celllabel] at (#1) {#2};
     }% 
 }
 
 \newcommand{\strdsidelabel}[3]{%
-    \node[strd linelabel,left] at (#1) {#2};
-    \node[strd linelabel,right] at (#1) {#3};%
+    \strdonlayer{strd labellayer}{
+        \node[strd linelabel,left] at (#1) {#2};
+        \node[strd linelabel,right] at (#1) {#3};
+    }%
 }
 
-% can't apply everywhere
+% remove me.can't apply everywhere
 \newcommand{\strdlsbracket}{\raisebox{0.075em}{[}}
 \newcommand{\strdrsbracket}{\raisebox{0.075em}{]}}
 
+% removeme
 \newcommand{\strdihomlabel}[3]{%
     \node[strd linelabel,left] at (#1) {[#2};
     \node[strd linelabel,right] at (#1) {#3]};%
 }
 
 \newcommand{\strdstartlabel}[2]{%
-    \node[strd endlabel,above] at (#1 Start) {#2};%
+    \strdonlayer{strd labellayer}{
+        \node[strd endlabel,above] at (#1 Start) {#2};
+    }%
 }
 
 \newcommand{\strdendlabel}[2]{%
-    \node[strd endlabel,below] at (#1 End) {#2};%
+    \strdonlayer{strd labellayer}{
+        \node[strd endlabel,below] at (#1 End) {#2};
+    }%
 }
 
 
@@ -264,25 +270,25 @@
 \newcommand{\strdimplicit}[1]{\strdpathis{densely dotted}{#1}}
 
 \newcommand{\strdlbij}[2]{%
-    \strdonlayer{strd piecelayer}{
+    \strdonlayer{strd labellayer}{
         \strdpathis{strd bij}{\strdsqsubset{#1}{#2}}
     }%
 }
 
 \newcommand{\strdrbij}[2]{%
-    \strdonlayer{strd piecelayer}{
+    \strdonlayer{strd labellayer}{
         \strdpathis{strd bij}{\strdsqsupset{#1}{#2}}
     }%
 }
 
 \newcommand{\strdbij}[2]{%
-    \strdonlayer{strd piecelayer}{
+    \strdonlayer{strd labellayer}{
         \strdpathis{strd bij}{\strdsquare{#1}{#2}}
     }%
 }
 
 \newcommand{\strdbijlabel}[2]{%
-    \strdonlayer{strd piecelayer}{
+    \strdonlayer{strd labellayer}{
         \node[strd bijlabel] at (#1) {#2};
     }%
 }
@@ -296,6 +302,13 @@
     \strdjump{#1}{#2}%
 }
 
+\newcommand{\strdparallel}[2]{%
+    \strddup{#1}{#2 Dup}
+    \strdmid{#2 Dup Left}{#2 Left}
+    \strdmid{#2 Dup Right}{#2 Right}
+    \strdjump{#1}{#2}%
+}
+
 \newcommand{\strdcircle}[2]{%
     \strdsubset{#1}{#2 Left}
     \strdsupset{#1}{#2 Right}
@@ -303,27 +316,13 @@
 }
 
 
-% command combinators
-
-% removeme
-\newcommand{\strdlabeled}[5]{%
-    \csuse{strd#1}{#2}{#4#5}
-    \csuse{strd#3label}{#4#5}{#4}{#5}%
-}
-
-\newcommand{\strdfamily}[2]{%
-    \left(#2\right)_{\!\!#1}%
-}
-
-\newcommand*{\strdmath}[1]{\scalebox{1.5}{\ensuremath{#1}}}
-
-
 % roads
 
 \tikzset{strd roadcolor/.style={gray!20}}
 \tikzset{strd roadbase/.style={line width=3.05pt}}
-                                                 % overwrite unneeded end color; slightly noisy fix
-\tikzset{strd roadpave/.style={line width=2.65pt,shorten >= -0.2pt,shorten <= -0.2pt,strd roadcolor}}
+\tikzset{strd edgenoise/.style={shorten >= -0.2pt,shorten <= -0.2pt}}
+\tikzset{strd roadpave/.style={line width=2.65pt,strd edgenoise,strd roadcolor}}
+
 
 \newcommand{\strdroad}[3]{%
     \strdscope{strd roadbase}{\csuse{strd#1}{#2}{#3}}
@@ -339,12 +338,24 @@
 }
 
 \newcommand{\strddeadend}[1]{%
-    \strdonlayer{strd piecelayer}{
-        \fill[white,line width=0.4pt,sharp corners] {
-            ($(#1 End)+(-2pt,0.15)$) rectangle ($(#1 End)+(2pt,-0.15)$)
+    \strdonlayer{strd labellayer}{
+        \draw[strd draw,white,line width=4pt,shorten >=-1pt] {
+            ($(#1 End)+(0,4.2pt)$) -- (#1 End)
+        };
+        \draw[strd draw,strd roadbase]{
+            ($(#1 End)+(0,4.2pt)$) -- ($(#1 End)+(0,4.4pt)$)
+        };
+    }%
+}
+
+% removeme.broken by scaling
+\newcommand{\strddeadendbroken}[1]{%
+    \strdonlayer{strd labellayer}{
+        \fill[red,line width=0.4pt,sharp corners,x=1cm,y=1cm] {
+            ($(#1 End)+(-2pt,4.2pt)$) rectangle ($(#1 End)+(2pt,-4.2pt)$)
         };
         \draw[strd draw,line width=0.4pt]{
-            ($(#1 End)+(-1.525pt,0.15)$) -- ($(#1 End)+(1.525pt,0.15)$)
+            ($(#1 End)+(-1.525pt,4.2pt)$) -- ($(#1 End)+(1.525pt,4.2pt)$)
         };
     }%
 }
@@ -361,15 +372,14 @@
 }
 \newcommand{\strdroadrshift}[2]{\strdflip{\strdroadlshift{#1}{#2}}}
 
-% removeme
-\newcommand{\strdevaluation}[2]{%
-    \strdmid{#1}{#2 Top}
-    \strdleft{#2 Top}{#2 Left}%
-    \strdroad{right}{#2 Top}{#2 Right}
-}
-
 
 % utilities
+
+\newcommand{\strdfamily}[2]{%
+    \left(#2\right)_{\!\!\!#1}%
+}
+
+\newcommand*{\strdmath}[1]{\scalebox{1.5}{\ensuremath{#1}}}
 
 % removeme
 \newcommand{\strdassign}[2]{%
