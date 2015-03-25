@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+
+\begin{document}
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,B)}{T(A\myprime,B\myprime)}
+        \strdroad{left}{U}{BB'} \strdroadlabel{BB'}{B}{B'}
+        \strdroad{right}{U}{AA'} \strdroadlabel{AA'}{A}{A'}
+        \strdcelllabel{U End}{T}
+        \strdstartlabel{U}{\mathcal{C}}
+        \strdendlabel{BB'}{\mathcal{B}}
+        \strdendlabel{AA'}{\mathcal{A}}
+    }
+}
+
+% associativity compatible
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,B)}{T(A\mydprime,B\mydprime)}
+        \strdstartlabel{U}{\mathcal{C}}
+        \strdxscale{2}{\strdroad{left}{U}{L}} \strdroadlabel{L}{}{T(A\myprime,B\myprime)}
+        \strdcelllabel{L End}{T}
+        \strdroad{left}{L}{BB'} \strdroadlabel{BB'}{B}{B\myprime}
+        \strdendlabel{BB'}{\mathcal{B}}
+        \strdroad{right}{L}{AA'} \strdroadlabel{AA'}{A}{A\myprime}
+        \strdendlabel{AA'}{\mathcal{A}}
+        \strdxscale{2}{\strdroad{right}{U}{R}} %\strdroadlabel{R}{T(A',B')}{T(A\mydprime,B\mydprime)}
+        \strdcelllabel{R End}{T}
+        \strdroad{left}{R}{B'B''} \strdroadlabel{B'B''}{B\myprime}{B\mydprime}
+        \strdendlabel{B'B''}{\mathcal{B}}
+        \strdroad{right}{R}{A'A''} \strdroadlabel{A'A''}{A\myprime}{A\mydprime}
+        \strdendlabel{A'A''}{\mathcal{A}}
+    } =
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,B)}{T(A\mydprime,B\mydprime)}
+        \strdcelllabel{U End}{T} \strdstartlabel{U}{\mathcal{C}}
+        \strdxscale{2}{
+            \strdroad{left}{U}{BB''} \strdroadlabel{BB''}{B}{B\mydprime}
+            \strdroad{right}{U}{AA''} \strdroadlabel{AA''}{A}{A\mydprime}
+        }
+        \strdroad{left}{BB''}{BB'} \strdroad{right}{AA''}{A'A''}
+        \strdxscale{3}{\strdroadu{right}{BB''}{B'B''}} \strdroadlabel{B'B''}{B\myprime}{B\mydprime}
+        \strdxscale{3}{\strdroad{left}{AA''}{AA'}} \strdroadlabel{AA'}{A}{A\myprime}
+        \strdroadlabel{BB'}{B}{B\myprime}
+        \strdroadlabel{A'A''}{A\myprime}{A\mydprime}
+        \strdendlabel{BB'}{\mathcal{B}}
+        \strdendlabel{A'A''}{\mathcal{A}}
+        \strdendlabel{B'B''}{\mathcal{B}}
+        \strdendlabel{AA'}{\mathcal{A}}
+    }
+}
+
+% unit compatible
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,B)}{T(A,B)}
+        \strdroad{left}{U}{BB} \strdroadlabel{BB}{}{B}
+        \strdroad{right}{U}{AA} \strdroadlabel{AA}{}{A}
+        \strdcelllabel{U End}{T}
+        \strdstartlabel{U}{\mathcal{C}}
+        \strddeadend{BB}
+        \strddeadend{AA}
+    } =
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{}{T(A,B)}
+        \strddeadend{U}
+        \strdstartlabel{U}{\mathcal{C}}
+    }
+}
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,B)}{T(A\myprime,B)}
+        \strdroad{mid}{U}{AA'} \strdroadlabel{AA'}{A}{A\myprime}
+        \strdcelllabel{U End}{T(\mydash,B)}
+        \strdstartlabel{U}{\mathcal{C}}
+        \strdendlabel{AA'}{\mathcal{A}}
+    } \mydefeq
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,B)}{T(A\myprime,B)}
+        \strdroad{left}{U}{BB} \strdroadlabel{BB}{}{B}
+        \strdroad{right}{U}{AA'} \strdroadlabel{AA'}{A}{A\myprime}
+        \strdcelllabel{U End}{T}
+        \strdstartlabel{U}{\mathcal{C}}
+        \strddeadend{BB}
+        \strdendlabel{AA'}{\mathcal{A}}
+        %\strdendlabel{BB}{\mathcal{B}}
+    }
+}
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,B)}{T(A,B\myprime)}
+        \strdroad{mid}{U}{BB'} \strdroadlabel{BB'}{B}{B\myprime}
+        \strdcelllabel{U End}{T(A,\mydash)}
+        \strdstartlabel{U}{\mathcal{C}}
+        \strdendlabel{BB'}{\mathcal{B}}
+    } \mydefeq
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,B)}{T(A,B\myprime)}
+        \strdroad{left}{U}{BB'} \strdroadlabel{BB'}{B}{B\myprime}
+        \strdroad{right}{U}{AA} \strdroadlabel{AA}{}{A}
+        \strdcelllabel{U End}{T}
+        \strdstartlabel{U}{\mathcal{C}}
+        \strddeadend{AA}
+        \strdendlabel{BB'}{\mathcal{B}}
+    }
+}
+
+\end{document}

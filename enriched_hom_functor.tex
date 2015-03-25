@@ -1,0 +1,140 @@
+\documentclass{article}
+\usepackage{strd,cat,my,amssymb}
+
+\begin{document}
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{\mathcal{A}(A,B)}{\mathcal{A}(A\myprime,B\myprime)}
+        \strdstartlabel{U}{(\mathcal{V})}
+        \strdroad{left}{U}{BB'} \strdroadlabel{BB'}{B}{B\myprime}
+        \strdroad{right}{U}{A'A} \strdroadlabel{A'A}{A\myprime}{A}
+        \strdcelllabel{U End}{\operatorname{Hom}_{\mathcal{A}}}
+        \strdendlabel{BB'}{\mathcal{A}}
+        \strdendlabel{A'A}{\mathcal{A}}
+    } \mydefeq
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{\mathcal{A}(A,B)}{\mathcal{A}(A\myprime,B\myprime)}
+        \strdstartlabel{U}{(\mathcal{V})}
+        \strdrshift{U}{U2}
+        \strdroad{mid}{U2}{A'B'} \strdroadlabel{A'B'}{A\myprime}{B\myprime}
+%        \strdroadx{circle}{A'B'}{A'B'C}
+        \strdroadx{subset}{A'B'}{A'B'C Left}
+        \strdroadx{right}{A'B'C Left}{A'A0}
+        \strdroadx{supset}{A'B'}{A'B'C Right}
+        \strdroadlabel{A'B'C Left}{A\myprime}{A} \strdroadlabel{A'B'C Right}{A}{B\myprime}
+        \strdxscale{2}{\strdroad{left}{A'B'C Left}{AB'2} \strdroadlabel{AB'2}{A}{B\myprime}}
+        \strdxscale{1}{\strdroad{left}{AB'2}{AB} \strdroadlabel{AB}{A}{B}}
+        \strdroad{right}{AB'2}{BB'} \strdroadlabel{BB'}{B}{B\myprime}
+        \strdroad{mid}{A'A0}{A'A} \strdroadlabel{A'A}{A\myprime}{A}
+      %  \strddotlabel{A'B' End}
+     %   \strddotlabel{AB'2 End}
+     %   \strdxscale{2}{\strdrshift{U}{Box}}
+        \strdscale{3}{4}{\strdbij{U}{Unused}}
+        \strdroad{mid}{A'A}{A'A2} \strdroadlabel{A'A2}{A\myprime}{A}
+        \strdroad{mid}{BB'}{BB'2} \strdroadlabel{BB'2}{B}{B\myprime}
+        \strdendlabel{BB'2}{\mathcal{A}}
+        \strdendlabel{A'A2}{\mathcal{A}}
+    }
+}
+
+\myinn{preview}{math}{
+    \left(
+        \strdpicturein{gathered}{
+            \strdroad{mid}{\strdorigin}{A'A} \strdroadlabel{A'A}{A\myprime}{A}
+            \strdstartlabel{A'A}{\mathcal{A}}
+            \strdcelllabel{A'A End}{f}
+        },
+        \strdpicturein{gathered}{
+            \strdroad{mid}{\strdorigin}{BB'} \strdroadlabel{BB'}{B}{B\myprime}
+            \strdstartlabel{BB'}{\mathcal{A}}
+            \strdcelllabel{BB' End}{g}
+        }
+    \right) \mapsto % \overset{\operatorname{hom} _ {\mathcal{A}}}{\mapsto}
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{\mathcal{A}(A,B)}{\mathcal{A}(A\myprime,B\myprime)}
+        \strdstartlabel{U}{(\mathcal{V})}
+        \strdroad{left}{U}{BB'} \strdroadlabel{BB'}{B}{B\myprime}
+        \strdroad{right}{U}{A'A} \strdroadlabel{A'A}{A\myprime}{A}
+        \strdcelllabel{U End}{\operatorname{Hom}_{\mathcal{A}}}
+        \strdcelllabel{BB' End}{g}
+        \strdcelllabel{A'A End}{f}
+    } \sim
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{A'B'} \strdroadlabel{A'B'}{A\myprime}{B\myprime}
+        %\strdroad{circle}{A'B'}{A'B'C}
+        \strdroadx{subset}{A'B'}{A'B'C Left}
+        \strdroadx{right}{A'B'C Left}{A'A0}
+        \strdroadx{supset}{A'B'}{A'B'C Right}
+        \strdroadlabel{A'B'C Left}{A\myprime}{A} \strdroadlabel{A'B'C Right}{A}{B\myprime}
+        \strdxscale{2}{\strdroad{left}{A'B'C Right}{AB'2} \strdroadlabel{AB'2}{A}{B'}}
+        \strdroad{left}{AB'2}{AB0}
+        \strdroad{mid}{AB0}{AB} \strdroadlabel{AB}{A}{B}
+        \strdroad{right}{AB'2}{BB'} \strdroadlabel{BB'}{B}{B\myprime}
+        \strdroad{mid}{A'A0}{A'A} \strdroadlabel{A'A}{A\myprime}{A}
+        \strdcelllabel{BB' End}{g}
+        \strdcelllabel{A'A End}{f}
+        \strdstartlabel{A'B'}{\mathcal{A}}
+    } =
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{A'B'} \strdroadlabel{A'B'}{A\myprime}{B\myprime}
+        \strddotlabel{A'B' End}
+        \strdxscale{1}{\strdroad{left}{A'B'}{A'A} \strdroadlabel{A'A}{A\myprime}{A}}
+        \strdxscale{1}{\strdroad{right}{A'B'}{BB'} \strdroadlabel{BB'}{B}{B\myprime}}
+        \strdcelllabel{A'A End}{f}
+        \strdcelllabel{BB' End}{g}
+        \strdroad{mid}{A'B'}{AB0}
+        \strdroad{mid}{AB0}{AB} \strdroadlabel{AB}{A}{B}
+        \strdstartlabel{A'B'}{\mathcal{A}}
+    }
+}
+
+\myinn{preview}{math}{
+    \left(
+        \strdpicturein{gathered}{
+            \strdroad{mid}{\strdorigin}{A'A} \strdroadlabel{A'A}{A'}{A}
+            \strdstartlabel{A'A}{\mathcal{A}}
+            \strdcelllabel{A'A End}{f}
+        },
+        \strdpicturein{gathered}{
+            \strdroad{mid}{\strdorigin}{BB'} \strdroadlabel{BB'}{B}{B'}
+            \strdstartlabel{BB'}{\mathcal{A}}
+            \strdcelllabel{BB' End}{g}
+        }
+    \right) \overset{\operatorname{hom} _ {\mathcal{A}}}{\mapsto}
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{A'B'} \strdroadlabel{A'B'}{A'}{B'}
+        \strdroad{circle}{A'B'}{A'B'C} \strdroadlabel{A'B'C Left}{A'}{A} \strdroadlabel{A'B'C Right}{A}{B'}
+        \strdxscale{2}{\strdroad{left}{A'B'C}{AB'2} \strdroadlabel{AB'2}{A}{B'}}
+        \strdroad{left}{AB'2}{AB0}
+        \strdroad{mid}{AB0}{AB} \strdroadlabel{AB}{A}{B}
+        \strdroad{right}{AB'2}{BB'} \strdroadlabel{BB'}{B}{B'}
+        \strdxscale{1}{\strdroad{right}{A'B'C}{A'A0}}
+        \strdroad{mid}{A'A0}{A'A} \strdroadlabel{A'A}{A'}{A}
+        \strddotlabel{A'B' End}
+        \strddotlabel{AB'2 End}
+        \strdcelllabel{BB' End}{g}
+        \strdcelllabel{A'A End}{f}
+        \strdstartlabel{A'B'}{\mathcal{A}}
+    } 
+}
+
+\myinn{preview}{math}{
+    \strdpicturein{gathered}{
+        \strdmid{\strdorigin}{Y} \strdsidelabel{Y}{}{Y}
+        \strdmid{Y}{X} \strdsidelabel{X}{}{X}
+        \strdcelllabel{Y End}{f}
+    } \mapsto
+    \strdpicturein{gathered}{
+        \strdmid{\strdorigin}{X} \strdsidelabel{X}{}{X}
+        \strdcelllabel{X End}{h}
+    } \mapsto
+    \strdpicturein{gathered}{
+        \strdmid{\strdorigin}{Y} \strdsidelabel{Y}{}{Y}
+        \strdmid{Y}{X} \strdsidelabel{X}{}{X}
+        \strdcelllabel{Y End}{f}
+        \strdcelllabel{X End}{h}
+    } 
+}
+
+\end{document}

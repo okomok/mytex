@@ -328,20 +328,23 @@
 \newcommand{\strdroad}[3]{%
     \strdscope{strd roadbase}{\csuse{strd#1}{#2}{#3}}
     \strdonlayer{strd pavelayer}{
-        \strdscope{strd roadpave}{\csuse{strd#1}{#2}{#3 Road}}
+        \strdscope{strd roadpave}{\csuse{strd#1}{#2}{#3 Paved}}
     }
 }
 
-% underpass
-\newcommand{\strdroadu}[3]{%
+% order depends; crossable
+\newcommand{\strdroadx}[3]{%
     \strdscope{strd roadbase}{\csuse{strd#1}{#2}{#3}}
-    \strdscope{strd roadpave}{\csuse{strd#1}{#2}{#3 Road}}%
+    \strdscope{strd roadpave}{\csuse{strd#1}{#2}{#3 Paved}}%
 }
 
 \newcommand{\strddeadend}[1]{%
     \strdonlayer{strd piecelayer}{
+        \fill[white,line width=0.4pt,sharp corners] {
+            ($(#1 End)+(-2pt,0.15)$) rectangle ($(#1 End)+(2pt,-0.15)$)
+        };
         \draw[strd draw,line width=0.4pt]{
-            ($(#1 End)+(-1.525pt,0)$) -- ($(#1 End)+(1.525pt,0)$)
+            ($(#1 End)+(-1.525pt,0.15)$) -- ($(#1 End)+(1.525pt,0.15)$)
         };
     }%
 }

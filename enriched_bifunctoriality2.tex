@@ -1,0 +1,95 @@
+\documentclass{article}
+\usepackage{strd,cat,my,amssymb,amsmath}
+
+
+\begin{document}
+
+\myinn{preview}{equation}{
+    \myassign{hereT}{
+        \strdpicturein{gathered}{
+            \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T^A B}{T_{B'}A'}
+            \strdxscale{1.6}{
+                \strdroad{left}{U}{L} \strdroadlabel{L}{T^A B}{T^A B'}
+                \strdroad{right}{U}{R} \strdroadlabel{R}{T_{B'}A}{T_{B'}A'}
+            }
+            \strdroad{mid}{L}{BB'} \strdroadlabel{BB'}{B}{B'} \strdroad{mid}{R}{AA'} \strdroadlabel{AA'}{A}{A'}
+            \strdcelllabel{L End}{T^A} \strdcelllabel{R End}{T_{B'}}
+            \strddotlabel{U End}
+            \strdstartlabel{U}{\mathcal{C}}
+            \strdendlabel{BB'}{\mathcal{B}}
+            \strdendlabel{AA'}{\mathcal{A}}
+        }
+    } =
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T_B A}{T^{A'}B'}
+        \strddotlabel{U End}
+        \strdxscale{1.6}{
+            \strdroad{left}{U}{L} \strdroadlabel{L}{T_B A}{T_B A'}
+            \strdroad{right}{U}{R} \strdroadlabel{R}{T^{A'}B}{T^{A'}B'}
+            \strdroad{unleft}{L}{AA'} \strdroadlabel{AA'}{A}{A'} \strdroad{unright}{R}{BB'} \strdroadlabel{BB'}{B}{B'}
+            \strdcelllabel{L End}{T_B} \strdcelllabel{R End}{T^{A'}}
+            \strdroad{right}{AA'}{AA'2} \strdroadlabel{AA'2}{A}{A'}
+            \strdroad{left}{BB'}{BB'2} \strdroadlabel{BB'2}{B}{B'}
+            \strdstartlabel{U}{\mathcal{C}}
+            \strdendlabel{BB'2}{\mathcal{B}}
+            \strdendlabel{AA'2}{\mathcal{A}}
+        }
+    }
+}
+
+
+\myinn{preview}{equation}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,B)}{T(A',B')}
+        \strdroad{left}{U}{BB'} \strdroadlabel{BB'}{B}{B'}
+        \strdroad{right}{U}{AA'} \strdroadlabel{AA'}{A}{A'}
+        \strdstartlabel{U}{\mathcal{C}}
+        \strdendlabel{BB'}{\mathcal{B}}
+        \strdendlabel{AA'}{\mathcal{A}}
+        \strdcelllabel{U End}{T}
+    } \mydefeq
+    \hereT
+}
+
+\myinnn{preview}{math}{aligned}{
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,B)}{T(A\myprime,B\myprime)}
+        \strdroad{left}{U}{BB'} \strdroadlabel{BB'}{B}{B\myprime}
+        \strdroad{right}{U}{AA'} \strdroadlabel{AA'}{A}{A\myprime}
+        \strdstartlabel{U}{\mathcal{C}}
+        \strdendlabel{BB'}{\mathcal{B}}
+        \strdendlabel{AA'}{\mathcal{A}}
+        \strdcelllabel{U End}{T}
+    } &=
+    \strdpicturein{gathered}{
+            \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,B)}{T(A\myprime,B\myprime)}
+        \strdxscale{1.7}{
+            \strdroad{left}{U}{L} \strdroadlabel{L}{}{T(A,B\myprime)}
+            \strdroad{right}{U}{R} %\strdroadlabel{R}{T(A,B')}{T(A',B')}
+        }
+        \strdroad{mid}{L}{BB'} \strdroadlabel{BB'}{B}{B'} \strdroad{mid}{R}{AA'} \strdroadlabel{AA'}{A}{A\myprime}
+        \strdcelllabel{L End}{T(A,\mydash)} \strdcelllabel{R End}{T(\mydash,B\myprime)}
+        \strddotlabel{U End}
+        \strdstartlabel{U}{\mathcal{C}}
+        \strdendlabel{BB'}{\mathcal{B}}
+        \strdendlabel{AA'}{\mathcal{A}}
+    } \\ &=
+    \strdpicturein{gathered}{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{T(A,B)}{T(A\myprime,B\myprime)}
+        \strddotlabel{U End}
+        \strdxscale{1.7}{
+            \strdroad{left}{U}{L} \strdroadlabel{L}{}{T(A\myprime,B)}
+            \strdroad{right}{U}{R} %\strdroadlabel{R}{T(A',B)}{T(A',B')}
+            \strdroadx{unleft}{L}{AA'}% \strdroadlabel{AA'}{A}{A\myprime}
+            \strdroadx{right}{AA'}{AA'2} \strdroadlabel{AA'2}{A}{A\myprime}
+            \strdroadx{unright}{R}{BB'}% \strdroadlabel{BB'}{B}{B\myprime}
+            \strdcelllabel{L End}{T(\mydash,B)} \strdcelllabel{R End}{T(A\myprime,\mydash)}
+            \strdroadx{left}{BB'}{BB'2} \strdroadlabel{BB'2}{B}{B\myprime}
+            \strdstartlabel{U}{\mathcal{C}}
+            \strdendlabel{BB'2}{\mathcal{B}}
+            \strdendlabel{AA'2}{\mathcal{A}}
+        }
+    }
+}
+
+\end{document}
