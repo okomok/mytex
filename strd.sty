@@ -318,11 +318,11 @@
 
 % roads
 
+% keep scaling away by '--'
 \tikzset{strd roadcolor/.style={gray!20}}
 \tikzset{strd roadbase/.style={line width=3.05pt}}
 \tikzset{strd edgenoise/.style={shorten >= -0.2pt,shorten <= -0.2pt}}
 \tikzset{strd roadpave/.style={line width=2.65pt,strd edgenoise,strd roadcolor}}
-
 
 \newcommand{\strdroad}[3]{%
     \strdscope{strd roadbase}{\csuse{strd#1}{#2}{#3}}
@@ -337,25 +337,14 @@
     \strdscope{strd roadpave}{\csuse{strd#1}{#2}{#3 Paved}}%
 }
 
+% slightly noisy
 \newcommand{\strddeadend}[1]{%
     \strdonlayer{strd labellayer}{
         \draw[strd draw,white,line width=4pt,shorten >=-1pt] {
-            ($(#1 End)+(0,4.2pt)$) -- (#1 End)
+            ($(#1 End)+(0,5.68pt)$) -- (#1 End)
         };
         \draw[strd draw,strd roadbase]{
-            ($(#1 End)+(0,4.2pt)$) -- ($(#1 End)+(0,4.4pt)$)
-        };
-    }%
-}
-
-% removeme.broken by scaling
-\newcommand{\strddeadendbroken}[1]{%
-    \strdonlayer{strd labellayer}{
-        \fill[red,line width=0.4pt,sharp corners,x=1cm,y=1cm] {
-            ($(#1 End)+(-2pt,4.2pt)$) rectangle ($(#1 End)+(2pt,-4.2pt)$)
-        };
-        \draw[strd draw,line width=0.4pt]{
-            ($(#1 End)+(-1.525pt,4.2pt)$) -- ($(#1 End)+(1.525pt,4.2pt)$)
+            ($(#1 End)+(0,5.68pt)$) -- ($(#1 End)+(0,5.88pt)$)
         };
     }%
 }
