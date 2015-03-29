@@ -2,30 +2,28 @@
 
 \usepackage{amsmath,mathtools,etoolbox,lambda}
 
-\newcommand{\mydefeq}{\coloneqq}
-\newcommand{\myeqdef}{\eqqcolon}
+\newcommand*{\mydefeq}{\coloneqq}
+\newcommand*{\myeqdef}{\eqqcolon}
 
-\newcommand{\mycomment}[1]{}
+\newcommand*{\mycomment}[1]{}
 
-\newcommand\myassign[2]{%
+\newcommand*\myassign[2]{%
     \global\csdef{#1}{#2}
     #2%
 }
 
-\newcommand{\mydash}{\text{--}}
+\newcommand*{\mydash}{\text{--}}
 
-\newcommand{\myforall}[2]{%
+\newcommand*{\myforall}[2]{%
     \ensuremath{({} ^ \forall #1)(#2)}%
 }
 
-\newcommand{\myexists}[2]{%
+\newcommand*{\myexists}[2]{%
     \ensuremath{({} ^ \exists #1)(#2)}%
 }
 
-\newcommand{\myin}[2]{%
-    \Foldr{\myin@}{#2}{\Listize#1}%
-}
-\newcommand{\myin@}[2]{\begin{#1}#2\end{#1}}
+\def\myin[#1]#2{\Foldr{\myinf}{#2}{\Listize[#1]}}
+\newcommand*{\myinf}[2]{\begin{#1}#2\end{#1}}
 
 \newcommand*{\myprime}{^{\prime}\mkern-1.2mu}
 \newcommand*{\mydprime}{^{\prime\prime}\mkern-1.2mu}

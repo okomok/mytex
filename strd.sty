@@ -6,7 +6,7 @@
 \usetikzlibrary{shapes,calc,decorations.markings,backgrounds}
 
 
-\newcommand{\strds}[1]{\csuse{strd#1}}
+\newcommand*{\strds}[1]{\csuse{strd#1}}
 
 
 % styles
@@ -33,7 +33,7 @@
 \pgfdeclarelayer{strd piecelayer}
 \pgfsetlayers{background,main,strd pavelayer,strd piecelayer}
 
-\newcommand{\strdonlayer}[2]{%
+\newcommand*{\strdonlayer}[2]{%
     \begin{pgfonlayer}{#1}
         #2
     \end{pgfonlayer}
@@ -44,17 +44,17 @@
 
 % environmentals 
 
-\newcommand{\strd}[1]{%
+\newcommand*{\strd}[1]{%
     \begin{tikzpicture}[strd picture]
         \strddeclorigin
         #1;
     \end{tikzpicture}%
 }
 
-\newcommand{\strdin}[2]{%
-    \Foldr{\strdin@}{#2}{\Listize#1}%
+\def\strdin[#1]#2{%
+    \Foldr{\strdinf}{#2}{\Listize[#1]}%
 }
-\newcommand{\strdin@}[2]{%
+\newcommand*{\strdinf}[2]{%
     \begin{#1}
         \! % why needed?
         \strd{#2}
@@ -65,37 +65,37 @@
 % string constructors
 %   A string 's' is a triple of nodes 's Start', 's' and 's End'.
 
-\newcommand{\strdrange}[4]{%
+\newcommand*{\strdrange}[4]{%
     \node[strd coord] (#1 Start) at (#2) {};
     \node[strd coord] (#1) at (#3) {};
     \node[strd coord] (#1 End) at (#4) {};%
 }
 
-\newcommand{\strdcoordat}[3]{%
+\newcommand*{\strdcoordat}[3]{%
     \node[strd coord] (#3 Start) at (#1,#2) {};
     \node[strd coord] (#3) at (#1,#2) {};
     \node[strd coord] (#3 End) at (#1,#2) {};%
 }
 
-\newcommand{\strdcoord}[2]{%
+\newcommand*{\strdcoord}[2]{%
     \node[strd coord] (#2 Start) at (#1) {};
     \node[strd coord] (#2) at (#1) {};
     \node[strd coord] (#2 End) at (#1) {};%
 }
 
-\newcommand{\strddeclorigin}{\strdcoordat{0}{0}{strdorigin}}
-\newcommand{\strdorigin}{strdorigin}
+\newcommand*{\strddeclorigin}{\strdcoordat{0}{0}{strdorigin}}
+\newcommand*{\strdorigin}{strdorigin}
 
 
 % strings
 
-\newcommand{\strdempty}[2]{%
+\newcommand*{\strdempty}[2]{%
     \node[strd coord] (#2) at (#1 End) {};
     \node[strd coord] (#2 Start) at (#2) {};
     \node[strd coord] (#2 End) at (#2) {};%
 }
 
-\newcommand{\strdleft}[2]{%
+\newcommand*{\strdleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2 Corner) at ($(#1 End)+(-0.5,-0.3)$) {};
     \node[strd coord] (#2) at ($(#1 End)+(-0.5,-0.4)$) {};
@@ -104,9 +104,9 @@
         (#2 Start) parabola (#2 Corner) -- (#2 End)
     };%
 }
-\newcommand{\strdright}[2]{\strdflip{\strdleft{#1}{#2}}}
+\newcommand*{\strdright}[2]{\strdflip{\strdleft{#1}{#2}}}
 
-\newcommand{\strdmid}[2]{%
+\newcommand*{\strdmid}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2) at ($(#1 End)+(0,-0.4)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.8)$) {};
@@ -115,7 +115,7 @@
     };%
 }
 
-\newcommand{\strdunleft}[2]{%
+\newcommand*{\strdunleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2) at ($(#1 End)+(0,-0.4)$) {};
     \node[strd coord] (#2 Corner) at ($(#1 End)+(0,-0.5)$) {};
@@ -124,15 +124,15 @@
         (#2 Start) -- (#2 Corner) parabola[bend at end] (#2 End)
     };%
 }
-\newcommand{\strdunright}[2]{\strdflip{\strdunleft{#1}{#2}}}
+\newcommand*{\strdunright}[2]{\strdflip{\strdunleft{#1}{#2}}}
 
-\newcommand{\strdconnect}[3]{%
+\newcommand*{\strdconnect}[3]{%
     \node[strd coord] (#3 Start) at (#1 Start) {};
     \node[strd coord] (#3) at (#2 Start) {};
     \node[strd coord] (#3 End) at (#2 End) {};%
 }
 
-\newcommand{\strdhleft}[2]{%
+\newcommand*{\strdhleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2) at ($(#1 End)+(-0.25,0)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(-0.5,0)$) {};
@@ -140,9 +140,9 @@
         (#2 Start) -- (#2 End)
     };%
 }
-\newcommand{\strdhright}[2]{\strdflip{\strdhleft{#1}{#2}}}
+\newcommand*{\strdhright}[2]{\strdflip{\strdhleft{#1}{#2}}}
 
-\newcommand{\strdminus}[2]{%
+\newcommand*{\strdminus}[2]{%
     \strdxscale{0.5}{
         \strdhleft{#1}{#2 Left}
         \strdempty{#1}{#2}
@@ -150,7 +150,7 @@
     }
 }
 
-\newcommand{\strdsubset}[2]{%
+\newcommand*{\strdsubset}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-0.5,-0.3)$) {};
     \node[strd coord] (#2) at ($(#1 End)+(-0.5,-0.4)$) {};
@@ -160,9 +160,9 @@
         (#2 Start) parabola (#2 StartCorner) -- (#2 EndCorner) parabola[bend at end] (#2 End)
     };%
 }
-\newcommand{\strdsupset}[2]{\strdflip{\strdsubset{#1}{#2}}}
+\newcommand*{\strdsupset}[2]{\strdflip{\strdsubset{#1}{#2}}}
 
-\newcommand{\strdlint}[2]{%
+\newcommand*{\strdlint}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-0.5,-0.3)$) {};
     \node[strd coord] (#2) at ($(#1 End)+(-0.5,-0.4)$) {};
@@ -172,17 +172,17 @@
         (#2 Start) parabola (#2 StartCorner) -- (#2 EndCorner) parabola[bend at end] (#2 End)
     };%
 }
-\newcommand{\strdrint}[2]{\strdflip{\strdlint{#1}{#2}}}
+\newcommand*{\strdrint}[2]{\strdflip{\strdlint{#1}{#2}}}
 
-\newcommand{\strdjump}[2]{\strdnone{\strdmid{#1}{#2}}}
-\newcommand{\strdlshift}[2]{\strdnone{\strdhleft{#1}{#2}}}
-\newcommand{\strdrshift}[2]{\strdnone{\strdhright{#1}{#2}}}
-\newcommand{\strddup}[2]{\strdnone{\strdminus{#1}{#2}}}
+\newcommand*{\strdjump}[2]{\strdnone{\strdmid{#1}{#2}}}
+\newcommand*{\strdlshift}[2]{\strdnone{\strdhleft{#1}{#2}}}
+\newcommand*{\strdrshift}[2]{\strdnone{\strdhright{#1}{#2}}}
+\newcommand*{\strddup}[2]{\strdnone{\strdminus{#1}{#2}}}
 
 
 % square strings
 
-\newcommand{\strdsqsubset}[2]{%
+\newcommand*{\strdsqsubset}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-0.5,0)$) {};
     \node[strd coord] (#2) at ($(#1 End)+(-0.5,-0.4)$) {};
@@ -192,9 +192,9 @@
         (#2 Start) -- (#2 StartCorner) -- (#2 EndCorner) -- (#2 End)
     };%
 }
-\newcommand{\strdsqsupset}[2]{\strdflip{\strdsqsubset{#1}{#2}}}
+\newcommand*{\strdsqsupset}[2]{\strdflip{\strdsqsubset{#1}{#2}}}
 
-\newcommand{\strdsquare}[2]{%
+\newcommand*{\strdsquare}[2]{%
     \strdsqsubset{#1}{#2 Left}
     \strdsqsupset{#1}{#2 Right}
     \strdjump{#1}{#2}%
@@ -203,30 +203,30 @@
 
 % labels
 
-\newcommand{\strddotlabel}[1]{%
+\newcommand*{\strddotlabel}[1]{%
     \node[strd dot] at (#1) {};%
 }
 
-\newcommand{\strdcelllabel}[2]{%
+\newcommand*{\strdcelllabel}[2]{%
     \strdonlayer{strd piecelayer}{
         \node[strd celllabel] at (#1) {#2};
     }% 
 }
 
-\newcommand{\strdsidelabel}[3]{%
+\newcommand*{\strdsidelabel}[3]{%
     \strdonlayer{strd piecelayer}{
         \node[strd linelabel,left] at (#1) {#2};
         \node[strd linelabel,right] at (#1) {#3};
     }%
 }
 
-\newcommand{\strdstartlabel}[2]{%
+\newcommand*{\strdstartlabel}[2]{%
     \strdonlayer{strd piecelayer}{
         \node[strd endlabel,above] at (#1 Start) {#2};
     }%
 }
 
-\newcommand{\strdendlabel}[2]{%
+\newcommand*{\strdendlabel}[2]{%
     \strdonlayer{strd piecelayer}{
         \node[strd endlabel,below] at (#1 End) {#2};
     }%
@@ -235,21 +235,21 @@
 
 % transformations
 
-\newcommand{\strdscope}[2]{%
+\newcommand*{\strdscope}[2]{%
     \begin{scope}[#1]
         #2
     \end{scope}%
 }
 
-\newcommand{\strdflip}[1]{\strdscope{xscale=-1}{#1}}
-\newcommand{\strdreverse}[1]{\strdscope{yscale=-1}{#1}}
-\newcommand{\strdxscale}[2]{\strdscope{xscale=#1}{#2}}
-\newcommand{\strdyscale}[2]{\strdscope{yscale=#1}{#2}}
-\newcommand{\strdscale}[3]{\strdscope{xscale=#1,yscale=#2}{#3}}
-\newcommand{\strdnone}[1]{\strdscope{every path/.style=strd none,every node/.style=strd none}{#1}}
-\newcommand{\strdnolabels}[1]{\strdscope{every node/.style=strd none}{#1}}
-\newcommand{\strdpathis}[2]{\strdscope{every path/.style=#1}{#2}}
-\newcommand{\strdnodeis}[2]{\strdscope{every node/.append style=#1}{#2}}
+\newcommand*{\strdflip}[1]{\strdscope{xscale=-1}{#1}}
+\newcommand*{\strdreverse}[1]{\strdscope{yscale=-1}{#1}}
+\newcommand*{\strdxscale}[2]{\strdscope{xscale=#1}{#2}}
+\newcommand*{\strdyscale}[2]{\strdscope{yscale=#1}{#2}}
+\newcommand*{\strdscale}[3]{\strdscope{xscale=#1,yscale=#2}{#3}}
+\newcommand*{\strdnone}[1]{\strdscope{every path/.style=strd none,every node/.style=strd none}{#1}}
+\newcommand*{\strdnolabels}[1]{\strdscope{every node/.style=strd none}{#1}}
+\newcommand*{\strdpathis}[2]{\strdscope{every path/.style=#1}{#2}}
+\newcommand*{\strdnodeis}[2]{\strdscope{every node/.append style=#1}{#2}}
 
 
 % category-theory specific 
@@ -258,27 +258,27 @@
 \tikzset{strd bijlabel/.style={font=\small,rectangle,strd bij,draw,fill=white,inner sep=1.2pt}}
 \tikzset{strd mapping/.style={rounded corners=2pt}}
 
-\newcommand{\strdimplicit}[1]{\strdpathis{densely dotted}{#1}}
+\newcommand*{\strdimplicit}[1]{\strdpathis{densely dotted}{#1}}
 
-\newcommand{\strdlbij}[2]{%
+\newcommand*{\strdlbij}[2]{%
     \strdonlayer{strd piecelayer}{
         \strdpathis{strd bij}{\strdsqsubset{#1}{#2}}
     }%
 }
 
-\newcommand{\strdrbij}[2]{%
+\newcommand*{\strdrbij}[2]{%
     \strdonlayer{strd piecelayer}{
         \strdpathis{strd bij}{\strdsqsupset{#1}{#2}}
     }%
 }
 
-\newcommand{\strdbij}[2]{%
+\newcommand*{\strdbij}[2]{%
     \strdonlayer{strd piecelayer}{
         \strdpathis{strd bij}{\strdsquare{#1}{#2}}
     }%
 }
 
-\newcommand{\strdbijlabel}[2]{%
+\newcommand*{\strdbijlabel}[2]{%
     \strdonlayer{strd piecelayer}{
         \node[strd bijlabel] at (#1) {#2};
     }%
@@ -287,20 +287,20 @@
 
 % composed strings
 
-\newcommand{\strdcap}[2]{%
+\newcommand*{\strdcap}[2]{%
     \strdleft{#1}{#2 Left}
     \strdright{#1}{#2 Right}
     \strdjump{#1}{#2}%
 }
 
-\newcommand{\strdparallel}[2]{%
+\newcommand*{\strdparallel}[2]{%
     \strddup{#1}{#2 Dup}
     \strdmid{#2 Dup Left}{#2 Left}
     \strdmid{#2 Dup Right}{#2 Right}
     \strdjump{#1}{#2}%
 }
 
-\newcommand{\strdcircle}[2]{%
+\newcommand*{\strdcircle}[2]{%
     \strdsubset{#1}{#2 Left}
     \strdsupset{#1}{#2 Right}
     \strdjump{#1}{#2}%
@@ -315,7 +315,7 @@
 \tikzset{strd edgenoise/.style={shorten >= -0.2pt,shorten <= -0.2pt}}
 \tikzset{strd roadpave/.style={line width=2.65pt,strd edgenoise,strd roadcolor}}
 
-\newcommand{\strdroad}[3]{%
+\newcommand*{\strdroad}[3]{%
     \strdscope{strd roadbase}{\csuse{strd#1}{#2}{#3}}
     \strdonlayer{strd pavelayer}{
         \strdscope{strd roadpave}{\csuse{strd#1}{#2}{#3 Paved}}
@@ -323,13 +323,13 @@
 }
 
 % order depends; crossable
-\newcommand{\strdroadx}[3]{%
+\newcommand*{\strdroadx}[3]{%
     \strdscope{strd roadbase}{\csuse{strd#1}{#2}{#3}}
     \strdscope{strd roadpave}{\csuse{strd#1}{#2}{#3 Paved}}%
 }
 
 % slightly noisy
-\newcommand{\strddeadend}[1]{%
+\newcommand*{\strddeadend}[1]{%
     \strdonlayer{strd piecelayer}{
         \draw[strd draw,white,line width=4pt,shorten >=-1pt] {
             ($(#1 End)+(0,5.68pt)$) -- (#1 End)
@@ -340,22 +340,22 @@
     }%
 }
 
-\newcommand{\strdroadlabel}[3]{%
+\newcommand*{\strdroadlabel}[3]{%
     \node[strd linelabel,left,xshift=-1.5pt] at (#1) {#2};
     \node[strd linelabel,right,xshift=1.5pt] at (#1) {#3};%
 }
 
-\newcommand{\strdroadlshift}[2]{%
+\newcommand*{\strdroadlshift}[2]{%
     \node[strd coord] (#2 Start) at ($(#1 End)+(-0.05,0)$) {};
     \node[strd coord] (#2) at (#2 Start) {};
     \node[strd coord] (#2 End) at (#2 Start) {};%
 }
-\newcommand{\strdroadrshift}[2]{\strdflip{\strdroadlshift{#1}{#2}}}
+\newcommand*{\strdroadrshift}[2]{\strdflip{\strdroadlshift{#1}{#2}}}
 
 
 % utilities
 
-\newcommand{\strdfamily}[2]{%
+\newcommand*{\strdfamily}[2]{%
     \left(#2\right)_{\!\!\!#1}%
 }
 
