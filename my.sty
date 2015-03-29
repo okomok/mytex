@@ -1,11 +1,10 @@
 \ProvidesPackage{my}
 
-\usepackage{amsmath,mathtools,etoolbox}
+\usepackage{amsmath,mathtools,etoolbox,lambda}
 
 \newcommand{\mydefeq}{\coloneqq}
 \newcommand{\myeqdef}{\eqqcolon}
 
-\newcommand{\myidentity}[1]{#1}
 \newcommand{\mycomment}[1]{}
 
 \newcommand\myassign[2]{%
@@ -24,26 +23,9 @@
 }
 
 \newcommand{\myin}[2]{%
-    \begin{#1}
-        #2
-    \end{#1}%
+    \Foldr{\myin@}{#2}{\Listize#1}%
 }
-\newcommand{\myinn}[3]{%
-    \begin{#1}
-        \begin{#2}
-            #3
-        \end{#2}
-    \end{#1}%
-}
-\newcommand{\myinnn}[4]{%
-    \begin{#1}
-        \begin{#2}
-            \begin{#3}
-                #4
-            \end{#3}
-        \end{#2}
-    \end{#1}%
-}
+\newcommand{\myin@}[2]{\begin{#1}#2\end{#1}}
 
 \newcommand*{\myprime}{^{\prime}\mkern-1.2mu}
 \newcommand*{\mydprime}{^{\prime\prime}\mkern-1.2mu}

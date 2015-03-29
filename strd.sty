@@ -1,12 +1,12 @@
 \ProvidesPackage{strd}
 
-\usepackage{amsmath,mathtools,etoolbox,my}
+\usepackage{amsmath,mathtools,etoolbox,lambda,my}
 \usepackage{tikz}
 \usepackage[active,tightpage]{preview}
 \usetikzlibrary{shapes,calc,decorations.markings,backgrounds}
 
 
-\newcommand{\strd}[1]{\csuse{str#1}}
+\newcommand{\strd}[1]{\csuse{strd#1}}
 
 
 % styles
@@ -52,6 +52,9 @@
 }
 
 \newcommand{\strdpicturein}[2]{%
+    \Foldr{\strdpicturein@}{#2}{\Listize#1}%
+}
+\newcommand{\strdpicturein@}[2]{%
     \begin{#1}
         \!
         \strdpicture{#2}
