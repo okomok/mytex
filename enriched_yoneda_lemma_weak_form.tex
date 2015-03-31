@@ -1,0 +1,113 @@
+\documentclass{article}
+\usepackage{strd,cat,my,stmaryrd}
+
+\begin{document}
+
+
+\myin[preview,math]{
+    \strdfamily{A}{
+        \strdin[gathered]{
+            \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\mathcal{A}(K,A)}{FA}
+            \strdcelllabel{u End}{\alpha_A}
+            \strdstartlabel{u}{(\mathcal{V})}
+        }
+    } \mapsto
+    \strdin[gathered]{
+        \strdxscale{1.5}{
+            \strdroad{branch}{\strdorigin}{u}
+        }
+        \strdroadlabel{u Top}{I}{FK}
+        \strdroadlabel{u Left}{}{\mathcal{A}(K,K)}
+        \strdcelllabel{u Right End}{\alpha_K}
+        \strdroad{mid}{u Left}{j}
+        \strddeadend{j}
+        \strdbij{u Left}{b}
+        \strdroadlabel{j}{}{K}
+        \strdstartlabel{u Top}{(\mathcal{V})}
+    } \sim
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{FK}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{}{K}
+        \strddeadend{u2}
+        \strdbijlabel{u End}{\alpha_K}
+    }
+}
+
+\myin[preview,math]{
+    \strdfamily{A}{
+        \strdin[gathered]{
+            \strdxscale{3}{
+                \strdroad{branch}{\strdorigin}{u} \strdroadlabel{u Top}{\mathcal{A}(K,A)}{FA}
+                \strdroadlabel{u Left}{}{[FK,FA]}
+                \strdroadlabel{u Right}{}{}
+                \strdroad{mid}{u Top}{u Mid}
+                \strdroadlabel{u Mid}{}{[I,FA]}
+            }
+            \strdbijlabel{u Left End}{F}
+            \strdstartlabel{u Top}{(\mathcal{V})}
+            \strdroad{mid}{u Mid}{u MMid}
+            \strdroad{left}{u MMid}{u MMid Left}
+            \strdcelllabel{u MMid Left End}{f}
+            \strdroadlabel{u MMid}{I}{}
+            \strdyscale{1}{\strdroad{mid}{u MMid}{u MMMid}}
+            \strdroadlabel{u MMMid}{}{FA}
+            \strdyscale{1}{\strdroad{mid}{u MMMid}{u MMMMid}}
+            \strdroadlabel{u MMMMid}{FK}{}
+           % \strdroadlabel{u MMid Left}{}{FK}
+            \strdscale{2}{3}{\strdlbij{u Mid}{mbl}}
+            \strdscale{1.2}{3}{\strdrbij{u Mid}{mbr}}
+            \strdyscale{1}{
+                \strdnone{\strdmid{u Right}{urm} \strdsidelabel{urm}{}{FA}}
+                \strdroadrshift{u Right}{urms} \strdmid{urms}{urmsj} \strdsidelabel{urmsj}{}{FA}
+                \strdroad{mid}{urm}{urmm} % \strdroadlabel{urmm}{I}{FA}
+                \strdroad{mid}{urmm}{urmmm} \strdroadlabel{urmmm}{I}{FA}
+                \strdscale{1.5}{3}{\strdbij{u Right}{urb}}
+                \strdscale{1}{1}{\strdbij{urm}{urb}}
+            }
+        } \sim
+        \strdin[gathered]{
+           % \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\mathcal{A}(K,A)}{FA}
+            \strdnone{\strdmid{\strdorigin}{u2} \strdsidelabel{u2}{}{FA}}
+            \strdroadrshift{\strdorigin}{u2s} \strdmid{u2s}{u2sm} \strdsidelabel{u2sm}{}{FA}
+            \strdroad{branch}{u2}{u3} \strdroadlabel{u3 Top}{I}{FA}
+            \strdroadlabel{u3 Left}{}{FK}
+            \strdcelllabel{u3 Left End}{f}
+            \strdcelllabel{u3 Right End}{F}
+            \strdroad{mid}{u3 Right}{u4}
+            \strdroad{mid}{u4}{u5}
+            %\strdscale{3}{5}{\strdbij{u}{u1b}}
+            \strdscale{2}{3}{\strdbij{u2}{u2b}}
+            %\strdroadlabel{u4}{K}{A}
+            \strdroadlabel{u5}{K}{A}
+        }
+    } \mapsfrom
+    \strdin[gathered]{ 
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{I}{FK}
+        \strdcelllabel{u End}{f}
+        \strdstartlabel{u}{(\mathcal{V})}
+    } \sim
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{FK}
+        \strdbijlabel{u End}{f}
+    }
+}
+
+\myin[preview,math]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\mathcal{A}(A,K)}{FA}
+        \strdnone{\strdmid{u}{u2} \strdsidelabel{u2}{}{FA}}
+        \strdroadrshift{u}{u2s} \strdmid{u2s}{u2sm} \strdsidelabel{u2sm}{}{FA}
+        \strdroad{branch}{u2}{u3} \strdroadlabel{u3 Top}{I}{FA}
+        \strdroadlabel{u3 Left}{}{FK}
+        \strdcelllabel{u3 Left End}{f}
+        \strdcelllabel{u3 Right End}{F}
+        \strdroad{mid}{u3 Right}{u4}
+        \strdroad{mid}{u4}{u5}
+        \strdscale{3}{5}{\strdbij{u}{u1b}}
+        \strdscale{2}{3}{\strdbij{u2}{u2b}}
+        \strdroadlabel{u4}{K}{A}
+        \strdroadlabel{u5}{K}{A}
+    }
+}
+
+\end{document}
