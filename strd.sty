@@ -6,7 +6,7 @@
 \usetikzlibrary{shapes,calc,decorations.markings,backgrounds}
 
 
-\newcommand*{\strds}[1]{%
+\newcommand*{\strduse}[1]{%
     \ifcsdef{strd\detokenize{#1}}{\csuse{strd#1}}{#1}%
 }
 
@@ -106,7 +106,7 @@
         (#2 Start) parabola (#2 Corner) -- (#2 End)
     };%
 }
-\newcommand*{\strdright}[2]{\strdflip{\strdleft{#1}{#2}}}
+\newcommand*{\strdright}{\strdflipped{left}}
 
 \newcommand*{\strdmid}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
@@ -126,7 +126,7 @@
         (#2 Start) -- (#2 Corner) parabola[bend at end] (#2 End)
     };%
 }
-\newcommand*{\strdunright}[2]{\strdflip{\strdunleft{#1}{#2}}}
+\newcommand*{\strdunright}{\strdflipped{unleft}}
 
 \newcommand*{\strdconnect}[3]{%
     \node[strd coord] (#3 Start) at (#1 Start) {};
@@ -142,7 +142,7 @@
         (#2 Start) -- (#2 End)
     };%
 }
-\newcommand*{\strdhright}[2]{\strdflip{\strdhleft{#1}{#2}}}
+\newcommand*{\strdhright}{\strdflipped{hleft}}
 
 \newcommand*{\strdminus}[2]{%
     \strdxscale{0.5}{
@@ -162,7 +162,7 @@
         (#2 Start) parabola (#2 StartCorner) -- (#2 EndCorner) parabola[bend at end] (#2 End)
     };%
 }
-\newcommand*{\strdsupset}[2]{\strdflip{\strdsubset{#1}{#2}}}
+\newcommand*{\strdsupset}{\strdflipped{subset}}
 
 \newcommand*{\strdlint}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
@@ -174,12 +174,12 @@
         (#2 Start) parabola (#2 StartCorner) -- (#2 EndCorner) parabola[bend at end] (#2 End)
     };%
 }
-\newcommand*{\strdrint}[2]{\strdflip{\strdlint{#1}{#2}}}
+\newcommand*{\strdrint}{\strdflipped{lint}}
 
-\newcommand*{\strdjump}[2]{\strdnone{\strdmid{#1}{#2}}}
-\newcommand*{\strdlshift}[2]{\strdnone{\strdhleft{#1}{#2}}}
-\newcommand*{\strdrshift}[2]{\strdnone{\strdhright{#1}{#2}}}
-\newcommand*{\strddup}[2]{\strdnone{\strdminus{#1}{#2}}}
+\newcommand*{\strdjump}{\strdnoned{mid}}
+\newcommand*{\strdlshift}{\strdnoned{hleft}}
+\newcommand*{\strdrshift}{\strdnoned{hright}}
+\newcommand*{\strddup}{\strdnoned{minus}}
 
 
 % square strings
@@ -194,7 +194,7 @@
         (#2 Start) -- (#2 StartCorner) -- (#2 EndCorner) -- (#2 End)
     };%
 }
-\newcommand*{\strdsqsupset}[2]{\strdflip{\strdsqsubset{#1}{#2}}}
+\newcommand*{\strdsqsupset}{\strdflipped{sqsubset}}
 
 \newcommand*{\strdsquare}[2]{%
     \strdsqsubset{#1}{#2 Left}
@@ -243,15 +243,15 @@
     \end{scope}%
 }
 
-\newcommand*{\strdflip}[1]{\strdscope{xscale=-1}{#1}}
-\newcommand*{\strdreverse}[1]{\strdscope{yscale=-1}{#1}}
-\newcommand*{\strdxscale}[2]{\strdscope{xscale=#1}{#2}}
-\newcommand*{\strdyscale}[2]{\strdscope{yscale=#1}{#2}}
-\newcommand*{\strdscale}[3]{\strdscope{xscale=#1,yscale=#2}{#3}}
-\newcommand*{\strdnone}[1]{\strdscope{every path/.style=strd none,every node/.style=strd none}{#1}}
-\newcommand*{\strdnolabels}[1]{\strdscope{every node/.style=strd none}{#1}}
-\newcommand*{\strdpathis}[2]{\strdscope{every path/.style=#1}{#2}}
-\newcommand*{\strdnodeis}[2]{\strdscope{every node/.append style=#1}{#2}}
+\newcommand*{\strdflip}{\strdscope{xscale=-1}}
+\newcommand*{\strdreverse}{\strdscope{yscale=-1}}
+\newcommand*{\strdxscale}[1]{\strdscope{xscale=#1}}
+\newcommand*{\strdyscale}[1]{\strdscope{yscale=#1}}
+\newcommand*{\strdscale}[2]{\strdscope{xscale=#1,yscale=#2}}
+\newcommand*{\strdnone}{\strdscope{every path/.style=strd none,every node/.style=strd none}}
+\newcommand*{\strdnolabels}{\strdscope{every node/.style=strd none}}
+\newcommand*{\strdpathis}[1]{\strdscope{every path/.style=#1}}
+\newcommand*{\strdnodeis}[1]{\strdscope{every node/.append style=#1}}
 
 
 % category-theory specific 
@@ -260,7 +260,7 @@
 \tikzset{strd bijlabel/.style={font=\small,rectangle,strd bij,draw,fill=white,inner sep=1.2pt}}
 \tikzset{strd mapping/.style={rounded corners=2pt}}
 
-\newcommand*{\strdimplicit}[1]{\strdpathis{densely dotted}{#1}}
+\newcommand*{\strdimplicit}{\strdpathis{densely dotted}}
 
 \newcommand*{\strdlbij}[2]{%
     \strdonlayer{strd piecelayer}{
@@ -322,16 +322,16 @@
 \tikzset{strd roadpave/.style={line width=2.65pt,strd edgenoise,strd roadcolor}}
 
 \newcommand*{\strdroad}[3]{%
-    \strdscope{strd roadbase}{\strds{#1}{#2}{#3}}
+    \strdscope{strd roadbase}{\strduse{#1}{#2}{#3}}
     \strdonlayer{strd pavelayer}{
-        \strdscope{strd roadpave}{\strds{#1}{#2}{#3 Paved}}
+        \strdscope{strd roadpave}{\strduse{#1}{#2}{#3 Paved}}
     }
 }
 
 % order depends; crossable
 \newcommand*{\strdroadx}[3]{%
-    \strdscope{strd roadbase}{\strds{#1}{#2}{#3}}
-    \strdscope{strd roadpave}{\strds{#1}{#2}{#3 Paved}}%
+    \strdscope{strd roadbase}{\strduse{#1}{#2}{#3}}
+    \strdscope{strd roadpave}{\strduse{#1}{#2}{#3 Paved}}%
 }
 
 % slightly noisy
@@ -358,20 +358,27 @@
     \node[strd coord] (#2) at (#2 Start) {};
     \node[strd coord] (#2 End) at (#2 Start) {};%
 }
-\newcommand*{\strdroadrshift}[2]{\strdflip{\strdroadlshift{#1}{#2}}}
+\newcommand*{\strdroadrshift}{\strdflipped{roadlshift}}
 
 
 % command combinators
 
+\newcommand*{\strdtofun}[4]{%
+    \strduse{#1}{\strduse{#2}{#3}{#4}}%
+}
+
+\newcommand*{\strdflipped}{\strdtofun{flip}}
+\newcommand*{\strdnoned}{\strdtofun{none}}
+
 \newcommand*{\strdlshifted}[3]{%
     \strdlshift{#2}{#2 Start}
-    \strds{#1}{#2 Start}{#3}%
+    \strduse{#1}{#2 Start}{#3}%
 }
 \newcommand*{\strdrshifted}[3]{\strdflip{\strdlshifted{#1}{#2}{#3}}}
 
 \newcommand*{\strdroadlshifted}[3]{%
     \strdroadlshift{#2}{#2 Start}
-    \strds{#1}{#2 Start}{#3}%
+    \strduse{#1}{#2 Start}{#3}%
 }
 \newcommand*{\strdroadrshifted}[3]{\strdflip{\strdroadlshifted{#1}{#2}{#3}}}
 
