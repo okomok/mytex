@@ -1,7 +1,6 @@
 \ProvidesPackage{strd}
 
-\usepackage{amsmath,mathtools,etoolbox,lambda,my}
-\usepackage{tikz}
+\usepackage{tikz,lambda}
 \usepackage[active,tightpage]{preview}
 \usetikzlibrary{shapes,calc,decorations.markings,backgrounds}
 
@@ -54,9 +53,9 @@
 }
 
 \def\strdin[#1]#2{%
-    \Foldr{\strdinf}{#2}{\Listize[#1]}%
+    \Foldr{\strdinimpl}{#2}{\Listize[#1]}%
 }
-\newcommand*{\strdinf}[2]{%
+\newcommand*{\strdinimpl}[2]{%
     \begin{#1}
         \! % why needed?
         \strd{#2}
@@ -73,19 +72,13 @@
     \node[strd coord] (#1 End) at (#4) {};%
 }
 
-\newcommand*{\strdcoordat}[3]{%
-    \node[strd coord] (#3 Start) at (#1,#2) {};
-    \node[strd coord] (#3) at (#1,#2) {};
-    \node[strd coord] (#3 End) at (#1,#2) {};%
-}
-
 \newcommand*{\strdcoord}[2]{%
     \node[strd coord] (#2 Start) at (#1) {};
     \node[strd coord] (#2) at (#1) {};
     \node[strd coord] (#2 End) at (#1) {};%
 }
 
-\newcommand*{\strddeclorigin}{\strdcoordat{0}{0}{strdorigin}}
+\newcommand*{\strddeclorigin}{\strdcoord{0,0}{strdorigin}}
 \newcommand*{\strdorigin}{strdorigin}
 
 
@@ -244,7 +237,7 @@
 }
 
 \newcommand*{\strdflip}{\strdscope{xscale=-1}}
-\newcommand*{\strdreverse}{\strdscope{yscale=-1}}
+\newcommand*{\strdinv}{\strdscope{yscale=-1}}
 \newcommand*{\strdxscale}[1]{\strdscope{xscale=#1}}
 \newcommand*{\strdyscale}[1]{\strdscope{yscale=#1}}
 \newcommand*{\strdscale}[2]{\strdscope{xscale=#1,yscale=#2}}
@@ -325,7 +318,7 @@
     \strdscope{strd roadbase}{\strduse{#1}{#2}{#3}}
     \strdonlayer{strd pavelayer}{
         \strdscope{strd roadpave}{\strduse{#1}{#2}{#3 Paved}}
-    }
+    }%
 }
 
 % order depends; crossable

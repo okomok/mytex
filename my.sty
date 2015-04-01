@@ -22,8 +22,8 @@
     \ensuremath{({} ^ \exists #1)(#2)}%
 }
 
-\def\myin[#1]#2{\Foldr{\myinf}{#2}{\Listize[#1]}}
-\newcommand*{\myinf}[2]{\begin{#1}#2\end{#1}}
+\def\myin[#1]#2{\Foldr{\myinimpl}{#2}{\Listize[#1]}}
+\newcommand*{\myinimpl}[2]{\begin{#1}#2\end{#1}}
 
 \newcommand*{\myprime}{^{\prime}\mkern-1.2mu}
 \newcommand*{\mydprime}{^{\prime\prime}\mkern-1.2mu}
