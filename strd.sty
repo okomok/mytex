@@ -6,7 +6,9 @@
 \usetikzlibrary{shapes,calc,decorations.markings,backgrounds}
 
 
-\newcommand*{\strds}[1]{\csuse{strd#1}}
+\newcommand*{\strds}[1]{%
+    \ifcsdef{strd\detokenize{#1}}{\csuse{strd#1}}{#1}%
+}
 
 
 % styles
@@ -320,16 +322,16 @@
 \tikzset{strd roadpave/.style={line width=2.65pt,strd edgenoise,strd roadcolor}}
 
 \newcommand*{\strdroad}[3]{%
-    \strdscope{strd roadbase}{\csuse{strd#1}{#2}{#3}}
+    \strdscope{strd roadbase}{\strds{#1}{#2}{#3}}
     \strdonlayer{strd pavelayer}{
-        \strdscope{strd roadpave}{\csuse{strd#1}{#2}{#3 Paved}}
+        \strdscope{strd roadpave}{\strds{#1}{#2}{#3 Paved}}
     }
 }
 
 % order depends; crossable
 \newcommand*{\strdroadx}[3]{%
-    \strdscope{strd roadbase}{\csuse{strd#1}{#2}{#3}}
-    \strdscope{strd roadpave}{\csuse{strd#1}{#2}{#3 Paved}}%
+    \strdscope{strd roadbase}{\strds{#1}{#2}{#3}}
+    \strdscope{strd roadpave}{\strds{#1}{#2}{#3 Paved}}%
 }
 
 % slightly noisy
@@ -359,9 +361,22 @@
 \newcommand*{\strdroadrshift}[2]{\strdflip{\strdroadlshift{#1}{#2}}}
 
 
+% command combinators
+
+\newcommand*{\strdlshifted}[3]{%
+    \strdlshift{#2}{#2 Start}
+    \strds{#1}{#2 Start}{#3}%
+}
+\newcommand*{\strdrshifted}[3]{\strdflip{\strdlshifted{#1}{#2}{#3}}}
+
+\newcommand*{\strdroadlshifted}[3]{%
+    \strdroadlshift{#2}{#2 Start}
+    \strds{#1}{#2 Start}{#3}%
+}
+\newcommand*{\strdroadrshifted}[3]{\strdflip{\strdroadlshifted{#1}{#2}{#3}}}
+
+
 % utilities
 
-\newcommand*{\strdfamily}[2]{%
-    \left(#2\right)_{\!\!\!#1}%
-}
+\newcommand*{\strdfamily}[2]{\left(#2\right)_{\!\!\!#1}}
 

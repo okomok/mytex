@@ -3,8 +3,26 @@
 
 \begin{document}
 
-\myinn{preview}{math}{
-    \strdpicturein{gathered}{
+\myin[preview,math]{
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u}
+        \strdmid{u}{u2}
+        \strdmid{u2}{u3}
+        \strdrshifted{mid}{u}{u2s}
+        \strdmid{u2s}{u3s}
+    }
+}
+
+\myin[preview,math]{
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u}
+        \strdroadlshifted{\strdroad{mid}}{u}{u2}
+        \strdroadrshifted{mid}{u2}{u3}
+    }
+}
+
+\myin[preview,math]{
+    \strdin[gathered]{
         \strdscope{-<-}{
             \strdmid{\strdorigin}{U} \strdsidelabel{U}{A}{B}
             \strdleft{U}{L} \strdsidelabel{L}{C}{D}
@@ -15,8 +33,8 @@
     }
 }
 
-\myinn{preview}{math}{
-    \strdpicturein{gathered}{
+\myin[preview,math]{
+    \strdin[gathered]{
         \strdsubset{\strdorigin}{U}
         \strdsidelabel{U}{A}{B}
         \strdsupset{U}{U2}
@@ -24,24 +42,24 @@
     }
 }
 
-\myinn{preview}{math}{
-    \strdpicturein{gathered}{
+\myin[preview,math]{
+    \strdin[gathered]{
         \strddup{\strdorigin}{U}
         \strdleft{U Left}{L}
         \strdright{U Right}{R}
     }
 }
 
-\myinn{preview}{math}{
-    \strdpicturein{gathered}{
+\myin[preview,math]{
+    \strdin[gathered]{
         \strdrint{\strdorigin}{U}
         \strdsidelabel{U}{A}{B}
         \strdlint{U}{U2}
     }
 }
 
-\myinn{preview}{math}{
-    \strdpicturein{gathered}{
+\myin[preview,math]{
+    \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{U}
         \strdroad{left}{U}{L}
         \strdroad{right}{U}{R}
@@ -52,16 +70,14 @@
     }
 }
 
-\myinn{preview}{math}{
-    \strdpicturein{gathered}{
+\myin[preview,math]{
+    \strdin[gathered]{
         \strdscale{2}{2}{
         \strdroad{mid}{\strdorigin}{U}
         \strdroad{left}{U}{L}
         \strdroad{right}{U}{R}
-
         \strdroad{unleft}{L}{UL}
         \strdroad{right}{UL}{ULR}
-
         \strdroadx{unright}{R}{UR}
         \strdroadx{left}{UL}{ULL}
         \strdcelllabel{L End}{a}
@@ -69,23 +85,19 @@
     }
 }
 
-\myinn{preview}{math}{
-    \strdpicturein{gathered}{
+\myin[preview,math]{
+    \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{U}
         \strdroad{left}{U}{L}
         \strdroad{mid}{U}{M}
         \strdroad{right}{U}{R}
-
         \strdroadx{mid}{M}{M2}
         \strdroadx{mid}{M2}{M3}
         \strddeadend{M3}
-
         \strdroadx{unleft}{L}{UL}
         \strdroadx{right}{UL}{ULR}
-
         \strdroad{unright}{R}{UR}
         \strdroad{left}{UL}{ULL}
-
         \strdcelllabel{L End}{a}
         \strdendlabel{ULL}{A B}
         \strdroadlabel{R End}{B}{C}
