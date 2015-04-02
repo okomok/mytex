@@ -12,10 +12,10 @@
 
 % styles
 
-\tikzset{strd celllabel/.style={font=\small,rounded rectangle,very thin,solid,rounded corners=0pt,rounded rectangle arc length=90,draw,fill=white,inner sep=1.2pt}}
+\tikzset{strd celllabel/.style={font=\normalsize,rounded rectangle,very thin,solid,rounded corners=0pt,rounded rectangle arc length=90,draw,fill=white,inner sep=1.2pt}}
 \tikzset{strd linelabel/.style={font=\scriptsize,inner sep=0.2pt,strd textvaligned}}
-\tikzset{strd endlabel/.style={font=\small,inner sep=1pt,strd textvaligned}}
-\tikzset{strd textvaligned/.style={text height=1.4ex,text depth=0.25ex}}
+\tikzset{strd endlabel/.style={font=\normalsize,inner sep=1pt,strd textvaligned}}
+\tikzset{strd textvaligned/.style={text height=1.5ex,text depth=0.25ex}}
 \tikzset{strd coord/.style={coordinate}}
 \tikzset{strd dot/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
 \tikzset{strd mathnodes/.style={execute at begin node=$,execute at end node=$}}
@@ -84,6 +84,19 @@
 
 % strings
 
+\newcommand*{\strdxunit}{0.5}
+\newcommand*{\strdyunit}{0.8}
+\newcommand*{\strdhalfxunit}{0.25}
+\newcommand*{\strdhalfyunit}{0.4}
+\newcommand*{\strdunitdiff}{0.3}
+\iffalse
+\newcommand*{\strdxunit}{0.63}
+\newcommand*{\strdyunit}{1.02}
+\newcommand*{\strdhalfxunit}{0.315}
+\newcommand*{\strdhalfyunit}{0.51}
+\newcommand*{\strdunitdiff}{0.39}
+\fi
+
 \newcommand*{\strdempty}[2]{%
     \node[strd coord] (#2) at (#1 End) {};
     \node[strd coord] (#2 Start) at (#2) {};
@@ -92,9 +105,9 @@
 
 \newcommand*{\strdleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2 Corner) at ($(#1 End)+(-0.5,-0.3)$) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-0.5,-0.4)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(-0.5,-0.8)$) {};
+    \node[strd coord] (#2 Corner) at ($(#1 End)+(-\strdxunit,-\strdunitdiff)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-\strdxunit,-\strdhalfyunit)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(-\strdxunit,-\strdyunit)$) {};
     \draw[strd draw]{
         (#2 Start) parabola (#2 Corner) -- (#2 End)
     };%
@@ -103,8 +116,8 @@
 
 \newcommand*{\strdmid}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(0,-0.4)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.8)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(0,-\strdhalfyunit)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(0,-\strdyunit)$) {};
     \draw[strd draw]{
         (#2 Start) -- (#2 End)
     };%
@@ -112,9 +125,9 @@
 
 \newcommand*{\strdunleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(0,-0.4)$) {};
-    \node[strd coord] (#2 Corner) at ($(#1 End)+(0,-0.5)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(0.5,-0.8)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(0,-\strdhalfyunit)$) {};
+    \node[strd coord] (#2 Corner) at ($(#1 End)+(0,-\strdxunit)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(\strdxunit,-\strdyunit)$) {};
     \draw[strd draw]{
         (#2 Start) -- (#2 Corner) parabola[bend at end] (#2 End)
     };%
@@ -129,8 +142,8 @@
 
 \newcommand*{\strdhleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-0.25,0)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(-0.5,0)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-\strdhalfxunit,0)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(-\strdxunit,0)$) {};
     \draw[strd draw]{
         (#2 Start) -- (#2 End)
     };%
@@ -147,10 +160,10 @@
 
 \newcommand*{\strdsubset}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-0.5,-0.3)$) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-0.5,-0.4)$) {};
-    \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-0.5,-0.5)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.8)$) {};
+    \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-\strdxunit,-\strdunitdiff)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-\strdxunit,-\strdhalfyunit)$) {};
+    \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-\strdxunit,-\strdxunit)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(0,-\strdyunit)$) {};
     \draw[strd draw]{
         (#2 Start) parabola (#2 StartCorner) -- (#2 EndCorner) parabola[bend at end] (#2 End)
     };%
@@ -159,10 +172,10 @@
 
 \newcommand*{\strdlint}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-0.5,-0.3)$) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-0.5,-0.4)$) {};
-    \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-0.5,-0.5)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(-1,-0.8)$) {};
+    \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-\strdxunit,-\strdunitdiff)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-\strdxunit,-\strdhalfyunit)$) {};
+    \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-\strdxunit,-\strdxunit)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(-1,-\strdyunit)$) {};
     \draw[strd draw]{
         (#2 Start) parabola (#2 StartCorner) -- (#2 EndCorner) parabola[bend at end] (#2 End)
     };%
@@ -179,10 +192,10 @@
 
 \newcommand*{\strdsqsubset}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-0.5,0)$) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-0.5,-0.4)$) {};
-    \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-0.5,-0.8)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(0,-0.8)$) {};
+    \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-\strdxunit,0)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-\strdxunit,-\strdhalfyunit)$) {};
+    \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-\strdxunit,-\strdyunit)$) {};
+    \node[strd coord] (#2 End) at ($(#1 End)+(0,-\strdyunit)$) {};
     \draw[strd draw]{
         (#2 Start) -- (#2 StartCorner) -- (#2 EndCorner) -- (#2 End)
     };%
