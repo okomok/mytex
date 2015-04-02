@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage{strd,cat,my,stmaryrd,latexsym}
+
+\begin{document}
+
+\myin[preview,math]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{B}{TK}
+        \strdbijlabel{u End}{f}
+        \strdstartlabel{u}{\mathcal{B}}
+    } \leadsto 
+    \strdfamily{A}{
+        \strdin[gathered]{
+            \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\mathcal{A}(K,A)}{\mathcal{B}(B,TA)}
+            \strdcelllabel{u End}{\alpha}
+            \strdstartlabel{u}{(\mathcal{V})}
+        } =
+        \strdin[gathered]{
+            \strdxscale{1.8}{\strdroad{branch}{\strdorigin}{u}}
+            \strdroadlabel{u Top}{\mathcal{A}(K,A)}{\mathcal{B}(B,TA)}
+            \strdroadlabel{u Left}{}{\mathcal{B}(TK,TA)}
+            \strdroad{left}{u Right}{ta} \strdroadlabel{ta}{}{TA} \strddeadend{ta}
+            \strdroad{right}{u Right}{btk} \strdroadlabel{btk}{B}{TK}
+            \strdbijlabel{u Left End}{T}
+            \strdcelllabel{u Right End}{\operatorname{Hom}_{\mathcal{B}}}
+            \strdbijlabel{btk End}{f}
+            \strdstartlabel{u Top}{(\mathcal{V})}
+        }
+    } 
+}
+
+\myin[preview,math]{
+    \strdfamily{A}{
+        \strdin[gathered]{
+            \strdroad{mid}{\strdorigin}{u}
+            \strdroadlabel{u}{\mathcal{A}(K,A)}{\mathcal{B}(B,A)}
+            \strdcelllabel{u End}{\alpha}
+            \strdstartlabel{u}{(\mathcal{V})}
+        }
+    } : \mathcal{V}\text{-natural iso} \iff
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{B}{K}
+        \strdbijlabel{u End}{f}
+        \strdstartlabel{u}{\mathcal{B}}
+    } : \text{iso in } \mathcal{B}_0
+}
+
+\end{document}
