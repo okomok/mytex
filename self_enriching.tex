@@ -5,28 +5,91 @@
 
 \myin[preview,math]{
     \strdin[gathered]{
-        \strds{mid}{\strdorigin}{U} \strdsidelabel{U}{}{Y}
+        \strduse{mid}{\strdorigin}{U} \strdsidelabel{U}{}{Y}
         \strdmid{U}{U2} \strdsidelabel{U2}{}{X}
         \strdcelllabel{U End}{f}
     } \mapsto
     \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{U0} \strdroadlabel{U0}{X}{Y}
-        \strdmid{U0}{U} \strdsidelabel{U}{}{Y}
+        \strdroadrshifted{mid}{U0}{U} \strdsidelabel{U}{}{Y}
         \strdleft{U}{L} \strdsidelabel{L}{}{X}
         \strdimplicit{
             \strdright{U}{R} \strdsidelabel{R}{}{I}
             \strdmid{R}{R2} \strdsidelabel{R2}{}{I}
         }
-        \strdscale{2}{2}{\strdbij{U0}{box}}
+        \strdscale{2}{2}{\strdbijsq{U0}{box}}
         \strdcelllabel{U End}{f}
         \strdstartlabel{U0}{(\mathcal{V})}
     } \myeqdef
     \strdin[gathered]{
-        \strdroad{mid}{\strdorigin}{U0} \strdroadlabel{U0}{[X}{Y]}
+        \strdroad{mid}{\strdorigin}{U0} \strdroadlabel{U0}{X}{Y}
         \strdbijlabel{U0 End}{f}
-%        \strdstartlabel{U0}{(\mathcal{V})}
+        \strdstartlabel{U0}{(\mathcal{V})}
     }
 }
+
+% functoriality of self-enriching
+\myin[preview,math]{
+    \strdin[gathered]{
+        \strdroad{branch}{\strdorigin}{U} \strdroadlabel{U Top}{X}{Z}
+        \strdbijlabel{U Left End}{f}
+        \strdbijlabel{U Right End}{g}
+        \strdstartlabel{U Top}{(\mathcal{V})}
+        \strdroadlabel{U Left}{}{Y}
+    } = 
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{X}{Z}
+        \strdroadrshifted{mid}{U}{Z} \strdsidelabel{Z}{}{Z}
+        \strdcelllabel{Z End}{g}
+        \strdmid{Z}{Y} \strdsidelabel{Y}{}{Y}
+        \strdcelllabel{Y End}{f}
+        \strdmid{Y}{X} \strdsidelabel{X}{}{X}
+        \strdscale{1}{3}{\strdbijsq{U}{b}}
+    }
+}
+
+
+% self-enriched naturality
+\myin[preview,math]{
+    \strdin[gathered]{
+        \strdxscale{2}{\strdroad{branch}{\strdorigin}{u}}
+        \strdbijlabel{u Left End}{S}
+        \strdbijlabel{u Right End}{[\alpha_A,\mydash]}
+        \strdroadlabel{u Top}{\mathcal{A}(A,B)}{\mathcal{B}(TA,SB)}
+        \strdroadlabel{u Left}{}{\mathcal{B}(SA,SB)}
+        \strdstartlabel{U Top}{(\mathcal{V})}
+    } =
+    \strdin[gathered]{
+        \strdxscale{2}{\strdroad{branch}{\strdorigin}{u}}
+        \strdbijlabel{u Left End}{T}
+        \strdbijlabel{u Right End}{[\mydash,\alpha_B]}
+        \strdroadlabel{u Top}{\mathcal{A}(A,B)}{\mathcal{B}(TA,SB)}
+        \strdroadlabel{u Left}{}{\mathcal{B}(TA,TB)}
+        \strdstartlabel{U Top}{(\mathcal{V})}
+    }
+}
+
+% self-enriched extranaturality
+\myin[preview,math]{
+    \strdin[gathered]{
+        \strdxscale{3}{\strdroad{branch}{\strdorigin}{u}}
+        \strdbijlabel{u Left End}{T(A,\mydash)}
+        \strdbijlabel{u Right End}{[\beta_A,\mydash]}
+        \strdroadlabel{u Top}{\mathcal{A}(A,B)}{[K,T(A,B)]}
+        \strdroadlabel{u Left}{}{[T(A,A),T(A,B)]}
+        \strdstartlabel{U Top}{(\mathcal{V})}
+    } =
+    \strdin[gathered]{
+        \strdxscale{3}{\strdroad{branch}{\strdorigin}{u}}
+        \strdbijlabel{u Left End}{T(\mydash,B)}
+        \strdbijlabel{u Right End}{[\beta_B,\mydash]}
+        \strdroadlabel{u Top}{\mathcal{A}(A,B)}{[K,T(A,B)]}
+        \strdroadlabel{u Left}{}{[T(B,B),T(A,B)]}
+        \strdstartlabel{U Top}{(\mathcal{V})}
+    }
+}
+
+ 
 
 \myin[preview,math]{
     M _{A,B,C} \mydefeq
@@ -40,15 +103,17 @@
 
 \myin[preview,math]{
     \strdin[gathered]{
-        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{[\mathcal{A}(B,C) \otimes \mathcal{A}(A,B)}{\mathcal{A}(A,C)]}
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{\mathcal{A}(B,C) \otimes \mathcal{A}(A,B)}{\mathcal{A}(A,C)}
         \strdbijlabel{U End}{M}
+        \strdstartlabel{U}{(\mathcal{V})}
     }
 }
 
 \myin[preview,math]{
     \strdin[gathered]{
-        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{[\operatorname{Ten}(\operatorname{Hom}_{\mathcal{A}}(B,C),\operatorname{Hom}_{\mathcal{A}}(A,B))}{\operatorname{Hom}_{\mathcal{A}}(A,C)]}
+        \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{\operatorname{Ten}(\operatorname{Hom}_{\mathcal{A}}(B,C),\operatorname{Hom}_{\mathcal{A}}(A,B))}{\operatorname{Hom}_{\mathcal{A}}(A,C)}
         \strdbijlabel{U End}{M}
+        \strdstartlabel{U}{(\mathcal{V})}
     }
 }
 

@@ -347,14 +347,14 @@
 \newcommand*{\strdnoned}{\strdtofun{none}}
 
 \newcommand*{\strdlshifted}[3]{%
-    \strdlshift{#2}{#2 Start}
-    \strduse{#1}{#2 Start}{#3}%
+    \strdlshift{#2}{#2 Shifted}
+    \strduse{#1}{#2 Shifted}{#3}%
 }
 \newcommand*{\strdrshifted}[3]{\strdflip{\strdlshifted{#1}{#2}{#3}}}
 
 \newcommand*{\strdroadlshifted}[3]{%
-    \strdroadlshift{#2}{#2 Start}
-    \strduse{#1}{#2 Start}{#3}%
+    \strdroadlshift{#2}{#2 Shifted}
+    \strduse{#1}{#2 Shifted}{#3}%
 }
 \newcommand*{\strdroadrshifted}[3]{\strdflip{\strdroadlshifted{#1}{#2}{#3}}}
 
