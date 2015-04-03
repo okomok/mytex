@@ -12,9 +12,6 @@
 
 % styles
 
-\tikzset{strd celllabel/.style={font=\normalsize,rounded rectangle,very thin,solid,rounded corners=0pt,rounded rectangle arc length=90,draw,fill=white,inner sep=1.2pt}}
-\tikzset{strd linelabel/.style={font=\scriptsize,inner sep=0.2pt,strd textvaligned}}
-\tikzset{strd endlabel/.style={font=\normalsize,inner sep=1pt,strd textvaligned}}
 \tikzset{strd textvaligned/.style={text height=1.5ex,text depth=0.25ex}}
 \tikzset{strd coord/.style={coordinate}}
 \tikzset{strd dot/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
@@ -31,15 +28,14 @@
 %   they reset surrounding line styles!
 
 \pgfdeclarelayer{strd pavelayer}
-\pgfdeclarelayer{strd piecelayer}
-\pgfsetlayers{background,main,strd pavelayer,strd piecelayer}
+\pgfdeclarelayer{strd labellayer}
+\pgfsetlayers{background,main,strd pavelayer,strd labellayer}
 
 \newcommand*{\strdonlayer}[2]{%
     \begin{pgfonlayer}{#1}
         #2
     \end{pgfonlayer}
-    % temporary workaround
-    \pgfsetlinewidth{0.2pt}%
+    \pgfsetlinewidth{0.2pt}% temporary workaround
 }
 
 
@@ -211,31 +207,38 @@
 
 % labels
 
+\tikzset{strd label/.style={font=\normalsize,very thin,solid,draw,sharp corners,fill=white,inner sep=1.2pt}}
+\tikzset{strd celllabel/.style={strd label,rounded rectangle,rounded rectangle arc length=90}}
+\tikzset{strd linelabel/.style={font=\scriptsize,inner sep=0.2pt,strd textvaligned}}
+\tikzset{strd endlabel/.style={font=\normalsize,inner sep=1pt,strd textvaligned}}
+
 \newcommand*{\strddotlabel}[1]{%
-    \node[strd dot] at (#1) {};%
+    \strdonlayer{strd labellayer}{
+       \node[strd dot] at (#1) {};%
+    }% 
 }
 
 \newcommand*{\strdcelllabel}[2]{%
-    \strdonlayer{strd piecelayer}{
+    \strdonlayer{strd labellayer}{
         \node[strd celllabel] at (#1) {#2};
     }% 
 }
 
 \newcommand*{\strdsidelabel}[3]{%
-    \strdonlayer{strd piecelayer}{
+    \strdonlayer{strd labellayer}{
         \node[strd linelabel,left] at (#1) {#2};
         \node[strd linelabel,right] at (#1) {#3};
     }%
 }
 
 \newcommand*{\strdstartlabel}[2]{%
-    \strdonlayer{strd piecelayer}{
+    \strdonlayer{strd labellayer}{
         \node[strd endlabel,above] at (#1 Start) {#2};
     }%
 }
 
 \newcommand*{\strdendlabel}[2]{%
-    \strdonlayer{strd piecelayer}{
+    \strdonlayer{strd labellayer}{
         \node[strd endlabel,below] at (#1 End) {#2};
     }%
 }
@@ -258,39 +261,6 @@
 \newcommand*{\strdnolabels}{\strdscope{every node/.style=strd none}}
 \newcommand*{\strdpathis}[1]{\strdscope{every path/.style=#1}}
 \newcommand*{\strdnodeis}[1]{\strdscope{every node/.append style=#1}}
-
-
-% category-theory specific 
-
-\tikzset{strd bij/.style={solid,thin,rounded corners=0pt}}
-\tikzset{strd bijlabel/.style={font=\small,rectangle,strd bij,draw,fill=white,inner sep=1.2pt}}
-\tikzset{strd mapping/.style={rounded corners=2pt}}
-
-\newcommand*{\strdimplicit}{\strdpathis{densely dotted}}
-
-\newcommand*{\strdlbij}[2]{%
-    \strdonlayer{strd piecelayer}{
-        \strdpathis{strd bij}{\strdsqsubset{#1}{#2}}
-    }%
-}
-
-\newcommand*{\strdrbij}[2]{%
-    \strdonlayer{strd piecelayer}{
-        \strdpathis{strd bij}{\strdsqsupset{#1}{#2}}
-    }%
-}
-
-\newcommand*{\strdbij}[2]{%
-    \strdonlayer{strd piecelayer}{
-        \strdpathis{strd bij}{\strdsquare{#1}{#2}}
-    }%
-}
-
-\newcommand*{\strdbijlabel}[2]{%
-    \strdonlayer{strd piecelayer}{
-        \node[strd bijlabel] at (#1) {#2};
-    }%
-}
 
 
 % composed strings
@@ -342,7 +312,7 @@
 
 % slightly noisy around anti-aliasing
 \newcommand*{\strddeadend}[1]{%
-    \strdonlayer{strd piecelayer}{
+    \strdonlayer{strd labellayer}{
         \draw[strd draw,white,line width=4pt,shorten >=-1pt] {
             ($(#1 End)+(0,5.68pt)$) -- (#1 End)
         };
@@ -353,7 +323,7 @@
 }
 
 \newcommand*{\strdroadlabel}[3]{%
-    \strdonlayer{strd piecelayer}{
+    \strdonlayer{strd labellayer}{
         \node[strd linelabel,left,xshift=-1.5pt] at (#1) {#2};
         \node[strd linelabel,right,xshift=1.5pt] at (#1) {#3};
     }%
@@ -387,6 +357,46 @@
     \strduse{#1}{#2 Start}{#3}%
 }
 \newcommand*{\strdroadrshifted}[3]{\strdflip{\strdroadlshifted{#1}{#2}{#3}}}
+
+
+% category-theory specific 
+
+\tikzset{strd isolabel/.style={strd label,tape,tape bend height=2pt,minimum width=0pt,tape bend top=out and in,tape bend bottom=out and in}}
+\tikzset{strd bijlabel/.style={strd label,rectangle,strd bijsq}}
+\tikzset{strd bijsq/.style={solid,thin,sharp corners}}
+\tikzset{strd mapsq/.style={rounded corners=2pt}}
+
+\newcommand*{\strdisolabel}[2]{%
+    \strdonlayer{strd labellayer}{
+        \node[strd isolabel] at (#1) {#2};
+    }% 
+}
+
+\newcommand*{\strdbijlabel}[2]{%
+    \strdonlayer{strd labellayer}{
+        \node[strd bijlabel] at (#1) {#2};
+    }%
+}
+
+\newcommand*{\strdimplicit}{\strdpathis{densely dotted}}
+
+\newcommand*{\strdlbijsq}[2]{%
+    \strdonlayer{strd labellayer}{
+        \strdpathis{strd bijsq}{\strdsqsubset{#1}{#2}}
+    }%
+}
+
+\newcommand*{\strdrbijsq}[2]{%
+    \strdonlayer{strd labellayer}{
+        \strdpathis{strd bijsq}{\strdsqsupset{#1}{#2}}
+    }%
+}
+
+\newcommand*{\strdbijsq}[2]{%
+    \strdonlayer{strd labellayer}{
+        \strdpathis{strd bijsq}{\strdsquare{#1}{#2}}
+    }%
+}
 
 
 % utilities

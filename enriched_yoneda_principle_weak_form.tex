@@ -28,21 +28,61 @@
         }
     } 
 }
+\iffalse
+\myin[preview,math]{
+    \strdfamily{A}{
+        \strdin[gathered]{
+            \strdroad{mid}{\strdorigin}{u}
+            \strdroadlabel{u}{\mathcal{A}(KB,A)}{\mathcal{A}(B,A)}
+            \strdcelllabel{u End}{\alpha}
+            \strdstartlabel{u}{(\mathcal{V})}
+        }
+    } : \mathcal{V}\text{-natural in } B \iff
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{I}{F(B,KB)}
+        \strdcelllabel{u End}{f}
+        \strdstartlabel{u}{\mathcal{A}}
+    } : \mathcal{V}\text{-extranatural in } B
+}
+\fi
+\myin[preview,math]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{B}{K}
+        \strdbijlabel{u End}{f}
+        \strdstartlabel{u}{\mathcal{A}}
+    } \leadsto 
+    \strdfamily{A}{
+        \strdin[gathered]{
+            \strdxscale{1}{\strdroad{branch}{\strdorigin}{u}}
+            \strdroadlabel{u Top}{\mathcal{A}(K,A)}{\mathcal{A}(B,A)}
+            \strdroadlabel{u Left}{}{A}
+            \strddeadend{u Left}{T}
+            \strdcelllabel{u Top End}{\operatorname{Hom}_{\mathcal{A}}}
+            \strdbijlabel{u Right End}{f}
+            \strdstartlabel{u Top}{(\mathcal{V})}
+            \strdroadlabel{u Right}{B}{K}
+        }
+    } \myeqdef
+    \mathcal{A}(
+        \strdin[gathered]{
+            \strdbijlabel{\strdorigin}{f}
+        },\mydash)
+}
 
 \myin[preview,math]{
     \strdfamily{A}{
         \strdin[gathered]{
             \strdroad{mid}{\strdorigin}{u}
-            \strdroadlabel{u}{\mathcal{A}(K,A)}{\mathcal{B}(B,A)}
-            \strdcelllabel{u End}{\alpha}
+            \strdroadlabel{u}{\mathcal{A}(K,A)}{\mathcal{A}(B,A)}
+            \strdpiece{iso}{u End}{\alpha}
             \strdstartlabel{u}{(\mathcal{V})}
         }
     } : \mathcal{V}\text{-natural iso} \iff
     \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{B}{K}
         \strdbijlabel{u End}{f}
-        \strdstartlabel{u}{\mathcal{B}}
-    } : \text{iso in } \mathcal{B}_0
+        \strdstartlabel{u}{\mathcal{A}}
+    } : \text{iso in } \mathcal{A}_0
 }
 
 \end{document}
