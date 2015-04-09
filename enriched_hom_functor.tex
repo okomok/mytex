@@ -1,10 +1,11 @@
 \documentclass{article}
 \usepackage{strd,cat,my,amssymb}
+\usepackage[active,tightpage]{preview}
 
 \begin{document}
 
-\myinn{preview}{math}{
-    \strdpicturein{gathered}{
+\myin[preview,math]{
+    \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{\operatorname{Hom}_{\mathcal{A}}(A,B)}{\operatorname{Hom}_\mathcal{A}(A\myprime,B\myprime)}
         \strdstartlabel{U}{(\mathcal{V})}
         \strdroad{left}{U}{BB'} \strdroadlabel{BB'}{B}{B\myprime}
@@ -13,7 +14,7 @@
         \strdendlabel{BB'}{\mathcal{A}}
         \strdendlabel{A'A}{\mathcal{A}}
     } \mydefeq
-    \strdpicturein{gathered}{
+    \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{\mathcal{A}(A,B)}{\mathcal{A}(A\myprime,B\myprime)}
         \strdstartlabel{U}{(\mathcal{V})}
         \strdrshift{U}{U2}
@@ -30,7 +31,7 @@
       %  \strddotlabel{A'B' End}
      %   \strddotlabel{AB'2 End}
      %   \strdxscale{2}{\strdrshift{U}{Box}}
-        \strdscale{3}{4}{\strdbij{U}{Unused}}
+        \strdscale{3}{4}{\strdbijsq{U}{Unused}}
         \strdroad{mid}{A'A}{A'A2} \strdroadlabel{A'A2}{A\myprime}{A}
         \strdroad{mid}{BB'}{BB'2} \strdroadlabel{BB'2}{B}{B\myprime}
         \strdendlabel{BB'2}{\mathcal{A}}
@@ -38,20 +39,21 @@
     }
 }
 
-\myinn{preview}{math}{
+\myin[preview,math]{
     \left(
-        \strdpicturein{gathered}{
+        \strdin[gathered]{
             \strdroad{mid}{\strdorigin}{A'A} \strdroadlabel{A'A}{A\myprime}{A}
             \strdstartlabel{A'A}{\mathcal{A}}
             \strdcelllabel{A'A End}{f}
         },
-        \strdpicturein{gathered}{
+        \strdin[gathered]{
             \strdroad{mid}{\strdorigin}{BB'} \strdroadlabel{BB'}{B}{B\myprime}
             \strdstartlabel{BB'}{\mathcal{A}}
             \strdcelllabel{BB' End}{g}
         }
     \right) \mapsto % \overset{\operatorname{hom} _ {\mathcal{A}}}{\mapsto}
-    \strdpicturein{gathered}{
+     \mathcal{A}(f,g) \mydefeq
+    \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{U} \strdroadlabel{U}{\mathcal{A}(A,B)}{\mathcal{A}(A\myprime,B\myprime)}
         \strdstartlabel{U}{(\mathcal{V})}
         \strdroad{left}{U}{BB'} \strdroadlabel{BB'}{B}{B\myprime}
@@ -59,8 +61,8 @@
         \strdcelllabel{U End}{\operatorname{Hom}_{\mathcal{A}}}
         \strdcelllabel{BB' End}{g}
         \strdcelllabel{A'A End}{f}
-    } \sim
-    \strdpicturein{gathered}{
+    } \overset{\square}{\sim}
+    \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{A'B'} \strdroadlabel{A'B'}{A\myprime}{B\myprime}
         %\strdroad{circle}{A'B'}{A'B'C}
         \strdroadx{subset}{A'B'}{A'B'C Left}
@@ -76,9 +78,9 @@
         \strdcelllabel{A'A End}{f}
         \strdstartlabel{A'B'}{\mathcal{A}}
     } =
-    \strdpicturein{gathered}{
+    \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{A'B'} \strdroadlabel{A'B'}{A\myprime}{B\myprime}
-        \strddotlabel{A'B' End}
+    %    \strddotlabel{A'B' End}
         \strdxscale{1}{\strdroad{left}{A'B'}{A'A} \strdroadlabel{A'A}{A\myprime}{A}}
         \strdxscale{1}{\strdroad{right}{A'B'}{BB'} \strdroadlabel{BB'}{B}{B\myprime}}
         \strdcelllabel{A'A End}{f}
@@ -86,23 +88,23 @@
         \strdroad{mid}{A'B'}{AB0}
         \strdroad{mid}{AB0}{AB} \strdroadlabel{AB}{A}{B}
         \strdstartlabel{A'B'}{\mathcal{A}}
-    }
+    } 
 }
 
-\myinn{preview}{math}{
+\myin[preview,math]{
     \left(
-        \strdpicturein{gathered}{
+        \strdin[gathered]{
             \strdroad{mid}{\strdorigin}{A'A} \strdroadlabel{A'A}{A'}{A}
             \strdstartlabel{A'A}{\mathcal{A}}
             \strdcelllabel{A'A End}{f}
         },
-        \strdpicturein{gathered}{
+        \strdin[gathered]{
             \strdroad{mid}{\strdorigin}{BB'} \strdroadlabel{BB'}{B}{B'}
             \strdstartlabel{BB'}{\mathcal{A}}
             \strdcelllabel{BB' End}{g}
         }
     \right) \overset{\operatorname{hom} _ {\mathcal{A}}}{\mapsto}
-    \strdpicturein{gathered}{
+    \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{A'B'} \strdroadlabel{A'B'}{A'}{B'}
         \strdroad{circle}{A'B'}{A'B'C} \strdroadlabel{A'B'C Left}{A'}{A} \strdroadlabel{A'B'C Right}{A}{B'}
         \strdxscale{2}{\strdroad{left}{A'B'C}{AB'2} \strdroadlabel{AB'2}{A}{B'}}
@@ -111,25 +113,25 @@
         \strdroad{right}{AB'2}{BB'} \strdroadlabel{BB'}{B}{B'}
         \strdxscale{1}{\strdroad{right}{A'B'C}{A'A0}}
         \strdroad{mid}{A'A0}{A'A} \strdroadlabel{A'A}{A'}{A}
-        \strddotlabel{A'B' End}
-        \strddotlabel{AB'2 End}
+      %  \strddotlabel{A'B' End}
+      %  \strddotlabel{AB'2 End}
         \strdcelllabel{BB' End}{g}
         \strdcelllabel{A'A End}{f}
         \strdstartlabel{A'B'}{\mathcal{A}}
     } 
 }
 
-\myinn{preview}{math}{
-    \strdpicturein{gathered}{
+\myin[preview,math]{
+    \strdin[gathered]{
         \strdmid{\strdorigin}{Y} \strdsidelabel{Y}{}{Y}
         \strdmid{Y}{X} \strdsidelabel{X}{}{X}
         \strdcelllabel{Y End}{f}
     } \mapsto
-    \strdpicturein{gathered}{
+    \strdin[gathered]{
         \strdmid{\strdorigin}{X} \strdsidelabel{X}{}{X}
         \strdcelllabel{X End}{h}
     } \mapsto
-    \strdpicturein{gathered}{
+    \strdin[gathered]{
         \strdmid{\strdorigin}{Y} \strdsidelabel{Y}{}{Y}
         \strdmid{Y}{X} \strdsidelabel{X}{}{X}
         \strdcelllabel{Y End}{f}

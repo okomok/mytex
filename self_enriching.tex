@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
 
 \begin{document}
 
@@ -54,7 +55,7 @@
     \strdin[gathered]{
         \strdxscale{2}{\strdroad{branch}{\strdorigin}{u}}
         \strdbijlabel{u Left End}{S}
-        \strdbijlabel{u Right End}{[\alpha_A,\mydash]}
+        \strdcelllabel{u Right End}{\mathcal{B}(\alpha_A,1)}
         \strdroadlabel{u Top}{\mathcal{A}(A,B)}{\mathcal{B}(TA,SB)}
         \strdroadlabel{u Left}{}{\mathcal{B}(SA,SB)}
         \strdstartlabel{U Top}{(\mathcal{V})}
@@ -62,7 +63,7 @@
     \strdin[gathered]{
         \strdxscale{2}{\strdroad{branch}{\strdorigin}{u}}
         \strdbijlabel{u Left End}{T}
-        \strdbijlabel{u Right End}{[\mydash,\alpha_B]}
+        \strdcelllabel{u Right End}{\mathcal{B}(1,\alpha_B)}
         \strdroadlabel{u Top}{\mathcal{A}(A,B)}{\mathcal{B}(TA,SB)}
         \strdroadlabel{u Left}{}{\mathcal{B}(TA,TB)}
         \strdstartlabel{U Top}{(\mathcal{V})}
@@ -74,7 +75,7 @@
     \strdin[gathered]{
         \strdxscale{3}{\strdroad{branch}{\strdorigin}{u}}
         \strdbijlabel{u Left End}{T(A,\mydash)}
-        \strdbijlabel{u Right End}{[\beta_A,\mydash]}
+        \strdcelllabel{u Right End}{\mathcal{B}(\beta_A,1)}
         \strdroadlabel{u Top}{\mathcal{A}(A,B)}{[K,T(A,B)]}
         \strdroadlabel{u Left}{}{[T(A,A),T(A,B)]}
         \strdstartlabel{U Top}{(\mathcal{V})}
@@ -82,7 +83,7 @@
     \strdin[gathered]{
         \strdxscale{3}{\strdroad{branch}{\strdorigin}{u}}
         \strdbijlabel{u Left End}{T(\mydash,B)}
-        \strdbijlabel{u Right End}{[\beta_B,\mydash]}
+        \strdcelllabel{u Right End}{\mathcal{B}(\beta_B,1)}
         \strdroadlabel{u Top}{\mathcal{A}(A,B)}{[K,T(A,B)]}
         \strdroadlabel{u Left}{}{[T(B,B),T(A,B)]}
         \strdstartlabel{U Top}{(\mathcal{V})}

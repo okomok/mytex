@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{kbkc} \strdroadlabel{kbkc}{SB}{SC}
+        \strdroad{mid}{kbkc}{bc} \strdroadlabel{bc}{B}{C}
+        \strdcelllabel{kbkc End}{S}
+        \strdstartlabel{kbkc}{\mathcal{A}}
+        \strdendlabel{bc}{\mathcal{B}}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{kbkc} \strdroadlabel{kbkc}{S_B}{S_C}
+        \strdbijlabel{kbkc End}{\alpha}
+        \strdmid{kbkc}{fbkc} \strdsidelabel{fbkc}{}{F(B,S_C)}
+        \strdmid{fbkc}{fckc} \strdsidelabel{fckc}{}{F(C,S_C)}
+        \strdmid{fckc}{fcac} \strdsidelabel{fcac}{}{F(C,A)}
+        \strdbijlabel{fcac End}{\alpha}
+        \strdroad{mid}{fcac}{kca} \strdroadlabel{kca}{S_C}{A}
+        \strdscale{2.5}{3.5}{\strdlbijsq{fbkc}{bl1}}
+        \strdscale{4.5}{3.5}{\strdrbijsq{fbkc}{br1}}
+        \strdscale{2}{2}{\strdlbijsq{fckc}{bl2}}
+        \strdscale{3}{2}{\strdrbijsq{fckc}{br2}}
+        \strdroad{mid}{bl1}{bc} \strdroadlabel{bc}{B}{C}
+        \strdsidelabel{br2}{{}_A}{S_C} 
+        \strdsidelabel{br1}{C}{{}_B}
+        \strdstartlabel{kbkc}{\mathcal{A}}
+        \strdendlabel{bc}{\mathcal{B}}
+    }
+}
+
+            
+
+\end{document}
