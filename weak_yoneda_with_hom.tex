@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage{strd,cat,my,amsmath,stmaryrd}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    \operatorname{\mathcal{V}-nat}(\mathcal{A}(KB,\mydash),F(B,\mydash)) &\cong \mathcal{V}_0(I, F(B, KB)) \\
+    \strdfamily{A}{
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{F(B,A)}
+        \strdbijlabel{u End}{\alpha}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{KB}{A}
+%        \strdstartlabel{u}{(\mathcal{V})}
+        \strdendlabel{u2}{\mathcal{A}}
+    }} &\sim
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{F(B,KB)}
+        \strdcelllabel{u End}{f}
+%        \strdstartlabel{u}{(\mathcal{V})}
+    }
+}
+
+\myin[preview,math,aligned]{
+    \operatorname{\mathcal{V}-nat}(\mathcal{A}(K,\mydash),\mathcal{B}(B,T(\mydash))) &\cong \mathcal{B}_0(B, TK) \\
+    \strdfamily{A}{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{bta} \strdroadlabel{bta}{B}{TA}
+        \strdbijlabel{bta End}{\alpha}
+        \strdroad{mid}{bta}{ka} \strdroadlabel{ka}{K}{A}
+        \strdstartlabel{bta}{\mathcal{B}}
+        \strdendlabel{ka}{\mathcal{A}}
+    }} & \mapsto
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{bta} \strdroadlabel{bta}{B}{TK}
+        \strdbijlabel{bta End}{\alpha}
+        \strdroad{mid}{bta}{ka} \strdroadlabel{ka}{}{K}
+        \strddeadend{ka}
+        \strdstartlabel{bta}{\mathcal{B}}
+    } \\
+   \strdfamily{A}{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{bta} \strdroadlabel{bta}{B}{TA}
+        \strdroad{left}{bta}{btk} \strdroadlabel{btk}{}{TK}
+        \strdcelllabel{btk End}{f}
+        \strdroad{right}{bta}{ta}
+        \strdcelllabel{ta End}{T}
+        \strdroad{mid}{ta}{ka} \strdroadlabel{ka}{K}{A}
+        \strdstartlabel{bta}{\mathcal{B}}
+        \strdendlabel{ka}{\mathcal{A}}
+%        \strdscale{2}{3}{\strdbijsq{\strdorigin}{box}}
+%        \strdfamilylabel{box Right EndCorner}{A}
+%        \strdinv{\strdroad{mid}{\strdorigin}{kabta}} \strdroadlabel{kabta}{\mathcal{A}(K,A)}{\mathcal{B}(B,TA)}
+%        \strdlabelat{kabta End}{above}{(\mathcal{V})}
+   }
+    } &\mapsfrom
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{btk} \strdroadlabel{btk}{B}{TK}
+        \strdcelllabel{btk End}{f}
+        \strdstartlabel{btk}{\mathcal{B}}
+    } 
+}
+
+            
+
+\end{document}

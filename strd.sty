@@ -209,7 +209,8 @@
 
 \tikzset{strd label/.style={font=\normalsize,very thin,solid,draw,sharp corners,fill=white,inner sep=1.2pt}}
 \tikzset{strd celllabel/.style={strd label,rounded rectangle,rounded rectangle arc length=90}}
-\tikzset{strd linelabel/.style={font=\scriptsize,inner sep=0.2pt,strd textvaligned}}
+\tikzset{strd scriptlabel/.style={font=\scriptsize,inner sep=0.2pt,strd textvaligned}}
+\tikzset{strd familylabel/.style={font=\scriptsize,inner sep=0pt,below right}}
 \tikzset{strd endlabel/.style={font=\normalsize,inner sep=1pt,strd textvaligned}}
 
 \newcommand*{\strddotlabel}[1]{%
@@ -226,22 +227,25 @@
 
 \newcommand*{\strdsidelabel}[3]{%
     \strdonlayer{strd labellayer}{
-        \node[strd linelabel,left] at (#1) {#2};
-        \node[strd linelabel,right] at (#1) {#3};
+        \node[strd scriptlabel,left] at (#1) {#2};
+        \node[strd scriptlabel,right] at (#1) {#3};
     }%
 }
 
-\newcommand*{\strdstartlabel}[2]{%
+\newcommand*{\strdfamilylabel}[2]{%
     \strdonlayer{strd labellayer}{
-        \node[strd endlabel,above] at (#1 Start) {#2};
+        \node[strd familylabel] at (#1) {#2};
     }%
 }
 
-\newcommand*{\strdendlabel}[2]{%
+\newcommand*{\strdlabelat}[3]{%
     \strdonlayer{strd labellayer}{
-        \node[strd endlabel,below] at (#1 End) {#2};
+        \node[strd endlabel,#2] at (#1) {#3};
     }%
 }
+
+\newcommand*{\strdstartlabel}[2]{\strdlabelat{#1 Start}{above}{#2}}
+\newcommand*{\strdendlabel}[2]{\strdlabelat{#1 End}{below}{#2}}
 
 
 % transformations
@@ -314,18 +318,18 @@
 \newcommand*{\strddeadend}[1]{%
     \strdonlayer{strd labellayer}{
         \draw[strd draw,white,line width=4pt,shorten >=-1pt] {
-            ($(#1 End)+(0,5.68pt)$) -- (#1 End)
+            ($(#1 End)+(0,11.16pt)$) -- (#1 End)
         };
         \draw[strd draw,strd roadbase]{
-            ($(#1 End)+(0,5.68pt)$) -- ($(#1 End)+(0,5.88pt)$)
+            ($(#1 End)+(0,11.16pt)$) -- ($(#1 End)+(0,11.36pt)$)
         };
     }%
 }
 
 \newcommand*{\strdroadlabel}[3]{%
     \strdonlayer{strd labellayer}{
-        \node[strd linelabel,left,xshift=-1.5pt] at (#1) {#2};
-        \node[strd linelabel,right,xshift=1.5pt] at (#1) {#3};
+        \node[strd scriptlabel,left,xshift=-1.5pt] at (#1) {#2};
+        \node[strd scriptlabel,right,xshift=1.5pt] at (#1) {#3};
     }%
 }
 
