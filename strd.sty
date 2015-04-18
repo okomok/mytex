@@ -1,6 +1,6 @@
 \ProvidesPackage{strd}
 
-\usepackage{tikz,lambda,ifthen}
+\usepackage{tikz,lambda,ifthen,mathtools}
 %\usepackage[active,tightpage]{preview}
 \usetikzlibrary{shapes,calc,decorations.markings,backgrounds}
 
@@ -404,10 +404,9 @@
 
 
 % utilities
-
 \newcommand*{\strdfamily}[2]{%
     \left(#2\right)_{
-        \ifthenelse{\equal{#1}{}}{}{\!\!\!}#1
+        \mathrlap{\ifthenelse{\equal{#1}{}}{}{\!\!\!}#1}
     }%
 }
 

@@ -1,0 +1,108 @@
+\documentclass{article}
+\usepackage{strd,cat,my,amsmath,stmaryrd}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,gathered]{
+    \myitem\left\{\myin[gathered]{
+        \strdfamily{A}{
+            \strdin[gathered]{
+                \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{K}{T(A,A)}
+                \strdcelllabel{u End}{\beta}
+                \strdstartlabel{u}{\mathcal{B}}
+            }
+        } : \operatorname{\mathcal{V}\mathrm{-extranatural-looking}} \\ 
+        \strdfamily{A,B}{
+            \strdin[gathered]{
+                \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{T(A,B)}{S(A,B)}
+                \strdcelllabel{u End}{\alpha}
+                \strdstartlabel{u}{\mathcal{B}}
+            }
+        } : \operatorname{\mathcal{V}\mathrm{-natural-looking}}
+    }
+    \right\} \implies
+    \strdfamily{A}{
+        \strdin[gathered]{
+            \strdxscale{1.3}{\strdroad{branch}{\strdorigin}{u}}
+            \strdroadlabel{u Top}{K}{S(A,A)}
+            \strdroadlabel{u Left}{}{T(A,A)}
+            \strdstartlabel{u Top}{\mathcal{B}}
+            \strdcelllabel{u Left End}{\beta}
+            \strdcelllabel{u Right End}{\alpha}
+        }
+    } : \operatorname{\mathcal{V}\mathrm{-extranatural-looking}}
+}
+            
+\myin[preview,math,gathered]{
+    \myitem \strdfamily{A}{
+        \strdin[gathered]{
+            \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{TA}{SA}
+            \strdcelllabel{u End}{\alpha}
+            \strdstartlabel{u}{\mathcal{B}}
+        }
+    } : \operatorname{\mathcal{V}\mathrm{-natural-looking}}  
+    \iff
+    \strdfamily{A}{
+        \strdin[gathered]{
+            \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{I}{\mathcal{B}(TA,SA)}
+            \strdbijlabel{u End}{\alpha}
+            \strdstartlabel{u}{(\mathcal{V})}
+        }
+    } : \operatorname{\mathcal{V}\mathrm{-extranatural-looking}}
+}
+
+\myin[preview,math,gathered]{
+    \myitem \strdfamily{A}{
+        \strdin[gathered]{
+            \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{K}{T(A,A)}
+            \strdcelllabel{u End}{\beta}
+            \strdstartlabel{u}{\mathcal{B}}
+        }
+    } : \operatorname{\mathcal{V}\mathrm{-extranatural-looking}}  
+    \iff
+    \strdfamily{A}{
+        \strdin[gathered]{
+            \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{I}{\mathcal{B}(K,T(A,A))}
+            \strdbijlabel{u End}{\beta}
+            \strdstartlabel{u}{(\mathcal{V})}
+        }
+    } : \operatorname{\mathcal{V}\mathrm{-extranatural-looking}}
+}
+
+\myin[preview,math,gathered]{
+    \myitem \strdfamily{A}{
+        \strdin[gathered]{
+            \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{TA}{SA}
+            \strdcelllabel{u End}{\alpha}
+            \strdstartlabel{u}{\mathcal{B}}
+        }
+    } : \operatorname{\mathcal{V}\mathrm{-natural-looking}}  
+    \implies
+    \strdfamily{C}{
+        \strdin[gathered]{
+            \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{TLC}{SLC}
+            \strdcelllabel{u End}{\alpha}
+            \strdstartlabel{u}{\mathcal{B}}
+        }
+    } : \operatorname{\mathcal{V}\mathrm{-natural-looking}}
+}
+\myin[preview,math,gathered]{
+    \myitem \strdfamily{A}{
+        \strdin[gathered]{
+            \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{K}{T(A,A)}
+            \strdcelllabel{u End}{\beta}
+            \strdstartlabel{u}{\mathcal{B}}
+        }
+    } : \operatorname{\mathcal{V}\mathrm{-extranatural-looking}}  
+    \implies
+    \strdfamily{C}{
+        \strdin[gathered]{
+            \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{K}{T(LC,LC)}
+            \strdcelllabel{u End}{\beta}
+            \strdstartlabel{u}{\mathcal{B}}
+        }
+    } : \operatorname{\mathcal{V}\mathrm{-extranatural-looking}}
+}
+\end{document}
