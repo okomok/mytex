@@ -1,6 +1,6 @@
 \ProvidesPackage{strd}
 
-\usepackage{tikz,lambda,ifthen,mathtools}
+\usepackage{tikz,lambda,mathtools}
 %\usepackage[active,tightpage]{preview}
 \usetikzlibrary{shapes,calc,decorations.markings,backgrounds}
 
@@ -210,7 +210,6 @@
 \tikzset{strd label/.style={font=\normalsize,very thin,solid,draw,sharp corners,fill=white,inner sep=1.2pt}}
 \tikzset{strd celllabel/.style={strd label,rounded rectangle,rounded rectangle arc length=90}}
 \tikzset{strd scriptlabel/.style={font=\scriptsize,inner sep=0.2pt,strd textvaligned}}
-\tikzset{strd familylabel/.style={font=\scriptsize,inner sep=0pt,below right}}
 \tikzset{strd endlabel/.style={font=\normalsize,inner sep=1pt,strd textvaligned}}
 
 \newcommand*{\strddotlabel}[1]{%
@@ -232,9 +231,10 @@
     }%
 }
 
-\newcommand*{\strdfamilylabel}[2]{%
+\newcommand*{\strdfamilylabel}[3]{%
     \strdonlayer{strd labellayer}{
-        \node[strd familylabel] at (#1) {#2};
+        \node[strd scriptlabel,above left] at (#1 EndCorner) {#2};
+        \node[strd scriptlabel,above right] at (#1 EndCorner) {#3};
     }%
 }
 
@@ -404,9 +404,17 @@
 
 
 % utilities
+
 \newcommand*{\strdfamily}[2]{%
     \left(#2\right)_{
-        \mathrlap{\ifthenelse{\equal{#1}{}}{}{\!\!\!}#1}
+        \mathrlap{\!\!\!#1}
     }%
 }
 
+\newcommand*{\strdmedfamily}[3]{%
+    \left\langle#3\right\rangle^{
+        \mathrlap{\!\!\!#1}
+    }_{
+        \mathrlap{\!\!\!#2}
+    }%
+}

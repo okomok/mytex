@@ -1,0 +1,77 @@
+\documentclass{article}
+\usepackage{strd,cat,my,amsmath,stmaryrd}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math]{
+    \forall
+    \strdfamily{}{
+        \strdin[gathered]{
+            \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{X}{K}
+%            \strdstartlabel{u}{(\mathcal{V})}
+            \strdcelllabel{u End}{f}
+        } 
+    }
+    \forall
+    \strdfamily{A}{
+        \strdin[gathered]{
+            \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{X}{T(A,A)}
+%            \strdstartlabel{u}{(\mathcal{V})}
+            \strdcelllabel{u End}{\alpha}
+        }
+    } : \catenriched{V}{wedge}% \operatorname{\mathcal{V}\text{-wedge}}
+    \strdfamily{}{
+        \strdin[gathered]{
+            \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{X}{T(A,A)}
+%            \strdstartlabel{u}{(\mathcal{V})}
+            \strdcelllabel{u End}{\alpha}
+        } \underset{\forall A}{=}
+        \strdin[gathered]{
+            \strdroad{branch}{\strdorigin}{u} \strdroadlabel{u Top}{X}{T(A,A)}
+            \strdroadlabel{u Left}{}{K}
+            \strdcelllabel{u Left End}{f}
+            \strdcelllabel{u Right End}{\lambda}
+%            \strdstartlabel{u Top}{(\mathcal{V})}
+        } \iff
+        \strdin[gathered]{
+            \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{X}{K}
+%            \strdstartlabel{u}{(\mathcal{V})}
+            \strdcelllabel{u End}{f}
+        } =
+%        \strdmedfamily{\lambda}{A}{
+            \strdin[gathered]{
+                \strdyscale{0.5}{\strdroad{mid}{\strdorigin}{u}} \strdroadlabel{u}{X}{K}
+                \strdroad{mid}{u}{u2} \strdroadlabel{u2}{X}{T(A,A)}
+%                \strdstartlabel{u}{(\mathcal{V})}
+                \strdcelllabel{u2 End}{\alpha}
+                \strdscale{0.8}{1.3}{\strdlbijsq{u}{bl}}
+                \strdscale{2.2}{1.3}{\strdrbijsq{u}{br}}
+                \strdfamilylabel{br}{A}{}
+%            }
+        }
+    }
+}
+
+\myin[preview,math]{
+    \strdfamily{A}{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{K}{T(A,A)}
+        \strdstartlabel{u}{(\mathcal{V})}
+        \strdcelllabel{u End}{\lambda}
+    } } : \catenriched{V}{end}\implies
+    \strdfamily{A}{
+    \strdin[gathered]{
+        \strdxscale{1.2}{\strdroad{branch}{\strdorigin}{u}}
+        \strdroadlabel{u Top}{[X,K]}{[X,T(A,A)]}
+        \strdroadlabel{u Left}{K}{T(A,A)}
+        \strdroadlabel{u Right}{}{X}
+        \strddeadend{u Right}
+        \strdcelllabel{u Top End}{\operatorname{Hom}_{(\mathcal{V})}}
+        \strdstartlabel{u Top}{(\mathcal{V})}
+        \strdcelllabel{u Left End}{\lambda}
+    } } : \catenriched{V}{end} 
+}
+            
+\end{document}
