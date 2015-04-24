@@ -1,0 +1,91 @@
+\documentclass{article}
+\usepackage{strd,cat,my,amsmath,stmaryrd}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math]{
+    \strdfamily{T,S : \mathcal{A} \to \mathcal{B}}{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{TA}{SA}
+        \strdbijlabel{u End}{E ^ {TS}}
+        \strdmid{u}{u2} \strdsidelabel{u2}{}{\int_A\mathcal{B}(TA,SA)}
+        \strdstartlabel{u}{\mathcal{B}}
+    }
+} \phantom{_{S : \mathcal{A} \to \mathcal{B}}}
+}
+
+% definition
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{T}{S}
+        \strdstartlabel{u}{[\mathcal{A},\mathcal{B}]}
+    } &\mydefeq
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{\int_A\mathcal{B}(TA,SA)}
+    } \\
+    \strdin[gathered]{
+        \strdroad{branch}{\strdorigin}{u} \strdroadlabel{u}{T}{R}
+        \strdstartlabel{u}{[\mathcal{A},\mathcal{B}]}
+        \strdroadlabel{u Left}{}{S}
+    } &\mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{T}{R}
+        \strdroad{branch}{u}{u2} \strdroadlabel{u2}{TA}{RA}
+        \strdroadlabel{u2 Left}{}{SA}
+        \strdbijlabel{u2 Left End}{E ^ {TS}}
+        \strdbijlabel{u2 Right End}{E ^ {SR}}
+        \strdroad{mid}{u2 Left}{ul2} \strdroadlabel{ul2}{T}{S}
+        \strdroad{mid}{u2 Right}{ur2} \strdroadlabel{ur2}{S}{R}
+%        \strdstartlabel{u}{[\mathcal{A},\mathcal{B}]}
+        \strdscale{2}{3}{\strdbijsq{u}{box}}
+        \strdroad{mid}{ul2}{ul3} \strdroadlabel{ul3}{T}{S}
+        \strdroad{mid}{ur2}{ur3} \strdroadlabel{ur3}{S}{R}
+        \strdfamilylabel{box Right}{A}{E ^ {TR}}
+    } \\
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{}{T}
+        \strdstartlabel{u}{[\mathcal{A},\mathcal{B}]}
+        \strddeadend{u}
+    } &\mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{T}{T}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{}{TA}
+        \strddeadend{u2}
+        \strdscale{1}{1}{\strdbijsq{u}{box}}
+        \strdfamilylabel{box Right}{A}{E ^ {TT}}
+    }
+}
+            
+\myin[preview,math,aligned]{
+   \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{T}{R}
+        \strdroad{branch}{u}{u2} \strdroadlabel{u2}{TA}{RA}
+        \strdroadlabel{u2 Left}{}{SA}
+        \strdbijlabel{u2 Left End}{\beta}
+        \strdbijlabel{u2 Right End}{\alpha}
+        \strduse{mid}{u2 Left}{ul2} \strdsidelabel{ul2}{}{Y}
+        \strduse{mid}{u2 Right}{ur2} \strdsidelabel{ur2}{}{X}
+%        \strdstartlabel{u}{[\mathcal{A},\mathcal{B}]}
+        \strdscale{2}{3}{\strdbijsq{u}{box}}
+        \strduse{mid}{ul2}{ul3} \strdsidelabel{ul3}{}{Y}
+        \strduse{mid}{ur2}{ur3} \strdsidelabel{ur3}{}{X}
+%        \strdfamilylabel{box Right}{A}{E ^ {TR}}
+    } = 
+    \strdin[gathered]{
+        \strdroad{branch}{u}{u2} \strdroadlabel{u2}{T}{R}
+        \strdroadlabel{u2 Left}{}{S}
+        \strdroad{mid}{u2 Left}{ul2} \strdroadlabel{ul2}{TA}{SA}
+        \strdroad{mid}{u2 Right}{ur2} \strdroadlabel{ur2}{SA}{RA}
+        \strduse{mid}{ul2}{ul3} \strdsidelabel{ul3}{}{Y}
+        \strduse{mid}{ur2}{ur3} \strdsidelabel{ur3}{}{X}
+        \strdbijlabel{ul2 End}{\beta}
+        \strdbijlabel{ur2 End}{\alpha}
+        \strdscale{1}{2}{\strdbijsq{u2 Left}{box}}
+        \strdscale{1}{2}{\strdbijsq{u2 Right}{box}}
+        \strduse{mid}{ul3}{ul4} \strdsidelabel{ul4}{}{Y}
+        \strduse{mid}{ur3}{ur4} \strdsidelabel{ur4}{}{X}
+    } 
+ }
+\end{document}

@@ -55,6 +55,30 @@
 }
 
 \myin[preview,math]{
+        \strdin[gathered]{
+            \strdroad{branch}{\strdorigin}{u} \strdroadlabel{u Top}{X}{T(A,A)}
+            \strdroadlabel{u Left}{}{K}
+            \strdcelllabel{u Left End}{f}
+            \strdcelllabel{u Right End}{\lambda}
+        } \underset{\forall A}{=}
+        \strdin[gathered]{
+            \strdroad{branch}{\strdorigin}{u} \strdroadlabel{u Top}{X}{T(A,A)}
+            \strdroadlabel{u Left}{}{K}
+            \strdcelllabel{u Left End}{f'}
+            \strdcelllabel{u Right End}{\lambda}
+        } \implies
+        \strdin[gathered]{
+            \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{X}{K}
+            \strdcelllabel{u End}{f}
+        } =
+        \strdin[gathered]{
+            \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{X}{K}
+            \strdcelllabel{u End}{f'}
+        }
+}
+
+
+\myin[preview,math]{
     \strdfamily{A}{
     \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{K}{T(A,A)}
