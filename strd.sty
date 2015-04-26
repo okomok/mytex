@@ -214,27 +214,27 @@
 
 \newcommand*{\strddotlabel}[1]{%
     \strdonlayer{strd labellayer}{
-       \node[strd dot] at (#1) {};%
+        \node[strd dot] (#1 DotLabel) at (#1) {};%
     }% 
 }
 
 \newcommand*{\strdcelllabel}[2]{%
     \strdonlayer{strd labellayer}{
-        \node[strd celllabel] at (#1) {#2};
+        \node[strd celllabel] (#1 CellLabel) at (#1) {#2};
     }% 
 }
 
 \newcommand*{\strdsidelabel}[3]{%
     \strdonlayer{strd labellayer}{
-        \node[strd scriptlabel,left] at (#1) {#2};
-        \node[strd scriptlabel,right] at (#1) {#3};
+        \node[strd scriptlabel,left] (#1 LeftLabel) at (#1) {#2};
+        \node[strd scriptlabel,right] (#1 RightLabel) at (#1) {#3};
     }%
 }
 
 \newcommand*{\strdfamilylabel}[3]{%
     \strdonlayer{strd labellayer}{
-        \node[strd scriptlabel,above left] at (#1 EndCorner) {#2};
-        \node[strd scriptlabel,above right] at (#1 EndCorner) {#3};
+        \node[strd scriptlabel,above left] (#1 EndCorner LeftLabel) at (#1 EndCorner) {#2};
+        \node[strd scriptlabel,above right] (#1 EndCorner RightLabel) at (#1 EndCorner) {#3};
     }%
 }
 
@@ -329,8 +329,8 @@
 
 \newcommand*{\strdroadlabel}[3]{%
     \strdonlayer{strd labellayer}{
-        \node[strd scriptlabel,left,xshift=-1.5pt] at (#1) {#2};
-        \node[strd scriptlabel,right,xshift=1.5pt] at (#1) {#3};
+        \node[strd scriptlabel,left,xshift=-1.5pt] (#1 LeftLabel) at (#1) {#2};
+        \node[strd scriptlabel,right,xshift=1.5pt] (#1 RightLabel) at (#1) {#3};
     }%
 }
 
@@ -412,10 +412,3 @@
     }%
 }
 
-\newcommand*{\strdmedfamily}[3]{%
-    \left\langle#3\right\rangle^{
-        \mathrlap{\!\!\!#1}
-    }_{
-        \mathrlap{\!\!\!#2}
-    }%
-}

@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage{strd,cat,my,amsmath,stmaryrd}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math]{
+    \strdfamily{A}{
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{T'(A,A)}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{T(A,A)}
+        \strdbijlabel{u End}{\alpha}
+    } } \mapsto
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\int_{\mathcal A} T'}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{T'(A,A)}
+        \strdbijlabel{u2 End}{\alpha}
+        \strduse{mid}{u2}{u3} \strdsidelabel{u3}{}{T(A,A)}
+        \strdbijlabel{u3 End}{\lambda^T}
+        \strduse{mid}{u3}{u4} \strdsidelabel{u4}{}{\int_{\mathcal{A}} T}
+        \strduse{mid}{u4}{u5} \strdsidelabel{u5}{}{\int_{\mathcal{A}} T}
+        \strdscale{1}{3}{\strdlbijsq{u}{lb}}
+        \strdscale{2.3}{3}{\strdrbijsq{u}{rb}}
+        \strdfamilylabel{rb}{A}{\lambda ^ {T'}}
+    }
+}
+
+\myin[preview,math]{
+%    \strdfamily{A}{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{HB}{HC}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{B}{C}
+        \strdcelllabel{u End}{H}
+%    }
+    } \mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{H_B}{H_C}
+        \strdxscale{1.5}{\strdroad{branch}{u}{u2}} \strdroadlabel{u2}{H_B}{T(A,A,C)}
+        \strdcelllabel{u2 Left End}{\lambda}
+        \strdcelllabel{u2 Right End}{T(A,A,\mydash)}
+        \strdroad{mid}{u2 Right}{u2r} \strdroadlabel{u2r}{B}{C}
+        \strdroad{mid}{u2r}{u2r2} \strdroadlabel{u2r2}{B}{C}
+        \strdroadlabel{u2 Left}{}{T(A,A,B)}
+        \strdscale{2.3}{3}{\strdlbijsq{u}{bjl}}
+        \strdscale{3.5}{3}{\strdrbijsq{u}{bjr}}
+        \strdfamilylabel{bjr}{A}{[H_B,\lambda^C]}
+    }
+}
+
+            
+\end{document}
