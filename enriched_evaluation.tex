@@ -1,0 +1,32 @@
+\documentclass{article}
+\usepackage{strd,cat,my,amsmath,stmaryrd}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math]{
+        \strdin[gathered]{
+            \strdroad{branch}{\strdorigin}{u} \strdroadlabel{u}{TA}{SA'}
+            \strdroadlabel{u Left}{A}{A'}
+            \strdcelllabel{u End}{E}
+            \strdroadlabel{u Right}{T}{S}
+            \strdstartlabel{u}{\mathcal{B}}
+            \strdendlabel{u Left}{\mathcal{A}}
+            \strdendlabel{u Right}{\mathcal{[A,B]}}
+        } \mydefeq
+        \strdin[gathered]{
+            \strdxscale{1.3}{\strdroad{branch}{\strdorigin}{u}} \strdroadlabel{u}{TA}{SA'}
+            \strdroadlabel{u Left}{TA}{TA'}
+            \strdroadlabel{u Right}{TA'}{SA'}
+            \strdcelllabel{u Left End}{T}
+            \strdbijlabel{u Right End}{E ^ {TS}}
+            \strdroad{mid}{u Left}{aa'} \strdroadlabel{aa'}{A}{A'}
+            \strdroad{mid}{u Right}{ts} \strdroadlabel{ts}{T}{S}
+            \strdstartlabel{u}{\mathcal{B}}
+            \strdendlabel{aa'}{\mathcal{A}}
+            \strdendlabel{ts}{\mathcal{[A,B]}}
+        }
+}
+
+\end{document}
