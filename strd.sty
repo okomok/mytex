@@ -294,6 +294,13 @@
     \strdjump{#1}{#2}%
 }
 
+\newcommand*{\strdlchange}[2]{%
+    \strdunright{#1}{#2 Prev}
+    \strdleft{#2 Prev}{#2}%
+}
+\newcommand*{\strdrchange}{\strdflipped{lchange}}
+
+
 
 % roads
 %   keep scaling away by '--'
@@ -319,10 +326,10 @@
 \newcommand*{\strddeadend}[1]{%
     \strdonlayer{strd labellayer}{
         \draw[strd draw,white,line width=4pt,shorten >=-1pt] {
-            ($(#1 End)+(0,11.16pt)$) -- (#1 End)
+            ($(#1 End)+(0,10.16pt)$) -- (#1 End)
         };
         \draw[strd draw,strd roadbase]{
-            ($(#1 End)+(0,11.16pt)$) -- ($(#1 End)+(0,11.36pt)$)
+            ($(#1 End)+(0,10.16pt)$) -- ($(#1 End)+(0,10.36pt)$)
         };
     }%
 }
@@ -406,9 +413,11 @@
 
 % utilities
 
+%remove me
 \newcommand*{\strdfamily}[2]{%
     \left(#2\right)_{
         \mathrlap{\!\!\!#1}
     }%
 }
 
+\newcommand*{\strdfamilyarg}[1]{{\!\!\!#1}}

@@ -1,0 +1,163 @@
+\documentclass{article}
+\usepackage{strd,cat,my,amsmath,stmaryrd}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+% definition
+\myin[preview,math,aligned]{
+    \exists \phi _{\mathcal{C}} : \catencats(\mathcal{C},[\mathcal{A},\mathcal{B}]) & \cong \catencats(\mathcal{C} \otimes \mathcal{A},\mathcal{B}) : \text{2-natural in } \mathcal{C} \\
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} 
+        \strdcelllabel{u End}{G}
+        \strdroad{mid}{u}{u2} 
+        \strdstartlabel{u}{[\mathcal{A},\mathcal{B}]}
+        \strdendlabel{u2}{\mathcal{C}}
+        \strdroadlabel{u}{GC}{GC\myprime}
+        \strdroadlabel{u2}{C}{C\myprime}
+    } &\mapsto
+    \strdin[gathered]{
+        \strdroad{branch}{\strdorigin}{u} \strdroadlabel{u}{(GC)A}{(GC\myprime)A}
+        \strdroadlabel{u Right}{GC}{GC\myprime}
+        \strdroad{mid}{u Right}{ur}
+        \strdroadlabel{ur}{C}{C\myprime}
+        \strdstartlabel{u}{\mathcal{B}}
+        \strdendlabel{ur}{\mathcal{C}}
+        \strdroad{mid}{u Left}{ul}
+        \strdroadlabel{u Left End}{A}{A\myprime}
+        \strdcelllabel{u Right End}{G}
+        \strdendlabel{ul}{\mathcal{A}}
+        \strdcelllabel{u End}{E}
+    } \\
+%\left(
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{GC}{G\myprime C}
+        \strdcelllabel{u End}{\beta}
+        \strdstartlabel{u}{[\mathcal{A},\mathcal{B}]}
+    }
+%\right) _ {\mathrlap{\strdfamilyarg{C}}}
+    & \mapsto
+%\left(
+    \strdin[gathered]{
+        \strdroad{branch}{\strdorigin}{u} \strdroadlabel{u}{(GC)A}{(GC\myprime)A}
+        \strdroadlabel{u Right}{GC}{GC\myprime}
+        \strdroadlabel{u Left}{}{A}
+        \strddeadend{u Left}
+        \strdcelllabel{u Right End}{\beta}
+        \strdcelllabel{u End}{E}
+        \strdstartlabel{u}{\mathcal{B}}
+    } \\
+%\right) _ {\strdfamilyarg{A,C}}
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{P(C,\mydash)}{P(C\myprime,\mydash)}
+        \strdroad{branch}{u}{p} \strdroadlabel{p Left}{}{A} \strdroadlabel{p Right}{C}{C\myprime}
+        \strddeadend{p Left}
+        \strdroad{mid}{p Right}{ul} \strdroadlabel{ul}{C}{C\myprime}
+        \strdendlabel{ul}{\mathcal{C}}
+        \strdstartlabel{u}{[\mathcal{A},\mathcal{B}]}
+        \strdscale{2.3}{2}{\strdbijsq{u}{b}}
+        \strdcelllabel{p End}{P}
+        \strdroadlabel{p}{P(C,A)}{P(C\myprime,A)}
+        \strdfamilylabel{b Right}{A}{\int_{\cdot}}
+    } & \mapsfrom
+    \strdin[gathered]{
+            \strdscale{1}{1}{
+        \strdroad{branch}{\strdorigin}{u}
+        \strdcelllabel{u End}{P}
+        \strdstartlabel{u}{\mathcal{B}}
+        \strdendlabel{u Left}{\mathcal{A}}
+        \strdendlabel{u Right}{\mathcal{C}}
+        \strdroadlabel{u}{P(C,A)}{P(C\myprime,A\myprime)}
+        \strdroadlabel{u Left}{A}{A\myprime}
+        \strdroadlabel{u Right}{C}{C\myprime}
+            }
+    } \\
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{P(C,\mydash)}{P\myprime(C,\mydash)}
+        \strdroad{mid}{u}{p} 
+        \strdstartlabel{u}{[\mathcal{A},\mathcal{B}]}
+        \strdscale{2.3}{1.4}{\strdbijsq{u}{b}}
+        \strdcelllabel{p End}{\gamma}
+        \strdroadlabel{p}{P(C,A)}{P\myprime(C,A)}
+        \strdfamilylabel{b Right}{A}{\int_{\cdot}}
+    } &\mapsfrom
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{P(C,A)}{P\myprime(C,A)}
+        \strdcelllabel{u End}{\gamma}
+        \strdstartlabel{u}{\mathcal{B}}
+    }
+}
+            
+\myin[preview,math,aligned]{
+    \left(\strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} 
+        \strdcelllabel{u End}{M}
+        \strdroad{mid}{u}{u2} 
+        \strdstartlabel{u}{\mathcal{A}}
+        \strdendlabel{u2}{\mathcal{A}\myprime}
+        \strdroadlabel{u}{MA}{MA\myprime}
+        \strdroadlabel{u2}{A}{A\myprime}
+    },
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} 
+        \strdcelllabel{u End}{N}
+        \strdroad{mid}{u}{u2} 
+        \strdstartlabel{u}{\mathcal{B}\myprime}
+        \strdendlabel{u2}{\mathcal{B}}
+        \strdroadlabel{u}{NB}{NB\myprime}
+        \strdroadlabel{u2}{B}{B\myprime}
+    }\right) &\mapsto
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{[M,N]T}{[M,N]S}
+        \strdcelllabel{u End}{[M,N]}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{T}{S}
+        \strdstartlabel{u}{[\mathcal{A}\myprime,\mathcal{B}\myprime]}
+        \strdendlabel{u2}{[\mathcal{A},\mathcal{B}]}
+    } \mydefeq 
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{NTM}{NSM}
+        \strdroad{mid}{u}{n} \strdroadlabel{n}{NTMA}{NSMA}
+        \strdcelllabel{n End}{N}
+        \strdroad{mid}{n}{e} \strdroadlabel{e}{TMA}{SMA}
+        \strdbijlabel{e End}{E ^ {TM,SM}}
+        \strdroad{mid}{e}{ts} \strdroadlabel{ts}{T}{S}
+        \strdroad{mid}{ts}{ts2} \strdroadlabel{ts2}{T}{S}
+        \strdendlabel{ts2}{[\mathcal{A},\mathcal{B}]}
+        \strdstartlabel{u}{[\mathcal{A}\myprime,\mathcal{B}\myprime]}
+        \strdscale{2.2}{3}{\strdbijsq{u}{b}}
+        \strdfamilylabel{b Right}{A}{\int_{\cdot}}
+    } \\
+    \left(\strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{MA}{M\myprime A}
+        \strdcelllabel{u End}{\mu}
+        \strdstartlabel{u}{\mathcal{A}}
+    },
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{NB}{N\myprime B}
+        \strdcelllabel{u End}{\nu}
+        \strdstartlabel{u}{\mathcal{B}\myprime}
+    }\right) & \mapsto  
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{[M,N]T}{[M\myprime,N\myprime]T}
+        \strdcelllabel{u End}{[\mu,\nu]}
+        \strdstartlabel{u}{[\mathcal{A}\myprime,\mathcal{B}\myprime]}
+    } \mydefeq 
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{uz} \strdroadlabel{uz}{NTM}{N\myprime TM\myprime}
+        \strdxscale{1.5}{\strdroad{branch}{uz}{u}} \strdroadlabel{u}{NTMA}{N\myprime TM\myprime A}
+        \strdroadlabel{u Left}{}{NTM\myprime A}
+        \strdcelllabel{u Left End}{N}
+        \strdroad{mid}{u Left}{ul} \strdroadlabel{ul}{TMA}{TM\myprime A}
+        \strdcelllabel{ul End}{T}
+        \strdroad{mid}{ul}{m} \strdroadlabel{m}{MA}{M\myprime A}
+        \strdcelllabel{u Right End}{\nu}
+        \strdscale{3.3}{4.5}{\strdlbijsq{uz}{b Left}}
+        \strdscale{2.5}{4.5}{\strdrbijsq{uz}{b Right}}
+        \strdstartlabel{uz}{[\mathcal{A}\myprime,\mathcal{B}\myprime]}
+        \strdfamilylabel{b Right}{A}{\int_{\cdot}}
+        \strdcelllabel{m End}{\mu}
+    }
+}
+        
+\end{document}
