@@ -1,0 +1,105 @@
+\documentclass{article}
+\usepackage{strd,cat,my,amsmath,stmaryrd}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+% composition-compatibility
+\myin[preview,math]{
+        \strdin[gathered]{
+            \strdmid{\strdorigin}{fc} \strdsidelabel{fc}{}{FC}
+            \strdmid{fc}{c} \strdsidelabel{c}{}{C}
+            \strdcelllabel{c End}{g}
+            \strdmid{c}{b} \strdsidelabel{b}{}{B}
+            \strdcelllabel{b End}{f}
+            \strdmid{b}{a} \strdsidelabel{a}{}{A}
+            \strdmid{a}{fa} \strdsidelabel{fa}{}{FA}
+            \strdscale{1}{3}{\strdmapsq{fc}{b}}
+            \strdfamilylabel{b Right}{}{F}
+        } =
+        \strdin[gathered]{
+            \strdmid{\strdorigin}{fc} \strdsidelabel{fc}{}{FC}
+            \strdmid{fc}{c} \strdsidelabel{c}{}{C}
+            \strdcelllabel{c End}{g}
+            \strdmid{c}{b} \strdsidelabel{b}{}{B}
+            \strdmid{b}{fb} \strdsidelabel{fb}{}{FB}
+            \strdmid{fb}{b2} \strdsidelabel{b2}{}{B}
+            \strdcelllabel{b2 End}{f}
+            \strdmid{b2}{a} \strdsidelabel{a}{}{A}
+            \strdmid{a}{fa} \strdsidelabel{fa}{}{FA}
+            \strdscale{1}{2}{\strdmapsq{fc}{b}}
+            \strdscale{1}{2}{\strdmapsq{fb}{b2}}
+            \strdfamilylabel{b Right}{}{F}
+            \strdfamilylabel{b2 Right}{}{F}
+        }
+}
+
+% unit-compatibility
+\myin[preview,math]{
+        \strdin[gathered]{
+            \strdmid{\strdorigin}{fa} \strdsidelabel{fa}{}{FA}
+            \strdmid{fa}{a} \strdsidelabel{a}{}{A}
+            \strdscale{1}{1}{\strdmapsq{fa}{b}}
+            \strdfamilylabel{b Right}{}{F}
+            \strdmid{a}{fa2} \strdsidelabel{fa2}{}{FA}
+        } =
+        \strdin[gathered]{
+            \strdmid{\strdorigin}{fa} \strdsidelabel{fa}{}{FA}
+        }
+}
+
+
+% coherence
+\myin[preview,math]{
+        \strdin[gathered]{
+            \strdmid{\strdorigin}{u0} \strdsidelabel{u0}{}{FB}
+            \strdxscale{1.4}{\strduse{branch}{u0}{u}} \strdsidelabel{u}{}{B}
+            \strdmid{u}{um} \strdsidelabel{um}{}{A_2}
+            \strdsidelabel{u Left}{}{A_3}
+            \strdcelllabel{u End}{f}
+            \strdsidelabel{u Right}{}{A_1}
+            \strdscale{2.2}{2}{\strdmapsq{u0}{b}}
+            \strdmid{um}{um2} \strdsidelabel{um2}{}{FA_2}
+            \strdmid{u Left}{ul2} \strdsidelabel{ul2}{}{FA_3}
+            \strdmid{u Right}{ur2} \strdsidelabel{ur2}{}{FA_1}
+            \strdfamilylabel{b Right}{}{F}
+        }
+}
+
+% naturality of phi
+\myin[preview,math]{
+        \strdin[gathered]{
+            \strdxscale{1.5}{ \strdbranch{\strdorigin}{fab} } \strdsidelabel{fab}{}{F(A\myprime \otimes B\myprime)}
+            \strdcelllabel{fab End}{\phi}
+            \strdsidelabel{fab Left}{}{FB\myprime}
+            \strdsidelabel{fab Right}{}{FA\myprime}
+            \strdmid{fab Left}{b'} \strdsidelabel{b'}{}{B'}
+            \strdcelllabel{b' End}{g}
+            \strdmid{b'}{b} \strdsidelabel{b}{}{B}
+            \strdmid{b}{fb} \strdsidelabel{fb}{}{FB}
+            \strdyscale{2}{\strdmapsq{fab Left}{gf}} \strdfamilylabel{gf Right}{}{F}
+            \strdmid{fab Right}{a'} \strdsidelabel{a'}{}{A'}
+            \strdcelllabel{a' End}{f}
+            \strdmid{a'}{a} \strdsidelabel{a}{}{A}
+            \strdmid{a}{fa} \strdsidelabel{fa}{}{FA}
+            \strdyscale{2}{\strdmapsq{fab Right}{ff}} \strdfamilylabel{ff Right}{}{F}
+        } =
+        \strdin[gathered]{
+            \strdmid{\strdorigin}{fab}  \strdsidelabel{fab}{}{F(A\myprime \otimes B\myprime)}
+            \strdbranch{fab}{ab} \strdsidelabel{ab}{}{A\myprime \otimes B\myprime}
+ %           \strdcelllabel{ab End}{=}
+            \strdscale{2}{3}{ \strdmapsq{fab}{f} } \strdfamilylabel{f Right}{}{F}
+            \strdsidelabel{ab Left}{}{B\myprime}
+            \strdsidelabel{ab Right}{}{A\myprime}
+            \strdmid{ab Left}{b} \strdsidelabel{b}{}{B}
+            \strdcelllabel{b Start}{g}
+            \strdmid{b}{fb} \strdsidelabel{fb}{}{FB}
+            \strdmid{ab Right}{a} \strdsidelabel{a}{}{A}
+            \strdcelllabel{a Start}{f}
+            \strdmid{a}{fa} \strdsidelabel{fa}{}{FA}
+        }
+}
+
+\end{document}

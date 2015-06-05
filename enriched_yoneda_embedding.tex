@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage{strd,cat,my,amsmath,stmaryrd}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+% yoneda embeddding
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\mathcal{A}(K,\mydash)}{\mathcal{A}(L,\mydash)}
+        \strdroad{branch}{u}{u2} \strdroadlabel{u2}{\mathcal{A}(K,A)}{\mathcal{A}(L,A)}
+        \strdcelllabel{u2 End}{\operatorname{Hom}_{\mathcal{A}}}
+        \strdroadlabel{u2 Left}{}{A}
+        \strddeadend{u2 Left}
+        \strdroad{mid}{u2 Right}{u2r}
+        \strdroadlabel{u2r}{L}{K}
+        \strdscale{2.5}{2}{\strdbijsq{u}{b}}
+        \strdfamilylabel{b Right}{A}{\int_{\cdot}}
+        \strdstartlabel{u}{[\mathcal{A}, (\mathcal{V})]}
+        \strdendlabel{u2r}{\mathcal{A}}
+    }
+}
+ 
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdxscale{1.5}{\strdroad{branch}{\strdorigin}{u2}} \strdroadlabel{u2}{ [\mathcal{A},\mathcal{B}]( \tilde{P}C, \tilde{Q}D )} { [\mathcal{A},\mathcal{B}]( \tilde{P}C\myprime, \tilde{Q}D\myprime) }
+        \strdcelllabel{u2 End}{ \operatorname{Hom}_ { [\mathcal{A},\mathcal{B}] } }
+        \strdroadlabel{u2 Left}{\tilde{Q}D}{\tilde{Q}D\myprime}
+        \strdroadlabel{u2 Right}{\tilde{P}C\myprime}{\tilde{P}C}
+        \strdroad{mid}{u2 Left}{u2l}\strdroadlabel{u2l}{D}{D\myprime}
+        \strdroad{mid}{u2 Right}{u2r} \strdroadlabel{u2r}{C\myprime}{C}
+        \strdstartlabel{u2}{(\mathcal{V})}
+        \strdendlabel{u2l}{\mathcal{D}}
+        \strdendlabel{u2r}{\mathcal{C}}
+        \strdcelllabel{u2 Left End}{\tilde{Q}}
+        \strdcelllabel{u2 Right End}{\tilde{P}}
+    }
+}
+\end{document}

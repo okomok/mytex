@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\Identity{\catwlim{F}{G}}}{GK}
+        \strdbijlabel{u End}{\mu}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{FK}
+        \strdstartlabel{u}{\mathcal{B}}
+    } &\mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\mathllap{\catwlim{F}{G}}}{GK}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{F}{\mathcal{B}(B,G\mydash)}
+        \strdbijlabel{u2 End}{\cong}
+        \strdroad{mid}{u2}{u3} \strdroadlabel{u3}{B}{\catwlim{F}{G}}
+        \strduse{mid}{u3}{fk} \strdsidelabel{fk}{}{FK}
+        \strdstartlabel{u}{\mathcal{B}}
+        \strdscale{1}{2}{\strdlbijsq{u}{sq Left}}
+        \strdscale{2.6}{2}{\strdrbijsq{u}{sq Right}}
+        \strdfamilylabel{sq Right}{}{\Identity{\mathsf{y;\int _ {\cdot};s}}}
+    } \\
+}
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{F}{\Identity{\mathcal{C}(C,TG\mydash)}}
+        \strdbijlabel{u End}{T\mu}
+        \strdroad{mid}{u}{v} \strdroadlabel{v}{C}{T\catwlim{F}{G}}
+        \strdstartlabel{u}{\lbrack \mathcal{K},(\mathcal{V})\rbrack}
+        \strdendlabel{v}{\mathcal{C}}
+    } &\mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{F}{\Identity{\mathcal{C}(C,TG\mydash)}}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{T \catwlim{F}{G} }{TGK}
+        \strdcelllabel{u2 End}{T}
+        \strdroad{mid}{u2}{fggk} \strdroadlabel{fggk}{\catwlim{F}{G}}{GK}
+        \strdbijlabel{fggk End}{\mu}
+        \strduse{mid}{fggk}{fk} \strdsidelabel{fk}{}{FK}
+        \strdstartlabel{u}{\lbrack \mathcal{K},(\mathcal{V})\rbrack}
+        \strdscale{2.4}{3}{\strdlbijsq{u}{sq Left}}
+        \strdscale{1.8}{3}{\strdrbijsq{u}{sq Right}}
+        \strdfamilylabel{sq Right}{}{\Identity{\mathsf{s;\int _ {\cdot};y}}}
+        \strdroad{mid}{fk}{v} \strdroadlabel{v}{C}{T\catwlim{F}{G}}
+        \strdendlabel{v}{\mathcal{C}}
+    }  
+} 
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{T\catwlim{F}{G}}{\catwlim{F}{TG}}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{F}{\mathcal{C}(C,TG\mydash)}
+        \strdbijlabel{u2 End}{T\mu}
+        \strdroad{mid}{u2}{u3} \strdroadlabel{u3}{C}{T\catwlim{F}{G}}
+        \strdscale{1}{2}{\strdlbijsq{u}{sq Left}}
+        \strdscale{3}{2}{\strdrbijsq{u}{sq Right}}
+        %\strdfamilylabel{sq Right}{}{\catwlim{F}{TG}}
+        \strdfamilylabel{sq Right}{}{\langle\rangle}
+        \strdstartlabel{u}{\mathcal{C}}
+    }
+}
+
+\end{document}

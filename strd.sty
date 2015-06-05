@@ -256,6 +256,8 @@
     \end{scope}%
 }
 
+\newcommand*{\strdxhalf}{\strdscope{xscale=0.5}}
+\newcommand*{\strdyhalf}{\strdscope{yscale=0.5}}
 \newcommand*{\strdflip}{\strdscope{xscale=-1}}
 \newcommand*{\strdinv}{\strdscope{yscale=-1}}
 \newcommand*{\strdxscale}[1]{\strdscope{xscale=#1}}
@@ -397,16 +399,30 @@
         \strdpathis{strd bijsq}{\strdsqsubset{#1}{#2}}
     }%
 }
-
 \newcommand*{\strdrbijsq}[2]{%
     \strdonlayer{strd labellayer}{
         \strdpathis{strd bijsq}{\strdsqsupset{#1}{#2}}
     }%
 }
-
 \newcommand*{\strdbijsq}[2]{%
     \strdonlayer{strd labellayer}{
         \strdpathis{strd bijsq}{\strdsquare{#1}{#2}}
+    }%
+}
+
+\newcommand*{\strdlmapsq}[2]{%
+    \strdonlayer{strd labellayer}{
+        \strdpathis{strd mapsq}{\strdsqsubset{#1}{#2}}
+    }%
+}
+\newcommand*{\strdrmapsq}[2]{%
+    \strdonlayer{strd labellayer}{
+        \strdpathis{strd mapsq}{\strdsqsupset{#1}{#2}}
+    }%
+}
+\newcommand*{\strdmapsq}[2]{%
+    \strdonlayer{strd labellayer}{
+        \strdpathis{strd mapsq}{\strdsquare{#1}{#2}}
     }%
 }
 

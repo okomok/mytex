@@ -7,6 +7,67 @@
 
 \myin[preview,math]{
     \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{rl} \strdroadlabel{rl}{R}{L}
+        \strduse{mid}{rl}{fa} \strdsidelabel{fa}{}{FA}
+        \strdbijlabel{fa End}{\beta}
+        \strdroad{mid}{fa}{la} \strdroadlabel{la}{L}{A}
+        \strdstartlabel{rl}{\mathcal{A}}
+        \strdscale{1}{2}{\strdbijsq{rl}{sq}}
+        \strdfamilylabel{sq Right}{A}{}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{rl} \strdroadlabel{rl}{R}{L}
+        \strdstartlabel{rl}{\mathcal{A}}
+        \strdroad{mid}{rl}{ra} \strdroadlabel{ra}{R}{A}
+        \strdbijlabel{ra End}{\cong}
+        \strduse{mid}{ra}{fa} \strdsidelabel{fa}{}{FA}
+        \strdbijlabel{fa End}{\beta}
+        \strdscale{1}{3}{\strdbijsq{rl}{sq}}
+        \strdfamilylabel{sq Right}{A}{\mathsf{ye}}
+        \strdroad{mid}{fa}{la} \strdroadlabel{la}{L}{A}
+    }
+}
+
+
+\myin[preview,math]{
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{fa} \strdsidelabel{fa}{}{FA}
+        \strdroad{mid}{fa}{rl} \strdroadlabel{rl}{R}{L}
+        \strdcelllabel{rl End}{k}
+        \strdscale{1}{1.5}{\strdbijsq{fa}{sq}}
+        \strdfamilylabel{sq Right}{}{}
+        \strdroad{mid}{sq}{la} \strdroadlabel{la}{L}{A}
+        \strdendlabel{la}{\mathcal{A}}
+    } \mydefeq
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{fa} \strdsidelabel{fa}{}{FA}
+        \strdbijlabel{fa End}{\cong}
+        \strdroad{mid}{fa}{ra} \strdroadlabel{ra}{R}{A}
+        \strdroad{mid}{ra}{rl} \strdroadlabel{rl}{R}{L}
+        \strdcelllabel{rl End}{k}
+        \strdscale{1}{1.5}{\strdbijsq{ra}{sq}} \strdfamilylabel{sq Right}{}{\mathsf{ye}}
+        \strdroad{mid}{sq}{la} \strdroadlabel{la}{L}{A}
+        \strdendlabel{la}{\mathcal{A}}
+    }
+}
+
+\myin[preview,math]{
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{F(B,S_B)}
+        \strdcelllabel{u End}{\eta}
+    } \mydefeq
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{F(B,S_B)}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{F(B,A)}
+        \strdbijlabel{u2 End}{\alpha}
+        \strdroad{mid}{u2}{sba} \strdroadlabel{sba}{S_B}{A}
+        \strdscale{2.2}{2}{\strdrbijsq{u}{sq Right}} \strdfamilylabel{sq Right}{A}{\mathsf{y}}
+        \strdscale{1}{2}{\strdlbijsq{u}{sq Left}} 
+    }
+}
+
+\myin[preview,math]{
+    \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{kbkc} \strdroadlabel{kbkc}{SB}{SC}
         \strdroad{mid}{kbkc}{bc} \strdroadlabel{bc}{B}{C}
         \strdcelllabel{kbkc End}{S}
@@ -16,20 +77,20 @@
     \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{kbkc} \strdroadlabel{kbkc}{S_B}{S_C}
         \strdbijlabel{kbkc End}{\alpha}
-        \strdmid{kbkc}{fbkc} \strdsidelabel{fbkc}{}{F(B,S_C)}
-        \strdmid{fbkc}{fckc} \strdsidelabel{fckc}{}{F(C,S_C)}
-        \strdmid{fckc}{fcac} \strdsidelabel{fcac}{}{F(C,A)}
-        \strdbijlabel{fcac End}{\alpha}
-        \strdroad{mid}{fcac}{kca} \strdroadlabel{kca}{S_C}{A}
-        \strdscale{2.5}{3.5}{\strdlbijsq{fbkc}{bl1}}
-        \strdscale{4.5}{3.5}{\strdrbijsq{fbkc}{br1}}
-        \strdscale{2}{2}{\strdlbijsq{fckc}{bl2}}
-        \strdscale{3}{2}{\strdrbijsq{fckc}{br2}}
-        \strdroad{mid}{bl1}{bc} \strdroadlabel{bc}{B}{C}
-        \strdsidelabel{br2}{{}_A}{S_C} 
-        \strdsidelabel{br1}{C}{{}_B}
+        \strduse{mid}{kbkc}{u2} \strdsidelabel{u2}{}{F(B,S_C)}
+        \strdxscale{1.5}{\strdroad{branch}{u2}{fbkc}} \strdroadlabel{fbkc}{I}{F(B,S_C)}
+        \strdroadlabel{fbkc Left}{}{F(C,S_C)}
+        \strdbijlabel{fbkc Left End}{\eta}
+        \strdcelllabel{fbkc Right End}{F}
+        \strdroad{left}{fbkc Right}{b} \strddeadend{b} \strdroadlabel{b}{}{S_C}
+        \strdroad{right}{fbkc Right}{bc}
+        \strdroadlabel{bc}{B}{C}
+        \strdroad{mid}{bc}{bc2} \strdroadlabel{bc2}{B}{C}
+        \strdscale{2}{3}{\strdlbijsq{u2}{bl2}}
+        \strdscale{3.2}{3}{\strdrbijsq{u2}{br2}}
+        \strdfamilylabel{br2}{}{\mathsf{c}}
         \strdstartlabel{kbkc}{\mathcal{A}}
-        \strdendlabel{bc}{\mathcal{B}}
+        \strdendlabel{bc2}{\mathcal{B}}
     }
 }
 
