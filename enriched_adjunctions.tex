@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{B}{TA}
+        \strdbijlabel{u End}{n}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{SB}{A}
+        \strdstartlabel{u}{\mathcal{B}}
+        \strdendlabel{u2}{\mathcal{A}}
+    } &\mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{B}{TA}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{B}{TSB}
+        \strdcelllabel{u2 End}{\eta}
+        \strdscale{0.8}{1.5}{\strdlbijsq{u}{sq Left}}
+        \strdscale{1.5}{1.5}{\strdrbijsq{u}{sq Right}}
+        \strdfamilylabel{sq Right}{}{\mathsf{y} ^ +}
+        \strdroad{mid}{sq Right}{v} \strdroadlabel{v}{SB}{A}
+        \strdstartlabel{u}{\mathcal{B}}
+        \strdendlabel{v}{\mathcal{A}}
+    } \\
+}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{SB}{A}
+        \strdbijlabel{u End}{n ^{-1}}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{B}{TA}
+        \strdstartlabel{u}{\mathcal{A}}
+        \strdendlabel{u2}{\mathcal{B}}
+    } &\mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{SB}{A}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{STA}{A}
+        \strdcelllabel{u2 End}{\epsilon}
+        \strdscale{1.5}{1.5}{\strdlbijsq{u}{sq Left}}
+        \strdscale{0.8}{1.5}{\strdrbijsq{u}{sq Right}}
+        \strdfamilylabel{sq Right}{}{\mathsf{y} ^ -}
+        \strdroad{mid}{sq Right}{v} \strdroadlabel{v}{B}{TA}
+        \strdendlabel{v}{\mathcal{B}}
+        \strdstartlabel{u}{\mathcal{A}}
+    } \\
+}
+
+\end{document}

@@ -7,21 +7,19 @@
 
 \myin[preview,math,aligned]{
     \strdin[gathered]{
-        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\Identity{\catwlim{F}{G}}}{GK}
-        \strdbijlabel{u End}{\mu}
-        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{FK}
-        \strdstartlabel{u}{\mathcal{B}}
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{F}{\mathcal{B}(\catwlim{F}{G},G\mydash)}
+        \strdcelllabel{u End}{\mu}
+        \strdstartlabel{u}{[\mathcal{K},\mathcal{(V)}]}
     } &\mydefeq
     \strdin[gathered]{
-        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\mathllap{\catwlim{F}{G}}}{GK}
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{F}{\mathcal{B}(\catwlim{F}{G},G\mydash)}
         \strdroad{mid}{u}{u2} \strdroadlabel{u2}{F}{\mathcal{B}(B,G\mydash)}
         \strdbijlabel{u2 End}{\cong}
         \strdroad{mid}{u2}{u3} \strdroadlabel{u3}{B}{\catwlim{F}{G}}
-        \strduse{mid}{u3}{fk} \strdsidelabel{fk}{}{FK}
-        \strdstartlabel{u}{\mathcal{B}}
+        \strdstartlabel{u}{[\mathcal{K},\mathcal{(V)}]}
         \strdscale{1}{2}{\strdlbijsq{u}{sq Left}}
         \strdscale{2.6}{2}{\strdrbijsq{u}{sq Right}}
-        \strdfamilylabel{sq Right}{}{\Identity{\mathsf{y;\int _ {\cdot};s}}}
+        \strdfamilylabel{sq Right}{B}{\mathsf{y}}
     } \\
 }
 \myin[preview,math,aligned]{
@@ -34,17 +32,22 @@
     } &\mydefeq
     \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{F}{\Identity{\mathcal{C}(C,TG\mydash)}}
-        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{T \catwlim{F}{G} }{TGK}
+        \strdxscale{2}{\strdroad{branch}{u}{br}}
+        \strdroadlabel{br}{F}{\mathcal{C}(T \catwlim{F}{G},TG\mydash)}
+        \strdroadlabel{br Left}{}{\mathcal{B}(\catwlim{F}{G},G\mydash)}
+        \strdroad{mid}{br Right}{u2} \strdroadlabel{u2}{T \catwlim{F}{G} }{TGK}
+        \strdcelllabel{br Left End}{\mu}
         \strdcelllabel{u2 End}{T}
         \strdroad{mid}{u2}{fggk} \strdroadlabel{fggk}{\catwlim{F}{G}}{GK}
-        \strdbijlabel{fggk End}{\mu}
-        \strduse{mid}{fggk}{fk} \strdsidelabel{fk}{}{FK}
         \strdstartlabel{u}{\lbrack \mathcal{K},(\mathcal{V})\rbrack}
-        \strdscale{2.4}{3}{\strdlbijsq{u}{sq Left}}
-        \strdscale{1.8}{3}{\strdrbijsq{u}{sq Right}}
-        \strdfamilylabel{sq Right}{}{\Identity{\mathsf{s;\int _ {\cdot};y}}}
-        \strdroad{mid}{fk}{v} \strdroadlabel{v}{C}{T\catwlim{F}{G}}
+        \strdscale{3}{4.5}{\strdlbijsq{u}{sq Left}}
+        \strdscale{5}{4.5}{\strdrbijsq{u}{sq Right}}
+        \strdfamilylabel{sq Right}{}{\mathsf{y}}
+        \strdroad{mid}{sq Left}{v} \strdroadlabel{v}{C}{T\catwlim{F}{G}}
         \strdendlabel{v}{\mathcal{C}}
+        \strdscale{2.5}{2}{\strdlbijsq{br Right}{bt Left}}
+        \strdscale{2}{2}{\strdrbijsq{br Right}{bt Right}}
+        \strdfamilylabel{bt Right}{K}{\int _ \mydash}
     }  
 } 
 
