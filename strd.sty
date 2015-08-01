@@ -409,6 +409,11 @@
         \strdpathis{strd bijsq}{\strdsquare{#1}{#2}}
     }%
 }
+\newcommand*{\strdbijsqx}[5]{%
+    \strdscale{#4}{#3}{\strdlbijsq{#1}{#2 Left}}
+    \strdscale{#5}{#3}{\strdrbijsq{#1}{#2 Right}}
+    \strdyscale{#3}{\strdjump{#1}{#2}}
+} %
 
 \newcommand*{\strdlmapsq}[2]{%
     \strdonlayer{strd labellayer}{

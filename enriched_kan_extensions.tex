@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{F \circ K}{\lambda_A\mathcal{B}(B,GA)}
+        \strdxscale{2}{\strdroad{branch}{u}{u2}}
+            \strdroadlabel{u2}{FKA}{\mathcal{B}(B,GA)}
+            \strdroadlabel{u2 Left}{}{\mathcal{B}(B,TKA)}
+            \strdbijlabel{u2 Left End}{\lambda _ {KA}}
+            \strdyscale{1.5}{\strdroad{mid}{u2 Left}{u2l}}
+        \strdcelllabel{u2 Right End}{\operatorname{Hom}_{\mathcal{B}}}
+        \strdroad{cap}{u2 Right}{u2r}
+            \strdroadlabel{u2r Left}{TKA}{GA}
+            \strddeadend{u2r Right} \strdroadlabel{u2r Right}{}{B}
+            \strdcelllabel{u2r Left End}{\psi_A}
+        \strdstartlabel{u}{[\mathcal{A},\mathcal{(V)}]}
+        \strdbijsqx{u}{bj}{3.5}{3}{4} \strdfamilylabel{bj Right}{A}{\rlap{\lambda}}
+        \strdroad{mid}{u2l}{u2l2} \strdroadlabel{u2l2}{F}{\lambda_C\mathcal{B}(B,TC)}
+        \strdendlabel{u2l2}{[\mathcal{C},\mathcal{(V)}]}
+    } : \text{iso}
+}
+
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\lambda_A\mathcal{C}(C,KA)}{\lambda_A\mathcal{B}(B,GA)}
+        %
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{\lambda_A\mathcal{C}(C,KA)}{\lambda_A\mathcal{B}(TC,GA)}
+        %
+        \strdroad{branch}{u2}{u3} \strdroadlabel{u3}{TC}{GA} \strdroadlabel{u3 Left}{}{TKA}
+        \strdcelllabel{u3 Left End}{T}
+        \strdroad{mid}{u3 Left}{u3l} \strdroadlabel{u3l}{C}{KA}
+        \strdcelllabel{u3 Right End}{\psi_A}
+        \strdbijsqx{u}{bi}{4.5}{3.5}{4} \strdfamilylabel{bi Right}{\operatorname{y}}{\rlap{B}}
+        \strdbijsqx{u2}{b2}{3}{2}{2} \strdfamilylabel{b2 Right}{A}{\lambda}
+        \strdstartlabel{u}{[\mathcal{C},\mathcal{(V)}]}
+        %
+        \strdroad{mid}{bi}{v} \strdroadlabel{v}{B}{TC}
+        \strdendlabel{v}{\mathcal{B}}
+    } : \text{iso}
+}
+
+\end{document}

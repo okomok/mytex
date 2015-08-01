@@ -1,0 +1,44 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{FA}{GA}
+        \strdbijlabel{u End}{\lambda _ A}
+        \strdstartlabel{u}{\mathcal{B}}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{F}{G}
+        \strdendlabel{u2}{[\mathcal{A},\mathcal{B}]}
+    } &\mydefeq
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\mathcal{B}(FA,GA)}
+        \strdbijlabel{u End}{\textstyle\int _ A}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{\int_A\mathcal{B}(FA,GA)}
+    } 
+    \\
+}
+
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{FA}{GA}
+        \strdbijlabel{u End}{\lambda _ A}
+        \strdstartlabel{u}{\mathcal{B}}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{F}{G}
+        \strdendlabel{u2}{[\mathcal{A},\mathcal{B}]}
+    } =
+    \strdin[gathered]{
+        \strdroad{branch}{\strdorigin}{u} \strdroadlabel{u}{FA}{GA}
+        \strdcelllabel{u End}{\operatorname{Eval}}
+        \strdstartlabel{u}{\mathcal{B}}
+        \strdroadlabel{u Right}{F}{G}
+        \strdendlabel{u Right}{[\mathcal{A},\mathcal{B}]}
+        \strddeadend{u Left}
+        \strdroadlabel{u Left}{}{A}
+    }
+}
+
+\end{document}
