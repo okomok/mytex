@@ -1,0 +1,127 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\int_B T(A,B,A,B)}
+        \strdbijlabel{u End}{\scriptscriptstyle\int_{A}^{\operatorname{Fub}}}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{\int_{A,B}T(A,B,A,B)}
+    } \mydefeq
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\int_B T(A,B,A,B)}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{T(A,B,A,B)}
+        \strdbijlabel{u2 End}{\scriptstyle\int_{A,B}}
+        \strduse{mid}{u2}{u3}
+        \strduse{mid}{u3}{u4} \strdsidelabel{u4}{}{\int_{A,B}T(A,B,A,B)}
+        \strdbijsqx{u}{bj}{2}{1}{3.5} \strdfamilylabel{bj Right}{B}{\int}
+    }
+}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\int_{A,B} T(A,B,A,B)}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{\int_B T(A,B,A,B)}
+        \strdbijlabel{u2 End}{x_A}
+        \strduse{mid}{u2}{u3}
+        \strduse{mid}{u3}{u4} \strdsidelabel{u4}{}{X}
+        \strdbijsqx{u}{bj}{2}{1}{4.5} \strdfamilylabel{bj Right}{A}{\int^{\mathrlap{\operatorname{Fub}}}}
+    } \mydefeq
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\int_{A,B} T(A,B,A,B)}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{T(A,B,A,B)}
+        \strdbijlabel{u2 End}{\scriptstyle\int_{B}}
+        \strduse{mid}{u2}{u3} \strdsidelabel{u3}{}{\int_{B}T(A,B,A,B)}
+        \strduse{mid}{u3}{u4}
+        \strdbijlabel{u3 End}{x_A}
+        \strduse{mid}{u4}{u5} \strdsidelabel{u5}{}{X}
+        \strdbijsqx{u}{bj}{3}{1}{4.5} \strdfamilylabel{bj Right}{A,B}{\int}
+    }
+}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{T(A,B,A,B)}
+        \strdbijlabel{u End}{\scriptscriptstyle\int_{A,B}^{\operatorname{Fub}}}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{\int_{A}\int_{B}T(A,B,A,B)}
+    } \mydefeq
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u2} \strdsidelabel{u2}{}{T(A,B,A,B)}
+        \strdbijlabel{u2 End}{\scriptstyle\int_{B}}
+        \strduse{mid}{u2}{u3} \strdsidelabel{u3}{}{\int_{B}T(A,B,A,B)}
+        \strdbijlabel{u3 End}{\scriptstyle\int_A}
+        \strduse{mid}{u3}{u4} \strdsidelabel{u4}{}{\int_A\int_B T(A,B,A,B)}
+    }
+}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\int_{A}\int_B T(A,B,A,B)}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{T(A,B,A,B)}
+        \strdbijlabel{u2 End}{x_{A,B}}
+        \strduse{mid}{u2}{u3}
+        \strduse{mid}{u3}{u4} \strdsidelabel{u4}{}{X}
+        \strdbijsqx{u}{bj}{2}{1}{4.5} \strdfamilylabel{bj Right}{A,B}{\int^{\mathrlap{\operatorname{Fub}}}}
+    } \mydefeq
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\int_{A}\int_{B} T(A,B,A,B)}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{\int_B T(A,B,A,B)}
+        \strduse{mid}{u2}{u3} \strdsidelabel{u3}{}{T(A,B,A,B)}
+        \strdbijlabel{u3 End}{x_{A,B}}
+        \strduse{mid}{u3}{u4}
+        \strduse{mid}{u4}{u5}
+        \strduse{mid}{u5}{u6} \strdsidelabel{u6}{}{X}
+        \strdbijsqx{u}{bj}{4}{1.5}{5.5} \strdfamilylabel{bj Right}{A}{\int}
+        \strdbijsqx{u2}{bj}{2}{1}{4.5} \strdfamilylabel{bj Right}{B}{\int}
+    }
+}
+
+% Fubini ver.2
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\int_{A} T(A,B,A,B)}
+        \strdbijlabel{u End}{\scriptscriptstyle\int_B ^ {\operatorname{Fub}}}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{\int_A \int_B T(A,B,A,B)}
+    } \mydefeq
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\int_{A} T(A,B,A,B)}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{T(A,B,A,B)}
+        \strdbijlabel{u2 End}{\scriptstyle\int_{B}}
+        \strduse{mid}{u2}{u3} \strdsidelabel{u3}{}{\int_{B}T(A,B,A,B)}
+        \strduse{mid}{u3}{u4}
+        \strdbijlabel{u3 End}{\scriptstyle\int_A}
+        \strduse{mid}{u4}{u5} \strdsidelabel{u5}{}{\int_A\int_B T(A,B,A,B)}
+        \strdbijsqx{u}{bj}{3}{1}{4.5} \strdfamilylabel{bj Right}{A}{\int}
+    }
+}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\int_A\int_{B} T(A,B,A,B)}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{\int_A T(A,B,A,B)}
+        \strdbijlabel{u2 End}{x_{B}}
+        \strduse{mid}{u2}{u3}
+        \strduse{mid}{u3}{u4} \strdsidelabel{u4}{}{X}
+        \strdbijsqx{u}{bj}{2}{1}{4.5} \strdfamilylabel{bj Right}{B}{\int^{\mathrlap{\operatorname{Fub}}}}
+    } \mydefeq
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\int_{A}\int_{B} T(A,B,A,B)}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{\int_B T(A,B,A,B)}
+        \strduse{mid}{u2}{u3} \strdsidelabel{u3}{}{T(A,B,A,B)}
+        \strdbijlabel{u3 End}{\scriptstyle\int_A}
+        \strduse{mid}{u3}{u4} \strdsidelabel{u4}{}{\int_A T(A,B,A,B)}
+        \strdbijlabel{u4 End}{x_B}
+        \strduse{mid}{u4}{u5}
+        \strduse{mid}{u5}{u6}
+        \strduse{mid}{u6}{u7} \strdsidelabel{u7}{}{X}
+        \strdbijsqx{u}{bj}{5}{1.5}{5.5} \strdfamilylabel{bj Right}{A}{\int}
+        \strdbijsqx{u2}{bj}{3}{1}{4.5} \strdfamilylabel{bj Right}{B}{\int}
+    }
+}
+
+
+\end{document}
