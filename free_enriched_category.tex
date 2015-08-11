@@ -1,0 +1,74 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{K}{L}
+        \strdstartlabel{u}{\mathcal{L} _ {\mathcal{V}}}
+    } &\mydefeq 
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\mathcal{L}(K,L) \cdot I}
+    } \\ 
+    \strdin[gathered]{
+        \strdroad{branch}{\strdorigin}{u} \strdroadlabel{u}{K}{M}
+        \strdroadlabel{u Left}{}{L}
+        \strdstartlabel{u}{\mathcal{L} _ {\mathcal{V}}}
+    } &\mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u0} \strdroadlabel{u0}{K}{M}
+        \strdroad{branch}{u0}{u} 
+        \strdroad{mid}{u Left}{ul} \strdroadlabel{ul}{}{L}
+        \strdroad{mid}{u Right}{ur}
+        \strdmapsqx{u0}{fn}{2}{2}{2} \strdmaplabel{fn Right}{}{\cdot I}
+        \strdstartlabel{u0}{\mathcal{L} _ {\mathcal{V}}}
+    } \\
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{}{K}
+        \strddeadend{u}
+        \strdstartlabel{u}{\mathcal{L} _ {\mathcal{V}}}
+    } &\mydefeq
+    \strdin[gathered]{
+        \strdyscale{0.5}{\strdroad{mid}{\strdorigin}{u}}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{}{K}
+        \strdmapsqx{u}{fn}{1}{1}{1} \strdmaplabel{fn Right}{}{\cdot I}
+        \strddeadend{u2}
+        \strdstartlabel{u}{\mathcal{L} _ {\mathcal{V}}}
+    }
+}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{K}{L}
+        \strdcelllabel{u End}{f}
+        \strdstartlabel{u}{\mathcal{L}}
+    } &\overset{\eta _ {\mathcal{L}}}{\mapsto}
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{K}{L}
+        \strdyscale{0.5}{\strdroad{mid}{u}{u2}}
+        \strdcelllabel{u2 End}{f}
+        \strdstartlabel{u}{\mathcal{L} _ {\mathcal{V}}}
+        \strdmapsqx{u}{fn}{1}{1}{1} \strdmaplabel{fn Right}{}{\cdot I}
+    } \\
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\epsilon _{\mathcal{A}}K}{\epsilon _ {\mathcal{A}}L}
+        \strdcelllabel{u End}{\epsilon_{\mathcal{A}}}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{K}{L}
+        \strdstartlabel{u}{\mathcal{A}}
+        \strdendlabel{u2}{(\mathcal{A} _ 0)_{\mathcal{V}}}
+    } &\mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{K}{L}
+        \strdyscale{0.5}{\strdroad{mid}{u}{u2}}
+        \strdcelllabel{u2 End}{a}
+        \strdbijsqx{u}{bj}{1}{1}{1} \strdfamilylabel{bj Right}{a}{\mathcal{A} _ 0 (K,L) \cdot}
+        \strdroad{mid}{bj}{v} \strdroadlabel{v}{K}{L}
+        \strdstartlabel{u}{\mathcal{A}}
+        \strdendlabel{v}{(\mathcal{A} _ 0)_{\mathcal{V}}}
+    }
+}
+
+\end{document}

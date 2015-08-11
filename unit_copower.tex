@@ -1,0 +1,127 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{X}
+        \strdcelllabel{u End}{\alpha _ e}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{Y}
+    } \underset{\forall e}{=}
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{X}
+        \strdcelllabel{u End}{m}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{E \cdot Y}
+        \strdcelllabel{u2 End}{e \cdot}
+        \strduse{mid}{u2}{u3} \strdsidelabel{u3}{}{Y}
+    } \iff
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{X}
+        \strdcelllabel{u End}{m}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{E \cdot Y}
+    } =
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{X}
+        \strdbijsqx{u}{bj}{2}{1}{1} \strdfamilylabel{bj Right}{e}{E \cdot}
+        \strduse{mid}{u}{u2}
+        \strdcelllabel{u2 End}{\alpha _ e}
+        \strduse{mid}{u2}{u3} \strdsidelabel{u3}{}{Y}
+        \strduse{mid}{u3}{u4} \strdsidelabel{u4}{}{E \cdot Y}
+    }
+}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strduse{branch}{\strdorigin}{u} \strdsidelabel{u}{}{X}
+        \strdcelllabel{u End}{\alpha _ e}
+        \strdsidelabel{u Left}{}{Z}
+        \strdsidelabel{u Right}{}{Y}
+    } \underset{\forall e}{=}
+    \strdin[gathered]{
+        \strduse{branch}{\strdorigin}{u} \strdsidelabel{u}{}{X}
+        \strdcelllabel{u End}{m}
+        \strdsidelabel{u Right}{}{E \cdot Y}
+        \strdcelllabel{u Right End}{e \cdot}
+        \strduse{mid}{u Right}{u2} \strdsidelabel{u2}{}{Y}
+        \strduse{mid}{u Left}{u3} \strdsidelabel{u3}{}{Z}
+    } \iff
+    \strdin[gathered]{
+        \strduse{branch}{\strdorigin}{u} \strdsidelabel{u}{}{X}
+        \strdcelllabel{u End}{m}
+        \strdsidelabel{u Right}{}{E \cdot Y}
+        \strdsidelabel{u Left}{}{Z}
+    } =
+    \strdin[gathered]{
+        \strdmid{bj}{d1} \strdsidelabel{d1}{}{X}
+        \strdroadlshifted{\strdroad{mid}}{d1}{d2} \strdroadlabel{d2}{Z}{X}
+        \strdroad{mid}{d2}{d3}
+        \strdbijlabel{d3 End}{\alpha _ e}
+        \strduse{mid}{d3}{d4} \strdsidelabel{d4}{}{Y}
+        \strdbijsqx{d1}{bjd1}{4}{3}{3}
+        \strdbijsqx{d2}{bjd2}{2}{2}{2} \strdfamilylabel{bjd2 Right}{e}{E \cdot}
+        \strdrshifted{mid}{bjd2}{re}
+        \strdlshifted{mid}{bjd1}{le} \strdsidelabel{le}{}{Z}
+        \strduse{mid}{re}{re2} \strdsidelabel{re2}{}{E \cdot Y}
+    }
+}
+
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{F \cdot I}
+        \strdmid{u}{u2} \strdsidelabel{u2}{}{F}
+        \strdcelllabel{u2 End}{f}
+        \strdmid{u2}{u3} \strdsidelabel{u3}{}{E}
+        \strdmid{u3}{u4} \strdsidelabel{u4}{}{E \cdot I}
+        \strdmapsqx{u}{ms}{2}{1}{1} \strdfunlabel{ms Right}{}{\cdot I}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{F \cdot I}
+        \strdmid{u}{u2}
+        \strdcelllabel{u2 End}{f(e) \cdot}
+        \strdbijsqx{u}{bj}{2}{1.5}{1.5} \strdfamilylabel{bj Right}{e}{E \cdot}
+        \strdmid{bj}{u3} \strdsidelabel{u3}{}{E \cdot I}
+    }
+}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{\lbrace \ast \rbrace \cdot I}
+        \strdcelllabel{u End}{\phi _ 0}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{\lbrace \ast \rbrace \cdot I}
+        \strdcelllabel{u End}{\ast \cdot}
+    }
+}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdbranch{\strdorigin}{u} \strdsidelabel{u}{}{(E\times F) \cdot I}
+        \strdcelllabel{u End}{\phi}
+        \strdsidelabel{u Left}{}{F \cdot I} \strdsidelabel{u Right}{}{E \cdot I}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{(E\times F) \cdot I}
+        \strdmid{u}{u2}
+        \strdmid{u2}{u3}
+        \strdcelllabel{u3 End}{(e,f) \cdot}
+        \strdbijsqx{u}{bj}{4}{3}{3} \strdfamilylabel{bj Right}{f}{F \cdot}
+        \strdbijsqx{u2}{bj2}{2}{2}{2} \strdfamilylabel{bj2 Right}{e}{E \cdot}
+        \strdmid{bj2}{u4} \strdsidelabel{u4}{}{F \cdot I}
+        \strdmid{bj}{d1} \strdsidelabel{d1}{}{E \cdot(F \cdot I)}
+        \strdroadlshifted{\strdroad{mid}}{d1}{d2} \strdroadlabel{d2}{F \cdot I}{E \cdot(F \cdot I)}
+        \strdroad{mid}{d2}{d3}
+        \strdbijlabel{d3 End}{e \cdot}
+        \strdbijsqx{d1}{bjd1}{4}{3}{3}
+        \strdbijsqx{d2}{bjd2}{2}{2}{2} \strdfamilylabel{bjd2 Right}{e}{E \cdot}
+        \strdrshifted{mid}{bjd2}{re}
+        \strdlshifted{mid}{bjd1}{le} \strdsidelabel{le}{}{F \cdot I}
+        \strduse{mid}{re}{re2} \strdsidelabel{re2}{}{E \cdot I}
+    }
+}
+
+\end{document}
