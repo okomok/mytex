@@ -1,0 +1,43 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{A}{A}
+        \strdcellnode{u End}{\lambda _ \ast A}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{\ast}{\ast}
+        \strdstartlabel{u}{\mathcal{A}}
+        \strdendlabel{u2}{\mathcal{I}}
+    } &\mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{}{A}
+        \strddeadend{u}
+        \strdstartlabel{u}{\mathcal{A}}
+    } 
+    \\
+}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\lambda _\ast A}{\lambda_ \ast B}
+        \strdbijnodewith{u End}{\lambda _ \ast}{{}^{-1}}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{A}{B}
+        \strdstartlabel{u}{[\mathcal{I},\mathcal{A}]}
+        \strdendlabel{u2}{\mathcal{A}}
+    } &\mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\lambda_\ast A}{\lambda_\ast B}
+        \strdbijsq{u}{bj} \strdfamilylabel{bj Right}{\ast}{\lambda}
+        \strdstartlabel{u}{[\mathcal{I},\mathcal{A}]}
+        \strdroad{mid}{u}{u2} 
+        \strdroad{mid}{u2}{u3} \strdroadlabel{u3}{A}{B}
+        \strdendlabel{u3}{\mathcal{A}}
+    } 
+    \\
+}
+
+\end{document}

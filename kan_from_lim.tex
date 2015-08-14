@@ -1,0 +1,26 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\lim _ A ^{\mathcal{C}(KA\myprime,KA)} GA}{GA\myprime}
+        \strdcelllabel{u End}{\psi _ {A\myprime}}
+    } &\mydefeq 
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\lim _ A ^{\mathcal{C}(KA\myprime,KA)} GA}{GA\myprime}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{\mathcal{C}(C,KA\myprime)}{\mathcal{B}(\lim _ A ^{\mathcal{C}(C,KA)}GA,GA\myprime)}
+        \strdbijlabel{u2 End}{\lambda_{A\myprime}}
+        \strdroad{mid}{u2}{u3}\strdroadlabel{u3}{\lambda_A\mathcal{C}(C,KA)}{\lambda_A\mathcal{B}(\lim _ A ^{\mathcal{C}(C,KA)}GA,GA)}
+        \strdroad{mid}{u3}{u4}\strdroadlabel{u4}{\lambda_A\mathcal{C}(C,KA)}{\lambda_A\mathcal{B}(B,GA)}{GA}
+        \strdbijlabel{u4 End}{\lim _ B}
+        \strdroad{mid}{u4}{u5} \strdroadlabel{u5}{B}{\lim _ A ^{\mathcal{C}(C,KA)}GA}
+        \strdbijsqx{u}{bj1}{4.5}{5}{7} \strdfamilylabel{bj1 Right}{C}{\operatorname{y}}
+        \strdbijsqx{u3}{bj2}{2}{4}{4} \strdfamilylabel{bj2 Right}{B}{\operatorname{y}}
+    } \\ 
+}
+
+\end{document}
