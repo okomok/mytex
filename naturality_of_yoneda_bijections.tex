@@ -1,0 +1,74 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\mathcal{A}(K\myprime,A)}{FA}
+        \strdroad{branch}{u}{u2} \strdroadlabel{u2}{I}{FK\myprime}
+        \strdcellnode{u2 Left End}{\eta} \strdroadlabel{u2 Left}{}{FK}
+        \strdcellnode{u2 Right End}{F}
+        \strdroad{mid}{u2 Right}{u3} \strdroadlabel{u3}{K}{K'}
+        \strdcellnode{u3 End}{h}
+        \strdbijsqx{u}{sq}{3.5}{2}{2} \strdfamilylabel{sq Right}{\operatorname{y}}{\mathrlap{A}}
+        \strdstartlabel{u}{\mathcal{(V)}}
+    } =
+    \strdin[gathered]{
+        \strdxscale{2}{\strdroad{branch}{\strdorigin}{u}} \strdroadlabel{u}{\mathcal{A}(K\myprime,A)}{FA}
+        \strdroadlabel{u Left}{}{\mathcal{A}(K,A)}
+        \strdcellnode{u Left End}{\operatorname{Hom}_{\mathcal{A}}}
+        \strdroad{left}{u Left}{ul} \strdroadlabel{ul}{}{A} \strddeadend{ul}
+        \strdroad{right}{u Left}{ur} \strdroadlabel{ur}{K}{K\myprime}
+        \strdcellnode{ur End}{h}
+        \strdroad{mid}{u Right}{u2} \strdroadlabel{u2}{I}{FK}
+        \strdcellnode{u2 End}{\eta}
+        \strdbijsqx{u Right}{sq}{1.5}{1.5}{1.5} \strdfamilylabel{sq Right}{\operatorname{y}}{A}
+        \strdstartlabel{u}{\mathcal{(V)}}
+    } \\ 
+}
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{B}{TA}
+        \strdroad{branch}{u}{u2} \strdroadlabel{u2}{B}{TK\myprime}
+        \strdcellnode{u2 Left End}{\eta} \strdroadlabel{u2 Left}{}{TK}
+        \strdcellnode{u2 Right End}{T}
+        \strdroad{mid}{u2 Right}{u3} \strdroadlabel{u3}{K}{K'}
+        \strdcellnode{u3 End}{h}
+        \strdbijsqx{u}{sq}{3.5}{2}{2} \strdfamilylabel{sq Right}{\operatorname{y}}{\mathrlap{A}}
+        \strdroad{mid}{sq}{v} \strdroadlabel{v}{K\myprime}{A}
+        \strdstartlabel{u}{\mathcal{B}}
+        \strdendlabel{v}{\mathcal{A}}
+    } =
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{B}{TA}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{B}{TK}
+        \strdcellnode{u2 End}{\eta}
+        \strdbijsqx{u}{sq}{1.5}{1.5}{1.5} \strdfamilylabel{sq Right}{\operatorname{y}}{A}
+        \strdroad{branch}{sq}{v} \strdroadlabel{v}{K}{A}
+        \strdcellnode{v Left End}{h}
+        \strdroad{mid}{v Right}{w} \strdroadlabel{w}{K\myprime}{A}
+        \strdstartlabel{u}{\mathcal{B}}
+        \strdendlabel{w}{\mathcal{A}}
+    } \\ 
+}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{I}{FK\myprime} 
+        \strdcellnode{u End}{\eta\myprime}
+        \strdstartlabel{u}{\mathcal{(V)}}
+    } =
+    \strdin[gathered]{
+        \strdroad{branch}{\strdorigin}{u2} \strdroadlabel{u2}{I}{FK\myprime}
+        \strdcellnode{u2 Left End}{\eta} \strdroadlabel{u2 Left}{}{FK}
+        \strdcellnode{u2 Right End}{F}
+        \strdroad{mid}{u2 Right}{u3} \strdroadlabel{u3}{K}{K'}
+        \strdcellnode{u3 End}{\cong}
+        \strdstartlabel{u}{\mathcal{(V)}}
+    } \\ 
+}
+
+\end{document}

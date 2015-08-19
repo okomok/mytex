@@ -1,0 +1,24 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{A}{A}
+        \strdcellnode{u End}{\lambda _ \ast A}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{\ast}{\ast}
+        \strdstartlabel{u}{\mathcal{A}}
+        \strdendlabel{u2}{\mathcal{I}}
+    } &\mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{}{A}
+        \strddeadend{u}
+        \strdstartlabel{u}{\mathcal{A}}
+    } 
+    \\
+}
+
+\end{document}
