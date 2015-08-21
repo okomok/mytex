@@ -215,9 +215,24 @@
 \tikzset{strd isonode/.style={strd node,tape,tape bend height=2pt,minimum width=0pt,tape bend top=out and in,tape bend bottom=out and in}}
 \tikzset{strd dotnode/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
 
+\newcommand*{\strdasis}[2]{%
+    #1%
+}
+\newcommand*{\strdsub}[2]{%
+    \vphantom{#2}_{#1}%
+}
+\newcommand*{\strdsuper}[2]{%
+    \vphantom{#2}^{#1}%
+}
+
 \newcommand*{\strdcellnode}[2]{%
     \strdonlayer{strd nodelayer}{
         \node[strd cellnode] (#1 Node) at (#1) {#2};
+    }% 
+}
+\newcommand*{\strdcellnodewith}[3]{%
+    \strdonlayer{strd nodelayer}{
+        \node[strd cellnode,label={[strd nodelabel]right:#3{#2}}] (#1 Node) at (#1) {#2};
     }% 
 }
 
@@ -226,10 +241,9 @@
         \node[strd bijnode] (#1 Node) at (#1) {#2};
     }%
 }
-
 \newcommand*{\strdbijnodewith}[3]{%
     \strdonlayer{strd nodelayer}{
-        \node[strd bijnode,label={[strd nodelabel]right:#3}] (#1 Node) at (#1) {#2};
+        \node[strd bijnode,label={[strd nodelabel]right:#3{#2}}] (#1 Node) at (#1) {#2};
     }%
 }
 
@@ -301,7 +315,7 @@
 
 \tikzset{strd scriptlabel/.style={font=\scriptsize,inner sep=0.2pt,strd textvaligned}}
 \tikzset{strd rightlabel/.style={font=\normalsize,inner sep=0.2pt,strd textvaligned}}
-\tikzset{strd endlabel/.style={font=\normalsize,inner sep=1pt,strd textvaligned}}
+\tikzset{strd endlabel/.style={font=\normalsize,inner sep=1.2pt}}
 
 \newcommand*{\strdsidelabel}[3]{%
     \strdonlayer{strd labellayer}{
