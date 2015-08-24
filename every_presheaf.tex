@@ -1,0 +1,74 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{F}{\lambda_K [\mathcal{K},(\mathcal{V})](\lambda_A \mathcal{K}(K,A),H)}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{FK}{[\mathcal{K},(\mathcal{V})](\lambda_A\mathcal{K}(K,A),H)}
+        \strdroad{mid}{u2}{u3} \strdroadlabel{u3}{\lambda_A\mathcal{K}(K,A)}{H}
+        \strdxscale{1.5}{\strdroad{branch}{u3}{u4}} \strdroadlabel{u4}{\mathcal{K}(K,A)}{HA}
+        \strdroadlabel{u4 Left}{}{FA}
+        \strdroad{mid}{u4 Left}{uf} \strdroadlabel{uf}{FK}{FA}
+        \strdcellnode{uf End}{F}
+        \strdroad{mid}{uf}{uf2} \strdroadlabel{uf2}{K}{A}
+        \strduse{mid}{uf2}{uf3}
+        \strduse{mid}{uf3}{uf4} \strdsidelabel{uf4}{}{FK}
+        \strdbijnode{u4 Right End}{\lambda}
+     %   \strdsqlabel{u4 Right End Node Right}{\operatorname{A}}
+        \strdyscale{5}{\strdroad{mid}{u4 Right}{ur}}
+        \strdroad{mid}{ur}{ur2} \strdroadlabel{ur2}{F}{H}
+        \strdstartlabel{u}{[\mathcal{K},(\mathcal{V})]}
+        \strdendlabel{ur2}{[\mathcal{K},(\mathcal{V})]}
+        \strdbijsqx{u}{bj}{9}{5.5}{6}
+        \strdbijsqx{u2}{bj2}{7}{4.5}{5}
+        \strdbijsqx{u3}{bj3}{5}{3.5}{3.5}
+        \strdbijsqx{u4 Left}{bjf}{2}{1.5}{1.5} \strdsqlabel{bjf Right}{\operatorname{flip}}
+        \strdsqlabel{bj3 Right}{\lambda}
+        \strdfamilylabel{bj3 Right}{A}{}
+        \strdfamilylabel{bj Right}{K}{}
+        \strdsqlabel{bj Right}{\lambda}
+    } 
+}
+        
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{F}{H}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{FA}{HA}
+        \strduse{mid}{u2}{u3} \strdsidelabel{u3}{}{HA}
+        \strdroad{mid}{u3}{u4} \strdroadlabel{u4}{\mathcal{K}(A,A)}{HA}
+        \strdroad{mid}{u4}{u5} \strdroadlabel{u5}{FA}{[\mathcal{K}(A,A),HA]}
+        \strdroad{right}{u5}{u5r} \strdcellnode{u5r End}{\lambda}
+        \strdroad{left}{u5}{u6}
+        \strdroad{mid}{u6}{u7} \strdroadlabel{u7}{}{[\mathcal{K},(\mathcal{V})](\lambda_{A\myprime}\mathcal{K}(A,A\myprime),H)}
+        \strdbijnode{u7 End}{\lambda}
+        \strdroad{right}{u7}{u8}
+        \strdroad{mid}{u8}{u9}
+        \strdroad{mid}{u9}{u10}
+        \strdroad{mid}{u10}{u11}
+        \strdroad{mid}{u11}{u12} \strdroadlabel{u12}{F}{\lambda_A[\mathcal{K},(\mathcal{V})](\lambda_{A\myprime}\mathcal{K}(A,A\myprime),H)}
+        \strdnone{
+            \strdroad{left}{u7}{u5l}
+        }
+        \strduse{mid}{u5l}{fa}
+        \strduse{mid}{fa}{fa2}
+        \strdsidelabel{fa2}{}{FA}
+        \strdnone{
+            \strdroad{left}{u5l}{aa}
+        }
+        \strdroad{mid}{aa}{aa2} \strdroadlabel{aa2}{}{A} \strddeadend{aa2}
+        \strdstartlabel{u}{[\mathcal{K},(\mathcal{V})]}
+        \strdendlabel{u12}{[\mathcal{K},(\mathcal{V})]}
+        %
+        \strdbijsqx{u}{bj1}{10}{5}{7}
+        \strdbijsqx{u2}{bj2}{8}{4.5}{6.5}
+        \strdbijsqx{u3}{bj3}{6}{4}{6}
+        \strdbijsqx{u4}{bj4}{4}{3}{5.5}
+        \strdsqlabel{bj1 Right}{\lambda} \strdfamilylabel{bj1 Right}{A}{}
+    }
+}
+
+\end{document}
