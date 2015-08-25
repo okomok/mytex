@@ -216,14 +216,19 @@
 \tikzset{strd isonode/.style={strd node,tape,tape bend height=2pt,minimum width=0pt,tape bend top=out and in,tape bend bottom=out and in}}
 \tikzset{strd dotnode/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
 
+% mathbin only works without unneeded spaces.
+\newcommand*{\myvphantom}[1]{%
+    \mathbin{\vphantom{#1}}%
+}
+
 \newcommand*{\strdasis}[2]{%
     #1%
 }
 \newcommand*{\strdsub}[2]{%
-    \vphantom{#2}_{#1}%
+    \myvphantom{#2}_{#1}%
 }
 \newcommand*{\strdsuper}[2]{%
-    \vphantom{#2}^{#1}%
+    \myvphantom{#2}^{#1}%
 }
 
 \newcommand*{\strdcellnode}[2]{%
@@ -244,7 +249,7 @@
 }
 \newcommand*{\strdbijnodewith}[3]{%
     \strdonlayer{strd nodelayer}{
-        \node[strd bijnode,label={[strd nodelabel]right:\vphantom{#2}{#3}}] (#1 Node) at (#1) {#2};
+        \node[strd bijnode,label={[strd nodelabel]right:\myvphantom{#2}{#3}}] (#1 Node) at (#1) {#2};
     }%
 }
 
@@ -320,21 +325,21 @@
 \newcommand*{\strdsidelabel}[3]{%
     \strdonlayer{strd labellayer}{
         \node[strd scriptlabel,left] (#1 LeftLabel) at (#1) {#2};
-        \node[strd scriptlabel,right] (#1 RightLabel) at (#1) {\vphantom{#2}#3};
+        \node[strd scriptlabel,right] (#1 RightLabel) at (#1) {\myvphantom{#2}#3};
     }%
 }
 
 \newcommand*{\strdfamilylabel}[3]{%
     \strdonlayer{strd labellayer}{
         \node[strd scriptlabel,above left] (#1 EndCorner LeftLabel) at (#1 EndCorner) {#2};
-        \node[strd scriptlabel,above right] (#1 EndCorner RightLabel) at (#1 EndCorner) {\vphantom{#2}#3};
+        \node[strd scriptlabel,above right] (#1 EndCorner RightLabel) at (#1 EndCorner) {\myvphantom{#2}#3};
     }%
 }
 
 \newcommand*{\strdmaplabel}[3]{%
     \strdonlayer{strd labellayer}{
         \node[strd scriptlabel,left] (#1 LeftLabel) at (#1) {#2};
-        \node[strd scriptlabel,right] (#1 RightLabel) at (#1) {\vphantom{#2}#3};
+        \node[strd scriptlabel,right] (#1 RightLabel) at (#1) {\myvphantom{#2}#3};
     }%
 }
 
@@ -445,7 +450,7 @@
 \newcommand*{\strdroadlabel}[3]{%
     \strdonlayer{strd labellayer}{
         \node[strd scriptlabel,left,xshift=-1.5pt] (#1 LeftLabel) at (#1) {#2};
-        \node[strd scriptlabel,right,xshift=1.5pt] (#1 RightLabel) at (#1) {\vphantom{#2}#3};
+        \node[strd scriptlabel,right,xshift=1.5pt] (#1 RightLabel) at (#1) {\myvphantom{#2}#3};
     }%
 }
 

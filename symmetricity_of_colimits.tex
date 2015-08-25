@@ -1,0 +1,20 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{F}{\lambda_K[GK,B]}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{FK}{[GK,B]}
+        \strdbijnode{u2 End}{\operatorname{flip}}
+        \strdroad{mid}{u2}{u3} \strdroadlabel{u3}{GK}{[FK,B]}
+        \strdroad{mid}{u3}{u4} \strdroadlabel{u4}{G}{\lambda_K[FK,B]}
+        \strdstartlabel{u}{[\mathcal{K}^{\operatorname{op}},(\mathcal{V})]}
+        \strdendlabel{u4}{[\mathcal{K},(\mathcal{V})]}
+        \strdmapsqx{u}{bj}{2}{1.5}{2.5} \strdmaplabel{bj Left}{\int}{ _ K}
+    } 
+}
+        
+\end{document}

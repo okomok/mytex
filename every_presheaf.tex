@@ -37,29 +37,29 @@
 \myin[preview,math,aligned]{
     \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{F}{H}
-        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{FA}{HA}
-        \strduse{mid}{u2}{u3} \strdsidelabel{u3}{}{HA}
-        \strdroad{mid}{u3}{u4} \strdroadlabel{u4}{\mathcal{K}(A,A)}{HA}
-        \strdroad{mid}{u4}{u5} \strdroadlabel{u5}{FA}{[\mathcal{K}(A,A),HA]}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{FK}{HK}
+        \strduse{mid}{u2}{u3} \strdsidelabel{u3}{}{HK}
+        \strdroad{mid}{u3}{u4} \strdroadlabel{u4}{\mathcal{K}(K,K)}{HK}
+        \strdroad{mid}{u4}{u5} \strdroadlabel{u5}{FK}{[\mathcal{K}(K,K),HK]}
         \strdroad{right}{u5}{u5r} \strdcellnode{u5r End}{\lambda}
         \strdroad{left}{u5}{u6}
-        \strdroad{mid}{u6}{u7} \strdroadlabel{u7}{}{[\mathcal{K},(\mathcal{V})](\lambda_{A\myprime}\mathcal{K}(A,A\myprime),H)}
+        \strdroad{mid}{u6}{u7} \strdroadlabel{u7}{}{[\mathcal{K},(\mathcal{V})](\lambda_{A}\mathcal{K}(K,A),H)}
         \strdbijnode{u7 End}{\lambda}
         \strdroad{right}{u7}{u8}
         \strdroad{mid}{u8}{u9}
         \strdroad{mid}{u9}{u10}
         \strdroad{mid}{u10}{u11}
-        \strdroad{mid}{u11}{u12} \strdroadlabel{u12}{F}{\lambda_A[\mathcal{K},(\mathcal{V})](\lambda_{A\myprime}\mathcal{K}(A,A\myprime),H)}
+        \strdroad{mid}{u11}{u12} \strdroadlabel{u12}{F}{\lambda_K[\mathcal{K},(\mathcal{V})](\lambda_{A}\mathcal{K}(K,A),H)}
         \strdnone{
             \strdroad{left}{u7}{u5l}
         }
-        \strduse{mid}{u5l}{fa}
+         \strduse{mid}{u5l}{fa}
         \strduse{mid}{fa}{fa2}
-        \strdsidelabel{fa2}{}{FA}
+        \strdsidelabel{fa2}{}{FK}
         \strdnone{
             \strdroad{left}{u5l}{aa}
         }
-        \strdroad{mid}{aa}{aa2} \strdroadlabel{aa2}{}{A} \strddeadend{aa2}
+        \strdroad{mid}{aa}{aa2} \strdroadlabel{aa2}{}{K} \strddeadend{aa2}
         \strdstartlabel{u}{[\mathcal{K},(\mathcal{V})]}
         \strdendlabel{u12}{[\mathcal{K},(\mathcal{V})]}
         %
@@ -67,7 +67,7 @@
         \strdbijsqx{u2}{bj2}{8}{4.5}{6.5}
         \strdbijsqx{u3}{bj3}{6}{4}{6}
         \strdbijsqx{u4}{bj4}{4}{3}{5.5}
-        \strdsqlabel{bj1 Right}{\lambda} \strdfamilylabel{bj1 Right}{A}{}
+        \strdsqlabel{bj1 Right}{\lambda} \strdfamilylabel{bj1 Right}{K}{}
     }
 }
 
