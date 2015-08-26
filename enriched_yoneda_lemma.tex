@@ -16,11 +16,9 @@
         \strdhleft{bi}{yp}
         \strdrchange{yp}{y} \strdsidelabel{y}{}{Y}
         \strdlchange{x}{x2} \strdsidelabel{x2}{}{X}
-        \strdcelllabel{yz End}{g}
+        \strdcellnode{yz End}{g}
         \strdmid{y}{y2} \strdsidelabel{y2}{}{Y}
         \strdscale{3}{5}{\strdbijsq{u}{bo}}
-        \strdfamilylabel{bo Right}{}{\mathsf{c}}
-        \strdfamilylabel{bi Right}{}{\mathsf{c}}
         \strdstartlabel{u}{(\mathcal{V})}
     }
 }
@@ -28,75 +26,104 @@
 \myin[preview,math,aligned]{
     \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\mathcal{A}(K,A)}{FA}
-        \strdbijlabel{u End}{\lambda_A}
+        \strdbijnode{u End}{\scriptstyle\int^{\operatorname{Y}}_A}
         \strdmid{u}{u2} \strdsidelabel{u2}{}{FK}
         \strdstartlabel{u}{(\mathcal{V})}
     } \mydefeq
     \strdin[gathered]{
-        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\mathcal{A}(K,A)}{FA}
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\mathllap{\mathcal{A}(K,A)}}{FA}
         \strdroad{mid}{u}{u2} \strdroadlabel{u2}{FK}{FA}
-        \strdcelllabel{u2 End}{F}
+        \strdcellnode{u2 End}{F}
         \strdroad{mid}{u2}{ka} \strdroadlabel{ka}{K}{A}
         \strduse{mid}{ka}{fk} \strdsidelabel{fk}{}{FK}
         \strdscale{1.5}{2}{\strdbijsq{u}{bo}}
         \strdstartlabel{u}{(\mathcal{V})}
-        \strdfamilylabel{bo Right}{}{\mathsf{f}}
+        \strdsqlabel{bo Right}{\operatorname{flip}}
     }
 }
 
 \myin[preview,math,aligned]{
- %   \strdin[gathered]{
- %       \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{\int_A[\mathcal{A}(K,A),FA]}
- %       \strdbijlabel{u End}{\eta}
- %       \strdmid{u}{u2} \strdsidelabel{u2}{}{FK}
- %   } \mydefeq
-    \strdin[gathered]{
-        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{\int_A[\mathcal{A}(K,A),FA]}
-        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{\mathcal{A}(K,A)}{FA}
-        \strdbijlabel{u2 End}{\lambda_A}
-        \strdmid{u2}{fk} \strdsidelabel{fk}{}{FK}
-        \strdmid{fk}{fk2} \strdsidelabel{fk2}{}{FK}
-        \strdscale{2.3}{2}{\strdlbijsq{u}{bo}}
-        \strdscale{1.5}{2}{\strdrbijsq{u}{bo}}
-        \strdfamilylabel{bo Right}{}{\int_{\cdot}}
-    }
-}
-
-\myin[preview,math,aligned]{
-    \strdin[gathered]{
-        \strdroad{mid}{\strdorigin}{kafa} \strdroadlabel{kafa}{\mathcal{A}(K,A)}{FA}
-        \strdbijlabel{kafa End}{\alpha}
-        \strduse{mid}{kafa}{x} \strdsidelabel{x}{}{X}
-        \strdstartlabel{kafa}{(\mathcal{V})}
-    } =
-    \strdin[gathered]{
-        \strdroad{mid}{\strdorigin}{kafa} \strdroadlabel{kafa}{\mathcal{A}(K,A)}{FA}
-        \strdbijlabel{kafa End}{\lambda}
-        \strduse{mid}{kafa}{fk} \strdsidelabel{fk}{}{FK}
-        \strdbijlabel{fk End}{\eta}
-        \strduse{mid}{fk}{x} \strdsidelabel{x}{}{X}
-        \strdstartlabel{kafa}{(\mathcal{V})}
-    } \iff
     \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{xfk} \strdroadlabel{xfk}{X}{FK}
-        \strdcelllabel{xfk End}{\eta}
+        \strdroad{mid}{xfk}{u2} \strdroadlabel{u2}{\mathcal{A}(K,A)}{FA}
+        \strdbijnode{u2 End}{\alpha}
+        \strdmid{u2}{fk} \strdsidelabel{fk}{}{X}
+        \strdscale{2.3}{2}{\strdlbijsq{u}{bo}}
+        \strdscale{1.5}{2}{\strdrbijsq{u}{bo}}
+        \strdfamilylabel{bo Right}{}{\mathrlap{\int^{\operatorname{Y}}}}
         \strdstartlabel{xfk}{(\mathcal{V})}
-    } =
+    } &\mydefeq
     \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{xfk} \strdroadlabel{xfk}{X}{FK}
         \strdroad{mid}{xfk}{xfa} \strdroadlabel{xfa}{X}{FA}
         \strdroad{mid}{xfa}{kafa} \strdroadlabel{kafa}{\mathcal{A}(K,A)}{FA}
-        \strdbijlabel{kafa End}{\alpha}
+        \strdbijnode{kafa End}{\alpha}
         \strduse{mid}{kafa}{x} \strdsidelabel{x}{}{X}
         \strdroad{mid}{x}{ka} \strdroadlabel{ka}{K}{A}
         \strdscale{3}{4}{\strdlbijsq{xfk}{y Left}}
         \strdscale{2.5}{4}{\strdrbijsq{xfk}{y Right}}
         \strdscale{2.5}{2}{\strdlbijsq{xfa}{f Left}}
         \strdscale{1.5}{2}{\strdrbijsq{xfa}{f Right}}
-        \strdfamilylabel{y Right}{A}{\mathsf{y}}
-        \strdfamilylabel{f Right}{}{\mathsf{f}}
+        \strdfamilylabel{y Right}{A}{}
+        \strdsqlabel{y Right}{\operatorname{y}}
+        \strdsqlabel{f Right}{\operatorname{flip}}
         \strdstartlabel{xfk}{(\mathcal{V})}
     }
 }
- 
+
+\myin[preview,math,aligned]{
+ %   \strdin[gathered]{
+ %       \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{\int_A[\mathcal{A}(K,A),FA]}
+ %       \strdbijnode{u End}{\eta}
+ %       \strdmid{u}{u2} \strdsidelabel{u2}{}{FK}
+ %   } \mydefeq
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{\int_A[\mathcal{A}(K,A),FA]}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{\mathcal{A}(K,A)}{FA}
+        \strdbijnode{u2 End}{\scriptstyle\int ^ {\operatorname{Y}}_A}
+        \strdmid{u2}{fk} \strdsidelabel{fk}{}{FK}
+        \strdmid{fk}{fk2} \strdsidelabel{fk2}{}{FK}
+        \strdscale{2.3}{2}{\strdlbijsq{u}{bo}}
+        \strdscale{1.5}{2}{\strdrbijsq{u}{bo}}
+        \strdfamilylabel{bo Right}{}{\int}
+    }
+}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{kafa} \strdroadlabel{kafa}{\mathcal{A}(K,A)}{FA}
+        \strdbijnode{kafa End}{\alpha}
+        \strduse{mid}{kafa}{x} \strdsidelabel{x}{}{X}
+        \strdstartlabel{kafa}{(\mathcal{V})}
+    } =
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{kafa} \strdroadlabel{kafa}{\mathcal{A}(K,A)}{FA}
+        \strdbijnode{kafa End}{\scriptstyle\int ^ {\operatorname{Y}}}
+        \strduse{mid}{kafa}{fk} \strdsidelabel{fk}{}{FK}
+        \strdbijnode{fk End}{\eta}
+        \strduse{mid}{fk}{x} \strdsidelabel{x}{}{X}
+        \strdstartlabel{kafa}{(\mathcal{V})}
+    } \iff
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{xfk} \strdroadlabel{xfk}{X}{FK}
+        \strdcellnode{xfk End}{\eta}
+        \strdstartlabel{xfk}{(\mathcal{V})}
+    } =
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{xfk} \strdroadlabel{xfk}{X}{FK}
+        \strdroad{mid}{xfk}{xfa} \strdroadlabel{xfa}{X}{FA}
+        \strdroad{mid}{xfa}{kafa} \strdroadlabel{kafa}{\mathcal{A}(K,A)}{FA}
+        \strdbijnode{kafa End}{\alpha}
+        \strduse{mid}{kafa}{x} \strdsidelabel{x}{}{X}
+        \strdroad{mid}{x}{ka} \strdroadlabel{ka}{K}{A}
+        \strdscale{3}{4}{\strdlbijsq{xfk}{y Left}}
+        \strdscale{2.5}{4}{\strdrbijsq{xfk}{y Right}}
+        \strdscale{2.5}{2}{\strdlbijsq{xfa}{f Left}}
+        \strdscale{1.5}{2}{\strdrbijsq{xfa}{f Right}}
+        \strdfamilylabel{y Right}{A}{}
+        \strdsqlabel{y Right}{\operatorname{y}}
+        \strdsqlabel{f Right}{\operatorname{flip}}
+        \strdstartlabel{xfk}{(\mathcal{V})}
+    }
+}
 \end{document}
