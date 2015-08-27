@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{F(\int_A T(A,A))}{FT(A,A)}
+        \strdcellnode{u End}{F}
+        \strdroad{mid}{u}{v}  \strdroadlabel{v}{\int_A T(A,A)}{T(A,A)}
+        \strdcellnode{v End}{\scriptstyle\int _ A}
+        \strdstartlabel{u}{(\mathcal{V})}
+    } 
+}
+        
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{X}{T(A,A)}
+        \strdbijnode{u End}{\scriptstyle\int _A ^{[X,\mydash]}}
+        \strdroad{mid}{u}{v}  \strdroadlabel{v}{X}{\int_A T(A,A)}
+        \strdstartlabel{u}{(\mathcal{V})}
+        \strdendlabel{v}{(\mathcal{V})}
+    } &\mydefeq
+    \strdin[gathered]{
+        \strdxscale{1}{\strdroad{branch}{\strdorigin}{u} }\strdroadlabel{u}{X}{T(A,A)}
+        \strdcellnode{u Right End}{\scriptstyle\int_A}
+        \strdroad{mid}{u Left}{v} 
+        \strdroadlabel{v}{}{\int _ A T(A,A)}
+        \strdendlabel{v}{(\mathcal{V})}
+        \strdstartlabel{u}{(\mathcal{V})}
+    } \\
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{X}{\int_A T(A,A)}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{X}{T(A,A)}
+        \strdbijnode{u2 End}{\alpha}
+        \strduse{mid}{u2}{u3}
+        \strduse{mid}{u3}{v} \strdsidelabel{v}{}{Y} 
+        \strdbijsqx{u}{bj}{2}{1}{2.5} \strdfamilylabel{bj Right}{A}{}%{\int^{\mathrlap{[X,\mydash]}}}
+        \strdsqlabel{bj Right}{\int ^ {\mathrlap{[X,\mydash]}}}
+        \strdstartlabel{u}{(\mathcal{V})}
+    } &\mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{X}{\int_A T(A,A)}
+        \strdstartlabel{u}{(\mathcal{V})}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{\int_A T(A,A)}
+        \strduse{mid}{u2}{u3} \strdsidelabel{u3}{}{T(A,A)}
+        \strdroad{mid}{u3}{u4} \strdroadlabel{u4}{X}{T(A,A)}
+        \strdbijnode{u4 End}{\alpha}
+        \strdright{u4}{u4r}
+        \strdmid{u4r}{u4r2}
+        \strdmid{u4r2}{u4r3}
+        \strdmid{u4r3}{u4r4} \strdsidelabel{u4r4}{}{Y}
+        \strdnone{\strdleft{u4}{u4l}}
+        \strdmid{u4l}{u4l2}
+        \strdmid{u4l2}{u4l3} \strdsidelabel{u4l3}{}{X}
+        \strdbijsqx{u}{bj}{6}{3.5}{4} 
+        \strdbijsqx{u2}{bj2}{4}{2.5}{3} \strdfamilylabel{bj2 Right}{A}{\int} 
+        \strdbijsqx{u3}{bj3}{2}{2}{2.5} 
+    }
+}
+
+\end{document}

@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{H}{\lambda _ A \lim _ K ^ {FK} P(K,A) }
+        \strdbijnode{u End}{\lim ^ {\lambda}}
+        \strdroad{mid}{u}{v}  \strdroadlabel{v}{F}{\lambda _ K [\mathcal{A},\mathcal{B}](H,\lambda _ A P(K,A))}
+        \strdstartlabel{u}{[\mathcal{A},\mathcal{B}]}
+        \strdendlabel{v}{[\mathcal{K},(\mathcal{V})]}
+    } &\mydefeq 
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{H}{\lambda _ A \lim _ K ^ {FK} P(K,A) }
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{HA}{\lim _ K ^ {FK} P(K,A) } 
+        \strdbijnode{u2 End}{\lim}
+        \strdroad{mid}{u2}{u3} \strdroadlabel{u3}{F}{\lambda _ K \mathcal{B}(HA,P(K,A))}
+        \strdroad{branch}{u3}{u4} \strdroadlabel{u4}{FK}{\mathcal{B}(HA,P(K,A))}
+        \strdcellnode{u4 Right End}{\lambda}
+        \strdroad{mid}{u4 Left}{u41}
+        \strdbijnode{u41 End}{\lambda} \strdroadlabel{u41}{}{[\mathcal{A},\mathcal{B}](H,\lambda_A P(K,A))}
+        \strdroad{mid}{u41}{u42}
+        \strdroad{mid}{u42}{v}  \strdroadlabel{v}{F}{\lambda _ K [\mathcal{A},\mathcal{B}](H,\lambda _ A P(K,A))}
+        \strdstartlabel{u}{[\mathcal{A},\mathcal{B}]}
+        \strdendlabel{v}{[\mathcal{K},(\mathcal{V})]}
+        \strdbijsqx{u}{bj1}{6}{3}{6} \strdfamilylabel{bj1 Right}{K}{\lambda}
+        \strdbijsqx{u3}{bj2}{4}{2}{5} \strdfamilylabel{bj2 Right}{A}{\lambda}
+    } \\ 
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{F}{\lambda _ K [\mathcal{A},\mathcal{B}](H,\lambda _ A P(K,A))}
+        \strdbijnode{u End}{\lim ^ {\lambda}}
+        \strdroad{mid}{u}{v}  \strdroadlabel{v}{H}{\lambda _ A \lim _ K ^ {FK} P(K,A) }
+        \strdendlabel{v}{[\mathcal{A},\mathcal{B}]}
+        \strdstartlabel{u}{[\mathcal{K},(\mathcal{V})]}
+    } &\mydefeq 
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u}  \strdroadlabel{u}{F}{\lambda _ K [\mathcal{A},\mathcal{B}](H,\lambda _ A P(K,A))}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{FK}{[\mathcal{A},\mathcal{B}](H,\lambda_A P(K,A))} 
+        \strdroad{mid}{u2}{u3} \strdroadlabel{u3}{FK}{\mathcal{B}(HA,P(K,A))}
+        \strdbijnode{u3 End}{\lambda}
+        \strdroad{mid}{u3}{u4} \strdroadlabel{u4}{F}{\lambda _ K \mathcal{B}(HA,P(K,A))}
+        \strdbijnode{u4 End}{\lim}
+        \strdroad{mid}{u4}{u5} \strdroadlabel{u5}{HA}{\lim _ K ^{FK} P(K,A)}
+        \strdbijnode{u5 End}{\lambda}
+        \strdroad{mid}{u5}{u6}
+        \strdstartlabel{u}{[\mathcal{K},(\mathcal{V})]}
+        \strdbijsqx{u}{bj1}{5}{3}{7.5} \strdfamilylabel{bj1 Right}{K}{\lambda}
+        \strdbijsqx{u2}{bj2}{4}{2}{5} \strdfamilylabel{bj2 Right}{A}{\int ^ {[FK,\mydash]}}
+        \strdroad{mid}{u6}{v} \strdroadlabel{v}{H}{\lambda _ A \lim _ K ^ {FK} P(K,A) }
+        \strdendlabel{v}{[\mathcal{A},\mathcal{B}]}
+    } 
+}
+        
+\end{document}

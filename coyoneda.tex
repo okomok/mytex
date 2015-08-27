@@ -1,0 +1,30 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\mathcal{K}(A,K)}{\mathcal{B}(GA,B)}
+        \strdbijnode{u End}{\scriptstyle\int _ A ^ {\operatorname{coY}}}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{GK}{B}
+        \strdstartlabel{u}{(\mathcal{V})}
+        \strdendlabel{u2}{\mathcal{B}}
+    } &\mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\mathcal{K}(A,K)}{\mathcal{B}(GA,B)}
+        \strdroad{branch}{u}{u2} \strdroadlabel{u2}{GA}{B} \strdroadlabel{u2 Left}{}{GK}
+        \strdcellnode{u2 Left End}{G}
+        \strdroad{mid}{u2 Left}{u2l} \strdroadlabel{u2l}{A}{K}
+        \strdroad{mid}{u2 Right}{u2r2}
+        \strdroad{mid}{u2r2}{u2v} \strdroadlabel{u2v}{GK}{B}
+        \strdstartlabel{u}{(\mathcal{V})}
+        \strdendlabel{u2v}{\mathcal{B}}
+        \strdbijsqx{u}{bj}{3}{2}{2}
+    } 
+    \\
+}
+        
+\end{document}
