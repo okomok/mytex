@@ -1,0 +1,74 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{F}{\lambda_K [X,GK]}
+        \strdbijnode{u End}{\scriptstyle\operatorname{lim} ^ {(\mathcal{V})} _ X}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{X}{[\mathcal{K},(\mathcal{V})](F,G)}
+        \strdstartlabel{u}{[\mathcal{K},(\mathcal{V})]}
+        \strdendlabel{u2}{(\mathcal{V})}
+    } &\mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{F}{\lambda_K [X,GK]}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{FK}{[X,GK]}
+        \strdbijnode{u2 End}{\operatorname{flip}}
+        \strdroad{branch}{u2}{u3} \strdroadlabel{u3}{X}{[FK,GK]}
+        \strdcellnode{u3 Right End}{\lambda _ K}
+        \strdroad{mid}{u3 Left}{u4}
+        \strdroad{mid}{u4}{u5} \strdroadlabel{u5}{X}{[\mathcal{K},(\mathcal{V})](F,G)}
+        \strdbijsqx{u}{sq}{4}{2}{3} \strdunfamilylabel{sq Right}{K}{\lambda}
+        \strdstartlabel{u}{[\mathcal{K},(\mathcal{V})]}
+        \strdendlabel{u5}{(\mathcal{V})}
+    } \\
+    \strdin[gathered] {
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{X}{[\mathcal{K},(\mathcal{V})](F,G)}
+        \strdbijnode{u End}{\scriptstyle\operatorname{lim} ^ {(\mathcal{V})} _ X}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{F}{\lambda _ K[X,GK]}
+        \strdstartlabel{u}{[\mathcal{K},(\mathcal{V})]}
+        \strdendlabel{u2}{(\mathcal{V})}
+    } & \mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{X}{[\mathcal{K},(\mathcal{V})](F,G)}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{X}{[FK,GK]}
+        \strdbijnode{u2 End}{\operatorname{flip}}
+        \strdroad{mid}{u2}{u3} \strdroadlabel{u3}{FK}{[X,GK]}
+        \strdbijnode{u3 End}{\lambda_K}
+        \strdroad{mid}{u3}{u4}
+        \strdroad{mid}{u4}{u5} \strdroadlabel{u5}{F}{\lambda_K[X,GK]}
+        \strdendlabel{u5}{[\mathcal{K},(\mathcal{V})]}
+        \strdstartlabel{u}{(\mathcal{V})}
+        \strdbijsqx{u}{sq}{2.8}{2}{3} \strdunfamilylabel{sq Right}{K}{\scriptstyle\int^{[X,\mydash]}}
+    }
+}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{X}{[\mathcal{K},(\mathcal{V})](F, \lambda _ A \mathcal{B}(B,GA) ) }
+        \strdbijnode{u End}{\scriptstyle\operatorname{lim} ^ {(\mathcal{V})}}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{F}{\lambda _ A [X, \mathcal{B}(B,GA) ]}
+        \strdxscale{2}{\strdroad{branch}{u2}{u3}} \strdroadlabel{u3}{F}{\lambda _ A [\mathcal{B}(B,C), \mathcal{B}(B,GA) ]}
+        \strdroadlabel{u3 Left}{}{\lambda _ A \mathcal{B}(C,GA)}
+        \strdbijnodewith{u3 Left End}{\alpha}{\operatorname{y}}
+        \strdbijnodewith{u3 Right End}{\mathcal{B}(B,\mydash)}{\lambda}
+        \strdbijsqx{u2}{bj}{3}{3}{6} \strdfamilylabel{bj Right}{\mathrlap{X}}{\operatorname{y}}
+        \strdroad{mid}{bj}{v} \strdroadlabel{v}{X}{\mathcal{B}(B,C)}
+        \strdstartlabel{u}{(\mathcal{V})}
+        \strdendlabel{v}{(\mathcal{V})}
+    } & = 
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{X}{[\mathcal{K},(\mathcal{V})](F, \lambda _ A \mathcal{B}(B,GA) ) }
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{F}{\lambda_A\mathcal{B}(B,GA)}
+        \strdbijnode{u2 End}{\alpha}
+        \strdroad{mid}{u2}{u3} \strdroadlabel{u3}{B}{C}
+        \strdroad{mid}{u3}{u4} \strdroadlabel{u4}{X}{\mathcal{B}(B,C)}
+        \strdbijsqx{u}{bj}{2}{1}{3.5} \strdfamilylabel{bj Right}{X}{\operatorname{ye}}
+        \strdstartlabel{u}{(\mathcal{V})}
+        \strdendlabel{u4}{(\mathcal{V})}
+    }
+}
+\end{document}

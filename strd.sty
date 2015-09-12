@@ -251,7 +251,7 @@
 }
 \newcommand*{\strdbijnodewith}[3]{%
     \strdonlayer{strd nodelayer}{
-        \node[strd bijnode,label={[strd nodelabel]right:\myvphantom{#2}{#3}}] (#1 Node) at (#1) {#2};
+        \node[strd bijnode,label={[strd familylabel,xshift=2.5pt]below:\hphantom{#2}{#3}}] (#1 Node) at (#1) {#2};
     }%
 }
 
@@ -320,33 +320,43 @@
 
 % labels
 
-\tikzset{strd scriptlabel/.style={font=\scriptsize,inner xsep=0.4pt,inner ysep=0.6pt,strd scripttextvaligned}}
+\tikzset{strd sidelabel/.style={font=\scriptsize,inner sep=0.2pt,strd scripttextvaligned}}
+\tikzset{strd familylabel/.style={font=\scriptsize,inner sep=0.4pt,inner ysep=0.8pt}}
+\tikzset{strd sqlabel/.style={font=\scriptsize,inner xsep=0.6pt,inner ysep=0.8pt}}
 \tikzset{strd endlabel/.style={font=\normalsize,inner sep=0.8pt,strd normaltextvaligned}}
 
 \newcommand*{\strdsidelabel}[3]{%
     \strdonlayer{strd labellayer}{
-        \node[strd scriptlabel,left] (#1 LeftLabel) at (#1) {#2};
-        \node[strd scriptlabel,right] (#1 RightLabel) at (#1) {\myvphantom{#2}#3};
+        \node[strd sidelabel,left] (#1 LeftLabel) at (#1) {#2};
+        \node[strd sidelabel,right] (#1 RightLabel) at (#1) {\myvphantom{#2}#3};
     }%
 }
 
 \newcommand*{\strdfamilylabel}[3]{%
     \strdonlayer{strd labellayer}{
-        \node[strd scriptlabel,above left] (#1 EndCorner LeftLabel) at (#1 EndCorner) {#2};
-        \node[strd scriptlabel,above right] (#1 EndCorner RightLabel) at (#1 EndCorner) {\myvphantom{#2}#3};
+        \node[strd familylabel,above right] (#1 EndCorner RightLabel) at (#1 EndCorner) {#2};
+        \node[strd familylabel,below] (#1 EndCorner BelowLabel) at (#1 EndCorner) {\myvphantom{#2}#3};
     }%
 }
+\newcommand*{\strdunfamilylabel}[3]{%
+    \strdonlayer{strd labellayer}{
+        \node[strd familylabel,above left] (#1 EndCorner LeftLabel) at (#1 EndCorner) {#2};
+        \node[strd familylabel,below] (#1 EndCorner BelowLabel) at (#1 EndCorner) {\myvphantom{#2}#3};
+    }%
+}
+
 
 \newcommand*{\strdmaplabel}[3]{%
     \strdonlayer{strd labellayer}{
-        \node[strd scriptlabel,left] (#1 LeftLabel) at (#1) {#2};
-        \node[strd scriptlabel,right] (#1 RightLabel) at (#1) {\myvphantom{#2}#3};
+        \node[strd sidelabel,left] (#1 LeftLabel) at (#1) {#2};
+        \node[strd sidelabel,right] (#1 RightLabel) at (#1) {\myvphantom{#2}#3};
     }%
 }
 
+% removeme
 \newcommand*{\strdsqlabel}[2]{%
     \strdonlayer{strd labellayer}{
-        \node[strd scriptlabel,below] (#1 EndCorner BelowLabel) at (#1 EndCorner) {#2};
+        \node[strd sqlabel,below] (#1 EndCorner BelowLabel) at (#1 EndCorner) {#2};
     }%
 }
 
@@ -450,8 +460,8 @@
 
 \newcommand*{\strdroadlabel}[3]{%
     \strdonlayer{strd labellayer}{
-        \node[strd scriptlabel,left,xshift=-1.5pt] (#1 LeftLabel) at (#1) {#2};
-        \node[strd scriptlabel,right,xshift=1.5pt] (#1 RightLabel) at (#1) {\myvphantom{#2}#3};
+        \node[strd sidelabel,left,xshift=-1.5pt] (#1 LeftLabel) at (#1) {#2};
+        \node[strd sidelabel,right,xshift=1.5pt] (#1 RightLabel) at (#1) {\myvphantom{#2}#3};
     }%
 }
 

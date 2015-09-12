@@ -1,0 +1,27 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+     \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{T \circ K}{S \circ K}
+        \strdcellnode{u End}{\mydash \circ K}
+        \strdroad{mid}{u}{v} \strdroadlabel{v}{T}{S}
+        \strdstartlabel{u}{[\mathcal{A},\mathcal{B}]}
+        \strdendlabel{v}{[\mathcal{C},\mathcal{B}]}
+    } & =
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{T \circ K}{S \circ K}
+        \strdroad{mid}{u}{u2} \strdroadlabel{u2}{TKA}{SKA}
+        \strdbijnode{u2 End}{\lambda _{KA}}
+        \strdroad{mid}{u2}{u3} 
+        \strdroad{mid}{u3}{v} \strdroadlabel{v}{T}{S}
+        \strdbijsqx{u}{bj}{2}{2}{2} \strdfamilylabel{bj Right}{A}{\lambda}
+        \strdstartlabel{u}{[\mathcal{A},\mathcal{B}]}
+        \strdendlabel{v}{[\mathcal{C},\mathcal{B}]}
+    }
+}
+\end{document}
