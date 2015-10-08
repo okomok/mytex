@@ -492,7 +492,12 @@
     \strdroadlshift{#2}{#2 Shifted}
     \strduse{#1}{#2 Shifted}{#3}%
 }
-\newcommand*{\strdroadrshifted}[3]{\strdflip{\strdroadlshifted{#1}{#2}{#3}}}
+\newcommand*{\strdroadrshifted}[3]{%
+    \strdroadrshift{#2}{#2 Shifted}
+    \strduse{#1}{#2 Shifted}{#3}%
+}
+% number of arguments unknown, so flip can't determine the scope...
+%\newcommand*{\strdroadrshifted}[3]{\strdflip{\strdroadlshifted{#1}{#2}{#3}}}
 
 
 

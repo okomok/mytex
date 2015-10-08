@@ -1,0 +1,77 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{ma}
+        \strdcellnode{u End}{\mathtt{return}}
+        \strduse{mid}{u}{v} \strdsidelabel{v}{}{a}
+    }, 
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{mb}
+        \strdbijnode{u End}{\mathtt{>>=}}
+        \strdroad{left}{u}{l} \strdroadlabel{l}{a}{mb}
+        \strdright{u}{r} \strdsidelabel{r}{}{ma}
+    } \\ 
+}
+
+\myin[preview,math,aligned]{
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{mb}
+        \strdbijnode{u End}{\mathtt{>>=}}
+        \strdroad{left}{u}{l} \strdroadlabel{l}{a}{mb}
+        \strdright{u}{r} \strdsidelabel{r}{}{ma}
+        \strdcellnode{l End}{k}
+        \strdcellnode{r End}{\mathtt{return}}
+        \strduse{mid}{r}{v} \strdsidelabel{v}{}{a}
+    } &= 
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{mb}
+        \strdbijnode{u End}{k}
+        \strduse{mid}{u}{v} \strdsidelabel{v}{}{a}
+    } \\ 
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{ma}
+        \strdbijnode{u End}{\mathtt{>>=}}
+        \strdroad{left}{u}{l} \strdroadlabel{l}{a}{ma}
+        \strdright{u}{r} %\strdsidelabel{r}{}{ma}
+        \strdbijnode{l End}{\mathtt{return}}
+        \strdyscale{0.5}{\strduse{mid}{r}{v}} \strdsidelabel{v Start}{}{ma}
+    } &= 
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{ma}
+    } \\ 
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{mc}
+        \strdbijnode{u End}{\mathtt{>>=}}
+        \strdxscale{1.5}{\strdroad{left}{u}{l}} \strdroadlabel{l}{a}{mc}
+        \strdxscale{1.5}{\strdright{u}{r}} %\strdsidelabel{r}{}{ma}
+        \strdroadrshifted{\strdmid}{l}{lu} \strdsidelabel{lu}{}{mc}
+        \strdbijnode{lu End}{\mathtt{>>=}}
+        \strdroad{left}{lu}{ll} \strdroadlabel{ll}{b}{mc}
+        \strdright{lu}{lr} \strdsidelabel{lr}{}{mb}
+        \strdbijnode{lr End}{k}
+        \strdcellnode{ll End}{h}
+        \strdmid{lr}{v} \strdsidelabel{v}{}{a}
+        \strdroadrshifted{\strdbijsqx}{l}{bjs}{3}{2}{2}
+        \strdyscale{3.5}{\strdmid{r}{r2}} \strdsidelabel{r2}{}{ma}
+    } &= 
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{mc}
+        \strdbijnode{u End}{\mathtt{>>=}}
+        \strdroad{left}{u}{l} \strdroadlabel{l}{b}{mc}
+        \strdright{u}{r} \strdsidelabel{r}{}{mb}
+        \strdbijnode{r End}{\mathtt{>>=}}
+        \strdroad{left}{r}{rl} \strdroadlabel{rl}{a}{mb}
+        \strdcellnode{rl End}{k}
+        \strdright{r}{rr}
+        \strdyhalf{\strdmid{rr}{rrr}} \strdsidelabel{rrr Start}{}{ma}
+        \strdcellnode{l End}{h}
+    } \\ 
+}
+
+\end{document}
