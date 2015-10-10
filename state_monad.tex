@@ -1,0 +1,93 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    & \myitem \strdin[gathered]{
+        \strdxscale{0.5}{\strduse{cup}{\strdorigin}{u}} \strdsidelabel{u Left}{}{x} \strdsidelabel{u Right}{}{x}
+        \strddotnode{u End}
+        \strduse{mid}{u}{v} \strdsidelabel{v}{}{x}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdxscale{0.5}{\strduse{cup}{\strdorigin}{u}} \strdsidelabel{u Left}{}{x} \strdsidelabel{u Right}{}{x}
+        \strdcellnode{u End}{\Delta}
+        \strduse{mid}{u}{v} \strdsidelabel{v}{}{x}
+    } 
+}
+
+\myin[preview,math,aligned]{
+    & \myitem \strdin[gathered]{
+        \strdyhalf{\strdnone{\strduse{mid}{\strdorigin}{u}}}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{x}
+        \strddotnode{u2 Start}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdyhalf{\strdnone{\strduse{mid}{\strdorigin}{u}}}
+        \strduse{mid}{u}{u2} \strdsidelabel{u2}{}{x}
+        \strdcellnode{u2 Start}{!}
+    } 
+}
+
+\myin[preview,math,aligned]{
+    & \myitem \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{s}{(a,s)}
+        \strdcellnode{u End}{\texttt{return}}
+        \strduse{mid}{u}{v} \strdsidelabel{v}{}{a}
+    } \mydefeq 
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{s}{(a,s)}
+        \strdparallel{u}{w} \strdsidelabel{w Left}{}{s}
+        \strdbijsqx{u}{b}{1}{1}{1}
+        \strdmid{w Right}{v} \strdsidelabel{v}{}{a}
+    } \\ 
+    & \myitem \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{s}{(b,s)}
+        \strdbijnode{u End}{\texttt{>>=}}
+        \strdxscale{1.5}{\strdroad{left}{u}{l} \strdroadlabel{l}{a}{s \texttt{\to} (b,s)}
+        \strdroad{right}{u}{r}} \strdroadlabel{r}{s}{(a,s)}
+        \strdbijnode{l End}{k}
+        \strdbijnode{r End}{m}
+    } \mydefeq 
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{s}{(b,s)}
+        \strdcup{u}{k} \strdsidelabel{k Left}{}{s} \strdsidelabel{k Right}{}{b}
+        \strdcellnode{k End}{k}
+        \strdcircle{k}{m} \strdsidelabel{m Left}{}{s} \strdsidelabel{m Right}{}{a}
+        \strdcellnode{m End}{m}
+        \strdmid{m}{v} \strdsidelabel{v}{}{s}
+        \strdbijsqx{u}{b}{3}{2}{2}
+    } \\ 
+}
+
+\myin[preview,math,aligned]{
+    & \myitem \strdin[gathered]{
+        \strdxscale{0.5}{\strduse{cup}{\strdorigin}{u}} \strdsidelabel{u Left}{}{s} \strdsidelabel{u Right}{}{s}
+        \strdcellnode{u End}{\texttt{get}}
+        \strduse{mid}{u}{v} \strdsidelabel{v}{}{s}
+    } \mydefeq 
+    \strdin[gathered]{
+        \strdxscale{0.5}{\strduse{cup}{\strdorigin}{u}} \strdsidelabel{u Left}{}{s} \strdsidelabel{u Right}{}{s}
+        \strddotnode{u End}
+        \strduse{mid}{u}{v} \strdsidelabel{v}{}{s}
+    } \\ 
+    & \myitem \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{s}{((),s)}
+        \strdcellnode{u End}{\texttt{put}}
+        \strdmid{u}{v} \strdsidelabel{v}{}{s}
+    } \mydefeq 
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{s}{((),s)}
+        \strddup{u}{u2}
+        \strdmid{u2 Right}{l}
+        \strdmid{l}{v} \strdsidelabel{v}{}{s}
+        \strdbijsqx{u}{b}{1}{1}{1}
+        \strdnone{\strdyhalf{\strdmid{u2 Left}{r}}}
+        \strdyhalf{\strdmid{r}{r2}} \strdsidelabel{r2}{}{s}
+        \strddotnode{r2 Start}
+    } \\ 
+}
+
+\end{document}

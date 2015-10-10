@@ -1,0 +1,61 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    & \myitem
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{e}{a}
+        \strdcellnode{u End}{\texttt{const}}
+        \strdmid{u}{v} \strdsidelabel{v}{}{a}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{e}{a}
+        \strddup{u}{w}
+        \strdyhalf{
+            \strdnone{\strdmid{w Left}{wl}}
+            \strddotnode{wl End}
+            \strdmid{wl}{vl} \strdsidelabel{vl}{}{e}
+        }
+        \strdmid{w Right}{wr}
+        \strdmid{wr}{v} \strdsidelabel{v}{}{a}
+        \strdbijsqx{u}{bs}{1}{1}{1}
+    } \\
+}
+
+\myin[preview,math,aligned]{
+    & \myitem \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{e}{a}
+        \strdcellnode{u End}{\texttt{return}}
+        \strdmid{u}{v} \strdsidelabel{v}{}{a}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{e}{a}
+        \strdcellnode{u End}{\texttt{const}}
+        \strdmid{u}{v} \strdsidelabel{v}{}{a}
+    } \\
+    & \myitem \strdin[gathered]{
+        \strdroad{branch}{\strdorigin}{u} \strdroadlabel{u Main}{e}{b}
+        \strdcellnode{u Main End}{\texttt{>>=}}
+        \strdroadlabel{u Left}{a}{e\texttt{\to}b}
+        \strdroadlabel{u Right}{e}{a}
+        \strdbijnode{u Left End}{f}
+        \strdbijnode{u Right End}{r}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{e}{b}
+        \strdroadrshifted{\strdbranch}{u}{b} \strdsidelabel{b Main}{}{b}
+        \strdsidelabel{b Left End}{}{e} \strdsidelabel{b Right}{}{a}
+        \strdcellnode{b Right End}{r}
+        \strdunbranch{b}{unb} 
+        \strddotnode{unb Main Start}
+        \strdcellnode{b Main End}{f}
+        \strdsidelabel{unb Right}{}{e}
+        \strdsidelabel{unb Main}{}{e}
+        \strdroadrshifted{\strdbijsqx}{u}{b}{4}{2}{2}
+    }
+}
+\end{document}

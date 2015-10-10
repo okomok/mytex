@@ -103,6 +103,12 @@
     \node[strd coord] (#2 End) at (#2) {};%
 }
 
+\newcommand*{\strdcopy}[2]{%
+    \node[strd coord] (#2) at (#1) {};
+    \node[strd coord] (#2 Start) at (#1 Start) {};
+    \node[strd coord] (#2 End) at (#1 End) {};%
+}
+
 \newcommand*{\strdleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2 Corner) at ($(#1 End)+(-\strdxunit,-\strdunitdiff)$) {};
@@ -399,10 +405,26 @@
     \strdjump{#1}{#2}%
 }
 
+\newcommand*{\strdcup}[2]{%
+    \strdxscale{2}{\strddup{#1}{#2 Dup}}
+    \strdunleft{#2 Dup Left}{#2 Left}
+    \strdunright{#2 Dup Right}{#2 Right}
+    \strdjump{#1}{#2}%
+}
+
 \newcommand*{\strdbranch}[2]{%
-    \strdmid{#1}{#2}
-    \strdleft{#2}{#2 Left}
-    \strdright{#2}{#2 Right}%
+    \strdmid{#1}{#2 Main}
+    \strdleft{#2 Main}{#2 Left}
+    \strdright{#2 Main}{#2 Right}
+    \strdjump{#2 Main}{#2}
+}
+
+\newcommand*{\strdunbranch}[2]{%
+    \strdxscale{2}{\strddup{#1}{#2 Dup}}
+    \strdunleft{#2 Dup Left}{#2 Left}
+    \strdunright{#2 Dup Right}{#2 Right}
+    \strdmid{#2 Left}{#2 Main}
+    \strdcopy{#2 Main}{#2}
 }
 
 \newcommand*{\strdparallel}[2]{%
