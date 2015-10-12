@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    & \myitem \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{a}{b}
+        \strdcellnode{u End}{\texttt{\$}}
+        \strdroad{mid}{u}{v} \strdroadlabel{v}{a}{b}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{a}{b}
+    } \\ 
+    & \myitem \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{b}
+        \strdbijnode{u End}{\texttt{\$}}
+        \strduse{left}{u}{v} \strdsidelabel{v End}{}{a}
+        \strdroad{right}{u}{w} \strdroadlabel{w}{a}{b}
+        \strdbijnode{w End}{f}
+        \strdyhalf{\strdmid{v}{v2}}
+    } = 
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{b}
+        \strdcellnode{u End}{f}
+        \strduse{mid}{u}{v} \strdsidelabel{v}{}{a}
+    } \\ 
+}
+
+\myin[preview,math,aligned]{
+    & \myitem \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{a\texttt{\to}r}{r}
+        \strdcellnode{u End}{\texttt{return}}
+        \strduse{mid}{u}{v} \strdsidelabel{v}{}{a}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{a\texttt{\to}r}{r}
+        \strdbijnodewithright{u End}{\texttt{\$}}{\operatorname{flip}}
+        \strduse{mid}{u}{v} \strdsidelabel{v}{}{a}
+    } \\ 
+    & \myitem \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u Main} \strdroadlabel{u Main}{b\texttt{\to}r}{r}
+        \strdbijnode{u Main End}{\texttt{>>=}}
+        \strdxscale{2}{\strdroad{left}{u Main}{u Left}} \strdroadlabel{u Left}{a}{(b\texttt{\to}r)\texttt{\to}r}
+        \strdxscale{2}{\strdroad{right}{u Main}{u Right}} \strdroadlabel{u Right}{a\texttt{\to}r}{r}
+        \strdbijnode{u Left End}{f}
+        \strdbijnode{u Right End}{c}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{b\texttt{\to}r}{r}
+        \strdroadrshifted{\strdmid}{u}{r} \strdsidelabel{r}{}{r}
+        \strdcellnode{r End}{c}
+        \strdroad{mid}{r}{ar} \strdroadlabel{ar}{a}{r}
+        \strdbijnodewithright{ar End}{f}{\operatorname{flip}}
+        \strdroad{mid}{ar}{br} \strdroadlabel{br}{b}{r}
+        \strdbijsqx{u Shifted}{bs}{3}{1}{1.3}
+    } \\ 
+}
+
+\myin[preview,math,aligned]{
+    & \myitem \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{a\texttt{\to}r}{r}
+        \strdcellnode{u End}{\texttt{callCC}}
+        \strdroad{mid}{u}{v} \strdroadlabel{v}{a\texttt{\to}(b\texttt{\to}r)\texttt{\to}r}{(a\texttt{\to}r)\texttt{\to}r}
+        \strdbijnode{v End}{f}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{a\texttt{\to}r}{r}
+        \strdroadrshifted{\strdmid}{u}{r} \strdsidelabel{r}{}{r}
+        \strdbijnode{r End}{f}
+        \strdroad{cap}{r}{fn} \strdroadlabel{fn Left End}{a}{r} \strdroadlabel{fn Right}{}{(b\texttt{\to}r)\texttt{\to}r}
+        \strdroad{right}{fn Right}{fnr}
+        \strdroad{unbranch}{fn}{fnl}
+        \strdcellnode{fnl Main Start}{\Delta}
+        \strdroadlabel{fnr}{r}{}
+        \strdroadlabel{fnl Right Start}{a}{}
+        \strdbijnode{fnr End}{\texttt{const}}
+        \strdroadlabel{fnl Main}{a}{r}
+        \strdbijsqx{u Shifted}{b}{4}{1.8}{3.8}
+    } \\ 
+}
+\end{document}

@@ -217,9 +217,10 @@
 
 % nodes
 
-\tikzset{strd node/.style={font=\normalsize,very thin,solid,draw,fill=white,inner xsep=0.4pt,inner ysep=1.2pt}}
+\tikzset{strd node/.style={font=\normalsize,very thin,solid,draw,fill=white,inner xsep=0.6pt,inner ysep=1.2pt}}
 \tikzset{strd nodelabel/.style={font=\normalsize,inner sep=0pt}}
-\tikzset{strd cellnode/.style={strd node,rounded rectangle,rounded rectangle arc length=90,minimum height=9pt}}
+%\tikzset{strd cellnode/.style={strd node,rounded rectangle,rounded rectangle arc length=90,minimum height=9pt}}
+\tikzset{strd cellnode/.style={strd node,rectangle,minimum size=9pt}}
 \tikzset{strd bijnode/.style={strd node,thin,rectangle,sharp corners,minimum size=9pt}}
 \tikzset{strd isonode/.style={strd node,tape,tape bend height=2pt,minimum width=0pt,tape bend top=out and in,tape bend bottom=out and in}}
 \tikzset{strd dotnode/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
@@ -258,6 +259,11 @@
 \newcommand*{\strdbijnodewith}[3]{%
     \strdonlayer{strd nodelayer}{
         \node[strd bijnode,label={[strd familylabel,xshift=2.5pt]below:\hphantom{#2}{#3}}] (#1 Node) at (#1) {#2};
+    }%
+}
+\newcommand*{\strdbijnodewithright}[3]{%
+    \strdonlayer{strd nodelayer}{
+        \node[strd bijnode,label={[strd familylabel,yshift=-2.5pt]right:#3}] (#1 Node) at (#1) {#2};
     }%
 }
 

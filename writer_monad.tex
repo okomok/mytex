@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    & \myitem \strdin[gathered]{
+        \strdunbranch{\strdorigin}{u} \strdsidelabel{u Left}{}{w} \strdsidelabel{u Right}{}{a}
+        \strdsidelabel{u Main}{}{a}
+        \strdcellnode{u Main Start}{\texttt{return}}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdxscale{1.8}{\strdparallel{\strdorigin}{u}}  \strdsidelabel{u Left}{}{w} \strdsidelabel{u Right End}{}{a}
+        \strdcellnode{u Left End}{\texttt{mempty}}
+        \strdmid{u Right}{v}
+    } \\ 
+    & \myitem \strdin[gathered]{
+        \strdunbranch{\strdorigin}{u} \strdsidelabel{u Left}{}{w} \strdsidelabel{u Right}{}{b}
+        \strdsidelabel{u Main End}{}{w}
+        \strdbijnode{u Main Start}{\texttt{>>=}}
+        \strdxscale{1.8}{\strdroad{left}{u Left}{v}} \strdroadlabel{v}{a}{(b,w)}
+        \strdxscale{1}{\strdright{u Left}{vr}} \strdsidelabel{vr End}{}{a}
+        \strdbijnode{v End}{f}
+        \strdmid{u Main}{vm} \strdmid{vr}{vrr}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdxscale{2.5}{\strdparallel{\strdorigin}{u}} \strdsidelabel{u Left}{}{w} \strdsidelabel{u Right End}{}{b}
+        \strdxscale{1}{\strdcap{u Left}{me}} 
+        \strdbijnode{u Left End}{\texttt{mappend}}
+        \strdcellnode{me Right End}{f}
+        \strdmid{me Right}{v} \strdsidelabel{v}{}{a}
+        \strdunright{u Right}{kp}
+        \strdmid{me Left}{vl} \strdsidelabel{vl}{}{w} 
+        \strdsidelabel{me Right}{}{w}
+    } 
+}
+
+\end{document}

@@ -31,7 +31,7 @@
         \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{e}{a}
         \strdcellnode{u End}{\texttt{return}}
         \strdmid{u}{v} \strdsidelabel{v}{}{a}
-    } \mydefeq
+    } \mydefeq  
     \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{e}{a}
         \strdcellnode{u End}{\texttt{const}}
@@ -39,7 +39,7 @@
     } \\
     & \myitem \strdin[gathered]{
         \strdroad{branch}{\strdorigin}{u} \strdroadlabel{u Main}{e}{b}
-        \strdcellnode{u Main End}{\texttt{>>=}}
+        \strdbijnode{u Main End}{\texttt{>>=}}
         \strdroadlabel{u Left}{a}{e\texttt{\to}b}
         \strdroadlabel{u Right}{e}{a}
         \strdbijnode{u Left End}{f}
