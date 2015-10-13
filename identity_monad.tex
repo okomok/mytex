@@ -1,0 +1,32 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    & \myitem \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{a} 
+        \strdcellnode{u End}{\texttt{return}}
+        \strdmid{u}{v} \strdsidelabel{v}{}{a}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{a} 
+    } \\ 
+    & \myitem \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{a} 
+        \strdbijnode{u End}{\texttt{>>=}}
+        \strdroad{left}{u}{l} \strdroadlabel{l}{a}{b}
+        \strdbijnode{l End}{f}
+        \strdright{u}{r} \strdsidelabel{r End}{}{a}
+        \strdyhalf{\strdmid{r}{rr}}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{b} 
+        \strdcellnode{u End}{f}
+        \strdmid{u}{v} \strdsidelabel{v}{}{a} 
+    } 
+}
+
+\end{document}

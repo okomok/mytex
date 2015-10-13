@@ -37,7 +37,7 @@
     } \mydefeq
     \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{a\texttt{\to}r}{r}
-        \strdbijnodewithright{u End}{\texttt{\$}}{\operatorname{flip}}
+        \strdbijnode{u End}{\strdsubscript{\texttt{\$}}{\operatorname{flip}}}
         \strduse{mid}{u}{v} \strdsidelabel{v}{}{a}
     } \\ 
     & \myitem \strdin[gathered]{
@@ -53,7 +53,7 @@
         \strdroadrshifted{\strdmid}{u}{r} \strdsidelabel{r}{}{r}
         \strdcellnode{r End}{c}
         \strdroad{mid}{r}{ar} \strdroadlabel{ar}{a}{r}
-        \strdbijnodewithright{ar End}{f}{\operatorname{flip}}
+        \strdbijnode{ar End}{\strdsubscript{f}{\operatorname{flip}}}
         \strdroad{mid}{ar}{br} \strdroadlabel{br}{b}{r}
         \strdbijsqx{u Shifted}{bs}{3}{1}{1.3}
     } \\ 
