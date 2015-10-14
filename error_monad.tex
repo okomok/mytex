@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin[preview,math,aligned]{
+    & \myitem \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{e\texttt{+}a}
+        \strdcellnode{u End}{\texttt{return}}
+        \strduse{mid}{u}{v} \strdsidelabel{v}{}{a}
+    } \mydefeq
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{e\texttt{+}a}
+        \strdcellnode{u End}{\texttt{Right}}
+        \strduse{mid}{u}{v} \strdsidelabel{v}{}{a}
+    } \\ 
+    & \myitem \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{e\texttt{+}b}
+        \strdbijnode{u End}{\texttt{>>=}}
+        \strdroad{left}{u}{v} \strdroadlabel{v}{a}{e\texttt{+}b}
+        \strduse{right}{u}{w} \strdsidelabel{w End}{}{e\texttt{+}a}
+        \strdbijnode{v End}{f}
+        \strdyhalf{\strdmid{w}{ww}}
+    } \mydefeq 
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{e\texttt{+}b}
+        \strdxscale{1.8}{\strduse{parallel}{u}{w}} \strdsidelabel{w Left}{}{e\texttt{+}b} \strdsidelabel{w Right}{}{e\texttt{+}b}
+        \strdbijsqx{u}{b}{2}{2.2}{2.2} 
+        \strdmid{b}{v} \strdsidelabel{v}{}{e\texttt{+}a}
+        \strdcellnode{w Right End}{f} %\strdunfamilylabel{b Right}{}{\texttt{+}}
+        \strdcellnode{w Left End}{\texttt{Left}\strdrlap{,}}
+        \strdxscale{1.8}{\strdparallel{w}{z}} \strdsidelabel{z Left}{}{e} \strdsidelabel{z Right}{}{a}
+        \strdmaplabel{b Left}{[}{}
+        \strdmaplabel{b Right}{}{]}
+    } \\ 
+}
+
+\myin[preview,math,aligned]{
+    & \myitem \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{e\texttt{+}a}
+        \strdcellnode{u End}{\texttt{throwError}}
+        \strduse{mid}{u}{v} \strdsidelabel{v}{}{e}
+    } \mydefeq
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{e\texttt{+}a}
+        \strdcellnode{u End}{\texttt{Left}}
+        \strduse{mid}{u}{v} \strdsidelabel{v}{}{e}
+    } \\ 
+    & \myitem \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{e\texttt{+}a}
+        \strdbijnode{u End}{\texttt{catchError}}
+        \strdroad{left}{u}{v} \strdroadlabel{v}{e}{e\texttt{+}a}
+        \strduse{right}{u}{w} \strdsidelabel{w End}{}{e\texttt{+}a}
+        \strdbijnode{v End}{h}
+        \strdyhalf{\strdmid{w}{ww}}
+    } \mydefeq 
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{e\texttt{+}a}
+        \strdxscale{1.8}{\strduse{parallel}{u}{w}} \strdsidelabel{w Left}{}{e\texttt{+}a} \strdsidelabel{w Right}{}{e\texttt{+}a}
+        \strdbijsqx{u}{b}{2}{2}{2.4} 
+        \strdmid{b}{v} \strdsidelabel{v}{}{e\texttt{+}a}
+        \strdcellnode{w Right End}{\texttt{Right}} %\strdunfamilylabel{b Right}{}{\texttt{+}}
+        \strdcellnode{w Left End}{h\strdrlap{,}}
+        \strdxscale{1.8}{\strdparallel{w}{z}} \strdsidelabel{z Left}{}{e} \strdsidelabel{z Right}{}{a}
+        \strdmaplabel{b Left}{[}{}
+        \strdmaplabel{b Right}{}{]}
+    } \\ 
+}
+
+\end{document}

@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+\myin[preview,math,aligned]{
+    & \myitem \strdin[gathered]{
+        \strdxscale{0.5}{\strduse{cup}{\strdorigin}{u}} \strdsidelabel{u Left}{}{z} \strdsidelabel{u Right}{}{z}
+        \strdcellnode{u End}{\Delta}
+        \strduse{mid}{u}{v} \strdsidelabel{v}{}{z}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdxscale{0.5}{\strduse{cup}{\strdorigin}{u}} \strdsidelabel{u Left}{}{z} \strdsidelabel{u Right}{}{z}
+        \strddotnode{u End}
+        \strduse{mid}{u}{z} \strdsidelabel{v}{}{z}
+    } \mydefeq
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{z\texttt{\times}z}
+        \strdxscale{1.2}{\strduse{parallel}{u}{w}} \strdsidelabel{w Left}{}{z\strdrlap{,}} \strdsidelabel{w Right}{}{z}
+        \strdbijsqx{u}{b}{1}{1.5}{1.5} 
+        \strdmid{b}{v} \strdsidelabel{v}{}{z}
+        \strdmaplabel{b Left}{\langle}{}
+        \strdmaplabel{b Right}{}{\rangle}
+    } \\
+    & \myitem
+    \strdin[gathered]{
+        \strdxscale{2}{\strdparallel{\strdorigin}{u}} \strdsidelabel{u Left}{}{y} \strdsidelabel{u Right}{}{x}
+        \strdcellnode{u Left End}{g}
+        \strdcellnode{u Right End}{f}
+        \strdxscale{1}{\strdunbranch{u}{v}} \strdsidelabel{v Left}{}{z} \strdsidelabel{v Right}{}{z}
+        \strdcellnode{v Main Start}{\Delta} \strdsidelabel{v Main}{}{z}
+    } =
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{x\texttt{\times}y}
+        \strdxscale{1.2}{\strduse{parallel}{u}{w}} \strdsidelabel{w Left}{}{x} \strdsidelabel{w Right}{}{y}
+        \strdbijsqx{u}{b}{2}{1.5}{1.5} 
+        \strdmid{b}{v} \strdsidelabel{v}{}{z}
+        \strdcellnode{w Right End}{g} % \strdunfamilylabel{b Right}{}{\texttt{+}}
+        \strdcellnode{w Left End}{f\strdrlap{,}}
+        \strdxscale{1.2}{\strdparallel{w}{z}} \strdsidelabel{z Left}{}{z} \strdsidelabel{z Right}{}{z}
+        \strdmaplabel{b Left}{\langle}{}
+        \strdmaplabel{b Right}{}{\rangle}
+    } 
+}
+
+% naturality
+\myin[preview,math,aligned]{
+    & \myitem
+    \strdin[gathered]{
+        \strdxscale{1}{\strdunbranch{\strdorigin}{v}} \strdsidelabel{v Left}{}{z} \strdsidelabel{v Right}{}{z}
+        \strdcellnode{v Main Start}{\Delta} \strdsidelabel{v Main}{}{z}
+        \strdcellnode{v Main End}{h}
+        \strdmid{v}{w} \strdsidelabel{w}{}{y}
+    } =
+    \strdin[gathered]{
+        \strdxscale{2}{\strdparallel{\strdorigin}{u}} \strdsidelabel{u Left}{}{z} \strdsidelabel{u Right}{}{z}
+        \strdcellnode{u Left End}{h}
+        \strdcellnode{u Right End}{h}
+        \strdxscale{1}{\strdunbranch{u}{v}} \strdsidelabel{v Left}{}{y} \strdsidelabel{v Right}{}{y}
+        \strdcellnode{v Main Start}{\Delta} \strdsidelabel{v Main}{}{y}
+    } 
+}
+    
+\end{document}

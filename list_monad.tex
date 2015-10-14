@@ -1,0 +1,89 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\newcommand*{\lb}{\texttt{[}}
+\newcommand*{\rb}{\texttt{]}}
+
+\myin[preview,math,aligned]{
+    & \myitem
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\lb a \rb}{b}
+        \strdbijnode{u End}{\texttt{foldr}}
+        \strdleft{u}{l} \strdsidelabel{l}{}{b}
+        \strdroad{right}{u}{r} \strdroadlabel{r}{a}{b \texttt{\to} b}
+        \strdcellnode{l End}{z}
+        \strdbijnode{r End}{f}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u0} \strdroadlabel{u0}{\lb a \rb}{b}
+        \strdroadrshifted{\strduse{mid}}{u0}{u} \strdsidelabel{u}{}{b}
+        \strdxscale{1.3}{\strdparallel{u}{bf}} \strdsidelabel{bf Left}{}{b} \strdsidelabel{bf Right}{}{b}
+        \strdcellnode{bf Left End}{z\strdrlap{,}} \strdcellnode{bf Right End}{f}
+        \strdmid{bf Right}{a} \strdsidelabel{a}{}{a\texttt{\times}b}
+        \strdbijsqx{u0}{bo}{4}{3}{3}
+        \strdbijsqx{u}{bi}{2}{2}{2}
+        \strdmid{bi}{w} \strdsidelabel{w}{}{\texttt{()+}a \texttt{\times} b}
+        \strdfamilylabel{bo Right}{\mu}{}
+        %\strdfamilylabel{bi Right}{\texttt{+}}{}
+        \strdmaplabel{bi Left}{[}{} \strdmaplabel{bi Right}{}{]}
+    }
+}
+
+% concatenation
+\myin[preview,math,aligned]{
+    & \myitem
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\lb a \rb}{\lb a \rb}
+        \strdcellnode{u End}{\texttt{++}}
+        \strduse{mid}{u}{v} \strdsidelabel{v}{}{\lb a \rb}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{\lb a \rb}{\lb a \rb}
+        \strdbijnode{u End}{\texttt{foldr}}
+        \strdleft{u}{l} \strdsidelabel{l End}{}{\lb a \rb}
+        \strdroad{right}{u}{r} \strdroadlabel{r}{a}{\lb a \rb \texttt{\to} \lb a \rb}
+        \strdyhalf{\strduse{mid}{l}{ll}} 
+        \strdbijnode{r End}{\texttt{:}}
+    } \\ 
+}
+
+% list monad
+\myin[preview,math,aligned]{
+    & \myitem \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\lb a \rb}
+        \strdcellnode{u End}{\texttt{return}}
+        \strduse{mid}{u}{v} \strdsidelabel{v}{}{a}
+    } \mydefeq
+    \strdin[gathered]{
+        \strduse{branch}{\strdorigin}{u} \strdsidelabel{u Main}{}{\lb a \rb}
+        \strdbijnode{u Main End}{\texttt{:}}
+        \strdsidelabel{u Left}{}{\lb a \rb} \strdsidelabel{u Right End}{}{a}
+        \strdyhalf{\strduse{mid}{u Right}{v}}
+        \strdcellnode{u Left End}{\texttt{[]}}
+    } \\ 
+    & \myitem \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\lb b \rb}
+        \strdbijnode{u End}{\texttt{>>=}}
+        \strdroad{left}{u}{v} \strdroadlabel{v}{a}{\lb b \rb}
+        \strduse{right}{u}{w} \strdsidelabel{w End}{}{\lb a \rb}
+        \strdbijnode{v End}{f}
+        \strdyhalf{\strdmid{w}{ww}}
+    } \mydefeq 
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\lb b \rb}
+        \strdroadlshifted{\strdbijsqx}{u}{b}{3.5}{2}{3.6} 
+        \strdmid{b}{v} \strdsidelabel{v}{}{\lb a \rb}
+        \strdroadlshifted{\strdroad{mid}}{u}{ab} \strdroadlabel{ab}{\lb a \rb}{\lb b \rb}
+        \strdbijnode{ab End}{\texttt{foldr}}
+        \strdleft{ab}{b} \strdsidelabel{b}{}{\lb b \rb}
+        \strdcellnode{b End}{\texttt{[]}}
+        \strdroad{right}{ab}{abb} \strdroadlabel{abb}{a}{\lb b \rb \texttt{\to} \lb  b \rb}
+        \strdroad{cap}{abb}{fc} \strdroadlabel{fc Left}{}{\lb b \rb}
+        \strdbijnode{fc Left End}{f} \strdbijnode{fc Right End}{\texttt{++}}
+    } \\ 
+}
+\end{document}

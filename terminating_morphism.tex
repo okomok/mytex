@@ -1,0 +1,39 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+\myin[preview,math,aligned]{
+    & \myitem
+    \strdin[gathered]{
+        \strdnone{\strdyhalf{\strdmid{\strdorigin}{u}}}
+        \strdmid{u}{v} \strdsidelabel{v}{}{x}
+        \strddotnode{u End}
+        \strdnone{\strdcellnode{u End}{!}}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdnone{\strdyhalf{\strdmid{\strdorigin}{u}}}
+        \strdmid{u}{v} \strdsidelabel{v}{}{z}
+        \strdcellnode{u End}{!}
+    } 
+}
+
+% naturality
+\myin[preview,math,aligned]{
+    & \myitem
+    \strdin[gathered]{
+        \strdnone{\strdyhalf{\strdmid{\strdorigin}{u}}}
+        \strdmid{u}{v} \strdsidelabel{v}{}{x}
+        \strdcellnode{u End}{!}
+        \strdcellnode{v End}{f}
+        \strdmid{v}{w} \strdsidelabel{w}{}{z}
+    } =
+    \strdin[gathered]{
+        \strdnone{\strdyhalf{\strdmid{\strdorigin}{u}}}
+        \strdmid{u}{v} \strdsidelabel{v}{}{z}
+        \strdcellnode{u End}{!}
+    } 
+}
+    
+\end{document}

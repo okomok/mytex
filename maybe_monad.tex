@@ -64,17 +64,18 @@
         \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\texttt{()+}b}
         \strdbijnode{u End}{\texttt{>>=}}
         \strdroad{left}{u}{v} \strdroadlabel{v}{a}{\texttt{()+}b}
-        \strduse{right}{u}{w} \strdsidelabel{w}{}{\texttt{()+}a}
+        \strduse{right}{u}{w} \strdsidelabel{w End}{}{\texttt{()+}a}
         \strdbijnode{v End}{f}
+        \strdyhalf{\strdmid{w}{ww}}
     } \mydefeq 
     \strdin[gathered]{
         \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\texttt{()+}b}
         \strdxscale{2}{\strduse{parallel}{u}{w}} \strdsidelabel{w Left}{}{\texttt{()+}b} \strdsidelabel{w Right}{}{\texttt{()+}b}
-        \strdbijsqx{u}{b}{2}{2.8}{2.8} 
+        \strdbijsqx{u}{b}{2}{2.7}{2.4} 
         \strdmid{b}{v} \strdsidelabel{v}{}{\texttt{()+}a}
         \strdcellnode{w Right End}{f} %\strdunfamilylabel{b Right}{}{\texttt{+}}
         \strdcellnode{w Left End}{\texttt{Nothing}\strdrlap{,}}
-        \strdxscale{2}{\strdparallel{w}{z}} \strdsidelabel{z Left}{}{\texttt{()}} \strdsidelabel{z Right}{}{a}
+        \strdmid{w Right}{z} \strdsidelabel{z Right}{}{a}
         \strdmaplabel{b Left}{[}{}
         \strdmaplabel{b Right}{}{]}
     } \\ 
