@@ -1,0 +1,123 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+% signature
+\myin[preview,math,aligned]{
+    & \myitem
+    \texttt{Applicative}\>f \implies
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{ta}{f(tb)}
+        \strdcellnode{u End}{\texttt{traverse}}
+        \strdroad{mid}{u}{v} \strdroadlabel{v}{a}{fb}
+    }
+}
+   
+% laws
+\myin[preview,math,aligned]{
+    & \myitem
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{ta}{1(tb)}
+        \strdcellnode{u End}{\texttt{traverse}}
+        \strdroad{mid}{u}{v} \strdroadlabel{v}{a}{1b}
+    } = 
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{ta}{tb}
+        \strdcellnode{u End}{\texttt{fmap}}
+        \strdroad{mid}{u}{v} \strdroadlabel{v}{a}{b}
+    } \\ 
+    & \myitem
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{ta}{\mathrlap{(f\texttt{\circ}g)(tc)}}
+        \strdcellnode{u End}{\texttt{traverse}}
+        \strdroad{mid}{u}{v} 
+        \strdroad{cap}{v}{w} \strdroadlabel{v}{a}{(f\texttt{\circ} g)c}
+        \strdcellnode{w Right End}{\texttt{fmap}}
+        \strdroad{mid}{w Right}{e} \strdroadlabel{e}{b}{gc}
+        \strdroadlabel{w Left}{}{fb}
+    } = 
+    \strdin[gathered]{
+        \strdxscale{1.3}{ \strdroad{branch}{\strdorigin}{u} } \strdroadlabel{u Main}{ta}{(f\texttt{\circ}g)(tc)}
+        \strdroadlabel{u Left}{}{f(tb)}
+        \strdcellnode{u Left End}{\texttt{traverse}}
+        \strdroad{mid}{u Left}{ul} \strdroadlabel{ul}{a}{fb}
+        \strdcellnode{u Right End}{\texttt{fmap}}
+        \strdroad{mid}{u Right}{ur} \strdroadlabel{ur}{tb}{g(tc)}
+        \strdcellnode{ur End}{\texttt{traverse}}
+        \strdroad{mid}{ur}{urr} \strdroadlabel{urr}{b}{gc}
+    } \\ 
+}
+
+
+% constant functor
+\myin[preview,math,aligned]{
+    & \myitem
+    \strdin[gathered]{
+        \strdtwo{\strdroad{mid}}{\strdorigin}{u}
+        \strdroadlabel{u First}{(\Delta x)a}{(\Delta x)b}
+        \strdroadlabel{u Second}{a}{b}
+        \strdcellnode{u First End}{\Delta x}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdtwo{\strdroad{mid}}{\strdorigin}{u}
+        \strddeadend{u First} \strdroadlabel{u First}{}{x}
+        \strdcellnode{u First End}{!} \strdroadlabel{u Second}{a}{b}
+    }
+}
+
+% vs Foldable
+\myin[preview,math,aligned]{
+    & \myitem
+    \strdin[gathered]{
+        \strdtwo{\strdroad{mid}}{\strdorigin}{u}
+        \strdroadlabel{u First}{ta}{m}
+        \strdroadlabel{u Second}{a}{m}
+        \strdcellnode{u First End}{\texttt{foldMap}}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdtwo{\strdroad{mid}}{\strdorigin}{u}
+        \strdroadlabel{u First}{ta}{(\Delta m)tb}
+        \strdroadlabel{u Second}{a}{(\Delta m)b}
+        \strdcellnode{u First End}{\texttt{traverse}}
+    } \\
+    & \myitem
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u}
+        \strdleft{u}{ta} \strdsidelabel{ta}{}{ta}
+        \strdmid{u}{v} \strdsidelabel{v}{}{b}
+        \strdxscale{1.2}{\strdroad{right}{u}{abb}} \strdroadlabel{abb}{a}{b\texttt{\to}\mathrlap{b}}
+        \strdcellnode{ta End}{t}
+        \strdcellnode{v End}{z}
+        \strdcellnode{u End}{\texttt{foldr}}
+        \strdsidelabel{u}{}{b}
+    } \mydefeq
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u}
+        \strdleft{u}{ta} \strdsidelabel{ta}{}{b}
+        \strdmid{u}{v} \strdsidelabel{v}{}{ta}
+        \strdxscale{1.2}{\strdroad{right}{u}{abb}} \strdroadlabel{abb}{a}{b\texttt{\to}b}
+        \strdcellnode{ta End}{z}
+        \strdcellnode{v End}{t}
+        \strdcellnode{u End}{\texttt{foldMap}}
+        \strdsidelabel{u}{}{b}
+    }
+}
+
+% identity functor
+\myin[preview,math,aligned]{
+    & \myitem
+    \strdin[gathered]{
+        \strdtwo{\strdroad{mid}}{\strdorigin}{u}
+        \strdroadlabel{u First}{1a}{1b}
+        \strdroadlabel{u Second}{a}{b}
+        \strdcellnode{u First End}{1}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u}
+        \strdroadlabel{u}{a}{b}
+    }
+}
+\end{document}

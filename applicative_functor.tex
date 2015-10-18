@@ -1,0 +1,167 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+% signature
+\myin[preview,math,aligned]{
+    & \myitem 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{fa} 
+        \strdcellnode{u End}{\texttt{pure}}
+        \strdmid{u}{v} \strdsidelabel{v}{}{a}
+    }, 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{fb} 
+        \strdcellnode{u End}{\texttt{<*>}}
+        \strduse{left}{u}{l} \strdsidelabel{l}{}{fa}
+        \strdright{u}{r} \strdsidelabel{r}{}{f(a\texttt{\to}b)}
+    } 
+}
+
+\newcommand*{\pair}[2]{\texttt{(}#1\texttt{,}#2\texttt{)}}
+
+% monoidal from applicative
+\myin[preview,math,aligned]{
+    & \myitem 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{f\texttt{()}} 
+        \strdcellnode{u End}{u}
+    } \mydefeq 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{f\texttt{()}} 
+        \strdcellnode{u End}{\texttt{pure}}
+    } \\
+    & \myitem 
+    \strdin[gathered]{
+        \strdbranch{\strdorigin}{u} \strdsidelabel{u Main}{}{f\pair{a}{b}} 
+        \strdcellnode{u Main End}{\phi}
+        \strdsidelabel{u Left}{}{fb}
+        \strdsidelabel{u Right}{}{fa}
+    } \mydefeq 
+    \strdin[gathered]{
+        \strdbranch{\strdorigin}{u} \strdsidelabel{u Main}{}{f\pair{a}{b}} 
+        \strdcellnode{u Main End}{\texttt{<*>}}
+    %    \strdsidelabel{u Left}{}{fb}
+        \strdleft{u Right}{ul} \strdsidelabel{ul End}{}{fa}
+        \strdroad{right}{u Right}{ur} \strdroadlabel{ur}{a}{b\texttt{\to}\pair{a}{b}}
+        \strdcellnode{ur End}{\texttt{(,)}}
+        \strdcellnode{ur Start}{\texttt{fmap}}
+        \strdsidelabel{u Right}{}{f(b \texttt{\to} \pair{a}{b})}
+        \strdmid{u Left}{fb} 
+        \strdyhalf{\strdmid{ul}{ull}}
+        \strdyhalf{\strdmid{fb}{fbb}}
+        \strdsidelabel{fb}{}{fb}
+    } \\
+    & \myitem 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{fc} 
+        \strdbranch{u}{c} \strdsidelabel{c Main}{}{c}
+        \strdcellnode{c Main End}{h}
+        \strdsidelabel{c Left}{}{b}
+        \strdsidelabel{c Right}{}{a}
+        \strdmid{c Left}{fb} \strdsidelabel{fb}{}{fb}
+        \strdmid{c Right}{fa} \strdsidelabel{fa}{}{fa}
+        \strdmapsqx{u}{mp}{2}{2}{2}
+        \strdmaplabel{mp Left}{}{f}
+    } \mydefeq 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{fc} 
+        \strdbranch{u}{c} \strdsidelabel{c Main}{}{c}
+        \strdcellnode{c Main End}{h}
+        \strdsidelabel{c Left}{}{b}
+        \strdsidelabel{c Right}{}{a}
+        \strdmapsqx{u}{mp}{2}{2}{2}
+        \strdmaplabel{mp Left}{}{\texttt{fmap}}
+        \strdbranch{mp}{fab} \strdsidelabel{fab Main}{}{f\pair{a}{b}}
+        \strdcellnode{fab Main End}{\phi}
+        \strdsidelabel{fab Left}{}{fb}
+        \strdsidelabel{fab Right}{}{fa}
+    }
+}
+
+% applicative from monoidal
+\myin[preview,math,aligned]{
+    & \myitem 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{fa} 
+        \strdmid{u}{a} \strdsidelabel{a}{}{a}
+        \strdcellnode{a End}{a}
+        \strdcellnode{u End}{\texttt{pure}}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{fa} 
+        \strdmid{u}{a} \strdsidelabel{a}{}{a}
+        \strdcellnode{a End}{a}
+        \strdmapsqx{u}{mp}{1.5}{1}{1} \strdmaplabel{mp Left}{}{f}
+    } \\
+    & \myitem
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{fb} 
+        \strdcellnode{u End}{\texttt{<*>}}
+        \strduse{left}{u}{l} \strdsidelabel{l}{}{fa}
+        \strdright{u}{r} \strdsidelabel{r}{}{f(a\texttt{\to}b)}
+    } \mydefeq 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{fb} 
+        \strdmid{u}{c Main} \strdsidelabel{c Main}{}{b}
+        \strdleft{c Main}{c Left}
+        \strdroad{right}{c Main}{c Right}
+        \strdcellnode{c Main End}{\texttt{\$}}
+        \strdsidelabel{c Left}{}{a}
+        \strdroadlabel{c Right}{a}{b}
+        \strdmid{c Left}{fb} \strdsidelabel{fb}{}{fa}
+        \strdmid{c Right}{fa} \strdsidelabel{fa}{}{f(a \texttt{\to} b)}
+        \strdmapsqx{u}{mp}{2}{2}{2}
+        \strdmaplabel{mp Left}{}{f}
+    } 
+}
+
+\myin[preview,math,aligned]{
+    & \myitem 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{fc} 
+        \strdbranch{u}{c} \strdsidelabel{c Main}{}{c}
+        \strdcellnode{c Main End}{h}
+        \strdsidelabel{c Left}{}{b}
+        \strdsidelabel{c Right}{}{a}
+        \strdmid{c Left}{fb} \strdsidelabel{fb}{}{fb}
+        \strdmid{c Right}{fa} \strdsidelabel{fa}{}{fa}
+        \strdmapsqx{u}{mp}{2}{2.4}{2}
+        \strdmaplabel{mp Left}{}{\texttt{liftA2}}
+        \mycomment{\strdbranch{\strdorigin}{u} \strdsidelabel{u Main}{}{fc}
+        \strdsidelabel{u Left}{}{fb}
+        \strdsidelabel{u Right}{}{fc}
+        \strdcellnode{u Main End}{\texttt{liftA2}\>h}
+        }
+    } \mydefeq
+    \strdin[gathered]{
+        \strdbranch{\strdorigin}{u} \strdsidelabel{u Main}{}{fc} 
+        \strdcellnode{u Main End}{\texttt{<*>}}
+    %    \strdsidelabel{u Left}{}{fb}
+        \strdleft{u Right}{ul} \strdsidelabel{ul End}{}{fa}
+        \strdroad{right}{u Right}{ur} \strdroadlabel{ur}{a}{b\texttt{\to}c}
+        \strdcellnode{ur End}{h}
+        \strdcellnode{ur Start}{\texttt{fmap}}
+        \strdsidelabel{u Right}{}{f(b \texttt{\to}c)}
+        \strdmid{u Left}{fb} 
+        \strdyhalf{\strdmid{ul}{ull}}
+        \strdyhalf{\strdmid{fb}{fbb}}
+        \strdsidelabel{fb}{}{fb}
+    } = 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{fc} 
+        \strdbranch{u}{c} \strdsidelabel{c Main}{}{c}
+        \strdcellnode{c Main End}{h}
+        \strdsidelabel{c Left}{}{b}
+        \strdsidelabel{c Right}{}{a}
+        \strdmid{c Left}{fb} \strdsidelabel{fb}{}{fb}
+        \strdmid{c Right}{fa} \strdsidelabel{fa}{}{fa}
+        \strdmapsqx{u}{mp}{2}{2}{2}
+        \strdmaplabel{mp Left}{}{f}
+    }
+}
+
+\end{document}

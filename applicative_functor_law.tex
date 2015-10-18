@@ -1,0 +1,117 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\newcommand*{\pair}[2]{\texttt{(}#1\texttt{,}#2\texttt{)}}
+
+\myin[preview,math,aligned]{
+    % identity
+    & \myitem 
+    \strdin[gathered]{
+        \strdbranch{\strdorigin}{u} \strdsidelabel{u Main}{}{fa} 
+        \strdcellnode{u Main End}{\texttt{<*>}}
+%        \strdsidelabel{u Left}{}{fb}
+        \strdroad{mid}{u Right}{ur} \strdroadlabel{ur}{}{a}
+        \strddeadend{ur}
+        \strdcellnode{ur Start}{\texttt{pure}}
+        \strdsidelabel{u Right}{}{f(a \texttt{\to}a)}
+   %     \strdmid{u Left}{fb}
+        \strdsidelabel{u Left}{}{fa}
+    } = 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{fa} 
+    } \\
+    % homomorphism
+    & \myitem 
+    \strdin[gathered]{
+        \strdbranch{\strdorigin}{u} \strdsidelabel{u Main}{}{fb}
+        \strdsidelabel{u Left}{}{fa} \strdsidelabel{u Right}{}{f(a\texttt{\to}b)}
+        \strdcellnode{u Left End}{\texttt{pure}}
+        \strdcellnode{u Right End}{\texttt{pure}}
+        \strdmid{u Left}{vl} \strdsidelabel{vl}{}{a} 
+        \strdroad{mid}{u Right}{vr} \strdroadlabel{vr}{a}{b} 
+        \strdcellnode{vr End}{f}
+        \strdcellnode{u Main End}{\texttt{<*>}}
+    } = 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{fb}
+        \strdcellnode{u End}{\texttt{pure}}
+        \strdmid{u}{b} \strdsidelabel{b}{}{b}
+        \strdcellnode{b End}{f} \strdmid{b}{a}
+        \strdsidelabel{a}{}{a}
+    } \\
+    % interchange
+    & \myitem 
+    \strdin[gathered]{
+        \strdbranch{\strdorigin}{u} \strdsidelabel{u Main}{}{fb}
+        \strdsidelabel{u Left}{}{fa}
+        \strdcellnode{u Left End}{\texttt{pure}}
+        \strdmid{u Left}{vl} \strdsidelabel{vl}{}{a}
+        \strdcellnode{vl End}{y}
+        \strdcellnode{u Main End}{\texttt{<*>}}
+     %   \strdmidex{u Right}{ur}
+        \strdsidelabel{u Right}{}{f(a\texttt{\to}b)}
+    } =
+    \strdin[gathered]{
+        \strdxscale{1.5}{\strdbranch{\strdorigin}{u}} \strdsidelabel{u Main}{}{fb}
+        \strdcellnode{u Main End}{\texttt{<*>}}
+       % \strdsidelabel{u Left}{}{f(a\texttt{\to}b)}
+        \strdsidelabel{u Right}{}{f((a\texttt{\to}b)\texttt{\to}b)}
+        \strdcellnode{u Right End}{\texttt{pure}}
+        \strdroad{mid}{u Right}{abb} \strdroadlabel{abb}{a\texttt{\to}b}{b}
+        \strdroadrshifted{\strdmid}{abb}{b} \strdsidelabel{b}{}{b}
+        \strdcellnode{b End}{\texttt{\$}}
+        \strdleft{b}{a} \strdsidelabel{a}{}{a}
+        \strdcellnode{a End}{y}
+        \strdroad{right}{b}{ab} \strdroadlabel{ab End}{a}{b}
+        \strdroadrshifted{\strdbijsqx}{abb}{bj}{2.5}{2}{2}
+        \strdyhalf{\strdroad{mid}{ab}{abx}}
+   %     \strdmid{u Left}{ul}
+   %     \strdmid{ul}{ull}
+   %     \strdmidex{ull}{ulll}
+        \strdsidelabel{u Left}{}{f(a\texttt{\to}b)}
+    } \\
+    % composition
+    & \myitem
+    \strdin[gathered]{
+        \strdbranch{\strdorigin}{u} \strdsidelabel{u Main}{}{fc}
+        \strdcellnode{u Main End}{\texttt{<*>}}
+        \strdsidelabel{u Left}{}{fb} \strdsidelabel{u Right}{}{f(b\texttt{\to}c)}
+        \strdcap{u Left}{u2} \strdsidelabel{u2 Left}{}{fa} \strdsidelabel{u2 Right}{}{f(a \texttt{\to} b)}
+        \strdcellnode{u2 Start}{\texttt{<*>}}
+    } =
+    \strdin[gathered]{
+        \strdxscale{1.2}{\strdbranch{\strdorigin}{u}} \strdsidelabel{u Main}{}{fc}
+        \strdcellnode{u Main End}{\texttt{<*>}}
+        \strdsidelabel{u Left}{}{fa} \strdsidelabel{u Right}{}{f(a\texttt{\to}c)}
+        \strdxscale{1.2}{\strdcap{u Right}{u2}} \strdsidelabel{u2 Left}{}{f(a\texttt{\to}b)} \strdsidelabel{u2 Right}{}{f((a \texttt{\to} b)\texttt{\to}(a\texttt{\to}c))}
+        \strdcellnode{u2 Start}{\texttt{<*>}}
+        \strdxscale{1.2}{\strdcap{u2 Right}{u3}} \strdsidelabel{u3 Right}{}{f((b\texttt{\to}c)\texttt{\to}(a\texttt{\to}b)\texttt{\to}(a\texttt{\to}c))}
+        \strdsidelabel{u3 Left}{}{f(b\texttt{\to}c)}
+        \strdcellnode{u3 Start}{\texttt{<*>}}
+        \strdcellnode{u3 Right End}{\texttt{pure}}
+        \strdroad{mid}{u3 Right}{u4} \strdroadlabel{u4}{b\texttt{\to}c}{(a\texttt{\to}b)\texttt{\to}(a\texttt{\to}c)}
+        \strdcellnode{u4 End}{\texttt{.}}
+    } \\
+    % fmap-pure
+    & \myitem
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{fb}
+        \strdcellnode{u End}{\texttt{fmap}}
+        \strdleft{u}{ul} \strdsidelabel{ul}{}{fa}
+        \strdroad{right}{u}{ur} \strdroadlabel{ur}{a}{b}
+    } =
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{fb}
+        \strdcellnode{u End}{\texttt{<*>}}
+        \strdleft{u}{ul} \strdsidelabel{ul}{}{fa}
+        \strdright{u}{ur} \strdsidelabel{ur}{}{f(a\texttt{\to}b)}
+        \strdcellnode{ur End}{\texttt{pure}}
+        \strdroad{mid}{ur}{v} \strdroadlabel{v}{a}{b}
+    }
+}
+
+\end{document}

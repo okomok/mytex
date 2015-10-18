@@ -67,9 +67,9 @@
 %   A string 's' is a triple of nodes 's Start', 's' and 's End'.
 
 \newcommand*{\strdrange}[4]{%
-    \node[strd coord] (#1 Start) at (#2) {};
-    \node[strd coord] (#1) at (#3) {};
-    \node[strd coord] (#1 End) at (#4) {};%
+    \node[strd coord] (#4 Start) at (#1) {};
+    \node[strd coord] (#4) at (#2) {};
+    \node[strd coord] (#4 End) at (#3) {};%
 }
 
 \newcommand*{\strdcoord}[2]{%
@@ -127,6 +127,11 @@
     \draw[strd draw]{
         (#2 Start) -- (#2 End)
     };%
+}
+
+\newcommand*{\strdmidex}[2]{%
+    \strdmid{#1}{#2}
+    \strdyhalf{\strdmid{#2}{#2 Ex}}%
 }
 
 \newcommand*{\strdunleft}[2]{%
@@ -452,6 +457,11 @@
 }
 \newcommand*{\strdrchange}{\strdflipped{lchange}}
 
+\newcommand*{\strdtwo}[3]{%
+    \strduse{#1}{#2}{#3 First}
+    \strduse{#1}{#3 First}{#3 Second}
+    \strdrange{#3 First Start}{#3 First End}{#3 Second End}{#3}
+}
 
 
 % roads
