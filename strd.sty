@@ -308,10 +308,10 @@
     }%
 }
 \newcommand*{\strdbijsqx}[5]{%
-    \strdscale{#4}{#3}{\strdlbijsq{#1}{#2 Left}}
-    \strdscale{#5}{#3}{\strdrbijsq{#1}{#2 Right}}
-    \strdyscale{#3}{\strdjump{#1}{#2}}
-} %
+    \strdscale{#2}{#1}{\strdlbijsq{#4}{#5 Left}}
+    \strdscale{#3}{#1}{\strdrbijsq{#4}{#5 Right}}
+    \strdyscale{#1}{\strdjump{#4}{#5}}%
+} 
 
 \newcommand*{\strdlmapsq}[2]{%
     \strdonlayer{strd labellayer}{
@@ -329,10 +329,10 @@
     }%
 }
 \newcommand*{\strdmapsqx}[5]{%
-    \strdscale{#4}{#3}{\strdlmapsq{#1}{#2 Left}}
-    \strdscale{#5}{#3}{\strdrmapsq{#1}{#2 Right}}
-    \strdyscale{#3}{\strdjump{#1}{#2}}
-} %
+    \strdscale{#2}{#1}{\strdlmapsq{#4}{#5 Left}}
+    \strdscale{#3}{#1}{\strdrmapsq{#4}{#5 Right}}
+    \strdyscale{#1}{\strdjump{#4}{#5}}%
+}
 
 
 % labels
@@ -530,12 +530,11 @@
     \strdroadlshift{#2}{#2 Shifted}
     \strduse{#1}{#2 Shifted}{#3}%
 }
-\newcommand*{\strdroadrshifted}[3]{%
-    \strdroadrshift{#2}{#2 Shifted}
-    \strduse{#1}{#2 Shifted}{#3}%
-}
-% number of arguments unknown, so flip can't determine the scope...
-%\newcommand*{\strdroadrshifted}[3]{\strdflip{\strdroadlshifted{#1}{#2}{#3}}}
+%\newcommand*{\strdroadrshifted}[3]{%
+%    \strdroadrshift{#2}{#2 Shifted}
+%    \strduse{#1}{#2 Shifted}{#3}%
+%}
+\newcommand*{\strdroadrshifted}[3]{\strdflip{\strdroadlshifted{#1}{#2}{#3}}}
 
 
 

@@ -24,8 +24,8 @@
         \strdxscale{1.3}{\strdparallel{u}{bf}} \strdsidelabel{bf Left}{}{b} \strdsidelabel{bf Right}{}{b}
         \strdcellnode{bf Left End}{z\strdrlap{,}} \strdcellnode{bf Right End}{f}
         \strdmid{bf Right}{a} \strdsidelabel{a}{}{a\texttt{\times}b}
-        \strdbijsqx{u0}{bo}{4}{3}{3}
-        \strdbijsqx{u}{bi}{2}{2}{2}
+        \strdbijsqx{4}{3}{3}{u0}{bo}
+        \strdbijsqx{2}{2}{2}{u}{bi}
         \strdmid{bi}{w} \strdsidelabel{w}{}{\texttt{()+}a \texttt{\times} b}
         \strdfamilylabel{bo Right}{\mu}{}
         %\strdfamilylabel{bi Right}{\texttt{+}}{}
@@ -75,7 +75,7 @@
     } \mydefeq 
     \strdin[gathered]{
         \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\lb b \rb}
-        \strdroadlshifted{\strdbijsqx}{u}{b}{3.5}{2}{3.6} 
+        \strdroadlshifted{\strdbijsqx{3.5}{2}{3.6}}{u}{b} 
         \strdmid{b}{v} \strdsidelabel{v}{}{\lb a \rb}
         \strdroadlshifted{\strdroad{mid}}{u}{ab} \strdroadlabel{ab}{\lb a \rb}{\lb b \rb}
         \strdbijnode{ab End}{\texttt{foldr}}
