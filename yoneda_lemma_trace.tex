@@ -1,0 +1,215 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\newcommand*{\pair}[2]{\texttt{(}#1\texttt{,}#2\texttt{)}}
+
+% uncurried functoriality
+\myin[preview,math,aligned]{
+    & \myitem 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fa} 
+        \strdcellnode{u End}{F}
+        \strdleft{u}{l} \strdsidelabel{l}{}{Fa}
+        \strdroad{right}{u}{r} \strdroadlabel{r}{}{a}
+        \strddeadend{r}
+    } = 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fa} 
+    } \\
+    & \myitem
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fc} 
+        \strdcellnode{u End}{F}
+        \strdleft{u}{l} \strdsidelabel{l}{}{Fb}
+        \strdroad{right}{u}{r} \strdroadlabel{r}{b}{c}
+        \strdleft{l}{ll} \strdsidelabel{ll}{}{Fa}
+        \strdroad{right}{l}{lr} \strdroadlabel{lr}{a}{b}
+        \strdcellnode{l End}{F}
+    } =
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fc} 
+        \strdcellnode{u End}{F}
+        \strdleft{u}{l} \strdsidelabel{l}{}{Fa}
+        \strdroad{right}{u}{r} \strdroadlabel{r}{a}{c}
+        \strdroad{cap}{r}{r2} \strdroadlabel{r2 Left}{}{b}
+    } \\
+}
+
+% A naturality 
+\myin[preview,math,aligned]{
+    & \myitem 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fb}
+        \strdleft{u}{ul} \strdsidelabel{ul}{}{Fa}
+        \strdcellnode{ul End}{\alpha}
+        \strdroad{mid}{ul}{ka} \strdroadlabel{ka}{k}{a}
+        \strdroad{right}{u}{ur} \strdroadlabel{ur}{a}{b}
+        \strdcellnode{u End}{F}
+    } =
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fb}
+        \strdcellnode{u End}{\alpha}
+        \strdroad{branch}{u}{b} \strdroadlabel{b Main}{k}{b}
+        \strdroadlabel{b Left}{}{a}
+    }
+}
+
+\newcommand*{\facircle}[1]{
+        \strdleft{#1}{ul} \strdsidelabel{ul}{}{Fa}
+        \strdcellnode{ul End}{\alpha}
+        \strdroad{unleft}{ul}{ka} %\strdroadlabel{ka}{k}{a}
+        \strdroad{right}{#1}{ur} \strdroadlabel{ur End}{a}{k}
+        \strdcellnode{#1 End}{F}
+        \strdroad{unright}{ur} 
+}
+
+% Yoneda bijection 
+\myin[preview,math,aligned]{
+    & \myitem 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fa}
+        \strdcellnode{u End}{\alpha}
+        \strdroad{mid}{u}{b} \strdroadlabel{b}{k}{a}
+    } \mapsto
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u}
+        \strdsidelabel{u}{}{Fk}
+        \facircle{u}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fk}
+        \strdcellnode{u End}{\alpha}
+        \strdroad{mid}{u}{b} \strdroadlabel{b}{}{k}
+        \strddeadend{b}
+    } \\
+    & \myitem 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fk}
+        \strdcellnode{u End}{\eta}
+    } \mapsto
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fa} 
+        \strdcellnode{u End}{F}
+        \strdleft{u}{l} \strdsidelabel{l}{}{Fk}
+        \strdroad{right}{u}{r} \strdroadlabel{r}{k}{a}
+        \strdcellnode{l End}{\eta}
+    }
+}
+
+% Propositions 
+\myin[preview,math,aligned]{
+    & \myitem 
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{a}{a}
+        \strdroad{circle}{u}{v}
+        \strdroadlabel{v Left}{}{b}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdroad{branch}{\strdorigin}{u} \strdroadlabel{u Main}{a}{a}
+        \strdroad{cup}{u}{v}
+        \strdroadlabel{v Left}{a}{b}
+        \strdroadlabel{u Left}{a}{b}
+        \strdroadlabel{u Right End}{b}{a}
+        \strdcellnode{u Main End}{\operatorname{Hom}(a,\mydash)}
+        \strdcellnode{v Left Start}{1}
+    } =
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{}{a}
+        \strddeadend{u}
+    } \\
+    & \myitem
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u2}
+        \strdroad{circle}{u2}{c}
+        \strdcoord{c Right}{cr} 
+        \strdroad{right}{cr}{v} \strdroadlabel{v}{a}{b}
+        \strdroadlabel{u2}{a}{b}
+        \strdroadlabel{c Left}{}{c}
+    } =
+    \strdin[gathered]{
+        \strdroad{branch}{\strdorigin}{u2}
+        \strdroadlabel{u2 Right}{a}{b}
+        \strdroad{circle}{u2 Left}{c}
+        \strdroadlabel{u2 Main}{a}{b}
+        \strdroadlabel{c Left}{}{c}
+    } = 
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{a}{b}
+    }
+}
+
+% Proof
+\myin[preview,math,aligned]{
+    & \myitem 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fa} 
+        \strdcellnode{u End}{F}
+        \strdleft{u}{l} \strdsidelabel{l}{}{Fk}
+        \strdroad{right}{u}{r} \strdroadlabel{r}{k}{a}
+        \facircle{l}
+    } = 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fa} 
+        \strdcellnode{u End}{F}
+        \strdleft{u}{l} \strdsidelabel{l}{}{Fa}
+        \strdroad{right}{u}{r} %\strdroadlabel{r}{}{a} 
+        \strdroadlabel{r End}{a}{}
+        \strdcellnode{l End}{\alpha}
+        \strdroad{unleft}{l}{ad} %\strdroadlabel{ad}{k}{a}
+        \strdroad{unright}{r}{rl}
+        \strdroad{right}{r}{rr} \strdroadlabel{rr}{k}{a}
+    } = 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fa} 
+        \strdcellnode{u End}{\alpha}
+        \strdroad{mid}{u}{u2}
+        \strdroad{circle}{u2}{c}
+        \strdcoord{c Right}{cr} 
+        \strdroad{right}{cr}{v} \strdroadlabel{v}{k}{a}
+        \strdroadlabel{u2}{k}{a}
+        \strdroadlabel{c Left}{}{a}
+    } = 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fa}
+        \strdcellnode{u End}{\alpha}
+        \strdroad{mid}{u}{b} \strdroadlabel{b}{k}{a}
+    } \\
+    & \myitem
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fk}
+        \strdleft{u}{fa} \strdsidelabel{fa}{}{Fa}
+        \strdleft{fa}{fk} \strdsidelabel{fk}{}{Fk}
+        \strdcellnode{fk End}{\eta}
+        \strdroad{unleft}{fa}{ka} %\strdroadlabel{ka}{}{a}
+        \strdcellnode{u End}{F}
+        \strdcellnode{fa End}{F}
+        \strdroad{right}{u}{ak} \strdroadlabel{ak End}{a}{k}
+        \strdroad{unright}{ak}{ak2}
+    } =
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fk}
+        \strdleft{u}{fk} \strdsidelabel{fk}{}{Fk}
+        \strdcellnode{fk End}{\eta}
+        \strdroad{right}{u}{ka} \strdroadlabel{ka}{k}{k}
+        \strdroad{circle}{ka}{a} \strdroadlabel{a Right}{a}{}
+        \strdcellnode{u End}{F}
+    } =
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fk}
+        \strdleft{u}{fk} \strdsidelabel{fk}{}{Fk}
+        \strdcellnode{fk End}{\eta}
+        \strdroad{right}{u}{ka} \strdroadlabel{ka}{}{k}
+        \strddeadend{ka}
+        \strdcellnode{u End}{F}
+    } =
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fk}
+        \strdcellnode{u End}{\eta}
+    }
+}
+
+\end{document}
