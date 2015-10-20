@@ -1,7 +1,6 @@
 \ProvidesPackage{strd}
 
 \usepackage{tikz,lambda,mathtools}
-%\usepackage[active,tightpage]{preview}
 \usetikzlibrary{shapes,calc,decorations.markings,backgrounds,calc}
 
 
@@ -13,9 +12,7 @@
 % styles
 
 \tikzset{strd normaltextvaligned/.style={text height=1.9ex,text depth=0.65ex}}
-%\tikzset{strd normaltextvaligned/.style={}}
 \tikzset{strd scripttextvaligned/.style={text height=1.5ex,text depth=0.25ex}}
-%\tikzset{strd scripttextvaligned/.style={}}
 \tikzset{strd coord/.style={coordinate}}
 \tikzset{strd mathnodes/.style={execute at begin node=$,execute at end node=$}}
 \tikzset{strd none/.style={opacity=0,text opacity=0,fill opacity=0}}
@@ -23,7 +20,6 @@
 \tikzset{strd picture/.style={strd picturevaligned,strd mathnodes,very thin,rounded corners=2pt}}
 \tikzset{strd draw/.style={}}
 \tikzset{-<-/.style={decoration={markings,mark=at position .5 with {\arrow{<}}},postaction={decorate}}}
-\tikzset{nomorepostaction/.code={\let\tikz@postactions\pgfutil@empty}}
 
 
 % layers
@@ -86,16 +82,9 @@
 
 \newcommand*{\strdxunit}{0.5}
 \newcommand*{\strdyunit}{0.8}
-\newcommand*{\strdhalfxunit}{0.25}
-\newcommand*{\strdhalfyunit}{0.4}
+\newcommand*{\strdxhalfunit}{0.25}
+\newcommand*{\strdyhalfunit}{0.4}
 \newcommand*{\strdunitdiff}{0.3}
-\iffalse
-\newcommand*{\strdxunit}{0.63}
-\newcommand*{\strdyunit}{1.02}
-\newcommand*{\strdhalfxunit}{0.315}
-\newcommand*{\strdhalfyunit}{0.51}
-\newcommand*{\strdunitdiff}{0.39}
-\fi
 
 \newcommand*{\strdempty}[2]{%
     \node[strd coord] (#2) at (#1 End) {};
@@ -112,7 +101,7 @@
 \newcommand*{\strdleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2 Corner) at ($(#1 End)+(-\strdxunit,-\strdunitdiff)$) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-\strdxunit,-\strdhalfyunit)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-\strdxunit,-\strdyhalfunit)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(-\strdxunit,-\strdyunit)$) {};
     \draw[strd draw]{
         (#2 Start) parabola (#2 Corner) -- (#2 End)
@@ -122,7 +111,7 @@
 
 \newcommand*{\strdmid}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(0,-\strdhalfyunit)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(0,-\strdyhalfunit)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(0,-\strdyunit)$) {};
     \draw[strd draw]{
         (#2 Start) -- (#2 End)
@@ -136,7 +125,7 @@
 
 \newcommand*{\strdunleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(0,-\strdhalfyunit)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(0,-\strdyhalfunit)$) {};
     \node[strd coord] (#2 Corner) at ($(#1 End)+(0,-\strdxunit)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(\strdxunit,-\strdyunit)$) {};
     \draw[strd draw]{
@@ -153,7 +142,7 @@
 
 \newcommand*{\strdhleft}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-\strdhalfxunit,0)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-\strdxhalfunit,0)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(-\strdxunit,0)$) {};
     \draw[strd draw]{
         (#2 Start) -- (#2 End)
@@ -172,7 +161,7 @@
 \newcommand*{\strdsubset}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-\strdxunit,-\strdunitdiff)$) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-\strdxunit,-\strdhalfyunit)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-\strdxunit,-\strdyhalfunit)$) {};
     \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-\strdxunit,-\strdxunit)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(0,-\strdyunit)$) {};
     \draw[strd draw]{
@@ -184,7 +173,7 @@
 \newcommand*{\strdlint}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-\strdxunit,-\strdunitdiff)$) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-\strdxunit,-\strdhalfyunit)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-\strdxunit,-\strdyhalfunit)$) {};
     \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-\strdxunit,-\strdxunit)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(-1,-\strdyunit)$) {};
     \draw[strd draw]{
@@ -204,7 +193,7 @@
 \newcommand*{\strdsqsubset}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
     \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-\strdxunit,0)$) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-\strdxunit,-\strdhalfyunit)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-\strdxunit,-\strdyhalfunit)$) {};
     \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-\strdxunit,-\strdyunit)$) {};
     \node[strd coord] (#2 End) at ($(#1 End)+(0,-\strdyunit)$) {};
     \draw[strd draw]{
@@ -224,7 +213,6 @@
 
 \tikzset{strd node/.style={font=\normalsize,very thin,solid,draw,fill=white,inner xsep=0.6pt,inner ysep=1.2pt}}
 \tikzset{strd nodelabel/.style={font=\normalsize,inner sep=0pt}}
-%\tikzset{strd cellnode/.style={strd node,rounded rectangle,rounded rectangle arc length=90,minimum height=9pt}}
 \tikzset{strd cellnode/.style={strd node,rectangle,minimum size=9pt}}
 \tikzset{strd bijnode/.style={strd node,thin,rectangle,sharp corners,minimum size=9pt}}
 \tikzset{strd isonode/.style={strd node,tape,tape bend height=2pt,minimum width=0pt,tape bend top=out and in,tape bend bottom=out and in}}
@@ -250,25 +238,10 @@
         \node[strd cellnode] (#1 Node) at (#1) {#2};
     }% 
 }
-\newcommand*{\strdcellnodewith}[3]{%
-    \strdonlayer{strd nodelayer}{
-        \node[strd cellnode,label={[strd nodelabel]right:#3{#2}}] (#1 Node) at (#1) {#2};
-    }% 
-}
 
 \newcommand*{\strdbijnode}[2]{%
     \strdonlayer{strd nodelayer}{
         \node[strd bijnode] (#1 Node) at (#1) {#2};
-    }%
-}
-\newcommand*{\strdbijnodewith}[3]{%
-    \strdonlayer{strd nodelayer}{
-        \node[strd bijnode,label={[strd familylabel,xshift=2.5pt]below:\hphantom{#2}{#3}}] (#1 Node) at (#1) {#2};
-    }%
-}
-\newcommand*{\strdbijnodewithright}[3]{%
-    \strdonlayer{strd nodelayer}{
-        \node[strd bijnode,label={[strd familylabel,yshift=-2.5pt]right:#3}] (#1 Node) at (#1) {#2};
     }%
 }
 
@@ -339,7 +312,6 @@
 
 \tikzset{strd sidelabel/.style={font=\scriptsize,inner sep=0.2pt,strd scripttextvaligned}}
 \tikzset{strd familylabel/.style={font=\scriptsize,inner sep=0.4pt,inner ysep=0.8pt}}
-\tikzset{strd sqlabel/.style={font=\scriptsize,inner xsep=0.6pt,inner ysep=0.8pt}}
 \tikzset{strd endlabel/.style={font=\normalsize,inner sep=0.8pt,strd normaltextvaligned}}
 
 \newcommand*{\strdsidelabel}[3]{%
@@ -362,18 +334,10 @@
     }%
 }
 
-
 \newcommand*{\strdmaplabel}[3]{%
     \strdonlayer{strd labellayer}{
         \node[strd sidelabel,left] (#1 LeftLabel) at (#1) {#2};
         \node[strd sidelabel,right] (#1 RightLabel) at (#1) {\myvphantom{#2}#3};
-    }%
-}
-
-% removeme
-\newcommand*{\strdsqlabel}[2]{%
-    \strdonlayer{strd labellayer}{
-        \node[strd sqlabel,below] (#1 EndCorner BelowLabel) at (#1 EndCorner) {#2};
     }%
 }
 
@@ -530,24 +494,11 @@
     \strdroadlshift{#2}{#2 Shifted}
     \strduse{#1}{#2 Shifted}{#3}%
 }
-%\newcommand*{\strdroadrshifted}[3]{%
-%    \strdroadrshift{#2}{#2 Shifted}
-%    \strduse{#1}{#2 Shifted}{#3}%
-%}
 \newcommand*{\strdroadrshifted}[3]{\strdflip{\strdroadlshifted{#1}{#2}{#3}}}
-
 
 
 % utilities
 
 \newcommand*{\strdrlap}[1]{\mathrlap{\smash{\,#1}}}
-
-%remove me
-\newcommand*{\strdfamily}[2]{%
-    \left(#2\right)_{
-        \mathrlap{\!\!\!#1}
-    }%
-}
-
 \newcommand*{\strdfamilyarg}[1]{{\!\!\!#1}}
 
