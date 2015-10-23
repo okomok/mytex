@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage{strd,cat,my}
 \usepackage[active,tightpage]{preview}
+\usepackage{amssymb}
 
 
 \begin{document}
@@ -64,7 +65,7 @@
         \strdroad{unleft}{ul}{ka} %\strdroadlabel{ka}{k}{a}
         \strdroad{right}{#1}{ur} \strdroadlabel{ur End}{a}{k}
         \strdcellnode{#1 End}{F}
-        \strdroad{unright}{ur} 
+        \strdroad{unright}{ur}{ww} 
 }
 
 % Yoneda bijection 
@@ -75,11 +76,6 @@
         \strdcellnode{u End}{\alpha}
         \strdroad{mid}{u}{b} \strdroadlabel{b}{k}{a}
     } \mapsto
-    \strdin[gathered]{
-        \strdmid{\strdorigin}{u}
-        \strdsidelabel{u}{}{Fk}
-        \facircle{u}
-    } \mydefeq
     \strdin[gathered]{
         \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fk}
         \strdcellnode{u End}{\alpha}
@@ -100,8 +96,76 @@
     }
 }
 
-% Propositions 
+% Notations 
 \myin[preview,math,aligned]{
+    & \myitem
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u}
+        \strdsidelabel{u}{}{Fk}
+        \facircle{u}
+%        \strdleft{ul}{v} \strdsidelabel{v}{}{l}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fk}
+        \strdcellnode{u End}{\alpha}
+        \strdroad{mid}{u}{b} \strdroadlabel{b}{}{k}
+        \strddeadend{b}
+%        \strdleft{u}{v} \strdsidelabel{v}{}{l}
+    } \\
+    & \myitem
+\iffalse
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fb} 
+        \strdcellnode{u End}{F}
+        \strdleft{u}{l} \strdsidelabel{l}{}{Fa}
+        \strdroad{right}{u}{r} %\strdroadlabel{r}{}{a} 
+        \strdroadlabel{r End}{a}{}
+        \strdcellnode{l End}{\alpha}
+        \strdroad{unleft}{l}{ad} %\strdroadlabel{ad}{k}{a}
+        \strdroad{unright}{r}{rl}
+        \strdcoord{rl}{rd}
+        \strdroad{right}{rd}{rr} \strdroadlabel{rr}{k}{b}
+    } \mydefeq 
+\fi
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fb} 
+        \strdcellnode{u End}{F}
+        \strdleft{u}{l} \strdsidelabel{l}{}{Fa}
+        \strdroad{right}{u}{r} %\strdroadlabel{r}{}{a} 
+        \strdroadlabel{r End}{a}{}
+        \strdcellnode{l End}{\alpha}
+        \strdroad{unleft}{l}{ad} %\strdroadlabel{ad}{k}{a}
+        \strdroad{unright}{r}{rl}
+        \strdroad{mid}{ad}{rr} \strdroadlabel{rr}{k}{b}
+%        \strdleft{l}{v} \strdsidelabel{v}{}{l}
+    } \mydefeq 
+\iffalse
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fb} 
+        \strdcellnode{u End}{F}
+        \strdleft{u}{l} \strdsidelabel{l}{}{Fa}
+        \strdroad{right}{u}{r} %\strdroadlabel{r}{}{a} 
+        \strdroadlabel{r End}{a}{}
+        \strdcellnode{l End}{\alpha}
+        \strdroad{unleft}{l}{ad} %\strdroadlabel{ad}{k}{a}
+        \strdroad{unright}{r}{rl}
+        \strdcoord{ad}{adn}
+        \strdroad{left}{adn}{rr} \strdroadlabel{rr}{k}{b}
+    } \mydefeq 
+\fi
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fb} 
+        \strdcellnode{u End}{F}
+        \strdleft{u}{l} \strdsidelabel{l}{}{Fk}
+        \strdroad{right}{u}{r} \strdroadlabel{r}{k}{b}
+        \strdleft{l}{ul} \strdsidelabel{ul}{}{Fa}
+        \strdcellnode{ul End}{\alpha}
+        \strdroad{unleft}{ul}{ka} %\strdroadlabel{ka}{k}{a}
+        \strdroad{right}{l}{ur} \strdroadlabel{ur End}{a}{k}
+        \strdcellnode{l End}{F}
+        \strdroad{unright}{ur}{ww} 
+%        \strdleft{ul}{v} \strdsidelabel{v}{}{l}
+    } \\ 
     & \myitem 
     \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{a}{a}
@@ -116,20 +180,31 @@
         \strdroadlabel{u Right End}{b}{a}
         \strdcellnode{u Main End}{\operatorname{Hom}(a,\mydash)}
         \strdcellnode{v Left Start}{1}
-    } =
+    } \\
+}
+
+% Consistency
+\myin[preview,math,aligned]{
+    & \myitem
+    \strdin[gathered]{
+        \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{a}{a}
+        \strdroad{circle}{u}{v}
+        \strdroadlabel{v Left}{}{b}
+    } = _{\lbrace \text{Yoneda} \rbrace} 
     \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{}{a}
         \strddeadend{u}
-    } \\
+    } \\ 
     & \myitem
     \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{u2}
         \strdroad{circle}{u2}{c}
         \strdcoord{c Right}{cr} 
-        \strdroad{right}{cr}{v} \strdroadlabel{v}{a}{b}
         \strdroadlabel{u2}{a}{b}
         \strdroadlabel{c Left}{}{c}
-    } =
+        \strdroad{mid}{c}{v} \strdroadlabel{v}{a}{b}
+    } = _{\lbrace \text{Yoneda} \rbrace} 
+\iffalse
     \strdin[gathered]{
         \strdroad{branch}{\strdorigin}{u2}
         \strdroadlabel{u2 Right}{a}{b}
@@ -137,11 +212,72 @@
         \strdroadlabel{u2 Main}{a}{b}
         \strdroadlabel{c Left}{}{c}
     } = 
+\fi
     \strdin[gathered]{
         \strdroad{mid}{\strdorigin}{u} \strdroadlabel{u}{a}{b}
-    }
+    } \\
+    & \myitem
+\iffalse
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fb} 
+        \strdcellnode{u End}{F}
+        \strdleft{u}{l} \strdsidelabel{l}{}{Fk}
+        \strdroad{right}{u}{r} \strdroadlabel{r}{k}{b}
+        \strdleft{l}{ul} \strdsidelabel{ul}{}{Fa}
+        \strdcellnode{ul End}{\alpha}
+        \strdroad{unleft}{ul}{ka} %\strdroadlabel{ka}{k}{a}
+        \strdroad{right}{l}{ur} \strdroadlabel{ur End}{a}{k}
+        \strdcellnode{l End}{F}
+        \strdroad{unright}{ur} 
+    } 
+    = _ {\lbrace \text{naturality in } k \rbrace} 
+\fi
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fb} 
+        \strdcellnode{u End}{F}
+        \strdleft{u}{l} \strdsidelabel{l}{}{Fa}
+        \strdroad{right}{u}{r} %\strdroadlabel{r}{}{a} 
+        \strdroadlabel{r End}{a}{}
+        \strdcellnode{l End}{\alpha}
+        \strdroad{unleft}{l}{ad} %\strdroadlabel{ad}{k}{a}
+        \strdroad{unright}{r}{rl}
+        \strdroad{mid}{ad}{rr} \strdroadlabel{rr}{k}{b}
+    } 
+    = _ {\lbrace \text{Yoneda} \rbrace} 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fb}
+        \strdcellnode{u End}{\alpha}
+        \strdroad{mid}{u}{b} \strdroadlabel{b}{k}{b}
+    } 
+    = _ {\lbrace \text{above} \rbrace} 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fb}
+        \strdcellnode{u End}{\alpha}
+        \strdroad{mid}{u}{u2}
+        \strdroad{circle}{u2}{b} 
+        \strdroadlabel{b Right}{a}{}
+        \strdroad{mid}{b}{v}
+        \strdroadlabel{v}{k}{b}
+    } \\
+    & \myitem
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fk}
+        \strdleft{u}{fa} \strdsidelabel{fa}{}{Fa}
+        \strdleft{fa}{fk} \strdsidelabel{fk}{}{Fk}
+        \strdcellnode{fk End}{\eta}
+        \strdroad{unleft}{fa}{ka} %\strdroadlabel{ka}{}{a}
+        \strdcellnode{u End}{F}
+        \strdcellnode{fa End}{F}
+        \strdroad{right}{u}{ak} \strdroadlabel{ak End}{a}{k}
+        \strdroad{unright}{ak}{ak2}
+    } = _ {\lbrace \text{Yoneda} \rbrace}
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{Fk}
+        \strdcellnode{u End}{\eta}
+    } \\
 }
 
+\iffalse
 % Proof
 \myin[preview,math,aligned]{
     & \myitem 
@@ -211,5 +347,5 @@
         \strdcellnode{u End}{\eta}
     }
 }
-
+\fi
 \end{document}

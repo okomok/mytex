@@ -1,10 +1,11 @@
 \documentclass{article}
-\usepackage{strd,cat,my}
+\usepackage{strd,cat,my,hask}
 \usepackage[active,tightpage]{preview}
 
 
 \begin{document}
 
+% universality
 \myin[preview,math,aligned]{
     \myitem
     \strdin[gathered]{
@@ -15,7 +16,7 @@
     \strdin[gathered]{
         \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{z}
         \strdxscale{1.2}{\strduse{parallel}{u}{w}} \strdsidelabel{w Left}{}{z} \strdsidelabel{w Right}{}{z}
-        \strdbijsqx{u}{b}{2}{1.5}{1.5} 
+        \strdbijsqx{2}{1.5}{1.5}{u}{b} 
         \strdmid{b}{v} \strdsidelabel{v}{}{x\texttt{+}y}
         \strdcellnode{w Right End}{g} % \strdunfamilylabel{b Right}{}{\texttt{+}}
         \strdcellnode{w Left End}{f\strdrlap{,}}
@@ -48,7 +49,57 @@
         \strdmid{u}{v} \strdsidelabel{v}{}{y}
     } \end{aligned} \right. 
 }
+   
+% props
+\myin[preview,math,aligned]{
+    & \myitem
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\haskcoprod{x}{y}}
+        \strdcellnode{u End}{\operatorname{in}}
+        \strdmid{u}{v} \strdsidelabel{v}{}{x}
+    } =
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{y}
+        \strdrshifted{\strdtwo{mid}}{\strdorigin}{v}
+        \strdsidelabel{v First End}{}{x}
+        \strdcellnode{u End}{\operatorname{!}}
+    } \\
+    & \myitem
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\haskcoprod{x}{y}}
+        \strdcellnode{u End}{\operatorname{in}}
+        \strdmid{u}{v} \strdsidelabel{v}{}{y}
+    } =
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{x}
+        \strdlshifted{\strdtwo{mid}}{\strdorigin}{v}
+        \strdsidelabel{v First End}{}{y}
+        \strdcellnode{u End}{\operatorname{!}}
+        \strdnone{\strdcellnode{v}{\operatorname{!}}}
+    } \\
+    & \myitem
+    \strdin[gathered]{
+        \strdbranch{\strdorigin}{u} \strdsidelabel{u Main}{}{z} \strdsidelabel{u Left}{}{z} \strdsidelabel{u Right}{}{z}
+        \strdcellnode{u Main End}{\Delta}
+        \strdcellnode{u Left End}{g} \strdcellnode{u Right End}{f}
+        \strdmid{u Left}{ul} \strdsidelabel{ul}{}{y}
+        \strdmid{u Right}{ur} \strdsidelabel{ur}{}{x}
+    } =
+    \strdin[gathered]{
+        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{z}
+        \strdxscale{1.2}{\strduse{parallel}{u}{w}} \strdsidelabel{w Left}{}{z} \strdsidelabel{w Right}{}{z}
+        \strdbijsqx{2}{1.5}{1.5}{u}{b} 
+        \strdmid{b}{v} \strdsidelabel{v}{}{x\texttt{+}y}
+        \strdcellnode{w Right End}{g} % \strdunfamilylabel{b Right}{}{\texttt{+}}
+        \strdcellnode{w Left End}{f\strdrlap{,}}
+        \strdxscale{1.2}{\strdparallel{w}{z}} \strdsidelabel{z Left}{}{x} \strdsidelabel{z Right}{}{y}
+        \strdmaplabel{b Left}{}{[}
+        \strdmaplabel{b Right}{]}{}
+    }
+}
     
+
+% maybe monad
 \myin[preview,math,aligned]{
     & \myitem \strdin[gathered]{
         \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\texttt{()+}a}
@@ -62,23 +113,27 @@
     } \\ 
     & \myitem \strdin[gathered]{
         \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\texttt{()+}b}
-        \strdbijnode{u End}{\texttt{>>=}}
+        \strdcellnode{u End}{\texttt{>>=}}
         \strdroad{left}{u}{v} \strdroadlabel{v}{a}{\texttt{()+}b}
         \strduse{right}{u}{w} \strdsidelabel{w End}{}{\texttt{()+}a}
-        \strdbijnode{v End}{f}
+        \strdcellnode{v End}{f}
         \strdyhalf{\strdmid{w}{ww}}
     } \mydefeq 
     \strdin[gathered]{
-        \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{\texttt{()+}b}
-        \strdxscale{2}{\strduse{parallel}{u}{w}} \strdsidelabel{w Left}{}{\texttt{()+}b} \strdsidelabel{w Right}{}{\texttt{()+}b}
-        \strdbijsqx{u}{b}{2}{2.7}{2.4} 
+        \strduse{mid}{\strdorigin}{u0} \strdsidelabel{u0}{}{\texttt{()+}b}
+        \strdbranch{u0}{u} \strdsidelabel{u Main}{}{\haskcoprod{\haskone}{b}}
+        \strdsidelabel{u Left}{}{\haskcoprod{\haskone}{b}} 
+        \strdsidelabel{u Right}{}{\haskcoprod{\haskone}{b}}
+        \strdcellnode{u Main End}{\Delta}
+        \strdcellnode{u Left End}{f} \strdcellnode{u Right End}{\texttt{Nothing}}
+        \strdmid{u Left}{ul} \strdsidelabel{ul}{}{a}
+        \strdmid{u Right}{ur} \strdsidelabel{ur}{}{\haskone}
+%
+        \strdbijsqx{3}{2}{2.8}{u0}{b} 
         \strdmid{b}{v} \strdsidelabel{v}{}{\texttt{()+}a}
-        \strdcellnode{w Right End}{f} %\strdunfamilylabel{b Right}{}{\texttt{+}}
-        \strdcellnode{w Left End}{\texttt{Nothing}\strdrlap{,}}
-        \strdmid{w Right}{z} \strdsidelabel{z Right}{}{a}
-        \strdmaplabel{b Left}{}{[}
-        \strdmaplabel{b Right}{]}{}
+        \strdsqlabel{b}{\texttt{+}}
     } \\ 
 }
+
 
 \end{document}

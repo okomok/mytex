@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage{strd,cat,my}
+\usepackage{strd,cat,my,hask}
 \usepackage[active,tightpage]{preview}
 
 
@@ -18,22 +18,24 @@
     } \\ 
     & \myitem \strdin[gathered]{
         \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{e\texttt{+}b}
-        \strdbijnode{u End}{\texttt{>>=}}
+        \strdcellnode{u End}{\texttt{>>=}}
         \strdroad{left}{u}{v} \strdroadlabel{v}{a}{e\texttt{+}b}
         \strduse{right}{u}{w} \strdsidelabel{w End}{}{e\texttt{+}a}
-        \strdbijnode{v End}{f}
+        \strdcellnode{v End}{f}
         \strdyhalf{\strdmid{w}{ww}}
     } \mydefeq 
     \strdin[gathered]{
         \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{e\texttt{+}b}
-        \strdxscale{1.8}{\strduse{parallel}{u}{w}} \strdsidelabel{w Left}{}{e\texttt{+}b} \strdsidelabel{w Right}{}{e\texttt{+}b}
-        \strdbijsqx{u}{b}{2}{2.2}{2.2} 
-        \strdmid{b}{v} \strdsidelabel{v}{}{e\texttt{+}a}
-        \strdcellnode{w Right End}{f} %\strdunfamilylabel{b Right}{}{\texttt{+}}
-        \strdcellnode{w Left End}{\texttt{Left}\strdrlap{,}}
-        \strdxscale{1.8}{\strdparallel{w}{z}} \strdsidelabel{z Left}{}{e} \strdsidelabel{z Right}{}{a}
-        \strdmaplabel{b Left}{}{[}
-        \strdmaplabel{b Right}{]}{}
+        \strdbranch{u}{m} \strdcellnode{m Main End}{\Delta}
+        \strdsidelabel{m Main}{}{\haskcoprod{e}{b}}
+        \strdsidelabel{m Left}{}{\haskcoprod{e}{b}}
+        \strdsidelabel{m Right}{}{\haskcoprod{e}{b}}
+        \strdbijsqx{3}{2.2}{2.2}{u}{b} \strdsqlabel{b}{\texttt{+}}
+        \strdcellnode{m Left End}{f}
+        \strdcellnode{m Right End}{\texttt{Left}}
+        \strdmid{m Left}{ml} \strdsidelabel{ml}{}{a}
+        \strdmid{m Right}{mr} \strdsidelabel{mr}{}{e}
+        \strdmid{b}{v} \strdsidelabel{v}{}{\haskcoprod{e}{a}}
     } \\ 
 }
 
@@ -51,22 +53,24 @@
     } \\ 
     & \myitem \strdin[gathered]{
         \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{e\texttt{+}a}
-        \strdbijnode{u End}{\texttt{catchError}}
+        \strdcellnode{u End}{\texttt{catchError}}
         \strdroad{left}{u}{v} \strdroadlabel{v}{e}{e\texttt{+}a}
         \strduse{right}{u}{w} \strdsidelabel{w End}{}{e\texttt{+}a}
-        \strdbijnode{v End}{h}
+        \strdcellnode{v End}{h}
         \strdyhalf{\strdmid{w}{ww}}
     } \mydefeq 
     \strdin[gathered]{
         \strduse{mid}{\strdorigin}{u} \strdsidelabel{u}{}{e\texttt{+}a}
-        \strdxscale{1.8}{\strduse{parallel}{u}{w}} \strdsidelabel{w Left}{}{e\texttt{+}a} \strdsidelabel{w Right}{}{e\texttt{+}a}
-        \strdbijsqx{u}{b}{2}{2}{2.4} 
-        \strdmid{b}{v} \strdsidelabel{v}{}{e\texttt{+}a}
-        \strdcellnode{w Right End}{\texttt{Right}} %\strdunfamilylabel{b Right}{}{\texttt{+}}
-        \strdcellnode{w Left End}{h\strdrlap{,}}
-        \strdxscale{1.8}{\strdparallel{w}{z}} \strdsidelabel{z Left}{}{e} \strdsidelabel{z Right}{}{a}
-        \strdmaplabel{b Left}{}{[}
-        \strdmaplabel{b Right}{]}{}
+        \strdbranch{u}{m} \strdcellnode{m Main End}{\Delta}
+        \strdsidelabel{m Main}{}{\haskcoprod{e}{a}}
+        \strdsidelabel{m Left}{}{\haskcoprod{e}{a}}
+        \strdsidelabel{m Right}{}{\haskcoprod{e}{a}}
+        \strdbijsqx{3}{2.2}{2.2}{u}{b} \strdsqlabel{b}{\texttt{+}}
+        \strdcellnode{m Left End}{\texttt{Right}}
+        \strdcellnode{m Right End}{h}
+        \strdmid{m Left}{ml} \strdsidelabel{ml}{}{a}
+        \strdmid{m Right}{mr} \strdsidelabel{mr}{}{e}
+        \strdmid{b}{v} \strdsidelabel{v}{}{\haskcoprod{e}{a}}
     } \\ 
 }
 

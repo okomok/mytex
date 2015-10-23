@@ -341,6 +341,12 @@
     }%
 }
 
+\newcommand*{\strdsqlabel}[2]{%
+    \strdonlayer{strd labellayer}{
+        \node[strd familylabel,below left] (#1 SqLabel) at (#1 Right StartCorner) {#2};
+    }%
+}
+
 \newcommand*{\strdlabelat}[3]{%
     \strdonlayer{strd labellayer}{
         \node[strd endlabel,#2] at (#1) {#3};
