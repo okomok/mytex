@@ -4,12 +4,16 @@
 \usetikzlibrary{shapes,calc,decorations.markings,backgrounds,calc}
 
 
+% For short names
+%   \strduse{foo{x}} doesn't work... 
+%   http://tex.stackexchange.com/questions/21466/test-if-token-is-a-control-sequence
 \newcommand*{\strduse}[1]{%
     \ifcsdef{strd\detokenize{#1}}{\csuse{strd#1}}{#1}%
 }
 
 
 % styles
+%
 
 \tikzset{strd normaltextvaligned/.style={text height=1.9ex,text depth=0.65ex}}
 \tikzset{strd scripttextvaligned/.style={text height=1.5ex,text depth=0.25ex}}
@@ -23,23 +27,28 @@
 
 
 % layers
-%   they reset surrounding line styles!
+%
 
+\pgfdeclarelayer{strd gradedlayer}
 \pgfdeclarelayer{strd pavelayer}
 \pgfdeclarelayer{strd whitelayer}
 \pgfdeclarelayer{strd nodelayer}
 \pgfdeclarelayer{strd labellayer}
-\pgfsetlayers{background,main,strd pavelayer,strd whitelayer,strd nodelayer,strd labellayer}
+\pgfsetlayers{background,main,strd pavelayer,strd gradedlayer,strd whitelayer,strd nodelayer,strd labellayer}
+
+% layers reset surrounding line styles, so we define...
+\newcommand*{\strdresetlinewidth}{\pgfsetlinewidth{0.2pt}}
 
 \newcommand*{\strdonlayer}[2]{%
     \begin{pgfonlayer}{#1}
         #2
     \end{pgfonlayer}
-    \pgfsetlinewidth{0.2pt}% temporary workaround
+    \strdresetlinewidth
 }
 
 
 % environmentals 
+%
 
 \newcommand*{\strd}[1]{%
     \begin{tikzpicture}[strd picture]
@@ -61,6 +70,7 @@
 
 % string constructors
 %   A string 's' is a triple of nodes 's Start', 's' and 's End'.
+%
 
 \newcommand*{\strdrange}[4]{%
     \node[strd coord] (#4 Start) at (#1) {};
@@ -79,6 +89,7 @@
 
 
 % strings
+%
 
 \newcommand*{\strdxunit}{0.5}
 \newcommand*{\strdyunit}{0.8}
@@ -189,6 +200,7 @@
 
 
 % square strings
+%
 
 \newcommand*{\strdsqsubset}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
@@ -210,6 +222,7 @@
 
 
 % nodes
+%
 
 \tikzset{strd node/.style={font=\normalsize,very thin,solid,draw,fill=white,inner xsep=0.6pt,inner ysep=1.2pt}}
 \tikzset{strd nodelabel/.style={font=\normalsize,inner sep=0pt}}
@@ -261,6 +274,7 @@
 
 
 % squares
+%
 
 \tikzset{strd bijsq/.style={solid,thin,sharp corners}}
 \tikzset{strd mapsq/.style={rounded corners=2pt}}
@@ -309,6 +323,7 @@
 
 
 % labels
+%
 
 \tikzset{strd sidelabel/.style={font=\scriptsize,inner sep=0.2pt,strd scripttextvaligned}}
 \tikzset{strd familylabel/.style={font=\scriptsize,inner sep=0.4pt,inner ysep=0.8pt}}
@@ -358,6 +373,7 @@
 
 
 % transformations
+%
 
 \newcommand*{\strdscope}[2]{%
     \begin{scope}[#1]
@@ -379,6 +395,7 @@
 
 
 % composed strings
+%
 
 \newcommand*{\strdcap}[2]{%
     \strdleft{#1}{#2 Left}
@@ -434,11 +451,28 @@
 }
 
 
+% graded strings; order depends
+%   tikz/double doesn't work with scopes.
+%
+
+\tikzset{strd edgenoise/.style={shorten >= -0.2pt,shorten <= -0.2pt}}
+\tikzset{strd graded/.style={draw=white,double=white,line width=2pt,strd edgenoise}}
+
+\newcommand*{\strdgraded}[3]{%
+    \strdonlayer{strd gradedlayer}{
+        \strdresetlinewidth
+        \strdscope{strd graded}{\strduse{#1}{#2}{#3 Graded}}
+        \strdscope{strd edgenoise}{\strduse{#1}{#2}{#3}}
+    }%
+}
+
+
 % roads
 %   keep scaling away by '--'
+%
+
 \tikzset{strd roadcolor/.style={gray!18}}
 \tikzset{strd roadbase/.style={line width=3.05pt}}
-\tikzset{strd edgenoise/.style={shorten >= -0.2pt,shorten <= -0.2pt}}
 \tikzset{strd roadpave/.style={line width=2.65pt,strd edgenoise,strd roadcolor}}
 
 \newcommand*{\strdroad}[3]{%
@@ -448,7 +482,7 @@
     }%
 }
 
-% order depends; crossable
+% crossable road; order depends
 \newcommand*{\strdroadx}[3]{%
     \strdscope{strd roadbase}{\strduse{#1}{#2}{#3}}
     \strdscope{strd roadpave}{\strduse{#1}{#2}{#3 Paved}}%
@@ -482,13 +516,17 @@
 
 
 % command combinators
+%
 
 \newcommand*{\strdtofun}[4]{%
-    \strduse{#1}{\strduse{#2}{#3}{#4}}%
+    #1{\strduse{#2}{#3}{#4}}%
 }
 
-\newcommand*{\strdflipped}{\strdtofun{flip}}
-\newcommand*{\strdnoned}{\strdtofun{none}}
+\newcommand*{\strdflipped}{\strdtofun{\strdflip}}
+\newcommand*{\strdnoned}{\strdtofun{\strdnone}}
+\newcommand*{\strdscaled}[2]{\strdtofun{\strdscale{#1}{#2}}}
+\newcommand*{\strdxscaled}[1]{\strdtofun{\strdxscale{#1}}}
+\newcommand*{\strdyscaled}[1]{\strdtofun{\strdyscale{#1}}}
 
 \newcommand*{\strdlshifted}[3]{%
     \strdlshift{#2}{#3 Shift}
@@ -504,6 +542,7 @@
 
 
 % utilities
+%
 
 \newcommand*{\strdrlap}[1]{\mathrlap{\smash{\,#1}}}
 \newcommand*{\strdfamilyarg}[1]{{\!\!\!#1}}
