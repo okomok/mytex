@@ -120,7 +120,7 @@
         (#2 Start) parabola (#2 Corner) -- (#2 End)
     };%
 }
-\newcommand*{\strdright}{\strdflipped{left}}
+\newcommand*{\strdright}{\strdflip{\strdleft}}
 
 \newcommand*{\strdmid}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
@@ -133,7 +133,7 @@
 
 \newcommand*{\strdmidex}[2]{%
     \strdmid{#1}{#2}
-    \strdyhalf{\strdmid{#2}{#2 Ex}}%
+    \strdyhalf{\strdmid}{#2}{#2 Ex}%
 }
 
 \newcommand*{\strdunleft}[2]{%
@@ -145,7 +145,7 @@
         (#2 Start) -- (#2 Corner) parabola[bend at end] (#2 End)
     };%
 }
-\newcommand*{\strdunright}{\strdflipped{unleft}}
+\newcommand*{\strdunright}{\strdflip{\strdunleft}}
 
 \newcommand*{\strdconnect}[3]{%
     \node[strd coord] (#3 Start) at (#1 Start) {};
@@ -161,10 +161,10 @@
         (#2 Start) -- (#2 End)
     };%
 }
-\newcommand*{\strdhright}{\strdflipped{hleft}}
+\newcommand*{\strdhright}{\strdflip{\strdhleft}}
 
 \newcommand*{\strdminus}[2]{%
-    \strdxscale{0.5}{
+    \strdscopexscale{0.5}{
         \strdhleft{#1}{#2 Left}
         \strdempty{#1}{#2}
         \strdhright{#1}{#2 Right}
@@ -181,7 +181,7 @@
         (#2 Start) parabola (#2 StartCorner) -- (#2 EndCorner) parabola[bend at end] (#2 End)
     };%
 }
-\newcommand*{\strdsupset}{\strdflipped{subset}}
+\newcommand*{\strdsupset}{\strdflip{\strdsubset}}
 
 \newcommand*{\strdlint}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
@@ -193,7 +193,7 @@
         (#2 Start) parabola (#2 StartCorner) -- (#2 EndCorner) parabola[bend at end] (#2 End)
     };%
 }
-\newcommand*{\strdrint}{\strdflipped{lint}}
+\newcommand*{\strdrint}{\strdflip{\strdlint}}
 
 \newcommand*{\strdlchange}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
@@ -205,12 +205,12 @@
         (#2 Start) -- (#2 StartCorner) parabola[bend at end] (#2) parabola (#2 EndCorner) -- (#2 End)
     };%
 }
-\newcommand*{\strdrchange}{\strdflipped{lchange}}
+\newcommand*{\strdrchange}{\strdflip{\strdlchange}}
 
-\newcommand*{\strdjump}{\strdnoned{mid}}
-\newcommand*{\strdljump}{\strdnoned{hleft}}
-\newcommand*{\strdrjump}{\strdnoned{hright}}
-\newcommand*{\strddup}{\strdnoned{minus}}
+\newcommand*{\strdjump}{\strdnone{\strdmid}}
+\newcommand*{\strdljump}{\strdnone{\strdhleft}}
+\newcommand*{\strdrjump}{\strdnone{\strdhright}}
+\newcommand*{\strddup}{\strdnone{\strdminus}}
 
 
 % Square strings
@@ -226,7 +226,7 @@
         (#2 Start) -- (#2 StartCorner) -- (#2 EndCorner) -- (#2 End)
     };%
 }
-\newcommand*{\strdsqsupset}{\strdflipped{sqsubset}}
+\newcommand*{\strdsqsupset}{\strdflip{\strdsqsubset}}
 
 \newcommand*{\strdsquare}[2]{%
     \strdsqsubset{#1}{#2 Left}
@@ -245,6 +245,7 @@
 \tikzset{strd isonode/.style={strd node,tape,tape bend height=2pt,minimum width=0pt,tape bend top=out and in,tape bend bottom=out and in}}
 \tikzset{strd dotnode/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
 
+% remove me; doesn't work well.
 \newcommand*{\myvphantomd}[1]{%
     \vphantom{\operatorname{\vphantom{#1}}}%
 }
@@ -252,6 +253,7 @@
 
 \newcommand*{\strdasis}[1]{#1}
 
+% remove me
 \newcommand*{\strdsub}[2]{%
     \myvphantom{#2}_{#1}%
 }
@@ -283,7 +285,7 @@
     }% 
 }
 
-\newcommand*{\strdimplicit}{\strdpathis{densely dotted}}
+\newcommand*{\strdimplicit}{\strdscopepathis{densely dotted}}
 
 
 % Squares
@@ -294,44 +296,44 @@
 
 \newcommand*{\strdlbijsq}[2]{%
     \strdonlayer{strd labellayer}{
-        \strdpathis{strd bijsq}{\strdsqsubset{#1}{#2}}
+        \strdscopepathis{strd bijsq}{\strdsqsubset{#1}{#2}}
     }%
 }
 \newcommand*{\strdrbijsq}[2]{%
     \strdonlayer{strd labellayer}{
-        \strdpathis{strd bijsq}{\strdsqsupset{#1}{#2}}
+        \strdscopepathis{strd bijsq}{\strdsqsupset{#1}{#2}}
     }%
 }
 \newcommand*{\strdbijsq}[2]{%
     \strdonlayer{strd labellayer}{
-        \strdpathis{strd bijsq}{\strdsquare{#1}{#2}}
+        \strdscopepathis{strd bijsq}{\strdsquare{#1}{#2}}
     }%
 }
 \newcommand*{\strdbijsqx}[5]{%
-    \strdscale{#2}{#1}{\strdlbijsq{#4}{#5 Left}}
-    \strdscale{#3}{#1}{\strdrbijsq{#4}{#5 Right}}
-    \strdyscale{#1}{\strdjump{#4}{#5}}%
+    \strdscale{#2}{#1}{\strdlbijsq}{#4}{#5 Left}
+    \strdscale{#3}{#1}{\strdrbijsq}{#4}{#5 Right}
+    \strdyscale{#1}{\strdjump}{#4}{#5}%
 } 
 
 \newcommand*{\strdlmapsq}[2]{%
     \strdonlayer{strd labellayer}{
-        \strdpathis{strd mapsq}{\strdsqsubset{#1}{#2}}
+        \strdscopepathis{strd mapsq}{\strdsqsubset{#1}{#2}}
     }%
 }
 \newcommand*{\strdrmapsq}[2]{%
     \strdonlayer{strd labellayer}{
-        \strdpathis{strd mapsq}{\strdsqsupset{#1}{#2}}
+        \strdscopepathis{strd mapsq}{\strdsqsupset{#1}{#2}}
     }%
 }
 \newcommand*{\strdmapsq}[2]{%
     \strdonlayer{strd labellayer}{
-        \strdpathis{strd mapsq}{\strdsquare{#1}{#2}}
+        \strdscopepathis{strd mapsq}{\strdsquare{#1}{#2}}
     }%
 }
 \newcommand*{\strdmapsqx}[5]{%
-    \strdscale{#2}{#1}{\strdlmapsq{#4}{#5 Left}}
-    \strdscale{#3}{#1}{\strdrmapsq{#4}{#5 Right}}
-    \strdyscale{#1}{\strdjump{#4}{#5}}%
+    \strdscale{#2}{#1}{\strdlmapsq}{#4}{#5 Left}
+    \strdscale{#3}{#1}{\strdrmapsq}{#4}{#5 Right}
+    \strdyscale{#1}{\strdjump}{#4}{#5}%
 }
 
 
@@ -344,24 +346,27 @@
 
 \newcommand*{\strdsidelabel}[3]{%
     \strdonlayer{strd labellayer}{
-        \node[strd sidelabel,left] (#1 LeftLabel) at (#1) {#2};
-        \node[strd sidelabel,right] (#1 RightLabel) at (#1) {\myvphantom{#2}#3};
+        \node[strd sidelabel,left] at (#1) {#2};
+        \node[strd sidelabel,right] at (#1) {\myvphantom{#2}#3};
     }%
 }
+\newcommand*{\strdleftlabel}[2]{\strdsidelabel{#1}{#2}{}}
+\newcommand*{\strdrightlabel}[2]{\strdsidelabel{#1}{}{#2}}
 
 \newcommand*{\strdfamilylabel}[3]{%
     \strdonlayer{strd labellayer}{
-        \node[strd familylabel,above right] (#1 EndCorner RightLabel) at (#1 EndCorner) {#2};
-        \node[strd familylabel,below] (#1 EndCorner BelowLabel) at (#1 EndCorner) {\myvphantom{#2}#3};
+        \node[strd familylabel,above right] at (#1 EndCorner) {#2};
+        \node[strd familylabel,below] at (#1 EndCorner) {\myvphantom{#2}#3};
     }%
 }
 \newcommand*{\strdunfamilylabel}[3]{%
     \strdonlayer{strd labellayer}{
-        \node[strd familylabel,above left] (#1 EndCorner LeftLabel) at (#1 EndCorner) {#2};
-        \node[strd familylabel,below] (#1 EndCorner BelowLabel) at (#1 EndCorner) {\myvphantom{#2}#3};
+        \node[strd familylabel,above left] at (#1 EndCorner) {#2};
+        \node[strd familylabel,below] at (#1 EndCorner) {\myvphantom{#2}#3};
     }%
 }
 
+% remove me; sidelabels are enough
 \newcommand*{\strdmaplabel}[3]{%
     \strdonlayer{strd labellayer}{
         \node[strd sidelabel,left] (#1 LeftLabel) at (#1) {#2};
@@ -371,7 +376,7 @@
 
 \newcommand*{\strdsqlabel}[2]{%
     \strdonlayer{strd labellayer}{
-        \node[strd familylabel,below left] (#1 SqLabel) at (#1 Right StartCorner) {#2};
+        \node[strd familylabel,below left] at (#1 Right StartCorner) {#2};
     }%
 }
 
@@ -394,17 +399,15 @@
     \end{scope}%
 }
 
-\newcommand*{\strdxhalf}{\strdscope{xscale=0.5}}
-\newcommand*{\strdyhalf}{\strdscope{yscale=0.5}}
-\newcommand*{\strdflip}{\strdscope{xscale=-1}}
-\newcommand*{\strdinv}{\strdscope{yscale=-1}}
-\newcommand*{\strdxscale}[1]{\strdscope{xscale=#1}}
-\newcommand*{\strdyscale}[1]{\strdscope{yscale=#1}}
-\newcommand*{\strdscale}[2]{\strdscope{xscale=#1,yscale=#2}}
-\newcommand*{\strdnone}{\strdscope{every path/.style=strd none,every node/.style=strd none}}
-\newcommand*{\strdnolabels}{\strdscope{every node/.style=strd none}}
-\newcommand*{\strdpathis}[1]{\strdscope{every path/.style=#1}}
-\newcommand*{\strdnodeis}[1]{\strdscope{every node/.append style=#1}}
+\newcommand*{\strdscopeflip}{\strdscope{xscale=-1}}
+\newcommand*{\strdscopeinv}{\strdscope{yscale=-1}}
+\newcommand*{\strdscopexscale}[1]{\strdscope{xscale=#1}}
+\newcommand*{\strdscopeyscale}[1]{\strdscope{yscale=#1}}
+\newcommand*{\strdscopescale}[2]{\strdscope{xscale=#1,yscale=#2}}
+\newcommand*{\strdscopenone}{\strdscope{every path/.style=strd none,every node/.style=strd none}}
+\newcommand*{\strdscopenolabels}{\strdscope{every node/.style=strd none}}
+\newcommand*{\strdscopepathis}[1]{\strdscope{every path/.style=#1}}
+\newcommand*{\strdscopenodeis}[1]{\strdscope{every node/.append style=#1}}
 
 
 % Composed strings
@@ -417,7 +420,7 @@
 }
 
 \newcommand*{\strdcup}[2]{%
-    \strdxscale{2}{\strddup{#1}{#2 Dup}}
+    \strdxscale{2}{\strddup}{#1}{#2 Dup}
     \strdunleft{#2 Dup Left}{#2 Left}
     \strdunright{#2 Dup Right}{#2 Right}
     \strdjump{#1}{#2}%
@@ -427,17 +430,18 @@
     \strdmid{#1}{#2 Main}
     \strdleft{#2 Main}{#2 Left}
     \strdright{#2 Main}{#2 Right}
-    \strdyscaled{2}{\strdjump}{#1}{#2}
+    \strdyscale{2}{\strdjump}{#1}{#2}
 }
 
 \newcommand*{\strdunbranch}[2]{%
-    \strdxscaled{2}{\strddup}{#1}{#2 Dup}
+    \strdxscale{2}{\strddup}{#1}{#2 Dup}
     \strdunleft{#2 Dup Left}{#2 Left}
     \strdunright{#2 Dup Right}{#2 Right}
     \strdmid{#2 Left}{#2 Main}
-    \strdyscaled{2}{\strdjump}{#1}{#2}
+    \strdyscale{2}{\strdjump}{#1}{#2}
 }
 
+% rename me
 \newcommand*{\strdparallel}[2]{%
     \strddup{#1}{#2 Dup}
     \strdmid{#2 Dup Left}{#2 Left}
@@ -456,7 +460,7 @@
     \strdunright{#1}{#2 Prev}
     \strdleft{#2 Prev}{#2}%
 }
-\newcommand*{\strdrchangez}{\strdflipped{lchangez}}
+\newcommand*{\strdrchangez}{\strdflip{\strdlchangez}}
 
 \newcommand*{\strdtwo}[3]{%
     \strduse{#1}{#2}{#3 1}
@@ -526,17 +530,17 @@
 
 \newcommand*{\strdroadlabel}[3]{%
     \strdonlayer{strd labellayer}{
-        \node[strd sidelabel,left,xshift=-1.5pt] (#1 LeftLabel) at (#1) {#2};
-        \node[strd sidelabel,right,xshift=1.5pt] (#1 RightLabel) at (#1) {\myvphantom{#2}#3};
+        \node[strd sidelabel,left,xshift=-1.5pt] at (#1) {#2};
+        \node[strd sidelabel,right,xshift=1.5pt] at (#1) {\myvphantom{#2}#3};
     }%
 }
 
-\newcommand*{\strdroadlshift}[2]{%
+\newcommand*{\strdroadlaside}[2]{%
     \node[strd coord] (#2 Start) at ($(#1 End)+(-0.05,0)$) {};
     \node[strd coord] (#2) at (#2 Start) {};
     \node[strd coord] (#2 End) at (#2 Start) {};%
 }
-\newcommand*{\strdroadrshift}{\strdflipped{roadlshift}}
+\newcommand*{\strdroadraside}{\strdflip{\strdroadlshift}}
 
 
 % Command combinators
@@ -546,26 +550,26 @@
     #1{\strduse{#2}{#3}{#4}}%
 }
 
-\newcommand*{\strdflipped}{\strdtofun{\strdflip}}
-\newcommand*{\strdinved}{\strdtofun{\strdinv}}
-\newcommand*{\strdnoned}{\strdtofun{\strdnone}}
-\newcommand*{\strdscaled}[2]{\strdtofun{\strdscale{#1}{#2}}}
-\newcommand*{\strdxscaled}[1]{\strdtofun{\strdxscale{#1}}}
-\newcommand*{\strdyscaled}[1]{\strdtofun{\strdyscale{#1}}}
-\newcommand*{\strdxhalfed}{\strdxscaled{0.5}}
-\newcommand*{\strdyhalfed}{\strdyscaled{0.5}}
+\newcommand*{\strdflip}{\strdtofun{\strdscopeflip}}
+\newcommand*{\strdinv}{\strdtofun{\strdscopeinv}}
+\newcommand*{\strdnone}{\strdtofun{\strdscopenone}}
+\newcommand*{\strdscale}[2]{\strdtofun{\strdscopescale{#1}{#2}}}
+\newcommand*{\strdxscale}[1]{\strdtofun{\strdscopexscale{#1}}}
+\newcommand*{\strdyscale}[1]{\strdtofun{\strdscopeyscale{#1}}}
+\newcommand*{\strdxhalf}{\strdxscale{0.5}}
+\newcommand*{\strdyhalf}{\strdyscale{0.5}}
 
-\newcommand*{\strdlshifted}[3]{%
+\newcommand*{\strdlshift}[3]{%
     \strdljump{#2}{#3 Shift}
     \strduse{#1}{#3 Shift}{#3}%
 }
-\newcommand*{\strdrshifted}[3]{\strdflip{\strdlshifted{#1}{#2}{#3}}}
+\newcommand*{\strdrshift}[3]{\strdflip{\strdlshift{#1}}{#2}{#3}}
 
-\newcommand*{\strdroadlshifted}[3]{%
-    \strdroadlshift{#2}{#3 Shift}
+\newcommand*{\strdroadlshift}[3]{%
+    \strdroadlaside{#2}{#3 Shift}
     \strduse{#1}{#3 Shift}{#3}%
 }
-\newcommand*{\strdroadrshifted}[3]{\strdflip{\strdroadlshifted{#1}{#2}{#3}}}
+\newcommand*{\strdroadrshift}[3]{\strdflip{\strdroadlshift{#1}}{#2}{#3}}
 
 
 % Utilities
