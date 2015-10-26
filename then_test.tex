@@ -21,11 +21,21 @@
     \strdin[gathered]{
         \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{a} 
         \strdcellnode{u End}{P}
-        \strdseq[\strdrightlabeled{mid}{R},branch,unbranch]{u}{v}
+        \strdseq[\strdrightlabeled{mid}{R},\strdname{branch}{bran},\strdleftlabeledat{unbranch}{Right}{P}]{u}{v}
         \strdrightlabel{v Right}{b}
         \strdrightlabel{v Prev Left}{c}
         \strdcellnode{v Prev Prev End}{Q}
+        \strdcellnode{bran}{\texttt{bran}}
+        \strdleftlabel{bran Right}{bR}
     }
+}
+
+\myin[preview,math,aligned]{
+    & \texttt{labeledat test}
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{a} 
+        \strdrightlabeledat{branch}{Right}{P}{u}{v}
+   }
 }
 
 \myin[preview,math,aligned]{
