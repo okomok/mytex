@@ -285,8 +285,6 @@
     }% 
 }
 
-\newcommand*{\strdimplicit}{\strdscopepathis{densely dotted}}
-
 
 % Squares
 %
@@ -388,26 +386,6 @@
 
 \newcommand*{\strdstartlabel}[2]{\strdlabelat{#1 Start}{above}{#2}}
 \newcommand*{\strdendlabel}[2]{\strdlabelat{#1 End}{below}{#2}}
-
-
-% Transformations
-%
-
-\newcommand*{\strdscope}[2]{%
-    \begin{scope}[#1]
-        #2
-    \end{scope}%
-}
-
-\newcommand*{\strdscopeflip}{\strdscope{xscale=-1}}
-\newcommand*{\strdscopeinv}{\strdscope{yscale=-1}}
-\newcommand*{\strdscopexscale}[1]{\strdscope{xscale=#1}}
-\newcommand*{\strdscopeyscale}[1]{\strdscope{yscale=#1}}
-\newcommand*{\strdscopescale}[2]{\strdscope{xscale=#1,yscale=#2}}
-\newcommand*{\strdscopenone}{\strdscope{every path/.style=strd none,every node/.style=strd none}}
-\newcommand*{\strdscopenolabels}{\strdscope{every node/.style=strd none}}
-\newcommand*{\strdscopepathis}[1]{\strdscope{every path/.style=#1}}
-\newcommand*{\strdscopenodeis}[1]{\strdscope{every node/.append style=#1}}
 
 
 % Composed strings
@@ -543,6 +521,27 @@
 \newcommand*{\strdroadraside}{\strdflip{\strdroadlshift}}
 
 
+% Transformations
+%
+
+\newcommand*{\strdscope}[2]{%
+    \begin{scope}[#1]
+        #2
+    \end{scope}%
+}
+
+\newcommand*{\strdscopeflip}{\strdscope{xscale=-1}}
+\newcommand*{\strdscopeinv}{\strdscope{yscale=-1}}
+\newcommand*{\strdscopexscale}[1]{\strdscope{xscale=#1}}
+\newcommand*{\strdscopeyscale}[1]{\strdscope{yscale=#1}}
+\newcommand*{\strdscopescale}[2]{\strdscope{xscale=#1,yscale=#2}}
+\newcommand*{\strdscopenone}{\strdscope{every path/.style=strd none,every node/.style=strd none}}
+\newcommand*{\strdscopenolabels}{\strdscope{every node/.style=strd none}}
+\newcommand*{\strdscopepathis}[1]{\strdscope{every path/.style=#1}}
+\newcommand*{\strdscopenodeis}[1]{\strdscope{every node/.append style=#1}}
+\newcommand*{\strdscopeimplicit}{\strdscopepathis{densely dotted}}
+
+
 % Command combinators
 %
 
@@ -558,6 +557,7 @@
 \newcommand*{\strdyscale}[1]{\strdtofun{\strdscopeyscale{#1}}}
 \newcommand*{\strdxhalf}{\strdxscale{0.5}}
 \newcommand*{\strdyhalf}{\strdyscale{0.5}}
+\newcommand*{\strdimplicit}{\strdtofun{\strdscopeimplicit}}
 
 \newcommand*{\strdlshift}[3]{%
     \strdljump{#2}{#3 Shift}
