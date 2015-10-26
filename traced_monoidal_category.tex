@@ -1,0 +1,187 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+% signature
+\myin[preview,math,aligned]{
+    & \myitem
+    \strdin[gathered]{
+        \strdcircle{\strdorigin}{u} \strdsidelabel{u Left}{}{X} 
+        \strdcellnode{u Right}{f}
+        \strdcoord{u Right}{p}
+        \strdinved{mid}{p}{b} \strdsidelabel{b}{}{B}
+        \strdmid{p}{a} \strdsidelabel{a}{}{A}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{b} \strdsidelabel{b}{}{B}
+        \strdlshifted{cup}{b}{xb} \strdsidelabel{xb Left}{}{X}
+        \strdcellnode{xb End}{f}
+        \strdcap{xb}{xa} \strdsidelabel{xa Left}{}{X}
+        \strdmid{xa Right}{a} \strdsidelabel{a}{}{A}
+        \strdlshifted{\strdmapsqx{2}{2}{2}}{b}{box} \strdmaplabel{box Left}{}{\operatorname{Tr}}
+    }
+}
+
+
+% trace with symmetry
+\myin[preview,math,aligned]{
+    & \myitem
+    \strdin[gathered]{
+        \strdflip{
+        \strdmid{\strdorigin}{b} \strdsidelabel{b}{}{B}
+        \strdlshifted{cup}{b}{xb} \strdsidelabel{xb Left}{}{X}
+        \strdcellnode{xb End}{f}
+        \strdcap{xb}{xa} \strdsidelabel{xa Left}{}{X}
+        \strdmid{xa Right}{a} \strdsidelabel{a}{}{A}
+        \strdlshifted{\strdmapsqx{2}{2}{2}}{b}{box} \strdmaplabel{box Right}{}{\operatorname{Tr}^L}
+        }
+    } \mydefeq
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{b} \strdsidelabel{b}{}{B}
+        \strdlshifted{\strdlshifted{rchange}}{b}{x} \strdsidelabel{x End}{}{X}
+        \strdlchange{x}{x2}
+        \strdrchange{x2}{x3}
+        \strdmid{x3}{v} \strdsidelabel{v}{}{A}
+        \strdlshifted{\strdmapsqx{3}{2}{2}}{b}{box} \strdmaplabel{box Left}{}{\operatorname{Tr}}
+        \strdgraded{\strdlchange}{u}{b2} 
+        \strdrchange{b2}{b3}
+        \strdgraded{\strdlchange}{b3}{b4}
+        \strdcellnode{b3}{f}
+        \strdsidelabel{b3 End}{}{X}
+    }
+}
+
+% fixed-point property
+\myin[preview,math,aligned]{
+    & \myitem
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{X}
+        \strdbranch{u}{f} \strdcellnode{f Main End}{f}
+        \strdsidelabel{f Left}{}{X}
+        \strdmid{f Right}{v} \strdsidelabel{v}{}{A}
+        \strdmapsqx{2}{2}{2}{u}{b}
+        \strdmaplabel{b Left}{}{\operatorname{fix}}
+    } =
+    \strdin[gathered]{
+        \strdxscaled{1.5}{\strdbranch}{\strdorigin}{u} \strdsidelabel{u Main}{}{X}
+        \strdcellnode{u Main End}{f} \strdsidelabel{u Left}{}{X}
+        \strdbranch{u Left}{f} \strdcellnode{f}{f}
+        \strdsidelabel{f Left}{}{X}
+        \strdmapsqx{2}{2}{2}{u Left}{b}
+        \strdmaplabel{b Left}{}{\operatorname{fix}}
+        \strdyscaled{2}{mid}{u Right}{ar}
+        \strdlshifted{unbranch}{ar}{w}
+        \strdcellnode{w}{\Delta}
+        \strdsidelabel{w Main}{}{A}
+        \strdsidelabel{ar}{}{A}
+        \strdsidelabel{w Left}{}{A}
+    }
+}
+
+% diagonal property
+\myin[preview,math,aligned]{
+    & \myitem
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{X}
+        \strdmid{u}{u2}
+        \strdbranch{u2}{f} 
+        \strdcellnode{f}{f}
+        \strdmid{f Main}{xl}
+        \strdmid{xl}{xl2} \strdsidelabel{xl2}{}{X}
+        \strdmapsqx{4}{3}{3}{u}{bo}
+        \strdmapsqx{2}{2}{2}{u2}{bi}
+        \strdmaplabel{bo Left}{}{\operatorname{fix}}
+        \strdmaplabel{bi Left}{}{\operatorname{fix}}
+        \strdsidelabel{f Left}{}{X}
+        \strdtwo{mid}{f Right}{v} \strdsidelabel{v 2}{}{A}
+    } =
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{X}
+        \strdmid{u}{u2}
+        \strdxscaled{2}{left}{u2}{u2l} \strdsidelabel{u2l End}{}{X}
+        \strdmid{u2}{u2m} \strdsidelabel{u2m End}{}{X}
+        \strdrshifted{unbranch}{u2l}{dt} \strdsidelabel{dt Main}{}{X}
+        \strdcellnode{dt}{\Delta}
+        \strdright{u2}{u2r}
+        \strdyscaled{2}{mid}{u2r}{v}
+        \strdcellnode{u2 End}{f}
+        \strdmapsqx{4}{3}{2}{u}{b}
+        \strdmaplabel{b Left}{}{\operatorname{fix}}
+        \strdmid{v}{w} \strdsidelabel{w}{}{A}
+    }
+}
+
+\myin[preview,math,aligned]{
+    % fix to trace
+    & \myitem
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{b} \strdsidelabel{b}{}{B}
+        \strdlshifted{cup}{b}{xb} \strdsidelabel{xb Left}{}{X}
+        \strdcellnode{xb End}{f}
+        \strdcap{xb}{xa} \strdsidelabel{xa Left}{}{X}
+        \strdmid{xa Right}{a} \strdsidelabel{a}{}{A}
+        \strdlshifted{\strdmapsqx{2}{2}{2}}{b}{box} \strdmaplabel{box Left}{}{\operatorname{Tr}}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{b} \strdsidelabel{b}{}{B}
+        \strdlshifted{\strdmid}{\strdorigin}{x}
+        \strdmid{b}{b2}
+        \strdunleft{x}{x2}
+        \strdcellnode{x2 End}{f}
+        \strdleft{x2}{x3} \strdsidelabel{x3 End}{}{X}
+        \strdright{x2}{a}
+        \strdasis{\strdmapsqx{2.5}{2}{2}}{b}{box}
+        \strdyhalfed{\strdmid}{x3}{x4}
+        \strdyhalfed{\strdmid}{a}{a2}
+        \strdmid{a2}{a3} \strdsidelabel{a3}{}{A}
+        \strdlshifted{\strdinved{\strdyscaled{0.75}{\strdmid}}}{a2}{bx}
+        \strdcellnode{bx End}{!}
+        \strdsidelabel{bx}{}{B}
+        \strdlshifted{\strdwhite{\strdyhalfed{\strdmid}}}{\strdorigin}{wx}
+        \strdcellnode{wx End}{!}
+        \strdsidelabel{x2}{}{X}
+        \strdmaplabel{box Left}{}{\operatorname{fix}}
+    } \\
+    % trace to fix
+    & \myitem
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{X}
+        \strdbranch{u}{f} \strdcellnode{f Main End}{f}
+        \strdsidelabel{f Left}{}{X}
+        \strdmid{f Right}{v} \strdsidelabel{v}{}{A}
+        \strdmapsqx{2}{2}{2}{u}{b}
+        \strdmaplabel{b Left}{}{\operatorname{fix}}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{x} \strdsidelabel{x}{}{X}
+        \strdlshifted{\strdunbranch}{x}{dt} \strdsidelabel{dt Left}{}{X}
+        \strdcellnode{dt}{\Delta}
+        \strdcap{dt}{xa} \strdsidelabel{xa Left}{}{X}
+        \strdmid{xa Right}{a} \strdsidelabel{a}{}{A}
+        \strdlshifted{\strdmapsqx{3}{2}{2}}{u}{box} \strdmaplabel{box Left}{}{\operatorname{Tr}}
+        \strdcellnode{xa Start}{f}
+        \strdsidelabel{dt Main}{}{X}
+    }
+}
+
+
+% proof
+\myin[preview,math,aligned]{
+    & \myitem
+    \strdin[gathered]{
+        \strdunbranch{\strdorigin}{dt} \strdsidelabel{dt Left}{}{X} \strdsidelabel{dt Right}{}{X}
+        \strdsidelabel{dt Main}{}{X} \strdcellnode{dt}{\Delta}
+        \strdxscaled{1.5}{\strdrjump}{\strdorigin}{u2}
+        \strdgraded{\strdunbranch}{u2}{dt2} \strdsidelabel{dt2 Left}{A}{} \strdsidelabel{dt2 Right}{}{A}
+        \strdsidelabel{dt2 Main}{}{A} \strdcellnode{dt2}{\Delta}
+    } =
+    \strdin[gathered]{
+        \strdunbranch{\strdorigin}{dt} \strdsidelabel{dt Left}{}{A\texttt{\times}X} \strdsidelabel{dt Right}{}{A\texttt{\times}X}
+        \strdsidelabel{dt Main}{}{A\texttt{\times}X} \strdcellnode{dt}{\Delta}
+    }
+}
+
+\end{document}

@@ -12,11 +12,12 @@
 }
 
 
-% styles
+% Styles
 %
 
 \tikzset{strd normaltextvaligned/.style={text height=1.9ex,text depth=0.65ex}}
-\tikzset{strd scripttextvaligned/.style={text height=1.5ex,text depth=0.25ex}}
+\tikzset{strd scripttextvaligned/.style={text height=1.5ex,text depth=0.4ex}}
+%\tikzset{strd scripttextvaligned/.style={text height=1.5ex,text depth=0.25ex}}
 \tikzset{strd coord/.style={coordinate}}
 \tikzset{strd mathnodes/.style={execute at begin node=$,execute at end node=$}}
 \tikzset{strd none/.style={opacity=0,text opacity=0,fill opacity=0}}
@@ -26,7 +27,7 @@
 \tikzset{-<-/.style={decoration={markings,mark=at position .5 with {\arrow{<}}},postaction={decorate}}}
 
 
-% layers
+% Layers
 %
 
 \pgfdeclarelayer{strd gradedlayer}
@@ -47,7 +48,7 @@
 }
 
 
-% environmentals 
+% Environmentals 
 %
 
 \newcommand*{\strd}[1]{%
@@ -68,7 +69,7 @@
 }
 
 
-% string constructors
+% String constructors
 %   A string 's' is a triple of nodes 's Start', 's' and 's End'.
 %
 
@@ -88,7 +89,7 @@
 \newcommand*{\strdorigin}{strdorigin}
 
 
-% strings
+% Strings
 %
 
 \newcommand*{\strdxunit}{0.5}
@@ -96,6 +97,7 @@
 \newcommand*{\strdxhalfunit}{0.25}
 \newcommand*{\strdyhalfunit}{0.4}
 \newcommand*{\strdunitdiff}{0.3}
+\newcommand*{\strdunitmergin}{0.1}
 
 \newcommand*{\strdempty}[2]{%
     \node[strd coord] (#2) at (#1 End) {};
@@ -193,13 +195,25 @@
 }
 \newcommand*{\strdrint}{\strdflipped{lint}}
 
+\newcommand*{\strdlchange}[2]{%
+    \node[strd coord] (#2 Start) at (#1 End) {};
+    \node[strd coord] (#2 StartCorner) at ($(#1 End)+(0,-\strdunitmergin)$) {};
+    \node[strd coord] (#2) at ($(#1 End)+(-\strdxunit,-\strdyhalfunit)$) {};
+    \node[strd coord] (#2 EndCorner) at ($(#2)+(-\strdxunit,-\strdunitdiff)$) {};
+    \node[strd coord] (#2 End) at ($(#2)+(-\strdxunit,-\strdyhalfunit)$) {};
+    \draw[strd draw]{
+        (#2 Start) -- (#2 StartCorner) parabola[bend at end] (#2) parabola (#2 EndCorner) -- (#2 End)
+    };%
+}
+\newcommand*{\strdrchange}{\strdflipped{lchange}}
+
 \newcommand*{\strdjump}{\strdnoned{mid}}
-\newcommand*{\strdlshift}{\strdnoned{hleft}}
-\newcommand*{\strdrshift}{\strdnoned{hright}}
+\newcommand*{\strdljump}{\strdnoned{hleft}}
+\newcommand*{\strdrjump}{\strdnoned{hright}}
 \newcommand*{\strddup}{\strdnoned{minus}}
 
 
-% square strings
+% Square strings
 %
 
 \newcommand*{\strdsqsubset}[2]{%
@@ -221,7 +235,7 @@
 }
 
 
-% nodes
+% Nodes
 %
 
 \tikzset{strd node/.style={font=\normalsize,very thin,solid,draw,fill=white,inner xsep=0.6pt,inner ysep=1.2pt}}
@@ -236,9 +250,8 @@
 }
 \newcommand*{\myvphantom}[1]{}
 
-\newcommand*{\strdasis}[2]{%
-    #1%
-}
+\newcommand*{\strdasis}[1]{#1}
+
 \newcommand*{\strdsub}[2]{%
     \myvphantom{#2}_{#1}%
 }
@@ -273,7 +286,7 @@
 \newcommand*{\strdimplicit}{\strdpathis{densely dotted}}
 
 
-% squares
+% Squares
 %
 
 \tikzset{strd bijsq/.style={solid,thin,sharp corners}}
@@ -322,7 +335,7 @@
 }
 
 
-% labels
+% Labels
 %
 
 \tikzset{strd sidelabel/.style={font=\scriptsize,inner sep=0.2pt,strd scripttextvaligned}}
@@ -372,7 +385,7 @@
 \newcommand*{\strdendlabel}[2]{\strdlabelat{#1 End}{below}{#2}}
 
 
-% transformations
+% Transformations
 %
 
 \newcommand*{\strdscope}[2]{%
@@ -394,7 +407,7 @@
 \newcommand*{\strdnodeis}[1]{\strdscope{every node/.append style=#1}}
 
 
-% composed strings
+% Composed strings
 %
 
 \newcommand*{\strdcap}[2]{%
@@ -414,15 +427,15 @@
     \strdmid{#1}{#2 Main}
     \strdleft{#2 Main}{#2 Left}
     \strdright{#2 Main}{#2 Right}
-    \strdjump{#2 Main}{#2}
+    \strdyscaled{2}{\strdjump}{#1}{#2}
 }
 
 \newcommand*{\strdunbranch}[2]{%
-    \strdxscale{2}{\strddup{#1}{#2 Dup}}
+    \strdxscaled{2}{\strddup}{#1}{#2 Dup}
     \strdunleft{#2 Dup Left}{#2 Left}
     \strdunright{#2 Dup Right}{#2 Right}
     \strdmid{#2 Left}{#2 Main}
-    \strdcopy{#2 Main}{#2}
+    \strdyscaled{2}{\strdjump}{#1}{#2}
 }
 
 \newcommand*{\strdparallel}[2]{%
@@ -438,36 +451,47 @@
     \strdjump{#1}{#2}%
 }
 
-\newcommand*{\strdlchange}[2]{%
+% remove me
+\newcommand*{\strdlchangez}[2]{%
     \strdunright{#1}{#2 Prev}
     \strdleft{#2 Prev}{#2}%
 }
-\newcommand*{\strdrchange}{\strdflipped{lchange}}
+\newcommand*{\strdrchangez}{\strdflipped{lchangez}}
 
 \newcommand*{\strdtwo}[3]{%
-    \strduse{#1}{#2}{#3 First}
-    \strduse{#1}{#3 First}{#3 Second}
-    \strdrange{#3 First Start}{#3 First End}{#3 Second End}{#3}
+    \strduse{#1}{#2}{#3 1}
+    \strduse{#1}{#3 1}{#3 2}
+    \strdrange{#3 1 Start}{#3 1 End}{#3 2 End}{#3}
 }
 
 
-% graded strings; order depends
-%   tikz/double doesn't work with scopes.
+% White strings
 %
 
 \tikzset{strd edgenoise/.style={shorten >= -0.2pt,shorten <= -0.2pt}}
-\tikzset{strd graded/.style={draw=white,double=white,line width=2pt,strd edgenoise}}
+\tikzset{strd white/.style={draw=white,line width=3pt,strd edgenoise}}
+
+\newcommand*{\strdwhite}[3]{%
+    \strdonlayer{strd whitelayer}{
+        \strdresetlinewidth
+        \strdscope{strd white}{\strduse{#1}{#2}{#3}}
+    }%
+}
+
+% Graded strings; order depends
+%   tikz/double doesn't work with scopes.
+%
 
 \newcommand*{\strdgraded}[3]{%
     \strdonlayer{strd gradedlayer}{
         \strdresetlinewidth
-        \strdscope{strd graded}{\strduse{#1}{#2}{#3 Graded}}
+        \strdscope{strd white}{\strduse{#1}{#2}{#3 Graded}}
         \strdscope{strd edgenoise}{\strduse{#1}{#2}{#3}}
     }%
 }
 
 
-% roads
+% Roads
 %   keep scaling away by '--'
 %
 
@@ -515,7 +539,7 @@
 \newcommand*{\strdroadrshift}{\strdflipped{roadlshift}}
 
 
-% command combinators
+% Command combinators
 %
 
 \newcommand*{\strdtofun}[4]{%
@@ -523,13 +547,16 @@
 }
 
 \newcommand*{\strdflipped}{\strdtofun{\strdflip}}
+\newcommand*{\strdinved}{\strdtofun{\strdinv}}
 \newcommand*{\strdnoned}{\strdtofun{\strdnone}}
 \newcommand*{\strdscaled}[2]{\strdtofun{\strdscale{#1}{#2}}}
 \newcommand*{\strdxscaled}[1]{\strdtofun{\strdxscale{#1}}}
 \newcommand*{\strdyscaled}[1]{\strdtofun{\strdyscale{#1}}}
+\newcommand*{\strdxhalfed}{\strdxscaled{0.5}}
+\newcommand*{\strdyhalfed}{\strdyscaled{0.5}}
 
 \newcommand*{\strdlshifted}[3]{%
-    \strdlshift{#2}{#3 Shift}
+    \strdljump{#2}{#3 Shift}
     \strduse{#1}{#3 Shift}{#3}%
 }
 \newcommand*{\strdrshifted}[3]{\strdflip{\strdlshifted{#1}{#2}{#3}}}
@@ -541,7 +568,7 @@
 \newcommand*{\strdroadrshifted}[3]{\strdflip{\strdroadlshifted{#1}{#2}{#3}}}
 
 
-% utilities
+% Utilities
 %
 
 \newcommand*{\strdrlap}[1]{\mathrlap{\smash{\,#1}}}
