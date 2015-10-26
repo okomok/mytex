@@ -1,0 +1,31 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+\myin[preview,math,aligned]{
+    & \text{then test} 
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdrightlabel{u}{a} 
+        \strdthen{mid}{branch}{u}{v}
+        \strdleftlabel{v Prev}{b}
+        \strdrightlabel{v Right}{b}
+    } \\
+}
+
+\myin[preview,math,aligned]{
+    & \myitem
+    \strdin[gathered]{
+        \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{a} 
+        \strdcellnode{u End}{P}
+        \strdseq[\strdrightlabeled{mid}{R},branch,unbranch]{u}{v}
+        \strdrightlabel{v Right}{b}
+        \strdrightlabel{v Prev Left}{c}
+        \strdcellnode{v Prev Prev End}{Q}
+    }
+}
+
+\end{document}

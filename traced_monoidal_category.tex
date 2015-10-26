@@ -16,7 +16,7 @@
         \strdmid{p}{a} \strdsidelabel{a}{}{A}
     } \mydefeq
     \strdin[gathered]{
-        \strdmid{\strdorigin}{b} \strdsidelabel{b}{}{B}
+        \strdrightlabeled{\strdmid}{B}{\strdorigin}{b}
         \strdlshift{cup}{b}{xb} \strdsidelabel{xb Left}{}{X}
         \strdcellnode{xb End}{f}
         \strdcap{xb}{xa} \strdsidelabel{xa Left}{}{X}
@@ -32,7 +32,7 @@
     \strdin[gathered]{
         \strdscopeflip{
         \strdmid{\strdorigin}{b} \strdsidelabel{b}{}{B}
-        \strdlshift{cup}{b}{xb} \strdsidelabel{xb Left}{}{X}
+        \strdthen{ljump}{cup}{b}{xb} \strdsidelabel{xb Left}{}{X}
         \strdcellnode{xb End}{f}
         \strdcap{xb}{xa} \strdsidelabel{xa Left}{}{X}
         \strdmid{xa Right}{a} \strdsidelabel{a}{}{A}
