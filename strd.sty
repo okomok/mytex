@@ -105,7 +105,7 @@
     \node[strd coord] (#2 End) at (#2) {};%
 }
 
-\newcommand*{\strdidentity}[2]{%
+\newcommand*{\strdcopy}[2]{%
     \node[strd coord] (#2) at (#1) {};
     \node[strd coord] (#2 Start) at (#1 Start) {};
     \node[strd coord] (#2 End) at (#1 End) {};%
@@ -565,7 +565,7 @@
 }
 
 \def\strdseq[#1]{% can't support empty lists.
-    \Foldl{\strdthen}{\strdidentity}{\Listize[#1]}%
+    \Foldl{\strdthen}{\strdcopy}{\Listize[#1]}%
 }
 
 % remove me
