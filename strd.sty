@@ -4,12 +4,15 @@
 \usetikzlibrary{shapes,calc,decorations.markings,backgrounds,calc}
 
 
+% deprecate me; give up
 % For short names
 %   \strduse{foo{x}} doesn't work... 
 %   http://tex.stackexchange.com/questions/21466/test-if-token-is-a-control-sequence
-\newcommand*{\strduse}[1]{%
-    \ifcsdef{strd\detokenize{#1}}{\csuse{strd#1}}{#1}%
-}
+%\newcommand*{\strduse}[1]{%
+%    \ifcsdef{strd\detokenize{#1}}{\csuse{strd#1}}{#1}%
+%}
+
+\newcommand*{\strduse}{\Identity}
 
 
 % Styles
@@ -51,7 +54,7 @@
 % Environmentals 
 %
 
-\newcommand*{\strd}[1]{%
+\newcommand*{\strdpicture}[1]{%
     \begin{tikzpicture}[strd picture]
         \strddeclorigin
         #1;
@@ -64,7 +67,7 @@
 \newcommand*{\strdinimpl}[2]{%
     \begin{#1}
         \! % why needed?
-        \strd{#2}
+        \strdpicture{#2}
     \end{#1}%
 }
 
@@ -251,7 +254,6 @@
 }
 \newcommand*{\myvphantom}[1]{}
 
-\newcommand*{\strdasis}[1]{#1}
 
 % remove me
 \newcommand*{\strdsub}[2]{%
@@ -404,6 +406,7 @@
     \strdjump{#1}{#2}%
 }
 
+% deprecate me
 \newcommand*{\strdbranch}[2]{%
     \strdmid{#1}{#2 Main}
     \strdleft{#2 Main}{#2 Left}
@@ -411,6 +414,7 @@
     \strdyscale{2}{\strdjump}{#1}{#2}
 }
 
+% deprecate me
 \newcommand*{\strdunbranch}[2]{%
     \strdxscale{2}{\strddup}{#1}{#2 Dup}
     \strdunleft{#2 Dup Left}{#2 Left}
@@ -440,6 +444,7 @@
 }
 \newcommand*{\strdrchangez}{\strdflip{\strdlchangez}}
 
+% deprecate me
 \newcommand*{\strdtwo}[3]{%
     \strduse{#1}{#2}{#3 1}
     \strduse{#1}{#3 1}{#3 2}
@@ -459,6 +464,7 @@
         \strdscope{strd white}{\strduse{#1}{#2}{#3}}
     }%
 }
+
 
 % Graded strings; order depends
 %   tikz/double doesn't work with scopes.
@@ -580,10 +586,24 @@
 \newcommand*{\strdroadrshift}[1]{\strdflip{\strdroadlshift{#1}}}
 
 % {sf}{name}{from}{to}
-\newcommand*{\strdname}[4]{%
+\newcommand*{\strdnamed}[4]{%
     \strduse{#1}{#3}{#4}
     \strdnone{\strduse{#1}}{#3}{#2}
 }
+
+% {sf}{h}{from}{to}
+\newcommand*{\strdon}[4]{%
+    \strduse{#1}{#3}{#4}
+    \strduse{#2}{#4}%
+}
+
+\newcommand*{\strdhere}{\strdon{\strdempty}}
+\newcommand*{\strdcell}[1]{\strdhere{\myflip{\strdcellnode}{#1}}}
+\newcommand*{\strddot}{\strdhere{\strddotnode}}
+
+% remove me
+\newcommand*{\strdlabelside}[2]{\strdhere{\strdlabelsideimpl{#1}{#2}}}
+\newcommand*{\strdlabelsideimpl}[3]{\strdsidelabel{#3}{#1}{#2}}
 
 % {sf}{l}{r}{from}{to}
 \newcommand*{\strdsidelabeled}[5]{%

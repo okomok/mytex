@@ -10,7 +10,7 @@
     & \text{then test} 
     \strdin[gathered]{
         \strdmid{\strdorigin}{u} \strdrightlabel{u}{a} 
-        \strdthen{mid}{branch}{u}{v}
+        \strdthen{\strdmid}{\strdbranch}{u}{v}
         \strdleftlabel{v Prev}{b}
         \strdrightlabel{v Right}{b}
     } \\
@@ -21,7 +21,7 @@
     \strdin[gathered]{
         \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{a} 
         \strdcellnode{u End}{P}
-        \strdseq[\strdrightlabeled{mid}{R},\strdname{branch}{bran},\strdleftlabeledat{unbranch}{Right}{P}]{u}{v}
+        \strdseq[\strdrightlabeled{\strdmid}{R},\strdnamed{\strdbranch}{bran},\strdleftlabeledat{\strdunbranch}{Right}{P}]{u}{v}
         \strdrightlabel{v Right}{b}
         \strdrightlabel{v Prev Left}{c}
         \strdcellnode{v Prev Prev End}{Q}
@@ -34,19 +34,36 @@
     & \texttt{labeledat test}
     \strdin[gathered]{
         \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{a} 
-        \strdrightlabeledat{branch}{Right}{P}{u}{v}
+        \strdrightlabeledat{\strdbranch}{Right}{P}{u}{v}
    }
 }
 
 \myin[preview,math,aligned]{
-    & \myitem
+    & \text{one test}
     \strdin[gathered]{
         \strdmid{\strdorigin}{u} \strdsidelabel{u}{}{a} 
         \strdcellnode{u End}{P}
-        \strdseq[branch]{u}{v}
+        \strdseq[\strdbranch]{u}{v}
         \strdrightlabel{v Right}{b}
         \strdleftlabel{v Prev}{b}
     }
+}
+
+
+\myin[preview,math,aligned]{
+    & \text{with test} \\
+    & \strdin[gathered]{
+        \strdseq[\strdmid,\strdlabelside{A}{B},\strdmid]{\strdorigin}{v}
+        \strdrightlabel{v}{m}
+    } \\
+    & \strdin[gathered]{
+        \strdseq[\strddot,\strdmid,\strdcell{F},\strdmid,\strddot]{\strdorigin}{v}
+        \strdrightlabel{v}{m}
+        \strdrightlabel{v Prev}{mp}
+        \strdrightlabel{v Prev Prev}{mpp}
+        \strdrightlabel{v Prev Prev Prev}{mppp}
+        \strdrightlabel{v Prev Prev Prev Prev}{mpppp}
+    } \\
 }
 
 \end{document}
