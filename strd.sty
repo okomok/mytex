@@ -1,16 +1,8 @@
 \ProvidesPackage{strd}
 
-\usepackage{tikz,lambda,mathtools}
+\usepackage{tikz,lambda,mathtools,multido}
 \usetikzlibrary{shapes,calc,decorations.markings,backgrounds,calc}
 
-
-% deprecate me; give up
-% For short names
-%   \strduse{foo{x}} doesn't work... 
-%   http://tex.stackexchange.com/questions/21466/test-if-token-is-a-control-sequence
-%\newcommand*{\strduse}[1]{%
-%    \ifcsdef{strd\detokenize{#1}}{\csuse{strd#1}}{#1}%
-%}
 
 \newcommand*{\strduse}{\Identity}
 
@@ -54,7 +46,7 @@
 % Environmentals 
 %
 
-\newcommand*{\strdpicture}[1]{%
+\newcommand*{\strd}[1]{%
     \begin{tikzpicture}[strd picture]
         \strddeclorigin
         #1;
@@ -67,7 +59,7 @@
 \newcommand*{\strdinimpl}[2]{%
     \begin{#1}
         \! % why needed?
-        \strdpicture{#2}
+        \strd{#2}
     \end{#1}%
 }
 
@@ -132,11 +124,6 @@
     \draw[strd draw]{
         (#2 Start) -- (#2 End)
     };%
-}
-
-\newcommand*{\strdmidex}[2]{%
-    \strdmid{#1}{#2}
-    \strdyhalf{\strdmid}{#2}{#2 Ex}%
 }
 
 \newcommand*{\strdunleft}[2]{%
@@ -248,21 +235,6 @@
 \tikzset{strd isonode/.style={strd node,tape,tape bend height=2pt,minimum width=0pt,tape bend top=out and in,tape bend bottom=out and in}}
 \tikzset{strd dotnode/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
 
-% remove me; doesn't work well.
-\newcommand*{\myvphantomd}[1]{%
-    \vphantom{\operatorname{\vphantom{#1}}}%
-}
-\newcommand*{\myvphantom}[1]{}
-
-
-% remove me
-\newcommand*{\strdsub}[2]{%
-    \myvphantom{#2}_{#1}%
-}
-\newcommand*{\strdsuper}[2]{%
-    \myvphantom{#2}^{#1}%
-}
-
 \newcommand*{\strdcellnode}[2]{%
     \strdonlayer{strd nodelayer}{
         \node[strd cellnode] (#1 Node) at (#1) {#2};
@@ -347,7 +319,7 @@
 \newcommand*{\strdsidelabel}[3]{%
     \strdonlayer{strd labellayer}{
         \node[strd sidelabel,left] at (#1) {#2};
-        \node[strd sidelabel,right] at (#1) {\myvphantom{#2}#3};
+        \node[strd sidelabel,right] at (#1) {#3};
     }%
 }
 \newcommand*{\strdleftlabel}[2]{\strdsidelabel{#1}{#2}{}}
@@ -356,13 +328,13 @@
 \newcommand*{\strdfamilylabel}[3]{%
     \strdonlayer{strd labellayer}{
         \node[strd familylabel,above right] at (#1 EndCorner) {#2};
-        \node[strd familylabel,below] at (#1 EndCorner) {\myvphantom{#2}#3};
+        \node[strd familylabel,below] at (#1 EndCorner) {#3};
     }%
 }
 \newcommand*{\strdunfamilylabel}[3]{%
     \strdonlayer{strd labellayer}{
         \node[strd familylabel,above left] at (#1 EndCorner) {#2};
-        \node[strd familylabel,below] at (#1 EndCorner) {\myvphantom{#2}#3};
+        \node[strd familylabel,below] at (#1 EndCorner) {#3};
     }%
 }
 
@@ -370,7 +342,7 @@
 \newcommand*{\strdmaplabel}[3]{%
     \strdonlayer{strd labellayer}{
         \node[strd sidelabel,left] (#1 LeftLabel) at (#1) {#2};
-        \node[strd sidelabel,right] (#1 RightLabel) at (#1) {\myvphantom{#2}#3};
+        \node[strd sidelabel,right] (#1 RightLabel) at (#1) {#3};
     }%
 }
 
@@ -437,20 +409,6 @@
     \strdjump{#1}{#2}%
 }
 
-% remove me
-\newcommand*{\strdlchangez}[2]{%
-    \strdunright{#1}{#2 Prev}
-    \strdleft{#2 Prev}{#2}%
-}
-\newcommand*{\strdrchangez}{\strdflip{\strdlchangez}}
-
-% deprecate me
-\newcommand*{\strdtwo}[3]{%
-    \strduse{#1}{#2}{#3 1}
-    \strduse{#1}{#3 1}{#3 2}
-    \strdrange{#3 1 Start}{#3 1 End}{#3 2 End}{#3}
-}
-
 
 % White strings
 %
@@ -515,7 +473,7 @@
 \newcommand*{\strdroadlabel}[3]{%
     \strdonlayer{strd labellayer}{
         \node[strd sidelabel,left,xshift=-1.5pt] at (#1) {#2};
-        \node[strd sidelabel,right,xshift=1.5pt] at (#1) {\myvphantom{#2}#3};
+        \node[strd sidelabel,right,xshift=1.5pt] at (#1) {#3};
     }%
 }
 
@@ -568,6 +526,10 @@
 \newcommand*{\strdthen}[4]{%
     \strduse{#1}{#3}{#4 Prev}
     \strduse{#2}{#4 Prev}{#4}%
+}
+
+\newcommand*{\strdprev}[2]{% doesn't work.
+    #2\multido{}{#1}{\ Prev}%
 }
 
 \def\strdseq[#1]{% can't support empty lists.
