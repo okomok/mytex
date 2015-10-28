@@ -1,0 +1,25 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+\myin[preview,math,aligned]{
+    & \text{branch test: } 
+    \strdin[gathered]{
+        \strdseq[\strdmid,
+ %           \strdbranchimpl{\strdseq[\strdleft,\strdmid]},
+            \Identity{\strdbranchseq[\strdleft,\strdmid]},
+            \strdbranch{\strdmid},
+            \strdright
+        ]{\strdorigin}{v}
+   %     \strdllabel{v Prev}{X}
+   %     \strdllabel{v Prev Branch}{M}
+   %     \strdrlabel{v Prev Prev}{X}
+   %     \strdllabel{v Prev Prev Branch}{L}
+   %     \strdllabel{v}{R}
+    } \\
+}
+\end{document}

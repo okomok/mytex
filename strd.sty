@@ -314,7 +314,7 @@
 
 \tikzset{strd sidelabel/.style={font=\scriptsize,inner sep=0.2pt,strd scripttextvaligned}}
 \tikzset{strd familylabel/.style={font=\scriptsize,inner sep=0.4pt,inner ysep=0.8pt}}
-\tikzset{strd endlabel/.style={font=\normalsize,inner sep=0.8pt,strd normaltextvaligned}}
+\tikzset{strd edgelabel/.style={font=\normalsize,inner sep=0.8pt,strd normaltextvaligned}}
 
 \newcommand*{\strdsidelabel}[3]{%
     \strdonlayer{strd labellayer}{
@@ -352,14 +352,14 @@
     }%
 }
 
-\newcommand*{\strdlabelat}[3]{%
+\newcommand*{\strdedgelabelat}[3]{%
     \strdonlayer{strd labellayer}{
-        \node[strd endlabel,#2] at (#1) {#3};
+        \node[strd edgelabel,#2] at (#1) {#3};
     }%
 }
 
-\newcommand*{\strdstartlabel}[2]{\strdlabelat{#1 Start}{above}{#2}}
-\newcommand*{\strdendlabel}[2]{\strdlabelat{#1 End}{below}{#2}}
+\newcommand*{\strdstartlabel}[2]{\strdedgelabelat{#1 Start}{above}{#2}}
+\newcommand*{\strdendlabel}[2]{\strdedgelabelat{#1 End}{below}{#2}}
 
 
 % Composed strings
@@ -379,7 +379,7 @@
 }
 
 % deprecate me
-\newcommand*{\strdbranch}[2]{%
+\newcommand*{\strdbranchz}[2]{%
     \strdmid{#1}{#2 Main}
     \strdleft{#2 Main}{#2 Left}
     \strdright{#2 Main}{#2 Right}
@@ -387,7 +387,7 @@
 }
 
 % deprecate me
-\newcommand*{\strdunbranch}[2]{%
+\newcommand*{\strdunbranchz}[2]{%
     \strdxscale{2}{\strddup}{#1}{#2 Dup}
     \strdunleft{#2 Dup Left}{#2 Left}
     \strdunright{#2 Dup Right}{#2 Right}
@@ -559,6 +559,14 @@
     \strduse{#2}{#4}%
 }
 
+% {sf}{from}{to}
+\newcommand*{\strdbranch}[3]{%
+    \strdcopy{#2}{#3}
+    \strduse{#1}{#2}{#3 Branch}
+}
+\def\strdbranchseq[#1]{\strdbranch{\strdseq[#1]}}% \Identity must wrap...
+
+
 \newcommand*{\strdhere}{\strdon{\strdempty}}
 \newcommand*{\strdcell}[1]{\strdhere{\myflip{\strdcellnode}{#1}}}
 \newcommand*{\strddot}{\strdhere{\strddotnode}}
@@ -567,25 +575,25 @@
 \newcommand*{\strdlabelside}[2]{\strdhere{\strdlabelsideimpl{#1}{#2}}}
 \newcommand*{\strdlabelsideimpl}[3]{\strdsidelabel{#3}{#1}{#2}}
 
-% {sf}{l}{r}{from}{to}
-\newcommand*{\strdsidelabeled}[5]{%
-    \strduse{#1}{#4}{#5}
-    \strdsidelabel{#5}{#2}{#3}%
+% {l}{r}{sf}{from}{to}
+\newcommand*{\strdlabel}[5]{%
+    \strduse{#3}{#4}{#5}
+    \strdsidelabel{#5}{#1}{#2}%
 }
-\newcommand*{\strdleftlabeled}[3]{\strdsidelabeled{#1}{#2}{#3}{}}
-\newcommand*{\strdrightlabeled}[3]{\strdsidelabeled{#1}{#2}{}{#3}}
+\newcommand*{\strdllabel}[1]{\strdlabel{#1}{}}
+\newcommand*{\strdrlabel}[1]{\strdlabel{}{#1}}
 
-% {sf}{on}{l}{r}{from}{to}
-\newcommand*{\strdsidelabeledat}[6]{%
-    \strduse{#1}{#5}{#6}
-    \strdsidelabel{#6 #2}{#3}{#4}%
+% {on}{l}{r}{sf}{from}{to}
+\newcommand*{\strdlabelat}[6]{%
+    \strduse{#4}{#5}{#6}
+    \strdsidelabel{#6 #1}{#2}{#3}%
 }
-\newcommand*{\strdleftlabeledat}[3]{\strdsidelabeledat{#1}{#2}{#3}{}}
-\newcommand*{\strdrightlabeledat}[3]{\strdsidelabeledat{#1}{#2}{}{#3}}
+\newcommand*{\strdllabelat}[2]{\strdlabelat{#1}{#2}{}}
+\newcommand*{\strdrlabelat}[2]{\strdlabelat{#1}{}{#2}}
 
 \newcommand*{\strdroadlabeled}[5]{%
-    \strduse{#1}{#4}{#5}
-    \strdroadlabel{#5}{#2}{#3}%
+    \strduse{#3}{#4}{#5}
+    \strdroadlabel{#5}{#1}{#2}%
 }
 
 \newcommand*{\strdroadlabeledat}[6]{%

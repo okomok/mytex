@@ -1,0 +1,90 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+% catamorphism
+\myin[preview,math,aligned]{
+    & \myitem 
+    \strdin[gathered]{
+        \strdseq[
+            \strdrlabel{b}{\strdmid},
+            \strdcell{\texttt{cataFree}\,h\,\phi},
+            \strdrlabel{\texttt{Free}^f a} \strdmid,
+            \strdcell{\texttt{Pure}},
+            \strdrlabel{a}\strdmid
+        ]{\strdorigin}{v}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdseq[
+            \strdrlabel{b}{\strdmid},
+            \strdcell{h},
+            \strdrlabel{a} \strdmid,
+        ]{\strdorigin}{v}
+    } \\
+    & \myitem 
+    \strdin[gathered]{
+        \strdseq[
+            \strdrlabel{b}{\strdmid},
+            \strdcell{\texttt{cataFree}\,h\,\phi},
+            \strdrlabel{\texttt{Free}^f a}\strdmid,
+            \strdcell{\texttt{Free}},
+            \strdrlabel{f(\texttt{Free}^f a)}\strdmid
+        ]{\strdorigin}{v}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdseq[
+            \strdrlabel{b}{\strdmid},
+            \strdcell{\phi},
+            \strdrlabel{fb} \strdmid,
+            \strdbranch{
+                \strdrlabelat{Left}{\texttt{fmap}}{ \strdmapsqx{2}{3.3}{2.3} }
+            },
+            \strdrlabel{b} \strdmid,
+            \strdcell{\texttt{cataFree}\,h\,\phi},
+            \strdrlabel{\texttt{Free}^f a}\strdmid,
+            \strdrlabel{f(\texttt{Free}^f a)}\strdmid
+        ]{\strdorigin}{v}
+    } \\
+}
+
+% free monad
+\myin[preview,math,aligned]{
+    & \myitem 
+    \strdin[gathered]{
+        \strdseq[
+            \strdrlabel{\texttt{Free}^f a} \strdmid,
+            \strdcell{\texttt{return}},
+            \strdrlabel{a}\strdmid
+        ]{\strdorigin}{v}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdseq[
+            \strdrlabel{\texttt{Free}^f a} \strdmid,
+            \strdcell{\texttt{Pure}},
+            \strdrlabel{a}\strdmid
+        ]{\strdorigin}{v}
+    } \\
+    & \myitem 
+    \strdin[gathered]{
+        \strdseq[
+            \strdrlabel{\texttt{Free}^f b} \strdmid,
+            \strdcell{\texttt{>>=}},
+            \strdbranch{\strdseq[
+                \strdroadlabeled{a}{\texttt{Free}^f b}{\strdroad{\strdleft}},
+                \strdcell{h}
+            ]},
+            \strdrlabel{\texttt{Free}^f a} \strdright,
+        ]{\strdorigin}{v}
+    } \mydefeq
+    \strdin[gathered]{
+        \strdseq[
+            \strdrlabel{\texttt{Free}^f b} \strdmid,
+            \strdcell{\texttt{cataFree}\,h\,\texttt{Free}},
+            \strdrlabel{\texttt{Free}^f a}\strdmid
+        ]{\strdorigin}{v}
+    } \\
+}
+\end{document}
