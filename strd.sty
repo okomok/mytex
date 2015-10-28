@@ -1,7 +1,7 @@
 \ProvidesPackage{strd}
 
-\usepackage{tikz,lambda,mathtools,multido}
-\usetikzlibrary{shapes,calc,decorations.markings,backgrounds,calc}
+\usepackage{tikz,lambda,mathtools}
+\usetikzlibrary{shapes,calc,backgrounds,calc}
 
 
 \newcommand*{\strduse}{\Identity}
@@ -12,14 +12,12 @@
 
 \tikzset{strd normaltextvaligned/.style={text height=1.9ex,text depth=0.65ex}}
 \tikzset{strd scripttextvaligned/.style={text height=1.5ex,text depth=0.4ex}}
-%\tikzset{strd scripttextvaligned/.style={text height=1.5ex,text depth=0.25ex}}
 \tikzset{strd coord/.style={coordinate}}
 \tikzset{strd mathnodes/.style={execute at begin node=$,execute at end node=$}}
 \tikzset{strd none/.style={opacity=0,text opacity=0,fill opacity=0}}
 \tikzset{strd picturevaligned/.style={baseline={([yshift=-0.5ex]current bounding box.center)}}}
 \tikzset{strd picture/.style={strd picturevaligned,strd mathnodes,very thin,rounded corners=2pt}}
 \tikzset{strd draw/.style={}}
-\tikzset{-<-/.style={decoration={markings,mark=at position .5 with {\arrow{<}}},postaction={decorate}}}
 
 
 % Layers
@@ -28,9 +26,9 @@
 \pgfdeclarelayer{strd gradedlayer}
 \pgfdeclarelayer{strd pavelayer}
 \pgfdeclarelayer{strd whitelayer}
-\pgfdeclarelayer{strd nodelayer}
+\pgfdeclarelayer{strd celllayer}
 \pgfdeclarelayer{strd labellayer}
-\pgfsetlayers{background,main,strd pavelayer,strd gradedlayer,strd whitelayer,strd nodelayer,strd labellayer}
+\pgfsetlayers{background,main,strd pavelayer,strd gradedlayer,strd whitelayer,strd celllayer,strd labellayer}
 
 % layers reset surrounding line styles, so we define...
 \newcommand*{\strdresetlinewidth}{\pgfsetlinewidth{0.2pt}}
@@ -225,37 +223,36 @@
 }
 
 
-% Nodes
+% Cells
 %
 
 \tikzset{strd node/.style={font=\normalsize,very thin,solid,draw,fill=white,inner xsep=0.6pt,inner ysep=1.2pt}}
-\tikzset{strd nodelabel/.style={font=\normalsize,inner sep=0pt}}
-\tikzset{strd cellnode/.style={strd node,rectangle,minimum size=9pt}}
-\tikzset{strd bijnode/.style={strd node,thin,rectangle,sharp corners,minimum size=9pt}}
-\tikzset{strd isonode/.style={strd node,tape,tape bend height=2pt,minimum width=0pt,tape bend top=out and in,tape bend bottom=out and in}}
-\tikzset{strd dotnode/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
+\tikzset{strd cell/.style={strd node,rectangle,minimum size=9pt}}
+\tikzset{strd bijcell/.style={strd node,thin,rectangle,sharp corners,minimum size=9pt}}
+\tikzset{strd isocell/.style={strd node,tape,tape bend height=2pt,minimum width=0pt,tape bend top=out and in,tape bend bottom=out and in}}
+\tikzset{strd dot/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
 
-\newcommand*{\strdcellnode}[2]{%
-    \strdonlayer{strd nodelayer}{
-        \node[strd cellnode] (#1 Node) at (#1) {#2};
+\newcommand*{\strdputcell}[2]{% {x}{node}
+    \strdonlayer{strd celllayer}{
+        \node[strd cell] at (#2) {#1};
     }% 
 }
 
-\newcommand*{\strdbijnode}[2]{%
-    \strdonlayer{strd nodelayer}{
-        \node[strd bijnode] (#1 Node) at (#1) {#2};
+\newcommand*{\strdputbijcell}[2]{%
+    \strdonlayer{strd celllayer}{
+        \node[strd bijcell] at (#2) {#1};
     }%
 }
 
-\newcommand*{\strdisonode}[2]{%
-    \strdonlayer{strd nodelayer}{
-        \node[strd isonode] (#1 Node) at (#1) {#2};
+\newcommand*{\strdputisocell}[2]{%
+    \strdonlayer{strd celllayer}{
+        \node[strd isocell] at (#2) {#1};
     }% 
 }
 
-\newcommand*{\strddotnode}[1]{%
-    \strdonlayer{strd nodelayer}{
-        \node[strd dotnode] (#1 Node) at (#1) {};%
+\newcommand*{\strdputdot}[1]{%
+    \strdonlayer{strd celllayer}{
+        \node[strd dot] at (#1) {};%
     }% 
 }
 
@@ -316,50 +313,42 @@
 \tikzset{strd familylabel/.style={font=\scriptsize,inner sep=0.4pt,inner ysep=0.8pt}}
 \tikzset{strd edgelabel/.style={font=\normalsize,inner sep=0.8pt,strd normaltextvaligned}}
 
-\newcommand*{\strdsidelabel}[3]{%
+\newcommand*{\strdputlabel}[3]{% {l}{r}{node}
     \strdonlayer{strd labellayer}{
-        \node[strd sidelabel,left] at (#1) {#2};
-        \node[strd sidelabel,right] at (#1) {#3};
+        \node[strd sidelabel,left] at (#3) {#1};
+        \node[strd sidelabel,right] at (#3) {#2};
     }%
 }
-\newcommand*{\strdleftlabel}[2]{\strdsidelabel{#1}{#2}{}}
-\newcommand*{\strdrightlabel}[2]{\strdsidelabel{#1}{}{#2}}
+\newcommand*{\strdputllabel}[1]{\strdputlabel{#1}{}}
+\newcommand*{\strdputrlabel}[1]{\strdputlabel{}{#1}}
 
-\newcommand*{\strdfamilylabel}[3]{%
+\newcommand*{\strdputfamilylabel}[3]{% {f}{x}{node}
     \strdonlayer{strd labellayer}{
-        \node[strd familylabel,above right] at (#1 EndCorner) {#2};
-        \node[strd familylabel,below] at (#1 EndCorner) {#3};
+        \node[strd familylabel,above right] at (#3 EndCorner) {#1};
+        \node[strd familylabel,below] at (#3 EndCorner) {#2};
     }%
 }
-\newcommand*{\strdunfamilylabel}[3]{%
+\newcommand*{\strdputunfamilylabel}[3]{% {x}{f}{node}
     \strdonlayer{strd labellayer}{
-        \node[strd familylabel,above left] at (#1 EndCorner) {#2};
-        \node[strd familylabel,below] at (#1 EndCorner) {#3};
-    }%
-}
-
-% remove me; sidelabels are enough
-\newcommand*{\strdmaplabel}[3]{%
-    \strdonlayer{strd labellayer}{
-        \node[strd sidelabel,left] (#1 LeftLabel) at (#1) {#2};
-        \node[strd sidelabel,right] (#1 RightLabel) at (#1) {#3};
+        \node[strd familylabel,above left] at (#3 EndCorner) {#1};
+        \node[strd familylabel,below] at (#3 EndCorner) {#2};
     }%
 }
 
-\newcommand*{\strdsqlabel}[2]{%
+\newcommand*{\strdputsqlabel}[2]{%
     \strdonlayer{strd labellayer}{
-        \node[strd familylabel,below left] at (#1 Right StartCorner) {#2};
+        \node[strd familylabel,below left] at (#2 Right StartCorner) {#1};
     }%
 }
 
-\newcommand*{\strdedgelabelat}[3]{%
+\newcommand*{\strdputedgelabelat}[3]{% {at}{l}{node}
     \strdonlayer{strd labellayer}{
-        \node[strd edgelabel,#2] at (#1) {#3};
+        \node[strd edgelabel,#1] at (#3) {#2};
     }%
 }
 
-\newcommand*{\strdstartlabel}[2]{\strdedgelabelat{#1 Start}{above}{#2}}
-\newcommand*{\strdendlabel}[2]{\strdedgelabelat{#1 End}{below}{#2}}
+\newcommand*{\strdputstartlabel}[2]{\strdputedgelabelat{above}{#1}{#2 Start}}
+\newcommand*{\strdputendlabel}[2]{\strdputedgelabelat{below}{#1}{#2 End}}
 
 
 % Composed strings
@@ -376,23 +365,6 @@
     \strdunleft{#2 Dup Left}{#2 Left}
     \strdunright{#2 Dup Right}{#2 Right}
     \strdjump{#1}{#2}%
-}
-
-% deprecate me
-\newcommand*{\strdbranchz}[2]{%
-    \strdmid{#1}{#2 Main}
-    \strdleft{#2 Main}{#2 Left}
-    \strdright{#2 Main}{#2 Right}
-    \strdyscale{2}{\strdjump}{#1}{#2}
-}
-
-% deprecate me
-\newcommand*{\strdunbranchz}[2]{%
-    \strdxscale{2}{\strddup}{#1}{#2 Dup}
-    \strdunleft{#2 Dup Left}{#2 Left}
-    \strdunright{#2 Dup Right}{#2 Right}
-    \strdmid{#2 Left}{#2 Main}
-    \strdyscale{2}{\strdjump}{#1}{#2}
 }
 
 % rename me
@@ -452,14 +424,12 @@
     }%
 }
 
-% crossable road; order depends
-\newcommand*{\strdroadx}[3]{%
+\newcommand*{\strdroadx}[3]{% crossable road; order depends
     \strdscope{strd roadbase}{\strduse{#1}{#2}{#3}}
     \strdscope{strd roadpave}{\strduse{#1}{#2}{#3 Paved}}%
 }
 
-% slightly noisy around anti-aliasing
-\newcommand*{\strddeadend}[1]{%
+\newcommand*{\strddeadend}[1]{% slightly noisy around anti-aliasing
     \strdonlayer{strd whitelayer}{
         \draw[strd draw,white,line width=4pt,shorten >=-1pt] {
             ($(#1 End)+(0,10.16pt)$) -- (#1 End)
@@ -470,10 +440,10 @@
     }%
 }
 
-\newcommand*{\strdroadlabel}[3]{%
+\newcommand*{\strdputroadlabel}[3]{%
     \strdonlayer{strd labellayer}{
-        \node[strd sidelabel,left,xshift=-1.5pt] at (#1) {#2};
-        \node[strd sidelabel,right,xshift=1.5pt] at (#1) {#3};
+        \node[strd sidelabel,left,xshift=-1.5pt] at (#3) {#1};
+        \node[strd sidelabel,right,xshift=1.5pt] at (#3) {#2};
     }%
 }
 
@@ -528,77 +498,52 @@
     \strduse{#2}{#4 Prev}{#4}%
 }
 
-\newcommand*{\strdprev}[2]{% doesn't work.
-    #2\multido{}{#1}{\ Prev}%
-}
-
 \def\strdseq[#1]{% can't support empty lists.
     \Foldl{\strdthen}{\strdcopy}{\Listize[#1]}%
 }
 
-% remove me
-\newcommand*{\strdlshift}{\strdthen{\strdljump}}
-\newcommand*{\strdrshift}[1]{\strdflip{\strdlshift{#1}}}
-
-% remove me
-\newcommand*{\strdroadlshift}[3]{%
-    \strdroadlaside{#2}{#3 Shift}
-    \strduse{#1}{#3 Shift}{#3}%
-}
-\newcommand*{\strdroadrshift}[1]{\strdflip{\strdroadlshift{#1}}}
-
-% {sf}{name}{from}{to}
-\newcommand*{\strdnamed}[4]{%
-    \strduse{#1}{#3}{#4}
-    \strdnone{\strduse{#1}}{#3}{#2}
+\newcommand*{\strdname}[4]{% {name}{sf}{from}{to}
+    \strduse{#2}{#3}{#4}
+    \strdnone{\strduse{#2}}{#3}{#1}
 }
 
-% {sf}{h}{from}{to}
-\newcommand*{\strdon}[4]{%
-    \strduse{#1}{#3}{#4}
-    \strduse{#2}{#4}%
+\newcommand*{\strdapply}[4]{% {h}{sf}{from}{to}
+    \strduse{#2}{#3}{#4}
+    \strduse{#1}{#4}%
 }
 
-% {sf}{from}{to}
-\newcommand*{\strdbranch}[3]{%
+\newcommand*{\strdbranch}[3]{% {sf}{from}{to}
     \strdcopy{#2}{#3}
     \strduse{#1}{#2}{#3 Branch}
 }
 \def\strdbranchseq[#1]{\strdbranch{\strdseq[#1]}}% \Identity must wrap...
 
+\newcommand*{\strdhere}[1]{\strdapply{#1}{\strdempty}}
+\newcommand*{\strdcell}[1]{\strdhere{\strdputcell{#1}}}
+\newcommand*{\strddot}{\strdhere{\strdputdot}}
 
-\newcommand*{\strdhere}{\strdon{\strdempty}}
-\newcommand*{\strdcell}[1]{\strdhere{\myflip{\strdcellnode}{#1}}}
-\newcommand*{\strddot}{\strdhere{\strddotnode}}
-
-% remove me
-\newcommand*{\strdlabelside}[2]{\strdhere{\strdlabelsideimpl{#1}{#2}}}
-\newcommand*{\strdlabelsideimpl}[3]{\strdsidelabel{#3}{#1}{#2}}
-
-% {l}{r}{sf}{from}{to}
-\newcommand*{\strdlabel}[5]{%
+\newcommand*{\strdlabel}[5]{% {l}{r}{sf}{from}{to}
     \strduse{#3}{#4}{#5}
-    \strdsidelabel{#5}{#1}{#2}%
+    \strdputlabel{#1}{#2}{#5}%
 }
 \newcommand*{\strdllabel}[1]{\strdlabel{#1}{}}
 \newcommand*{\strdrlabel}[1]{\strdlabel{}{#1}}
 
-% {on}{l}{r}{sf}{from}{to}
-\newcommand*{\strdlabelat}[6]{%
+\newcommand*{\strdlabelat}[6]{% {on}{l}{r}{sf}{from}{to}
     \strduse{#4}{#5}{#6}
-    \strdsidelabel{#6 #1}{#2}{#3}%
+    \strdputlabel{#2}{#3}{#6 #1}%
 }
 \newcommand*{\strdllabelat}[2]{\strdlabelat{#1}{#2}{}}
 \newcommand*{\strdrlabelat}[2]{\strdlabelat{#1}{}{#2}}
 
-\newcommand*{\strdroadlabeled}[5]{%
+\newcommand*{\strdroadlabel}[5]{%
     \strduse{#3}{#4}{#5}
-    \strdroadlabel{#5}{#1}{#2}%
+    \strdputroadlabel{#1}{#2}{#5}%
 }
 
-\newcommand*{\strdroadlabeledat}[6]{%
-    \strduse{#1}{#5}{#6}
-    \strdroadlabel{#6 #2}{#3}{#4}%
+\newcommand*{\strdroadlabelat}[6]{%
+    \strduse{#4}{#5}{#6}
+    \strdputroadlabel{#2}{#3}{#6 #1}%
 }
 
 
