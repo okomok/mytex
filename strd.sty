@@ -429,7 +429,7 @@
     \strdscope{strd roadpave}{\strduse{#1}{#2}{#3 Paved}}%
 }
 
-\newcommand*{\strddeadend}[1]{% slightly noisy around anti-aliasing
+\newcommand*{\strdputdeadend}[1]{% slightly noisy around anti-aliasing
     \strdonlayer{strd whitelayer}{
         \draw[strd draw,white,line width=4pt,shorten >=-1pt] {
             ($(#1 End)+(0,10.16pt)$) -- (#1 End)
@@ -511,40 +511,32 @@
     \strduse{#2}{#3}{#4}
     \strduse{#1}{#4}%
 }
+\newcommand*{\strdapplyat}[5]{% {at}{h}{sf}{from}{to}
+    \strduse{#3}{#4}{#5}
+    \strduse{#2}{#5 #1}%
+}
+
+\newcommand*{\strdhere}[1]{\strdapply{#1}{\strdempty}}
+\newcommand*{\strdcell}[1]{\strdhere{\strdputcell{#1}}}
+\newcommand*{\strddot}{\strdhere{\strdputdot}}
+\newcommand*{\strddeadend}{\strdhere{\strdputdeadend}}
+
+\newcommand*{\strdlabel}[2]{\strdapply{\strdputlabel{#1}{#2}}}
+\newcommand*{\strdllabel}[1]{\strdlabel{#1}{}}
+\newcommand*{\strdrlabel}[1]{\strdlabel{}{#1}}
+
+\newcommand*{\strdlabelat}[3]{\strdapplyat{#1}{\strdputlabel{#2}{#3}}}
+\newcommand*{\strdllabelat}[2]{\strdlabelat{#1}{#2}{}}
+\newcommand*{\strdrlabelat}[2]{\strdlabelat{#1}{}{#2}}
+
+\newcommand*{\strdroadlabel}[2]{\strdapply{\strdputroadlabel{#1}{#2}}}
+\newcommand*{\strdroadlabelat}[3]{\strdapplyat{#1}{\strdputroadlabel{#2}{#3}}}
 
 \newcommand*{\strdbranch}[3]{% {sf}{from}{to}
     \strdcopy{#2}{#3}
     \strduse{#1}{#2}{#3 Branch}
 }
 \def\strdbranchseq[#1]{\strdbranch{\strdseq[#1]}}% \Identity must wrap...
-
-\newcommand*{\strdhere}[1]{\strdapply{#1}{\strdempty}}
-\newcommand*{\strdcell}[1]{\strdhere{\strdputcell{#1}}}
-\newcommand*{\strddot}{\strdhere{\strdputdot}}
-
-\newcommand*{\strdlabel}[5]{% {l}{r}{sf}{from}{to}
-    \strduse{#3}{#4}{#5}
-    \strdputlabel{#1}{#2}{#5}%
-}
-\newcommand*{\strdllabel}[1]{\strdlabel{#1}{}}
-\newcommand*{\strdrlabel}[1]{\strdlabel{}{#1}}
-
-\newcommand*{\strdlabelat}[6]{% {on}{l}{r}{sf}{from}{to}
-    \strduse{#4}{#5}{#6}
-    \strdputlabel{#2}{#3}{#6 #1}%
-}
-\newcommand*{\strdllabelat}[2]{\strdlabelat{#1}{#2}{}}
-\newcommand*{\strdrlabelat}[2]{\strdlabelat{#1}{}{#2}}
-
-\newcommand*{\strdroadlabel}[5]{%
-    \strduse{#3}{#4}{#5}
-    \strdputroadlabel{#1}{#2}{#5}%
-}
-
-\newcommand*{\strdroadlabelat}[6]{%
-    \strduse{#4}{#5}{#6}
-    \strdputroadlabel{#2}{#3}{#6 #1}%
-}
 
 
 % Utilities
