@@ -7,27 +7,27 @@
 % catamorphism
 \myin{preview,math,aligned}{
     & \myitem 
-    \strdgather{
+    \strdgathered{
         \strdrlabel{b}{\strdmid},
         \strdcell{\texttt{cataFree}\,h\,\phi},
         \strdrlabel{\texttt{Free}^f a} \strdmid,
         \strdcell{\texttt{Pure}},
         \strdrlabel{a}\strdmid
     } \mydefeq
-    \strdgather{
+    \strdgathered{
         \strdrlabel{b}{\strdmid},
         \strdcell{h},
         \strdrlabel{a} \strdmid,
     } \\
     & \myitem 
-    \strdgather{
+    \strdgathered{
         \strdrlabel{b}{\strdmid},
         \strdcell{\texttt{cataFree}\,h\,\phi},
         \strdrlabel{\texttt{Free}^f a}\strdmid,
         \strdcell{\texttt{Free}},
         \strdrlabel{f(\texttt{Free}^f a)}\strdmid
     } \mydefeq
-    \strdgather{
+    \strdgathered{
         \strdrlabel{b}{\strdmid},
         \strdcell{\phi},
         \strdrlabel{fb} \strdmid,
@@ -41,22 +41,21 @@
     } \\
 }
 
-
 % free monad
 \myin{preview,math,aligned}{
     & \myitem 
-    \strdgather{
+    \strdgathered{
         \strdrlabel{\texttt{Free}^f a} \strdmid,
         \strdcell{\texttt{return}},
         \strdrlabel{a}\strdmid
     } \mydefeq
-    \strdgather{
+    \strdgathered{
         \strdrlabel{\texttt{Free}^f a} \strdmid,
         \strdcell{\texttt{Pure}},
         \strdrlabel{a}\strdmid
     } \\
     & \myitem 
-    \strdgather{
+    \strdgathered{
         \strdrlabel{\texttt{Free}^f b} \strdmid,
         \strdcell{\texttt{>>=}},
         \strdbranchseq{
@@ -65,7 +64,7 @@
         },
         \strdrlabel{\texttt{Free}^f a} \strdright,
     } \mydefeq
-    \strdgather{
+    \strdgathered{
         \strdrlabel{\texttt{Free}^f b} \strdmid,
         \strdcell{\texttt{cataFree}\,h\,\texttt{Free}},
         \strdrlabel{\texttt{Free}^f a}\strdmid
