@@ -500,18 +500,19 @@
 \newcommand*{\strdroadlabel}[2]{\strdapply{\strdputroadlabel{#1}{#2}}}
 \newcommand*{\strdroadlabelat}[3]{\strdapplyat{#1}{\strdputroadlabel{#2}{#3}}}
 
-\newcommand*{\strdbranch}[3]{% {sf}{from}{to}
+\newcommand*{\strdbranchone}[3]{% {sf}{from}{to}
     \strdcopy{#2}{#3}
     \strduse{#1}{#2}{#3 Branch}
 }
-\def\strdbranchseq#1{\strdbranch{\strdseq{#1}}}
+\def\strdbranch#1{\strdbranchone{\strdseq{#1}}}
 
 
 % Utilities
 %
 
 \newcommand*{\strdrlap}[1]{\mathrlap{\smash{\,#1}}}
-\newcommand*{\strdfamilyarg}[1]{{\!\!\!#1}}
-
 \def\strdgathered#1{\strdin{gathered}{\strdseq{#1}{\strdorigin}{strdend}}}
+
+% remove me
+\newcommand*{\strdfamilyarg}[1]{{\!\!\!#1}}
 
