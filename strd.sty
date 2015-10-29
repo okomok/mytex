@@ -263,46 +263,14 @@
 \tikzset{strd bijsq/.style={solid,thin,sharp corners}}
 \tikzset{strd mapsq/.style={rounded corners=2pt}}
 
-\newcommand*{\strdlbijsq}[2]{%
+\newcommand*{\strdsq}[6]{% {style}{xl}{xr}{y}{from}{to}
     \strdonlayer{strd labellayer}{
-        \strdscopepathis{strd bijsq}{\strdsqsubset{#1}{#2}}
+        \strdscopepathis{#1}{
+            \strdscale{#2}{#4}{\strdsqsubset}{#5}{#6 Left}
+            \strdscale{#3}{#4}{\strdsqsupset}{#5}{#6 Right}
+            \strdyscale{#4}{\strdjump}{#5}{#6}%
+        }
     }%
-}
-\newcommand*{\strdrbijsq}[2]{%
-    \strdonlayer{strd labellayer}{
-        \strdscopepathis{strd bijsq}{\strdsqsupset{#1}{#2}}
-    }%
-}
-\newcommand*{\strdbijsq}[2]{%
-    \strdonlayer{strd labellayer}{
-        \strdscopepathis{strd bijsq}{\strdsquare{#1}{#2}}
-    }%
-}
-\newcommand*{\strdbijsqx}[5]{%
-    \strdscale{#2}{#1}{\strdlbijsq}{#4}{#5 Left}
-    \strdscale{#3}{#1}{\strdrbijsq}{#4}{#5 Right}
-    \strdyscale{#1}{\strdjump}{#4}{#5}%
-} 
-
-\newcommand*{\strdlmapsq}[2]{%
-    \strdonlayer{strd labellayer}{
-        \strdscopepathis{strd mapsq}{\strdsqsubset{#1}{#2}}
-    }%
-}
-\newcommand*{\strdrmapsq}[2]{%
-    \strdonlayer{strd labellayer}{
-        \strdscopepathis{strd mapsq}{\strdsqsupset{#1}{#2}}
-    }%
-}
-\newcommand*{\strdmapsq}[2]{%
-    \strdonlayer{strd labellayer}{
-        \strdscopepathis{strd mapsq}{\strdsquare{#1}{#2}}
-    }%
-}
-\newcommand*{\strdmapsqx}[5]{%
-    \strdscale{#2}{#1}{\strdlmapsq}{#4}{#5 Left}
-    \strdscale{#3}{#1}{\strdrmapsq}{#4}{#5 Right}
-    \strdyscale{#1}{\strdjump}{#4}{#5}%
 }
 
 
