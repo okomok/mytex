@@ -24,7 +24,7 @@
     \ensuremath{({} ^ \exists #1)(#2)}%
 }
 
-\def\myin[#1]#2{\Foldr{\myinimpl}{#2}{\Listize[#1]}}
+\def\myin#1#2{\Foldr{\myinimpl}{#2}{\myListize{#1}}}
 \newcommand*{\myinimpl}[2]{\begin{#1}#2\end{#1}}
 
 \newcommand*{\myprime}{^{\prime}\mkern-1.2mu}
@@ -35,4 +35,14 @@
 \newcommand*{\mynitem}[1]{\>\text{#1}.\ }
 
 \newcommand*{\mydint}[1]{\ensuremath{\displaystyle\int_{\mathrlap{#1}}\;}}
+
+\def\myUnlistize#1{#1\myUnlistize@{}}
+\def\myUnlistize@#1{#1\Foldr\Commaize{}}
+
+\def\myListize#1%
+   {\myListize@#1,\relax\@eolst}
+\def\myListize@#1,#2\@eolst%
+   {\TeXif{\ifx\relax#2}%
+        {\Singleton{#1}}%
+        {\Cons{#1}{\myListize@#2\@eolst}}}
 

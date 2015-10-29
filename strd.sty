@@ -51,8 +51,8 @@
     \end{tikzpicture}%
 }
 
-\def\strdin[#1]#2{%
-    \Foldr{\strdinimpl}{#2}{\Listize[#1]}%
+\def\strdin#1#2{%
+    \Foldr{\strdinimpl}{#2}{\myListize{#1}}%
 }
 \newcommand*{\strdinimpl}[2]{%
     \begin{#1}
@@ -498,11 +498,11 @@
     \strduse{#2}{#4 Prev}{#4}%
 }
 
-\def\strdseq[#1]{% can't support empty lists.
-    \Foldl{\strdthen}{\strdcopy}{\Listize[#1]}%
+\def\strdseq#1{% can't support empty lists.
+    \Foldl{\strdthen}{\strdcopy}{\myListize{#1}}%
 }
 
-\newcommand*{\strdname}[4]{% {name}{sf}{from}{to}
+\newcommand*{\strdassign}[4]{% {name}{sf}{from}{to}
     \strduse{#2}{#3}{#4}
     \strdnone{\strduse{#2}}{#3}{#1}
 }
@@ -536,7 +536,7 @@
     \strdcopy{#2}{#3}
     \strduse{#1}{#2}{#3 Branch}
 }
-\def\strdbranchseq[#1]{\strdbranch{\strdseq[#1]}}% \Identity must wrap...
+\def\strdbranchseq#1{\strdbranch{\strdseq{#1}}}
 
 
 % Utilities
