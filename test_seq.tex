@@ -6,20 +6,21 @@
 \begin{document}
 
 
-\myin[preview,math,aligned]{
+\myin{preview,math,aligned}{
     & \text{branch test: } 
-    \strdin[gathered]{
-        \strdseq[\strdmid,
- %           \strdbranchimpl{\strdseq[\strdleft,\strdmid]},
-            \Identity{\strdbranchseq[\strdleft,\strdmid]},
-            \strdbranch{\strdmid},
+    \strdin{gathered}{
+        \Identity{\strdseq}{\strdmid,
             \strdright
-        ]{\strdorigin}{v}
-   %     \strdllabel{v Prev}{X}
-   %     \strdllabel{v Prev Branch}{M}
-   %     \strdrlabel{v Prev Prev}{X}
-   %     \strdllabel{v Prev Prev Branch}{L}
-   %     \strdllabel{v}{R}
+        }{\strdorigin}{v}
     } \\
+}
+
+\myin{preview,math,aligned}{
+    & \text{branch test: } 
+    \strdgathered{\strdseq}{
+        \strdmid,
+        \strdright
+    }
+    \\
 }
 \end{document}
