@@ -1,0 +1,33 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+\myin{preview,math,aligned}{
+    & \text{then test: } 
+    \strdgathered{
+        \strdstart{S},
+        \strddot,
+        \strdmid,
+        \strddot,
+        \strdassign{r}{\strdmid},
+        \strddot,
+        \strdmid,
+        \strdrestart{r Start},
+        \strdleft,\strddot,
+        \strdmid,
+        \strdrestart{\strdorigin},
+        \strdright,
+        \strdassign{c}{\strdcircle},
+        \strdmid,
+        \strdend{E},
+        \strdrestart{c Right},
+        \strdhright
+%        \strduse{mid}{u}{u2} \strdrightlabel{u2}{r2}
+%        \strduse{\strdflip{mid}}{u2}{u3} \strdrightlabel{u3}{r3}
+    } \\
+}
+\end{document}

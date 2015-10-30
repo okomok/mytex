@@ -237,16 +237,9 @@
         \node[strd cell] at (#2) {#1};
     }% 
 }
-
-\newcommand*{\strdputbijcell}[2]{%
+\newcommand*{\strdputcellof}[3]{% {style}{x}{node}
     \strdonlayer{strd celllayer}{
-        \node[strd bijcell] at (#2) {#1};
-    }%
-}
-
-\newcommand*{\strdputisocell}[2]{%
-    \strdonlayer{strd celllayer}{
-        \node[strd isocell] at (#2) {#1};
+        \node[#1] at (#3) {#2};
     }% 
 }
 
@@ -257,13 +250,13 @@
 }
 
 
-% Squares
+% Frames
 %
 
-\tikzset{strd bijsq/.style={solid,thin,sharp corners}}
-\tikzset{strd mapsq/.style={rounded corners=2pt}}
+\tikzset{strd bijframe/.style={solid,thin,sharp corners}}
+\tikzset{strd mapframe/.style={rounded corners=2pt}}
 
-\newcommand*{\strdsq}[6]{% {style}{xl}{xr}{y}{from}{to}
+\newcommand*{\strdframeof}[6]{% {style}{xl}{xr}{y}{from}{to}
     \strdonlayer{strd labellayer}{
         \strdscopepathis{#1}{
             \strdscale{#2}{#4}{\strdsqsubset}{#5}{#6 Left}
@@ -290,20 +283,20 @@
 \newcommand*{\strdputllabel}[1]{\strdputlabel{#1}{}}
 \newcommand*{\strdputrlabel}[1]{\strdputlabel{}{#1}}
 
-\newcommand*{\strdputfamilylabel}[3]{% {f}{x}{node}
+\newcommand*{\strdputfamilylabel}[3]{% {f}{x}{sq}
     \strdonlayer{strd labellayer}{
         \node[strd familylabel,above right] at (#3 EndCorner) {#1};
         \node[strd familylabel,below] at (#3 EndCorner) {#2};
     }%
 }
-\newcommand*{\strdputunfamilylabel}[3]{% {x}{f}{node}
+\newcommand*{\strdputunfamilylabel}[3]{% {x}{f}{sq}
     \strdonlayer{strd labellayer}{
         \node[strd familylabel,above left] at (#3 EndCorner) {#1};
         \node[strd familylabel,below] at (#3 EndCorner) {#2};
     }%
 }
 
-\newcommand*{\strdputsqlabel}[2]{%
+\newcommand*{\strdputframelabel}[2]{%
     \strdonlayer{strd labellayer}{
         \node[strd familylabel,below left] at (#2 Right StartCorner) {#1};
     }%
@@ -459,6 +452,8 @@
 \newcommand*{\strdyscale}[1]{\strdtofun{\strdscopeyscale{#1}}}
 \newcommand*{\strdxhalf}{\strdxscale{0.5}}
 \newcommand*{\strdyhalf}{\strdyscale{0.5}}
+\newcommand*{\strdxdouble}{\strdxscale{2}}
+\newcommand*{\strdydouble}{\strdyscale{2}}
 \newcommand*{\strdimplicit}{\strdtofun{\strdscopeimplicit}}
 
 \newcommand*{\strdthen}[4]{%
@@ -488,12 +483,18 @@
 
 \newcommand*{\strdhere}[1]{\strdapply{#1}{\strdempty}}
 \newcommand*{\strdcell}[1]{\strdhere{\strdputcell{#1}}}
+\newcommand*{\strdcellof}[2]{\strdhere{\strdputcellof{#1}{#2}}}
 \newcommand*{\strddot}{\strdhere{\strdputdot}}
 \newcommand*{\strddeadend}{\strdhere{\strdputdeadend}}
 
 \newcommand*{\strdlabel}[2]{\strdapply{\strdputlabel{#1}{#2}}}
 \newcommand*{\strdllabel}[1]{\strdlabel{#1}{}}
 \newcommand*{\strdrlabel}[1]{\strdlabel{}{#1}}
+\newcommand*{\strdframelabel}[1]{\strdapply{\strdputframelabel{#1}}}
+\newcommand*{\strdfamilylabel}[2]{\strdapply{\strdputfamilylabel{#1}{#2}}}
+\newcommand*{\strdunfamilylabel}[2]{\strdapply{\strdputunfamilylabel{#1}{#2}}}
+\newcommand*{\strdstart}[1]{\strdhere{\strdputstartlabel{#1}}}
+\newcommand*{\strdend}[1]{\strdhere{\strdputendlabel{#1}}}
 
 \newcommand*{\strdlabelat}[3]{\strdapplyat{#1}{\strdputlabel{#2}{#3}}}
 \newcommand*{\strdllabelat}[2]{\strdlabelat{#1}{#2}{}}
@@ -504,17 +505,17 @@
 
 \newcommand*{\strdbranchone}[3]{% {sf}{from}{to}
     \strdcopy{#2}{#3}
-    \strduse{#1}{#2}{#3 Branch}
+    \strduse{#1}{#2}{#3 Branch}%
 }
 \newcommand{\strdbranch}{\strdseqin{\strdbranchone}}
 
 \newcommand*{\strdrestart}[3]{% {node}{from}{to}
-    \strdcoord{#1}{#3}
+    \strdcoord{#1}{#3}%
 }
 
 \newcommand*{\strddo}[3]{% {f}{from}{to}
     \strdcopy{#2}{#3}
-    \strduse{#1}
+    \strduse{#1}%
 }
 
 
