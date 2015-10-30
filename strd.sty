@@ -66,13 +66,13 @@
 %   A string 's' is a triple of nodes 's Start', 's' and 's End'.
 %
 
-\newcommand*{\strdrange}[4]{%
+\newcommand*{\strdrange}[4]{% {s}{m}{e}{to}
     \node[strd coord] (#4 Start) at (#1) {};
     \node[strd coord] (#4) at (#2) {};
     \node[strd coord] (#4 End) at (#3) {};%
 }
 
-\newcommand*{\strdcoord}[2]{%
+\newcommand*{\strdcoord}[2]{% {node}{to}
     \node[strd coord] (#2 Start) at (#1) {};
     \node[strd coord] (#2) at (#1) {};
     \node[strd coord] (#2 End) at (#1) {};%
@@ -472,7 +472,7 @@
 
 \newcommand*{\strdassign}[4]{% {name}{sf}{from}{to}
     \strduse{#2}{#3}{#4}
-    \strdnone{\strduse{#2}}{#3}{#1}
+    \strdnone{\strduse{#2}}{#3}{#1}% strdcopy keeps ranges only.
 }
 
 \newcommand*{\strdapply}[4]{% {h}{sf}{from}{to}
@@ -505,6 +505,10 @@
     \strduse{#1}{#2}{#3 Branch}
 }
 \def\strdbranch#1{\strdbranchone{\strdseq{#1}}}
+
+\newcommand*{\strdrestart}[3]{% {node}{from}{to}
+    \strdcoord{#1}{#3}
+}
 
 
 % Utilities
