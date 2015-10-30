@@ -502,13 +502,19 @@
 \newcommand*{\strdroadlabel}[2]{\strdapply{\strdputroadlabel{#1}{#2}}}
 \newcommand*{\strdroadlabelat}[3]{\strdapplyat{#1}{\strdputroadlabel{#2}{#3}}}
 
-\newcommand*{\strdbranch}[3]{% {sf}{from}{to}
+\newcommand*{\strdbranchone}[3]{% {sf}{from}{to}
     \strdcopy{#2}{#3}
     \strduse{#1}{#2}{#3 Branch}
 }
+\newcommand{\strdbranch}{\strdseqin{\strdbranchone}}
 
 \newcommand*{\strdrestart}[3]{% {node}{from}{to}
     \strdcoord{#1}{#3}
+}
+
+\newcommand*{\strddo}[3]{% {f}{from}{to}
+    \strdcopy{#2}{#3}
+    \strduse{#1}
 }
 
 

@@ -1,0 +1,19 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+\myin{preview,math,aligned}{
+    & \text{test do: } 
+    \strdgathered{
+        \strddot,
+        \strdassign{m}{\strdmid},
+        \strddot,
+        \strddo{ \strdputllabel{M}{m} \strdputrlabel{N}{m End} },
+        \strdleft
+    } \\
+}
+\end{document}
