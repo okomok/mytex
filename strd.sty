@@ -232,16 +232,14 @@
 \tikzset{strd isocell/.style={strd node,tape,tape bend height=2pt,minimum width=0pt,tape bend top=out and in,tape bend bottom=out and in}}
 \tikzset{strd dot/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
 
-\newcommand*{\strdputcell}[2]{% {x}{node}
-    \strdonlayer{strd celllayer}{
-        \node[strd cell] at (#2) {#1};
-    }% 
-}
 \newcommand*{\strdputcellof}[3]{% {style}{x}{node}
     \strdonlayer{strd celllayer}{
         \node[#1] at (#3) {#2};
     }% 
 }
+\newcommand*{\strdputcell}{\strdputcellof{strd cell}}
+\newcommand*{\strdputbijcell}{\strdputcellof{strd bijcell}}
+\newcommand*{\strdputisocell}{\strdputcellof{strd isocell}}
 
 \newcommand*{\strdputdot}[1]{%
     \strdonlayer{strd celllayer}{
@@ -253,8 +251,8 @@
 % Frames
 %
 
-\tikzset{strd bijframe/.style={solid,thin,sharp corners}}
 \tikzset{strd mapframe/.style={rounded corners=2pt}}
+\tikzset{strd bijframe/.style={solid,thin,sharp corners}}
 
 \newcommand*{\strdframeof}[6]{% {style}{xl}{xr}{y}{from}{to}
     \strdonlayer{strd labellayer}{
@@ -265,6 +263,8 @@
         }
     }%
 }
+\newcommand*{\strdmapframe}{\strdframeof{strd mapframe}}
+\newcommand*{\strdbijframe}{\strdframeof{strd bijframe}}
 
 
 % Labels
@@ -483,7 +483,8 @@
 
 \newcommand*{\strdhere}[1]{\strdapply{#1}{\strdempty}}
 \newcommand*{\strdcell}[1]{\strdhere{\strdputcell{#1}}}
-\newcommand*{\strdcellof}[2]{\strdhere{\strdputcellof{#1}{#2}}}
+\newcommand*{\strdbijcell}[1]{\strdhere{\strdputbijcell{#1}}}
+\newcommand*{\strdisocell}[1]{\strdhere{\strdputisocell{#1}}}
 \newcommand*{\strddot}{\strdhere{\strdputdot}}
 \newcommand*{\strddeadend}{\strdhere{\strdputdeadend}}
 
