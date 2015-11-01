@@ -1,6 +1,6 @@
 \ProvidesPackage{strd}
 
-\usepackage{tikz,lambda,mathtools}
+\usepackage{tikz,lambda,mathtools,graphicx}
 \usetikzlibrary{shapes,calc,backgrounds,calc}
 
 
@@ -78,7 +78,12 @@
     \node[strd coord] (#2 End) at (#1) {};%
 }
 
-\newcommand*{\strddeclorigin}{\strdcoord{0,0}{strdorigin}}
+\tikzset{strd origin/.style={inner sep=0pt,outer sep=0pt,minimum width=9pt,minimum height=0pt}}
+
+\newcommand*{\strddeclorigin}{%
+    \strdcoord{0,0}{strdorigin}
+    \node[strd origin] at (strdorigin) {};%
+}
 \newcommand*{\strdorigin}{strdorigin}
 
 
@@ -534,4 +539,6 @@
 %
 
 \newcommand*{\strdrlap}[1]{\mathrlap{\smash{\,#1}}}
+\newcommand*{\strdlvert}[1]{\rotatebox[origin=c]{90}{#1}}
+\newcommand*{\strdrvert}[1]{\rotatebox[origin=c]{-90}{#1}}
 

@@ -1,0 +1,96 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+% signature
+\myin{preview,math,aligned}{
+    & \myitem
+    \strdgathered{
+        \strdrlabel{ma}{\strdmid},
+        \strdcell{\texttt{return}},
+        \strdrlabel{a}{\strdmid}
+    } ,\ 
+    \strdgathered{
+        \strdroadlabel{ma}{mb}{\strdroad{\strdmid}},
+        \strdcell{\texttt{=<<}},
+        \strdroadlabel{a}{mb}{\strdroad{\strdmid}}
+    } \\
+}
+
+
+% laws 
+\myin{preview,math,aligned}{
+    & \myitem
+    \strdgathered{
+        \strdrlabel{mb}{\strdmid},
+        \strdbranch{
+            \strdframelabelat{Left}{\strdlvert{\texttt{=<<}}}{\strdmapframe{1}{1}{2}}
+        },
+        \strdmid,
+        \strdcell{k},
+        \strdrlabel{a}{\strdmid},
+        \strdrlabel{ma}{\strdmid},
+        \strdcell{\texttt{return}},
+        \strdrlabel{a}{\strdmid}
+    } =
+    \strdgathered{
+        \strdrlabel{mb}{\strdmid},
+        \strdcell{k},
+        \strdrlabel{a}{\strdmid}
+    } \\
+    & \myitem
+    \strdgathered{
+        \strdrlabel{ma}{\strdmid},
+        \strdbranch{
+            \strdframelabelat{Left}{\strdlvert{\texttt{=<<}}}{\strdmapframe{1.5}{1.5}{2}}
+        },
+        \strdmid,
+        \strdcell{\texttt{return}},
+        \strdrlabel{a}{\strdmid},
+        \strdrlabel{ma}{\strdmid},
+    } =
+    \strdgathered{
+        \strdrlabel{ma}{\strdmid}
+    } \\
+    & \myitem
+    \strdgathered{
+        \strdrlabel{mc}{\strdmid},
+        \strdbranch{
+            \strdframelabelat{Left}{\strdlvert{\texttt{=<<}}}{\strdmapframe{2}{2}{5}}
+        },
+        \strdmid,
+        \strdbranch{
+            \strdframelabelat{Left}{\strdlvert{\texttt{=<<}}}{\strdmapframe{1}{1}{2}}
+        },
+        \strdmid,
+        \strdcell{h},
+        \strdrlabel{b}{\strdmid},
+        \strdrlabel{mb}{\strdmid},
+        \strdcell{k},
+        \strdrlabel{a}{\strdmid},
+        \strdrlabel{ma}{\strdmid},
+    } =
+    \strdgathered{
+        \strdrlabel{mc}\strdmid,
+        \strdbranch{
+            \strdframelabelat{Left}{\strdlvert{\texttt{=<<}}}{\strdmapframe{1}{1}{2}}
+        },
+        \strdmid,
+        \strdcell{h},
+        \strdrlabel{b}{\strdmid},
+        \strdrlabel{mb}\strdmid,
+        \strdbranch{
+            \strdframelabelat{Left}{\strdlvert{\texttt{=<<}}}{\strdmapframe{1}{1}{2}}
+        },
+        \strdmid,
+        \strdcell{k},
+        \strdrlabel{a}{\strdmid},
+        \strdrlabel{ma}{\strdmid}
+    }
+}
+        
+\end{document}
