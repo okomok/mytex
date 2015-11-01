@@ -272,16 +272,26 @@
 
 \tikzset{strd sidelabel/.style={font=\scriptsize,inner sep=0.2pt,strd scripttextvaligned}}
 \tikzset{strd familylabel/.style={font=\scriptsize,inner sep=0.4pt,inner ysep=0.8pt}}
+\tikzset{strd framelabel/.style={font=\scriptsize,fill=white,inner sep=0.4pt,inner ysep=0.8pt}}
 \tikzset{strd edgelabel/.style={font=\normalsize,inner sep=0.8pt,strd normaltextvaligned}}
 
-\newcommand*{\strdputlabel}[3]{% {l}{r}{node}
+\newcommand*{\strdputllabel}[2]{%
     \strdonlayer{strd labellayer}{
-        \node[strd sidelabel,left] at (#3) {#1};
-        \node[strd sidelabel,right] at (#3) {#2};
+        \node[strd sidelabel,left] at (#2) {#1};
     }%
 }
-\newcommand*{\strdputllabel}[1]{\strdputlabel{#1}{}}
-\newcommand*{\strdputrlabel}[1]{\strdputlabel{}{#1}}
+
+\newcommand*{\strdputrlabel}[2]{%
+    \strdonlayer{strd labellayer}{
+        \node[strd sidelabel,right] at (#2) {#1};
+    }%
+}
+
+\newcommand*{\strdputframelabel}[2]{%
+    \strdonlayer{strd labellayer}{
+        \node[strd framelabel] at (#2) {#1};
+    }%
+}
 
 \newcommand*{\strdputfamilylabel}[3]{% {f}{x}{sq}
     \strdonlayer{strd labellayer}{
@@ -296,7 +306,7 @@
     }%
 }
 
-\newcommand*{\strdputframelabel}[2]{%
+\newcommand*{\strdputregionlabel}[2]{%
     \strdonlayer{strd labellayer}{
         \node[strd familylabel,below left] at (#2 Right StartCorner) {#1};
     }%
@@ -371,7 +381,7 @@
 
 
 % Roads
-%   keep scaling away by '--'
+%   Keep scaling away by '--'.
 %
 
 \tikzset{strd roadcolor/.style={gray!18}}
@@ -488,18 +498,18 @@
 \newcommand*{\strddot}{\strdhere{\strdputdot}}
 \newcommand*{\strddeadend}{\strdhere{\strdputdeadend}}
 
-\newcommand*{\strdlabel}[2]{\strdapply{\strdputlabel{#1}{#2}}}
-\newcommand*{\strdllabel}[1]{\strdlabel{#1}{}}
-\newcommand*{\strdrlabel}[1]{\strdlabel{}{#1}}
+\newcommand*{\strdllabel}[1]{\strdapply{\strdputllabel{#1}}}
+\newcommand*{\strdrlabel}[1]{\strdapply{\strdputrlabel{#1}}}
 \newcommand*{\strdframelabel}[1]{\strdapply{\strdputframelabel{#1}}}
+\newcommand*{\strdregionlabel}[1]{\strdapply{\strdputregionlabel{#1}}}
 \newcommand*{\strdfamilylabel}[2]{\strdapply{\strdputfamilylabel{#1}{#2}}}
 \newcommand*{\strdunfamilylabel}[2]{\strdapply{\strdputunfamilylabel{#1}{#2}}}
 \newcommand*{\strdstart}[1]{\strdhere{\strdputstartlabel{#1}}}
 \newcommand*{\strdend}[1]{\strdhere{\strdputendlabel{#1}}}
 
-\newcommand*{\strdlabelat}[3]{\strdapplyat{#1}{\strdputlabel{#2}{#3}}}
-\newcommand*{\strdllabelat}[2]{\strdlabelat{#1}{#2}{}}
-\newcommand*{\strdrlabelat}[2]{\strdlabelat{#1}{}{#2}}
+\newcommand*{\strdllabelat}[2]{\strdapplyat{#1}{\strdputllabel{#2}}}
+\newcommand*{\strdrlabelat}[2]{\strdapplyat{#1}{\strdputrlabel{#2}}}
+\newcommand*{\strdframelabelat}[2]{\strdapplyat{#1}{\strdputframelabel{#2}}}
 
 \newcommand*{\strdroadlabel}[2]{\strdapply{\strdputroadlabel{#1}{#2}}}
 \newcommand*{\strdroadlabelat}[3]{\strdapplyat{#1}{\strdputroadlabel{#2}{#3}}}

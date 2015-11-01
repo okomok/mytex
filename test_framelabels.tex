@@ -1,0 +1,29 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+\myin{preview,math,aligned}{
+    & \text{mapframe test: } 
+    \strdgathered{
+        \strdmid,
+        \strdbranch{
+            \strdframelabelat{Left}{\rotatebox[origin=c]{90}{\texttt{traverse}}}{\strdmapframe{2}{2}{2}}
+        },
+        \strdmid,
+        \strdcell{f},
+        \strdmid,
+        \strdmid,
+        \strdbranch{
+            \strdrlabelat{Left}{g}{\strdmapframe{2}{2}{2}}
+        },
+        \strdmid,
+        \strdcell{f},
+        \strdmid,
+        \strdmid
+    } \\
+}
+\end{document}
