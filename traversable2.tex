@@ -1,0 +1,88 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin{preview,math,aligned}{
+    & \myitem
+    \strdgathered{
+        \strdrlabel{g(tb)}{\strdmid},
+        \strdframelabelat{Left}{\strdlvert{\texttt{traverse}}}{\strdmapframe{1}{1}{
+            \strdrlabel{gb}{\strdmid},
+            \strdcell{s_b},
+            \strdrlabel{fb}{\strdmid},
+            \strdcell{h},
+            \strdrlabel{a}{\strdmid}
+        }},
+        \strdrlabel{ta}{\strdmid}
+    } =
+    \strdgathered{
+        \strdrlabel{g(tb)}{\strdmid},
+        \strdcell{s_{tb}},
+        \strdrlabel{f(tb)}{\strdmid},
+        \strdframelabelat{Left}{\strdlvert{\texttt{traverse}}}{\strdmapframe{1}{1}{
+            \strdrlabel{fb}{\strdmid},
+            \strdcell{h},
+            \strdrlabel{a}{\strdmid}
+        }},
+        \strdrlabel{ta}{\strdmid}
+    } \\
+    & \myitem
+    \strdgathered{
+        \strdrlabel{1(tb)}{\strdmid},
+        \strdframelabelat{Left}{\strdlvert{\texttt{traverse}}}{\strdmapframe{1}{1}{
+            \strdrlabel{1b}{\strdmid},
+            \strdcell{h},
+            \strdrlabel{a}{\strdmid}
+        }},
+        \strdrlabel{ta}{\strdmid}
+    } =
+    \strdgathered{
+        \strdrlabel{tb}{\strdmid},
+        \strdframelabelat{Left}{\strdlvert{\texttt{fmap}}}{\strdmapframe{1}{1}{
+            \strdrlabel{b}{\strdmid},
+            \strdcell{h},
+            \strdrlabel{a}{\strdmid}
+        }},
+        \strdrlabel{ta}{\strdmid}
+    } \\ 
+    & \myitem
+    \strdgathered{
+        \strdrlabel{f(g(tc))}{\strdmid},
+        \strdframelabelat{Left}{\strdlvert{\texttt{traverse}}}{\strdmapframe{2}{2}{
+            \strdrlabel{f(gc)}{\strdmid},
+            \strdframelabelat{Left}{\strdlvert{\texttt{fmap}}}{\strdmapframe{1}{1}{
+                \strdrlabel{gc}{\strdmid},
+                \strdcell{k},
+                \strdrlabel{b}{\strdmid}
+            }},
+            \strdrlabel{fb}{\strdmid},
+            \strdcell{h},
+            \strdrlabel{a}{\strdmid}
+        }},
+        \strdrlabel{ta}{\strdmid}
+    } =
+    \strdgathered{
+        \strdrlabel{f(g(tc))}{\strdmid},
+        \strdframelabelat{Left}{\strdlvert{\texttt{fmap}}}{\strdmapframe{2}{2}{
+            \strdrlabel{g(tc)}{\strdmid},
+            \strdframelabelat{Left}{\strdlvert{\texttt{traverse}}}{\strdmapframe{1}{1}{
+                \strdrlabel{gc}{\strdmid},
+                \strdcell{k},
+                \strdrlabel{b}{\strdmid}
+            }},
+            \strdrlabel{tb}{\strdmid}
+        }},
+        \strdrlabel{f(tb)}{\strdmid},
+        \strdframelabelat{Left}{\strdlvert{\texttt{traverse}}}{\strdmapframe{1}{1}{
+            \strdrlabel{fb}{\strdmid},
+            \strdcell{h},
+            \strdrlabel{a}{\strdmid}
+        }},
+        \strdrlabel{tb}{\strdmid}
+    } \\
+}
+
+\end{document}
