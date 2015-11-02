@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage{strd,cat,my}
+\usepackage{strd,cat,my,hask}
 \usepackage[active,tightpage]{preview}
 
 
@@ -93,4 +93,30 @@
     }
 }
         
+% Kleisli composition 
+\myin{preview,math,aligned}{
+    & \myitem
+    \strdgathered{
+        \strdroadlabel{a}{mc}{\strdroad{\strdmid}},
+        \strdcell{\haskop{<=<}},
+        \strdbranch{
+            \strdroadlabel{b}{mc}{\strdroad{\strdleft}},
+            \strdcell{g}
+        },
+        \strdroadlabel{a}{mb}{\strdroad{\strdright}},
+        \strdcell{f}
+    } \mydefeq
+    \strdgathered{
+        \strdrlabel{mc}{\strdmid},
+        \strdbranch{
+            \strdframelabelat{Left}{\strdlvert{\texttt{=<<}}}{\strdmapframe{1}{1}{2}}
+        },
+        \strdmid,
+        \strdcell{g},
+        \strdrlabel{b}{\strdmid},
+        \strdrlabel{mb}{\strdmid},
+        \strdcell{f},
+        \strdrlabel{a}{\strdmid}
+    } \\
+}
 \end{document}

@@ -30,11 +30,12 @@
 \pgfdeclarelayer{strd labellayer}
 \pgfsetlayers{background,main,strd pavelayer,strd gradedlayer,strd whitelayer,strd celllayer,strd labellayer}
 
-% layers reset surrounding line styles, so we define...
+% layers forget surrounding line styles, so we define...
 \newcommand*{\strdresetlinewidth}{\pgfsetlinewidth{0.2pt}}
 
 \newcommand*{\strdonlayer}[2]{%
     \begin{pgfonlayer}{#1}
+        \strdresetlinewidth
         #2
     \end{pgfonlayer}
     \strdresetlinewidth
@@ -205,19 +206,30 @@
 \newcommand*{\strdrjump}{\strdnone{\strdhright}}
 \newcommand*{\strddup}{\strdnone{\strdminus}}
 
+\newcommand*{\strdjumpto}[3]{% {node}{from}{to}
+    \node[strd coord] (#3 Start) at (#2 End) {};
+    \node[strd coord] (#3 End) at (#1) {};
+    \node[strd coord] (#3) at ($(#3 Start)!.5!(#3 End)$) {};%
+}
 
 % Square strings
 %
 
-\newcommand*{\strdsqsubset}[2]{%
-    \node[strd coord] (#2 Start) at (#1 End) {};
-    \node[strd coord] (#2 StartCorner) at ($(#1 End)+(-\strdxunit,0)$) {};
-    \node[strd coord] (#2) at ($(#1 End)+(-\strdxunit,-\strdyhalfunit)$) {};
-    \node[strd coord] (#2 EndCorner) at ($(#1 End)+(-\strdxunit,-\strdyunit)$) {};
-    \node[strd coord] (#2 End) at ($(#1 End)+(0,-\strdyunit)$) {};
+\newcommand*{\strdsqsubsetto}[3]{% {node}{from}{to}
+    \node[strd coord] (#3 Start) at (#2 End) {};
+    \node[strd coord] (#3 End) at (#1) {};
+    \node[strd coord] (#3 StartCorner) at ($(#3 Start)+(-\strdxunit,0)$) {};
+    \node[strd coord] (#3 EndCorner) at ($(#3 End)+(-\strdxunit,0)$) {};
+    \node[strd coord] (#3) at ($(#3 Start)!.5!(#3 End)+(-\strdxunit,0)$) {};
     \draw[strd draw]{
-        (#2 Start) -- (#2 StartCorner) -- (#2 EndCorner) -- (#2 End)
+        (#3 Start) -- (#3 StartCorner) -- (#3 EndCorner) -- (#3 End)
     };%
+}
+\newcommand*{\strdsqsupsetto}[1]{\strdflip{\strdsqsubsetto{#1}}}
+
+\newcommand*{\strdsqsubset}[2]{%
+    \strdjump{#1}{#2 Impl}
+    \strdsqsubsetto{#2 Impl End}{#1}{#2}%
 }
 \newcommand*{\strdsqsupset}{\strdflip{\strdsqsubset}}
 
@@ -256,20 +268,23 @@
 % Frames
 %
 
-\tikzset{strd mapframe/.style={rounded corners=2pt}}
+\tikzset{strd mapframe/.style={solid,thin,rounded corners=2pt}}
 \tikzset{strd bijframe/.style={solid,thin,sharp corners}}
 
-\newcommand*{\strdframeof}[6]{% {style}{xl}{xr}{y}{from}{to}
+\newcommand*{\strdframeofone}[6]{% {style}{xl}{xr}{sf}{from}{to}
+    \strduse{#4}{#5}{#6 Unframe}
     \strdonlayer{strd labellayer}{
         \strdscopepathis{#1}{
-            \strdscale{#2}{#4}{\strdsqsubset}{#5}{#6 Left}
-            \strdscale{#3}{#4}{\strdsqsupset}{#5}{#6 Right}
-            \strdyscale{#4}{\strdjump}{#5}{#6}%
+            \strdxscale{#2}{\strdsqsubsetto{#6 Unframe End}}{#5}{#6 Left}
+            \strdxscale{#3}{\strdsqsupsetto{#6 Unframe End}}{#5}{#6 Right}
+            \strdjumpto{#6 Unframe End}{#5}{#6}
         }
     }%
 }
-\newcommand*{\strdmapframe}{\strdframeof{strd mapframe}}
-\newcommand*{\strdbijframe}{\strdframeof{strd bijframe}}
+\newcommand{\strdframeof}[3]{\strdseqin{\strdframeofone{#1}{#2}{#3}}}
+
+\newcommand{\strdmapframe}{\strdframeof{strd mapframe}}
+\newcommand{\strdbijframe}{\strdframeof{strd bijframe}}
 
 
 % Labels
@@ -366,7 +381,6 @@
 
 \newcommand*{\strdwhite}[3]{%
     \strdonlayer{strd whitelayer}{
-        \strdresetlinewidth
         \strdscope{strd white}{\strduse{#1}{#2}{#3}}
     }%
 }
@@ -378,7 +392,6 @@
 
 \newcommand*{\strdgraded}[3]{%
     \strdonlayer{strd gradedlayer}{
-        \strdresetlinewidth
         \strdscope{strd white}{\strduse{#1}{#2}{#3 Graded}}
         \strdscope{strd edgenoise}{\strduse{#1}{#2}{#3}}
     }%

@@ -1,0 +1,44 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin{preview,math,aligned}{
+    & \text{test: } 
+    \strdin{gathered}{
+        \strdmid{\strdorigin}{u}
+        \strdmid{u}{u2}
+        \strdmid{u2}{u3}
+        \strdsquare{u}{sq}
+        \strdputrlabel{L}{sq Left}
+        \strdputrlabel{R}{sq Right}
+    } \\
+}
+
+\myin{preview,math,aligned}{
+    & \text{test: } 
+    \strdin{gathered}{
+        \strdmid{\strdorigin}{u}
+        \strdframeofone{strd mapframe}{3}{2}{\strdseq{\strdmid,\strdmid}}{u}{sq}
+        \strdputrlabel{L}{sq Left}
+        \strdputrlabel{R}{sq Right}
+        \strdmid{sq Unframe}{u3}
+        \strdputcell{F}{sq}
+    } \\
+}
+
+\myin{preview,math,aligned}{
+    & \text{test: } 
+    \strdin{gathered}{
+        \strdmid{\strdorigin}{u}
+        \strdmapframe{3}{2}{\strdmid,\strdmid}{u}{sq}
+        \strdputrlabel{L}{sq Left}
+        \strdputrlabel{R}{sq Right}
+        \strdmid{sq Unframe}{u3}
+        \strdputcell{F}{sq}
+    } \\
+}
+
+\end{document}
