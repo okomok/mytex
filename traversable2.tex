@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage{strd,cat,my}
+\usepackage{strd,cat,my,hask}
 \usepackage[active,tightpage]{preview}
 
 
@@ -16,7 +16,7 @@
             \strdmid ,\strdrlabel{fb},
             \strdcell{h},
             \strdmid, \strdrlabel{a}
-        }, \strdframelabelat{Left}{\strdlvert{\texttt{traverse}}},
+        }, \strdframellabel{\strdlvert{\haskop{traverse}}},
         \strdmid, \strdrlabel{ta}
     } =
     \strdgathered{
@@ -27,7 +27,7 @@
             \strdmid, \strdrlabel{fb},
             \strdcell{h},
             \strdmid, \strdrlabel{a}
-        }, \strdframelabelat{Left}{\strdlvert{\texttt{traverse}}},
+        }, \strdframellabel{\strdlvert{\haskop{traverse}}},
         \strdmid, \strdrlabel{ta}
     } \\
     & \myitem
@@ -37,7 +37,7 @@
             \strdmid, \strdrlabel{1b},
             \strdcell{h},
             \strdmid, \strdrlabel{a}
-        }, \strdframelabelat{Left}{\strdlvert{\texttt{traverse}}},
+        }, \strdframellabel{\strdlvert{\haskop{traverse}}},
         \strdmid, \strdrlabel{ta}
     } =
     \strdgathered{
@@ -46,7 +46,7 @@
             \strdmid, \strdrlabel{b},
             \strdcell{h},
             \strdmid, \strdrlabel{a}
-        }, \strdframelabelat{Left}{\strdlvert{\texttt{fmap}}},
+        }, \strdframellabel{\strdlvert{\haskop{fmap}}},
         \strdmid, \strdrlabel{ta}
     } \\ 
     & \myitem
@@ -58,11 +58,11 @@
                 \strdmid, \strdrlabel{gc},
                 \strdcell{k},
                 \strdmid, \strdrlabel{b}
-            }, \strdframelabelat{Left}{\strdlvert{\texttt{fmap}}},
+            }, \strdframellabel{\strdlvert{\haskop{fmap}}},
             \strdmid, \strdrlabel{fb},
             \strdcell{h},
             \strdmid, \strdrlabel{a}
-        }, \strdframelabelat{Left}{\strdlvert{\texttt{traverse}}},
+        }, \strdframellabel{\strdlvert{\haskop{traverse}}},
         \strdmid, \strdrlabel{ta}
     } =
     \strdgathered{
@@ -73,15 +73,15 @@
                 \strdmid, \strdrlabel{gc},
                 \strdcell{k},
                 \strdmid, \strdrlabel{b}
-            }, \strdframelabelat{Left}{\strdlvert{\texttt{traverse}}},
+            }, \strdframellabel{\strdlvert{\haskop{traverse}}},
             \strdmid, \strdrlabel{tb}
-        }, \strdframelabelat{Left}{\strdlvert{\texttt{fmap}}},
+        }, \strdframellabel{\strdlvert{\haskop{fmap}}},
         \strdmid, \strdrlabel{f(tb)},
         \strdmapframe{1}{1}{
             \strdmid, \strdrlabel{fb},
             \strdcell{h},
             \strdmid, \strdrlabel{a}
-        }, \strdframelabelat{Left}{\strdlvert{\texttt{traverse}}},
+        }, \strdframellabel{\strdlvert{\haskop{traverse}}},
         \strdmid, \strdrlabel{tb}
     } \\
 }
