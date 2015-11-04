@@ -245,8 +245,8 @@
 
 \tikzset{strd node/.style={font=\normalsize,very thin,solid,draw,fill=white,inner xsep=0.6pt,inner ysep=1.2pt}}
 \tikzset{strd cell/.style={strd node,rectangle,minimum size=9pt}}
+\tikzset{strd mapcell/.style={strd node,thin,rectangle,minimum size=9pt}}
 \tikzset{strd bijcell/.style={strd node,thin,rectangle,sharp corners,minimum size=9pt}}
-\tikzset{strd isocell/.style={strd node,tape,tape bend height=2pt,minimum width=0pt,tape bend top=out and in,tape bend bottom=out and in}}
 \tikzset{strd dot/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
 
 \newcommand*{\strdputcellof}[3]{% {style}{x}{node}
@@ -255,8 +255,8 @@
     }% 
 }
 \newcommand*{\strdputcell}{\strdputcellof{strd cell}}
+\newcommand*{\strdputmapcell}{\strdputcellof{strd mapcell}}
 \newcommand*{\strdputbijcell}{\strdputcellof{strd bijcell}}
-\newcommand*{\strdputisocell}{\strdputcellof{strd isocell}}
 
 \newcommand*{\strdputdot}[1]{%
     \strdonlayer{strd celllayer}{
@@ -520,8 +520,8 @@
 }
 
 \newcommand*{\strdcell}[1]{\strdhere{\strdputcell{#1}}}
+\newcommand*{\strdmapcell}[1]{\strdhere{\strdputmapcell{#1}}}
 \newcommand*{\strdbijcell}[1]{\strdhere{\strdputbijcell{#1}}}
-\newcommand*{\strdisocell}[1]{\strdhere{\strdputisocell{#1}}}
 \newcommand*{\strddot}{\strdhere{\strdputdot}}
 \newcommand*{\strddeadend}{\strdhere{\strdputdeadend}}
 
