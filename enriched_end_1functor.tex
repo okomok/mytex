@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+\myin{preview,math,aligned}{
+    & \myitem 
+    \strdgathered{
+        \strdmid, \strdrlabel{\int_{\mathcal{A}} T\myprime},
+        \strdmapframe{1.2}{2.3}{
+            \strdmid, \strdrlabel{T(A,A\myprime)},
+            \strdcell{\alpha\strdrlap{_{A,A\myprime}}},
+            \strdmid, \strdrlabel{T(A,A\myprime)}
+        }, 
+        \strdapply{\mylambda{
+            \strdputframelabel{\int_{\mathcal{A}}}{#1 Left},
+            \strdputunfamilylabel{A,A\myprime}{#1}
+        }},
+        \strdmid, \strdrlabel{\int_{\mathcal{A}} T}
+    } \mydefeq
+    \strdgathered{
+        \strdmid, \strdrlabel{\int_{\mathcal{A}} T\myprime},
+        \strdbijframe{1.2}{2.3}{
+            \strdmid, \strdrlabel{T\myprime(A,A)},
+            \strdcell{\alpha\strdrlap{_{A,A}}},
+            \strdmid, \strdrlabel{T(A,A)},
+            \strdcell{\lambda},
+            \strdmid, \strdrlabel{\int_{\mathcal{A}} T}
+        }, \strdunfamilylabel{A},
+        \strdmid, \strdrlabel{\int_{\mathcal{A}} T}
+    } \\
+}
+
+\end{document}

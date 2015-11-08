@@ -291,7 +291,7 @@
 %
 
 \tikzset{strd sidelabel/.style={font=\scriptsize,inner sep=0.2pt,strd scripttextvaligned}}
-\tikzset{strd familylabel/.style={font=\scriptsize,inner sep=0.4pt,inner ysep=0.8pt}}
+\tikzset{strd familylabel/.style={font=\scriptsize,inner xsep=0.2pt,inner ysep=-0.4pt,strd scripttextvaligned}}
 \tikzset{strd framelabel/.style={font=\scriptsize,fill=white,inner sep=0.4pt,inner ysep=0.8pt}}
 \tikzset{strd edgelabel/.style={font=\normalsize,inner sep=0.8pt,strd normaltextvaligned}}
 
@@ -313,16 +313,14 @@
     }%
 }
 
-\newcommand*{\strdputfamilylabel}[3]{% {f}{x}{sq}
+\newcommand*{\strdputfamilylabel}[2]{% {i}{sq}
     \strdonlayer{strd labellayer}{
-        \node[strd familylabel,above right] at (#3 EndCorner) {#1};
-        \node[strd familylabel,below] at (#3 EndCorner) {#2};
+        \node[strd familylabel,above right] at (#2 Right EndCorner) {#1};
     }%
 }
-\newcommand*{\strdputunfamilylabel}[3]{% {x}{f}{sq}
+\newcommand*{\strdputunfamilylabel}[2]{% {i}{sq}
     \strdonlayer{strd labellayer}{
-        \node[strd familylabel,above left] at (#3 EndCorner) {#1};
-        \node[strd familylabel,below] at (#3 EndCorner) {#2};
+        \node[strd familylabel,above left] at (#2 Right EndCorner) {#1};
     }%
 }
 
@@ -531,8 +529,8 @@
 \newcommand*{\strdrlabel}[1]{\strdapply{\strdputrlabel{#1}}}
 \newcommand*{\strdframelabel}[1]{\strdapply{\strdputframelabel{#1}}}
 \newcommand*{\strdregionlabel}[1]{\strdapply{\strdputregionlabel{#1}}}
-\newcommand*{\strdfamilylabel}[2]{\strdapply{\strdputfamilylabel{#1}{#2}}}
-\newcommand*{\strdunfamilylabel}[2]{\strdapply{\strdputunfamilylabel{#1}{#2}}}
+\newcommand*{\strdfamilylabel}[1]{\strdapply{\strdputfamilylabel{#1}}}
+\newcommand*{\strdunfamilylabel}[1]{\strdapply{\strdputunfamilylabel{#1}}}
 
 \newcommand*{\strdllabelat}[2]{\strdapplyat{#1}{\strdputllabel{#2}}}
 \newcommand*{\strdrlabelat}[2]{\strdapplyat{#1}{\strdputrlabel{#2}}}
