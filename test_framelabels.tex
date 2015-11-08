@@ -7,8 +7,8 @@
 
 
 \myin{preview,math,aligned}{
-    & \text{mapframe test: } 
-    \strdgathered{
+    & \text{framelabel test} \\
+    & \strdgathered{
         \strdmid,
         \strdmapframe{2}{2}{\strdmid}, \strdframelabelat{Left}{\rotatebox[origin=c]{90}{\texttt{traverse}}},
         \strdmid,
@@ -19,7 +19,12 @@
         \strdmid,
         \strdmapcell{f},
         \strdmid,
-        \strdmid
+        \strdmid,
+        \strdbranch{
+            \strdljump,
+            \strdmid, \strdmid
+        },
+        \strdmid, \strdcell{f}, \strdmid
     } \\
 }
 \end{document}

@@ -243,10 +243,10 @@
 % Cells
 %
 
-\tikzset{strd node/.style={font=\normalsize,very thin,solid,draw,fill=white,inner xsep=0.6pt,inner ysep=1.2pt}}
-\tikzset{strd cell/.style={strd node,rectangle,minimum size=9pt}}
-\tikzset{strd mapcell/.style={strd node,thin,rectangle,minimum size=9pt}}
-\tikzset{strd bijcell/.style={strd node,thin,rectangle,sharp corners,minimum size=9pt}}
+\tikzset{strd cellbase/.style={font=\normalsize,solid,draw,fill=white,rectangle,minimum size=9pt,inner xsep=0.6pt,inner ysep=1.2pt}}
+\tikzset{strd cell/.style={strd cellbase,very thin}}
+\tikzset{strd mapcell/.style={strd cellbase,thin}}
+\tikzset{strd bijcell/.style={strd cellbase,thin,sharp corners}}
 \tikzset{strd dot/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
 
 \newcommand*{\strdputcellof}[3]{% {style}{x}{node}
@@ -500,21 +500,21 @@
     \strdnone{\strduse{#2}}{#3}{#1}% strdcopy keeps ranges only.
 }
 
-\newcommand*{\strdapply}[4]{% {h}{sf}{from}{to}
+\newcommand*{\strdwith}[4]{% {h}{sf}{from}{to}
     \strduse{#2}{#3}{#4}
     \strduse{#1}{#4}%
 }
-\newcommand*{\strdapplyat}[5]{% {at}{h}{sf}{from}{to}
+\newcommand*{\strdwithat}[5]{% {at}{h}{sf}{from}{to}
     \strduse{#3}{#4}{#5}
     \strduse{#2}{#5 #1}%
 }
-\newcommand*{\strdhere}[1]{\strdapply{#1}{\strdempty}}
+\newcommand*{\strdhere}[1]{\strdwith{#1}{\strdempty}}
 
-\newcommand*{\strdthere}[3]{% {h}{from}{to}
+\newcommand*{\strdapply}[3]{% {h}{from}{to}
     \strduse{#1}{#2}
     \strdcopy{#2}{#3}%
 }
-\newcommand*{\strdthereat}[4]{% {at}{h}{from}{to}
+\newcommand*{\strdapplyat}[4]{% {at}{h}{from}{to}
     \strduse{#2}{#3 #1}
     \strdcopy{#3}{#4}%
 }
@@ -524,24 +524,24 @@
 \newcommand*{\strdbijcell}[1]{\strdhere{\strdputbijcell{#1}}}
 \newcommand*{\strddot}{\strdhere{\strdputdot}}
 \newcommand*{\strddeadend}{\strdhere{\strdputdeadend}}
-
-\newcommand*{\strdllabel}[1]{\strdthere{\strdputllabel{#1}}}
-\newcommand*{\strdrlabel}[1]{\strdthere{\strdputrlabel{#1}}}
-\newcommand*{\strdframelabel}[1]{\strdthere{\strdputframelabel{#1}}}
-\newcommand*{\strdregionlabel}[1]{\strdthere{\strdputregionlabel{#1}}}
-\newcommand*{\strdfamilylabel}[2]{\strdthere{\strdputfamilylabel{#1}{#2}}}
-\newcommand*{\strdunfamilylabel}[2]{\strdthere{\strdputunfamilylabel{#1}{#2}}}
 \newcommand*{\strdstart}[1]{\strdhere{\strdputstartlabel{#1}}}
 \newcommand*{\strdend}[1]{\strdhere{\strdputendlabel{#1}}}
 
-\newcommand*{\strdllabelat}[2]{\strdthereat{#1}{\strdputllabel{#2}}}
-\newcommand*{\strdrlabelat}[2]{\strdthereat{#1}{\strdputrlabel{#2}}}
-\newcommand*{\strdframelabelat}[2]{\strdthereat{#1}{\strdputframelabel{#2}}}
+\newcommand*{\strdllabel}[1]{\strdapply{\strdputllabel{#1}}}
+\newcommand*{\strdrlabel}[1]{\strdapply{\strdputrlabel{#1}}}
+\newcommand*{\strdframelabel}[1]{\strdapply{\strdputframelabel{#1}}}
+\newcommand*{\strdregionlabel}[1]{\strdapply{\strdputregionlabel{#1}}}
+\newcommand*{\strdfamilylabel}[2]{\strdapply{\strdputfamilylabel{#1}{#2}}}
+\newcommand*{\strdunfamilylabel}[2]{\strdapply{\strdputunfamilylabel{#1}{#2}}}
+
+\newcommand*{\strdllabelat}[2]{\strdapplyat{#1}{\strdputllabel{#2}}}
+\newcommand*{\strdrlabelat}[2]{\strdapplyat{#1}{\strdputrlabel{#2}}}
+\newcommand*{\strdframelabelat}[2]{\strdapplyat{#1}{\strdputframelabel{#2}}}
 \newcommand*{\strdframellabel}{\strdframelabelat{Left}}
 \newcommand*{\strdframerlabel}{\strdframelabelat{Right}}
 
-\newcommand*{\strdroadlabel}[2]{\strdthere{\strdputroadlabel{#1}{#2}}}
-\newcommand*{\strdroadlabelat}[3]{\strdthereat{#1}{\strdputroadlabel{#2}{#3}}}
+\newcommand*{\strdroadlabel}[2]{\strdapply{\strdputroadlabel{#1}{#2}}}
+\newcommand*{\strdroadlabelat}[3]{\strdapplyat{#1}{\strdputroadlabel{#2}{#3}}}
 
 \newcommand*{\strdbranchone}[3]{% {sf}{from}{to}
     \strdcopy{#2}{#3}

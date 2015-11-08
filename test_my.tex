@@ -8,6 +8,15 @@
 
 \myin{preview,math,aligned}{
     \myUnlistize{\Cons{a}{\Cons{b}{\Cons{c}{\Nil}}}} \\
-    \Foldr{\Commaize}{}{\myListize{x, y,z}}
+    \Foldr{\Commaize}{}{\myListize{x, y,z}} \\
+    \mathcal{C}(\texttt{-},\texttt{+}) \\
+    F(\texttt{-},\texttt{=}) \\
+    \mathcal{C}(\mydash,\texttt{+})
+}
+
+\myin{preview,math,aligned}{
+    \mylambda{#1 b}{a} = a b\\
+    \mylambda{#1{b}}{\mylambda{#1 c}} = b c\\
+    \mylambda{\mylambda{#1 ##1 c}}{a}{b} = a b c\\
 }
 \end{document}

@@ -14,15 +14,8 @@
     #2%
 }
 
+% deprecate me, texttt is better
 \newcommand*{\mydash}{\text{--}}
-
-\newcommand*{\myforall}[2]{%
-    \ensuremath{({} ^ \forall #1)(#2)}%
-}
-
-\newcommand*{\myexists}[2]{%
-    \ensuremath{({} ^ \exists #1)(#2)}%
-}
 
 \def\myin#1#2{\Foldr{\myinimpl}{#2}{\myListize{#1}}}
 \newcommand*{\myinimpl}[2]{\begin{#1}#2\end{#1}}
@@ -36,6 +29,10 @@
 
 \newcommand*{\mydint}[1]{\ensuremath{\displaystyle\int_{\mathrlap{#1}}\;}}
 
+
+% List construction
+%
+
 \def\myUnlistize#1{#1\myUnlistize@{}}
 \def\myUnlistize@#1{#1\Foldr\Commaize{}}
 
@@ -45,4 +42,17 @@
    {\TeXif{\ifx\relax#2}%
         {\Singleton{#1}}%
         {\Cons{#1}{\myListize@#2\@eolst}}}
+
+
+% Lambda expressions
+%
+
+\newcommand\mylambdanamed[2]{%
+    \expandafter\newcommand\csname#1\endcsname[1]{#2}\csuse{#1}%
+}
+\newcounter{mylambdacounter}
+\newcommand\mylambda{%
+    \stepcounter{mylambdacounter}%
+    \mylambdanamed{mylambda\the\value{mylambdacounter}}%
+}
 
