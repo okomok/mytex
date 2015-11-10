@@ -1,0 +1,228 @@
+\documentclass{article}
+\usepackage{strd,cat,my,hask}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin{preview,math,aligned}{
+    % arr is functorial
+    & \mynitem{1}
+    \strdgathered{
+        \strdmid, \strdrlabel{X},
+        \strdmapframe{1}{1}{
+            \strdmid%, \strdrlabel{X}
+        }, \strdframellabel{\strdlvert{\haskop{arr}}},
+        \strdmid, \strdrlabel{X}
+    } =
+    \strdgathered{
+        \strdmid, \strdrlabel{X}
+    } \\
+    & \mynitem{2}
+    \strdgathered{
+        \strdmid, \strdrlabel{Z},
+        \strdmapframe{1}{1}{
+            \strdmid, % \strdrlabel{Z},
+            \strdcell{g},
+            \strdmid, \strdrlabel{Y},
+            \strdcell{f},
+            \strdmid% , \strdrlabel{X}
+        }, \strdframellabel{\strdlvert{\haskop{arr}}},
+        \strdmid, \strdrlabel{X}
+    } =
+    \strdgathered{
+        \strdmid, \strdrlabel{Z},
+        \strdmapframe{1}{1}{
+            \strdmid, % \strdrlabel{Z},
+            \strdcell{g},
+            \strdmid% , \strdrlabel{Y}
+        }, \strdframellabel{\strdlvert{\haskop{arr}}},
+        \strdmid, \strdrlabel{Y},
+        \strdmapframe{1}{1}{
+            \strdmid, % \strdrlabel{Y},
+            \strdcell{f},
+            \strdmid% , \strdrlabel{X}
+        }, \strdframellabel{\strdlvert{\haskop{arr}}},
+        \strdmid, \strdrlabel{X}
+    } \\
+}
+\myin{preview,math,aligned}{
+    % first is functorial
+    & \mynitem{3}
+    \strdgathered{
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{W}},
+        \strdmid, \strdrlabel{Y},
+        \strdmapframe{2}{2}{
+            \strdmid, % \strdrlabel{Y},
+            \strdmapframe{1}{1}{
+                \strdmid, % \strdrlabel{Y},
+                \strdcell{f},
+                \strdmid% , \strdrlabel{X}
+            }, \strdframellabel{\strdlvert{\haskop{arr}}},
+            \strdmid%, \strdrlabel{X}
+        }, \strdframellabel{\strdlvert{\haskop{first}}},
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{W}},
+        \strdmid, \strdrlabel{X}
+    } =
+    \strdgathered{
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{W}, \strdmid, \strdmid},
+        \strdmid, \strdrlabel{Y},
+        \strdmapframe{1}{2}{
+            \strdmid, % \strdrlabel{Y},
+            \strdcell{f},
+            \strdmid% , \strdrlabel{X}
+        }, \strdframellabel{\strdlvert{\haskop{arr}}},
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{W}},
+        \strdmid, \strdrlabel{X}
+    } \\
+    & \mynitem{4}
+    \strdgathered{
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{W}},
+        \strdmid, \strdrlabel{Z},
+        \strdmapframe{1}{2}{
+            \strdmid, %\strdrlabel{Z},
+            \strdcell{b},
+            \strdmid, \strdrlabel{Y},
+            \strdcell{a},
+            \strdmid%, \strdrlabel{X}
+        }, \strdframellabel{\strdlvert{\haskop{first}}},
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{W}},
+        \strdmid, \strdrlabel{X}
+    } =
+    \strdgathered{
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{W}},
+        \strdmid, \strdrlabel{Z},
+        \strdmapframe{1}{2}{
+            \strdmid, %\strdrlabel{Z},
+            \strdcell{b},
+            \strdmid%, \strdrlabel{Y}
+        }, \strdframellabel{\strdlvert{\haskop{first}}},
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{W}},
+        \strdmid, \strdrlabel{Y},
+        \strdmapframe{1}{2}{
+            \strdmid, %\strdrlabel{Y},
+            \strdcell{a},
+            \strdmid%, \strdrlabel{X}
+        }, \strdframellabel{\strdlvert{\haskop{first}}},
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{W}},
+        \strdmid, \strdrlabel{X}
+    } \\ 
+    & \mynitem{5}
+    \strdgathered{
+        \strdmid, \strdrlabel{Y},
+        \strdmapframe{1}{2}{
+            \strdmid,
+            \strdbranch{\strdrjump, \strdcell{!}, \strdmid},
+            \strdempty,% \strdrlabel{Y},
+            \strdmid
+        }, \strdframellabel{\strdlvert{\haskop{arr}}},
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{W}},
+        \strdmid, \strdrlabel{Y},
+        \strdmapframe{1}{2}{
+            \strdmid, %\strdrlabel{Y},
+            \strdcell{a},
+            \strdmid, %\strdrlabel{X}
+        }, \strdframellabel{\strdlvert{\haskop{first}}},
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{W}},
+        \strdmid, \strdrlabel{X}
+    } =
+    \strdgathered{
+        \strdmid, \strdrlabel{Y},
+        \strdcell{a},
+        \strdmid, \strdrlabel{X},
+        \strdmapframe{1}{2}{
+            \strdmid,
+            \strdbranch{\strdrjump, \strdcell{!}, \strdmid},
+         %   \strdempty, \strdrlabel{X},
+            \strdmid
+        }, \strdframellabel{\strdlvert{\haskop{arr}}},
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{W}},
+        \strdmid, \strdrlabel{X}
+    } \\
+    & \mynitem{6}
+    \strdgathered{
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{Z}},
+        \strdmid, \strdrlabel{Y},
+        \strdmapframe{1}{2}{
+            \strdbranch{\strdrjump, \strdmid, \strdcell{f}, \strdmid},
+            \strdmid,
+     %       \strdempty, \strdrlabel{Y},
+            \strdmid
+        }, \strdframellabel{\strdlvert{\haskop{arr}}},
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{W}},
+        \strdmid, \strdrlabel{Y},
+        \strdmapframe{1}{2}{
+            \strdmid, %\strdrlabel{Y},
+            \strdcell{a},
+            \strdmid%, \strdrlabel{X}
+        }, \strdframellabel{\strdlvert{\haskop{first}}},
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{W}},
+        \strdmid, \strdrlabel{X}
+    } =
+    \strdgathered{
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{Z}},
+        \strdmid, \strdrlabel{Y},
+        \strdmapframe{1}{2}{
+            \strdmid, %\strdrlabel{Y},
+            \strdcell{a},
+            \strdmid%, \strdrlabel{X}
+        }, \strdframellabel{\strdlvert{\haskop{first}}},
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{Z}},
+        \strdmid, \strdrlabel{X},
+        \strdmapframe{1}{2}{
+            \strdbranch{\strdrjump, \strdmid, \strdcell{f}, \strdmid},
+            \strdmid,
+     %       \strdempty, \strdrlabel{Y},
+            \strdmid
+        }, \strdframellabel{\strdlvert{\haskop{arr}}},
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{W}},
+        \strdmid, \strdrlabel{X}
+    } \\
+}
+\myin{preview,math,aligned}{
+    % associativity
+    & \mynitem{7}
+    \strdgathered{
+        \strdbranch{\strdxdouble{\strdrjump}, \strdmid, \strdrlabel{\haskprod{Y}{Z}}, \strdunright},
+        \strdmid, \strdrlabel{X\myprime},
+        \strdmapframe{1}{3}{
+            \strdunleft,
+            \strdcell{\haskop{assoc}},
+            \strdbranch{\strdright,\strdmid,\strdrlabel{Z}},
+            \strdleft 
+        }, \strdframellabel{\strdlvert{\haskop{arr}}},
+        \strdmid,\strdllabel{\haskprod{X\myprime}{Y}},
+        \strdmapframe{2}{3}{
+            \strdmid,
+            \strdmapframe{1}{1}{
+                \strdmid, \strdrlabel{X\myprime},
+                \strdcell{a},
+                \strdmid, \strdrlabel{X}
+            }, \strdframellabel{\strdlvert{\haskop{first}}},
+            \strdmid
+        }, \strdframellabel{\strdlvert{\haskop{first}}},
+        \strdbranch{\strdxdouble{\strdrjump}, \strdmid, \strdrlabel{Z}},
+        \strdmid, \strdllabel{\haskprod{X}{Y}}
+    } =
+    \strdgathered{
+        \strdbranch{\strdxdouble{\strdrjump}, \strdmid, \strdrlabel{\haskprod{Y}{Z}}},
+        \strdmid, \strdrlabel{X\myprime},
+        \strdmapframe{1}{3}{
+            \strdmid, %\strdrlabel{Y},
+            \strdcell{a},
+            \strdmid%, \strdrlabel{X}
+        }, \strdframellabel{\strdlvert{\haskop{first}}},
+        \strdbranch{\strdxdouble{\strdrjump}, \strdmid, \strdrlabel{\haskprod{Y}{Z}}, \strdunright},
+        \strdmid, \strdrlabel{X},
+        \strdmapframe{1}{3}{
+            \strdunleft,
+            \strdcell{\haskop{assoc}},
+            \strdbranch{\strdright,\strdmid,\strdrlabel{Z}},
+            \strdleft 
+        }, \strdframellabel{\strdlvert{\haskop{arr}}},
+        \strdmid,\strdllabel{\haskprod{X}{Y}}
+    }
+}
+
+
+\end{document}

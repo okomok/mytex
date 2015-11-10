@@ -385,8 +385,8 @@
 
 
 % Graded strings; order depends
-%   tikz/double doesn't work with scopes.
-%
+%   You must wrap each string because of layers-reset-line-width bug.
+%   BTW, tikz/double doesn't work with scopes.
 
 \newcommand*{\strdgraded}[3]{%
     \strdonlayer{strd gradedlayer}{
@@ -516,6 +516,7 @@
     \strduse{#2}{#3 #1}
     \strdcopy{#3}{#4}%
 }
+\newcommand{\strdlambda}[1]{\strdapply{\mylambda{#1}}}
 
 \newcommand*{\strdcell}[1]{\strdhere{\strdputcell{#1}}}
 \newcommand*{\strdmapcell}[1]{\strdhere{\strdputmapcell{#1}}}

@@ -1,0 +1,192 @@
+\documentclass{article}
+\usepackage{strd,cat,my,hask}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+% Notations
+\myin{preview,math,aligned}{
+    & \myitem
+    \strdgathered{
+        \strdmid,\strdrlabel{Y},
+        \strdmapcell{f},
+        \strdmid, \strdrlabel{X}
+    } \mydefeq
+    \strdgathered{
+        \strdmid, \strdrlabel{Y},
+        \strdmapframe{1}{1}{
+            \strdmid, % \strdrlabel{Z},
+            \strdcell{f},
+            \strdmid% , \strdrlabel{Y}
+        }, \strdframellabel{\strdlvert{\haskop{arr}}},
+        \strdmid, \strdrlabel{X},
+    } \\
+    % symmetry
+    & \myitem
+    \strdgathered{
+        \strdbranch{
+            \strdunleft, \strdrlabel{Y},
+            \strdright, \strdrlabel{Y}
+        },
+        \strdxdouble{\strdrjump}, \strdgraded{\strdunright},\strdrlabel{X},
+        \strdgraded{\strdleft}, \strdrlabel{X}
+    } \mydefeq
+    \strdgathered{
+        \strdbranch{
+            \strdunleft, \strdrlabel{Y},
+            \strdmapcell{\haskop{swap}},
+            \strdright, \strdrlabel{Y}
+        },
+        \strdxdouble{\strdrjump}, \strdgraded{\strdunright},\strdrlabel{X},
+        \strdgraded{\strdleft}, \strdrlabel{X}
+    } \\
+    % copy
+    & \myitem
+    \strdgathered{
+        \strdbranch{
+            \strdunleft, \strdrlabel{X},
+            \strdcell{\Delta}, %\strdcell{\Delta},
+            \strdmid, \strdrlabel{X}
+        },
+        \strdxdouble{\strdrjump}, \strdgraded{\strdunright},\strdrlabel{X}
+    } \mydefeq
+    \strdgathered{
+        \strdbranch{
+            \strdunleft, \strdrlabel{X},
+            \strdmapcell{\Delta},
+            \strdmid, \strdrlabel{X}
+        },
+        \strdxdouble{\strdrjump}, \strdgraded{\strdunright},\strdrlabel{X}
+    } \\
+    % product with arr
+    & \myitem
+    \strdgathered{
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{Z}, \strdmapcell{f}, \strdmid, \strdrlabel{W}},
+        \strdmid, \strdrlabel{Y},
+        \strdcell{a},
+        \strdmid, \strdrlabel{X}
+    } \mydefeq \mynitem{6} 
+}
+
+
+% Props
+\myin{preview,math,aligned}{
+    % first
+    & \myitem
+    \strdgathered{
+        \strdbranch{\strdrjump, \strdmid, \strdempty, \strdrlabel{W}, \strdmid},
+        \strdmid, \strdrlabel{Y},
+        \strdcell{a},
+        \strdmid, \strdrlabel{X}
+    } =
+    \strdgathered{
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{W}},
+        \strdmid, \strdrlabel{Y},
+        \strdmapframe{1}{2}{
+            \strdmid, %\strdrlabel{Y},
+            \strdcell{a},
+            \strdmid%, \strdrlabel{X}
+        }, \strdframellabel{\strdlvert{\haskop{first}}},
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{W}},
+        \strdmid, \strdrlabel{X}
+    } \\
+    % functorial
+    & \myitem
+    \strdgathered{
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{Z}, \strdmapcell{g}, \strdmid, \strdrlabel{W}},
+        \strdmid, \strdrlabel{Y},
+        \strdmapcell{f},
+        \strdmid, \strdrlabel{X}
+    } = 
+    \strdgathered{
+        \strdbranch{\strdrjump, \strdmid, \strdrlabel{Z}, \strdmid,\strdcell{g}, \strdmid, \strdmid, \strdrlabel{W}},
+        \strdmid, \strdrlabel{Y}, 
+        \strdmapframe{1}{2}{
+            \strdmid,
+            \strdcell{f},
+            \strdmid
+        }, \strdframellabel{\strdlvert{\haskop{arr}}},
+        \strdmid,\strdrlabel{X}
+    } 
+}
+
+% second and products
+\myin{preview,math,aligned}{
+    % second
+    & \myitem
+    \strdgathered{
+        \strdbranch{\strdljump, \strdmid, \strdempty, \strdllabel{W}, \strdmid},
+        \strdmid, \strdrlabel{Y},
+        \strdcell{a},
+        \strdmid, \strdrlabel{X}
+    } \mydefeq
+    \strdgathered{
+        \strdbranch{\strdljump, \strdmid, \strdrlabel{W}},
+        \strdmid, \strdrlabel{Y},
+        \strdmapframe{2}{1}{
+            \strdmid, %\strdrlabel{Y},
+            \strdcell{a},
+            \strdmid%, \strdrlabel{X}
+        }, \strdframellabel{\strdlvert{\haskop{second}}},
+        \strdbranch{\strdljump, \strdmid, \strdrlabel{W}},
+        \strdmid, \strdrlabel{X}
+    } \mydefeq
+    \strdgathered{
+        \strdbranch{
+            \strdunleft, \strdrlabel{W},
+            \strdright,
+            \strdgraded{\strdunright},
+            \strdgraded{\strdleft}, \strdrlabel{W}
+        },
+        \strdxdouble{\strdrjump}, \strdgraded{\strdunright},\strdrlabel{Y},
+        \strdgraded{\strdleft},
+        \strdcell{a},
+        \strdunleft,
+        \strdright, \strdrlabel{X}
+    } \\
+    % split
+    & \myitem
+%    \strdgathered{
+%        \strdbranch{
+%            \strdljump, \strdmid, \strdrlabel{X\myprime}, \strdcell{a}, \strdmid,\strdrlabel{X}
+%        },
+%        \strdmid, \strdrlabel{Y\myprime}, \strdcell{b}, \strdmid,\strdrlabel{Y}
+%    } \mydefeq
+    \strdgathered{
+        \strdbranch{
+            \strdljump, \strdmid, \strdrlabel{X\myprime}, \strdmid,
+            \strdcell{a},\strdmid, \strdrlabel{X}
+        },
+        \strdmid, \strdrlabel{Y\myprime},
+        \strdcell{b},
+        \strdmid, \strdmid, \strdrlabel{Y}
+    }  =\,
+    \strdgathered{
+        \strdmid, \strdrlabel{\mathrlap{X\myprime}}, \strdcell{a}, \strdmid,\strdrlabel{\mathrlap{X}}
+    } \haskop{***}
+    \strdgathered{
+        \strdmid, \strdrlabel{Y\myprime}, \strdcell{b}, \strdmid,\strdrlabel{Y}
+    } \\ 
+    % fanout
+    & \myitem
+    \strdgathered{
+        \strdbranch{
+            \strdxdouble{\strdljump}, \strdmid, \strdrlabel{Y},\strdmid, 
+            \strdcell{a},
+            \strdunleft, \strdcell{\Delta},\strdmid, \strdrlabel{X}
+        },
+        \strdmid, \strdrlabel{Z},
+        \strdcell{b},
+        \strdmid,
+        \strdunright
+    } = \, 
+    \strdgathered{
+        \strdmid, \strdrlabel{\mathrlap{Y}}, \strdcell{a}, \strdmid,\strdrlabel{\mathrlap{X}}
+    } \haskop{\&\&\&}
+    \strdgathered{
+        \strdmid, \strdrlabel{Z}, \strdcell{b}, \strdmid,\strdrlabel{X}
+    }  
+}
+
+\end{document}
