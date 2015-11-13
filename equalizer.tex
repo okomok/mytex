@@ -1,0 +1,44 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin{preview,math,aligned}{
+    & \myitem 
+    \strdgathered{
+        \strdmid, \strdrlabel{X},
+        \strdcell{\operatorname{eq}\scriptstyle{\!\strdrlap{:\operatorname{fork}(f,g)}}},
+        \strdmid, \strdrlabel{\operatorname{Eq}(f,g)}
+    } \\
+    & \myitem 
+    \strdgathered{
+        \strdmid, \strdrlabel{\operatorname{Eq}(f,g)},
+        \strdcell{u},
+        \strdmid, \strdrlabel{O}
+    } \mathllap{=}\ 
+    \strdgathered{
+        \strdmid, \strdrlabel{\operatorname{Eq}(f,g)},
+        \strdbijframe{1}{3}{
+            \strdmid, \strdrlabel{X},
+            \strdcell{m\strdrlap{\scriptstyle{:\operatorname{fork}(f,g)}}},
+            \strdmid
+        }, \strdfamilylabel{\mathrlap{\operatorname{Eq}}},
+        \strdmid, \strdrlabel{O}
+    } \iff
+    \strdgathered{
+        \strdmid, \strdrlabel{X},
+        \strdcell{\operatorname{eq}},
+        \strdmid, \strdrlabel{\operatorname{Eq}(f,g)},
+        \strdcell{u},
+        \strdmid, \strdrlabel{O}
+    } =
+    \strdgathered{
+        \strdmid, \strdrlabel{X},
+        \strdcell{m},
+        \strdmid, \strdrlabel{O}
+    } \\
+}
+
+\end{document}
