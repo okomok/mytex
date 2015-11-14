@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+
+% choice.1
+\myin{preview,math,aligned}{
+    & \myitem 
+    \strdgathered{
+        \strdbranch{
+            \strdmid, \strdrlabel{Y},
+        },
+        \strdrjump, \strdmid, \strdrlabel{X}
+    }
+    \mydefeq
+    X \otimes Y \\
+    & \myitem 
+    \strdgathered{
+        \strdstart{\mathcal{A}},
+        \strdroad{\strdmid}, \strdroadlabel{A}{B}
+    } 
+    \mydefeq
+    \mathcal{A}(A,B) \\
+    & \myitem
+    \strdgathered{
+        \strdstart{\mathcal{A}},
+        \strdroad{\strdmid}, \strdroadlabel{A}{C},
+        \strdbranch{
+            \strdroad{\strdleft}, \strdroadlabel{A}{B}
+        },
+        \strdroad{\strdright}, \strdroadlabel{B}{C}
+    }
+    \mydefeq 
+    \strdgathered{
+        \strdstart{\mathcal{A}},
+        \strdroad{\strdmid}, \strdroadlabel{A}{C},
+        \strdcell{\circ},
+        \strdbranch{
+            \strdroad{\strdleft}, \strdroadlabel{A}{B}
+        },
+        \strdroad{\strdright}, \strdroadlabel{B}{C}
+    }
+}
+
+
+% choice.2
+\myin{preview,math,aligned}{
+    & \myitem 
+    \strdgathered{
+        \strdbranch{
+            \strdmid, \strdrlabel{X},
+        },
+        \strdrjump, \strdmid, \strdrlabel{Y}
+    }
+    \mydefeq
+    X \otimes Y \\
+    & \myitem 
+    \strdgathered{
+        \strdstart{\mathcal{A}},
+        \strdroad{\strdmid}, \strdroadlabel{B}{A}
+    } 
+    \mydefeq
+    \mathcal{A}(A,B) \\
+    & \myitem
+    \strdgathered{
+        \strdstart{\mathcal{A}},
+        \strdroad{\strdmid}, \strdroadlabel{C}{A},
+        \strdbranch{
+            \strdroad{\strdleft}, \strdroadlabel{C}{B}
+        },
+        \strdroad{\strdright}, \strdroadlabel{B}{A}
+    }
+    \mydefeq 
+    \strdgathered{
+        \strdstart{\mathcal{A}},
+        \strdroad{\strdmid}, \strdroadlabel{C}{A},
+        \strdcell{\circ},
+        \strdbranch{
+            \strdroad{\strdleft}, \strdroadlabel{C}{B}
+        },
+        \strdroad{\strdright}, \strdroadlabel{B}{A}
+    }
+}
+
+
+\myin{preview,math,aligned}{
+    & \myitem 
+    \strdgathered{
+        \strdbranch{
+            \strdmid, \strdrlabel{X},
+        },
+        \strdrjump, \strdmid, \strdrlabel{Y}
+    }
+    \mydefeq
+    X \otimes Y \\
+    & \myitem 
+    \strdgathered{
+        \strdstart{\mathcal{A}},
+        \strdroad{\strdmid}, \strdroadlabel{A}{B}
+    } 
+    \mydefeq
+    \mathcal{A}(A,B) \\
+    & \myitem
+    \strdgathered{
+        \strdstart{\mathcal{A}},
+        \strdroad{\strdmid}, \strdroadlabel{A}{C},
+        \strdbranch{
+            \strdroad{\strdleft}, \strdroadlabel{A}{B}
+        },
+        \strdroad{\strdright}, \strdroadlabel{B}{C}
+    }
+    \mydefeq 
+    \strdgathered{
+        \strdstart{\mathcal{A}},
+        \strdroad{\strdmid}, \strdroadlabel{A}{C},
+        \strdcell{\circ},
+        \strdbranch{
+            \strdroadx{\strdsubset},
+            \strdroadx{\strdright}, \strdroadlabel{B}{C}
+        },
+        \strdroad{\strdsupset},
+        \strdroad{\strdleft}, \strdroadlabel{A}{B}
+    }
+}
+
+
+\end{document}

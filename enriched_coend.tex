@@ -1,0 +1,90 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+
+\myin{preview,math,aligned}{
+    % coend bijection
+    & \myitem 
+    \strdgathered{
+        \strdmid, \strdrlabel{W},
+        \strdcell{w},
+        \strdmid, \strdrlabel{T(A,A)},
+    }
+    \underset{\forall A}{=} 
+    \strdgathered{
+        \strdmid, \strdrlabel{W},
+        \strdcell{f},
+        \strdmid, \strdrlabel{\int ^ A T(A,A)},
+        \strdcell{\scriptstyle\int},
+        \strdmid, \strdrlabel{T(A,A)}
+    }
+    \iff
+    \strdgathered{
+        \strdmid, \strdrlabel{W},
+        \strdcell{f},
+        \strdmid, \strdrlabel{\int ^ A T(A,A)}
+    }
+    \strdllap{=}
+    \strdgathered{
+        \strdmid, \strdrlabel{W},
+        \strdbijframe{1}{2.3}{
+            \strdmid,
+            \strdcell{w},
+            \strdmid, \strdrlabel{T(A,A)}
+        }, \strdframellabel{\int ^ A},
+        \strdmid, \strdrlabel{\int ^ A T(A,A)}
+    } \\
+}
+
+\myin{preview,math,aligned}{
+    % IHPL
+    & \myitem 
+    \strdgathered{
+        \strdroad{\strdmid}, \strdroadlabel{T(A,A)}{X},
+        \strdcell{w},
+        \strdmid, \strdrlabel{W}
+    }
+    \underset{\forall A}{=}
+    \strdgathered{
+        \strdroad{\strdmid}, \strdroadlabel{T(A,A)}{X},
+        \strdbranch{
+            \strdroad{\strdleft},
+            \strdcell{\scriptstyle\int}
+        },
+        \strdroad{\strdright},
+        \strdroad{\strdmid}, \strdroadlabel{\int ^ A T(A,A)}{},
+        \strdcell{f},
+        \strdmid, \strdrlabel{W}
+    }
+    \iff
+    \strdgathered{
+        \strdroad{\strdmid}, \strdroadlabel{\int ^ A T(A,A)}{X},
+        \strdcell{f},
+        \strdmid, \strdrlabel{W}
+    }
+    =
+    \strdgathered{
+        \strdroad{\strdmid}, \strdroadlabel{\int ^ A T(A,A)}{X},
+        \strdbijframe{4}{4}{
+            \strdroad{\strdmid}, \strdroadlabel{W}{X},
+            \strdbijframe{3.15}{3}{
+                \strdroad{\strdmid},
+                \strdbijframe{2.3}{2}{
+                    \strdroad{\strdmid}, \strdroadlabel{T(A,A)}{X},
+                    \strdcell{w},
+                    \strdmid, \strdrlabel{W}
+                }, \strdframellabel{\strdlvert{\operatorname{flip}}},
+                \strdmid, \strdrlabel{T(A,A)}
+            },\strdframellabel{\int ^ A},
+            \strdmid, \strdrlabel{\int ^ A T(A,A)}
+        },\strdframellabel{\strdlvert{\operatorname{flip}}},
+        \strdmid, \strdrlabel{W}
+    } \\
+}
+
+
+
+\end{document}
