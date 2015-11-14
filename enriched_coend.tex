@@ -30,18 +30,18 @@
     \strdllap{=}
     \strdgathered{
         \strdmid, \strdrlabel{W},
-        \strdbijframe{1}{2.3}{
+        \strdbijframe{1.2}{2.3}{
             \strdmid,
             \strdcell{w},
             \strdmid, \strdrlabel{T(A,A)}
-        }, \strdframellabel{\int ^ A},
+        }, \strdframelabelat{Left EndCorner}{\int ^ {\strdrlap{A}}},
         \strdmid, \strdrlabel{\int ^ A T(A,A)}
     } \\
 }
 
 \myin{preview,math,aligned}{
     % IHPL
-    & \myitem 
+    \myitem & 
     \strdgathered{
         \strdroad{\strdmid}, \strdroadlabel{T(A,A)}{X},
         \strdcell{w},
@@ -68,23 +68,82 @@
     =
     \strdgathered{
         \strdroad{\strdmid}, \strdroadlabel{\int ^ A T(A,A)}{X},
+        \strdbijframe{2.3}{1}{
+            \strdroad{\strdmid}, \strdroadlabel{T(A,A)}{X},
+            \strdcell{w},
+            \strdmid%, \strdrlabel{W}
+        }, \strdframelabelat{Left StartCorner}{[\int _ {\strdrlap{A}}},
+        \strdmid, \strdrlabel{W}
+    } \\
+    & \mydefeq
+    \strdgathered{
+        \strdroad{\strdmid}, \strdroadlabel{\int ^ A T(A,A)}{X},
         \strdbijframe{4}{4}{
             \strdroad{\strdmid}, \strdroadlabel{W}{X},
             \strdbijframe{3.15}{3}{
-                \strdroad{\strdmid},
+                \strdroad{\strdmid}, \strdroadlabel{W}{X},
                 \strdbijframe{2.3}{2}{
                     \strdroad{\strdmid}, \strdroadlabel{T(A,A)}{X},
                     \strdcell{w},
                     \strdmid, \strdrlabel{W}
                 }, \strdframellabel{\strdlvert{\operatorname{flip}}},
                 \strdmid, \strdrlabel{T(A,A)}
-            },\strdframellabel{\int ^ A},
+            },\strdframelabelat{Left EndCorner}{\int ^ {\strdrlap{A}}},
             \strdmid, \strdrlabel{\int ^ A T(A,A)}
         },\strdframellabel{\strdlvert{\operatorname{flip}}},
         \strdmid, \strdrlabel{W}
-    } \\
+    }
 }
 
 
+\myin{preview,math,aligned}{
+    & \myitem 
+    \strdgathered{
+        \strdmid, \strdrlabel{\int ^ A T\myprime(A,A)},
+        \strdmapframe{1.8}{2.5}{
+            \strdmid, \strdrlabel{T(A,A\myprime)},
+            \strdcell{v},
+            \strdmid, \strdrlabel{T\myprime(A,A\myprime)}
+        }, \strdframellabel{\int ^ {\strdrlap{{A,A\myprime}}}},
+        \strdmid, \strdrlabel{\int ^ A T(A,A)}
+    } \mydefeq
+    \strdgathered{
+        \strdmid, \strdrlabel{\int ^ A T(A,A)},
+        \strdbijframe{1}{2.5}{
+            \strdmid, % \strdrlabel{\int ^ A T(A,A)},
+            \strdcell{\scriptstyle\int},
+            \strdmid, \strdrlabel{T(A,A)},
+            \strdcell{v},
+            \strdmid, \strdrlabel{T\myprime(A,A)}
+        }, \strdframelabelat{Left EndCorner}{\int ^ {\strdrlap{A}}},
+        \strdmid, \strdrlabel{\int ^ A T\myprime(A,A)}
+    }
+}
+
+\myin{preview,math,aligned}{
+    & \myitem 
+    \strdgathered{
+        \strdroad{\strdmid}, \strdroadlabel{\int ^ AT(A,A,B)}{\int ^ AT(A,A,B\myprime)},
+        \strdcell{\lambda _ B \scriptstyle\int ^ A T(A,A,B)},
+        \strdroad{\strdmid}, \strdroadlabel{B}{B\myprime},
+        \strdend{\mathcal{B}}
+    } \mydefeq
+    \strdgathered{
+        \strdroad{\strdmid}, \strdroadlabel{\int ^ A T(A,A,B)}{\int ^ A T(A,A,B\myprime)},
+        \strdbijframe{3.3}{4.3}{
+            \strdroad{\strdmid}, \strdroadlabel{T(A,A,B)}{\int ^A T(A,A,B\myprime)},
+            \strdbranch{
+                \strdxscale{2.3}{\strdroad{\strdright}},
+                \strdroadlabel{T(A,A,B\myprime)}{},
+                \strdcell{\scriptstyle\int}
+            },
+            \strdroad{\strdleft},
+            \strdcell{\scriptstyle T(A,A,\texttt{-})},
+            \strdroad{\strdmid}
+        }, \strdframelabelat{Left StartCorner}{[\int _ {\strdrlap{A}}},
+        \strdroad{\strdmid}, \strdroadlabel{B}{B\myprime},
+        \strdend{\mathcal{B}}
+    }
+}
 
 \end{document}
