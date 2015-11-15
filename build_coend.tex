@@ -1,0 +1,74 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid, \strdrlabel{\coprod _ C F(C,C)},
+        \strdcell{f},
+        \strdmid, \strdrlabel{\coprod _{C,D} \mathcal{C}(D,C) \otimes F(C,D)}
+    } \mydefeq
+    \strdgathered{
+        \strdmid, \strdrlabel{\coprod _ C F(C,C)},
+        \strdcell{=},
+        \strdmid, \strdrlabel{\coprod _ D F(D,D)},
+        \strdbijframe{3}{3.2}{
+            \strdmid,
+            \strdcell{\scriptstyle\coprod},
+            \strdmid, \strdrlabel{F(D,D)},
+            \strdroadlaside,
+            \strdbijframe{2.3}{2.3}{
+                \strdroad{\strdmid}, \strdroadlabel{F(C,D)}{F(D,D)},
+                \strdcell{F(\texttt{-},D)},
+                \strdroad{\strdleft}, \strdroadlabel{D}{C}, \strdrjump
+            }, \strdframellabel{\strdlvert{\operatorname{flip}}},
+            \strdbranch{
+                \strdljump, \strdroad{\strdmid}%, \strdroadlabel{D}{C}
+            },
+            \strdrjump, \strdmid, \strdrlabel{F(C,D)}
+        }, \strdframelabelat{Left EndCorner}{\coprod ^ {\strdrlap{C,D}}},
+        \strdljump, \strdmid, \strdrlabel{\coprod _{C,D} \mathcal{C}(D,C) \otimes F(C,D)}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdmid, \strdrlabel{\coprod _ C F(C,C)},
+        \strdcell{g},
+        \strdmid, \strdrlabel{\coprod _{C,D} \mathcal{C}(D,C) \otimes F(C,D)}
+    } \mydefeq
+    \strdgathered{
+        \strdmid, \strdrlabel{\coprod _ C F(C,C)},
+        \strdbijframe{3}{3.2}{
+            \strdmid,
+            \strdcell{\scriptstyle\coprod},
+            \strdmid, \strdrlabel{F(C,C)},
+            \strdroadlaside,
+            \strdbijframe{2.3}{2.3}{
+                \strdroad{\strdmid}, \strdroadlabel{F(C,D)}{F(C,C)},
+                \strdcell{F(C,\texttt{-})},
+                \strdroad{\strdleft}, \strdroadlabel{D}{C}, \strdrjump
+            }, \strdframellabel{\strdlvert{\operatorname{flip}}},
+            \strdbranch{
+                \strdljump, \strdroad{\strdmid}%, \strdroadlabel{D}{C}
+            },
+            \strdrjump, \strdmid, \strdrlabel{F(C,D)}
+        }, \strdframelabelat{Left EndCorner}{\coprod ^ {\strdrlap{C,D}}},
+        \strdljump, \strdmid, \strdrlabel{\coprod _{C,D} \mathcal{C}(D,C) \otimes F(C,D)}
+    } \\
+}
+
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid, \strdrlabel{\operatorname{Coeq}(f,g)},
+        \strdcell{\operatorname{coeq}},
+        \strdmid, \strdrlabel{\coprod _ C F(C,C)},
+        \strdcell{\scriptstyle\coprod},
+        \strdmid, \strdrlabel{F(C,C)}
+    } 
+}
+
+\end{document}
