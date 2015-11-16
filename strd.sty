@@ -213,18 +213,13 @@
 }
 
 % Square strings
-%   http://tex.stackexchange.com/questions/33703/extract-x-y-coordinate-of-an-arbitrary-point-in-tikz
-%
-\newdimen\XCoord
-\newdimen\YCoord
-\newcommand*{\ExtractCoordinate}[1]{\path (#1); \pgfgetlastxy{\XCoord}{\YCoord};}%
+%   Note \getlastxy doesn't work with calc.
 
 \newcommand*{\strdsqsubsetto}[3]{% {node}{from}{to}
-    \ExtractCoordinate{$(#1)$}
     \node[strd coord] (#3 Start) at (#2 End) {};
     \node[strd coord] (#3 End) at (#1) {};
     \node[strd coord] (#3 StartCorner) at ($(#3 Start)+(-\strdxunit,0)$) {};
-    \node[strd coord] (#3 EndCorner) at ($(-\strdxunit,\YCoord)$) {};
+    \node[strd coord] (#3 EndCorner) at ({#3 StartCorner} |- {#3 End}) {};
     \node[strd coord] (#3) at ($(#3 StartCorner)!.5!(#3 EndCorner)$) {};
     \draw[strd draw]{
         (#3 Start) -- (#3 StartCorner) -- (#3 EndCorner) -- (#3 End)

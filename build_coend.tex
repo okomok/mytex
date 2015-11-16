@@ -4,7 +4,6 @@
 
 \begin{document}
 
-
 \myin{preview,math,aligned}{
     \myitem &
     \strdgathered{
@@ -24,14 +23,14 @@
             \strdbijframe{2.3}{2.3}{
                 \strdroad{\strdmid}, \strdroadlabel{F(C,D)}{F(D,D)},
                 \strdcell{F(\texttt{-},D)},
-                \strdroad{\strdleft}, \strdroadlabel{D}{C}, \strdrjump
-            }, \strdframellabel{\strdlvert{\operatorname{flip}}},
+                \strdroad{\strdright}, \strdroadlabel{D}{C}, \strdljump
+            }, %\strdframellabel{\strdlvert{\operatorname{flip}}},
             \strdbranch{
-                \strdljump, \strdroad{\strdmid}%, \strdroadlabel{D}{C}
+                \strdrjump, \strdroad{\strdmid}%, \strdroadlabel{D}{C}
             },
-            \strdrjump, \strdmid, \strdrlabel{F(C,D)}
+            \strdxscale{1.2}\strdljump, \strdmid, \strdrlabel{F(C,D)}
         }, \strdframelabelat{Left EndCorner}{\coprod ^ {\strdrlap{C,D}}},
-        \strdljump, \strdmid, \strdrlabel{\coprod _{C,D} \mathcal{C}(D,C) \otimes F(C,D)}
+        \strdxscale{1.2}\strdrjump, \strdmid, \strdrlabel{\coprod _{C,D} \mathcal{C}(D,C) \otimes F(C,D)}
     } \\
     \myitem &
     \strdgathered{
@@ -48,15 +47,15 @@
             \strdroadlaside,
             \strdbijframe{2.3}{2.3}{
                 \strdroad{\strdmid}, \strdroadlabel{F(C,D)}{F(C,C)},
-                \strdcell{F(C,\texttt{-})},
-                \strdroad{\strdleft}, \strdroadlabel{D}{C}, \strdrjump
-            }, \strdframellabel{\strdlvert{\operatorname{flip}}},
+                \strdcell{F(C,\texttt{+})},
+                \strdroad{\strdright}, \strdroadlabel{D}{C}, \strdljump
+            }, %\strdframellabel{\strdlvert{\operatorname{flip}}},
             \strdbranch{
-                \strdljump, \strdroad{\strdmid}%, \strdroadlabel{D}{C}
+                \strdrjump, \strdroad{\strdmid}%, \strdroadlabel{D}{C}
             },
-            \strdrjump, \strdmid, \strdrlabel{F(C,D)}
+            \strdxscale{1.2}\strdljump, \strdmid, \strdrlabel{F(C,D)}
         }, \strdframelabelat{Left EndCorner}{\coprod ^ {\strdrlap{C,D}}},
-        \strdljump, \strdmid, \strdrlabel{\coprod _{C,D} \mathcal{C}(D,C) \otimes F(C,D)}
+        \strdxscale{1.2}\strdrjump, \strdmid, \strdrlabel{\coprod _{C,D} \mathcal{C}(D,C) \otimes F(C,D)}
     } \\
 }
 
