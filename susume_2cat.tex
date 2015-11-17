@@ -1,0 +1,251 @@
+\documentclass{article}
+\usepackage{strd,cat,my,hask}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+% 1-cell
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid, \strdrlabel{a}
+    } \mydefeq a \\
+}
+
+% 2-cell
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid, \strdrlabel{b},
+        \strdcell{f},
+        \strdmid, \strdrlabel{a}
+    }
+    \mydefeq f \haskop{::} a \haskop{->} b \\
+}
+
+% id
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid, \strdrlabel{a}
+    }
+    \mydefeq 
+    \strdgathered{
+        \strdmid, \strdrlabel{a},
+        \strdcell{\haskop{id}},
+        \strdmid, \strdrlabel{a}
+    } \\
+}
+
+
+% vertical composition
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid, \strdrlabel{c},
+        \strdcell{g},
+        \strdmid, \strdrlabel{b},
+        \strdcell{f},
+        \strdmid, \strdrlabel{a}
+    }
+    \mydefeq 
+    \strdgathered{
+        \strdmid, \strdrlabel{c},
+        \strdcell{g \texttt{.} f},
+        \strdmid, \strdrlabel{a}
+    } \\
+}
+
+
+
+% product
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdmid, \strdrlabel{a}
+        },
+        \strdrjump, \strdmid, \strdrlabel{a\myprime}
+    }
+    \mydefeq
+    \strdgathered{
+        \strdmid, \strdrlabel{\haskprod{a}{a\myprime}}
+    } \\
+}
+
+% product of functions
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdmid, \strdrlabel{b},
+            \strdcell{f},
+            \strdmid, \strdrlabel{a}
+        },
+        \strdrjump, \strdmid, \strdrlabel{b\myprime},
+        \strdcell{f\strdrlap{\,\myprime}},
+        \strdmid, \strdrlabel{a\myprime}
+    } \mydefeq 
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{b},\strdxscale{0.5}\strdrjump,\strdcell{f \texttt{***} f\myprime},\strdxscale{0.5}{\strdljump},\strdmid,\strdrlabel{a}
+        },
+        \strdrjump, \strdmid,\strdrlabel{b\myprime},\strdmid, \strdrlabel{a\myprime}
+    } = \haskbackslash \haskprod{a}{a\myprime} \haskop{->} \haskprod{f\,a}{f\myprime\,a\myprime} \\
+}
+
+% product consistency
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{c},\strdxscale{0.5}\strdrjump,\strdcell{g \texttt{***} g\myprime},\strdxscale{0.5}{\strdljump}
+        },
+        \strdrjump, \strdmid,\strdrlabel{c\myprime},
+        \strdljump, 
+        \strdbranch{
+            \strdmid,\strdrlabel{b},\strdxscale{0.5}\strdrjump,\strdcell{f \texttt{***} f\myprime},\strdxscale{0.5}{\strdljump},\strdmid,\strdrlabel{a}
+        },
+        \strdrjump, \strdmid,\strdrlabel{b\myprime},\strdmid, \strdrlabel{a\myprime}
+    } = 
+    \strdgathered{
+        \strdbranch{
+            \strdmid, \strdrlabel{c},
+            \strdcell{g\texttt{.}f},
+            \strdmid, \strdrlabel{a}
+        },
+        \strdxscale{1.5}\strdrjump, \strdmid, \strdrlabel{c\mydprime},
+        \strdcell{g\myprime\texttt{.}f\myprime},
+        \strdmid, \strdrlabel{a\myprime}
+    }
+}
+
+% product consistency
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdmid, \strdrlabel{c},
+            \strdcell{g},
+            \strdmid, \strdrlabel{b},
+            \strdcell{f},
+            \strdmid, \strdrlabel{a}
+        },
+        \strdrjump,
+        \strdmid, \strdrlabel{c\mydprime},
+        \strdcell{g\strdrlap{\,\myprime}},
+        \strdmid, \strdrlabel{b\myprime},
+        \strdcell{f\strdrlap{\,\myprime}},
+        \strdmid, \strdrlabel{a\myprime}
+    }
+}
+
+% sliding
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdmid, \strdempty, \strdrlabel{b},
+            \strdmid, 
+            \strdcell{f},
+            \strdmid, \strdrlabel{a}
+        },
+        \strdrjump,
+        \strdmid, \strdrlabel{b\myprime},
+        \strdcell{f\strdrlap{\,\myprime}},
+        \strdmid, \strdempty, \strdrlabel{a\myprime},
+        \strdmid
+    } =
+    \strdgathered{
+        \strdbranch{
+            \strdmid, \strdrlabel{b},
+            \strdcell{f},
+            \strdmid, \strdrlabel{a}
+        },
+        \strdrjump, \strdmid, \strdrlabel{b\myprime},
+        \strdcell{f\strdrlap{\,\myprime}},
+        \strdmid, \strdrlabel{a\myprime}
+    } =
+    \strdgathered{
+        \strdbranch{
+            \strdmid, \strdrlabel{b},
+            \strdcell{f},
+            \strdmid, \strdempty, \strdrlabel{a},
+            \strdmid
+        },
+        \strdrjump,
+        \strdmid, \strdempty, \strdrlabel{b\myprime},
+        \strdmid,
+        \strdcell{f\strdrlap{\,\myprime}},
+        \strdmid, \strdrlabel{a\myprime}
+    }
+}
+
+% unit
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdimplicit\strdmid
+    } \mydefeq 
+    \strdgathered{
+        \strdmid, \strdrlabel{\haskone}
+    } \\
+}
+
+
+% assoc
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdbranch{
+                \strdrjump, \strdmid, \strdrlabel{b}
+            },
+            \strdmid, \strdrlabel{a},
+        },
+        \strdrjump, \strdrjump, \strdmid, \strdrlabel{c} 
+    }
+}
+
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdbranch{
+                \strdrjump, \strdmid, \strdrlabel{b}
+            },
+            \strdmid, \strdrlabel{a},
+        },
+        \strdrjump, \strdrjump, \strdmid, \strdrlabel{c} 
+    } =
+    \haskprod{\haskprod{a}{b}}{c} \text{ or }
+    \haskprod{a}{\haskprod{b}{c}} \text{ or\dots } \\
+}
+
+
+% term
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid, \strdrlabel{a},
+        \strdcell{x},
+        \strdnone{\strdmid}
+    } =
+    \strdgathered{
+        \strdmid, \strdrlabel{a},
+        \strdcell{x},
+        \strdimplicit\strdmid
+    }
+    \mydefeq \haskbackslash\texttt{\_} \haskop{->} x\\
+    \myitem &
+    \strdgathered{
+        \strdmid, \strdrlabel{b}
+        , \strdcell{f}
+        , \strdmid, \strdrlabel{a}
+        , \strdcell{x}
+    } =
+    \haskbackslash\texttt{\_} \haskop{->} f(x) \\
+}
+\end{document}

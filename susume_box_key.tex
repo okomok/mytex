@@ -1,0 +1,30 @@
+\documentclass{article}
+\usepackage{strd,cat,my,hask}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+% function box
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid, \strdrlabel{mb}
+        , \strdmapframe{1}{1}{
+            \strdmid
+            , \strdcell{k}
+            , \strdmid, \strdrlabel{a}
+        }, \strdframellabel{\strdlvert{\haskop{=<<}}}
+        , \strdmid, \strdrlabel{ma}
+        , \strdcell{\haskop{return}}
+        , \strdmid, \strdrlabel{a}
+    } =
+    \strdgathered{
+        \strdmid, \strdrlabel{mb}
+        , \strdcell{k}
+        , \strdmid,\strdrlabel{a}
+    }
+}
+
+
+\end{document}

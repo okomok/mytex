@@ -1,0 +1,106 @@
+\documentclass{article}
+\usepackage{strd,cat,my,hask}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+% function box
+\myin{preview,math,aligned}{
+    \myitem &
+    \haskop{foo} \haskop{::} (a \haskop{->} b) \haskop{->} (a\myprime \haskop{->} b \myprime) \\
+    \myitem &
+    \strdgathered{
+        \strdmid, \strdrlabel{b\myprime}
+        , \strdmapframe{1}{1}{
+            \strdmid, \strdrlabel{b}
+            , \strdcell{f}
+            , \strdmid, \strdrlabel{a}
+        }, \strdframellabel{\strdlvert{\haskop{foo}}}
+        , \strdmid, \strdrlabel{a\myprime}
+    } \mydefeq \cdots
+}
+
+
+% functoriality
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid, \strdrlabel{fc}
+        , \strdmapframe{1}{1}{
+            \strdmid, \strdrlabel{c}
+            , \strdcell{h}
+            , \strdmid, \strdrlabel{b}
+            , \strdcell{g}
+            , \strdmid, \strdrlabel{a}
+        }, \strdframellabel{\strdlvert{\haskop{fmap}}}
+        , \strdmid, \strdrlabel{fa}
+    } =
+    \strdgathered{
+        \strdmid, \strdrlabel{fc}
+        , \strdmapframe{1}{1}{
+            \strdmid, \strdrlabel{c}
+            , \strdcell{h}
+            , \strdmid, \strdrlabel{b}
+        }, \strdframellabel{\strdlvert{\haskop{fmap}}}
+        , \strdmid, \strdrlabel{fb}
+        , \strdmapframe{1}{1}{
+            \strdmid, \strdrlabel{b}
+            , \strdcell{g}
+            , \strdmid, \strdrlabel{a}
+        }, \strdframellabel{\strdlvert{\haskop{fmap}}}
+        , \strdmid, \strdrlabel{fa}
+    }
+}
+
+
+% monoidal functoriality
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid, \strdrlabel{fc}
+        , \strdmapframe{1.8}{1.8}{
+            \strdmid, \strdrlabel{c}
+            , \strdcell{h}
+            , \strdbranch{
+                \strdright, \strdrlabel{b\myprime}
+                , \strdcell{g\strdrlap{\,\myprime}}
+                , \strdmid, \strdrlabel{a\myprime}
+                , \strdmid, \strdrlabel{fa\myprime}
+            }
+            , \strdleft, \strdrlabel{b}
+            , \strdcell{g}
+            , \strdmid, \strdrlabel{a}
+        }, \strdframellabel{\strdlvert{\haskop{fmap}}}
+        , \strdmid, \strdrlabel{fa}
+    } =
+    \strdgathered{
+        \strdmid, \strdrlabel{fc}
+        , \strdmapframe{1.8}{1.8}{
+            \strdmid, \strdrlabel{c}
+            , \strdcell{h}
+            , \strdbranch{
+                \strdright, \strdrlabel{b\myprime}
+                , \strdmid, \strdrlabel{fb\myprime}
+                , \strdmapframe{0.8}{0.8}{
+                    \strdmid, \strdrlabel{b\myprime}
+                    , \strdcell{g\strdrlap{\,\myprime}}
+                    , \strdmid, \strdrlabel{a\myprime}
+                }, \strdframellabel{\strdlvert{\haskop{fmap}}}
+                , \strdmid, \strdrlabel{fa\myprime}
+            }
+            , \strdleft, \strdrlabel{b}
+        }, \strdframellabel{\strdlvert{\haskop{fmap}}}
+        , \strdmid, \strdrlabel{fb}
+        , \strdmapframe{0.8}{0.8}{
+            \strdmid, \strdrlabel{b}
+            , \strdcell{g}
+            , \strdmid, \strdrlabel{a}
+        }, \strdframellabel{\strdlvert{\haskop{fmap}}}
+        , \strdmid, \strdrlabel{fa}
+    }
+}
+
+
+\end{document}

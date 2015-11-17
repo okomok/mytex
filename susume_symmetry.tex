@@ -1,0 +1,49 @@
+\documentclass{article}
+\usepackage{strd,cat,my,hask}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdxdouble{\strdljump}
+            , \strdmid, \strdrlabel{b}
+            , \strdrchange
+            , \strdmid, \strdrlabel{b}
+        }
+        , \strdmid, \strdrlabel{a}
+        , \strdgraded{\strdlchange}
+        , \strdmid, \strdrlabel{a}
+    } \mydefeq \haskbackslash \haskprod{a}{b} \haskop{->} \haskprod{b}{a}
+}
+
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdxdouble{\strdljump}
+            , \strdmid, \strdrlabel{b}
+            , \strdrchange
+            , \strdmid, \strdrlabel{b}
+        }
+        , \strdmid, \strdrlabel{a}
+        , \strdgraded{\strdlchange}, \strdempty, \strdcell{f}
+        , \strdmid, \strdrlabel{a}
+    } = 
+    \strdgathered{
+        \strdbranch{
+            \strdxdouble{\strdljump}
+            , \strdmid, \strdrlabel{b}
+            , \strdrchange
+            , \strdmid, \strdrlabel{b}
+        }
+        , \strdmid, \strdrlabel{a}, \strdempty, \strdcell{f}
+        , \strdgraded{\strdlchange}
+        , \strdmid, \strdrlabel{a}
+    }
+}
+
+\end{document}

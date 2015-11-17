@@ -1,0 +1,118 @@
+\documentclass{article}
+\usepackage{strd,cat,my,hask}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+% self-enriched
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdroad\strdmid, \strdroadlabel{b}{a}
+    } \mydefeq
+    \strdgathered{
+        \strdmid, \strdrlabel{a \haskop{->}b}
+    } \\
+}
+
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdroad\strdmid, \strdroadlabel{fb}{fa}
+        , \strdcell{\haskop{fmap}}
+        , \strdroad\strdmid, \strdroadlabel{b}{a}
+    } 
+}
+
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdroad\strdmid, \strdroadlabel{c}{a}
+        , \strdbranch{
+            \strdroad\strdleft, \strdroadlabel{}{b}
+        }
+        , \strdroad\strdright
+    } \mydefeq
+    \strdgathered{
+        \strdroad\strdmid, \strdroadlabel{c}{a}
+        , \strdcell{\haskop{.}}
+        , \strdbranch{
+            \strdroad\strdleft, \strdroadlabel{c}{b}
+        }
+        , \strdroad\strdright, \strdroadlabel{b}{a}
+    }
+}
+
+
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdroad\strdmid, \strdroadlabel{}{a}
+        , \strddeadend
+    } \mydefeq
+    \strdgathered{
+        \strdroad\strdmid, \strdroadlabel{a}{a}
+        , \strdcell{\haskop{id}}
+    } \\
+}
+
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdroad\strdmid, \strdroadlabel{b}{a}
+        , \strdbranch{
+            \strdroad\strdleft, \strdroadlabel{}{a}
+        }
+        , \strdroad\strdright
+        , \strddeadend
+    } = 
+    \strdgathered{
+        \strdroad\strdmid, \strdroadlabel{b}{a}
+    } =
+    \strdgathered{
+        \strdroad\strdmid, \strdroadlabel{b}{a}
+        , \strdbranch{
+            \strdroad\strdleft, \strddeadend 
+        }
+        , \strdroad\strdright, \strdroadlabel{b}{}
+    }
+}
+
+% currying
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid, \strdrlabel{c},
+        \strdcell{f},
+        \strdbranch{
+            \strdleft, \strdrlabel{a}
+        },
+        \strdright, \strdrlabel{b}
+    } \sim
+    \strdgathered{
+        \strdroad\strdmid, \strdroadlabel{c}{b},
+        \strdcell{f},
+        \strdmid, \strdrlabel{a}
+    } \\
+}
+
+% naming
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid, \strdrlabel{c},
+        \strdcell{f},
+        \strdbranch{
+            \strdimplicit\strdleft
+        },
+        \strdright, \strdrlabel{b}
+    } \sim 
+    \strdgathered{
+        \strdroad\strdmid, \strdroadlabel{c}{b},
+        \strdcell{f}
+    } \\
+}
+
+
+\end{document}
