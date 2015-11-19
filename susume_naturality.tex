@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage{strd,cat,my,hask}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+% self-enriched
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid, \strdrlabel{g(tb)}
+        , \strdmapframe{1}{1}{
+            \strdmid, \strdrlabel{gb}
+            , \strdcell{s}
+            , \strdmid, \strdrlabel{fb}
+            , \strdcell{h}
+            , \strdmid, \strdrlabel{a}
+        }, \strdframellabel{\strdlvert{\haskop{traverse}}}
+        , \strdmid, \strdrlabel{ta}
+    } \mydefeq
+    \strdgathered{
+        \strdmid, \strdrlabel{g(tb)}
+        , \strdcell{s}
+        , \strdmid, \strdrlabel{f(tb)}
+        , \strdmapframe{1}{1}{
+            \strdmid, \strdrlabel{fb}
+            , \strdcell{h}
+            , \strdmid, \strdrlabel{a}
+        }, \strdframellabel{\strdlvert{\haskop{traverse}}}
+        , \strdmid, \strdrlabel{ta}
+    } \\
+}
+
+\end{document}

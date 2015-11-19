@@ -89,7 +89,7 @@
             \strdleft, \strdrlabel{a}
         },
         \strdright, \strdrlabel{b}
-    } \sim
+    } \sim\
     \strdgathered{
         \strdroad\strdmid, \strdroadlabel{c}{b},
         \strdcell{f},
@@ -107,12 +107,51 @@
             \strdimplicit\strdleft
         },
         \strdright, \strdrlabel{b}
-    } \sim 
+    } \sim \
     \strdgathered{
         \strdroad\strdmid, \strdroadlabel{c}{b},
         \strdcell{f}
     } \\
 }
 
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdroad\strdmid, \strdroadlabel{c}{a}
+        , \strdbranch{
+            \strdroad\strdleft, \strdroadlabel{}{b}
+            , \strdcell{g}
+        }
+        , \strdroad\strdright, \strdcell{f}
+    } =
+    \strdgathered{
+        \strdmid, \strdrlabel{c}
+        , \strdcell{g}
+        , \strdmid, \strdrlabel{b}
+        , \strdcell{f}
+        , \strdmid, \strdrlabel{a}
+    }
+}
+
+
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid, \strdrlabel{c}
+        , \strdcell{g}
+        , \strdmid, \strdrlabel{b}
+        , \strdcell{f}
+        , \strdmid, \strdrlabel{a}
+    } \ \sim
+    \strdgathered{
+        \strdroad\strdmid, \strdroadlabel{c}{a}
+        , \strdbranch{
+            \strdroad\strdleft, \strdroadlabel{}{b}
+            , \strdcell{g}
+        }
+        , \strdroad\strdright
+        , \strdcell{f}
+    } 
+}
 
 \end{document}

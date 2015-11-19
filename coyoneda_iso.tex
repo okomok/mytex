@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{strd,cat,my,hask}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+\myin{preview,math,aligned}{
+    & \myitem 
+    \strdgathered{
+        \strdmid, \strdrlabel{FK}
+        , \strdcell{\scriptstyle\operatorname{coy}\negmedspace\int^{\strdrlap{A}}}
+        , \strdbranch{
+            \strdleft, \strdrlabel{FA}
+        }
+        , \strdroad\strdright, \strdroadlabel{A}{K}
+    } \mydefeq
+    \strdgathered{
+        \strdmid, \strdrlabel{FK}
+        , \strdcell{F}
+        , \strdbranch{
+            \strdleft, \strdrlabel{FA}
+        }
+        , \strdroad\strdright, \strdroadlabel{A}{K}
+    } \\
+}
+
+
+\myin{preview,math,aligned}{
+    & \myitem 
+    \strdgathered{
+        \strdmid, \strdrlabel{W}
+        , \strdmapframe{2}{2}{
+            \strdmid
+            , \strdcell{w}
+            , \strdbranch{
+                \strdleft, \strdrlabel{FA}
+            }
+            , \strdroad\strdright, \strdroadlabel{A}{K}
+        }, \strdframelabelat{Left EndCorner}{\operatorname{coy}\negmedspace\int ^{\strdrlap{A}}}
+        , \strdljump
+        , \strdmid, \strdrlabel{FK}
+    } \mydefeq
+    \strdgathered{
+        \strdroad\strdmid, \strdroadlabel{FK}{W}
+        , \strdmapframe{1.2}{1}{
+            \strdroad\strdmid, \strdroadlabel{FA}{W}
+            , \strdcell{w}
+%            , \strdmapframe{2}{2}{
+%                \strdroadraside
+%                , \strdmid, \strdrlabel{W}
+%                , \strdcell{w}
+%                , \strdbranch{
+%                    \strdleft, \strdrlabel{FA}
+%                }
+%                , \strdroad\strdright, \strdroadlabel{A}{K}
+%            }
+            , \strdroad\strdmid, \strdroadlabel{A}{K}
+        }, \strdframelabelat{Left StartCorner}{\strdunraise{\operatorname{y}_{\strdrlap{A}}}}
+    }
+}
+
+
+\end{document}

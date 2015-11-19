@@ -248,4 +248,19 @@
     } =
     \haskbackslash\texttt{\_} \haskop{->} f(x) \\
 }
+
+
+% expression tree
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid, \strdrlabel{\haskop{Int}},
+        \strdcell{\haskop{+}},
+        \strdbranch{
+            \strdleft, \strdrlabel{\haskop{Int}}
+        },
+        \strdright, \strdrlabel{\haskop{Int}}
+    }
+}
+
 \end{document}

@@ -439,7 +439,7 @@
     \node[strd coord] (#2) at (#2 Start) {};
     \node[strd coord] (#2 End) at (#2 Start) {};%
 }
-\newcommand*{\strdroadraside}{\strdflip{\strdroadlshift}}
+\newcommand*{\strdroadraside}{\strdflip{\strdroadlaside}}
 
 
 % Transformations
@@ -565,4 +565,5 @@
 \newcommand*{\strdllap}[1]{\mathllap{#1}\ }
 \newcommand*{\strdlvert}[1]{\rotatebox[origin=c]{90}{\ensuremath{#1}}}
 \newcommand*{\strdrvert}[1]{\rotatebox[origin=c]{-90}{\ensuremath{#1}}}
+\newcommand*{\strdunraise}[1]{\mathstrut\raisebox{-\depth}{\ensuremath{#1}}}
 
