@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage{strd,cat,my,hask}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid, \strdllabel{K'(C,B\myprime)}
+        , \strdcell{\beta}
+        , \strdmid, \strdllabel{K(C,B\myprime)}
+    } \star
+    \strdgathered{
+        \strdmid, \strdrlabel{H'(B,A)}
+        , \strdcell{\alpha}
+        , \strdmid, \strdrlabel{H(B,A)}
+    } \mydefeq 
+    \strdgathered{
+        \strdmid, \strdrlabel{\int ^ B H\myprime(B,A) \otimes K\myprime(C,B)}
+        , \strdmapframe{3}{3}{
+            \strdbranch{
+                \strdxhalf\strdrjump
+                , \strdmid, \strdrlabel{H\myprime(B,A)}
+                , \strdcell{\alpha}
+                , \strdmid, \strdrlabel{H(B,A)}
+            }
+            , \strdxhalf\strdljump, \strdmid, \strdllabel{K'(C,B)}
+            , \strdcell{\beta}
+            , \strdmid, \strdllabel{K(C,B)} 
+        }, \strdframellabel{\int ^ {\strdrlap{B}}}
+        , \strdxhalf\strdrjump, \strdmid, \strdrlabel{\int ^ B H(B,A) \otimes K(C,B)}
+    } \\
+}
+
+\end{document}

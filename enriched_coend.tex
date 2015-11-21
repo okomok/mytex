@@ -39,6 +39,7 @@
     } \\
 }
 
+
 \myin{preview,math,aligned}{
     % IHPL
     \myitem & 
@@ -72,7 +73,7 @@
             \strdroad{\strdmid}, \strdroadlabel{T(A,A)}{X},
             \strdcell{w},
             \strdmid%, \strdrlabel{W}
-        }, \strdframelabelat{Left StartCorner}{[\int _ {\strdrlap{A}}},
+        }, \strdframelabelat{Left StartCorner}{\strdunraise{[\int _ {\strdrlap{A}}}},
         \strdmid, \strdrlabel{W}
     } \\
     & \mydefeq
@@ -99,24 +100,33 @@
 \myin{preview,math,aligned}{
     & \myitem 
     \strdgathered{
-        \strdmid, \strdrlabel{\int ^ A T(A,A)},
+        \strdmid, \strdrlabel{\int ^ A T\myprime(A,A)},
         \strdmapframe{1.8}{2.5}{
-            \strdmid, \strdrlabel{T(A,A\myprime)},
+            \strdmid, \strdrlabel{T\myprime(A,A)},
             \strdcell{v},
-            \strdmid, \strdrlabel{T\myprime(A,A\myprime)}
-        }, \strdframellabel{\int ^ {\strdrlap{{A,A\myprime}}}},
-        \strdmid, \strdrlabel{\int ^ A T\myprime(A,A)}
+            \strdmid, \strdrlabel{T(A,A)}
+        }, \strdframellabel{\int ^ {\strdrlap{A}}},
+        \strdmid, \strdrlabel{\int ^ A T(A,A)}
     } \mydefeq
     \strdgathered{
-        \strdmid, \strdrlabel{\int ^ A T(A,A)},
+        \strdmid, \strdrlabel{\int ^ A T\myprime(A,A)},
+        \strdmapframe{1.8}{2.5}{
+            \strdmid, \strdrlabel{T\myprime(A,A\myprime)},
+            \strdcell{v},
+            \strdmid, \strdrlabel{T(A,A\myprime)}
+        }, \strdframellabel{\int ^ {\strdrlap{{A,A\myprime}}}},
+        \strdmid, \strdrlabel{\int ^ A T(A,A)}
+    } \mydefeq
+    \strdgathered{
+        \strdmid, \strdrlabel{\int ^ A T\myprime(A,A)},
         \strdbijframe{1}{2.5}{
             \strdmid, % \strdrlabel{\int ^ A T(A,A)},
             \strdcell{\scriptstyle\int},
-            \strdmid, \strdrlabel{T(A,A)},
+            \strdmid, \strdrlabel{T\myprime(A,A)},
             \strdcell{v},
-            \strdmid, \strdrlabel{T\myprime(A,A)}
+            \strdmid, \strdrlabel{T(A,A)}
         }, \strdframelabelat{Left EndCorner}{\int ^ {\strdrlap{A}}},
-        \strdmid, \strdrlabel{\int ^ A T\myprime(A,A)}
+        \strdmid, \strdrlabel{\int ^ A T(A,A)}
     }
 }
 
@@ -140,7 +150,7 @@
             \strdroad{\strdleft},
             \strdcell{\scriptstyle T(A,A,\texttt{-})},
             \strdroad{\strdmid}
-        }, \strdframelabelat{Left StartCorner}{[\int _ {\strdrlap{A}}},
+        }, \strdframelabelat{Left StartCorner}{\strdunraise{[\int _ {\strdrlap{A}}}},
         \strdroad{\strdmid}, \strdroadlabel{B}{B\myprime},
         \strdend{\mathcal{B}}
     }

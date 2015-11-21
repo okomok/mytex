@@ -84,7 +84,7 @@
             \strdcell{f},
             \strdmid, \strdrlabel{a}
         },
-        \strdrjump, \strdmid, \strdrlabel{b\myprime},
+        \strdxscale{1.2}\strdrjump, \strdmid, \strdrlabel{b\myprime},
         \strdcell{f\strdrlap{\,\myprime}},
         \strdmid, \strdrlabel{a\myprime}
     } \mydefeq 
@@ -133,7 +133,7 @@
             \strdcell{f},
             \strdmid, \strdrlabel{a}
         },
-        \strdrjump,
+        \strdxscale{1.2}\strdrjump,
         \strdmid, \strdrlabel{c\mydprime},
         \strdcell{g\strdrlap{\,\myprime}},
         \strdmid, \strdrlabel{b\myprime},
@@ -152,7 +152,7 @@
             \strdcell{f},
             \strdmid, \strdrlabel{a}
         },
-        \strdrjump,
+        \strdxscale{1.2}\strdrjump,
         \strdmid, \strdrlabel{b\myprime},
         \strdcell{f\strdrlap{\,\myprime}},
         \strdmid, \strdempty, \strdrlabel{a\myprime},
@@ -164,7 +164,7 @@
             \strdcell{f},
             \strdmid, \strdrlabel{a}
         },
-        \strdrjump, \strdmid, \strdrlabel{b\myprime},
+        \strdxscale{1.2}\strdrjump, \strdmid, \strdrlabel{b\myprime},
         \strdcell{f\strdrlap{\,\myprime}},
         \strdmid, \strdrlabel{a\myprime}
     } =
@@ -175,7 +175,7 @@
             \strdmid, \strdempty, \strdrlabel{a},
             \strdmid
         },
-        \strdrjump,
+        \strdxscale{1.2}\strdrjump,
         \strdmid, \strdempty, \strdrlabel{b\myprime},
         \strdmid,
         \strdcell{f\strdrlap{\,\myprime}},
@@ -230,23 +230,23 @@
     \myitem &
     \strdgathered{
         \strdmid, \strdrlabel{a},
-        \strdcell{x},
-        \strdnone{\strdmid}
-    } =
-    \strdgathered{
-        \strdmid, \strdrlabel{a},
-        \strdcell{x},
-        \strdimplicit\strdmid
-    }
-    \mydefeq \haskbackslash\texttt{\_} \haskop{->} x\\
-    \myitem &
-    \strdgathered{
-        \strdmid, \strdrlabel{b}
-        , \strdcell{f}
-        , \strdmid, \strdrlabel{a}
-        , \strdcell{x}
-    } =
-    \haskbackslash\texttt{\_} \haskop{->} f(x) \\
+        \strdcell{x}
+%        ,\strdnone{\strdmid}
+    } \mydefeq
+    % \strdgathered{
+    %     \strdmid, \strdrlabel{a},
+    %     \strdcell{x},
+    %     \strdimplicit\strdmid
+    % }
+    \haskbackslash\texttt{\_} \haskop{->} x\\
+    % \myitem &
+    % \strdgathered{
+    %     \strdmid, \strdrlabel{b}
+    %     , \strdcell{f}
+    %     , \strdmid, \strdrlabel{a}
+    %     , \strdcell{x}
+    % } =
+    % \haskbackslash\texttt{\_} \haskop{->} f(x) \\
 }
 
 
@@ -262,5 +262,34 @@
         \strdright, \strdrlabel{\haskop{Int}}
     }
 }
+
+
+% function equality 
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid, \strdrlabel{b},
+        \strdcell{f},
+        \strdmid, \strdrlabel{a}
+    } =
+    \strdgathered{
+        \strdmid, \strdrlabel{b},
+        \strdcell{g},
+        \strdmid, \strdrlabel{a}
+    } \iff
+    \strdgathered{
+        \strdmid, \strdrlabel{b},
+        \strdcell{f},
+        \strdmid, \strdrlabel{a}
+        , \strdcell{x}
+    } \ \underset{=}{\forall x}\
+    \strdgathered{
+        \strdmid, \strdrlabel{b},
+        \strdcell{g},
+        \strdmid, \strdrlabel{a}
+        , \strdcell{x}
+    }
+}
+
 
 \end{document}
