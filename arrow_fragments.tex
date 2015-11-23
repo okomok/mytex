@@ -1,0 +1,128 @@
+\documentclass{article}
+\usepackage{strd,cat,my,hask}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+\myin{preview,math,aligned}{
+    & (\mathcal{A}, \operatorname{arr}) \mapsto \\
+      &
+    \myitem \strdgathered{
+        \strdstart{\mathcal{A}}
+        , \strdroad\strdmid, \strdroadlabel{A(C,C\myprime)}{A(D,D\myprime)}
+        , \strdcell{A}
+        , \strdbranch{
+            \strdroad\strdleft, \strdroadlabel{C\myprime}{D\myprime}
+            , \strdend{\mathcal{C}}
+        }
+        , \strdroad\strdright, \strdroadlabel{D}{C}
+        , \strdend{\mathcal{C}}
+    } \mydefeq
+    \strdgathered{
+        \strdstart{\mathcal{A}}
+        , \strdroad\strdmid, \strdroadlabel{\mathcal{A}(C,C\myprime)}{\mathcal{A}(D,D\myprime)}
+        , \strdcell{\operatorname{Hom}_{\mathcal{A}}}
+        , \strdbranch{
+            \strdroad\strdleft, \strdroadlabel{C\myprime}{D\myprime}
+            , \strdcell{\operatorname{arr}}
+            , \strdroad\strdmid, \strdroadlabel{C\myprime}{D\myprime}
+            , \strdend{\mathcal{C}}
+        }
+        , \strdroad\strdright, \strdroadlabel{D}{C}
+        , \strdcell{\operatorname{arr}}
+        , \strdroad\strdmid, \strdroadlabel{D}{C}
+        , \strdend{\mathcal{C}}
+    } \\
+    & \myitem \strdgathered{
+        \strdnone{\strdstart{\mathcal{C}}}
+        , \strdmid, \strdrlabel{A(C,D)}
+        , \strdcell{\eta}
+        , \strdroad\strdmid, \strdroadlabel{C}{D}
+        , \strdend{\mathcal{C}}
+    } \mydefeq
+    \strdgathered{
+        \Identity{\strdstart{\mathcal{A}}}
+        , \strdroad\strdmid, \strdroadlabel{C}{D}
+        %, \strdmid, \strdrlabel{A(C,D)}
+        , \strdcell{\operatorname{arr}}
+        , \strdroad\strdmid, \strdroadlabel{C}{D}
+        , \strdend{\mathcal{C}}
+    }\\
+    & 
+    \myitem \strdgathered{
+        \strdmid, \strdrlabel{A(C,E)}
+        ,\strdcell{\mu}
+        , \strdmid, \strdrlabel{\int ^ D A(D,E) \times A(C,D)}
+    } \mydefeq
+    \strdgathered{
+        \strdstart{\mathcal{A}}
+        , \strdroad\strdmid, \strdroadlabel{C}{E}
+        %\strdmid, \strdrlabel{A(C,E)}
+        , \strdmapframe{2}{2}{
+            \strdroad\strdmid, \strdroadlabel{C}{E}
+            , \strdbranch{
+                \strdroad\strdleft, \strdroadlabel{}{D}
+            }
+            , \strdroad\strdright
+            , \strdljump
+        }, \strdframelabelat{Left EndCorner}{\int ^ {\strdrlap{D}}}
+        , \strdmid, \strdrlabel{\int ^ D \mathcal{A}(D,E) \times \mathcal{A}(C,D)}
+    }
+}
+
+\myin{preview,math,aligned}{
+    & (\Identity{A}, \eta,\mu) \mapsto \\
+    &\myitem\! \operatorname{ob}\mathcal{A} \mydefeq \operatorname{ob}\mathcal{C} \\
+    & \myitem \strdgathered{
+        \strdstart{\mathcal{A}}
+        ,\strdroad\strdmid, \strdroadlabel{C}{D}
+    } \mydefeq A(C,D) \\
+    & \myitem \strdgathered{
+        \strdstart{\mathcal{A}}
+        ,\strdroad\strdmid,\strdroadlabel{C}{E}
+        ,\strdbranch{
+            \strdroad\strdleft, \strdroadlabel{}{D}
+        }
+        ,\strdroad\strdright
+    } \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{A(C,E)}
+        ,\strdcell{\mu}
+        ,\strdmid,\strdrlabel{\int ^ D A(D,E) \times A(C,D)}
+        ,\strdcell{\scriptstyle\int}
+        ,\strdbranch{
+            \strdleft,\strdllabel{A(C,D)}
+        }
+        ,\strdright,\strdrlabel{A(D,E)}
+    } \\
+    & \myitem \strdgathered{
+        \strdstart{\mathcal{A}}
+        ,\strdroad\strdmid, \strdroadlabel{}{C}
+        ,\strddeadend
+    } \mydefeq 
+    \strdgathered{
+        \strdmid, \strdrlabel{A(C,D)}
+        ,\strdcell{\eta}
+        ,\strdroad\strdmid,\strdroadlabel{}{C}
+        ,\strddeadend
+    } \\
+    &
+    \myitem \strdgathered{
+        \strdstart{\mathcal{A}}
+        ,\strdroad\strdmid,\strdroadlabel{C}{D}
+        ,\strdcell{\operatorname{arr}}
+        ,\strdroad\strdmid,\strdroadlabel{C}{D}
+        ,\strdend{\mathcal{C}}
+    } \mydefeq
+    \strdgathered{
+        \strdnone{\strdstart{\mathcal{A}}}
+        ,\strdmid,\strdrlabel{A(C,D)}
+        ,\strdcell{\eta}
+        ,\strdroad\strdmid,\strdroadlabel{C}{D}
+        ,\strdend{\mathcal{C}}
+    }
+}
+
+\end{document}
