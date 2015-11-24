@@ -28,7 +28,8 @@
 \pgfdeclarelayer{strd whitelayer}
 \pgfdeclarelayer{strd celllayer}
 \pgfdeclarelayer{strd labellayer}
-\pgfsetlayers{background,main,strd pavelayer,strd gradedlayer,strd whitelayer,strd celllayer,strd labellayer}
+\pgfdeclarelayer{strd framelayer}
+\pgfsetlayers{background,main,strd pavelayer,strd framelayer,strd gradedlayer,strd whitelayer,strd celllayer,strd labellayer}
 
 % layers forget surrounding line styles, so we define...
 \newcommand*{\strdresetlinewidth}{\pgfsetlinewidth{0.2pt}}
@@ -273,7 +274,7 @@
 
 \newcommand*{\strdframeofone}[6]{% {style}{xl}{xr}{sf}{from}{to}
     \strduse{#4}{#5}{#6 Unframe}
-    \strdonlayer{strd labellayer}{
+    \strdonlayer{strd framelayer}{
         \strdscopepathis{#1}{
             \strdxscale{#2}{\strdsqsubsetto{#6 Unframe End}}{#5}{#6 Left}
             \strdxscale{#3}{\strdsqsupsetto{#6 Unframe End}}{#5}{#6 Right}

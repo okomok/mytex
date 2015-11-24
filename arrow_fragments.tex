@@ -78,7 +78,10 @@
     & \myitem \strdgathered{
         \strdstart{\mathcal{A}}
         ,\strdroad\strdmid, \strdroadlabel{C}{D}
-    } \mydefeq A(C,D) \\
+    } \mydefeq
+    \strdgathered{
+        \strdmid, \strdrlabel{A(C,D)}
+    } \\
     & \myitem \strdgathered{
         \strdstart{\mathcal{A}}
         ,\strdroad\strdmid,\strdroadlabel{C}{E}
@@ -103,7 +106,7 @@
         ,\strddeadend
     } \mydefeq 
     \strdgathered{
-        \strdmid, \strdrlabel{A(C,D)}
+        \strdmid, \strdrlabel{A(C,C)}
         ,\strdcell{\eta}
         ,\strdroad\strdmid,\strdroadlabel{}{C}
         ,\strddeadend

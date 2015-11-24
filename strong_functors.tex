@@ -1,0 +1,90 @@
+\documentclass{article}
+\usepackage{strd,cat,my,hask}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+\myin{preview,math,aligned}{
+    \myitem 
+    \strdgathered{
+        \strdmid,\strdrlabel{TC},
+        \strdmapframe{2}{2}{
+            \strdmid,\strdrlabel{C},
+            \strdcell{f},
+            \strdbranch{
+                \strdright,\strdrlabel{B},
+                \strdmid,\strdrlabel{TB}
+            },
+            \strdgraded\strdleft
+        },\strdframellabel{T},
+        \strdgraded\strdmid,\strdrlabel{A}
+    } \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{TC},
+        \strdmapframe{2}{2}{
+            \strdmid,\strdrlabel{C},
+            \strdcell{f},
+            \strdbranch{
+                \strdright,\strdrlabel{B}
+            },
+            \strdleft,\strdrlabel{A}
+        },\strdframellabel{T},
+        \strdrjump,\strdmid,\strdrlabel{T(A\otimes B)},
+        \strdcell{st},
+        \strdbranch{
+            \strdright,\strdrlabel{TB}
+        },
+        \strdleft,\strdrlabel{A}
+    } 
+}
+
+\myin{preview,math,aligned}{
+    \myitem 
+    \strdgathered{
+        \strdmid,\strdrlabel{TE},
+        \strdmapframe{2}{2}{
+            \strdmid,\strdrlabel{E},
+            \strdcell{f},
+            \strdbranch{
+                \strdright,\strdrlabel{D},
+                \strdcell{g},
+                \strdmid,\strdrlabel{C},
+                \strdmid,\strdrlabel{TC}
+            },
+            \strdbranch{
+                \strdgraded\strdleft,
+                \strdgraded\strdmid,
+                \strdmid,\strdrlabel{A}
+            },
+            \strdmid,
+            \strdgraded\strdmid
+        },\strdframellabel{T},
+        \strdgraded\strdmid,\strdrlabel{B}
+    }= 
+    \strdgathered{
+        \strdmid,\strdrlabel{TE},
+        \strdmapframe{2}{2}{
+            \strdmid,\strdrlabel{E},
+            \strdcell{f},
+            \strdbranch{
+                \strdxscale{0.5}{\strdgraded\strdleft},
+                \strdgraded\strdmid,\strdrlabel{B}
+            },
+            \strdbranch{
+                \strdxscale{1.3}{\strdgraded\strdleft},\strdgraded\strdmid,\strdrlabel{A}
+            },
+            \strdxscale{1.3}{\strdright},\strdrlabel{D}
+        },\strdframellabel{T},
+        \strdmid, \strdrlabel{TD},
+        \strdmapframe{1}{1}{
+            \strdmid,\strdrlabel{D},
+            \strdcell{g},
+            \strdmid,\strdrlabel{C}
+        },\strdframellabel{T},
+        \strdmid,\strdrlabel{TC}
+    } 
+}
+
+\end{document}
