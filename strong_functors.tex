@@ -17,9 +17,9 @@
                 \strdright,\strdrlabel{B},
                 \strdmid,\strdrlabel{TB}
             },
-            \strdgraded\strdleft
+            \Identity\strdleft
         },\strdframellabel{T},
-        \strdgraded\strdmid,\strdrlabel{A}
+        \strdaroundframe,\Identity\strdmid,\strdrlabel{A}
     } \mydefeq
     \strdgathered{
         \strdmid,\strdrlabel{TC},
@@ -54,14 +54,14 @@
                 \strdmid,\strdrlabel{TC}
             },
             \strdbranch{
-                \strdgraded\strdleft,
-                \strdgraded\strdmid,
-                \strdmid,\strdrlabel{A}
+                \Identity\strdleft,
+                \Identity\strdmid,
+                \strdaroundframe,\strdmid,\strdrlabel{A}
             },
             \strdmid,
-            \strdgraded\strdmid
+            \Identity\strdmid
         },\strdframellabel{T},
-        \strdgraded\strdmid,\strdrlabel{B}
+        \strdaroundframe,\Identity\strdmid,\strdrlabel{B}
     }= 
     \strdgathered{
         \strdmid,\strdrlabel{TE},
@@ -69,11 +69,11 @@
             \strdmid,\strdrlabel{E},
             \strdcell{f},
             \strdbranch{
-                \strdxscale{0.5}{\strdgraded\strdleft},
-                \strdgraded\strdmid,\strdrlabel{B}
+                \strdxscale{0.5}{\Identity\strdleft},
+                \strdaroundframe,\Identity\strdmid,\strdrlabel{B}
             },
             \strdbranch{
-                \strdxscale{1.3}{\strdgraded\strdleft},\strdgraded\strdmid,\strdrlabel{A}
+                \strdxscale{1.3}{\Identity\strdleft},\strdaroundframe,\Identity\strdmid,\strdrlabel{A}
             },
             \strdxscale{1.3}{\strdright},\strdrlabel{D}
         },\strdframellabel{T},
@@ -119,14 +119,14 @@
     \strdgathered{
         \strdroad\strdmid,\strdroadlabel{TB}{TA},
         \strdmapframe{2.5}{2.3}{
-            \strdroadlaside,\strdmid,\strdrlabel{TB},
+            \strdroadlaside,\strdmid,\strdllabel{TB},
             \strdmapframe{1.8}{1.8}{
                 \strdmid,\strdrlabel{B},
                 \strdcell{\epsilon},
                 \strdbranch{
-                    \strdroadgraded{\strdleft},
-                    \strdroadgraded{\strdmid},
-                    \strdroadgraded\strdmid,\strdroadlabel{B}{A}
+                    \strdroad{\strdleft},
+                    \strdroadaroundframe,\strdroad{\strdmid},
+                    \strdroadaroundframe,\strdroad\strdmid,\strdroadlabel{B}{A}
                 },
                 \strdright,\strdrlabel{A}
             }, \strdframellabel{T},
@@ -147,9 +147,9 @@
         \strdroad\strdleft,\strdroadlabel{A\otimes B}{B},
         \strdmapframe{1.2}{1.2}{
             \strdbranch{\strdxhalf\strdrjump,\strdmid,\strdrlabel{B}},
-            \strdxhalf\strdljump,\strdyhalf\strdmid,\strdgraded{\strdyhalf\strdmid}
+            \strdxhalf\strdljump,\strdyhalf\strdmid,\Identity{\strdyhalf\strdmid}
         },\strdframellabel{\strdlvert{\operatorname{curry}}},
-        \strdgraded\strdmid,\strdrlabel{A}
+        \strdaroundframe,\Identity\strdmid,\strdrlabel{A}
     }
 }
 
