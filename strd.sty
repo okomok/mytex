@@ -396,6 +396,13 @@
     }%
 }
 
+\newcommand*{\strdroadgraded}[3]{%
+    \strdscope{strd roadbase}{\strduse{#1}{#2}{#3}}
+    \strdonlayer{strd gradedlayer}{
+        \strdscope{strd roadpave}{\strduse{#1}{#2}{#3 Paved}}
+    }%
+}
+
 
 % Roads
 %   Keep scaling away by '--'.
@@ -563,7 +570,7 @@
 %
 
 \newcommand*{\strdrlap}[1]{\mathrlap{\smash{#1}}}
-\newcommand*{\strdllap}[1]{\mathllap{#1}\ }
+\newcommand*{\strdllap}[1]{\mathllap{#1}}
 \newcommand*{\strdlvert}[1]{\rotatebox[origin=c]{90}{\ensuremath{#1}}}
 \newcommand*{\strdrvert}[1]{\rotatebox[origin=c]{-90}{\ensuremath{#1}}}
 \newcommand*{\strdunraise}[1]{\mathstrut\raisebox{-\depth}{\ensuremath{#1}}}

@@ -87,4 +87,72 @@
     } 
 }
 
+
+\myin{preview,math,aligned}{
+    \myitem 
+    T : \text{strong} \iff \exists T : \operatorname{\mathcal{V}-\text{functor}},
+    \strdgathered{
+        \strdroad\strdmid,\strdroadlabel{TB}{TA},
+        \strdcell{T},
+        \strdroad\strdmid,\strdroadlabel{B}{A},
+        \strdcell{f}
+    } = 
+    \strdgathered{
+        \strdmid,\strdrlabel{TB},
+        \strdmapframe{1}{1}{
+            \strdmid,\strdrlabel{B},
+            \strdcell{f},
+            \strdmid,\strdrlabel{A}
+        },\strdframellabel{T},
+        \strdmid,\strdrlabel{TA}
+    }
+}
+
+
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdroad\strdmid,\strdroadlabel{TB}{TA},
+        \strdcell{T},
+        \strdroad\strdmid,\strdroadlabel{B}{A}
+    } \mydefeq
+    \strdgathered{
+        \strdroad\strdmid,\strdroadlabel{TB}{TA},
+        \strdmapframe{2.5}{2.3}{
+            \strdroadlaside,\strdmid,\strdrlabel{TB},
+            \strdmapframe{1.8}{1.8}{
+                \strdmid,\strdrlabel{B},
+                \strdcell{\epsilon},
+                \strdbranch{
+                    \strdroadgraded{\strdleft},
+                    \strdroadgraded{\strdmid},
+                    \strdroadgraded\strdmid,\strdroadlabel{B}{A}
+                },
+                \strdright,\strdrlabel{A}
+            }, \strdframellabel{T},
+            \strdmid,\strdrlabel{TA}
+        },\strdframellabel{\strdlvert{\operatorname{curry}}}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{T(A\otimes B)},
+        \strdcell{st},
+        \strdbranch{\strdleft,\strdrlabel{A}},
+        \strdright,\strdrlabel{TB}
+    } \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{T(A\otimes B)},
+        \strdcell{T},
+        \strdbranch{\strdright,\strdrlabel{TB}},
+        \strdroad\strdleft,\strdroadlabel{A\otimes B}{B},
+        \strdmapframe{1.2}{1.2}{
+            \strdbranch{\strdxhalf\strdrjump,\strdmid,\strdrlabel{B}},
+            \strdxhalf\strdljump,\strdyhalf\strdmid,\strdgraded{\strdyhalf\strdmid}
+        },\strdframellabel{\strdlvert{\operatorname{curry}}},
+        \strdgraded\strdmid,\strdrlabel{A}
+    }
+}
+
+
+
 \end{document}
