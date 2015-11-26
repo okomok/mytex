@@ -47,11 +47,11 @@
 % Lambda expressions
 %
 
-\newcommand\mylambdanamed[2]{%
+\newcommand*{\mylambdanamed}[2]{%
     \expandafter\newcommand\csname#1\endcsname[1]{#2}\csuse{#1}%
 }
 \newcounter{mylambdacounter}
-\newcommand\mylambda{%
+\newcommand*{\mylambda}{%
     \stepcounter{mylambdacounter}%
     \mylambdanamed{mylambda\the\value{mylambdacounter}}%
 }

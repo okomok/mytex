@@ -54,7 +54,7 @@
     \end{tikzpicture}%
 }
 
-\newcommand{\strdin}[2]{%
+\newcommand*{\strdin}[2]{%
     \Foldr{\strdinimpl}{#2}{\myListize{#1}}%
 }
 \newcommand*{\strdinimpl}[2]{%
@@ -121,7 +121,7 @@
         (#2 Start) parabola (#2 Corner) -- (#2 End)
     };%
 }
-\newcommand*{\strdright}{\strdflip{\strdleft}}
+\newcommand*{\strdright}{\strdflip\strdleft}
 
 \newcommand*{\strdmid}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
@@ -292,10 +292,10 @@
         }
     }%
 }
-\newcommand{\strdframeof}[3]{\strdseqin{\strdframeofone{#1}{#2}{#3}}}
+\newcommand*{\strdframeof}[3]{\strdseqin{\strdframeofone{#1}{#2}{#3}}}
 
-\newcommand{\strdmapframe}{\strdframeof{strd mapframe}}
-\newcommand{\strdbijframe}{\strdframeof{strd bijframe}}
+\newcommand*{\strdmapframe}{\strdframeof{strd mapframe}}
+\newcommand*{\strdbijframe}{\strdframeof{strd bijframe}}
 
 
 % aroundframe dots
@@ -524,11 +524,11 @@
     \strduse{#2}{#4 Prev}{#4}%
 }
 
-\newcommand{\strdseq}[1]{% can't support empty lists.
+\newcommand*{\strdseq}[1]{% can't support empty lists.
     \Foldl{\strdthen}{\strdcopy}{\myListize{#1}}%
 }
-\newcommand{\strdseqin}[2]{\strduse{#1}{\strdseq{#2}}}
-\newcommand{\strdgathered}[1]{\strdin{gathered}{\strdseq{#1}{\strdorigin}{strdend}}}
+\newcommand*{\strdseqin}[2]{\strduse{#1}{\strdseq{#2}}}
+\newcommand*{\strdgathered}[1]{\strdin{gathered}{\strdseq{#1}{\strdorigin}{strdend}}}
 
 \newcommand*{\strdassign}[4]{% {name}{sf}{from}{to}
     \strduse{#2}{#3}{#4}
@@ -553,7 +553,7 @@
     \strdcopy{#3}{#4}
     \strduse{#2}{#3 #1}%
 }
-\newcommand{\strdlambda}{\Compose\strdapply\mylambda}
+\newcommand*{\strdlambda}{\Compose\strdapply\mylambda}
 
 \newcommand*{\strddot}{\strdhere\strdputdot}
 \newcommand*{\strdwhitedot}{\strdwithat{Start}{\strdputwhitedot}}
@@ -586,7 +586,7 @@
     \strdcopy{#2}{#3}
     \strduse{#1}{#2}{#3 Branch}%
 }
-\newcommand{\strdbranch}{\strdseqin\strdbranchone}
+\newcommand*{\strdbranch}{\strdseqin\strdbranchone}
 
 \newcommand*{\strdrestart}[3]{% {node}{from}{to}
     \strdcoord{#1}{#3}%
