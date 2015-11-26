@@ -5,20 +5,33 @@
 
 \begin{document}
 
+% \myin{preview,math,aligned}{
+%     \myitem &
+%     \strdgathered{
+%         \strdbranch{
+%             \strdxdouble{\strdljump}
+%             , \strdmid, \strdrlabel{b}
+%             , \strdrchange
+%             , \strdmid, \strdrlabel{b}
+%         }
+%         , \strdmid, \strdrlabel{a}
+%         , \strdgraded{\strdlchange}
+%         , \strdmid, \strdrlabel{a}
+%     } \mydefeq \haskbackslash \haskprod{a}{b} \haskop{->} \haskprod{b}{a}
+% }
 \myin{preview,math,aligned}{
     \myitem &
     \strdgathered{
         \strdbranch{
             \strdxdouble{\strdljump}
-            , \strdmid, \strdrlabel{b}
-            , \strdrchange
-            , \strdmid, \strdrlabel{b}
+            , \strdunleft, \strdrlabel{b}
+            , \strdright,\strdrlabel{b}
         }
-        , \strdmid, \strdrlabel{a}
-        , \strdgraded{\strdlchange}
-        , \strdmid, \strdrlabel{a}
+        , \strdgraded\strdunright, \strdrlabel{a}
+        , \strdgraded\strdleft,\strdrlabel{a}
     } \mydefeq \haskbackslash \haskprod{a}{b} \haskop{->} \haskprod{b}{a}
 }
+
 
 \myin{preview,math,aligned}{
     \myitem &
@@ -43,6 +56,31 @@
         , \strdmid, \strdrlabel{b}, \strdempty, \strdcell{f}
         , \strdgraded{\strdlchange}
         , \strdmid, \strdrlabel{a}
+    }
+}
+
+
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{a},
+            \strdbranch{\strdxscale{3}{\strdhright}},
+            \strdmid,\strdrlabel{d}
+        },
+        \strdrjump,
+        \strdbranch{
+            \strdmid,\strdrlabel{b},
+            \strdmid,\strdrlabel{c}
+        },
+        \strdrjump,
+        \strdbranch{
+            \strdmid,\strdrlabel{c},
+            \strdmid,\strdrlabel{a}
+        },
+        \strdrjump,
+        \strdmid,\strdrlabel{d},
+        \strdmid,\strdrlabel{b}
     }
 }
 
