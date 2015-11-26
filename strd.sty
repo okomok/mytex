@@ -40,7 +40,7 @@
         \strdresetlinewidth
         #2
     \end{pgfonlayer}
-    \strdresetlinewidth
+    \strdresetlinewidth%
 }
 
 
@@ -141,7 +141,7 @@
         (#2 Start) -- (#2 Corner) parabola[bend at end] (#2 End)
     };%
 }
-\newcommand*{\strdunright}{\strdflip{\strdunleft}}
+\newcommand*{\strdunright}{\strdflip\strdunleft}
 
 \newcommand*{\strdconnect}[3]{%
     \node[strd coord] (#3 Start) at (#1 Start) {};
@@ -157,7 +157,7 @@
         (#2 Start) -- (#2 End)
     };%
 }
-\newcommand*{\strdhright}{\strdflip{\strdhleft}}
+\newcommand*{\strdhright}{\strdflip\strdhleft}
 
 \newcommand*{\strdminus}[2]{%
     \strdscopexscale{0.5}{
@@ -177,7 +177,7 @@
         (#2 Start) parabola (#2 StartCorner) -- (#2 EndCorner) parabola[bend at end] (#2 End)
     };%
 }
-\newcommand*{\strdsupset}{\strdflip{\strdsubset}}
+\newcommand*{\strdsupset}{\strdflip\strdsubset}
 
 \newcommand*{\strdlint}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
@@ -189,7 +189,7 @@
         (#2 Start) parabola (#2 StartCorner) -- (#2 EndCorner) parabola[bend at end] (#2 End)
     };%
 }
-\newcommand*{\strdrint}{\strdflip{\strdlint}}
+\newcommand*{\strdrint}{\strdflip\strdlint}
 
 \newcommand*{\strdlchange}[2]{%
     \node[strd coord] (#2 Start) at (#1 End) {};
@@ -201,12 +201,12 @@
         (#2 Start) -- (#2 StartCorner) parabola[bend at end] (#2) parabola (#2 EndCorner) -- (#2 End)
     };%
 }
-\newcommand*{\strdrchange}{\strdflip{\strdlchange}}
+\newcommand*{\strdrchange}{\strdflip\strdlchange}
 
-\newcommand*{\strdjump}{\strdnone{\strdmid}}
-\newcommand*{\strdljump}{\strdnone{\strdhleft}}
-\newcommand*{\strdrjump}{\strdnone{\strdhright}}
-\newcommand*{\strddup}{\strdnone{\strdminus}}
+\newcommand*{\strdjump}{\strdnone\strdmid}
+\newcommand*{\strdljump}{\strdnone\strdhleft}
+\newcommand*{\strdrjump}{\strdnone\strdhright}
+\newcommand*{\strddup}{\strdnone\strdminus}
 
 \newcommand*{\strdjumpto}[3]{% {node}{from}{to}
     \node[strd coord] (#3 Start) at (#2 End) {};
@@ -227,13 +227,13 @@
         (#3 Start) -- (#3 StartCorner) -- (#3 EndCorner) -- (#3 End)
     };%
 }
-\newcommand*{\strdsqsupsetto}[1]{\strdflip{\strdsqsubsetto{#1}}}
+\newcommand*{\strdsqsupsetto}{\Compose\strdflip\strdsqsubsetto}
 
 \newcommand*{\strdsqsubset}[2]{%
     \strdjump{#1}{#2 Impl}
     \strdsqsubsetto{#2 Impl End}{#1}{#2}%
 }
-\newcommand*{\strdsqsupset}{\strdflip{\strdsqsubset}}
+\newcommand*{\strdsqsupset}{\strdflip\strdsqsubset}
 
 \newcommand*{\strdsquare}[2]{%
     \strdsqsubset{#1}{#2 Left}
@@ -305,13 +305,13 @@
 
 \newcommand*{\strdputaroundframe}[1]{%
     \strdonlayer{strd aroundframelayer}{
-        \node[strd aroundframe] at (#1) {};%
+        \node[strd aroundframe] at (#1) {};
     }% 
 }
 
 \newcommand*{\strdputroadaroundframe}[1]{%
     \strdonlayer{strd aroundframelayer}{
-        \node[strd roadaroundframe] at (#1) {};%
+        \node[strd roadaroundframe] at (#1) {};
     }% 
 }
 
@@ -413,7 +413,7 @@
 }
 
 
-% Deprecate me
+% Deprecate me?
 % Graded strings; order depends
 %   You must wrap each string because of layers-reset-line-width bug.
 %   BTW, tikz/double doesn't work with scopes.
@@ -476,7 +476,7 @@
     \node[strd coord] (#2) at (#2 Start) {};
     \node[strd coord] (#2 End) at (#2 Start) {};%
 }
-\newcommand*{\strdroadraside}{\strdflip{\strdroadlaside}}
+\newcommand*{\strdroadraside}{\strdflip\strdroadlaside}
 
 
 % Transformations
@@ -507,17 +507,17 @@
     \strduse{#1}{\strduse{#2}{#3}{#4}}%
 }
 
-\newcommand*{\strdflip}{\strdtofun{\strdscopeflip}}
-\newcommand*{\strdinv}{\strdtofun{\strdscopeinv}}
-\newcommand*{\strdnone}{\strdtofun{\strdscopenone}}
+\newcommand*{\strdflip}{\strdtofun\strdscopeflip}
+\newcommand*{\strdinv}{\strdtofun\strdscopeinv}
+\newcommand*{\strdnone}{\strdtofun\strdscopenone}
 \newcommand*{\strdscale}[2]{\strdtofun{\strdscopescale{#1}{#2}}}
-\newcommand*{\strdxscale}[1]{\strdtofun{\strdscopexscale{#1}}}
-\newcommand*{\strdyscale}[1]{\strdtofun{\strdscopeyscale{#1}}}
+\newcommand*{\strdxscale}{\Compose\strdtofun\strdscopexscale}
+\newcommand*{\strdyscale}{\Compose\strdtofun\strdscopeyscale}
 \newcommand*{\strdxhalf}{\strdxscale{0.5}}
 \newcommand*{\strdyhalf}{\strdyscale{0.5}}
 \newcommand*{\strdxdouble}{\strdxscale{2}}
 \newcommand*{\strdydouble}{\strdyscale{2}}
-\newcommand*{\strdimplicit}{\strdtofun{\strdscopeimplicit}}
+\newcommand*{\strdimplicit}{\strdtofun\strdscopeimplicit}
 
 \newcommand*{\strdthen}[4]{%
     \strduse{#1}{#3}{#4 Prev}
@@ -553,25 +553,25 @@
     \strdcopy{#3}{#4}
     \strduse{#2}{#3 #1}%
 }
-\newcommand{\strdlambda}[1]{\strdapply{\mylambda{#1}}}
+\newcommand{\strdlambda}{\Compose\strdapply\mylambda}
 
-\newcommand*{\strddot}{\strdhere{\strdputdot}}
+\newcommand*{\strddot}{\strdhere\strdputdot}
 \newcommand*{\strdwhitedot}{\strdwithat{Start}{\strdputwhitedot}}
-\newcommand*{\strdcell}[1]{\strdhere{\strdputcell{#1}}}
-\newcommand*{\strdmapcell}[1]{\strdhere{\strdputmapcell{#1}}}
-\newcommand*{\strdbijcell}[1]{\strdhere{\strdputbijcell{#1}}}
-\newcommand*{\strdaroundframe}{\strdhere{\strdputaroundframe}}
-\newcommand*{\strdroadaroundframe}{\strdhere{\strdputroadaroundframe}}
-\newcommand*{\strddeadend}{\strdhere{\strdputdeadend}}
-\newcommand*{\strdstart}[1]{\strdhere{\strdputstartlabel{#1}}}
-\newcommand*{\strdend}[1]{\strdhere{\strdputendlabel{#1}}}
+\newcommand*{\strdcell}{\Compose\strdhere\strdputcell}
+\newcommand*{\strdmapcell}{\Compose\strdhere\strdputmapcell}
+\newcommand*{\strdbijcell}{\Compose\strdhere\strdputbijcell}
+\newcommand*{\strdaroundframe}{\strdhere\strdputaroundframe}
+\newcommand*{\strdroadaroundframe}{\strdhere\strdputroadaroundframe}
+\newcommand*{\strddeadend}{\strdhere\strdputdeadend}
+\newcommand*{\strdstart}{\Compose\strdhere\strdputstartlabel}
+\newcommand*{\strdend}{\Compose\strdhere\strdputendlabel}
 
-\newcommand*{\strdllabel}[1]{\strdapply{\strdputllabel{#1}}}
-\newcommand*{\strdrlabel}[1]{\strdapply{\strdputrlabel{#1}}}
-\newcommand*{\strdframelabel}[1]{\strdapply{\strdputframelabel{#1}}}
-\newcommand*{\strdregionlabel}[1]{\strdapply{\strdputregionlabel{#1}}}
-\newcommand*{\strdfamilylabel}[1]{\strdapply{\strdputfamilylabel{#1}}}
-\newcommand*{\strdunfamilylabel}[1]{\strdapply{\strdputunfamilylabel{#1}}}
+\newcommand*{\strdllabel}{\Compose\strdapply\strdputllabel}
+\newcommand*{\strdrlabel}{\Compose\strdapply\strdputrlabel}
+\newcommand*{\strdframelabel}{\Compose\strdapply\strdputframelabel}
+\newcommand*{\strdregionlabel}{\Compose\strdapply\strdputregionlabel}
+\newcommand*{\strdfamilylabel}{\Compose\strdapply\strdputfamilylabel}
+\newcommand*{\strdunfamilylabel}{\Compose\strdapply\strdputunfamilylabel}
 
 \newcommand*{\strdllabelat}[2]{\strdapplyat{#1}{\strdputllabel{#2}}}
 \newcommand*{\strdrlabelat}[2]{\strdapplyat{#1}{\strdputrlabel{#2}}}
@@ -586,7 +586,7 @@
     \strdcopy{#2}{#3}
     \strduse{#1}{#2}{#3 Branch}%
 }
-\newcommand{\strdbranch}{\strdseqin{\strdbranchone}}
+\newcommand{\strdbranch}{\strdseqin\strdbranchone}
 
 \newcommand*{\strdrestart}[3]{% {node}{from}{to}
     \strdcoord{#1}{#3}%
@@ -601,8 +601,8 @@
 % Utilities
 %
 
-\newcommand*{\strdrlap}[1]{\mathrlap{\smash{#1}}}
-\newcommand*{\strdllap}[1]{\mathllap{#1}}
+\newcommand*{\strdrlap}{\Compose\mathrlap\smash}
+\newcommand*{\strdllap}{\Compose\mathllap\smash}
 \newcommand*{\strdlvert}[1]{\rotatebox[origin=c]{90}{\ensuremath{#1}}}
 \newcommand*{\strdrvert}[1]{\rotatebox[origin=c]{-90}{\ensuremath{#1}}}
 \newcommand*{\strdunraise}[1]{\mathstrut\raisebox{-\depth}{\ensuremath{#1}}}
