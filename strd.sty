@@ -242,6 +242,22 @@
 }
 
 
+% Dots
+
+\tikzset{strd dot/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
+\tikzset{strd whitedot/.style={circle,draw=white,fill=white,minimum size=3pt,inner sep=0pt}}
+
+\newcommand*{\strdputdot}[1]{%
+    \strdonlayer{strd celllayer}{
+        \node[strd dot] at (#1) {};
+    }%
+}
+
+\newcommand*{\strdputwhitedot}[1]{%
+    \node[strd whitedot] at (#1) {};%
+}
+
+
 % Cells
 %
 
@@ -249,7 +265,6 @@
 \tikzset{strd cell/.style={strd cellbase,very thin}}
 \tikzset{strd mapcell/.style={strd cellbase,thin}}
 \tikzset{strd bijcell/.style={strd cellbase,thin,sharp corners}}
-\tikzset{strd dot/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
 
 \newcommand*{\strdputcellof}[3]{% {style}{x}{node}
     \strdonlayer{strd celllayer}{
@@ -259,12 +274,6 @@
 \newcommand*{\strdputcell}{\strdputcellof{strd cell}}
 \newcommand*{\strdputmapcell}{\strdputcellof{strd mapcell}}
 \newcommand*{\strdputbijcell}{\strdputcellof{strd bijcell}}
-
-\newcommand*{\strdputdot}[1]{%
-    \strdonlayer{strd celllayer}{
-        \node[strd dot] at (#1) {};%
-    }% 
-}
 
 
 % Frames
@@ -537,19 +546,20 @@
 \newcommand*{\strdhere}[1]{\strdwith{#1}{\strdempty}}
 
 \newcommand*{\strdapply}[3]{% {h}{from}{to}
-    \strduse{#1}{#2}
-    \strdcopy{#2}{#3}%
+    \strdcopy{#2}{#3}
+    \strduse{#1}{#2}%
 }
 \newcommand*{\strdapplyat}[4]{% {at}{h}{from}{to}
-    \strduse{#2}{#3 #1}
-    \strdcopy{#3}{#4}%
+    \strdcopy{#3}{#4}
+    \strduse{#2}{#3 #1}%
 }
 \newcommand{\strdlambda}[1]{\strdapply{\mylambda{#1}}}
 
+\newcommand*{\strddot}{\strdhere{\strdputdot}}
+\newcommand*{\strdwhitedot}{\strdwithat{Start}{\strdputwhitedot}}
 \newcommand*{\strdcell}[1]{\strdhere{\strdputcell{#1}}}
 \newcommand*{\strdmapcell}[1]{\strdhere{\strdputmapcell{#1}}}
 \newcommand*{\strdbijcell}[1]{\strdhere{\strdputbijcell{#1}}}
-\newcommand*{\strddot}{\strdhere{\strdputdot}}
 \newcommand*{\strdaroundframe}{\strdhere{\strdputaroundframe}}
 \newcommand*{\strdroadaroundframe}{\strdhere{\strdputroadaroundframe}}
 \newcommand*{\strddeadend}{\strdhere{\strdputdeadend}}
