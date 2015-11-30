@@ -1,0 +1,218 @@
+\documentclass{article}
+\usepackage{strd,cat,my,hask}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+
+\myin{preview,math,aligned}{
+    \myitem & \text{1-functors: }
+    \strdgathered{
+        \strdmid,\strdrlabel{Fg},
+        \strdmapframe{1}{1}{
+            \strdmid,\strdrlabel{g},
+            \strdcell{x},
+            \strdmid,\strdrlabel{f}
+        },\strdframellabel{F},
+        \strdmid,\strdrlabel{Ff}
+    } \\
+    \myitem & \text{1-natural: }
+    \strdgathered{
+        \strdmid,\strdrlabel{F(g\mycdot f)},
+        \strdcell{\operatorname\phi},
+        \strdbranch{\strdleft,\strdrlabel{Fg}},
+        \strdright,\strdrlabel{Ff}
+    } \\
+    \myitem & \text{1-natural: }
+    \strdgathered{
+        \strdmid,\strdrlabel{F\Identity I_A},
+        \strdcell{\phi_0},
+        \strdimplicit\strdmid, \strdrlabel{\Identity{I'}_{FA}}
+    }
+}
+
+\myin{preview,math,aligned}{
+    \myitem & 
+    \strdgathered{
+        \strdmid,\strdrlabel{F(h\mycdot(g\mycdot f))},
+        \strdcell{\phi},
+        \strdbranch{\strdleft,\strdempty,\strdrlabel{Fh},\strdunleft,\strdleft,\strdrlabel{Fh\mycdot\myprime Fg}},
+        \strdright,\strdrlabel{F(g\mycdot f)},
+        \strdcell{\phi},
+        \strdunright,\strdrlabel{Fg\mycdot\myprime Ff},
+        \strdcell{\operatorname{a}},
+        \strdright,\strdrlabel{Ff}
+    } = 
+    \strdgathered{
+        \strdmid,\strdrlabel{F(h\mycdot(g\mycdot f))},
+        \strdmapframe{1}{2}{
+            \strdmid,\strdrlabel{h\mycdot(g\mycdot h)},
+            \strdcell{\operatorname{a}},
+            \strdmid,\strdrlabel{(h\mycdot g)\mycdot f}
+        },\strdframellabel{F},
+        \strdmid,\strdrlabel{F((h\mycdot g)\mycdot f)},
+        \strdcell{\phi},
+        \strdbranch{\strdleft,\strdrlabel{F(h\mycdot g)},\strdcell{\phi},\strdmid,\strdrlabel{Fh\mycdot\myprime Fg}},
+        \strdright,\strdrlabel{Ff}
+    }\\
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{Ff},
+        \strdcell{\operatorname r},
+        \strdbranch{\strdleft,\strdrlabel{Ff}},
+        \strdimplicit\strdright
+    } = 
+    \strdgathered{
+        \strdmid,\strdrlabel{Ff},
+        \strdmapframe{1}{1}{
+            \strdmid,\strdrlabel{f},
+            \strdcell{\operatorname r},
+            \strdmid,\strdrlabel{f\mycdot I}
+        },\strdframellabel{F},
+        \strdmid,\strdrlabel{F(f\mycdot I)},
+        \strdcell{\phi},
+        \strdbranch{\strdleft,\strdrlabel{Ff}},
+        \strdright,\strdrlabel{FI},
+        \strdcell{\phi_0},
+        \strdimplicit\strdmid
+    }\\
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{Ff},
+        \strdcell{\operatorname l},
+        \strdbranch{\strdright,\strdllabel{Ff}},
+        \strdimplicit\strdleft
+    } = 
+    \strdgathered{
+        \strdmid,\strdrlabel{Ff},
+        \strdmapframe{1}{1}{
+            \strdmid,\strdrlabel{f},
+            \strdcell{\operatorname l},
+            \strdmid,\strdrlabel{I\mycdot f}
+        },\strdframellabel{F},
+        \strdmid,\strdrlabel{F(I\mycdot f)},
+        \strdcell{\phi},
+        \strdbranch{\strdright,\strdrlabel{Ff}},
+        \strdleft,\strdrlabel{FI},
+        \strdcell{\phi_0},
+        \strdimplicit\strdmid
+    }\\
+}
+
+
+\myin{preview,math,aligned}{
+    \myitem & 
+    \strdgathered{
+        \strdmid,\strdrlabel{Fh},
+        \strdmapframe{2}{2}{
+            \strdmid,\strdrlabel{h},
+            \strdcell{z},
+            \strdbranch{\strdleft,\strdrlabel{g},\strdcell{x},\strdmid,\strdrlabel{f},\strdmid,\strdrlabel{Ff}},
+            \strdright,\strdrlabel{g\myprime},\strdcell{y},
+            \strdmid,\strdrlabel{f\myprime},
+            \strdbranch{\strdmid,\strdrlabel{Ff\myprime}}
+        },\strdframellabel{F}
+    } =
+    \strdgathered{
+        \strdmid,\strdrlabel{Fh},
+        \strdmapframe{2}{2}{
+            \strdmid,\strdrlabel{h},\strdcell{z},
+            \strdbranch{
+                \strdxscale{1.2}\strdleft,\strdrlabel{g},
+                \strdmid,\strdrlabel{Fg},
+                \strdmapframe{1}{1}{
+                    \strdmid,\strdrlabel{g},\strdcell{x},\strdmid,\strdrlabel{f}
+                },\strdframellabel{F},
+                \strdmid,\strdrlabel{Ff}
+            },
+            \strdxscale{1.2}\strdright,\strdrlabel{g\myprime},
+            \strdbranch{
+                \strdmid,\strdrlabel{Fg\myprime},
+                \strdmapframe{1}{1}{
+                    \strdmid,\strdrlabel{g\myprime},\strdcell{y},\strdmid,\strdrlabel{f\myprime}
+                },\strdframellabel{F},
+                \strdmid,\strdrlabel{Ff\myprime}
+            }
+        },\strdframellabel{F}
+    }
+}
+
+\myin{preview,math,aligned}{
+    \myitem & 
+    \strdgathered{
+        \strdbranch{\strdmid,\strdrlabel{Fk}},
+        \strdrjump,\strdrjump,\strdmid,\strdrlabel{Fk\myprime},
+        \strdljump,
+        \strdmapframe{2}{2}{
+            \strdbranch{\strdljump,\strdmid,\strdrlabel{k},\strdcell{v},\strdunleft,\strdrlabel{j}},
+            \strdrjump,\strdmid,\strdrlabel{k\myprime},\strdcell{w},\strdunright,\strdrlabel{j\myprime},
+            \strdcell{z},
+            \strdbranch{\strdleft,\strdrlabel{g},\strdcell{x},\strdmid,\strdrlabel{f},\strdmid,\strdrlabel{Ff}},
+            \strdright,\strdrlabel{g\myprime},\strdcell{y},
+            \strdmid,\strdrlabel{f\myprime},
+            \strdbranch{\strdmid,\strdrlabel{Ff\myprime}}
+        },\strdframellabel{F}
+    } =
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{Fk},
+            \strdmapframe{1}{1}{
+                \strdmid,\strdrlabel{k},\strdcell{v},\strdmid,\strdrlabel{j}
+            },\strdframellabel{F},
+            \strdmid,\strdrlabel{Fj}
+        },\strdxscale{2.4}\strdrjump,
+        \strdmid,\strdrlabel{Fk\myprime},
+        \strdmapframe{1}{1}{
+            \strdmid,\strdrlabel{k\myprime},\strdcell{w},\strdmid,\strdrlabel{j\myprime}
+        },\strdframellabel{F},
+        \strdmid,\strdrlabel{Fj\myprime},
+        \strdxscale{1.2}\strdljump,
+        \strdmapframe{2}{2}{
+            \strdbranch{\strdxscale{1.2}\strdljump,\strdxscale{1.2}\strdunleft,\strdrlabel{j}},
+            \strdxscale{1.2}\strdrjump,\strdxscale{1.2}\strdunright,\strdrlabel{j\myprime},
+            \strdcell{z},
+            \strdbranch{
+                \strdxscale{1.2}\strdleft,\strdrlabel{g},
+                \strdmid,\strdrlabel{Fg},
+                \strdmapframe{1}{1}{
+                    \strdmid,\strdrlabel{g},\strdcell{x},\strdmid,\strdrlabel{f}
+                },\strdframellabel{F},
+                \strdmid,\strdrlabel{Ff}
+            },
+            \strdxscale{1.2}\strdright,\strdrlabel{g\myprime},
+            \strdbranch{
+                \strdmid,\strdrlabel{Fg\myprime},
+                \strdmapframe{1}{1}{
+                    \strdmid,\strdrlabel{g\myprime},\strdcell{y},\strdmid,\strdrlabel{f\myprime}
+                },\strdframellabel{F},
+                \strdmid,\strdrlabel{Ff\myprime}
+            }
+        },\strdframellabel{F}
+    }
+}
+
+\myin{preview,math,aligned}{
+    \myitem & 
+    \strdgathered{
+        \strdbranch{\strdunleft,\strdrlabel{Fj},\strdleft,\strdrlabel{Fg}},
+        \strdxdouble\strdrjump,\strdunright,\strdrlabel{Fj\myprime},
+        \strdcell{Fz},
+        \strdright,\strdrlabel{Fg\myprime}
+    } \mydefeq
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{Fj},\strdunleft,\strdrlabel{j},
+            \strdright,\strdrlabel{g\myprime},\strdmid,\strdrlabel{Fg\myprime}
+        },
+        \strdrjump,\strdrjump,\strdmid,\strdrlabel{Fj\myprime},
+        \strdmapframe{3}{1}{
+            \strdunright,\strdrlabel{j\myprime},\strdcell{z},
+            \strdleft,\strdrlabel{g},
+            \strdbranch{\strdmid,\strdrlabel{Fg}}
+        },\strdframellabel{F}
+    }
+}
+
+\end{document}
