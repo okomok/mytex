@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage{strd,cat,my,hask}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+
+\myin{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{T(A\myotimes B)},
+        \strdcell{\operatorname{st}},
+        \strdbranch{\strdleft,\strdrlabel{A}},
+        \strdright,\strdrlabel{TB},
+        \strdcell{\eta},
+        \strdmid,\strdrlabel{B}
+    } =
+    \strdgathered{
+        \strdmid,\strdrlabel{T(A\myotimes B)},
+        \strdcell{\eta},
+        \strdbranch{\strdleft,\strdrlabel{A}},
+        \strdright,\strdrlabel{B}
+    }\\ 
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{T(A\myotimes B)},
+        \strdcell{\mu},
+        \strdmid,\strdrlabel{T^2(A\myotimes B)},
+        \strdmapframe{2}{2.5}{
+            \strdmid,\strdrlabel{T(A\myotimes B)},
+            \strdcell{\operatorname{st}},
+            \strdbranch{\strdleft,\strdaroundframe,\strdmid,\strdrlabel{A}},
+            \strdright,\strdrlabel{TB}
+        },\strdframellabel{T},
+        \strdmid,\strdrlabel{T^2B}
+    } =
+    \strdgathered{
+        \strdmid,\strdrlabel{T(A\myotimes B)},
+        \strdcell{\operatorname{st}},
+        \strdbranch{\strdleft,\strdrlabel{A}},
+        \strdright,\strdrlabel{TB},
+        \strdcell{\mu},
+        \strdmid,\strdrlabel{T^2B}
+    }
+}
+\end{document}

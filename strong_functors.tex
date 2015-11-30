@@ -31,8 +31,8 @@
             },
             \strdleft,\strdrlabel{A}
         },\strdframellabel{T},
-        \strdrjump,\strdmid,\strdrlabel{T(A\otimes B)},
-        \strdcell{st},
+        \strdrjump,\strdmid,\strdrlabel{T(A\myotimes B)},
+        \strdcell{\operatorname{st}},
         \strdbranch{
             \strdright,\strdrlabel{TB}
         },
@@ -135,16 +135,16 @@
     } \\
     \myitem &
     \strdgathered{
-        \strdmid,\strdrlabel{T(A\otimes B)},
-        \strdcell{st},
+        \strdmid,\strdrlabel{T(A\myotimes B)},
+        \strdcell{\operatorname{st}},
         \strdbranch{\strdleft,\strdrlabel{A}},
         \strdright,\strdrlabel{TB}
     } \mydefeq
     \strdgathered{
-        \strdmid,\strdrlabel{T(A\otimes B)},
+        \strdmid,\strdrlabel{T(A\myotimes B)},
         \strdcell{T},
         \strdbranch{\strdright,\strdrlabel{TB}},
-        \strdroad\strdleft,\strdroadlabel{A\otimes B}{B},
+        \strdroad\strdleft,\strdroadlabel{A\myotimes B}{B},
         \strdmapframe{1.2}{1.2}{
             \strdbranch{\strdxhalf\strdrjump,\strdmid,\strdrlabel{B}},
             \strdxhalf\strdljump,\strdyhalf\strdmid,\Identity{\strdyhalf\strdmid}
