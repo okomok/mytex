@@ -1,0 +1,56 @@
+\documentclass{article}
+\usepackage{strd,cat,my,hask}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+\myin{preview,math,aligned}{
+    \myitem & 
+    \strdgathered{
+        \strdmid,\strdrlabel{\text{pro}F\myprime},
+        \strdmapframe{1}{1}{
+            \strdmid,\strdrlabel{F\myprime},
+            \strdcell{\tau},
+            \strdmid,\strdrlabel{F}
+        },\strdframellabel{\text{\smash{p}ro}},
+        \strdmid,\strdrlabel{\text{pro}F}
+    } \mydefeq\
+    \strdgathered{
+        \strdmid,\strdrlabel{\operatorname{Hom}(\texttt{-},F\myprime\texttt{+})},
+        \strdcell{\tau \texttt{\circ} \texttt{-}},
+        \strdmid,\strdrlabel{\operatorname{Hom}(\texttt{-},F\texttt{+})}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{\text{pro}(G\texttt{\circ}F)},
+        \strdcell{\phi},
+        \strdbranch{\strdleft,\strdrlabel{\text{pro}G}},
+        \strdright,\strdrlabel{\text{pro}F}
+    } \mydefeq
+    \strdgathered{
+ %       \strdmid,\strdrlabel{\operatorname{Hom}(\texttt{-},GF\texttt{+})},
+        \strdmapframe{2}{4.8}{
+            \strdmid,\strdrlabel{\operatorname{Hom}(E,GFC)},
+            \strdbijcell{\text{coYoneda}},
+            \strdyscale{1.8}\strdmid,\strdrlabel{
+                \myin{aligned}{
+                    \textstyle\int ^ X &\operatorname{Hom}(X,FC)\\
+                    \times&\operatorname{Hom}(E,GX)
+                }
+            }
+        },\strdunfamilylabel{E,C}
+ %      , \strdmid
+    }\\
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{\text{pro}(\text{Id})},
+        \strdcell{\phi_0}
+    }\mydefeq
+    \strdgathered{
+        \strdimplicit\strdmid, \strdrlabel{\operatorname{Hom}}
+    }
+}
+
+\end{document}

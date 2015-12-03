@@ -59,7 +59,7 @@
 }
 \newcommand*{\strdinimpl}[2]{%
     \begin{#1}
-        \! % why needed?
+%       \! % why needed?
         \strd{#2}
     \end{#1}%
 }
@@ -214,6 +214,7 @@
     \node[strd coord] (#3) at ($(#3 Start)!.5!(#3 End)$) {};%
 }
 
+
 % Square strings
 %   Note \getlastxy doesn't work with calc.
 
@@ -264,7 +265,7 @@
 \tikzset{strd cellbase/.style={font=\normalsize,solid,draw,fill=white,rectangle,minimum size=9pt,inner xsep=0.6pt,inner ysep=1.2pt}}
 \tikzset{strd cell/.style={strd cellbase,very thin}}
 \tikzset{strd mapcell/.style={strd cellbase,thin}}
-\tikzset{strd bijcell/.style={strd cellbase,thin,sharp corners}}
+\tikzset{strd bijcell/.style={strd cellbase,very thin,sharp corners}}
 
 \newcommand*{\strdputcellof}[3]{% {style}{x}{node}
     \strdonlayer{strd celllayer}{
