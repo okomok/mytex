@@ -1,0 +1,23 @@
+\documentclass{article}
+\usepackage{lambdax,amsmath}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+\In{preview,math,aligned}{
+    \Unlist{\Cons{a}{\Cons{b}{\Cons{c}{\Nil}}}} \\
+    \Foldr{\Commaize}{}{\List{x, y,z}} \\
+    \mathcal{C}(\texttt{-},\texttt{+}) \\
+    F(\texttt{-},\texttt{=}) \\
+    \mathcal{C}(\texttt{-},\texttt{+})
+}
+
+\In{preview,math,aligned}{
+    \Fun{#1 b}{a} = a b\\
+    \Fun{#1{b}}{\Fun{#1 c}} = b c\\
+    \Fun{\Fun{#1 ##1 c}}{a}{b} = a b c\\
+}
+
+\end{document}

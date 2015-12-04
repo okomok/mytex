@@ -1,26 +1,27 @@
 \ProvidesPackage{lambdax}
 
-\usepackage{lambda}
+\usepackage{lambda,etoolbox}
 
 
 % Functions
 %
 
 \newcommand*{\Flip}[3]{#1{#3}{#2}}
+\newcommand*{\Then}{\Flip\Compose}
 
 
 % List construction
 %  can't support empty lists.
 
-\def\BraceUnlistize#1{#1\BraceUnlistize@{}}
-\def\BraceUnlistize@#1{#1\Foldr\Commaize{}}
+\def\Unlist#1{#1\Unlist@{}}
+\def\Unlist@#1{#1\Foldr\Commaize{}}
 
-\def\BraceListize#1%
-   {\BraceListize@#1,\relax\@eolst}
-\def\BraceListize@#1,#2\@eolst%
+\def\List#1%
+   {\List@#1,\relax\@eolst}
+\def\List@#1,#2\@eolst%
    {\TeXif{\ifx\relax#2}%
         {\Singleton{#1}}%
-        {\Cons{#1}{\BraceListize@#2\@eolst}}}
+        {\Cons{#1}{\List@#2\@eolst}}}
 
 
 % Lambda expressions
@@ -35,6 +36,6 @@
     \FunNamed{Fun\the\value{Funcounter}}%
 }
 
-\def\In#1#2{\Foldr{\In@}{#2}{\BraceListize{#1}}}
+\def\In#1#2{\Foldr{\In@}{#2}{\List{#1}}}
 \newcommand*{\In@}[2]{\begin{#1}#2\end{#1}}
 

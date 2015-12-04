@@ -1,0 +1,85 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{T\myprime},
+        \strdcell{\alpha},
+        \strdmid,\strdrlabel{T}
+    } \overset{\circ}{\times}
+    \strdgathered{
+        \strdmid,\strdrlabel{S\myprime},
+        \strdcell{\beta},
+        \strdmid,\strdrlabel{S}
+    } \mydefeq
+    \strdgathered{
+        \strdyscale{1.3}\strdmid,\strdrlabel{ T\myprime\mytt{\overset{\circ}{\times}} S\myprime},
+        \strdcell{\alpha \texttt{$\overset{\circ}{\times}$} \beta},
+        \strdyscale{1.3}\strdmid,\strdrlabel{T\mytt{\overset{\circ}{\times}}S}
+    } \mydefeq
+    \strdgathered{
+        \strdmapframe{3}{4}{
+            \strdbranch{
+                \strdmid,\strdllabel{T\myprime(BA)},
+                \strdcell{\alpha},
+                \strdmid,\strdllabel{T(BA)}
+            },
+            \strdxscale{1}\strdrjump,
+            \strdmid,\strdrlabel{S\myprime(B\myprime A\myprime)},
+            \strdcell{\beta},
+            \strdmid,\strdrlabel{S(B\myprime A\myprime)}
+        },\strdunfamilylabel{B B\myprime A A\myprime}
+        ,\strdregionlabel{\mathcal{S}et}
+    }
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{(T\myprime \mytt{\overset\circ\circ} T) \mytt{\overset{\circ}{\times}} \overset{\circ}{1}},
+        \strdcell{\phi},
+        \strdxscale{1}\strdcap,
+        \strdllabelat{Left}{T\myprime \mytt{\overset\circ\circ} \overset{\circ}{1}},
+        \strdrlabelat{Right}{T\mytt{\overset\circ\circ}\overset{\circ}{1}}
+    } \mydefeq
+    \strdgathered{
+        \strdmapframe{2.3}{7.8}{
+            \strdbranch{
+                \strdyscale{2}\strdmid,\strdrlabel{\textstyle\int ^ X T \mytt\times T\myprime},
+                \strdcell{\scriptstyle\int ^ X},
+                \strdcap,\strdrlabelat{Left End}{T},
+                \strdbranch{
+                    \strdljump,
+                    \strdmid
+                }, \strdxscale{1}\strdrjump,
+                \strdrchange,\strdrlabelat{Start}{T\myprime}
+            },\strdxscale{4}{\strdrjump},
+            \strdmid,\strdrlabel{\operatorname{Hom}},
+            \strdbijcell{\text{\scriptsize coYoneda}},
+            \strdmid,\strdrlabel{\textstyle\int ^ Y \!\text{Hom} \mytt\times \text{Hom}},
+            \strdcell{\scriptstyle\int ^ Y},
+            \strdcap,\strdrlabelat{Left End}{\operatorname{Hom}},\strdrlabelat{Right End}{\operatorname{Hom}},
+            \strdbranch{
+                \strdljump,
+                \strdgraded\strdlchange
+            },\strdrjump,
+            \strdmid
+        },\strdframelabelat{Left EndCorner}{\int\strdrlap{^{XY}}},\strdregionlabel{\mathcal{S}et}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{\overset{\circ}{1}\mytt{\overset{\circ}{\times}}\overset{\circ}{1}},
+        \strdcell{\phi _ 0}
+    } \mydefeq
+    \strdgathered{
+        \strdmid, \strdrlabel{\text{Hom}\mytt\times\text{Hom}}
+    }
+}
+
+
+\end{document}

@@ -27,7 +27,7 @@
 \pgfdeclarelayer{strd labellayer}
 \pgfdeclarelayer{strd framelayer}
 \pgfdeclarelayer{strd aroundframelayer}
-\pgfsetlayers{background,main,strd pavelayer,strd aroundframelayer,strd framelayer,strd gradedlayer,strd whitelayer,strd celllayer,strd labellayer}
+\pgfsetlayers{background,main,strd pavelayer,strd aroundframelayer,strd gradedlayer,strd framelayer,strd whitelayer,strd celllayer,strd labellayer}
 
 % Layers forget surrounding line styles, so we define...
 \newcommand*{\strdresetlinewidth}{\pgfsetlinewidth{0.2pt}}
@@ -57,7 +57,7 @@
     \end{tikzpicture}%
 }
 
-\newcommand*{\strdin}[2]{\Foldr{\strdin@}{#2}{\BraceListize{#1}}}
+\newcommand*{\strdin}[2]{\Foldr{\strdin@}{#2}{\List{#1}}}
 \newcommand*{\strdin@}[2]{%
     \begin{#1}
 %       \! % why needed?
@@ -132,8 +132,8 @@
     \node[strd coord] (#1 Corner) at ($(#2)+(0,-\strdxunit)$) {};
     \draw[strd draw]{ (#1 Start) -- (#1 Corner) parabola[bend at end] (#1 End) };%
 }
-\newcommand*{\strdunrightC}{\strdflipC\strdunleftC}
 \newcommand*{\strdunright}{\strdcomposeC\strdunrightC}
+\newcommand*{\strdunrightC}{\strdflipC\strdunleftC}
 
 % WHATFOR
 % \newcommand*{\strdconnectC}[3]{% {id}{s1}{s2}
@@ -147,8 +147,8 @@
     \strdstringC{#1}{#2}{$(#2)+(-\strdxhalfunit,0)$}{$(#2)+(-\strdxunit,0)$}
     \draw[strd draw]{ (#1 Start) -- (#1 End) };%
 }
-\newcommand*{\strdhrightC}{\strdflipC\strdhleftC}
 \newcommand*{\strdhright}{\strdcomposeC\strdhrightC}
+\newcommand*{\strdhrightC}{\strdflipC\strdhleftC}
 
 \newcommand*{\strdminus}{\strdcomposeC\strdminusC}
 \newcommand*{\strdminusC}[2]{% {id}{node}
@@ -170,8 +170,8 @@
         (#1 Start) parabola (#1 StartCorner) -- (#1 EndCorner) parabola[bend at end] (#1 End)
     };%
 }
-\newcommand*{\strdsupsetC}{\strdflipC\strdsubsetC}
 \newcommand*{\strdsupset}{\strdcomposeC\strdsupsetC}
+\newcommand*{\strdsupsetC}{\strdflipC\strdsubsetC}
 
 \newcommand*{\strdlint}{\strdcomposeC\strdlintC}
 \newcommand*{\strdlintC}[2]{% {id}{node}
@@ -184,8 +184,8 @@
         (#1 Start) parabola (#1 StartCorner) -- (#1 EndCorner) parabola[bend at end] (#1 End)
     };%
 }
-\newcommand*{\strdrintC}{\strdflipC\strdlintC}
 \newcommand*{\strdrint}{\strdcomposeC\strdrintC}
+\newcommand*{\strdrintC}{\strdflipC\strdlintC}
 
 \newcommand*{\strdlchange}{\strdcomposeC\strdlchangeC}
 \newcommand*{\strdlchangeC}[2]{% {id}{node}
@@ -198,17 +198,17 @@
         (#1 Start) -- (#1 StartCorner) parabola[bend at end] (#1) parabola (#1 EndCorner) -- (#1 End)
     };%
 }
-
-\newcommand*{\strdrchangeC}{\strdflipC\strdlchangeC}
 \newcommand*{\strdrchange}{\strdcomposeC\strdrchangeC}
-\newcommand*{\strdjumpC}{\strdnoneC\strdmidC}
+\newcommand*{\strdrchangeC}{\strdflipC\strdlchangeC}
+
 \newcommand*{\strdjump}{\strdcomposeC\strdjumpC}
-\newcommand*{\strdljumpC}{\strdnoneC\strdhleftC}
+\newcommand*{\strdjumpC}{\strdnoneC\strdmidC}
 \newcommand*{\strdljump}{\strdcomposeC\strdljumpC}
-\newcommand*{\strdrjumpC}{\strdnoneC\strdhrightC}
+\newcommand*{\strdljumpC}{\strdnoneC\strdhleftC}
 \newcommand*{\strdrjump}{\strdcomposeC\strdrjumpC}
-\newcommand*{\strddupC}{\strdnoneC\strdminusC}
+\newcommand*{\strdrjumpC}{\strdnoneC\strdhrightC}
 \newcommand*{\strddup}{\strdcomposeC\strddupC}
+\newcommand*{\strddupC}{\strdnoneC\strdminusC}
 
 \newcommand*{\strdjumptoC}[3]{% {id}{fromnode}{tonode}
     \node[strd coord] (#1 Start) at (#2) {};
@@ -216,7 +216,6 @@
     \node[strd coord] (#1) at ($(#1 Start)!.5!(#1 End)$) {};%
 }
 
-\newcommand*{\strdsqsupsettoC}{\Compose\strdflipC\strdsqsubsettoC}
 \newcommand*{\strdsqsubsettoC}[3]{% {id}{fromnode}{tonode}
     % Note \getlastxy doesn't work with calc.
     \node[strd coord] (#1 Start) at (#2) {};
@@ -228,14 +227,15 @@
         (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End)
     };%
 }
+\newcommand*{\strdsqsupsettoC}{\Compose\strdflipC\strdsqsubsettoC}
 
 \newcommand*{\strdsqsubset}{\strdcomposeC\strdsqsubsetC}
 \newcommand*{\strdsqsubsetC}[2]{% {id}{node}
     \strdjumpC{#1 Impl}{#2}
     \strdsqsubsettoC{#1}{#2}{#1 Impl End}%
 }
-\newcommand*{\strdsqsupsetC}{\strdflipC\strdsqsubsetC}
 \newcommand*{\strdsqsupset}{\strdcomposeC\strdsqsupsetC}
+\newcommand*{\strdsqsupsetC}{\strdflipC\strdsqsubsetC}
 
 \newcommand*{\strdsquare}{\strdcomposeC\strdsquareC}
 \newcommand*{\strdsquareC}[2]{% {id}{node}
@@ -254,8 +254,8 @@
 \newcommand*{\strdcup}{\strdcomposeC\strdcupC}
 \newcommand*{\strdcupC}[2]{% {id}{node}
     \strdxscale@{2}{\strddupC{#1 Dup}{#2}}
-    \strdunleftC{#1 Left}{#1 Dup Left}
-    \strdunrightC{#1 Right}{#1 Dup Right}
+    \strdunleftC{#1 Left}{#1 Dup Left End}
+    \strdunrightC{#1 Right}{#1 Dup Right End}
     \strdjumpC{#1}{#2}%
 }
 
@@ -366,7 +366,7 @@
 \newcommand*{\strdputendlabel}[2]{\strdputedgelabelat{below}{#1}{#2 End}}
 
 
-% TODO
+% WHATFOR
 % White strings
 %
 
@@ -520,7 +520,10 @@
 \newcommand*{\strdydoubleC}{\strdyscaleC{2}}
 \newcommand*{\strdimplicitC}{\strdtoC\strdimplicit@}
 
-\newcommand*{\strdtoT}[5]{\strduse{#1}{\strduse{#2}{#3}{#4}{#5}}}
+\newcommand*{\strdtoT}[5]{% {opt}{stm}{sc}{id}{node}
+    \strduse{#3}{#4 Prev}{#5}
+    \strduse{#1}{\strduse{#2}{\strdemptyC}{#4}{#4 Prev End}}
+}
 \newcommand*{\strdscope}{\Compose\strdtoT\strdscope@}
 \newcommand*{\strdflip}{\strdtoT\strdflip@}
 \newcommand*{\strdinv}{\strdtoT\strdinv@}
@@ -539,7 +542,7 @@
 %
 
 \newcommand*{\strdseq}[1]{% {sa1,sa2,..,saN}
-    \Foldr{\Flip\Compose}{\Identity}{\BraceListize{#1}}%
+    \Foldr{\Then}{\Identity}{\List{#1}}%
 }
 \newcommand*{\strdseqin}[2]{\strduse{#1}{\strdseq{#2}}}
 
@@ -549,11 +552,10 @@
     }%
 }
 
-% TODO
-% \newcommand*{\strdassign}[4]{% {name}{stm}{id}{node}
-%     \strduse{#2}{#3}{#4}
-%     \strdnone{\strduse{#2}}{#3}{#1}% strdcopy keeps ranges only.
-% }
+\newcommand*{\strdassign}[5]{% {name}{stm}{sc}{id}{node}
+    \strduse{#2}{#3}{#4}{#5}
+    \strdnone{\strduse{#2}}{#3}{#1}{#5}%
+}
 
 
 % String transformations
