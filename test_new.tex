@@ -4,30 +4,30 @@
 
 \begin{document}
 
-\myin{preview,math,aligned}{
+\In{preview,math,aligned}{
     \strd{
-     %   \strdnewempty{theStrd}{0,0}
-    %    \strdmid{\strdnewempty}{theStrd}{0,0}
+     %   \strdemptyC{theStrd}{0,0}
+    %    \strdmid{\strdemptyC}{theStrd}{0,0}
     %    \strdputrlabel{X}{theStrd}
-        \strdframeofone{strd mapframe}{1}{1}{\strdmid}{\strdnewempty}{ppp}{\strdorigin}
+        \strdframeofone{strd mapframe}{1}{1}{\strdmid}{\strdemptyC}{ppp}{\strdorigin}
     %    \strdmid{\strdempty}{theStrd}{0,0}
     }
 }
 
-\myin{preview,math,aligned}{
+\In{preview,math,aligned}{
     \strd{
-        \strdnewmid{theStrd}{0,0}
+        \strdmidC{theStrd}{0,0}
     }
 }
 
-\myin{preview,math,aligned}{
+\In{preview,math,aligned}{
     \strdgathered{
         \strdmid,\strdmid,
-        \strdseq{\strdmid,\strdmid,\strdnewimplicit} 
+        \strdseq{\strdmid,\strdmid,\strdimplicitC} 
     }
 }
 
-\myin{preview,math,aligned}{
+\In{preview,math,aligned}{
     & \text{test: } 
     \strdgathered{
         \strdmid,\strdrlabel{X},
@@ -39,7 +39,7 @@
     } \\
 }
 
-\myin{preview,math,aligned}{
+\In{preview,math,aligned}{
     & \text{test: } 
     \strdgathered{
         \strdmid,\strdrlabel{X},
@@ -48,26 +48,26 @@
         \strdrestart{\strdright}
     }
 }
-\myin{preview,math,aligned}{
+\In{preview,math,aligned}{
     & \text{test: } 
     \strdgathered{
         \strdmid,\strdrlabel{X},
         \strdmapframe{1}{2}{
             \strdmid,\strdrlabel{In},
             \strdright,\strdrlabel{In}
-        },
-        \strdmid
+        },\strdframellabel{L},\strdframerlabel{R},
+        \strdmid,\strdend{Ended}
     }
 }
 
-\myin{preview,math,aligned}{
+\In{preview,math,aligned}{
     & \text{test: } 
     \strdgathered{
         \strdmid,\strdrlabel{X},
         \strdbranch{
             \strdbranch{
                 \strdbranch{
-                    \strdxscaleone{0.5}{\strdright}
+                    \strdxscale{0.5}{\strdright}
                 },
                 \strdmid
             },
@@ -78,20 +78,51 @@
 }
 
 
-\myin{preview,math,aligned}{
+\In{preview,math,aligned}{
     & \text{test: } 
     \strd{
-        \strdnewroad{\strdnewmid}{x}{\strdorigin}
-        \strdnewroad{\strdnewright}{xy}{x End}
+        \strdroadC{\strdmidC}{x}{\strdorigin}
+        \strdroadC{\strdrightC}{xy}{x End}
     }
 }
 
-\myin{preview,math,aligned}{
+\In{preview,math,aligned}{
     & \text{test: } 
     \strdgathered{
         \strdroad\strdmid,\strdroadlabel{X}{Y},
-        \strdroad\strdright,\strdroadlabel{X}{Y}
+        \strdbranch{\strdroad\strdleft,\strdroad\strdmid},
+        \strdroad\strdright,\strdroadlabel{X}{Y},
+        \strdroad\strdmid,\strdroadlabel{X}{Y}
     }
 }
 
+\In{preview,math,aligned}{
+    & \text{test: cross} 
+    \strdgathered{
+        \strdbranch{
+            \strdxdouble\strdljump,\strdroadx\strdrchange
+        },
+        \strdroadx\strdlchange
+    }
+}
+
+\In{preview,math,aligned}{
+    & \text{test: graded} 
+    \strdgathered{
+        \strdbranch{
+            \strdxdouble\strdljump,\strdgraded\strdrchange
+        },
+        \strdlchange
+    }
+}
+
+\In{preview,math,aligned}{
+    & \text{test: graded road} 
+    \strdgathered{
+        \strdbranch{
+            \strdxdouble\strdljump,\strdroadgraded\strdrchange
+        },
+        \strdroad\strdlchange
+    }
+}
 \end{document}
