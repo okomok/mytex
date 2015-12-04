@@ -4,9 +4,6 @@
 \usetikzlibrary{shapes,calc,backgrounds,calc}
 
 
-\newcommand*{\strduse}{\Identity}
-
-
 % Styles
 %
 
@@ -43,7 +40,7 @@
     \strdresetlinewidth%
 }
 
-\newcommand*{\strdonlayer}[4]{% {layer}{sc}{newid}{fromnode}
+\newcommand*{\strdnewonlayer}[4]{% {layer}{sc}{id}{node}
     \strdscopeonlayer{#1}{
         \strduse{#2}{#3}{#4}
     }%
@@ -61,9 +58,9 @@
 }
 
 \newcommand*{\strdin}[2]{%
-    \Foldr{\strdinimpl}{#2}{\BraceListize{#1}}%
+    \Foldr{\strdin@}{#2}{\BraceListize{#1}}%
 }
-\newcommand*{\strdinimpl}[2]{%
+\newcommand*{\strdin@}[2]{%
     \begin{#1}
 %       \! % why needed?
         \strd{#2}
@@ -92,15 +89,15 @@
 % String constructors
 %
 
-\newcommand*{\strdnewstring}[4]{% {newid}{start}{middle}{end}
+\newcommand*{\strdnewstring}[4]{% {id}{start}{middle}{end}
     \node[strd coord] (#1 Start) at (#2) {};
     \node[strd coord] (#1) at (#3) {};
     \node[strd coord] (#1 End) at (#4) {};%
 }
 
-\newcommand*{\strdnewcompose}[4]{% {nextsc}{prevsc}{newid}{fromnode}
+\newcommand*{\strdnewcompose}[4]{% {nextsc}{prevsc}{id}{node}
     \strduse{#2}{#3 Prev}{#4}
-    \strduse{#1}{#3}{#3 Prev End}
+    \strduse{#1}{#3}{#3 Prev End}%
 }
 
 \tikzset{strd origin/.style={inner sep=0pt,outer sep=0pt,minimum width=9pt,minimum height=0pt}}
@@ -111,43 +108,31 @@
 }
 \newcommand*{\strdorigin}{strdorigin}
 
-\newcommand*{\strdnewempty}[2]{% {newid}{fromnode}
-    \strdnewstring{#1}{#2}{#2}{#2}
+\newcommand*{\strdnewempty}[2]{% {id}{node}
+    \strdnewstring{#1}{#2}{#2}{#2}%
 }
 \newcommand*{\strdempty}{\strdnewcompose\strdnewempty}
 
-\newcommand*{\strdnewleft}[2]{% {newid}{fromnode}
-    \node[strd coord] (#1 Start) at (#2) {};
+\newcommand*{\strdnewleft}[2]{% {id}{node}
+    \strdnewstring{#1}{#2}{$(#2)+(-\strdxunit,-\strdyhalfunit)$}{$(#2)+(-\strdxunit,-\strdyunit)$}
     \node[strd coord] (#1 Corner) at ($(#2)+(-\strdxunit,-\strdunitdiff)$) {};
-    \node[strd coord] (#1) at ($(#2)+(-\strdxunit,-\strdyhalfunit)$) {};
-    \node[strd coord] (#1 End) at ($(#2)+(-\strdxunit,-\strdyunit)$) {};
-    \draw[strd draw]{
-        (#1 Start) parabola (#1 Corner) -- (#1 End)
-    };%
+    \draw[strd draw]{ (#1 Start) parabola (#1 Corner) -- (#1 End) };%
 }
 \newcommand*{\strdleft}{\strdnewcompose\strdnewleft}
 
 \newcommand*{\strdnewright}{\strdnewflip\strdnewleft}
 \newcommand*{\strdright}{\strdnewcompose\strdnewright}
 
-\newcommand*{\strdnewmid}[2]{% {newid}{fromnode}
-    \node[strd coord] (#1 Start) at (#2) {};
-    \node[strd coord] (#1) at ($(#2)+(0,-\strdyhalfunit)$) {};
-    \node[strd coord] (#1 End) at ($(#2)+(0,-\strdyunit)$) {};
-    \draw[strd draw]{
-        (#1 Start) -- (#1 End)
-    };%
+\newcommand*{\strdnewmid}[2]{% {id}{node}
+    \strdnewstring{#1}{#2}{$(#2)+(0,-\strdyhalfunit)$}{$(#2)+(0,-\strdyunit)$}
+    \draw[strd draw]{ (#1 Start) -- (#1 End) };%
 }
 \newcommand*{\strdmid}{\strdnewcompose\strdnewmid}
 
-\newcommand*{\strdnewunleft}[2]{% {newid}{fromnode}
-    \node[strd coord] (#1 Start) at (#2) {};
-    \node[strd coord] (#1) at ($(#2)+(0,-\strdyhalfunit)$) {};
+\newcommand*{\strdnewunleft}[2]{% {id}{node}
+    \strdnewstring{#1}{#2}{$(#2)+(0,-\strdyhalfunit)$}{$(#2)+(\strdxunit,-\strdyunit)$}
     \node[strd coord] (#1 Corner) at ($(#2)+(0,-\strdxunit)$) {};
-    \node[strd coord] (#1 End) at ($(#2)+(\strdxunit,-\strdyunit)$) {};
-    \draw[strd draw]{
-        (#1 Start) -- (#1 Corner) parabola[bend at end] (#1 End)
-    };%
+    \draw[strd draw]{ (#1 Start) -- (#1 Corner) parabola[bend at end] (#1 End) };%
 }
 \newcommand*{\strdunleft}{\strdnewcompose\strdnewunleft}
 
@@ -155,26 +140,22 @@
 \newcommand*{\strdunright}{\strdnewcompose\strdnewunright}
 
 % WHATFOR
-% \newcommand*{\strdnewconnect}[3]{% {newid}{s1}{s2}
+% \newcommand*{\strdnewconnect}[3]{% {id}{s1}{s2}
 %     \node[strd coord] (#1 Start) at (#2 Start) {};
 %     \node[strd coord] (#1) at (#3 Start) {};
 %     \node[strd coord] (#1 End) at (#3 End) {};%
 % }
 
-\newcommand*{\strdnewhleft}[2]{% {newid}{fromnode}
-    \node[strd coord] (#1 Start) at (#2) {};
-    \node[strd coord] (#1) at ($(#2)+(-\strdxhalfunit,0)$) {};
-    \node[strd coord] (#1 End) at ($(#2)+(-\strdxunit,0)$) {};
-    \draw[strd draw]{
-        (#1 Start) -- (#1 End)
-    };%
+\newcommand*{\strdnewhleft}[2]{% {id}{node}
+    \strdnewstring{#1}{$(#2)+(-\strdxhalfunit,0)$}{$(#2)+(-\strdxunit,0)$}
+    \draw[strd draw]{ (#1 Start) -- (#1 End) };%
 }
 \newcommand*{\strdhleft}{\strdnewcompose\strdnewhleft}
 
 \newcommand*{\strdnewhright}{\strdnewflip\strdnewhleft}
 \newcommand*{\strdhright}{\strdnewcompose\strdnewhright}
 
-\newcommand*{\strdnewminus}[2]{% {newid}{fromnode}
+\newcommand*{\strdnewminus}[2]{% {id}{node}
     \strdscopexscale{0.5}{
         \strdnewhleft{#1 Left}{#2}
         \strdnewempty{#1}{#2}
@@ -183,7 +164,7 @@
 }
 \newcommand*{\strdminus}{\strdnewcompose\strdnewminus}
 
-\newcommand*{\strdnewsubset}[2]{% {newid}{fromnode}
+\newcommand*{\strdnewsubset}[2]{% {id}{node}
     \node[strd coord] (#1 Start) at (#2) {};
     \node[strd coord] (#1 StartCorner) at ($(#2)+(-\strdxunit,-\strdunitdiff)$) {};
     \node[strd coord] (#1) at ($(#2)+(-\strdxunit,-\strdyhalfunit)$) {};
@@ -198,7 +179,7 @@
 \newcommand*{\strdnewsupset}{\strdnewflip\strdnewsubset}
 \newcommand*{\strdsupset}{\strdnewcompose\strdnewsupset}
 
-\newcommand*{\strdnewlint}[2]{% {newid}{fromnode}
+\newcommand*{\strdnewlint}[2]{% {id}{node}
     \node[strd coord] (#1 Start) at (#2) {};
     \node[strd coord] (#1 StartCorner) at ($(#2)+(-\strdxunit,-\strdunitdiff)$) {};
     \node[strd coord] (#1) at ($(#2)+(-\strdxunit,-\strdyhalfunit)$) {};
@@ -213,7 +194,7 @@
 \newcommand*{\strdnewrint}{\strdnewflip\strdnewlint}
 \newcommand*{\strdrint}{\strdnewcompose\strdnewrint}
 
-\newcommand*{\strdnewlchange}[2]{% {newid}{fromnode}
+\newcommand*{\strdnewlchange}[2]{% {id}{node}
     \node[strd coord] (#1 Start) at (#2) {};
     \node[strd coord] (#1 StartCorner) at ($(#2)+(0,-\strdunitmergin)$) {};
     \node[strd coord] (#1) at ($(#2)+(-\strdxunit,-\strdyhalfunit)$) {};
@@ -240,13 +221,13 @@
 \newcommand*{\strdnewdup}{\strdnewnone\strdnewminus}
 \newcommand*{\strddup}{\strdnewcompose\strdnewdup}
 
-\newcommand*{\strdnewjumpto}[3]{% {newid}{fromnode}{tonode}
+\newcommand*{\strdnewjumpto}[3]{% {id}{fromnode}{tonode}
     \node[strd coord] (#1 Start) at (#2) {};
     \node[strd coord] (#1 End) at (#3) {};
     \node[strd coord] (#1) at ($(#1 Start)!.5!(#1 End)$) {};%
 }
 
-\newcommand*{\strdnewsqsubsetto}[3]{% {newid}{fromnode}{tonode}
+\newcommand*{\strdnewsqsubsetto}[3]{% {id}{fromnode}{tonode}
     % Note \getlastxy doesn't work with calc.
     \node[strd coord] (#1 Start) at (#2) {};
     \node[strd coord] (#1 End) at (#3) {};
@@ -259,7 +240,7 @@
 }
 \newcommand*{\strdnewsqsupsetto}{\Compose\strdnewflip\strdnewsqsubsetto}
 
-\newcommand*{\strdnewsqsubset}[2]{% {newid}{fromnode}
+\newcommand*{\strdnewsqsubset}[2]{% {id}{node}
     \strdnewjump{#1 Impl}{#2}
     \strdnewsqsubsetto{#1}{#2}{#1 Impl End}%
 }
@@ -268,21 +249,21 @@
 \newcommand*{\strdnewsqsupset}{\strdnewflip\strdnewsqsubset}
 \newcommand*{\strdsqsupset}{\strdnewcompose\strdnewsqsupset}
 
-\newcommand*{\strdnewsquare}[2]{% {newid}{fromnode}
+\newcommand*{\strdnewsquare}[2]{% {id}{node}
     \strdnewsqsubset{#1 Left}{#2}
     \strdnewsqsupset{#1 Right}{#2}
     \strdnewjump{#1}{#2}%
 }
 \newcommand*{\strdsquare}{\strdnewcompose\strdnewsquare}
 
-\newcommand*{\strdnewcap}[2]{% {newid}{fromnode}
+\newcommand*{\strdnewcap}[2]{% {id}{node}
     \strdnewleft{#1 Left}{#2}
     \strdnewright{#1 Right}{#2}
     \strdnewjump{#1}{#2}%
 }
 \newcommand*{\strdcap}{\strdnewcompose\strdnewcap}
 
-\newcommand*{\strdnewcup}[2]{% {newid}{fromnode}
+\newcommand*{\strdnewcup}[2]{% {id}{node}
     \strdscopexscale{2}{\strdnewdup{#1 Dup}{#2}}
     \strdnewunleft{#1 Left}{#1 Dup Left}
     \strdnewunright{#1 Right}{#1 Dup Right}
@@ -290,7 +271,7 @@
 }
 \newcommand*{\strdcup}{\strdnewcompose\strdnewcup}
 
-\newcommand*{\strdnewparallel}[2]{% {newid}{fromnode}
+\newcommand*{\strdnewparallel}[2]{% {id}{node}
     \strdnewdup{#1 Dup}{#2}
     \strdnewmid{#1 Left}{#1 Dup Left}
     \strdnewmid{#1 Right}{#1 Dup Right}
@@ -298,7 +279,7 @@
 }
 \newcommand*{\strdparallel}{\strdnewcompose\strdnewparallel}
 
-\newcommand*{\strdnewcircle}[2]{% {newid}{fromnode}
+\newcommand*{\strdnewcircle}[2]{% {id}{node}
     \strdnewsubset{#1 Left}{#2}
     \strdnewsupset{#1 Right}{#2}
     \strdnewjump{#1}{#2}%
@@ -311,13 +292,13 @@
 \tikzset{strd dot/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
 \tikzset{strd whitedot/.style={circle,draw=white,fill=white,minimum size=3pt,inner sep=0pt}}
 
-\newcommand*{\strdputdot}[1]{% {fromnode}
+\newcommand*{\strdputdot}[1]{% {node}
     \strdscopeonlayer{strd celllayer}{
         \node[strd dot] at (#1) {};
     }%
 }
 
-\newcommand*{\strdputwhitedot}[1]{% {fromnode}
+\newcommand*{\strdputwhitedot}[1]{% {node}
     \node[strd whitedot] at (#1) {};%
 }
 
@@ -330,7 +311,7 @@
 \tikzset{strd mapcell/.style={strd cellbase,thin}}
 \tikzset{strd bijcell/.style={strd cellbase,very thin,sharp corners}}
 
-\newcommand*{\strdputcellof}[3]{% {style}{text}{fromnode}
+\newcommand*{\strdputcellof}[3]{% {style}{text}{node}
     \strdscopeonlayer{strd celllayer}{
         \node[#1] at (#3) {#2};
     }% 
@@ -346,9 +327,9 @@
 \tikzset{strd mapframe/.style={solid,thin,rounded corners=2pt}}
 \tikzset{strd bijframe/.style={solid,thin,sharp corners}}
 
-\newcommand*{\strdframeofone}[7]{% {style}{xl}{xr}{stm}{sc}{newid}{fromnode}
-    \strduse{#4}{#5}{#6 Unframe}{#7}
-    \strdnewnone{#5}{#6 Prev}{#7}
+\newcommand*{\strdframeofone}[7]{% {style}{xl}{xr}{stm}{sc}{id}{node}
+    \strduse{#5}{#6 Prev}{#7}
+    \strduse{#4}{\strdnewempty}{#6 Unframe}{#6 Prev End}
     \strdscopeonlayer{strd framelayer}{
         \strdscopepathis{#1}{
             \strdscopexscale{#2}{
@@ -372,13 +353,13 @@
 \tikzset{strd aroundframe/.style={circle,draw=white,fill=white,minimum size=3pt,inner sep=0pt}}
 \tikzset{strd roadaroundframe/.style={rectangle,sharp corners,draw=white,fill=white,minimum width=4pt,minimum height=3pt,inner sep=0pt}}
 
-\newcommand*{\strdputaroundframe}[1]{% {fromnode}
+\newcommand*{\strdputaroundframe}[1]{% {node}
     \strdscopeonlayer{strd aroundframelayer}{
         \node[strd aroundframe] at (#1) {};
     }% 
 }
 
-\newcommand*{\strdputroadaroundframe}[1]{% {fromnode}
+\newcommand*{\strdputroadaroundframe}[1]{% {node}
     \strdscopeonlayer{strd aroundframelayer}{
         \node[strd roadaroundframe] at (#1) {};
     }% 
@@ -438,6 +419,7 @@
 \newcommand*{\strdputendlabel}[2]{\strdputedgelabelat{below}{#1}{#2 End}}
 
 
+% TODO
 % White strings
 %
 
@@ -451,6 +433,7 @@
 }
 
 
+% TODO
 % Graded strings; order depends
 %   You must wrap each string because of layers-reset-line-width bug.
 %   BTW, tikz/double doesn't work with scopes.
@@ -478,23 +461,23 @@
 \tikzset{strd roadbase/.style={line width=3.05pt}}
 \tikzset{strd roadpave/.style={line width=2.65pt,strd edgenoise,strd roadcolor}}
 
-\newcommand*{\strdnewroad}[3]{% {sc}{newid}{fromnode}
+\newcommand*{\strdnewroad}[3]{% {sc}{id}{node}
     \strdscope{strd roadbase}{\strduse{#1}{#2}{#3}}
     \strdscopeonlayer{strd pavelayer}{
         \strdscope{strd roadpave}{\strduse{#1}{#2 Paved}{#3}}
     }%
 }
-\newcommand*{\strdroad}[4]{% {stm}{sc}{newid}{fromnode}
+\newcommand*{\strdroad}[4]{% {stm}{sc}{id}{node}
     \strduse{#1}{\strdnewscope{strd roadbase}{#2}}{#3}{#4}
-    \strduse{#1}{\strdonlayer{strd pavelayer}{\strdnewscope{strd roadpave}{#2}}}{#3 Paved}{#4}
+    \strduse{#1}{\strdnewonlayer{strd pavelayer}{\strdnewscope{strd roadpave}{#2}}}{#3 Paved}{#4}
 }
 
 % Crossable road; order depends
-\newcommand*{\strdnewroadx}[3]{% {sc}{newid}{fromnode}
+\newcommand*{\strdnewroadx}[3]{% {sc}{id}{node}
     \strdscope{strd roadbase}{\strduse{#1}{#2}{#3}}
     \strdscope{strd roadpave}{\strduse{#1}{#2 Paved}{#3}}%
 }
-\newcommand*{\strdroadx}[4]{% {stm}{sc}{newid}{fromnode}
+\newcommand*{\strdroadx}[4]{% {stm}{sc}{id}{node}
     \strduse{#1}{\strdnewscope{strd roadbase}{#2}}{#3}{#4}
     \strduse{#1}{\strdnewscope{strd roadpave}{#2}}{#3 Paved}{#4}%
 }
@@ -518,13 +501,8 @@
     }%
 }
 
-\newcommand*{\strdnewroadlaside}[2]{% {newid}{node}
-    \node[strd coord] (#1 Start) at ($(#2)+(-0.05,0)$) {};
-    \node[strd coord] (#1) at (#1 Start) {};
-    \node[strd coord] (#1 End) at (#1 Start) {};%
-}
+\newcommand*{\strdnewroadlaside}[2]{\strdnewempty{#1}{$(#2)+(-0.05,0)$}}
 \newcommand*{\strdroadlaside}{\strdnewcompose\strdnewroadlaside}
-
 \newcommand*{\strdnewroadraside}{\strdnewflip\strdnewroadlaside}
 \newcommand*{\strdroadraside}{\strdnewcompose\strdnewroadraside}
 
@@ -564,7 +542,7 @@
 \newcommand*{\strdnewimplicit}{\strdtosc\strdscopeimplicit}
 
 \newcommand*{\strdtostm}[5]{\strduse{#1}{\strduse{#2}{#3}{#4}{#5}}}
-\newcommand*{\strdxscale}[1]{\strdtostm{\strdscopexscale{#1}}}
+\newcommand*{\strdxscaleone}[1]{\strdtostm{\strdscopexscale{#1}}}
 
 
 % Sequence-style construction
@@ -582,16 +560,20 @@
 }
 
 % TODO
-% \newcommand*{\strdassign}[4]{% {name}{stm}{newid}{fromnode}
+% \newcommand*{\strdassign}[4]{% {name}{stm}{id}{node}
 %     \strduse{#2}{#3}{#4}
 %     \strdnone{\strduse{#2}}{#3}{#1}% strdcopy keeps ranges only.
 % }
 
-\newcommand*{\strdwith}[4]{% {h}{sc}{newid}{fromnode}
+
+% String transformations
+%
+
+\newcommand*{\strdwith}[4]{% {h}{sc}{id}{node}
     \strduse{#2}{#3}{#4}
     \strduse{#1}{#3}%
 }
-\newcommand*{\strdwithat}[5]{% {at}{h}{sc}{newid}{fromnode}
+\newcommand*{\strdwithat}[5]{% {at}{h}{sc}{id}{node}
     \strduse{#3}{#4}{#5}
     \strduse{#2}{#4 #1}%
 }
@@ -624,13 +606,13 @@
 \newcommand*{\strdroadlabel}[2]{\strdwith{\strdputroadlabel{#1}{#2}}}
 \newcommand*{\strdroadlabelat}[3]{\strdwithat{#1}{\strdputroadlabel{#2}{#3}}}
 
-\newcommand*{\strdbranchone}[4]{% {stm}{sc}{newid}{fromnode}
-    \strduse{#1}{\strdnewnone{#2}}{#3 Branch}{#4}
+\newcommand*{\strdbranchone}[4]{% {stm}{sc}{id}{node}
     \strduse{#2}{#3}{#4}
+    \strduse{#1}{\strdnewempty}{#3 Branch}{#3 End}
 }
 \newcommand*{\strdbranch}{\strdseqin\strdbranchone}
 
-\newcommand*{\strdrestart}[4]{% {stm}{sc}{newid}{fromnode}
+\newcommand*{\strdrestart}[4]{% {stm}{sc}{id}{node}
     \strduse{#2}{#3}{#4}
     \strduse{#1}{\strdnewempty}{#3 Restart}{\strdorigin}%
 }
@@ -639,6 +621,7 @@
 % Utilities
 %
 
+\newcommand*{\strduse}{\Identity}
 \newcommand*{\strdrlap}{\Compose\mathrlap\smash}
 \newcommand*{\strdllap}{\Compose\mathllap\smash}
 \newcommand*{\strdlvert}[1]{\rotatebox[origin=c]{90}{\ensuremath{#1}}}
