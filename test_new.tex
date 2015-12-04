@@ -1,0 +1,97 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+\myin{preview,math,aligned}{
+    \strd{
+     %   \strdnewempty{theStrd}{0,0}
+    %    \strdmid{\strdnewempty}{theStrd}{0,0}
+    %    \strdputrlabel{X}{theStrd}
+        \strdframeofone{strd mapframe}{1}{1}{\strdmid}{\strdnewempty}{ppp}{\strdorigin}
+    %    \strdmid{\strdempty}{theStrd}{0,0}
+    }
+}
+
+\myin{preview,math,aligned}{
+    \strd{
+        \strdnewmid{theStrd}{0,0}
+    }
+}
+
+\myin{preview,math,aligned}{
+    \strdgathered{
+        \strdmid,\strdmid,
+        \strdseq{\strdmid,\strdmid,\strdnewimplicit} 
+    }
+}
+
+\myin{preview,math,aligned}{
+    & \text{test: } 
+    \strdgathered{
+        \strdmid,\strdrlabel{X},
+        \strddot,
+        \strdmid,\strdrlabel{Y},
+        \strdcell{P},
+        \strdright,\strdrlabel{A},\strdllabel{B},
+        \strdcap,\strdrlabelat{Right}{P},\strdllabelat{Left}{Q}
+    } \\
+}
+
+\myin{preview,math,aligned}{
+    & \text{test: } 
+    \strdgathered{
+        \strdmid,\strdrlabel{X},
+        \strdsqsubset,
+        \strdmid,\strdrlabel{Y},
+        \strdrestart{\strdright}
+    }
+}
+\myin{preview,math,aligned}{
+    & \text{test: } 
+    \strdgathered{
+        \strdmid,\strdrlabel{X},
+        \strdmapframe{1}{2}{
+            \strdmid,\strdrlabel{In},
+            \strdright,\strdrlabel{In}
+        },
+        \strdmid
+    }
+}
+
+\myin{preview,math,aligned}{
+    & \text{test: } 
+    \strdgathered{
+        \strdmid,\strdrlabel{X},
+        \strdbranch{
+            \strdbranch{
+                \strdbranch{
+                    \strdxscale{0.5}{\strdright}
+                },
+                \strdmid
+            },
+            \strdleft
+        },
+        \strdright
+    }
+}
+
+
+\myin{preview,math,aligned}{
+    & \text{test: } 
+    \strd{
+        \strdnewroad{\strdnewmid}{x}{\strdorigin}
+        \strdnewroad{\strdnewright}{xy}{x End}
+    }
+}
+
+\myin{preview,math,aligned}{
+    & \text{test: } 
+    \strdgathered{
+        \strdroad\strdmid,\strdroadlabel{X}{Y},
+        \strdroad\strdright,\strdroadlabel{X}{Y}
+    }
+}
+
+\end{document}
