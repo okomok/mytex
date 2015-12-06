@@ -40,14 +40,8 @@
     \strdresetlinewidth%
 }
 
-\newcommand*{\strdonlayerC}[4]{% {layer}{sc}{id}{node}
-    \strdonlayer@{#1}{
-        \strduse{#2}{#3}{#4}
-    }%
-}
 
-
-% Environmentals 
+% Environments 
 %
 
 \newcommand*{\strd}[1]{%
@@ -56,14 +50,9 @@
         #1;
     \end{tikzpicture}%
 }
-
 \newcommand*{\strdin}[2]{\Foldr{\strdin@}{#2}{\List{#1}}}
-\newcommand*{\strdin@}[2]{%
-    \begin{#1}
-%       \! % why needed?
-        \strd{#2}
-    \end{#1}%
-}
+\newcommand*{\strdin@}[2]{\begin{#1}\strd{#2}\end{#1}}
+
 
 % Constants
 %
@@ -211,9 +200,7 @@
 \newcommand*{\strddupC}{\strdnoneC\strdminusC}
 
 \newcommand*{\strdjumptoC}[3]{% {id}{fromnode}{tonode}
-    \node[strd coord] (#1 Start) at (#2) {};
-    \node[strd coord] (#1 End) at (#3) {};
-    \node[strd coord] (#1) at ($(#1 Start)!.5!(#1 End)$) {};%
+    \strdstringC{#1}{#2}{$(#2)!.5!(#3)$}{#3}%
 }
 
 \newcommand*{\strdsqsubsettoC}[3]{% {id}{fromnode}{tonode}
@@ -465,10 +452,10 @@
 \newcommand*{\strdputdeadend}[1]{% {node}
     \strdonlayer@{strd whitelayer}{
         \draw[strd draw,white,line width=4pt,shorten >=-1pt] {
-            ($(#1 End)+(0,10.16pt)$) -- (#1 End)
+            ($(#1)+(0,10.16pt)$) -- (#1)
         };
         \draw[strd draw,strd roadbase]{
-            ($(#1 End)+(0,10.16pt)$) -- ($(#1 End)+(0,10.36pt)$)
+            ($(#1)+(0,10.16pt)$) -- ($(#1)+(0,10.36pt)$)
         };
     }%
 }
@@ -489,12 +476,7 @@
 % Scoped transformations
 %
 
-\newcommand*{\strdscope@}[2]{%
-    \begin{scope}[#1]
-        #2
-    \end{scope}%
-}
-
+\newcommand*{\strdscope@}[2]{\begin{scope}[#1]#2\end{scope}}
 \newcommand*{\strdflip@}{\strdscope@{xscale=-1}}
 \newcommand*{\strdinv@}{\strdscope@{yscale=-1}}
 \newcommand*{\strdxscale@}[1]{\strdscope@{xscale=#1}}
@@ -507,6 +489,7 @@
 \newcommand*{\strdimplicit@}{\strdpathis@{densely dotted}}
 
 \newcommand*{\strdtoC}[4]{\strduse{#1}{\strduse{#2}{#3}{#4}}}
+\newcommand*{\strdonlayerC}{\Compose\strdtoC\strdonlayer@}
 \newcommand*{\strdscopeC}{\Compose\strdtoC\strdscope@}
 \newcommand*{\strdflipC}{\strdtoC\strdflip@}
 \newcommand*{\strdinvC}{\strdtoC\strdinv@}
@@ -524,6 +507,7 @@
     \strduse{#3}{#4 Prev}{#5}
     \strduse{#1}{\strduse{#2}{\strdemptyC}{#4}{#4 Prev End}}
 }
+\newcommand*{\strdonlayer}{\Compose\strdtoT\strdonlayer@}
 \newcommand*{\strdscope}{\Compose\strdtoT\strdscope@}
 \newcommand*{\strdflip}{\strdtoT\strdflip@}
 \newcommand*{\strdinv}{\strdtoT\strdinv@}
@@ -541,14 +525,12 @@
 % Sequence-style construction
 %
 
-\newcommand*{\strdseq}[1]{% {sa1,sa2,..,saN}
-    \Foldr{\Then}{\Identity}{\List{#1}}%
-}
+\newcommand*{\strdseq}[1]{\Foldr{\Then}{\Identity}{\List{#1}}}
 \newcommand*{\strdseqin}[2]{\strduse{#1}{\strdseq{#2}}}
 
 \newcommand*{\strdgathered}[1]{% {sa1,sa2,..,saN}
     \strdin{gathered}{
-        \strdseq{#1}{\strdemptyC}{theStrd}{\strdorigin}
+        \strdseq{#1}{\strdemptyC}{TheStrd}{\strdorigin}
     }%
 }
 
@@ -598,11 +580,11 @@
 \newcommand*{\strdroadlabel}[2]{\strdwith{\strdputroadlabel{#1}{#2}}}
 \newcommand*{\strdroadlabelat}[3]{\strdwithat{#1}{\strdputroadlabel{#2}{#3}}}
 
-\newcommand*{\strdbranchone}[4]{% {stm}{sc}{id}{node}
+\newcommand*{\strdbranch}{\strdseqin\strdbranch@}
+\newcommand*{\strdbranch@}[4]{% {stm}{sc}{id}{node}
     \strduse{#2}{#3}{#4}
     \strduse{#1}{\strdemptyC}{#3 Branch}{#3 End}
 }
-\newcommand*{\strdbranch}{\strdseqin\strdbranchone}
 
 \newcommand*{\strdrestart}[4]{% {stm}{sc}{id}{node}
     \strduse{#2}{#3}{#4}

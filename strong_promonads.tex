@@ -1,0 +1,32 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdyhalf\strdmid,
+        \strdunleft,\strdrlabelat{Start}{T},
+        \strdcell{\operatorname{st}},
+        \strdbranch{
+            \strdcap,\strdrlabelat{Left}{\text{pro}\otimes},\strdrlabelat{Right}{T \mytt{\overset{\circ}{\times}}\overset{\circ}1}
+        },
+        \strdinv\strdrint,\strdrlabel{\text{pro}\otimes},
+        \strdcell{{\scriptstyle\text{pro}}\text{r}},
+        \strdright,
+        \strdmid,\strdrlabelat{Start}{\text{pro}(,I)}
+    } =
+    \strdgathered{
+        \strdcell{{\scriptstyle\text{pro}}\text{r}},
+        \strdbranch{\strdleft,\strdrlabelat{End}{\text{pro}\otimes},\strdmid},
+        \strdrint,\strdrlabel{\text{pro}(,I)},
+        \strdcell{\cong},
+        \strdbranch{\strdinv{\strdseq{\strdright,\strdempty,\strdrlabel{T},\strdyhalf\strdmid}}},
+        \strdcap,\strdrlabelat{Right}{\text{pro}(,I)},\strdrlabelat{Left}{T \mytt{\overset{\circ}{\times}}\overset{\circ}1}
+    }
+}
+
+\end{document}
