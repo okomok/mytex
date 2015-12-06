@@ -488,38 +488,47 @@
 \newcommand*{\strdnodeis@}[1]{\strdscope@{every node/.append style=#1}}
 \newcommand*{\strdimplicit@}{\strdpathis@{densely dotted}}
 
-\newcommand*{\strdtoC}[4]{\strduse{#1}{\strduse{#2}{#3}{#4}}}
-\newcommand*{\strdonlayerC}{\Compose\strdtoC\strdonlayer@}
-\newcommand*{\strdscopeC}{\Compose\strdtoC\strdscope@}
-\newcommand*{\strdflipC}{\strdtoC\strdflip@}
-\newcommand*{\strdinvC}{\strdtoC\strdinv@}
-\newcommand*{\strdnoneC}{\strdtoC\strdnone@}
-\newcommand*{\strdscaleC}[2]{\strdtoC{\strdscale@{#1}{#2}}}
-\newcommand*{\strdxscaleC}{\Compose\strdtoC\strdxscale@}
-\newcommand*{\strdyscaleC}{\Compose\strdtoC\strdyscale@}
+\newcommand*{\strdtoC@}[4]{\strduse{#1}{\strduse{#2}{#3}{#4}}}
+\newcommand*{\strdonlayerC}{\Compose\strdtoC@\strdonlayer@}
+\newcommand*{\strdscopeC}{\Compose\strdtoC@\strdscope@}
+\newcommand*{\strdflipC}{\strdtoC@\strdflip@}
+\newcommand*{\strdinvC}{\strdtoC@\strdinv@}
+\newcommand*{\strdnoneC}{\strdtoC@\strdnone@}
+\newcommand*{\strdscaleC}[2]{\strdtoC@{\strdscale@{#1}{#2}}}
+\newcommand*{\strdxscaleC}{\Compose\strdtoC@\strdxscale@}
+\newcommand*{\strdyscaleC}{\Compose\strdtoC@\strdyscale@}
 \newcommand*{\strdxhalfC}{\strdxscaleC{0.5}}
 \newcommand*{\strdyhalfC}{\strdyscaleC{0.5}}
 \newcommand*{\strdxdoubleC}{\strdxscaleC{2}}
 \newcommand*{\strdydoubleC}{\strdyscaleC{2}}
-\newcommand*{\strdimplicitC}{\strdtoC\strdimplicit@}
+\newcommand*{\strdimplicitC}{\strdtoC@\strdimplicit@}
 
-\newcommand*{\strdtoT}[5]{% {opt}{stm}{sc}{id}{node}
+\newcommand*{\strdtoT@}[5]{% {opt}{stm}{sc}{id}{node}
     \strduse{#3}{#4 Prev}{#5}
     \strduse{#1}{\strduse{#2}{\strdemptyC}{#4}{#4 Prev End}}
 }
-\newcommand*{\strdonlayer}{\Compose\strdtoT\strdonlayer@}
-\newcommand*{\strdscope}{\Compose\strdtoT\strdscope@}
-\newcommand*{\strdflip}{\strdtoT\strdflip@}
-\newcommand*{\strdinv}{\strdtoT\strdinv@}
-\newcommand*{\strdnone}{\strdtoT\strdnone@}
-\newcommand*{\strdscale}[2]{\strdtoT{\strdscale@{#1}{#2}}}
-\newcommand*{\strdxscale}{\Compose\strdtoT\strdxscale@}
-\newcommand*{\strdyscale}{\Compose\strdtoT\strdyscale@}
+\newcommand*{\strdonlayer}{\Compose\strdseqin\strdonlayer@@}
+\newcommand*{\strdonlayer@@}{\Compose\strdtoT@\strdonlayer@}
+\newcommand*{\strdscope}{\Compose\strdseqin\strdscope@@}
+\newcommand*{\strdscope@@}{\Compose\strdtoT@\strdscope@}
+\newcommand*{\strdflip}{\strdseqin\strdflip@@}
+\newcommand*{\strdflip@@}{\strdtoT@\strdflip@}
+\newcommand*{\strdinv}{\strdseqin\strdinv@@}
+\newcommand*{\strdinv@@}{\strdtoT@\strdinv@}
+\newcommand*{\strdnone}{\strdseqin\strdnone@@}
+\newcommand*{\strdnone@@}{\strdtoT@\strdnone@}
+\newcommand*{\strdscale}[2]{\strdseqin{\strdscale@@{#1}{#2}}}
+\newcommand*{\strdscale@@}[2]{\strdtoT@{\strdscale@{#1}{#2}}}
+\newcommand*{\strdxscale}{\Compose\strdseqin\strdxscale@@}
+\newcommand*{\strdxscale@@}{\Compose\strdtoT@\strdxscale@}
+\newcommand*{\strdyscale}{\Compose\strdseqin\strdyscale@@}
+\newcommand*{\strdyscale@@}{\Compose\strdtoT@\strdyscale@}
 \newcommand*{\strdxhalf}{\strdxscale{0.5}}
 \newcommand*{\strdyhalf}{\strdyscale{0.5}}
 \newcommand*{\strdxdouble}{\strdxscale{2}}
 \newcommand*{\strdydouble}{\strdyscale{2}}
-\newcommand*{\strdimplicit}{\strdtoT\strdimplicit@}
+\newcommand*{\strdimplicit}{\strdseqin\strdimplicit@@}
+\newcommand*{\strdimplicit@@}{\strdtoT@\strdimplicit@}
 
 
 % Sequence-style construction

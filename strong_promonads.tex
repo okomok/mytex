@@ -4,6 +4,7 @@
 
 \begin{document}
 
+\newcommand*{\proop}[1]{\mytt{\overset{\circ}{#1}}}
 
 \In{preview,math,aligned}{
     \myitem &
@@ -15,17 +16,104 @@
             \strdcap,\strdrlabelat{Left}{\text{pro}\otimes},\strdrlabelat{Right}{T \mytt{\overset{\circ}{\times}}\overset{\circ}1}
         },
         \strdinv\strdrint,\strdrlabel{\text{pro}\otimes},
-        \strdcell{{\scriptstyle\text{pro}}\text{r}},
+        \strdbijcell{{\scriptstyle\text{pro}}\text{r}},
         \strdright,
         \strdmid,\strdrlabelat{Start}{\text{pro}(,I)}
     } =
     \strdgathered{
-        \strdcell{{\scriptstyle\text{pro}}\text{r}},
+        \strdbijcell{{\scriptstyle\text{pro}}\text{r}},
         \strdbranch{\strdleft,\strdrlabelat{End}{\text{pro}\otimes},\strdmid},
         \strdrint,\strdrlabel{\text{pro}(,I)},
-        \strdcell{\cong},
+        \strdbijcell{\cong},
         \strdbranch{\strdinv{\strdseq{\strdright,\strdempty,\strdrlabel{T},\strdyhalf\strdmid}}},
         \strdcap,\strdrlabelat{Right}{\text{pro}(,I)},\strdrlabelat{Left}{T \mytt{\overset{\circ}{\times}}\overset{\circ}1}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabelat{End}{T},\strdunleft,\strdcell{\operatorname{st}},
+        \strdbranch{\strdleft,\strdrlabelat{End}{\text{pro}\otimes},\strdmid},
+        \strdbranch{
+            \strdinv\strdrint,\strdrlabel{\text{pro}{\otimes}},
+            \strdbijcell{{\scriptstyle{\text{pro}}}\text{a}},
+            \strdinv\strdcap,\strdrlabelat{Left}{\text{pro}{\otimes}},\strdrlabelat{Right}{\text{pro\otimes}\proop\times\proop1}
+        },
+        \strdrint,\strdrlabel{T\proop\times\proop1},\strdbijcell{\cong},
+        \strdbranch{
+            \strdinv{\strdright,\strdempty,\strdrlabel{\proop1\proop\times\text{pro}\otimes},\strdunright}
+        },
+        \strdbranch{
+            \strdxscale{1.5}\strdleft,\strdrlabel{\Compose\strdunraise\strdunraise{\proop1\proop\times\text{pro}\otimes}}
+        },
+        \strdright,\strdrlabel{T\proop\times\proop1\proop\times\proop1}
+    } =
+    \strdgathered{
+        \strdcup,\strdrlabelat{Left}{T},\strdrlabelat{Right}{\text{pro\otimes}},
+        \strdcell{\text{st}},
+        \strdbranch{
+            \strdleft,\strdempty,\strdrlabel{\text{pro\otimes}},
+            \strdunleft,
+            \strdbijcell{{\scriptstyle\text{pro}}\text{a}},
+            \strdbranch{\strdinv{\strdrint,\strdrlabel{\Compose\strdunraise\strdunraise{\text{pro\otimes}\proop\times\proop1}}}},
+            \strdcap,\strdrlabelat{Left}{\text{pro\otimes}},\strdrlabelat{Right}{\proop1\proop\times\text{pro\otimes}}
+        },
+        \strdrint,\strdrlabel{T\proop\times\proop1},
+        \strdcell{\scriptstyle\text{st}\proop\times\proop1},
+        \strdbranch{
+            \strdinv{\strdright,\strdempty,\strdrlabel{\text{pro\otimes}\proop\times\proop1},\strdmid}
+        },
+        \strdright,\strdempty,\strdrlabel{T\proop\times\proop1\proop\times\proop1},
+        \strdmid
+    }
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdcup,\strdrlabelat{Left}{T},\strdrlabelat{Right}{\text{pro\otimes}},
+        \strdcell{\text{st}},
+        \strdbranch{
+            \strdleft,\strdempty,\strdrlabel{\text{pro\otimes}},
+            \strdyhalf\strdmid
+        },
+        \strdright,\strdrlabel{T\proop\times\proop1},
+        \strdcell{\scriptstyle\eta\proop\times\proop1}
+    } =
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{T},
+            \strdcell{\eta}
+        },
+        \strdrjump,\strdmid,\strdempty,\strdrlabel{\text{pro\otimes}},\strdmid
+    }\\
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{T},
+        \strdcell{\text{\mu}},
+        \strdbranch{
+            \strdleft,\strdempty,\strdrlabel{T},
+            \strdunleft,
+            \strdcell{\text{st}},
+            \strdbranch{\strdinv{\strdrint,\strdrlabel{\text{pro\otimes}}}},
+            \strdcap,\strdrlabelat{Left}{\text{pro\otimes}},\strdrlabelat{Right}{T\proop\times\proop1}
+        },
+        \strdrint,\strdrlabel{T},
+        \strdcell{\text{st}},
+        \strdbranch{
+            \strdinv{\strdright,\strdempty,\strdrlabel{\text{pro\otimes}},\strdmid}
+        },
+        \strdright,\strdempty,\strdrlabel{T\proop\times\proop1},
+        \strdmid
+    } =
+    \strdgathered{
+        \strdcup,\strdrlabelat{Left}{T},\strdrlabelat{Right}{\text{pro\otimes}},
+        \strdcell{\text{st}},
+        \strdbranch{
+            \strdleft,\strdempty,\strdrlabel{\text{pro\otimes}},
+            \strdmid
+        },
+        \strdright,\strdrlabel{T\proop\times\proop1},
+        \strdcell{\scriptstyle\mu\proop\times\proop1},
+        \strdcap,\strdrlabelat{Left}{\strdunraise{\strdunraise{T\proop\times\proop1}}},\strdrlabelat{Right}{T\proop\times\proop1}
     }
 }
 
