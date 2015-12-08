@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+\newcommand*{\proop}[1]{\mytt{\overset{\circ}{#1}}}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \text{st}_{E{,}CD} \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{{\int} ^ {Z}\text{Hom}(Z{,}C{\otimes}D){\times}T(E{,}Z)},
+        \strdcell{\scriptstyle\int},
+        \strdbranch{\strdroad\strdleft,\strdroadlabel{}{C{\otimes}D},\strddeadend},
+        \strdright,\strdrlabel{T(E{,}C{\otimes}D)},
+        \strdmapframe{7}{5.5}{
+            \strdframearound,\strdmid,
+            \strdcell{T(\texttt{-}{,}C{\otimes}D)},
+            \strdbranch{
+                \strdxscale{2}{\strdroad\strdleft},\strdroadlabel{X{\otimes}D}{E},
+                \strdmapframe{4}{2}{
+                    \strdbranch{\strdljump,\strdmid,\strdrlabel{X},\strdunleft},
+                    \strdrjump,\strdunright,\strdrlabel{D},
+                    \strdcell{\epsilon},
+                    \strdbranch{
+                        \strdsupset,\strdrlabel{Y},
+                        \strdcell{\epsilon},
+                        \strdbranch{\strdright,\strdrlabel{E}},
+                        \strdxscale{1}{\strdroad\strdleft},\strdroadframearound,
+                        \strdbranch{\strdroad\strdmid,\strdroadlabel{X{\otimes}Y}{E}}
+                    },
+                    \strdscale{3}{2}{\strdroad\strdleft},
+                    \strdroadlabel{D}{Y},\strdroadframearound,
+                    \strdbranch{\strdroad\strdmid}
+                },\strdframellabel{\strdlvert{\text{curry}}}
+            },
+            \strdxscale{1.5}\strdright,
+            \strdmid,\strdrlabel{T(X{\otimes}D{,}C{\otimes}D)},\strdmid,\strdcellat{Mid}{\text{first}},
+            \strdmid,\strdrlabelat{End}{T(X,C)},\strdmid
+        },\strdframelabelat{Left EndCorner}{{\int}{\strdrlap{^{X Y}}}},
+        \strdxscale{2}\strdljump,\strdmid,\strdrlabel{{\int}^{X Y}T(X{,}C){\times}\text{Hom}(Y{,}D){\times}\text{Hom}(E{,}X{\otimes}Y)}
+    }\\
+    \myitem &
+    \text{first} _ {X,C,D} \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{T(X{\otimes}D,C{\otimes}D)},
+        \strdframearound,
+        \strdmapframe{3}{4}{
+            \strdmid,
+            \strdcell{T(X{\otimes}D{,}\texttt{+})},
+            \strdbranch{\strdroad\strdleft,\strdroadlabel{C{\otimes}D}{Z}},
+            \strdright,\strdrlabel{T(X{\otimes}D{,}Z)}
+        },\strdframelabelat{Left EndCorner}{{\int}{\strdrlap{^Z}}},
+        \strdljump,\strdmid,\strdrlabel{{\int}^Z\text{Hom}(Z{,}C{\otimes}D){\times}T(X{\otimes}D{,}Z)},
+        \strdcell{\text{st}},%\strdrlap{_{X{\otimes}D{,}CD}}},
+        \strdmid,\strdrlabel{{\int}^{XY}T(X{,}C){\times}\text{Hom}(Y{,}D){\times}\text{Hom}(X{\otimes}D{,}X{\otimes}Y)},
+        \strdcell{\scriptstyle\int},
+        \strdbranch{\strdleft,\strdllabel{T(X{,}C)}},
+        \strdbranch{\strdyscale{1}{\strdroad\strdmid},\strdroadlabel{}{D},\strddeadend},
+        \strdroad\strdright,\strdroadlabel{}{X{\otimes}Y},\strddeadend
+    }
+}
+
+
+\end{document}

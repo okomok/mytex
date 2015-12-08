@@ -6,7 +6,7 @@
 \begin{document}
 
 % function box
-\myin{preview,math,aligned}{
+\In{preview,math,aligned}{
     \myitem &
     \strdgathered{
         \strdmid, \strdrlabel{mb}
@@ -23,6 +23,36 @@
         \strdmid, \strdrlabel{mb}
         , \strdcell{k}
         , \strdmid,\strdrlabel{a}
+    }
+}
+
+% lambda
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{\haskop{Int}},
+        \strdmapframe{2}{2}{
+            \strdmid,\strdrlabel{\haskop{Int}},
+            \strdcell{\haskop{+}},
+            \strdcap,\strdrlabelat{Left}{\haskop{Int}},\strdrlabelat{Right}{\haskop{Int}},
+            \strdcellat{Left End}{x},\strdcellat{Right End}{2},
+            \strdnone{\strdyhalf\strdmid}
+        },\strdunfamilylabel{x},
+        \strdmid,\strdrlabel{\haskop{Int}}
+    } = \haskbackslash x \haskop{->} x \haskop{+} 2
+}
+
+% lambda
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{?},
+        \strdmapframe{1.3}{1.3}{
+            \strdmid,\strdrlabel{ma},
+            \strdcell{\haskop{return}},
+            \strdmid,\strdrlabel{a}
+        },\strdunfamilylabel{a},
+        \strdmid,\strdrlabel{?}
     }
 }
 

@@ -26,8 +26,8 @@
 \pgfdeclarelayer{strd celllayer}
 \pgfdeclarelayer{strd labellayer}
 \pgfdeclarelayer{strd framelayer}
-\pgfdeclarelayer{strd aroundframelayer}
-\pgfsetlayers{background,main,strd pavelayer,strd aroundframelayer,strd gradedlayer,strd framelayer,strd whitelayer,strd celllayer,strd labellayer}
+\pgfdeclarelayer{strd framearoundlayer}
+\pgfsetlayers{background,main,strd pavelayer,strd framearoundlayer,strd gradedlayer,strd whitelayer,strd framelayer,strd celllayer,strd labellayer}
 
 % Layers forget surrounding line styles, so we define...
 \newcommand*{\strdresetlinewidth}{\pgfsetlinewidth{0.2pt}}
@@ -76,10 +76,15 @@
 % String constructors
 %
 
+\newcommand*{\strdcoord@}[2]{% {id}{node}
+    \node[strd coord] (#1) at (#2) {};%
+}
+
 \newcommand*{\strdstringC}[4]{% {id}{start}{middle}{end}
     \node[strd coord] (#1 Start) at (#2) {};
-    \node[strd coord] (#1) at (#3) {};
-    \node[strd coord] (#1 End) at (#4) {};%
+    \node[strd coord] (#1 Mid) at (#3) {};
+    \node[strd coord] (#1 End) at (#4) {};
+    \strdcoord@{#1}{#1 Mid}%
 }
 
 \newcommand*{\strdcomposeC}[4]{% {nextsc}{prevsc}{id}{node}
@@ -152,9 +157,10 @@
 \newcommand*{\strdsubsetC}[2]{% {id}{node}
     \node[strd coord] (#1 Start) at (#2) {};
     \node[strd coord] (#1 StartCorner) at ($(#2)+(-\strdxunit,-\strdunitdiff)$) {};
-    \node[strd coord] (#1) at ($(#2)+(-\strdxunit,-\strdyhalfunit)$) {};
+    \node[strd coord] (#1 Mid) at ($(#2)+(-\strdxunit,-\strdyhalfunit)$) {};
     \node[strd coord] (#1 EndCorner) at ($(#2)+(-\strdxunit,-\strdxunit)$) {};
     \node[strd coord] (#1 End) at ($(#2)+(0,-\strdyunit)$) {};
+    \strdcoord@{#1}{#1 Mid}
     \draw[strd draw]{
         (#1 Start) parabola (#1 StartCorner) -- (#1 EndCorner) parabola[bend at end] (#1 End)
     };%
@@ -166,9 +172,10 @@
 \newcommand*{\strdlintC}[2]{% {id}{node}
     \node[strd coord] (#1 Start) at (#2) {};
     \node[strd coord] (#1 StartCorner) at ($(#2)+(-\strdxunit,-\strdunitdiff)$) {};
-    \node[strd coord] (#1) at ($(#2)+(-\strdxunit,-\strdyhalfunit)$) {};
+    \node[strd coord] (#1 Mid) at ($(#2)+(-\strdxunit,-\strdyhalfunit)$) {};
     \node[strd coord] (#1 EndCorner) at ($(#2)+(-\strdxunit,-\strdxunit)$) {};
     \node[strd coord] (#1 End) at ($(#2)+(-1,-\strdyunit)$) {};
+    \strdcoord@{#1}{#1 Mid}
     \draw[strd draw]{
         (#1 Start) parabola (#1 StartCorner) -- (#1 EndCorner) parabola[bend at end] (#1 End)
     };%
@@ -180,9 +187,10 @@
 \newcommand*{\strdlchangeC}[2]{% {id}{node}
     \node[strd coord] (#1 Start) at (#2) {};
     \node[strd coord] (#1 StartCorner) at ($(#2)+(0,-\strdunitmergin)$) {};
-    \node[strd coord] (#1) at ($(#2)+(-\strdxunit,-\strdyhalfunit)$) {};
+    \node[strd coord] (#1 Mid) at ($(#2)+(-\strdxunit,-\strdyhalfunit)$) {};
     \node[strd coord] (#1 EndCorner) at ($(#1)+(-\strdxunit,-\strdunitdiff)$) {};
     \node[strd coord] (#1 End) at ($(#1)+(-\strdxunit,-\strdyhalfunit)$) {};
+    \strdcoord@{#1}{#1 Mid}
     \draw[strd draw]{
         (#1 Start) -- (#1 StartCorner) parabola[bend at end] (#1) parabola (#1 EndCorner) -- (#1 End)
     };%
@@ -209,7 +217,8 @@
     \node[strd coord] (#1 End) at (#3) {};
     \node[strd coord] (#1 StartCorner) at ($(#1 Start)+(-\strdxunit,0)$) {};
     \node[strd coord] (#1 EndCorner) at ({#1 StartCorner} |- {#1 End}) {};
-    \node[strd coord] (#1) at ($(#1 StartCorner)!.5!(#1 EndCorner)$) {};
+    \node[strd coord] (#1 Mid) at ($(#1 StartCorner)!.5!(#1 EndCorner)$) {};
+    \strdcoord@{#1}{#1 Mid}
     \draw[strd draw]{
         (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End)
     };%
@@ -281,7 +290,7 @@
 % Cells
 %
 
-\tikzset{strd cellbase/.style={font=\normalsize,solid,draw,fill=white,rectangle,minimum size=9pt,inner xsep=0.6pt,inner ysep=1.2pt}}
+\tikzset{strd cellbase/.style={font=\normalsize,solid,draw,fill=white,rectangle,minimum size=9pt,inner xsep=1pt,inner ysep=1.2pt}}
 \tikzset{strd cell/.style={strd cellbase,very thin}}
 \tikzset{strd mapcell/.style={strd cellbase,thin}}
 \tikzset{strd bijcell/.style={strd cellbase,very thin,sharp corners}}
@@ -325,12 +334,12 @@
 
 % Around frames
 
-\tikzset{strd aroundframe/.style={circle,draw=white,fill=white,minimum size=3pt,inner sep=0pt}}
-\tikzset{strd roadaroundframe/.style={rectangle,sharp corners,draw=white,fill=white,minimum width=4pt,minimum height=3pt,inner sep=0pt}}
+\tikzset{strd framearound/.style={circle,draw=white,fill=white,minimum size=3pt,inner sep=0pt}}
+\tikzset{strd roadframearound/.style={rectangle,sharp corners,draw=white,fill=white,minimum width=4pt,minimum height=3pt,inner sep=0pt}}
 
-\newcommand*{\strdaroundframe@}[1]{\strdonlayer@{strd aroundframelayer}{#1}}
-\newcommand*{\strdputaroundframe}[1]{\strdaroundframe@{\node[strd aroundframe] at (#1) {};}}
-\newcommand*{\strdputroadaroundframe}[1]{\strdaroundframe@{\node[strd roadaroundframe] at (#1) {};}}
+\newcommand*{\strdframearound@}[1]{\strdonlayer@{strd framearoundlayer}{#1}}
+\newcommand*{\strdputframearound}[1]{\strdframearound@{\node[strd framearound] at (#1) {};}}
+\newcommand*{\strdputroadframearound}[1]{\strdframearound@{\node[strd roadframearound] at (#1) {};}}
 
 
 % Labels
@@ -565,10 +574,11 @@
 \newcommand*{\strddot}{\strdhere\strdputdot}
 \newcommand*{\strdwhitedot}{\strdwithat{Start}{\strdputwhitedot}}
 \newcommand*{\strdcell}{\Compose\strdhere\strdputcell}
+\newcommand*{\strdcellat}[2]{\strdwithat{#1}{\strdputcell{#2}}}
 \newcommand*{\strdmapcell}{\Compose\strdhere\strdputmapcell}
 \newcommand*{\strdbijcell}{\Compose\strdhere\strdputbijcell}
-\newcommand*{\strdaroundframe}{\strdhere\strdputaroundframe}
-\newcommand*{\strdroadaroundframe}{\strdhere\strdputroadaroundframe}
+\newcommand*{\strdframearound}{\strdhere\strdputframearound}
+\newcommand*{\strdroadframearound}{\strdhere\strdputroadframearound}
 \newcommand*{\strddeadend}{\strdhere\strdputdeadend}
 
 \newcommand*{\strdllabel}{\Compose\strdwith\strdputllabel}
