@@ -3,28 +3,121 @@
 \usepackage{lambda,etoolbox}
 
 
-% Functions
+% References
+%   https://www.ctan.org/tex-archive/macros/generic/lambda-lists?lang=en
+%   https://en.wikipedia.org/wiki/Church_encoding
+%   http://d.hatena.ne.jp/melpon/20111005/1317799929
+
+
+% Bool
+%
+
+% \relax is prepended to the original one.
+\def\TeXif#1{#1\relax\gobblefalse\else\gobbletrue\fi}
+\newcommand*{\If}{\Identity}
+
+
+% Function
 %
 
 \newcommand*{\Flip}{\Twiddle}
 \newcommand*{\Then}{\Flip\Compose}
+\newcommand*{\Const}{\First}
+\newcommand*{\Unuse}[1]{}
 
 
-% List construction
-%   can't support empty lists.
+% Prelude
+%
 
-\def\Unlist#1{#1\Unlist@{}}
-\def\Unlist@#1{#1\Foldr\Commaize{}}
-
-\def\List#1%
-   {\List@#1,\relax\@eolst}
-\def\List@#1,#2\@eolst%
-   {\TeXif{\ifx\relax#2}%
-        {\Singleton{#1}}%
-        {\Cons{#1}{\List@#2\@eolst}}}
+\newcommand*{\ErrorMsg}[1]{\errmessage{haxerror: #1}}
+\newcommand*{\Assert}[2]{\If{#1}{#2}{\ErrorMsg{assertion failed}}}
 
 
-% Lambda expressions
+% Test
+%
+
+\newcommand*{\AssertTrue}[1]{\Assert{#1}{}}
+\newcommand*{\AssertFalse}[1]{\Assert{\Not{#1}}{}}
+
+
+% List
+%
+
+\newcommand*{\Null}{\Isempty}
+
+\newcommand*{\Unlist}[1]{#1\Unlist@{}}
+\newcommand*{\Unlist@}[1]{#1\Foldr\Commaize{}}
+
+\newcommand*{\List}[1]{\List@#1,\Listend@\@eolst}
+\newcommand*{\Listend@}{}
+\def\List@#1,#2\@eolst{%
+    \TeXif{\ifx\Listend@#2}{\Singleton{#1}}{\Cons{#1}{\List@#2\@eolst}}%
+}
+
+\newcommand*{\Iterate}[2]{\Cons{#2}{\Iterate{#1}{#1{#2}}}}
+
+\newcounter{Listcounter}
+\newcommand*{\Take}[2]{%
+    \setcounter{Listcounter}{0}%
+    \Take@{#1}{#2}%
+}
+\newcommand*{\Take@}[2]{%
+    \TeXif{\ifnum\value{Listcounter}<#1}{%
+        \stepcounter{Listcounter}%
+        \Cons{\Head{#2}}{\Take@{#1}{\Tail{#2}}}%
+    }{\Nil}%
+}
+
+\newcommand*{\Drop}[2]{%
+    \setcounter{Listcounter}{0}%
+    \Drop@{#1}{#2}%
+}
+\newcommand*{\Drop@}[2]{%
+    \TeXif{\ifnum\value{Listcounter}<#1}{%
+        \stepcounter{Listcounter}%
+        \Drop@{#1}{\Tail{#2}}%
+    }{#2}%
+}
+
+\newcommand*{\TakeWhile}[2]{%
+    \Foldr{\TakeWhile@{#1}}\Nil{#2}%
+}
+\newcommand*{\TakeWhile@}[3]{%
+    \If{#1{#2}}{\Cons{#2}{#3}}\Nil%
+}
+
+\newcommand*{\DropWhile}[2]{%
+    \Foldr{\DropWhile@{#1}}{\Const\Nil}{#2}\True%
+}
+\newcommand*{\DropWhile@}[4]{%
+    \If{#4}{%
+        \If{#1{#2}}{#3\True}{\Cons{#2}{#3\False}}%
+    }{%
+        \Cons{#2}{#3\False}%
+    }%
+}
+
+% How?
+% \newcommand*{\Length}[1]{%
+%     \setcounter{Listcounter}{0}%
+%     \Length@@{#1}{\stepcounter}
+%     \the\value{Listcounter}
+% }
+% \newcommand*{\Length@@}[2]{%
+%     \If{\Isempty{#1}}{}{%
+%         #2{Listcounter}%
+%         \Length@@{\Tail{#1}}{#2}%
+%     }%
+% }
+% \newcommand*{\Length@}[1]{
+%     \stepcounter\relax{Listcounter}
+% }
+
+\newcommand*{\Foreach}[2]{\Foldr{\Foreach@{#1}}{}{#2}}
+\newcommand*{\Foreach@}[3]{#1{#2}}
+
+
+% Lambda
 %
 
 \newcommand*{\FunNamed}[2]{%
@@ -36,6 +129,21 @@
     \FunNamed{Fun\the\value{Funcounter}}%
 }
 
-\newcommand*{\In}[2]{\Foldr{\In@}{#2}{\List{#1}}}
+
+% Misc
+%
+
+\newcommand*{\In}[2]{\Foldr\In@{#2}{\List{#1}}}
 \newcommand*{\In@}[2]{\begin{#1}#2\end{#1}}
+
+
+% Tuple
+%
+
+\newcommand{\Pair}[3]{#3{#1}{#2}}
+\newcommand{\Fst}[1]{#1\True}
+\newcommand{\Snd}[1]{#1\False}
+\newcommand{\Curry}[3]{#1{\Pair{#2}{#3}}}
+\newcommand{\Uncurry}[2]{#1{\Fst{#2}}{\Snd{#2}}}
+\newcommand{\Swap}[2]{\Pair{\Snd{#1}}{\Fst{#2}}}
 
