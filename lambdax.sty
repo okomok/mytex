@@ -24,6 +24,7 @@
 \newcommand*{\Then}{\Flip\Compose}
 \newcommand*{\Const}{\First}
 \newcommand*{\Unuse}[1]{}
+\newcommand*{\PrependComma}[2]{,#1#2}% no spaces
 
 
 % Prelude
@@ -46,7 +47,7 @@
 \newcommand*{\Null}{\Isempty}
 
 \newcommand*{\Unlist}[1]{#1\Unlist@{}}
-\newcommand*{\Unlist@}[1]{#1\Foldr\Commaize{}}
+\newcommand*{\Unlist@}[1]{#1\Foldr\PrependComma{}}
 
 \newcommand*{\List}[1]{\List@#1,\Listend@\@eolst}
 \newcommand*{\Listend@}{}

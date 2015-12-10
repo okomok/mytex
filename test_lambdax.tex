@@ -50,7 +50,7 @@ Test: \Unlist{\Drop{5}{\List{1,2,3,4,5,6,7}}}
 
 Test: \Unlist{\Drop{0}{\List{1,2,3,4,5,6,7}}}
 
-Test: \Unlist{\Take{5}{\Iterate{\Fun{#1 b}}{a}}}
+Test: \Unlist{\Take{6}{\Iterate{\Fun{#1 b}}{a}}}
 
 Test: \Unlist{\TakeWhile{\Lessthan{3}}{\List{5,6,4,2,5,3,4}}}
 
@@ -63,5 +63,15 @@ Test: \Unlist{\DropWhile{\Lessthan{3}}{\List{5,6,4,2,5,3,4}}}
 %\AssertTrue{\Null{\Nil}}
 %\AssertTrue{\TeXif{\ifnum 0 = \Length{\Nil}}}
 
+\the\value{Funcounter}
+
+%\newcommand{\foo}[2]{\bar{#1}{#2}}
+%\newcommand{\foo}{\bar}
+%\newcommand{\foo}[1]{\bar{\buz{#1}}}
+%\newcommand{\foo}{\Compose\bar\buz}
+
+\newcommand{\foo}[2]{#1#2}
+\newcommand{\call}[2]{#1{#2}}
+\call{\foo{1}}{2} % --> 12
 
 \end{document}
