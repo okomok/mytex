@@ -1,0 +1,30 @@
+
+\documentclass{article}
+\usepackage{lambda,hax,amsmath}
+%\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+Test
+
+\haxasserttrue{\haxtrue}
+\haxassertfalse{\haxfalse}
+\haxassertfalse{\haxnot\haxtrue}
+\haxasserttrue{\haxnot\haxfalse}
+\haxasserttrue{\haxbool{\iftrue}}
+\haxasserttrue{\haxbool{\ifx\Identity\Identity}}
+\haxassertfalse{\haxbool{\ifx\Compose\Identity}}
+
+\haxasserttrue{\haxhead{\haxcons{\haxtrue}{\haxnil}}}
+\haxunlist{\haxlist{1,2,3}}
+
+\haxasserttrue{\haxbool{\ifnum 3 < 4}}
+\haxassertfalse{\haxbool{\ifnum 5 < 4}}
+\haxasserttrue{\haxbool{\ifnum 3 = \haxhead{\haxlist{3,2,1}}}}
+\haxassertfalse{\haxbool{\ifnum 2 = \haxhead{\haxlist{3,2,1}}}}
+
+
+\end{document}
+

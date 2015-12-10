@@ -3,13 +3,14 @@
 \usepackage[active,tightpage]{preview}
 
 
+
 \begin{document}
 
 % function box
 \In{preview,math,aligned}{
     \myitem &
     \strdgathered{
-        \strdmid, \strdrlabel{mb}
+        \strdmid, \strdrlabel{mb},\strdframearound
         , \strdmapframe{1}{1}{
             \strdmid
             , \strdcell{k}
@@ -31,8 +32,9 @@
     \myitem &
     \strdgathered{
         \strdmid,\strdrlabel{\haskop{Int}},
+        \strdframearound,
         \strdmapframe{2}{2}{
-            \strdmid,\strdrlabel{\haskop{Int}},
+            \strdmid,%\strdrlabel{\haskop{Int}},
             \strdcell{\haskop{+}},
             \strdcap,\strdrlabelat{Left}{\haskop{Int}},\strdrlabelat{Right}{\haskop{Int}},
             \strdcellat{Left End}{x},\strdcellat{Right End}{2},
@@ -42,7 +44,6 @@
     } = \haskbackslash x \haskop{->} x \haskop{+} 2
 }
 
-% lambda
 \In{preview,math,aligned}{
     \myitem &
     \strdgathered{

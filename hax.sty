@@ -1,0 +1,107 @@
+\ProvidesPackage{hax}
+
+\usepackage{lambda,etoolbox}
+
+
+% TODO
+% https://en.wikipedia.org/wiki/Church_encoding
+% https://www.ctan.org/tex-archive/macros/generic/lambda-lists?lang=en
+
+
+% Prelude
+%
+
+\newcommand{\haxerror}[1]{\errmessage{haxerror: #1}}
+\newcommand{\haxassert}[2]{\haxif{#1}{#2}{\haxerror{assertion failed}}}
+
+
+% Test
+%
+
+\newcommand{\haxasserttrue}[1]{\haxassert{#1}{}}
+\newcommand{\haxassertfalse}[1]{\haxassert{\haxnot{#1}}{}}
+
+
+% Function
+%
+
+\newcommand{\haxid}[1]{#1}
+\newcommand{\haxconst}[2]{#1}
+\newcommand{\haxcompose}[3]{#1{#2{#3}}}
+\newcommand{\haxflip}[3]{#1{#3}{#2}}
+\newcommand{\haxthen}{\haxflip\haxcompose}
+\newcommand{\haxapply}[2]{#1{#2}}
+
+
+% Bool
+%
+
+\newcommand{\haxtrue}[2]{#1}
+\newcommand{\haxfalse}[2]{#2}
+\newcommand{\haxand}[2]{#1{#2}{\haxfalse}}
+\newcommand{\haxor}[2]{#1{\haxtrue}{#2}}
+\newcommand{\haxnot}{\haxflip}
+\newcommand{\haxif}{\haxid}
+
+% \relax is prepended to the original one.
+\newcommand{\haxbool}[1]{#1\relax\hax@gobblefalse\else\hax@gobbletrue\fi}
+\long\def\hax@gobblefalse\else\hax@gobbletrue\fi#1#2{\fi#1}
+\long\def\hax@gobbletrue\fi#1#2{\fi#2}
+
+
+% Tuple
+%
+
+\newcommand{\haxpair}[3]{#3{#1}{#2}}
+\newcommand{\haxfst}[1]{#1{\haxtrue}}
+\newcommand{\haxsnd}[1]{#1{\haxfalse}}
+\newcommand{\haxcurry}[3]{#1{\haxpair{#2}{#3}}}
+\newcommand{\haxuncurry}[2]{#1{\haxfst{#2}}{\haxsnd{#2}}}
+\newcommand{\haxswap}[2]{\haxpair{\haxsnd{#1}}{\haxfst{#2}}}
+
+
+% TODO: Make it canonical Church encoding for fast Isempty.
+% List
+%
+
+\newcommand{\haxnil}{\haxfalse}
+\newcommand{\haxcons}[4]{#3{#1}{#2}}
+\newcommand{\haxhead}[1]{#1{\haxtrue}{\error{no heads}}}
+\newcommand{\haxtail}[1]{#1{\haxfalse}{\error{no tails}}}
+\newcommand{\haxsingle}[1]{\haxcons{#1}{\haxnil}}
+
+\newcommand{\haxfoldl}[3]{#3{\haxfoldl@{#1}{#2}}{#2}}
+\newcommand{\haxfoldl@}[4]{\haxfoldl{#1}{{#1}{#2}{#3}}{#4}}
+\newcommand{\haxfoldr}[3]{#3{\haxfoldr@{#1}{#2}}{#2}}
+\newcommand{\haxfoldr@}[4]{#1{#3}{\haxfoldr{#1}{#2}{#4}}}
+
+\newcommand{\haxunlist}[1]{#1\haxunlist@{}}
+\long\def\haxunlist@#1{#1\haxfoldr\haxprependcomma{}}
+
+\newcommand{\haxlist}[1]{\haxlist@#1,\haxlistend@\@eolst}
+\newcommand{\haxlistend@}{}
+\long\def\haxlist@#1,#2\@eolst{%
+    \haxbool{\ifx\haxlistend@#2}{\haxsingle{#1}}{\haxcons{#1}{\haxlist@#2\@eolst}}%
+}
+
+
+% Lambda expressions
+%
+
+\newcounter{haxfuncounter}
+\newcommand*{\haxfun}{%
+    \stepcounter{haxfuncounter}%
+    \haxfunNamed@{haxfun\the\value{haxfuncounter}}%
+}
+\newcommand*{\haxfunNamed@}[2]{%
+    \expandafter\newcommand\csname#1\endcsname[1]{#2}\csuse{#1}%
+}
+
+%
+% \newcommand*{\In}[2]{\Foldr{\In@}{#2}{\haxlist{#1}}}
+% \newcommand*{\In@}[2]{\begin{#1}#2\end{#1}}
+
+
+% Misc
+
+\newcommand{\haxprependcomma}[2]{,#1#2}

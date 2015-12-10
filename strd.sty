@@ -355,7 +355,7 @@
 \newcommand*{\strdputrlabel}[2]{\strdlabel@{\node[strd sidelabel,right] at (#2) {#1};}}
 \newcommand*{\strdputframelabel}[2]{\strdlabel@{\node[strd framelabel] at (#2) {#1};}}
 \newcommand*{\strdputfamilylabel}[2]{\strdlabel@{\node[strd familylabel,above right] at (#2 Right EndCorner) {#1};}}
-\newcommand*{\strdputunfamilylabel}[2]{\strdlabel@{\node[strd familylabel,above left] at (#2 Right EndCorner) {#1};}}
+\newcommand*{\strdputunfamilylabel}[2]{\strdlabel@{\node[strd familylabel,above right] at (#2 Left EndCorner) {#1};}}
 \newcommand*{\strdputregionlabel}[2]{\strdlabel@{\node[strd familylabel,below left] at (#2 Right StartCorner) {#1};}}
 \newcommand*{\strdputedgelabelat}[3]{\strdlabel@{\node[strd edgelabel,#1] at (#3) {#2};}}
 \newcommand*{\strdputstartlabel}[2]{\strdputedgelabelat{above}{#1}{#2 Start}}
