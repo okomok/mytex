@@ -26,19 +26,19 @@ Test:
 \AssertFalse{\False}
 \AssertFalse{\Not\True}
 \AssertTrue{\Not\False}
-\AssertTrue{\TeXif{\iftrue}}
-\AssertTrue{\TeXif{\ifx\Identity\Identity}}
-\AssertFalse{\TeXif{\ifx\Compose\Identity}}
+\AssertTrue{\Bool{\iftrue}}
+\AssertTrue{\Bool{\ifx\Identity\Identity}}
+\AssertFalse{\Bool{\ifx\Compose\Identity}}
 
 \AssertTrue{\Head{\Cons{\True}{\Nil}}}
 \Unlist{\List{1,2,3}}
 
 \Unlist{\List{1,2,{,}3}}
 
-\AssertTrue{\TeXif{\ifnum 3 < 4}}
-\AssertFalse{\TeXif{\ifnum 5 < 4}}
-\AssertTrue{\TeXif{\ifnum 3 = \Head{\List{3,2,1}}}}
-\AssertFalse{\TeXif{\ifnum 2 = \Head{\List{3,2,1}}}}
+\AssertTrue{\Bool{\ifnum 3 < 4}}
+\AssertFalse{\Bool{\ifnum 5 < 4}}
+\AssertTrue{\Bool{\ifnum 3 = \Head{\List{3,2,1}}}}
+\AssertFalse{\Bool{\ifnum 2 = \Head{\List{3,2,1}}}}
 
 Test: \Unlist{\Take{4}{\List{1,2,3,4,5,6,7}}}
 
@@ -56,12 +56,13 @@ Test: \Unlist{\TakeWhile{\Lessthan{3}}{\List{5,6,4,2,5,3,4}}}
 
 Test: \Unlist{\DropWhile{\Lessthan{3}}{\List{5,6,4,2,5,3,4}}}
 
-%\Length{\Cons{1}{\Cons{2}{\Cons{3}{\Nil}}}}
-%\Length{\List{1,2,3}}
-%\Length{\Nil}
-%\AssertTrue{\TeXif{\ifnum 3 = {\Length{\List{1,2,3}}}}}
-%\AssertTrue{\Null{\Nil}}
-%\AssertTrue{\TeXif{\ifnum 0 = \Length{\Nil}}}
+
+\AssertTrue{ \BoolAnd{\Lessthan{3}{9}}{\True} }
+\AssertTrue{ \BoolOr{\True}{\True} }
+\AssertTrue{ \BoolAnd{\Lessthan{3}{9}}{\True} }
+\AssertTrue{ \All{\Lessthan{3}}{\List{4,5,6}} }
+\AssertTrue{\Null{\Nil}}
+\AssertFalse{\Null{\List{1,2}}}
 
 \the\value{Funcounter}
 
@@ -73,5 +74,42 @@ Test: \Unlist{\DropWhile{\Lessthan{3}}{\List{5,6,4,2,5,3,4}}}
 \newcommand{\foo}[2]{#1#2}
 \newcommand{\call}[2]{#1{#2}}
 \call{\foo{1}}{2} % --> 12
+
+
+\AssertTrue{\Bool{\ifnum 1 = \Fst{\ConsPair{1}{2}}}}
+\AssertTrue{\Bool{\ifnum 2 = \Snd{\ConsPair{1}{2}}}}
+\Unpair{\Pair(1,2)}
+
+\newcommand*{\uncurryme}[2]{#1#2}
+\Uncurry{\uncurryme}{\Pair(1,2)}
+
+\newcommand*{\ppp}[2]{#1,#2}
+\Head{\ZipWith{\ppp}{\List{1,2,3}}{\List{a,b,c}}}
+
+ZipWith:
+
+\Snd{ \Head{\Zip{\List{1,2,3}}{\List{a,b,c,d}}} }
+
+\Unlist{ \Map{\Unpair}{\Zip{\List{1,2,3}}{\List{a,b,c,d}}} }
+
+\Unlist{ \Map{\Unpair}{\Zip{\List{1,2,3,4}}{\List{a,b,c}}} }
+
+\Nth{3}{\List{1,2,3,4,5}}
+%\AssertTrue{\Bool{\ifnum 4 = \Nth{3}{\List{1,2,3,4,5}}}}
+
+EqualWith:
+
+\def\myeq#1#2{\TeXif{\ifnum#1=#2}}
+%\AssertTrue{\EqualWith{\myeq}{\List{1,2,3}}{\List{1,2,3}}}
+\newcommand*{\alwaystrue}[2]{\True}
+\newcommand*{\alwaysfalse}[2]{\False}
+\AssertTrue{\EqualWith{\alwaystrue}{\List{1,2,3}}{\List{1,2,3}}}
+\AssertTrue{\EqualWith{\alwaystrue}{\Nil}{\Nil}}
+\AssertTrue{\EqualWith{\alwaysfalse}{\Nil}{\Nil}}
+\AssertFalse{\EqualWith{\alwaystrue}{\List{1,2}}{\List{1,2,3}}}
+\AssertFalse{\EqualWith{\alwaystrue}{\List{1,2}}{\List{1,2,3}}}
+\AssertFalse{\EqualWith{\alwaystrue}{\List{1,2,3}}{\List{1,2}}}
+\AssertFalse{\EqualWith{\alwaystrue}{\Nil}{\List{1,2}}}
+\AssertFalse{\EqualWith{\alwaystrue}{\List{1,2,3}}{\Nil}}
 
 \end{document}

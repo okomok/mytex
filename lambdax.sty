@@ -9,12 +9,26 @@
 %   http://d.hatena.ne.jp/melpon/20111005/1317799929
 
 
+% Workarounds
+%
+
+% \relax is prepended
+\def\TeXif#1{#1\relax\gobblefalse\else\gobbletrue\fi}
+
+% "\And" conflicts somewhere?
+\def\And{\Undefined}
+\newcommand*{\BoolAnd}[2]{#1{#2}\False}
+\newcommand*{\BoolOr}{\Or}
+\newcommand*{\BoolNot}{\Not}
+\def\All#1{\Foldr{\Compose\BoolAnd{#1}}\True}
+
+
 % Bool
 %
 
-% \relax is prepended to the original one.
-\def\TeXif#1{#1\relax\gobblefalse\else\gobbletrue\fi}
+\newcommand*{\Bool}{\TeXif}
 \newcommand*{\If}{\Identity}
+\newcommand*{\Iftex}{\TeXif}
 
 
 % Function
@@ -23,15 +37,14 @@
 \newcommand*{\Flip}{\Twiddle}
 \newcommand*{\Then}{\Flip\Compose}
 \newcommand*{\Const}{\First}
-\newcommand*{\Unuse}[1]{}
-\newcommand*{\PrependComma}[2]{,#1#2}% no spaces
 
 
 % Prelude
 %
 
-\newcommand*{\ErrorMsg}[1]{\errmessage{haxerror: #1}}
+\newcommand*{\ErrorMsg}[1]{\errmessage{error: #1}}
 \newcommand*{\Assert}[2]{\If{#1}{#2}{\ErrorMsg{assertion failed}}}
+\newcommand*{\Undefined}{\errmessage{undefined}}
 
 
 % Test
@@ -69,7 +82,7 @@
     }{\Nil}%
 }
 
-\newcommand*{\Drop}[2]{%
+\newcommand*{\Drop}[2]{
     \setcounter{Listcounter}{0}%
     \Drop@{#1}{#2}%
 }
@@ -79,40 +92,48 @@
         \Drop@{#1}{\Tail{#2}}%
     }{#2}%
 }
+\newcommand*{\Nth}[2]{\Head{\Drop{#1}{#2}}}
 
-\newcommand*{\TakeWhile}[2]{%
-    \Foldr{\TakeWhile@{#1}}\Nil{#2}%
-}
-\newcommand*{\TakeWhile@}[3]{%
-    \If{#1{#2}}{\Cons{#2}{#3}}\Nil%
-}
+\newcommand*{\TakeWhile}[2]{\Foldr{\TakeWhile@{#1}}\Nil{#2}}
+\newcommand*{\TakeWhile@}[3]{\If{#1{#2}}{\Cons{#2}{#3}}\Nil}
 
 \newcommand*{\DropWhile}[2]{%
     \Foldr{\DropWhile@{#1}}{\Const\Nil}{#2}\True%
 }
 \newcommand*{\DropWhile@}[4]{%
     \If{#4}{%
-        \If{#1{#2}}{#3\True}{\Cons{#2}{#3\False}}%
+        \If{#1{#2}}{%
+            #3\True%
+        }{%
+            \Cons{#2}{#3\False}%
+        }%
     }{%
         \Cons{#2}{#3\False}%
     }%
 }
 
-% How?
-% \newcommand*{\Length}[1]{%
-%     \setcounter{Listcounter}{0}%
-%     \Length@@{#1}{\stepcounter}
-%     \the\value{Listcounter}
-% }
-% \newcommand*{\Length@@}[2]{%
-%     \If{\Isempty{#1}}{}{%
-%         #2{Listcounter}%
-%         \Length@@{\Tail{#1}}{#2}%
-%     }%
-% }
-% \newcommand*{\Length@}[1]{
-%     \stepcounter\relax{Listcounter}
-% }
+\newcommand*{\Zip}{\ZipWith{\ConsPair}}
+\newcommand*{\ZipWith}[1]{\Foldr{\ZipWith@{#1}}{\Const\Nil}}
+\newcommand*{\ZipWith@}[4]{%
+    \If{\Null{#4}}{%
+        \Nil%
+    }{%
+        \Cons{#1{#2}{\Head{#4}}}{#3{\Tail{#4}}}%
+    }%
+}
+
+\newcommand*{\EqualWith}[1]{\Foldr{\EqualWith@{#1}}{\Null}}
+\newcommand*{\EqualWith@}[4]{%
+    \If{\Null{#4}}{%
+        \False%
+    }{%
+        \If{#1{#2}{\Head{#4}}}{%
+            #3{\Tail{#4}}%
+        }{%
+            \False%
+        }%
+    }%
+}
 
 \newcommand*{\Foreach}[2]{\Foldr{\Foreach@{#1}}{}{#2}}
 \newcommand*{\Foreach@}[3]{#1{#2}}
@@ -131,20 +152,26 @@
 }
 
 
+% Pair
+%
+
+\newcommand*{\ConsPair}[3]{#3{#1}{#2}}
+\newcommand*{\Fst}[1]{#1\True}
+\newcommand*{\Snd}[1]{#1\False}
+\newcommand*{\Curry}[3]{#1{\ConsPair{#2}{#3}}}
+\newcommand*{\Uncurry}[2]{#1{\Fst{#2}}{\Snd{#2}}}
+\newcommand*{\Swap}[2]{\ConsPair{\Snd{#1}}{\Fst{#2}}}
+\newcommand*{\Pair}[1]{\Pair@#1}
+\def\Pair@(#1,#2){\ConsPair{#1}{#2}}
+\newcommand*{\Unpair}[1]{(\Fst{#1},\Snd{#1})}
+
+
 % Misc
 %
 
+\newcommand*{\Unuse}[1]{}
+\newcommand*{\PrependComma}[2]{,#1#2}% no spaces
+
 \newcommand*{\In}[2]{\Foldr\In@{#2}{\List{#1}}}
 \newcommand*{\In@}[2]{\begin{#1}#2\end{#1}}
-
-
-% Tuple
-%
-
-\newcommand{\Pair}[3]{#3{#1}{#2}}
-\newcommand{\Fst}[1]{#1\True}
-\newcommand{\Snd}[1]{#1\False}
-\newcommand{\Curry}[3]{#1{\Pair{#2}{#3}}}
-\newcommand{\Uncurry}[2]{#1{\Fst{#2}}{\Snd{#2}}}
-\newcommand{\Swap}[2]{\Pair{\Snd{#1}}{\Fst{#2}}}
 
