@@ -1,0 +1,29 @@
+\documentclass{article}
+\usepackage{lambdax}
+
+
+\begin{document}
+
+Test:
+
+\newcommand*{\foo}[2]{#1#2}
+
+\Apply{\foo}{1}{2}% --> 12
+
+\Apply{\foo{1}}{2}% --> 12
+
+\foo{1}{2}% --> 12
+
+\Unuse{\Error}
+
+\Fun{\Fun{#1##1c}}{a}{b}% --> abc
+
+\Head{\Listize[1,2,3]}% --> 1
+
+\Head{\List{1,2,3}}% --> 1
+
+\Head{\List1}% --> 1
+
+\Unlist{\Take{5}{\Iterate{\Fun{#1b}}{a}}}% --> a,ab,abb,abbb,abbbb
+
+\end{document}

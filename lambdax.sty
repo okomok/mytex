@@ -7,12 +7,13 @@
 %   https://www.ctan.org/tex-archive/macros/generic/lambda-lists?lang=en
 %   https://en.wikipedia.org/wiki/Church_encoding
 %   http://d.hatena.ne.jp/melpon/20111005/1317799929
+%   http://0-chromosome.hatenablog.jp/entry/2015/12/02/000000
 
 
 % Workarounds
 %
 
-% \relax is prepended
+% \relax is appended
 \def\TeXif#1{#1\relax\gobblefalse\else\gobbletrue\fi}
 
 % "\And" conflicts somewhere?
@@ -34,6 +35,7 @@
 % Function
 %
 
+\newcommand*{\Apply}[2]{#1{#2}}
 \newcommand*{\Flip}{\Twiddle}
 \newcommand*{\Then}{\Flip\Compose}
 \newcommand*{\Const}{\First}
@@ -135,8 +137,8 @@
     }%
 }
 
-\newcommand*{\Foreach}[2]{\Foldr{\Foreach@{#1}}{}{#2}}
-\newcommand*{\Foreach@}[3]{#1{#2}}
+% TODO
+% Foreach
 
 
 % Lambda
