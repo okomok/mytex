@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage{lambdax}
+\usepackage{lambdax,amsmath}
 
 
 \begin{document}
@@ -19,6 +19,11 @@ Test:
 \Fun{\Fun{#1##1c}}{a}{b}% --> abc
 
 \Head{\Listize[1,2,3]}% --> 1
+
+\newcommand*{\Inenv}[2]{\Foldr\Inenvimpl{#2}{\Listize#1}}
+\newcommand*{\Inenvimpl}[2]{\begin{#1}#2\end{#1}}
+
+\Inenv{[center,math,aligned]}{a+b=c}% --> a + b = c
 
 \Head{\List{1,2,3}}% --> 1
 
