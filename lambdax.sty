@@ -9,10 +9,15 @@
 %   http://d.hatena.ne.jp/melpon/20111005/1317799929
 %   http://0-chromosome.hatenablog.jp/entry/2015/12/02/000000
 %   http://tex.stackexchange.com/questions/24922/comparing-an-argument-to-a-string-when-argument-is-a-result-of-a-command-with-et
+%   https://hackage.haskell.org/package/base/docs/Data-List.html
+%   https://hackage.haskell.org/package/base/docs/Data-Function.html
+%   http://basking-cat.blogspot.jp/2013/04/scalachurch-encoding.html
+%   https://hackage.haskell.org/package/base/docs/Data-Maybe.html
 
 
 % Note
-%   Don't use \relax, which isn't expandable, for equality-tests.
+%   Don't use \relax, which isn't expandable, for structural equality.
+%   Avoid \Null, which is linear.
 
 
 % Workarounds
@@ -37,10 +42,12 @@
 % Function
 %
 
-\newcommand*{\Apply}[2]{#1{#2}}
-\newcommand*{\Flip}{\Twiddle}
-\newcommand*{\Then}{\Flip\Compose}
+\newcommand*{\Id}{\Identity}
 \newcommand*{\Const}{\First}
+\newcommand*{\Flip}{\Twiddle}
+\newcommand*{\Apply}[2]{#1{#2}}
+\newcommand*{\Then}{\Flip\Compose}
+\newcommand*{\Fix}[1]{#1{\Fix{#1}}}
 
 
 % Prelude
@@ -63,43 +70,53 @@
 
 \newcommand*{\Unlist}[1]{#1\Unlist@{}}
 \newcommand*{\Unlist@}[1]{#1\Foldr\PrependComma{}}
+\newcommand*{\ShowList}[1]{[\Unlist{#1}]}
 
 \newcommand*{\List}[1]{\List@#1,\Listend@\@eolst}
 \newcommand*{\Listend@}{}
 \def\List@#1,#2\@eolst{%
     \Iftex{\ifx\Listend@#2}{\Singleton{#1}}{\Cons{#1}{\List@#2\@eolst}}%
 }
-\newcommand*{\ShowList}[1]{[\Unlist{#1}]}
 
+% Basic functions
+\newcommand*{\Append}{\Cat}
 \newcommand*{\Last}{\FoldrOne{\Flip\Const}}
-
-\newcommand*{\Prepend}{\Flip\Cons}
-
 \newcommand*{\Init}[1]{\Foldr\Init@{\Const\Nil}{\Tail{#1}}{\Head{#1}}}
-\newcommand*{\Init@}[2]{\Prepend{#2{#1}}}
-
+\newcommand*{\Init@}[2]{\Flip\Cons{#2{#1}}}
 \newcommand*{\Null}{\Isempty}
-
 \newcommand*{\Length}{\Foldr\Length@{0}}
-\newcommand*{\Length@}[2]{\Inc@{#2}}
-\newcommand*{\Inc@}[1]{\ifcase#1 1\or2\or3\or4\or5\or6\or7\or8\or9\or10\or11\or12\or13\or14\or15\or16\or17\or18\or19\or20\else\Undefined\fi}
+\newcommand*{\Length@}[2]{\Increment@{#2}}
+\newcommand*{\Increment@}[1]{\ifcase#1 1\or2\or3\or4\or5\or6\or7\or8\or9\or10\or11\or12\or13\or14\or15\or16\or17\or18\or19\or20\else\Undefined\fi}
 
+% Reducing lists
 \newcommand*{\FoldlOne}[2]{\Foldl{#1}{\Head{#2}}{\Tail{#2}}}
-
-\newcommand*{\FoldrOne}[2]{\Foldr{\FoldrOne@{#1}}{\Identity}{\Tail{#2}}{\Head{#2}}}
+\newcommand*{\FoldrOne}[2]{\Foldr{\FoldrOne@{#1}}{\Id}{\Tail{#2}}{\Head{#2}}}
 \newcommand*{\FoldrOne@}[3]{\Flip{#1}{#3{#2}}}
 
+% Special folds
+\newcommand*{\Concat}{\Foldr\Append\Nil}
+\newcommand*{\ConcatMap}[1]{\Foldr{\Compose\Append{#1}}\Nil}
 \newcommand*{\ListAnd}{\Foldr\BoolAnd\False}
 \newcommand*{\ListOr}{\Foldr\BoolOr\False}
-\newcommand*{\Any}{\Some}
+\newcommand*{\ListAny}{\Some}
+\newcommand*{\ListAll}{\All}
 
-\newcommand*{\Concat}{\Foldr\Cat\Nil}
-\newcommand*{\ConcatMap}[1]{\Foldr{\Compose\Cat{#1}}\Nil}
+% Building lists 
+% TODO
 
+% Accumulating maps
+% TODO
+
+% Infinite lists
 \newcommand*{\Iterate}[2]{\Cons{#2}{\Iterate{#1}{#1{#2}}}}
 \newcommand*{\Repeat}{\Stream}
+\newcommand*{\Replicate}[2]{\Take{#1}{\Repeat{#2}}}
 \newcommand*{\Cycle}{\Compose\Concat\Repeat}
 
+% Unfolding
+% TODO
+
+% Sublists
 \newcommand*{\Take}[2]{\Foldr\Take@{\Const\Nil}{#2}{#1}}
 \newcommand*{\Take@}[3]{%
     \Iftex{\ifnum#3=0 }{%
@@ -108,7 +125,6 @@
         \Cons{#1}{#2{\numexpr#3-1}}%
     }%
 }
-
 \newcommand*{\Drop}[2]{\Foldr\Drop@{\Const\Nil}{#2}{#1}}
 \newcommand*{\Drop@}[3]{%
     \Iftex{\ifnum#3=0 }{%
@@ -117,14 +133,10 @@
         #2{\numexpr#3-1}%
     }%
 }
-\newcommand*{\Nth}[2]{\Head{\Drop{#1}{#2}}}
-
+\newcommand*{\SplitAt}[2]{\ConsPair{\Take{#1}{#2}}{\Drop{#1}{#2}}}
 \newcommand*{\TakeWhile}[2]{\Foldr{\TakeWhile@{#1}}\Nil{#2}}
 \newcommand*{\TakeWhile@}[3]{\If{#1{#2}}{\Cons{#2}{#3}}\Nil}
-
-\newcommand*{\DropWhile}[2]{%
-    \Foldr{\DropWhile@{#1}}{\Const\Nil}{#2}\True%
-}
+\newcommand*{\DropWhile}[2]{\Foldr{\DropWhile@{#1}}{\Const\Nil}{#2}\True}
 \newcommand*{\DropWhile@}[4]{%
     \If{#4}{%
         \If{#1{#2}}{%
@@ -136,10 +148,19 @@
         \Cons{#2}{#3\False}%
     }%
 }
-
 \newcommand*{\Span}[2]{\ConsPair{\TakeWhile{#1}{#2}}{\DropWhile{#1}{#2}}}
 \newcommand*{\Break}[1]{\Span{\Compose\Not{#1}}}
 
+% Predicates
+% TODO
+
+% Searching lists
+% TODO
+
+% Indexing lists
+\newcommand*{\Nth}[2]{\Head{\Drop{#1}{#2}}}
+
+% Zipping and unzipping lists
 \newcommand*{\Zip}{\ZipWith{\ConsPair}}
 \newcommand*{\ZipWith}[1]{\Foldr{\ZipWith@{#1}}{\Const\Nil}}
 \newcommand*{\ZipWith@}[4]{%
@@ -149,12 +170,18 @@
         \Cons{#1{#2}{\Head{#4}}}{#3{\Tail{#4}}}%
     }%
 }
-
 \newcommand*{\Unzip}{\Foldr\Unzip@{\ConsPair{\Nil}{\Nil}}}
 \newcommand*{\Unzip@}[2]{%
     \ConsPair{\Cons{\Fst{#1}}{\Fst{#2}}}{\Cons{\Snd{#1}}{\Snd{#2}}}%
 }
-    
+
+% Functions on strings
+% TODO
+
+% Set operations
+% TODO
+
+% List equality
 \newcommand*{\EqualWith}[1]{\Foldr{\EqualWith@{#1}}{\Null}}
 \newcommand*{\EqualWith@}[4]{%
     \If{\Null{#4}}{%
@@ -168,22 +195,10 @@
     }%
 }
 
+% Foreach
 \newcommand*{\Foreach}[2]{\ForeachImpl{\Fun{#2}}{#1}}
 \newcommand*{\ForeachImpl}[1]{\Foldr{\ForeachImpl@{#1}}{}}
 \newcommand*{\ForeachImpl@}[3]{#1{#2}#3}
-
-
-% Lambda
-%
-
-\newcommand*{\FunNamed@}[2]{%
-    \expandafter\newcommand\csname#1\endcsname[1]{#2}\csuse{#1}%
-}
-\newcounter{Funcounter}
-\newcommand*{\Fun}{%
-    \stepcounter{Funcounter}%
-    \FunNamed@{Fun\the\value{Funcounter}}%
-}
 
 
 % Pair
@@ -200,6 +215,32 @@
 \newcommand*{\Unpair}[1]{\Fst{#1},\Snd{#1}}
 \newcommand*{\ShowPair}[1]{(\Unpair{#1})}
 \newcommand*{\PairToList}[1]{\Cons{\Fst{#1}}{\Cons{\Snd{#1}}\Nil}}
+
+
+% Maybe
+%
+
+\newcommand*{\Nothing}{\False}
+\newcommand*{\Just}[3]{#2{#1}}
+\newcommand*{\IsJust}[1]{#1{\Const\True}\False}
+\newcommand*{\IsNothing}{\Compose\Not\IsJust}
+\newcommand*{\FromJust}[1]{#1\Id{\ErrorMsg{FromJust Nothing}}}
+\newcommand*{\MaybeToList}[1]{#1\Singleton\Nil}
+\newcommand*{\MaybeFromList}{\Foldr\MaybeFromList@\Nothing}
+\newcommand*{\MaybeFromList@}[2]{\Just{#1}}
+
+
+% Lambda
+%
+
+\newcommand*{\FunNamed@}[2]{%
+    \expandafter\newcommand\csname#1\endcsname[1]{#2}\csuse{#1}%
+}
+\newcounter{Funcounter}
+\newcommand*{\Fun}{%
+    \stepcounter{Funcounter}%
+    \FunNamed@{Fun\the\value{Funcounter}}%
+}
 
 
 % Misc

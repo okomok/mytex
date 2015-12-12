@@ -158,7 +158,7 @@ Funcounter = \the\value{Funcounter}
 \end{qstest}
 
 
-\begin{qstest}{Nth}{}
+\begin{qstest}{Last}{}
     \Expect*{\Last{\List{1,2,3,4,5}}}{5}
     \Expect*{\Last{\List{1}}}{1}
 \end{qstest}
@@ -183,8 +183,29 @@ Funcounter = \the\value{Funcounter}
 \AssertFalse{\EqualWith\myeq{\List{1,2,3}}{\List{1,2,2}}}
 
 
-% Foreach test
+% Foreach
 \Foreach{\List{1,2,3}}{#1} = 123
 
 
+% Concat
+\AssertTrue{\EqualWith\myeq{\List{1,2,3,4,5,6}}{\Concat{\List{\List{1},\List{2,3},\Nil,\List{4,5,6}}}}}
+\AssertTrue{\EqualWith\myeq{\List{1,2,3,4,5,6}}{\ConcatMap\Id{\List{\List{1},\List{2,3},\Nil,\List{4,5,6}}}}}
+
+
+\begin{qstest}{Maybe}{}
+    \Expect*{\FromJust{\Just{3}}}{3}
+    \Expect*{\FromJust{\MaybeFromList{\List{1}}}}{1}
+    \Expect*{\FromJust{\MaybeFromList{\List{1,2}}}}{1}
+\end{qstest}
+\AssertTrue{\IsJust{\Just{3}}}
+\AssertFalse{\IsJust{\Nothing}}
+\AssertFalse{\IsNothing{\Just{3}}}
+\AssertTrue{\IsNothing{\Nothing}}
+\AssertTrue{\IsNothing{\MaybeFromList\Nil}}
+\AssertTrue{\EqualWith\myeq{\MaybeToList{\Just{3}}}{\List{3}}}
+\AssertTrue{\EqualWith\myeq{\MaybeToList{\Nothing}}\Nil}
+%\FromJust\Nothing
+
+
 \end{document}
+
