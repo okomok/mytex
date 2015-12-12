@@ -69,14 +69,14 @@
 \newcommand*{\List}[1]{\List@#1,\Listend@\@eolst}
 \newcommand*{\Listend@}{}
 \def\List@#1,#2\@eolst{%
-    \TeXif{\ifx\Listend@#2}{\Singleton{#1}}{\Cons{#1}{\List@#2\@eolst}}%
+    \Iftex{\ifx\Listend@#2}{\Singleton{#1}}{\Cons{#1}{\List@#2\@eolst}}%
 }
 
 \newcommand*{\Iterate}[2]{\Cons{#2}{\Iterate{#1}{#1{#2}}}}
 
-% How?
-% \newcommand*{\Length}[1]{\Foldr\Length@0{#1}}
-% \newcommand*{\Length@}[2]{#2+1}
+\newcommand*{\Length}{\Foldr\Length@{0}}
+\newcommand*{\Length@}[2]{\Inc@{#2}}
+\newcommand*{\Inc@}[1]{\ifcase#1 1\or2\or3\or4\or5\or6\or7\or8\or9\or10\or11\or12\or13\or14\or15\or16\or17\or18\or19\or20\else\Undefined\fi}
 
 \newcommand*{\Take}[2]{\Foldr\Take@{\Const\Nil}{#2}{#1}}
 \newcommand*{\Take@}[3]{%
@@ -115,7 +115,7 @@
     }%
 }
 
-\newcommand*{\Zip}{\ZipWith{\ConsPair}}
+\newcommand*{\Zip}{\ZipWith{\PairCons@}}
 \newcommand*{\ZipWith}[1]{\Foldr{\ZipWith@{#1}}{\Const\Nil}}
 \newcommand*{\ZipWith@}[4]{%
     \If{\Null{#4}}{%
@@ -159,14 +159,14 @@
 % Pair
 %
 
-\newcommand*{\ConsPair}[3]{#3{#1}{#2}}
+\newcommand*{\PairCons@}[3]{#3{#1}{#2}}
 \newcommand*{\Fst}[1]{#1\True}
 \newcommand*{\Snd}[1]{#1\False}
-\newcommand*{\Curry}[3]{#1{\ConsPair{#2}{#3}}}
+\newcommand*{\Curry}[3]{#1{\PairCons@{#2}{#3}}}
 \newcommand*{\Uncurry}[2]{#1{\Fst{#2}}{\Snd{#2}}}
-\newcommand*{\Swap}[2]{\ConsPair{\Snd{#1}}{\Fst{#2}}}
+\newcommand*{\Swap}[2]{\PairCons@{\Snd{#1}}{\Fst{#2}}}
 \newcommand*{\Pair}[1]{\Pair@#1}
-\def\Pair@(#1,#2){\ConsPair{#1}{#2}}
+\def\Pair@(#1,#2){\PairCons@{#1}{#2}}
 \newcommand*{\Unpair}[1]{(\Fst{#1},\Snd{#1})}
 
 

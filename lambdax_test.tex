@@ -56,8 +56,8 @@ Tests...
 \end{qstest}
 
 
-\newcommand*{\appendb}[1]{#1b}
 \begin{qstest}{Iterate}{}
+    \newcommand*{\appendb}[1]{#1b}
     \Expect*{\Unlist{\Take{4}{\Iterate{\appendb}{a}}}}{a,ab,abb,abbb}
 \end{qstest}
 
@@ -77,10 +77,10 @@ Iterate Test: \Unlist{\Take{4}{\Iterate{\Fun{#1b}}{a}}} = a,ab,abb,abbb
 Funcounter = \the\value{Funcounter}
 
 
-\newcommand*{\uncurryme}[2]{#1#2}
 \begin{qstest}{Pair}{}
-    \Expect*{\Fst{\ConsPair{1}{2}}}{1}
-    \Expect*{\Snd{\ConsPair{1}{2}}}{2}
+    \newcommand*{\uncurryme}[2]{#1#2}
+    \Expect*{\Fst{\Pair(1,2)}}{1}
+    \Expect*{\Snd{\Pair(1,2)}}{2}
     \Expect*{\Unpair{\Pair(1,2)}}{(1,2)}
     \Expect*{\Uncurry{\uncurryme}{\Pair(1,2)}}{12}
 \end{qstest}
@@ -101,7 +101,12 @@ Funcounter = \the\value{Funcounter}
     \Expect*{\Nth{0}{\List{1,2,3,4,5}}}{1}
 \end{qstest}
 
-%Test Length: \Length{\List{1,2,3}} = 3
+
+\begin{qstest}{Length}{}
+    \Expect*{\Length{\List{1,2,3}}}{3}
+    \Expect*{\Length{\Nil}}{0}
+\end{qstest}
+
 
 \def\myeq#1#2{\TeXif{\ifnum#1=#2 }}
 \newcommand*{\alwaystrue}[2]{\True}
