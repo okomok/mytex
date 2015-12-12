@@ -12,7 +12,7 @@
 
 
 % Note
-%   Don't use \relax, which is unexpandable, for equality-tests.
+%   Don't use \relax, which isn't expandable, for equality-tests.
 
 
 % Workarounds
@@ -63,14 +63,15 @@
 
 \newcommand*{\Null}{\Isempty}
 
-\newcommand*{\Unlist}[1]{#1\Unlist@{}}
-\newcommand*{\Unlist@}[1]{#1\Foldr\PrependComma{}}
+\newcommand*{\Unlist}[1]{#1\UnlistImpl{}}
+\newcommand*{\UnlistImpl}[1]{#1\Foldr\PrependComma{}}
 
-\newcommand*{\List}[1]{\List@#1,\Listend@\@eolst}
-\newcommand*{\Listend@}{}
-\def\List@#1,#2\@eolst{%
-    \Iftex{\ifx\Listend@#2}{\Singleton{#1}}{\Cons{#1}{\List@#2\@eolst}}%
+\newcommand*{\List}[1]{\ListImpl#1,\ListendImpl\@eolst}
+\newcommand*{\ListendImpl}{}
+\def\ListImpl#1,#2\@eolst{%
+    \Iftex{\ifx\ListendImpl#2}{\Singleton{#1}}{\Cons{#1}{\ListImpl#2\@eolst}}%
 }
+\newcommand*{\ShowList}[1]{[\Unlist{#1}]}
 
 \newcommand*{\Iterate}[2]{\Cons{#2}{\Iterate{#1}{#1{#2}}}}
 
@@ -115,7 +116,7 @@
     }%
 }
 
-\newcommand*{\Zip}{\ZipWith{\PairCons@}}
+\newcommand*{\Zip}{\ZipWith{\ConsPair}}
 \newcommand*{\ZipWith}[1]{\Foldr{\ZipWith@{#1}}{\Const\Nil}}
 \newcommand*{\ZipWith@}[4]{%
     \If{\Null{#4}}{%
@@ -159,15 +160,17 @@
 % Pair
 %
 
-\newcommand*{\PairCons@}[3]{#3{#1}{#2}}
+\newcommand*{\ConsPair}[3]{#3{#1}{#2}}
 \newcommand*{\Fst}[1]{#1\True}
 \newcommand*{\Snd}[1]{#1\False}
-\newcommand*{\Curry}[3]{#1{\PairCons@{#2}{#3}}}
+\newcommand*{\Curry}[3]{#1{\ConsPair{#2}{#3}}}
 \newcommand*{\Uncurry}[2]{#1{\Fst{#2}}{\Snd{#2}}}
-\newcommand*{\Swap}[2]{\PairCons@{\Snd{#1}}{\Fst{#2}}}
+\newcommand*{\Swap}[1]{\ConsPair{\Snd{#1}}{\Fst{#1}}}
 \newcommand*{\Pair}[1]{\Pair@#1}
-\def\Pair@(#1,#2){\PairCons@{#1}{#2}}
-\newcommand*{\Unpair}[1]{(\Fst{#1},\Snd{#1})}
+\def\Pair@#1,#2{\ConsPair{#1}{#2}}
+\newcommand*{\Unpair}[1]{\Fst{#1},\Snd{#1}}
+\newcommand*{\ShowPair}[1]{(\Unpair{#1})}
+\newcommand*{\PairToList}[1]{\Cons{\Fst{#1}}{\Cons{\Snd{#1}}\Nil}}
 
 
 % Misc
