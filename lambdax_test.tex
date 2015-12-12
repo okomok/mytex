@@ -36,27 +36,27 @@ Tests...
 % \end{qstesto}
 
 
-\Unlist{\List{\Unlist{\List{1,2,3}}}}
-$\to$
-\List{\Unlist{\List{1,2,3}}}\UnlistImpl{}
-$\to$
-\Singleton{\Unlist{\List{1,2,3}}}\UnlistImpl{}
-$\to$
-\Cons{\Unlist{\List{1,2,3}}}\Nil\UnlistImpl{}
-$\to$
-\UnlistImpl{\Unlist{\List{1,2,3}}}\Nil
-$\to$
-\Unlist{\List{1,2,3}}\Foldr\PrependComma{}\Nil
-$\to$
-\List{1,2,3}\UnlistImpl{}\Foldr\PrependComma{}\Nil
-$\to$
-\Cons{1}{\Cons{2}{\Cons{3}\Nil}}\UnlistImpl{}\Foldr\PrependComma{}\Nil
-$\to$
-\UnlistImpl{1}{\Cons{2}{\Cons{3}\Nil}}\Foldr\PrependComma{}\Nil
-$\to$
-1\Foldr\PrependComma{}{\Cons{2}{\Cons{3}\Nil}}\Foldr\PrependComma{}\Nil
-$\to$
-1,2,3
+% \Unlist{\List{\Unlist{\List{1,2,3}}}}
+% $\to$
+% \List{\Unlist{\List{1,2,3}}}\Unlist@{}
+% $\to$
+% \Singleton{\Unlist{\List{1,2,3}}}\Unlist@{}
+% $\to$
+% \Cons{\Unlist{\List{1,2,3}}}\Nil\Unlist@{}
+% $\to$
+% \Unlist@{\Unlist{\List{1,2,3}}}\Nil
+% $\to$
+% \Unlist{\List{1,2,3}}\Foldr\PrependComma{}\Nil
+% $\to$
+% \List{1,2,3}\Unlist@{}\Foldr\PrependComma{}\Nil
+% $\to$
+% \Cons{1}{\Cons{2}{\Cons{3}\Nil}}\Unlist@{}\Foldr\PrependComma{}\Nil
+% $\to$
+% \Unlist@{1}{\Cons{2}{\Cons{3}\Nil}}\Foldr\PrependComma{}\Nil
+% $\to$
+% 1\Foldr\PrependComma{}{\Cons{2}{\Cons{3}\Nil}}\Foldr\PrependComma{}\Nil
+% $\to$
+% 1,2,3
 
 \begin{qstest}{List}{}
     \Expect*{\Unlist{\List{1,2,3}}}{1,2,3}
@@ -136,9 +136,31 @@ Funcounter = \the\value{Funcounter}
 \end{qstest}
 
 
+% Unzip
+\AssertTrue{%
+    \EqualWith\myeq{%
+        \Fst{\Unzip{\Zip{\List{1,2,3,4}}{\List{a,b,c}}}}%
+    }{\List{1,2,3}}%
+}
+
+
+% Init
+\AssertTrue{%
+    \EqualWith\myeq{%
+        \Init{\List{1,2,3}}%
+    }{\List{1,2}}%
+}
+
+
 \begin{qstest}{Nth}{}
     \Expect*{\Nth{3}{\List{1,2,3,4,5}}}{4}
     \Expect*{\Nth{0}{\List{1,2,3,4,5}}}{1}
+\end{qstest}
+
+
+\begin{qstest}{Nth}{}
+    \Expect*{\Last{\List{1,2,3,4,5}}}{5}
+    \Expect*{\Last{\List{1}}}{1}
 \end{qstest}
 
 

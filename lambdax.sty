@@ -61,23 +61,44 @@
 % List
 %
 
-\newcommand*{\Null}{\Isempty}
+\newcommand*{\Unlist}[1]{#1\Unlist@{}}
+\newcommand*{\Unlist@}[1]{#1\Foldr\PrependComma{}}
 
-\newcommand*{\Unlist}[1]{#1\UnlistImpl{}}
-\newcommand*{\UnlistImpl}[1]{#1\Foldr\PrependComma{}}
-
-\newcommand*{\List}[1]{\ListImpl#1,\ListendImpl\@eolst}
-\newcommand*{\ListendImpl}{}
-\def\ListImpl#1,#2\@eolst{%
-    \Iftex{\ifx\ListendImpl#2}{\Singleton{#1}}{\Cons{#1}{\ListImpl#2\@eolst}}%
+\newcommand*{\List}[1]{\List@#1,\Listend@\@eolst}
+\newcommand*{\Listend@}{}
+\def\List@#1,#2\@eolst{%
+    \Iftex{\ifx\Listend@#2}{\Singleton{#1}}{\Cons{#1}{\List@#2\@eolst}}%
 }
 \newcommand*{\ShowList}[1]{[\Unlist{#1}]}
 
-\newcommand*{\Iterate}[2]{\Cons{#2}{\Iterate{#1}{#1{#2}}}}
+\newcommand*{\Last}{\FoldrOne{\Flip\Const}}
+
+\newcommand*{\Prepend}{\Flip\Cons}
+
+\newcommand*{\Init}[1]{\Foldr\Init@{\Const\Nil}{\Tail{#1}}{\Head{#1}}}
+\newcommand*{\Init@}[2]{\Prepend{#2{#1}}}
+
+\newcommand*{\Null}{\Isempty}
 
 \newcommand*{\Length}{\Foldr\Length@{0}}
 \newcommand*{\Length@}[2]{\Inc@{#2}}
 \newcommand*{\Inc@}[1]{\ifcase#1 1\or2\or3\or4\or5\or6\or7\or8\or9\or10\or11\or12\or13\or14\or15\or16\or17\or18\or19\or20\else\Undefined\fi}
+
+\newcommand*{\FoldlOne}[2]{\Foldl{#1}{\Head{#2}}{\Tail{#2}}}
+
+\newcommand*{\FoldrOne}[2]{\Foldr{\FoldrOne@{#1}}{\Identity}{\Tail{#2}}{\Head{#2}}}
+\newcommand*{\FoldrOne@}[3]{\Flip{#1}{#3{#2}}}
+
+\newcommand*{\ListAnd}{\Foldr\BoolAnd\False}
+\newcommand*{\ListOr}{\Foldr\BoolOr\False}
+\newcommand*{\Any}{\Some}
+
+\newcommand*{\Concat}{\Foldr\Cat\Nil}
+\newcommand*{\ConcatMap}[1]{\Foldr{\Compose\Cat{#1}}\Nil}
+
+\newcommand*{\Iterate}[2]{\Cons{#2}{\Iterate{#1}{#1{#2}}}}
+\newcommand*{\Repeat}{\Stream}
+\newcommand*{\Cycle}{\Compose\Concat\Repeat}
 
 \newcommand*{\Take}[2]{\Foldr\Take@{\Const\Nil}{#2}{#1}}
 \newcommand*{\Take@}[3]{%
@@ -116,6 +137,9 @@
     }%
 }
 
+\newcommand*{\Span}[2]{\ConsPair{\TakeWhile{#1}{#2}}{\DropWhile{#1}{#2}}}
+\newcommand*{\Break}[1]{\Span{\Compose\Not{#1}}}
+
 \newcommand*{\Zip}{\ZipWith{\ConsPair}}
 \newcommand*{\ZipWith}[1]{\Foldr{\ZipWith@{#1}}{\Const\Nil}}
 \newcommand*{\ZipWith@}[4]{%
@@ -126,6 +150,11 @@
     }%
 }
 
+\newcommand*{\Unzip}{\Foldr\Unzip@{\ConsPair{\Nil}{\Nil}}}
+\newcommand*{\Unzip@}[2]{%
+    \ConsPair{\Cons{\Fst{#1}}{\Fst{#2}}}{\Cons{\Snd{#1}}{\Snd{#2}}}%
+}
+    
 \newcommand*{\EqualWith}[1]{\Foldr{\EqualWith@{#1}}{\Null}}
 \newcommand*{\EqualWith@}[4]{%
     \If{\Null{#4}}{%
