@@ -1,27 +1,13 @@
 \documentclass{article}
-\usepackage{lambdax,amsmath}
-%\usepackage[active,tightpage]{preview}
+\usepackage{lambdax,amsmath,qstest}
 
 
 \begin{document}
 
-Test:
-
-\In{math}{
-    \Unlist{\Cons{a}{\Cons{b}{\Cons{c}{\Nil}}}} 
-    \Foldr{\Commaize}{}{\List{x, y,z}} 
-    \mathcal{C}(\texttt{-},\texttt{+})\
-    F(\texttt{-},\texttt{=}) 
-    \mathcal{C}(\texttt{-},\texttt{+})
-}
-
-\In{math}{
-    \Fun{#1 b}{a} = a b
-    \Fun{#1{b}}{\Fun{#1 c}} = b c
-    \Fun{\Fun{#1 ##1 c}}{a}{b} = a b c
-}
+Tests...
 
 
+% Bool test
 \AssertTrue{\True}
 \AssertFalse{\False}
 \AssertFalse{\Not\True}
@@ -29,34 +15,11 @@ Test:
 \AssertTrue{\Bool{\iftrue}}
 \AssertTrue{\Bool{\ifx\Identity\Identity}}
 \AssertFalse{\Bool{\ifx\Compose\Identity}}
-
+\AssertTrue{\Bool{\ifnum 3 < 4 }}
+\AssertFalse{\Bool{\ifnum 5 < 4 }}
 \AssertTrue{\Head{\Cons{\True}{\Nil}}}
-\Unlist{\List{1,2,3}}
-
-\Unlist{\List{1,2,{,}3}}
-
-\AssertTrue{\Bool{\ifnum 3 < 4}}
-\AssertFalse{\Bool{\ifnum 5 < 4}}
-\AssertTrue{\Bool{\ifnum 3 = \Head{\List{3,2,1}}}}
-\AssertFalse{\Bool{\ifnum 2 = \Head{\List{3,2,1}}}}
-
-Test: \Unlist{\Take{4}{\List{1,2,3,4,5,6,7}}}
-
-Test: \Unlist{\Take{5}{\List{1,2,3,4,5,6,7}}}
-
-Test: \Unlist{\Take{0}{\List{1,2,3,4,5,6,7}}}
-
-Test: \Unlist{\Drop{5}{\List{1,2,3,4,5,6,7}}}
-
-Test: \Unlist{\Drop{0}{\List{1,2,3,4,5,6,7}}}
-
-Test: \Unlist{\Take{6}{\Iterate{\Fun{#1 b}}{a}}}
-
-Test: \Unlist{\TakeWhile{\Lessthan{3}}{\List{5,6,4,2,5,3,4}}}
-
-Test: \Unlist{\DropWhile{\Lessthan{3}}{\List{5,6,4,2,5,3,4}}}
-
-
+\AssertTrue{\Bool{\ifnum 3 = \Head{\List{3,2,1}} }}
+\AssertFalse{\Bool{\ifnum 2 = \Head{\List{3,2,1}} }}
 \AssertTrue{ \BoolAnd{\Lessthan{3}{9}}{\True} }
 \AssertTrue{ \BoolOr{\True}{\True} }
 \AssertTrue{ \BoolAnd{\Lessthan{3}{9}}{\True} }
@@ -64,55 +27,98 @@ Test: \Unlist{\DropWhile{\Lessthan{3}}{\List{5,6,4,2,5,3,4}}}
 \AssertTrue{\Null{\Nil}}
 \AssertFalse{\Null{\List{1,2}}}
 
-\the\value{Funcounter}
 
-%\newcommand{\foo}[2]{\bar{#1}{#2}}
-%\newcommand{\foo}{\bar}
-%\newcommand{\foo}[1]{\bar{\buz{#1}}}
-%\newcommand{\foo}{\Compose\bar\buz}
-
-\newcommand{\foo}[2]{#1#2}
-\newcommand{\call}[2]{#1{#2}}
-\call{\foo{1}}{2} % --> 12
+% \edef\myfun{\Fun{#1b}}
+% \begin{qstest}{test Fun}{}
+%     \Expect*{\myfun{a}}{ab}
+%     % \Fun{#1{b}}{\Fun{#1 c}} = b c
+%     % \Fun{\Fun{#1 ##1 c}}{a}{b} = a b c
+% \end{qstest}
 
 
-\AssertTrue{\Bool{\ifnum 1 = \Fst{\ConsPair{1}{2}}}}
-\AssertTrue{\Bool{\ifnum 2 = \Snd{\ConsPair{1}{2}}}}
-\Unpair{\Pair(1,2)}
+\begin{qstest}{Unlist}{}
+    \Expect*{\Unlist{\List{1,2,3}}}{1,2,3}
+    \Expect*{\Unlist{\List{1,2 , 3}}}{1,2 , 3}
+    \Expect*{\Unlist{\List{1,2,{,}3}}}{1,2,{,}3}
+\end{qstest}
+
+
+\begin{qstest}{Take}{}
+    \Expect*{\Unlist{\Take{3}{\List{1,2,3,4}}}}{1,2,3}
+    \Expect*{\Unlist{\Take{0}{\List{1,2,3,4}}}}{}
+\end{qstest}
+
+
+\begin{qstest}{Drop}{}
+    \Expect*{\Unlist{\Drop{2}{\List{1,2,3,4}}}}{3,4}
+    \Expect*{\Unlist{\Drop{0}{\List{1,2,3,4}}}}{1,2,3,4}
+    \Expect*{\Unlist{\Drop{7}{\List{1,2,3,4}}}}{}
+\end{qstest}
+
+
+\newcommand*{\appendb}[1]{#1b}
+\begin{qstest}{Iterate}{}
+    \Expect*{\Unlist{\Take{4}{\Iterate{\appendb}{a}}}}{a,ab,abb,abbb}
+\end{qstest}
+
+Iterate Test: \Unlist{\Take{4}{\Iterate{\Fun{#1b}}{a}}} = a,ab,abb,abbb
+
+
+\begin{qstest}{TakeWhile}{}
+    \Expect*{\Unlist{\TakeWhile{\Lessthan{3}}{\List{5,6,4,2,5,3,4}}}}{5,6,4}
+\end{qstest}
+
+
+\begin{qstest}{DropWhile}{}
+    \Expect*{\Unlist{\DropWhile{\Lessthan{3}}{\List{5,6,4,2,5,3,4}}}}{2,5,3,4}
+\end{qstest}
+
+
+Funcounter = \the\value{Funcounter}
+
 
 \newcommand*{\uncurryme}[2]{#1#2}
-\Uncurry{\uncurryme}{\Pair(1,2)}
+\begin{qstest}{Pair}{}
+    \Expect*{\Fst{\ConsPair{1}{2}}}{1}
+    \Expect*{\Snd{\ConsPair{1}{2}}}{2}
+    \Expect*{\Unpair{\Pair(1,2)}}{(1,2)}
+    \Expect*{\Uncurry{\uncurryme}{\Pair(1,2)}}{12}
+\end{qstest}
 
-\newcommand*{\ppp}[2]{#1,#2}
-\Head{\ZipWith{\ppp}{\List{1,2,3}}{\List{a,b,c}}}
 
-ZipWith:
+\begin{qstest}{Zip}{}
+    \Expect*{%
+        \Unlist{\Map{\Unpair}{\Zip{\List{1,2,3}}{\List{a,b,c,d}}}}%
+    }{(1,a),(2,b),(3,c)}
+    \Expect*{%
+        \Unlist{\Map{\Unpair}{\Zip{\List{1,2,3,4}}{\List{a,b,c}}}}%
+    }{(1,a),(2,b),(3,c)}
+\end{qstest}
 
-\Snd{ \Head{\Zip{\List{1,2,3}}{\List{a,b,c,d}}} }
 
-\Unlist{ \Map{\Unpair}{\Zip{\List{1,2,3}}{\List{a,b,c,d}}} }
+\begin{qstest}{Nth}{}
+    \Expect*{\Nth{3}{\List{1,2,3,4,5}}}{4}
+    \Expect*{\Nth{0}{\List{1,2,3,4,5}}}{1}
+\end{qstest}
 
-\Unlist{ \Map{\Unpair}{\Zip{\List{1,2,3,4}}{\List{a,b,c}}} }
+%Test Length: \Length{\List{1,2,3}} = 3
 
-\Nth{3}{\List{1,2,3,4,5}}
-%\AssertTrue{\Bool{\ifnum 4 = \Nth{3}{\List{1,2,3,4,5}}}}
-
-EqualWith:
-
-\def\myeq#1#2{\TeXif{\ifnum#1=#2}}
-%\AssertTrue{\EqualWith{\myeq}{\List{1,2,3}}{\List{1,2,3}}}
+\def\myeq#1#2{\TeXif{\ifnum#1=#2 }}
 \newcommand*{\alwaystrue}[2]{\True}
 \newcommand*{\alwaysfalse}[2]{\False}
-\AssertTrue{\EqualWith{\alwaystrue}{\List{1,2,3}}{\List{1,2,3}}}
+\AssertTrue{\EqualWith{\myeq}{\List{1,2,3}}{\List{1,2,3}}}
 \AssertTrue{\EqualWith{\alwaystrue}{\Nil}{\Nil}}
 \AssertTrue{\EqualWith{\alwaysfalse}{\Nil}{\Nil}}
-\AssertFalse{\EqualWith{\alwaystrue}{\List{1,2}}{\List{1,2,3}}}
-\AssertFalse{\EqualWith{\alwaystrue}{\List{1,2}}{\List{1,2,3}}}
-\AssertFalse{\EqualWith{\alwaystrue}{\List{1,2,3}}{\List{1,2}}}
-\AssertFalse{\EqualWith{\alwaystrue}{\Nil}{\List{1,2}}}
-\AssertFalse{\EqualWith{\alwaystrue}{\List{1,2,3}}{\Nil}}
+\AssertFalse{\EqualWith{\myeq}{\List{1,2}}{\List{1,2,3}}}
+\AssertFalse{\EqualWith{\myeq}{\List{1,2}}{\List{1,2,3}}}
+\AssertFalse{\EqualWith{\myeq}{\List{1,2,3}}{\List{1,2}}}
+\AssertFalse{\EqualWith{\myeq}{\Nil}{\List{1,2}}}
+\AssertFalse{\EqualWith{\myeq}{\List{1,2,3}}{\Nil}}
+\AssertFalse{\EqualWith{\myeq}{\List{1,2,3}}{\List{1,2,2}}}
 
-\Head{\Listize[1,2,3]}
-\Head{\List{1,2,3}}
+
+% Foreach test
+\Foreach{\List{1,2,3}}{#1} = 123
+
 
 \end{document}

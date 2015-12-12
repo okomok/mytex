@@ -8,13 +8,15 @@
 %   https://en.wikipedia.org/wiki/Church_encoding
 %   http://d.hatena.ne.jp/melpon/20111005/1317799929
 %   http://0-chromosome.hatenablog.jp/entry/2015/12/02/000000
+%   http://tex.stackexchange.com/questions/24922/comparing-an-argument-to-a-string-when-argument-is-a-result-of-a-command-with-et
+
+
+% Note
+%   Don't use \relax, which is unexpandable, for equality-tests.
 
 
 % Workarounds
 %
-
-% \relax is appended
-\def\TeXif#1{#1\relax\gobblefalse\else\gobbletrue\fi}
 
 % "\And" conflicts somewhere?
 \def\And{\Undefined}
@@ -72,27 +74,26 @@
 
 \newcommand*{\Iterate}[2]{\Cons{#2}{\Iterate{#1}{#1{#2}}}}
 
-\newcounter{Listcounter}
-\newcommand*{\Take}[2]{%
-    \setcounter{Listcounter}{0}%
-    \Take@{#1}{#2}%
-}
-\newcommand*{\Take@}[2]{%
-    \TeXif{\ifnum\value{Listcounter}<#1}{%
-        \stepcounter{Listcounter}%
-        \Cons{\Head{#2}}{\Take@{#1}{\Tail{#2}}}%
-    }{\Nil}%
+% How?
+% \newcommand*{\Length}[1]{\Foldr\Length@0{#1}}
+% \newcommand*{\Length@}[2]{#2+1}
+
+\newcommand*{\Take}[2]{\Foldr\Take@{\Const\Nil}{#2}{#1}}
+\newcommand*{\Take@}[3]{%
+    \Iftex{\ifnum#3=0 }{%
+        \Nil%
+    }{%
+        \Cons{#1}{#2{\numexpr#3-1}}%
+    }%
 }
 
-\newcommand*{\Drop}[2]{
-    \setcounter{Listcounter}{0}%
-    \Drop@{#1}{#2}%
-}
-\newcommand*{\Drop@}[2]{%
-    \TeXif{\ifnum\value{Listcounter}<#1}{%
-        \stepcounter{Listcounter}%
-        \Drop@{#1}{\Tail{#2}}%
-    }{#2}%
+\newcommand*{\Drop}[2]{\Foldr\Drop@{\Const\Nil}{#2}{#1}}
+\newcommand*{\Drop@}[3]{%
+    \Iftex{\ifnum#3=0 }{%
+        \Cons{#1}{#2{0}}%
+    }{%
+        #2{\numexpr#3-1}%
+    }%
 }
 \newcommand*{\Nth}[2]{\Head{\Drop{#1}{#2}}}
 
@@ -137,20 +138,21 @@
     }%
 }
 
-% TODO
-% Foreach
+\newcommand*{\Foreach}[2]{\ForeachImpl{\Fun{#2}}{#1}}
+\newcommand*{\ForeachImpl}[1]{\Foldr{\ForeachImpl@{#1}}{}}
+\newcommand*{\ForeachImpl@}[3]{#1{#2}#3}
 
 
 % Lambda
 %
 
-\newcommand*{\FunNamed}[2]{%
+\newcommand*{\FunNamed@}[2]{%
     \expandafter\newcommand\csname#1\endcsname[1]{#2}\csuse{#1}%
 }
 \newcounter{Funcounter}
 \newcommand*{\Fun}{%
     \stepcounter{Funcounter}%
-    \FunNamed{Fun\the\value{Funcounter}}%
+    \FunNamed@{Fun\the\value{Funcounter}}%
 }
 
 

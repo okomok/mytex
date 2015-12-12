@@ -1,5 +1,5 @@
 #!/usr/bin/env perl
-$pdflatex         = 'texfot --quiet lualatex -synctex=1 -halt-on-error';
+$pdflatex         = 'texfot --quiet pdflatex -synctex=1 -halt-on-error';
 $max_repeat       = 5;
 $pdf_mode         = 1;
 $pdf_previewer    = "cygstart";

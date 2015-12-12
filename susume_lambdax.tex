@@ -29,6 +29,8 @@ Test:
 
 \Head{\List1}% --> 1
 
-\Unlist{\Take{5}{\Iterate{\Fun{#1b}}{a}}}% --> a,ab,abb,abbb,abbbb
+\newcommand*{\appendb}[1]{#1b}
+\Unlist{\Take{5}{\Iterate{\appendb}{a}}}% --> a,ab,abb,abbb,abbbb
 
 \end{document}
+
