@@ -30,7 +30,7 @@ Test:
 \Head{\List1}% --> 1
 
 \newcommand*{\appendb}[1]{#1b}
-\Unlist{\Take{5}{\Iterate{\appendb}{a}}}% --> a,ab,abb,abbb,abbbb
+\Unlist{\Take{5}{\Iterate\appendb{a}}}% --> a,ab,abb,abbb,abbbb
 
 \end{document}
 
