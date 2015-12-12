@@ -9,9 +9,9 @@
 %   http://d.hatena.ne.jp/melpon/20111005/1317799929
 %   http://0-chromosome.hatenablog.jp/entry/2015/12/02/000000
 %   http://tex.stackexchange.com/questions/24922/comparing-an-argument-to-a-string-when-argument-is-a-result-of-a-command-with-et
+%   http://basking-cat.blogspot.jp/2013/04/scalachurch-encoding.html
 %   https://hackage.haskell.org/package/base/docs/Data-List.html
 %   https://hackage.haskell.org/package/base/docs/Data-Function.html
-%   http://basking-cat.blogspot.jp/2013/04/scalachurch-encoding.html
 %   https://hackage.haskell.org/package/base/docs/Data-Maybe.html
 
 
@@ -43,7 +43,7 @@
 %
 
 \newcommand*{\Id}{\Identity}
-\newcommand*{\Const}{\First}
+\newcommand*{\Const}{\True}
 \newcommand*{\Flip}{\Twiddle}
 \newcommand*{\Apply}[2]{#1{#2}}
 \newcommand*{\Then}{\Flip\Compose}
@@ -170,7 +170,7 @@
         \Cons{#1{#2}{\Head{#4}}}{#3{\Tail{#4}}}%
     }%
 }
-\newcommand*{\Unzip}{\Foldr\Unzip@{\ConsPair{\Nil}{\Nil}}}
+\newcommand*{\Unzip}{\Foldr\Unzip@{\ConsPair\Nil\Nil}}
 \newcommand*{\Unzip@}[2]{%
     \ConsPair{\Cons{\Fst{#1}}{\Fst{#2}}}{\Cons{\Snd{#1}}{\Snd{#2}}}%
 }
@@ -182,7 +182,7 @@
 % TODO
 
 % List equality
-\newcommand*{\EqualWith}[1]{\Foldr{\EqualWith@{#1}}{\Null}}
+\newcommand*{\EqualWith}[1]{\Foldr{\EqualWith@{#1}}\Null}
 \newcommand*{\EqualWith@}[4]{%
     \If{\Null{#4}}{%
         \False%
