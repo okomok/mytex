@@ -1,0 +1,22 @@
+\documentclass{article}
+\usepackage{lambdax,amsmath,qstest}
+
+\begin{document}
+
+Tests...
+
+\newcommand*{\FixImpl}[2]{%
+    \If{\BoolOr{\Bool{\ifnum#2=0 }}{\Bool{\ifnum#2=1 }}}{%
+        1%
+    }{%
+        \Plus{#1{\Minus{#2}{1}}}{#1{\Minus{#2}{2}}}%
+    }%
+}
+
+\begin{qstest}{Fix}{}
+    \Expect*{\Fix\FixImpl{6}}{13}
+\end{qstest}
+
+
+\end{document}
+

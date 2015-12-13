@@ -85,8 +85,7 @@
 \newcommand*{\Init@}[2]{\Flip\Cons{#2{#1}}}
 \newcommand*{\Null}{\Isempty}
 \newcommand*{\Length}{\Foldr\Length@{0}}
-\newcommand*{\Length@}[2]{\Increment@{#2}}
-\newcommand*{\Increment@}[1]{\ifcase#1 1\or2\or3\or4\or5\or6\or7\or8\or9\or10\or11\or12\or13\or14\or15\or16\or17\or18\or19\or20\else\Undefined\fi}
+\newcommand*{\Length@}[2]{\Increment{#2}}
 
 % Reducing lists
 \newcommand*{\FoldlOne}[2]{\Foldl{#1}{\Head{#2}}{\Tail{#2}}}
@@ -231,7 +230,7 @@
 
 
 % Lambda
-%
+%   makes expressions unfunctional, so that \ifnum etc is broken.
 
 \newcommand*{\FunNamed@}[2]{%
     \expandafter\newcommand\csname#1\endcsname[1]{#2}\csuse{#1}%
@@ -251,4 +250,10 @@
 
 \newcommand*{\In}[2]{\Foldr\In@{#2}{\List{#1}}}
 \newcommand*{\In@}[2]{\begin{#1}#2\end{#1}}
+
+\newcommand*{\Increment}[1]{\ifcase#1 1\or2\or3\or4\or5\or6\or7\or8\or9\or10\or11\or12\or13\or14\or15\or16\or17\or18\or19\or20\else\Undefined\fi}
+\newcommand*{\Decrement}[1]{\ifcase#1\Undefined\or0\or1\or2\or3\or4\or5\or6\or7\or8\or9\or10\or11\or12\or13\or14\or15\or16\or17\or18\or19\or20\else\Undefined\fi}
+\newcommand*{\Plus}[2]{\Nth{#2}{\Iterate\Increment{#1}}}
+\newcommand*{\Minus}[2]{\Nth{#2}{\Iterate\Decrement{#1}}}
+\newcommand*{\Mult}[2]{\Nth{#2}{\Iterate{\Plus{#1}}{0}}}
 
