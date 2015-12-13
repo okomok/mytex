@@ -85,7 +85,7 @@
 \newcommand*{\Init@}[2]{\Flip\Cons{#2{#1}}}
 \newcommand*{\Null}{\Isempty}
 \newcommand*{\Length}{\Foldr\Length@{0}}
-\newcommand*{\Length@}[2]{\Increment{#2}}
+\newcommand*{\Length@}[2]{\NumInc{#2}}
 
 % Reducing lists
 \newcommand*{\FoldlOne}[2]{\Foldl{#1}{\Head{#2}}{\Tail{#2}}}
@@ -251,9 +251,13 @@
 \newcommand*{\In}[2]{\Foldr\In@{#2}{\List{#1}}}
 \newcommand*{\In@}[2]{\begin{#1}#2\end{#1}}
 
-\newcommand*{\Increment}[1]{\ifcase#1 1\or2\or3\or4\or5\or6\or7\or8\or9\or10\or11\or12\or13\or14\or15\or16\or17\or18\or19\or20\else\Undefined\fi}
-\newcommand*{\Decrement}[1]{\ifcase#1\Undefined\or0\or1\or2\or3\or4\or5\or6\or7\or8\or9\or10\or11\or12\or13\or14\or15\or16\or17\or18\or19\or20\else\Undefined\fi}
-\newcommand*{\Plus}[2]{\Nth{#2}{\Iterate\Increment{#1}}}
-\newcommand*{\Minus}[2]{\Nth{#2}{\Iterate\Decrement{#1}}}
-\newcommand*{\Mult}[2]{\Nth{#2}{\Iterate{\Plus{#1}}{0}}}
+% Arithmetic
+\newcommand*{\NumInc}[1]{\ifcase#1 1\or2\or3\or4\or5\or6\or7\or8\or9\or10\or11\or12\or13\or14\or15\or16\or17\or18\or19\or20\else\Undefined\fi}
+\newcommand*{\NumDec}[1]{\ifcase#1\Undefined\or0\or1\or2\or3\or4\or5\or6\or7\or8\or9\or10\or11\or12\or13\or14\or15\or16\or17\or18\or19\or20\else\Undefined\fi}
+\newcommand*{\NumPlus}[2]{\Nth{#2}{\Iterate\NumInc{#1}}}
+\newcommand*{\NumMinus}[2]{\Nth{#2}{\Iterate\NumDec{#1}}}
+\newcommand*{\NumMult}[2]{\Nth{#2}{\Iterate{\NumPlus{#1}}{0}}}
+\newcommand*{\NumLess}{\Lessthan}
+\newcommand*{\NumGtr}[2]{\Iftex{\ifnum#1>#2 }}
+\newcommand*{\NumEq}[2]{\Iftex{\ifnum#1=#2 }}
 
