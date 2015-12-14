@@ -235,8 +235,30 @@
 \newcommand*{\In@}[2]{\begin{#1}#2\end{#1}}
 
 % Arithmetic
-\newcommand*{\NumInc}[1]{\ifcase#1 1\or2\or3\or4\or5\or6\or7\or8\or9\or10\or11\or12\or13\or14\or15\or16\or17\or18\or19\or20\else\Undefined\fi}
-\newcommand*{\NumDec}[1]{\ifcase#1\Undefined\or0\or1\or2\or3\or4\or5\or6\or7\or8\or9\or10\or11\or12\or13\or14\or15\or16\or17\or18\or19\or20\else\Undefined\fi}
+\newcommand*{\NumInc}[1]{\ifcase#1 %
+    1\or2\or3\or4\or5\or6\or7\or8\or9\or10\or%
+    11\or12\or13\or14\or15\or16\or17\or18\or19\or20\or%
+    21\or22\or23\or24\or25\or26\or27\or28\or29\or30\or%
+    31\or32\or33\or34\or35\or36\or37\or38\or39\or40\or%
+    41\or42\or43\or44\or45\or46\or47\or48\or49\or50\or%
+    51\or52\or53\or54\or55\or56\or57\or58\or59\or60\or%
+    61\or62\or63\or64\or65\or66\or67\or68\or69\or70\or%
+    71\or72\or73\or74\or75\or76\or77\or78\or79\or80\or%
+    81\or82\or83\or84\or85\or86\or87\or88\or89\or90\or%
+    91\or92\or93\or94\or95\or96\or97\or98\or99\or100\else\Undefined\fi%
+}
+\newcommand*{\NumDec}[1]{\ifcase#1\Undefined\or0\or%
+    1\or2\or3\or4\or5\or6\or7\or8\or9\or10\or%
+    11\or12\or13\or14\or15\or16\or17\or18\or19\or20\or%
+    21\or22\or23\or24\or25\or26\or27\or28\or29\or30\or%
+    31\or32\or33\or34\or35\or36\or37\or38\or39\or40\or%
+    41\or42\or43\or44\or45\or46\or47\or48\or49\or50\or%
+    51\or52\or53\or54\or55\or56\or57\or58\or59\or60\or%
+    61\or62\or63\or64\or65\or66\or67\or68\or69\or70\or%
+    71\or72\or73\or74\or75\or76\or77\or78\or79\or80\or%
+    81\or82\or83\or84\or85\or86\or87\or88\or89\or90\or%
+    91\or92\or93\or94\or95\or96\or97\or98\or99\or100\else\Undefined\fi%
+}
 \newcommand*{\NumPlus}[2]{\Nth{#2}{\Iterate\NumInc{#1}}}
 \newcommand*{\NumMinus}[2]{\Nth{#2}{\Iterate\NumDec{#1}}}
 \newcommand*{\NumMult}[2]{\Nth{#2}{\Iterate{\NumPlus{#1}}{0}}}
