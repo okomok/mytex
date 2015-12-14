@@ -171,6 +171,7 @@ Funcounter = \the\value{Funcounter}
 \end{qstest}
 
 
+% EqualWith
 \newcommand*{\alwaystrue}[2]{\True}
 \newcommand*{\alwaysfalse}[2]{\False}
 \AssertTrue{\EqualWith\NumEq{\List{1,2,3}}{\List{1,2,3}}}
@@ -188,11 +189,21 @@ Funcounter = \the\value{Funcounter}
 \Foreach{\List{1,2,3}}{#1} = 123
 
 
+% Unfoldr
+\newcommand*{\FibImpl}[1]{\Just{\ConsPair{\Fst{#1}}{\ConsPair{\Snd{#1}}{\NumPlus{\Fst{#1}}{\Snd{#1}}}}}}
+\newcommand*{\Fibs}{\Unfoldr\FibImpl{\ConsPair{0}{1}}}
+\newcommand*{\MyIterImpl}[2]{\Just{\ConsPair{#2}{#1{#2}}}}
+\newcommand*{\MyIter}[1]{\Unfoldr{\MyIterImpl{#1}}}
+\AssertTrue{\EqualWith\NumEq{\Take{8}\Fibs}{\List{0,1,1,2,3,5,8,13}}}
+\AssertTrue{\EqualWith\NumEq{\Take{3}{\MyIter\NumInc{3}}}{\List{3,4,5}}}
+
+
 % Concat
 \AssertTrue{\EqualWith\NumEq{\List{1,2,3,4,5,6}}{\Concat{\List{\List{1},\List{2,3},\Nil,\List{4,5,6}}}}}
 \AssertTrue{\EqualWith\NumEq{\List{1,2,3,4,5,6}}{\ConcatMap\Id{\List{\List{1},\List{2,3},\Nil,\List{4,5,6}}}}}
 
 
+% Maybe
 \begin{qstest}{Maybe}{}
     \Expect*{\FromJust{\Just{3}}}{3}
     \Expect*{\FromJust{\MaybeFromList{\List{1}}}}{1}
@@ -222,6 +233,18 @@ Funcounter = \the\value{Funcounter}
     \Expect*{\NumMult{0}{2}}{0}
     \Expect*{\NumMult{2}{0}}{0}
     \Expect*{\NumMult{0}{0}}{0}
+\end{qstest}
+
+\newcommand*{\FixImpl}[2]{%
+    \If{\BoolOr{\Bool{\ifnum#2=0 }}{\Bool{\ifnum#2=1 }}}{%
+        1%
+    }{%
+        \NumPlus{#1{\NumMinus{#2}{1}}}{#1{\NumMinus{#2}{2}}}%
+    }%
+}
+
+\begin{qstest}{Fix}{}
+    \Expect*{\Fix\FixImpl{6}}{13}
 \end{qstest}
 
 

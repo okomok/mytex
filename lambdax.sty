@@ -15,11 +15,6 @@
 %   https://hackage.haskell.org/package/base/docs/Data-Maybe.html
 
 
-% Note
-%   Don't use \relax, which isn't expandable, for structural equality.
-%   Avoid \Null, which is linear.
-
-
 % Workarounds
 %
 
@@ -29,6 +24,12 @@
 \newcommand*{\BoolOr}{\Or}
 \newcommand*{\BoolNot}{\Not}
 \def\All#1{\Foldr{\Compose\BoolAnd{#1}}\True}
+
+
+% Note
+%   For structural equality, don't use braces nor \relax, which aren't expandable.
+
+\newcommand*{\CatToken}[2]{#1#2}
 
 
 % Bool
@@ -66,7 +67,7 @@
 
 
 % List
-%
+%   \Null is linear.
 
 \newcommand*{\Unlist}[1]{#1\Unlist@{}}
 \newcommand*{\Unlist@}[1]{#1\Foldr\PrependComma{}}
@@ -113,25 +114,15 @@
 \newcommand*{\Cycle}{\Compose\Concat\Repeat}
 
 % Unfolding
-% TODO
+\newcommand*{\Unfoldr}[2]{\Unfoldr@{#1}{#1{#2}}}
+\newcommand*{\Unfoldr@}[2]{\If{\IsNothing{#2}}\Nil{\Unfoldr@@{#1}{\FromJust{#2}}}}
+\newcommand*{\Unfoldr@@}[2]{\Cons{\Fst{#2}}{\Unfoldr{#1}{\Snd{#2}}}}
 
 % Sublists
 \newcommand*{\Take}[2]{\Foldr\Take@{\Const\Nil}{#2}{#1}}
-\newcommand*{\Take@}[3]{%
-    \Iftex{\ifnum#3=0 }{%
-        \Nil%
-    }{%
-        \Cons{#1}{#2{\numexpr#3-1}}%
-    }%
-}
+\newcommand*{\Take@}[3]{\Iftex{\ifnum#3=0 }{\Nil}{\Cons{#1}{#2{\numexpr#3-1}}}}
 \newcommand*{\Drop}[2]{\Foldr\Drop@{\Const\Nil}{#2}{#1}}
-\newcommand*{\Drop@}[3]{%
-    \Iftex{\ifnum#3=0 }{%
-        \Cons{#1}{#2{0}}%
-    }{%
-        #2{\numexpr#3-1}%
-    }%
-}
+\newcommand*{\Drop@}[3]{\Iftex{\ifnum#3=0 }{\Cons{#1}{#2{0}}}{#2{\numexpr#3-1}}}
 \newcommand*{\SplitAt}[2]{\ConsPair{\Take{#1}{#2}}{\Drop{#1}{#2}}}
 \newcommand*{\TakeWhile}[2]{\Foldr{\TakeWhile@{#1}}\Nil{#2}}
 \newcommand*{\TakeWhile@}[3]{\If{#1{#2}}{\Cons{#2}{#3}}\Nil}
@@ -162,17 +153,9 @@
 % Zipping and unzipping lists
 \newcommand*{\Zip}{\ZipWith{\ConsPair}}
 \newcommand*{\ZipWith}[1]{\Foldr{\ZipWith@{#1}}{\Const\Nil}}
-\newcommand*{\ZipWith@}[4]{%
-    \If{\Null{#4}}{%
-        \Nil%
-    }{%
-        \Cons{#1{#2}{\Head{#4}}}{#3{\Tail{#4}}}%
-    }%
-}
+\newcommand*{\ZipWith@}[4]{\If{\Null{#4}}{\Nil}{\Cons{#1{#2}{\Head{#4}}}{#3{\Tail{#4}}}}}
 \newcommand*{\Unzip}{\Foldr\Unzip@{\ConsPair\Nil\Nil}}
-\newcommand*{\Unzip@}[2]{%
-    \ConsPair{\Cons{\Fst{#1}}{\Fst{#2}}}{\Cons{\Snd{#1}}{\Snd{#2}}}%
-}
+\newcommand*{\Unzip@}[2]{\ConsPair{\Cons{\Fst{#1}}{\Fst{#2}}}{\Cons{\Snd{#1}}{\Snd{#2}}}}
 
 % Functions on strings
 % TODO
