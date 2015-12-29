@@ -1,0 +1,78 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+\newcommand*{\proop}[1]{\mytt{\overset{\circ}{#1}}}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdtube{1}{1}{
+            \strdmid,\strdrlabel{B},
+            \strdcell{x},
+            \strdmid,\strdrlabel{A}
+        },\strdframellabel{F}
+    } \mydefeq
+    \strdgathered{
+        \strdyhalf\strdmid,\strdrlabel{FB},
+        \strdmapframe{1}{1}{
+            \strdmid,\strdrlabel{B},
+            \strdcell{x},
+            \strdmid,\strdrlabel{A}
+        },\strdframellabel{F},
+        \strdyhalf\strdmid,\strdrlabel{FA}
+    }
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdtube{1.7}{1.7}{
+            \strdmid,\strdrlabel{C},
+            \strdcell{x},
+            \strdbranch{\strdholecup},
+            \strdcap,\strdrlabelat{Left}{A},\strdrlabelat{Right}{B}
+        },\strdframellabel{F}
+    } \mydefeq
+    \strdgathered{
+        \strdyhalf\strdmid,\strdrlabel{FC},
+        \strdmapframe{1.7}{1.7}{
+            \strdmid,\strdrlabel{C},
+            \strdcell{x},
+            \strdbranch{
+                \strdleft,\strdrlabel{A},
+                \strdyhalf\strdmid,\strdrlabel{FA}
+            },
+            \strdbranch{
+                \strdright,\strdrlabel{B},
+                \strdyhalf\strdmid,\strdrlabel{FB}
+            },
+            \strdnone\strdmid
+        },\strdframellabel{F}
+    }
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdtube{2}{2}{
+            \strdmid,\strdrlabel{C},
+            \strdcell{x},
+            \strdbranch{
+                \strdleft,\strdrlabel{A},
+                \strdtube{1}{0.75}{
+                    \strdyhalf\strdmid
+                }
+            },
+            \strdbranch{
+                \strdright,\strdrlabel{B},
+                \strdyhalf\strdmid,\strdrlabel{FB}
+            },
+            \strdholecup
+        },\strdframellabel{F}
+    }
+}
+
+\end{document}

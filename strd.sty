@@ -64,6 +64,10 @@
 \newcommand*{\strdunitdiff}{0.3}
 \newcommand*{\strdunitmergin}{0.1}
 
+% for "anti"-anti-alias
+\newcommand*{\strdnoiseunit}{0.2pt}
+\newcommand*{\strddoublenoiseunit}{0.4pt}
+
 
 % Concepts
 %   An _id_ `id` is a name of tikz nodes.
@@ -308,8 +312,9 @@
 % Frames
 %
 
-\tikzset{strd mapframe/.style={solid,thin,rounded corners=2pt}}
-\tikzset{strd bijframe/.style={solid,thin,sharp corners}}
+\tikzset{strd framebase/.style={solid,thin}}
+\tikzset{strd mapframe/.style={strd framebase,rounded corners=2pt}}
+\tikzset{strd bijframe/.style={strd framebase,sharp corners}}
 
 \newcommand*{\strdframeof}[3]{\strdseqin{\strdframeofone{#1}{#2}{#3}}}
 \newcommand*{\strdframeofone}[7]{% {style}{xl}{xr}{stm}{sc}{id}{node}
@@ -317,12 +322,8 @@
     \strduse{#4}{\strdemptyC}{#6 Unframe}{#6 Prev End}
     \strdonlayer@{strd framelayer}{
         \strdpathis@{#1}{
-            \strdxscale@{#2}{
-                \strdsqsubsettoC{#6 Left}{#6 Prev End}{#6 Unframe End}
-            }
-            \strdxscale@{#3}{
-                \strdsqsupsettoC{#6 Right}{#6 Prev End}{#6 Unframe End}
-            }
+            \strdxscale@{#2}{ \strdsqsubsettoC{#6 Left}{#6 Prev End}{#6 Unframe End} }
+            \strdxscale@{#3}{ \strdsqsupsettoC{#6 Right}{#6 Prev End}{#6 Unframe End} }
             \strdjumptoC{#6}{#6 Prev End}{#6 Unframe End}
          }
      }%
@@ -330,6 +331,49 @@
 
 \newcommand*{\strdmapframe}{\strdframeof{strd mapframe}}
 \newcommand*{\strdbijframe}{\strdframeof{strd bijframe}}
+
+
+% Tubes
+%
+
+\tikzset{strd tubecolor/.style={orange!75,text=black}}
+\tikzset{strd tube/.style={strd tubecolor,sharp corners}}
+
+\newcommand*{\strdtubeof}[3]{\strdseqin{\strdtubeofone{#1}{#2}{#3}}}
+\newcommand*{\strdtubeofone}[7]{% {style}{xl}{xr}{stm}{sc}{id}{node}
+    \strduse{#5}{#6 Prev}{#7}
+    \strduse{#4}{\strdemptyC}{#6 Untube}{#6 Prev End}
+    \strdonlayer@{strd framelayer}{
+        \strdpathis@{}{
+            \strdxscale@{#2}{ \strdnone@{\strdsqsubsettoC{#6 Left}{#6 Prev End}{#6 Untube End}} }
+            \strdxscale@{#3}{ \strdnone@{\strdsqsupsettoC{#6 Right}{#6 Prev End}{#6 Untube End}} }
+            \draw[strd draw,strd framebase] { (#6 Left StartCorner) -- (#6 Left EndCorner) };
+            \draw[strd draw,strd framebase] { (#6 Right StartCorner) -- (#6 Right EndCorner) };
+            \strdonlayer@{background}{
+                \fill[strd tube] ($(#6 Left StartCorner)+(0,\strdnoiseunit)$) -- ($(#6 Left EndCorner)+(0,-\strdnoiseunit)$)
+                    -- ($(#6 Right EndCorner)+(0,-\strdnoiseunit)$) -- ($(#6 Right StartCorner)+(0,\strdnoiseunit)$) --cycle;
+            }
+            \strdjumptoC{#6}{#6 Prev End}{#6 Untube End}
+         }
+     }%
+}
+
+\tikzset{strd tubeframe/.style={solid,thin}}
+\newcommand*{\strdtube}{\strdtubeof{strd tubeframe}}
+
+\newcommand*{\strdxhalfholeunit}{0.125}
+\newcommand*{\strdholecup}{\strdcomposeC\strdholecupC}
+\newcommand*{\strdholecupC}[2]{% {id}{node}
+    \strdstringC{#1}{#2}{$(#2)+(0,\strdyhalfunit)$}{$(#2)+(0,-\strdyunit)$}
+    \node[strd coord] (#1 Left StartCorner) at ($(#2)+(-\strdxhalfholeunit,-\strdyhalfunit)$) {};
+    \node[strd coord] (#1 Right StartCorner) at ($(#2)+(\strdxhalfholeunit,-\strdyhalfunit)$) {};
+    \node[strd coord] (#1 Left EndCorner) at ($(#2)+(-\strdxhalfholeunit,-\strdyunit)$) {};
+    \node[strd coord] (#1 Right EndCorner) at ($(#2)+(\strdxhalfholeunit,-\strdyunit)$) {};
+    \fill[white,strd framebase]{ ($(#1 Left EndCorner)+(0,-\strddoublenoiseunit)$) -- (#1 Left StartCorner)
+        -- (#1 Right StartCorner) -- ($(#1 Right EndCorner)+(0,-\strddoublenoiseunit)$) };
+    \draw[strd draw,strd framebase]{ (#1 Left EndCorner) --
+        (#1 Left StartCorner) -- (#1 Right StartCorner) -- (#1 Right EndCorner) };
+}
 
 
 % Around frames
@@ -366,7 +410,7 @@
 % White strings
 %
 
-\tikzset{strd edgenoise/.style={shorten >= -0.2pt,shorten <= -0.2pt}}
+\tikzset{strd edgenoise/.style={shorten >= -\strdnoiseunit,shorten <= -\strdnoiseunit}}
 \tikzset{strd white/.style={draw=white,line width=3pt,strd edgenoise}}
 
 \newcommand*{\strdwhite}[3]{%
