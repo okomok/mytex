@@ -1,0 +1,149 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax,hask}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\newcommand*{\colonless}{\texttt{\hspace{-0.2ex}\raisebox{0.18ex}{:}<}}
+
+% Data
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{\haskop{Cofree}fa},
+        \strdbijcell{\colonless},
+        \strdcap,\strdrlabelat{Left}{a},\strdrlabelat{Right}{f(\haskop{Cofree}fa)}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{f(\haskop{Cofree}fa)},
+        \strdcell{\haskop{unwrap}},
+        \strdmid,\strdrlabel{\haskop{Cofree}fa}
+    } \mydefeq
+    \strdgathered{
+        \strdinv{
+            \strdmid,\strdrlabel{\haskop{Cofree}fa},
+            \strdbijcell{\colonless},
+            \strdcap,\strdrlabelat{Left}{a},\strdrlabelat{Right}{f(\haskop{Cofree}fa)},
+            \strdljump,\strdcell{!}
+        }
+    } \\
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{a},
+        \strdcell{\haskop{extract}},
+        \strdmid,\strdrlabel{\haskop{Cofree}fa}
+    } \mydefeq
+    \strdgathered{
+        \strdinv{
+            \strdmid,\strdrlabel{\haskop{Cofree}fa},
+            \strdbijcell{\colonless},
+            \strdcap,\strdrlabelat{Left}{a},\strdrlabelat{Right}{f(\haskop{Cofree}fa)},
+            \strdrjump,\strdcell{!}
+        }
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{\haskop{Cofree}fb},
+        \strdmapframe{1}{1}{
+            \strdmid,\strdrlabel{b},
+            \strdcell{f},
+            \strdmid
+        },\strdframearound,\strdmapframelabel{\haskop{extend}},
+        \strdmid,\strdrlabel{\haskop{Cofree}fa}
+    } \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{\haskop{Cofree}fb},
+        \strdbijcell{\colonless},
+        \strdbranch{
+            \strdscale{2}{2}\strdleft,\strdrlabel{b},
+            \strdmid,\strdcell{f},
+            \strdmid,\strdmid,
+            \strdscale{2}{2}\strdunleft,\strdrlabel{\haskop{Cofree}fa}
+        },
+        \strdxscale{2}\strdright,\strdrlabel{f(\haskop{Cofree}fb)},
+        \strdmapframe{2}{2.5}{
+            \strdmid,\strdrlabel{\haskop{Cofree}fb},
+            \strdmapframe{1}{1}{
+                \strdmid,\strdrlabel{b},
+                \strdcell{f},
+                \strdmid
+            },\strdframearound,\strdmapframelabel{\haskop{extend}},
+            \strdmid,\strdrlabel{\haskop{Cofree}fa}
+        },\strdmapframelabel{\haskop{fmap}},
+        \strdmid,\strdrlabel{f(\haskop{Cofree}fa)},
+        \strdcell{\haskop{unwrap}},
+        \strdxscale{2}\strdunright,\strdrlabel{\haskop{Cofree}fa},
+        \strdcell{\Delta},
+        \strdmid,\strdrlabel{\haskop{Cofree}fa}
+    }
+}
+
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{\haskop{Cofree} f (\haskop{Cofree}fa) },
+        \strdcell{\haskop{duplicate}},
+        \strdmid,\strdrlabel{\haskop{Cofree}fa}
+    } \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{\haskop{Cofree} f (\haskop{Cofree}fa)},
+        \strdbijcell{\colonless},
+        \strdbranch{
+            \strdscale{2}{2}\strdleft,
+            \strdmid,
+            \strdscale{2}{2}\strdunleft,\strdrlabel{\haskop{Cofree}fa}
+        },
+        \strdxscale{2}\strdright,\strdrlabel{f(\haskop{Cofree}f(\haskop{Cofree}fa))},
+        \strdmapframe{2.3}{5}{
+            \strdmid,\strdrlabel{\haskop{Cofree} f (\haskop{Cofree}fa) },
+            \strdcell{\haskop{duplicate}},
+            \strdmid,\strdrlabel{\haskop{Cofree}fa}
+        },\strdmapframelabel{\haskop{fmap}},
+        \strdmid,\strdrlabel{f(\haskop{Cofree}fa)},
+        \strdcell{\haskop{unwrap}},
+        \strdxscale{2}\strdunright,\strdrlabel{\haskop{Cofree}fa},
+        \strdcell{\Delta},
+        \strdmid,\strdrlabel{\haskop{Cofree}fa}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{\haskop{Cofree}fb},
+        \strdmapframe{1}{1}{
+            \strdmid,\strdrlabel{b},
+            \strdcell{f},
+            \strdmid,\strdrlabel{a}
+        },\Identity,\strdmapframelabel{\haskop{fmap}},
+        \strdmid,\strdrlabel{\haskop{Cofree}fa}
+    } \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{\haskop{Cofree}fb},
+        \strdbijcell{\colonless},
+        \strdbranch{
+            \strdscale{2}{2}\strdleft,\strdrlabel{b},
+            \strdmid,\strdcell{f},
+            \strdmid,
+            \strdscale{2}{2}\strdunleft,\strdrlabel{a}
+        },
+        \strdxscale{2}\strdright,\strdrlabel{f(\haskop{Cofree}fb)},
+        \strdmapframe{2}{2.5}{
+            \strdmid,\strdrlabel{\haskop{Cofree}fb},
+            \strdmapframe{1}{1}{
+                \strdmid,\strdrlabel{b},
+                \strdcell{f},
+                \strdmid,\strdrlabel{a}
+            },\Identity,\strdmapframelabel{\haskop{fmap}},
+            \strdmid,\strdrlabel{\haskop{Cofree}fa}
+        },\strdmapframelabel{\haskop{fmap}^f},
+        \strdxscale{2}\strdunright,\strdrlabel{f(\haskop{Cofree}fa)},
+        \strdbijcell{\colonless},
+        \strdmid,\strdrlabel{\haskop{Cofree}fa}
+    }
+}
+
+\end{document}

@@ -1,0 +1,124 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax,hask}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{a},
+        \strdcell{\haskop{extract}},
+        \strdmid,\strdrlabel{wa}
+    },\
+    \strdgathered{
+        \strdroad\strdmid,\strdroadlabel{wb}{wa},
+        \strdcell{\haskop{extend}},
+        \strdroad\strdmid,\strdroadlabel{b}{wa}
+    }
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{wa},
+        \strdmapframe{1.7}{1.7}{
+            \strdmid,\strdrlabel{a},
+            \strdcell{\haskop{extract}},
+            \strdmid
+        },\strdframelabelat{Left}{\strdlvert{\haskop{extend}}},
+        \strdframearound,
+        \strdmid,\strdrlabel{wa}
+    } =
+    \strdgathered{
+        \strdmid,\strdrlabel{wa}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{b},
+        \strdcell{\haskop{extract}},
+        \strdmid,\strdrlabel{wb},
+        \strdmapframe{1}{1}{
+            \strdmid,\strdrlabel{b},
+            \strdcell{f},
+            \strdmid
+        },\strdframelabelat{Left}{\strdlvert{\haskop{extend}}},
+        \strdframearound,\strdmid,\strdrlabel{wa}
+    } =
+    \strdgathered{
+        \strdmid,\strdrlabel{b},
+        \strdcell{f},
+        \strdmid,\strdrlabel{wa}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{wc},
+        \strdmapframe{1}{1}{
+            \strdmid,\strdrlabel{c},
+            \strdcell{f},
+            \strdmid
+        },\strdframearound,\strdframelabelat{Left}{\strdlvert{\haskop{extend}}},
+        \strdmid,\strdrlabel{wb},
+        \strdmapframe{1}{1}{
+            \strdmid,\strdrlabel{b},
+            \strdcell{g},
+            \strdmid
+        },\strdframearound,\strdframelabelat{Left}{\strdlvert{\haskop{extend}}},
+        \strdmid,\strdrlabel{wa}
+    } =
+    \strdgathered{
+        \strdmid,\strdrlabel{wc},
+        \strdmapframe{1.7}{1.7}{
+            \strdmid,\strdrlabel{c},
+            \strdcell{f},
+            \strdmid,\strdrlabel{wb},
+            \strdmapframe{1}{1}{
+                \strdmid,\strdrlabel{b},
+                \strdcell{g},
+                \strdmid
+            },\strdframearound,\strdframelabelat{Left}{\strdlvert{\haskop{extend}}},
+            \strdmid
+        },\strdframearound,\strdframelabelat{Left}{\strdlvert{\haskop{extend}}},
+        \strdmid,\strdrlabel{wa}
+    }
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{w(wa)},
+        \strdcell{\haskop{duplicate}},
+        \strdmid,\strdrlabel{wa}
+    } \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{w(wa)},
+        \strdmapframe{1}{1}{
+            \strdyscale{1.3}\strdmid
+        },\strdframearound,\strdframelabelat{Left}{\strdlvert{\haskop{extend}}},
+        \strdmid,\strdrlabel{wa}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{wb},
+        \strdmapframe{1}{1}{
+            \strdmid,\strdrlabel{b},
+            \strdcell{f},
+            \strdmid,\strdrlabel{a}
+        },\strdframelabelat{Left}{\strdlvert{\haskop{fmap}}},
+        \strdmid,\strdrlabel{wa}
+    } \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{wb},
+        \strdmapframe{1.7}{1.7}{
+            \strdmid,\strdrlabel{b},
+            \strdcell{f},
+            \strdmid,\strdrlabel{a},
+            \strdcell{\haskop{extract}},
+            \strdmid
+        },\strdframearound,\strdframelabelat{Left}{\strdlvert{\haskop{extend}}},
+        \strdmid,\strdrlabel{wa}
+    }
+}
+
+\end{document}

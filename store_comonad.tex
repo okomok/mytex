@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax,hask}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{a},
+        \strdcell{\haskop{extract}},
+        \strdbranch{ \strdroad\strdleft, \strdroadlabel{a}{s} },
+        \strdright,\strdrlabel{s}
+    } \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{a},
+        \strdcell{\haskop{\$}},
+        \strdbranch{ \strdroad\strdleft, \strdroadlabel{a}{s} },
+        \strdright,\strdrlabel{s}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdbranch{ \strdroad\strdmid,\strdroadlabel{b}{s} },
+        \strdxdouble\strdrjump,\strdmid,\strdrlabel{s},
+        \strdljump,
+        \strdmapframe{2}{2}{
+            \strdmid,\strdrlabel{b},
+            \strdcell{f},
+            \strdbranch{ \strdroad\strdleft,\strdroadframearound,\strdroad\strdmid,\strdroadlabel{a}{s} },
+            \strdbranch{ \strdright,\strdframearound,\strdmid,\strdrlabel{s} },
+            \strdjump
+        },\strdframelabelat{Left}{\strdlvert{\haskop{extend}}}
+    } \mydefeq
+    \strdgathered{
+        \strdbranch{
+            \strdroad\strdmid,\strdroadlabel{b}{s},
+            \strdcell{f},
+            \strdroad\strdmid,\strdroadlabel{a}{s}
+        },
+        \strdxscale{1.7}\strdrjump,
+        \strdmid,\strdempty,\strdrlabel{s},\strdmid
+    } \\
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{ \strdroad\strdunleft,\strdroadlabel{\haskprod{s\texttt{->}a}{s}}{s} },
+        \strdxdouble\strdrjump,\strdunright,\strdrlabel{s},
+        \strdcell{\haskop{duplicate}},
+        \strdbranch{ \strdroad\strdleft,\strdroadlabel{a}{s} },
+        \strdbranch{ \strdright,\strdrlabel{s} }
+    } \mydefeq 
+    \strdgathered{
+        \strdbranch{
+            \strdroad\strdmid,\strdroadlabel{\mathllap{\haskprod{s\texttt{->}a}{s}}}{s},
+            \strdxhalf\strdljump,
+            \strdmapframe{0.7}{1.7}{
+                \strdbranch{ \strdroad\strdmid,\strdroadframearound,\strdroad\strdmid,\strdroadlabel{a}{s} },
+                \strdrjump,
+                \strdmid,\strdrlabel{s}
+            },\strdframelabelat{Left}{\strdlvert{\haskop{curry}}}
+        },
+        \strdxdouble\strdrjump,
+        \strdyscale{3}\strdmid,\strdrlabel{s}
+    }
+}
+
+\end{document}
