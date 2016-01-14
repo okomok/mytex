@@ -1,0 +1,44 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdtubestart,
+        \strdtubemid,
+        \strdtubemid,
+        \strdtubedilate,
+        \strdtubemid,
+        \strdxscale{1.5}\strdtubedilate,
+        \strdxscale{2}\strdtubeundilate
+    }
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdtubestart,
+        \strdtubemid,
+        \strdtubeldilate,
+        \strdtubemid,
+        \strdtubeunldilate,
+        \strdtubemid
+    }
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdtubestart,
+        \strdtuberdilate,
+        \strdtubemid,
+        \strdtubeunrdilate,
+        \strdtubemid
+    }
+}
+
+\end{document}

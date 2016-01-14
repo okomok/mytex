@@ -10,9 +10,11 @@
 \In{preview,math,aligned}{
     \myitem &
     \strdgathered{
+        \strdmid,
         \strdbranch{
-            \strdtubemid,\strdframellabel{G},\strdtubestart,\strdtubecloseend,
-            \strdtubemid,\strdframellabel{F},\strdtubeend
+            \strdtubestart,
+            \strdtubemid,\strdframellabel{G},\strdtubestartline,\strdtubeclosedend,
+            \strdtubemid,\strdframellabel{F},\strdtubeendline
         },
         \strdmid,
         \strdcell{f},
@@ -23,13 +25,14 @@
 \In{preview,math,aligned}{
     \myitem &
     \strdgathered{
+        \strdtubestart,
         \strdtubeundilate{1}{1},
         \strdtubemid,
         \strdbranch{
-            \strdtubedilate{2}{1},\strdtubestart,\strdframelabelat{Left End}{F},
+            \strdtubedilate{2}{1},\strdtubestartline,\strdframelabelat{Left End}{F},
             \strdbranch{
                 \strdtubeleft,
-                \strdtubemid,\strdtubeend,
+                \strdtubemid,\strdtubeendline,
                 \strdtubeunleft
             },
             \strdtuberight,
@@ -52,6 +55,7 @@
 \In{preview,math,aligned}{
     \myitem &
     \strdgathered{
+        \strdtubestart,
         \strdtubeldilate{1}, \strdtubeundilate{1}{1},
         \strdtuberdilate{1},\strdframelabelat{Left}{L},\strdframelabelat{Right}{R}
     }
@@ -60,6 +64,7 @@
 \In{preview,math,aligned}{
     \myitem &
     \strdgathered{
+        \strdtubestart,
         \strdtubedilate{1}{1},
         \strdtubeunldilate{1}, \strdtubedilate{1}{1}
     }
@@ -72,7 +77,7 @@
             \strdmid,\strdrlabel{B},
             \strdcell{x},
             \strdmid,\strdrlabel{A}
-        },\strdframellabel{F},\strdtubestart,\strdtubeend
+        },\strdframellabel{F},\strdtubestartline,\strdtubeendline
     } \mydefeq
     \strdgathered{
         \strdyhalf\strdmid,\strdrlabel{FB},
@@ -93,7 +98,7 @@
             \strdcell{x},
             \strdbranch{\strdframeholecup},
             \strdcap,\strdrlabelat{Left}{A},\strdrlabelat{Right}{B}
-        },\strdframellabel{F},\strdtubestart
+        },\strdframellabel{F},\strdtubestartline
     } \mydefeq
     \strdgathered{
         \strdyhalf\strdmid,\strdrlabel{FC},
@@ -123,14 +128,14 @@
                 \strdleft,\strdrlabel{A},
                 \strdtubesq{1}{0.75}{
                     \strdyhalf\strdmid
-                },\strdtubeend
+                },\strdtubeendline
             },
             \strdbranch{
                 \strdright,\strdrlabel{B},
                 \strdyhalf\strdmid,\strdrlabel{FB}
             },
             \strdframeholecup
-        },\strdframellabel{F},\strdtubestart
+        },\strdframellabel{F},\strdtubestartline
     }
 }
 

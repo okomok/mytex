@@ -415,48 +415,41 @@
 % Tubes
 %
 
-% Constans
+% Constants
 \newcommand*{\strdtubexunit}{0.75}
 \newcommand*{\strdtubeyunit}{0.8}
 \newcommand*{\strdtubexhalfunit}{0.375}
 \newcommand*{\strdtubeyhalfunit}{0.4}
 \newcommand*{\strdtubexmagic}{0.125}
 
-\newcommand*{\strdtubestart}{\strdwith\strdtubestart@}
-\newcommand*{\strdtubestart@}[1]{
-    \draw[strd draw,strd implicit]{ (#1 Left Start) -- (#1 Right Start) };
-}
-\newcommand*{\strdtubeend}{\strdwith\strdtubeend@}
-\newcommand*{\strdtubeend@}[1]{
-    \draw[strd draw,strd implicit]{ (#1 Left End) -- (#1 Right End) };
+\newcommand*{\strdtubeimplC}[4]{% {nextsc}{prevsc}{id}{node}
+    \strduse{#2}{#3 Prev}{#4}
+    \strduse{#1}{#3}{#3 Prev Left End}{#3 Prev End}{#3 Prev Right End}%
 }
 
-\newcommand*{\strdtubeclosestart}{\strdwith\strdtubeclosestart@}
-\newcommand*{\strdtubeclosestart@}[1]{
-    \draw[strd draw,strd framebase]{ (#1 Left Start) -- (#1 Right Start) };
+\newcommand*{\strdtubestart}[3]{% {sc}{id}{node}
+    \strduse{#1}{#2 Prev}{#3}
+    \strdemptyC{#2 Left}{$(#2 Prev End)+(-\strdtubexhalfunit,0)$}
+    \strdemptyC{#2}{#2 Prev End}
+    \strdemptyC{#2 Right}{$(#2 Prev End)+(\strdtubexhalfunit,0)$}
 }
-\newcommand*{\strdtubecloseend}{\strdwith\strdtubecloseend@}
-\newcommand*{\strdtubecloseend@}[1]{
-    \draw[strd draw,strd framebase]{ (#1 Left End) -- (#1 Right End) };
+
+\newcommand*{\strdtube@}[1]{
+    \strdonlayer@{strd framelayer}{
+        \strdpathis@{strd frame}{
+            #1 
+        }
+    }%
 }
 
 % mid
-\newcommand*{\strdtubemid}{\strdcomposeC\strdtubemidC}
-\newcommand*{\strdtubemidC}[2]{% {id}{node}
-    \strdtubemidleftC@{#1 Left}{#2}
-    \strdflip@{\strdtubemidleftC@{#1 Right}{#2}}
-    \strdjumpC{#1}{#2}%
-}
-\newcommand*{\strdtubemidleftC@}[2]{% {id}{node}
-    \strdcoord@{#1 Start}{$(#2)+(-\strdtubexhalfunit,0)$}
-    \strdcoord@{#1 End}{$(#1 Start)+(0,-\strdtubeyunit)$}
-    \strdcoord@{#1 Mid}{$(#1 Start)!.5!(#1 End)$}
-    \strdcoord@{#1}{#1 Mid}
-    \strdonlayer@{strd framelayer}{
-        \strdpathis@{strd frame}{
-            \draw[strd draw]{ (#1 Start) -- (#1 End) };
-        }
-    }%
+\newcommand*{\strdtubemid}{\strdtubeimplC\strdtubemidC}
+\newcommand*{\strdtubemidC}[4]{% {id}{lnode}{node}{rnode}
+    \strdtube@{
+        \strdmidC{#1 Left}{#2}
+        \strdjumpC{#1}{#3}
+        \strdmidC{#1 Right}{#4}
+    }
 }
 
 % left
@@ -520,155 +513,121 @@
 \newcommand*{\strdtubeunrightC}{\strdflipC\strdtubeunleftC}
 
 % dilate
-\newcommand*{\strdtubedilate}[2]{\strdcomposeC{\strdtubedilateC{#1}{#2}}}
-\newcommand*{\strdtubedilateC}[4]{\strdtubedilateC@{#3}{#4}{#1}{#2}}
-\newcommand*{\strdtubedilateC@}[4]{% {id}{node}{scalel}{scaler}
-    \strdtubedilateleftC@{#1 Left}{#2}{#3}
-    \strdflip@{\strdtubedilateleftC@{#1 Right}{#2}{#4}}
-    \strdjumpC{#1}{#2}%
+\newcommand*{\strdtubedilate}{\strdtubeimplC\strdtubedilateC}
+\newcommand*{\strdtubedilateC}[4]{% {id}{lnode}{node}{rnode}
+    \strdtube@{
+        \strdtubedilateleftC@{#1 Left}{#2}
+        \strdjumpC{#1}{#3}
+        \strdflip@{\strdtubedilateleftC@{#1 Right}{#4}}
+    }%
 }
-\newcommand*{\strdtubedilateleftC@}[3]{% {id}{node}{scale}
-    \strdcoord@{#1 Start}{$(#2)+(-\strdtubexhalfunit,0)$}
+\newcommand*{\strdtubedilateleftC@}[2]{% {id}{node}
+    \strdcoord@{#1 Start}{#2}
     \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdtubeyhalfunit)$}
-    \strdscale@{#3}{1}{
-        \strdcoord@{#1 EndCorner}{$(#1 StartCorner)+(-\strdxunit,0)$}
-    }
+    \strdcoord@{#1 EndCorner}{$(#1 StartCorner)+(-\strdxunit,0)$}
     \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
     \strdcoord@{#1}{#1 Mid}
     \strdcoord@{#1 End}{$(#1 EndCorner)+(0,-\strdtubeyhalfunit)$}
-    \strdonlayer@{strd framelayer}{
-        \strdpathis@{strd frame}{
-            \draw[strd draw]{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) };
-        }
-    }%
+    \draw[strd draw]{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) };%
 }
 
 % undilate
-\newcommand*{\strdtubeundilate}[2]{\strdcomposeC{\strdtubeundilateC{#1}{#2}}}
-\newcommand*{\strdtubeundilateC}[4]{\strdtubeundilateC@{#3}{#4}{#1}{#2}}
-\newcommand*{\strdtubeundilateC@}[4]{% {id}{node}{scalel}{scaler}
-    \strdtubeundilateleftC@{#1 Left}{#2}{#3}
-    \strdflip@{\strdtubeundilateleftC@{#1 Right}{#2}{#4}}
-    \strdjumpC{#1}{#2}%
+\newcommand*{\strdtubeundilate}{\strdtubeimplC\strdtubeundilateC}
+\newcommand*{\strdtubeundilateC}[4]{% {id}{lnode}{node}{rnode}
+    \strdtube@{
+        \strdtubeundilateleftC@{#1 Left}{#2}
+        \strdjumpC{#1}{#3}
+        \strdflip@{\strdtubeundilateleftC@{#1 Right}{#4}}
+    }%
 }
-\newcommand*{\strdtubeundilateleftC@}[3]{% {id}{node}{scale}
-    \strdcoord@{#1 Start}{$(#2)+(-\strdtubexhalfunit,0)+(-\strdxunit,0)$}
+\newcommand*{\strdtubeundilateleftC@}[2]{% {id}{node}
+    \strdcoord@{#1 Start}{#2}
     \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdtubeyhalfunit)$}
-    \strdscale@{#3}{1}{
-        \strdcoord@{#1 EndCorner}{$(#1 StartCorner)+(\strdxunit,0)$}
-    }
+    \strdcoord@{#1 EndCorner}{$(#1 StartCorner)+(\strdxunit,0)$}
     \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
     \strdcoord@{#1}{#1 Mid}
     \strdcoord@{#1 End}{$(#1 EndCorner)+(0,-\strdtubeyhalfunit)$}
-    \strdonlayer@{strd framelayer}{
-        \strdpathis@{strd frame}{
-            \draw[strd draw]{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) };
-        }
-    }%
+    \draw[strd draw]{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) };%
 }
 
 % ldilate
-\newcommand*{\strdtubeldilate}[1]{\strdcomposeC{\strdtubeldilateC{#1}}}
-\newcommand*{\strdtubeldilateC}[3]{\strdtubeldilateC@{#2}{#3}{#1}}
-\newcommand*{\strdtubeldilateC@}[3]{% {id}{node}{scale}
-    \strdtubeldilateleftC@{#1 Left}{#2}{#3}
-    \strdtubeldilaterightC@{#1 Right}{#2}
-    \strdcoord@{#1 Start}{#2}
-    \strdcoord@{#1 End}{$(#2)+(-\strdxunit,-\strdyunit)$}
-    \strdcoord@{#1 Mid}{#1 Left Mid}
-    \strdcoord@{#1}{#1 Mid}
-}
-\newcommand*{\strdtubeldilateleftC@}[3]{% {id}{node}{scale}
-    \strdcoord@{#1 Start}{$(#2)+(-\strdtubexhalfunit,0)$}
-    \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdtubeyhalfunit)$}
-    \strdscale@{#3}{1}{
-        \strdcoord@{#1 EndCorner}{$(#1 StartCorner)+(-\strdtubexunit,0)+(-0.25,0)$}
+\newcommand*{\strdtubeldilate}{\strdtubeimplC\strdtubeldilateC}
+\newcommand*{\strdtubeldilateC}[4]{% {id}{lnode}{node}{rnode}
+    \strdtube@{
+        \strdtubeldilateleftC@{#1 Left}{#2}
+        \strdjumpC{#1}{$(#3)+(-\strdxunit,0)$}
+        \strdmidC{#1 Right}{#4}
     }
+}
+\newcommand*{\strdtubeldilateleftC@}[2]{% {id}{node}
+    \strdcoord@{#1 Start}{#2}
+    \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdtubeyhalfunit)$}
+    \strdcoord@{#1 EndCorner}{$(#1 StartCorner)+(-\strdtubexunit,0)+(-0.25,0)$}
     \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
     \strdcoord@{#1}{#1 Mid}
     \strdcoord@{#1 End}{$(#1 EndCorner)+(0,-\strdtubeyhalfunit)$}
-    \strdonlayer@{strd framelayer}{
-        \strdpathis@{strd frame}{
-            \draw[strd draw]{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) };
-        }
-    }%
-}
-\newcommand*{\strdtubeldilaterightC@}[2]{% {id}{node}
-    \strdcoord@{#1 Start}{$(#2)+(\strdtubexhalfunit,0)$}
-    \strdcoord@{#1 End}{$(#1 Start)+(0,-\strdtubeyunit)$}
-    \strdcoord@{#1 Mid}{$(#1 Start)!.5!(#1 End)$}
-    \strdcoord@{#1}{#1 Mid}
-    \strdonlayer@{strd framelayer}{
-        \strdpathis@{strd frame}{
-            \draw[strd draw]{ (#1 Start) -- (#1 End) };
-        }
-    }%
+    \draw[strd draw]{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) };%
 }
 
 % rdilate
-\newcommand*{\strdtuberdilate}[1]{\strdcomposeC{\strdtuberdilateC{#1}}}
-\newcommand*{\strdtuberdilateC}[3]{\strdtuberdilateC@{#2}{#3}{#1}}
-\newcommand*{\strdtuberdilateC@}[3]{% {id}{node}{scale}
-    \strdflip@{
-        \strdtubeldilateleftC@{#1 Right}{#2}{#3}
-        \strdtubeldilaterightC@{#1 Left}{#2}
-        \strdcoord@{#1 Start}{#2}
-        \strdcoord@{#1 End}{$(#2)+(-\strdxunit,-\strdyunit)$}
-        \strdcoord@{#1 Mid}{#1 Right Mid}
-        \strdcoord@{#1}{#1 Mid}
+\newcommand*{\strdtuberdilate}{\strdtubeimplC\strdtuberdilateC}
+\newcommand*{\strdtuberdilateC}[4]{% {id}{lnode}{node}{rnode}
+    \strdtube@{
+        \strdflip@{
+            \strdtubeldilateleftC@{#1 Right}{#4}
+            \strdjumpC{#1}{$(#3)+(-\strdxunit,0)$}
+            \strdmidC{#1 Left}{#2}
+        }
     }
 }
 
 % unldilate
-\newcommand*{\strdtubeunldilate}[1]{\strdcomposeC{\strdtubeunldilateC{#1}}}
-\newcommand*{\strdtubeunldilateC}[3]{\strdtubeunldilateC@{#2}{#3}{#1}}
-\newcommand*{\strdtubeunldilateC@}[3]{% {id}{node}{scale}
-    \strdtubeunldilateleftC@{#1 Left}{#2}{#3}
-    \strdtubeunldilaterightC@{#1 Right}{#2}
-    \strdcoord@{#1 Start}{#2}
-    \strdcoord@{#1 End}{$(#2)+(\strdxunit,-\strdyunit)$}
-    \strdcoord@{#1 Mid}{#1 Left Mid}
-    \strdcoord@{#1}{#1 Mid}
-}
-\newcommand*{\strdtubeunldilateleftC@}[3]{% {id}{node}{scale}
-    \strdscale@{#3}{1}{
-        \strdcoord@{#1 Start}{$(#2)+(-\strdtubexunit,0)+(-\strdtubexmagic,0)$}
+\newcommand*{\strdtubeunldilate}{\strdtubeimplC\strdtubeunldilateC}
+\newcommand*{\strdtubeunldilateC}[4]{% {id}{lnode}{node}{rnode}
+    \strdtube@{
+        \strdtubeunldilateleftC@{#1 Left}{#2}
+        \strdjumpC{#1}{$(#3)+(\strdxunit,0)$}
+        \strdmidC{#1 Right}{#4}
     }
+}
+\newcommand*{\strdtubeunldilateleftC@}[2]{% {id}{node}
+    \strdcoord@{#1 Start}{#2}
     \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdtubeyhalfunit)$}
-    \strdcoord@{#1 EndCorner}{$(#2)+(\strdtubexmagic,-\strdtubeyhalfunit)$}
+    \strdcoord@{#1 EndCorner}{$(#1 StartCorner)+(\strdtubexunit,0)+(0.25,0)$}
     \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
     \strdcoord@{#1}{#1 Mid}
     \strdcoord@{#1 End}{$(#1 EndCorner)+(0,-\strdtubeyhalfunit)$}
-    \strdonlayer@{strd framelayer}{
-        \strdpathis@{strd frame}{
-            \draw[strd draw]{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) };
-        }
-    }%
-}
-\newcommand*{\strdtubeunldilaterightC@}[2]{% {id}{node}
-    \strdcoord@{#1 Start}{$(#2)+(\strdtubexunit,0)+(\strdtubexmagic,0)$}
-    \strdcoord@{#1 End}{$(#1 Start)+(0,-\strdtubeyunit)$}
-    \strdcoord@{#1 Mid}{$(#1 Start)!.5!(#1 End)$}
-    \strdcoord@{#1}{#1 Mid}
-    \strdonlayer@{strd framelayer}{
-        \strdpathis@{strd frame}{
-            \draw[strd draw]{ (#1 Start) -- (#1 End) };
-        }
-    }%
+    \draw[strd draw]{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) };%
 }
 
 % unrdilate
-\newcommand*{\strdtubeunrdilate}[1]{\strdcomposeC{\strdtubeunrdilateC{#1}}}
-\newcommand*{\strdtubeunrdilateC}[3]{\strdtubeunrdilateC@{#2}{#3}{#1}}
-\newcommand*{\strdtubeunrdilateC@}[3]{% {id}{node}{scale}
-    \strdflip@{
-        \strdtubeunldilateleftC@{#1 Right}{#2}{#3}
-        \strdtubeunldilaterightC@{#1 Left}{#2}
-        \strdcoord@{#1 Start}{#2}
-        \strdcoord@{#1 End}{$(#2)+(-\strdxunit,-\strdyunit)$}
-        \strdcoord@{#1 Mid}{#1 Right Mid}
-        \strdcoord@{#1}{#1 Mid}
+\newcommand*{\strdtubeunrdilate}{\strdtubeimplC\strdtubeunrdilateC}
+\newcommand*{\strdtubeunrdilateC}[4]{% {id}{lnode}{node}{rnode}
+    \strdtube@{
+        \strdflip@{
+            \strdtubeunldilateleftC@{#1 Right}{#4}
+            \strdjumpC{#1}{$(#3)+(-\strdxunit,0)$}
+            \strdmidC{#1 Left}{#2}
+        }
     }
+}
+
+% start/end lines
+\newcommand*{\strdtubestartline}{\strdwith\strdtubestartline@}
+\newcommand*{\strdtubestartline@}[1]{
+    \draw[strd draw,strd implicit]{ (#1 Left Start) -- (#1 Right Start) };
+}
+\newcommand*{\strdtubeendline}{\strdwith\strdtubeendline@}
+\newcommand*{\strdtubeendline@}[1]{
+    \draw[strd draw,strd implicit]{ (#1 Left End) -- (#1 Right End) };
+}
+\newcommand*{\strdtubestartclose}{\strdwith\strdtubestartclose@}
+\newcommand*{\strdtubestartclose@}[1]{
+    \draw[strd draw,strd framebase]{ (#1 Left Start) -- (#1 Right Start) };
+}
+\newcommand*{\strdtubeendclose}{\strdwith\strdtubeendclose@}
+\newcommand*{\strdtubeendclose@}[1]{
+    \draw[strd draw,strd framebase]{ (#1 Left End) -- (#1 Right End) };
 }
 
 
@@ -864,10 +823,6 @@
 \newcommand*{\strdroadlaside}{\strdcomposeC\strdroadlasideC}
 \newcommand*{\strdroadrasideC}{\strdflipC\strdroadlasideC}
 \newcommand*{\strdroadraside}{\strdcomposeC\strdroadrasideC}
-
-
-% Shaded box
-
 
 
 % Scoped transformations
