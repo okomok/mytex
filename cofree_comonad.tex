@@ -51,7 +51,7 @@
         \strdmid,\strdrlabel{\haskop{Cofree}fb},
         \strdmapframe{1}{1}{
             \strdmid,\strdrlabel{b},
-            \strdcell{f},
+            \strdcell{h},
             \strdmid
         },\strdframearound,\strdmapframelabel{\haskop{extend}},
         \strdmid,\strdrlabel{\haskop{Cofree}fa}
@@ -61,7 +61,7 @@
         \strdbijcell{\colonless},
         \strdbranch{
             \strdscale{2}{2}\strdleft,\strdrlabel{b},
-            \strdmid,\strdcell{f},
+            \strdmid,\strdcell{h},
             \strdmid,\strdmid,
             \strdscale{2}{2}\strdunleft,\strdrlabel{\haskop{Cofree}fa}
         },
@@ -70,11 +70,11 @@
             \strdmid,\strdrlabel{\haskop{Cofree}fb},
             \strdmapframe{1}{1}{
                 \strdmid,\strdrlabel{b},
-                \strdcell{f},
+                \strdcell{h},
                 \strdmid
             },\strdframearound,\strdmapframelabel{\haskop{extend}},
             \strdmid,\strdrlabel{\haskop{Cofree}fa}
-        },\strdmapframelabel{\haskop{fmap}},
+        },\strdmapframelabel{\haskop{fmap}^f},
         \strdmid,\strdrlabel{f(\haskop{Cofree}fa)},
         \strdcell{\haskop{unwrap}},
         \strdxscale{2}\strdunright,\strdrlabel{\haskop{Cofree}fa},
@@ -90,7 +90,7 @@
         \strdmid,\strdrlabel{\haskop{Cofree} f (\haskop{Cofree}fa) },
         \strdcell{\haskop{duplicate}},
         \strdmid,\strdrlabel{\haskop{Cofree}fa}
-    } \mydefeq
+    } =
     \strdgathered{
         \strdmid,\strdrlabel{\haskop{Cofree} f (\haskop{Cofree}fa)},
         \strdbijcell{\colonless},
@@ -104,7 +104,7 @@
             \strdmid,\strdrlabel{\haskop{Cofree} f (\haskop{Cofree}fa) },
             \strdcell{\haskop{duplicate}},
             \strdmid,\strdrlabel{\haskop{Cofree}fa}
-        },\strdmapframelabel{\haskop{fmap}},
+        },\strdmapframelabel{\haskop{fmap}^f},
         \strdmid,\strdrlabel{f(\haskop{Cofree}fa)},
         \strdcell{\haskop{unwrap}},
         \strdxscale{2}\strdunright,\strdrlabel{\haskop{Cofree}fa},
@@ -116,17 +116,17 @@
         \strdmid,\strdrlabel{\haskop{Cofree}fb},
         \strdmapframe{1}{1}{
             \strdmid,\strdrlabel{b},
-            \strdcell{f},
+            \strdcell{h},
             \strdmid,\strdrlabel{a}
         },\Identity,\strdmapframelabel{\haskop{fmap}},
         \strdmid,\strdrlabel{\haskop{Cofree}fa}
-    } \mydefeq
+    } =
     \strdgathered{
         \strdmid,\strdrlabel{\haskop{Cofree}fb},
         \strdbijcell{\colonless},
         \strdbranch{
             \strdscale{2}{2}\strdleft,\strdrlabel{b},
-            \strdmid,\strdcell{f},
+            \strdmid,\strdcell{h},
             \strdmid,
             \strdscale{2}{2}\strdunleft,\strdrlabel{a}
         },
@@ -135,7 +135,7 @@
             \strdmid,\strdrlabel{\haskop{Cofree}fb},
             \strdmapframe{1}{1}{
                 \strdmid,\strdrlabel{b},
-                \strdcell{f},
+                \strdcell{h},
                 \strdmid,\strdrlabel{a}
             },\Identity,\strdmapframelabel{\haskop{fmap}},
             \strdmid,\strdrlabel{\haskop{Cofree}fa}

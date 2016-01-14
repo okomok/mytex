@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+
+\In{preview,math,aligned}{
+    \strdgathered{
+        \strddot,
+        \strdbranch{\strdrcorner,\strddot,\strdunrcorner},
+        \strdframeone\strdlcorner,\strddot,\strdunlcorner,\strddot
+    }
+}
+
+\In{preview,math,aligned}{
+    \strdgathered{
+        \strddot,
+        \strdxdouble\strdlcorner,\strddot
+    }
+}
+
+\In{preview,math,aligned}{
+    \strdgathered{
+        \strdbranch{\strdmid,\strdframelabel{F}},
+        \strdimplicit\strdhright,
+        \strdmid,\strdimplicit\strdhleft
+    }
+}
+
+\In{preview,math,aligned}{
+    \strdgathered{
+        \strdmid,
+        \strdopenframesq{1}{2}{
+            \strdmid,
+            \strdcell{h},
+            \strdmid
+        },\strdframellabel{F},
+        \strdmid
+    }
+}
+
+\In{preview,math,aligned}{
+    \strdgathered{
+        \strdmid,
+        \strdopenframesq{1}{1}{
+            \strdmid
+        },\strdframellabel{G},
+        \strdcell{\strdhspaced{0.5cm}\tau},
+        \strdopenframesq{1}{1}{
+            \strdmid
+        },\strdframellabel{F},
+        \strdmid
+    }
+}
+
+\end{document}

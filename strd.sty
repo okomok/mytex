@@ -30,7 +30,7 @@
 \pgfsetlayers{background,main,strd pavelayer,strd framearoundlayer,strd gradedlayer,strd whitelayer,strd framelayer,strd celllayer,strd labellayer}
 
 % Layers forget surrounding line styles, so we define...
-\newcommand*{\strdresetlinewidth}{\pgfsetlinewidth{0.2pt}}
+\newcommand*{\strdresetlinewidth}{\pgfsetlinewidth{\strdstringwidth}}
 
 \newcommand*{\strdonlayer@}[2]{%
     \begin{pgfonlayer}{#1}
@@ -57,6 +57,7 @@
 % Constants
 %
 
+\newcommand*{\strdstringwidth}{0.2pt}% very thin
 \newcommand*{\strdxunit}{0.5}
 \newcommand*{\strdyunit}{0.8}
 \newcommand*{\strdxhalfunit}{0.25}
@@ -215,6 +216,34 @@
     \strdstringC{#1}{#2}{$(#2)!.5!(#3)$}{#3}%
 }
 
+\newcommand*{\strdlcorner}{\strdcomposeC\strdlcornerC}
+\newcommand*{\strdlcornerC}[2]{% {id}{node}
+    \strdcoord@{#1 Start}{#2}
+    \strdcoord@{#1 StartCorner}{$(#1 Start)+(-\strdxunit,0)$}
+    \strdcoord@{#1 End}{$(#1 StartCorner)+(0,-\strdyunit)$}
+    \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 End)$}
+    \strdcoord@{#1}{#1 Mid}
+    \draw[strd draw]{
+        (#1 Start) -- (#1 StartCorner) -- (#1 End)
+    };%
+}
+\newcommand*{\strdrcorner}{\strdcomposeC\strdrcornerC}
+\newcommand*{\strdrcornerC}{\strdflipC\strdlcornerC}
+
+\newcommand*{\strdunlcorner}{\strdcomposeC\strdunlcornerC}
+\newcommand*{\strdunlcornerC}[2]{% {id}{node}
+    \strdcoord@{#1 Start}{#2}
+    \strdcoord@{#1 EndCorner}{$(#1 Start)+(0,-\strdyunit)$}
+    \strdcoord@{#1 End}{$(#1 EndCorner)+(\strdxunit,0)$}
+    \strdcoord@{#1 Mid}{$(#1 Start)!.5!(#1 EndCorner)$}
+    \strdcoord@{#1}{#1 Mid}
+    \draw[strd draw]{
+        (#1 Start) -- (#1 EndCorner) -- (#1 End)
+    };%
+}
+\newcommand*{\strdunrcorner}{\strdcomposeC\strdunrcornerC}
+\newcommand*{\strdunrcornerC}{\strdflipC\strdunlcornerC}
+
 \newcommand*{\strdsqsubsettoC}[3]{% {id}{fromnode}{tonode}
     % Note \getlastxy doesn't work with calc.
     \node[strd coord] (#1 Start) at (#2) {};
@@ -313,11 +342,14 @@
 %
 
 \tikzset{strd framebase/.style={solid,thin}}
-\tikzset{strd mapframe/.style={strd framebase,rounded corners=2pt}}
+\tikzset{strd frame/.style={strd framebase,rounded corners=2pt}}
 \tikzset{strd bijframe/.style={strd framebase,sharp corners}}
 
-\newcommand*{\strdframeof}[3]{\strdseqin{\strdframeofone{#1}{#2}{#3}}}
-\newcommand*{\strdframeofone}[7]{% {style}{xl}{xr}{stm}{sc}{id}{node}
+\newcommand*{\strdframe}{\Compose\strdseqin\strdframeone}
+\newcommand*{\strdframeone}{\Compose{\strdonlayer{strd framelayer}}{\strdscope{strd frame}}}
+
+\newcommand*{\strdframesqof}[3]{\strdseqin{\strdframesqofone{#1}{#2}{#3}}}
+\newcommand*{\strdframesqofone}[7]{% {style}{xl}{xr}{stm}{sc}{id}{node}
     \strduse{#5}{#6 Prev}{#7}
     \strduse{#4}{\strdemptyC}{#6 Unframe}{#6 Prev End}
     \strdonlayer@{strd framelayer}{
@@ -328,38 +360,345 @@
          }
      }%
 }
+\newcommand*{\strdframesq}{\strdframesqof{strd frame}}
+\newcommand*{\strdbijframesq}{\strdframesqof{strd bijframe}}
 
-\newcommand*{\strdmapframe}{\strdframeof{strd mapframe}}
-\newcommand*{\strdbijframe}{\strdframeof{strd bijframe}}
+\newcommand*{\strddeclsqsubset}[3]{% {id}{fromnode}{tonode}
+    \strdcoord@{#1 Start}{#2}
+    \strdcoord@{#1 StartCorner}{$(#2)+(-\strdxunit,0)$}
+    \strdcoord@{#1 EndCorner}{$(#3)+(-\strdxunit,0)$}
+    \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strdcoord@{#1 End}{#3}
+}
+\newcommand*{\strddeclsqsupset}[3]{\strdflip@{\strddeclsqsubset{#1}{#2}{#3}}}
+
+\newcommand*{\strdtubesqof}[3]{\strdseqin{\strdtubesqofone{#1}{#2}{#3}}}
+\newcommand*{\strdtubesqofone}[7]{% {style}{xl}{xr}{stm}{sc}{id}{node}
+    \strduse{#5}{#6 Prev}{#7}
+    \strduse{#4}{\strdemptyC}{#6 Unframe}{#6 Prev End}
+    \strdonlayer@{strd framelayer}{
+        \strdpathis@{#1}{
+            \strdxscale@{#2}{
+                \strddeclsqsubset{#6 Left}{#6 Prev End}{#6 Unframe End}
+                \draw[strd draw]{ (#6 Left StartCorner) -- (#6 Left EndCorner) };
+            }
+            \strdxscale@{#3}{
+                \strddeclsqsupset{#6 Right}{#6 Prev End}{#6 Unframe End}
+                \draw[strd draw]{ (#6 Right StartCorner) -- (#6 Right EndCorner) };
+            }
+         }
+        \strdjumptoC{#6}{#6 Prev End}{#6 Unframe End}%
+    }
+    % \draw[strd draw,strd implicit]{ (#6 Left StartCorner) -- (#6 Right StartCorner) };
+    % \draw[strd draw,strd implicit]{ (#6 Left EndCorner) -- (#6 Right EndCorner) };
+}
+\newcommand*{\strdtubesq}{\strdtubesqof{strd frame}}
+
+
+\newcommand*{\strdframeholecup}{\strdcomposeC\strdframeholecupC}
+\newcommand*{\strdframeholecupC}[2]{% {id}{node}
+    \strdstringC{#1}{#2}{$(#2)+(0,\strdyhalfunit)$}{$(#2)+(0,-\strdyunit)$}
+    \strdcoord@{#1 Left StartCorner}{$(#2)+(-\strdxhalfholeunit,-\strdyhalfunit)$}
+    \strdcoord@{#1 Right StartCorner}{$(#2)+(\strdxhalfholeunit,-\strdyhalfunit)$}
+    \strdcoord@{#1 Left EndCorner}{$(#2)+(-\strdxhalfholeunit,-\strdyunit)$}
+    \strdcoord@{#1 Right EndCorner}{$(#2)+(\strdxhalfholeunit,-\strdyunit)$}
+    \strdonlayer@{strd framelayer}{
+        % \fill[white,strd framebase]{ ($(#1 Left EndCorner)+(0,-\strddoublenoiseunit)$) -- (#1 Left StartCorner)
+        %     -- (#1 Right StartCorner) -- ($(#1 Right EndCorner)+(0,-\strddoublenoiseunit)$) };
+        \draw[strd draw,strd framebase]{ (#1 Left EndCorner) --
+            (#1 Left StartCorner) -- (#1 Right StartCorner) -- (#1 Right EndCorner) };
+    }
+}
 
 
 % Tubes
 %
 
-\tikzset{strd tubecolor/.style={orange!75,text=black}}
-\tikzset{strd tube/.style={strd tubecolor,sharp corners}}
+% Constans
+\newcommand*{\strdtubexunit}{0.75}
+\newcommand*{\strdtubeyunit}{0.8}
+\newcommand*{\strdtubexhalfunit}{0.375}
+\newcommand*{\strdtubeyhalfunit}{0.4}
+\newcommand*{\strdtubexmagic}{0.125}
 
-\newcommand*{\strdtubeof}[3]{\strdseqin{\strdtubeofone{#1}{#2}{#3}}}
-\newcommand*{\strdtubeofone}[7]{% {style}{xl}{xr}{stm}{sc}{id}{node}
+\newcommand*{\strdtubestart}{\strdwith\strdtubestart@}
+\newcommand*{\strdtubestart@}[1]{
+    \draw[strd draw,strd implicit]{ (#1 Left Start) -- (#1 Right Start) };
+}
+\newcommand*{\strdtubeend}{\strdwith\strdtubeend@}
+\newcommand*{\strdtubeend@}[1]{
+    \draw[strd draw,strd implicit]{ (#1 Left End) -- (#1 Right End) };
+}
+
+\newcommand*{\strdtubeclosestart}{\strdwith\strdtubeclosestart@}
+\newcommand*{\strdtubeclosestart@}[1]{
+    \draw[strd draw,strd framebase]{ (#1 Left Start) -- (#1 Right Start) };
+}
+\newcommand*{\strdtubecloseend}{\strdwith\strdtubecloseend@}
+\newcommand*{\strdtubecloseend@}[1]{
+    \draw[strd draw,strd framebase]{ (#1 Left End) -- (#1 Right End) };
+}
+
+% mid
+\newcommand*{\strdtubemid}{\strdcomposeC\strdtubemidC}
+\newcommand*{\strdtubemidC}[2]{% {id}{node}
+    \strdtubemidleftC@{#1 Left}{#2}
+    \strdflip@{\strdtubemidleftC@{#1 Right}{#2}}
+    \strdjumpC{#1}{#2}%
+}
+\newcommand*{\strdtubemidleftC@}[2]{% {id}{node}
+    \strdcoord@{#1 Start}{$(#2)+(-\strdtubexhalfunit,0)$}
+    \strdcoord@{#1 End}{$(#1 Start)+(0,-\strdtubeyunit)$}
+    \strdcoord@{#1 Mid}{$(#1 Start)!.5!(#1 End)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strdonlayer@{strd framelayer}{
+        \strdpathis@{strd frame}{
+            \draw[strd draw]{ (#1 Start) -- (#1 End) };
+        }
+    }%
+}
+
+% left
+\newcommand*{\strdtubeleft}{\strdcomposeC\strdtubeleftC}
+\newcommand*{\strdtubeleftC}[2]{% {id}{node}
+    \strdcoord@{#1 Start}{#2}
+    \strdcoord@{#1 End}{$(#2)+(-\strdxunit,-\strdyunit)$}
+    \strdcoord@{#1 Left Start}{$(#2)+(-\strdtubexhalfunit,0)+(-\strdxunit,0)$}
+    \strdcoord@{#1 Left End}{$(#1 Left Start)+(0,-\strdtubeyunit)$}
+    \strdcoord@{#1 Left Mid}{$(#1 Left Start)!.5!(#1 Left End)$}
+    \strdcoord@{#1 Left}{#1 Left Mid}
+    \strdcoord@{#1 Mid}{#1 Left Mid}
+    \strdcoord@{#1}{#1 Mid}
+    \strdonlayer@{strd framelayer}{
+        \strdpathis@{strd frame}{
+            \draw[strd draw]{ (#1 Left Start) -- (#1 Left End) };
+        }
+    }
+    \strdcoord@{#1 Right Start}{$(#2)+(0,-\strdtubeyhalfunit)$}
+    \strdcoord@{#1 Right StartCorner}{$(#1 Right Start)+(-\strdtubexmagic,0)$}
+    \strdcoord@{#1 Right End}{$(#1 Right StartCorner)+(0,-\strdtubeyhalfunit)$}
+    \strdcoord@{#1 Right Mid}{$(#1 Right StartCorner)!.5!(#1 Right End)$}
+    \strdcoord@{#1 Right}{#1 Right Mid}
+    \strdonlayer@{strd framelayer}{
+        \strdpathis@{strd frame}{
+            \draw[strd draw]{ (#1 Right Start) -- (#1 Right StartCorner) -- (#1 Right End) };
+        }
+    }%
+}
+\newcommand*{\strdtuberight}{\strdcomposeC\strdtuberightC}
+\newcommand*{\strdtuberightC}{\strdflipC\strdtubeleftC}
+
+% unleft
+\newcommand*{\strdtubeunleft}{\strdcomposeC\strdtubeunleftC}
+\newcommand*{\strdtubeunleftC}[2]{% {id}{node}
+    \strdcoord@{#1 Start}{#2}
+    \strdcoord@{#1 End}{$(#2)+(\strdxunit,-\strdyunit)$}
+    \strdcoord@{#1 Left Start}{$(#2)+(-\strdtubexhalfunit,0)$}
+    \strdcoord@{#1 Left End}{$(#1 Left Start)+(0,-\strdtubeyunit)$}
+    \strdcoord@{#1 Left Mid}{$(#1 Left Start)!.5!(#1 Left End)$}
+    \strdcoord@{#1 Left}{#1 Left Mid}
+    \strdcoord@{#1 Mid}{#1 Left Mid}
+    \strdcoord@{#1}{#1 Mid}
+    \strdonlayer@{strd framelayer}{
+        \strdpathis@{strd frame}{
+            \draw[strd draw]{ (#1 Left Start) -- (#1 Left End) };
+        }
+    }
+    \strdcoord@{#1 Right Start}{$(#2)+(\strdtubexhalfunit,0)$}
+    \strdcoord@{#1 Right StartCorner}{$(#1 Right Start)+(0,-\strdtubeyhalfunit)$}
+    \strdcoord@{#1 Right End}{$(#1 Right StartCorner)+(\strdtubexmagic,0)$}
+    \strdcoord@{#1 Right Mid}{$(#1 Right StartCorner)!.5!(#1 Right End)$}
+    \strdcoord@{#1 Right}{#1 Right Mid}
+    \strdonlayer@{strd framelayer}{
+        \strdpathis@{strd frame}{
+            \draw[strd draw]{ (#1 Right Start) -- (#1 Right StartCorner) -- (#1 Right End) };
+        }
+    }%
+}
+\newcommand*{\strdtubeunright}{\strdcomposeC\strdtubeunrightC}
+\newcommand*{\strdtubeunrightC}{\strdflipC\strdtubeunleftC}
+
+% dilate
+\newcommand*{\strdtubedilate}[2]{\strdcomposeC{\strdtubedilateC{#1}{#2}}}
+\newcommand*{\strdtubedilateC}[4]{\strdtubedilateC@{#3}{#4}{#1}{#2}}
+\newcommand*{\strdtubedilateC@}[4]{% {id}{node}{scalel}{scaler}
+    \strdtubedilateleftC@{#1 Left}{#2}{#3}
+    \strdflip@{\strdtubedilateleftC@{#1 Right}{#2}{#4}}
+    \strdjumpC{#1}{#2}%
+}
+\newcommand*{\strdtubedilateleftC@}[3]{% {id}{node}{scale}
+    \strdcoord@{#1 Start}{$(#2)+(-\strdtubexhalfunit,0)$}
+    \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdtubeyhalfunit)$}
+    \strdscale@{#3}{1}{
+        \strdcoord@{#1 EndCorner}{$(#1 StartCorner)+(-\strdxunit,0)$}
+    }
+    \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strdcoord@{#1 End}{$(#1 EndCorner)+(0,-\strdtubeyhalfunit)$}
+    \strdonlayer@{strd framelayer}{
+        \strdpathis@{strd frame}{
+            \draw[strd draw]{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) };
+        }
+    }%
+}
+
+% undilate
+\newcommand*{\strdtubeundilate}[2]{\strdcomposeC{\strdtubeundilateC{#1}{#2}}}
+\newcommand*{\strdtubeundilateC}[4]{\strdtubeundilateC@{#3}{#4}{#1}{#2}}
+\newcommand*{\strdtubeundilateC@}[4]{% {id}{node}{scalel}{scaler}
+    \strdtubeundilateleftC@{#1 Left}{#2}{#3}
+    \strdflip@{\strdtubeundilateleftC@{#1 Right}{#2}{#4}}
+    \strdjumpC{#1}{#2}%
+}
+\newcommand*{\strdtubeundilateleftC@}[3]{% {id}{node}{scale}
+    \strdcoord@{#1 Start}{$(#2)+(-\strdtubexhalfunit,0)+(-\strdxunit,0)$}
+    \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdtubeyhalfunit)$}
+    \strdscale@{#3}{1}{
+        \strdcoord@{#1 EndCorner}{$(#1 StartCorner)+(\strdxunit,0)$}
+    }
+    \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strdcoord@{#1 End}{$(#1 EndCorner)+(0,-\strdtubeyhalfunit)$}
+    \strdonlayer@{strd framelayer}{
+        \strdpathis@{strd frame}{
+            \draw[strd draw]{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) };
+        }
+    }%
+}
+
+% ldilate
+\newcommand*{\strdtubeldilate}[1]{\strdcomposeC{\strdtubeldilateC{#1}}}
+\newcommand*{\strdtubeldilateC}[3]{\strdtubeldilateC@{#2}{#3}{#1}}
+\newcommand*{\strdtubeldilateC@}[3]{% {id}{node}{scale}
+    \strdtubeldilateleftC@{#1 Left}{#2}{#3}
+    \strdtubeldilaterightC@{#1 Right}{#2}
+    \strdcoord@{#1 Start}{#2}
+    \strdcoord@{#1 End}{$(#2)+(-\strdxunit,-\strdyunit)$}
+    \strdcoord@{#1 Mid}{#1 Left Mid}
+    \strdcoord@{#1}{#1 Mid}
+}
+\newcommand*{\strdtubeldilateleftC@}[3]{% {id}{node}{scale}
+    \strdcoord@{#1 Start}{$(#2)+(-\strdtubexhalfunit,0)$}
+    \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdtubeyhalfunit)$}
+    \strdscale@{#3}{1}{
+        \strdcoord@{#1 EndCorner}{$(#1 StartCorner)+(-\strdtubexunit,0)+(-0.25,0)$}
+    }
+    \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strdcoord@{#1 End}{$(#1 EndCorner)+(0,-\strdtubeyhalfunit)$}
+    \strdonlayer@{strd framelayer}{
+        \strdpathis@{strd frame}{
+            \draw[strd draw]{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) };
+        }
+    }%
+}
+\newcommand*{\strdtubeldilaterightC@}[2]{% {id}{node}
+    \strdcoord@{#1 Start}{$(#2)+(\strdtubexhalfunit,0)$}
+    \strdcoord@{#1 End}{$(#1 Start)+(0,-\strdtubeyunit)$}
+    \strdcoord@{#1 Mid}{$(#1 Start)!.5!(#1 End)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strdonlayer@{strd framelayer}{
+        \strdpathis@{strd frame}{
+            \draw[strd draw]{ (#1 Start) -- (#1 End) };
+        }
+    }%
+}
+
+% rdilate
+\newcommand*{\strdtuberdilate}[1]{\strdcomposeC{\strdtuberdilateC{#1}}}
+\newcommand*{\strdtuberdilateC}[3]{\strdtuberdilateC@{#2}{#3}{#1}}
+\newcommand*{\strdtuberdilateC@}[3]{% {id}{node}{scale}
+    \strdflip@{
+        \strdtubeldilateleftC@{#1 Right}{#2}{#3}
+        \strdtubeldilaterightC@{#1 Left}{#2}
+        \strdcoord@{#1 Start}{#2}
+        \strdcoord@{#1 End}{$(#2)+(-\strdxunit,-\strdyunit)$}
+        \strdcoord@{#1 Mid}{#1 Right Mid}
+        \strdcoord@{#1}{#1 Mid}
+    }
+}
+
+% unldilate
+\newcommand*{\strdtubeunldilate}[1]{\strdcomposeC{\strdtubeunldilateC{#1}}}
+\newcommand*{\strdtubeunldilateC}[3]{\strdtubeunldilateC@{#2}{#3}{#1}}
+\newcommand*{\strdtubeunldilateC@}[3]{% {id}{node}{scale}
+    \strdtubeunldilateleftC@{#1 Left}{#2}{#3}
+    \strdtubeunldilaterightC@{#1 Right}{#2}
+    \strdcoord@{#1 Start}{#2}
+    \strdcoord@{#1 End}{$(#2)+(\strdxunit,-\strdyunit)$}
+    \strdcoord@{#1 Mid}{#1 Left Mid}
+    \strdcoord@{#1}{#1 Mid}
+}
+\newcommand*{\strdtubeunldilateleftC@}[3]{% {id}{node}{scale}
+    \strdscale@{#3}{1}{
+        \strdcoord@{#1 Start}{$(#2)+(-\strdtubexunit,0)+(-\strdtubexmagic,0)$}
+    }
+    \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdtubeyhalfunit)$}
+    \strdcoord@{#1 EndCorner}{$(#2)+(\strdtubexmagic,-\strdtubeyhalfunit)$}
+    \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strdcoord@{#1 End}{$(#1 EndCorner)+(0,-\strdtubeyhalfunit)$}
+    \strdonlayer@{strd framelayer}{
+        \strdpathis@{strd frame}{
+            \draw[strd draw]{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) };
+        }
+    }%
+}
+\newcommand*{\strdtubeunldilaterightC@}[2]{% {id}{node}
+    \strdcoord@{#1 Start}{$(#2)+(\strdtubexunit,0)+(\strdtubexmagic,0)$}
+    \strdcoord@{#1 End}{$(#1 Start)+(0,-\strdtubeyunit)$}
+    \strdcoord@{#1 Mid}{$(#1 Start)!.5!(#1 End)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strdonlayer@{strd framelayer}{
+        \strdpathis@{strd frame}{
+            \draw[strd draw]{ (#1 Start) -- (#1 End) };
+        }
+    }%
+}
+
+% unrdilate
+\newcommand*{\strdtubeunrdilate}[1]{\strdcomposeC{\strdtubeunrdilateC{#1}}}
+\newcommand*{\strdtubeunrdilateC}[3]{\strdtubeunrdilateC@{#2}{#3}{#1}}
+\newcommand*{\strdtubeunrdilateC@}[3]{% {id}{node}{scale}
+    \strdflip@{
+        \strdtubeunldilateleftC@{#1 Right}{#2}{#3}
+        \strdtubeunldilaterightC@{#1 Left}{#2}
+        \strdcoord@{#1 Start}{#2}
+        \strdcoord@{#1 End}{$(#2)+(-\strdxunit,-\strdyunit)$}
+        \strdcoord@{#1 Mid}{#1 Right Mid}
+        \strdcoord@{#1}{#1 Mid}
+    }
+}
+
+
+% tubeolds
+%
+
+\tikzset{strd tubeoldcolor/.style={orange!75,text=black}}
+\tikzset{strd tubeold/.style={strd tubeoldcolor,sharp corners}}
+
+\newcommand*{\strdtubeoldof}[3]{\strdseqin{\strdtubeoldofone{#1}{#2}{#3}}}
+\newcommand*{\strdtubeoldofone}[7]{% {style}{xl}{xr}{stm}{sc}{id}{node}
     \strduse{#5}{#6 Prev}{#7}
-    \strduse{#4}{\strdemptyC}{#6 Untube}{#6 Prev End}
+    \strduse{#4}{\strdemptyC}{#6 Untubeold}{#6 Prev End}
     \strdonlayer@{strd framelayer}{
         \strdpathis@{}{
-            \strdxscale@{#2}{ \strdnone@{\strdsqsubsettoC{#6 Left}{#6 Prev End}{#6 Untube End}} }
-            \strdxscale@{#3}{ \strdnone@{\strdsqsupsettoC{#6 Right}{#6 Prev End}{#6 Untube End}} }
+            \strdxscale@{#2}{ \strdnone@{\strdsqsubsettoC{#6 Left}{#6 Prev End}{#6 Untubeold End}} }
+            \strdxscale@{#3}{ \strdnone@{\strdsqsupsettoC{#6 Right}{#6 Prev End}{#6 Untubeold End}} }
             \draw[strd draw,strd framebase] { (#6 Left StartCorner) -- (#6 Left EndCorner) };
             \draw[strd draw,strd framebase] { (#6 Right StartCorner) -- (#6 Right EndCorner) };
             \strdonlayer@{background}{
-                \fill[strd tube] ($(#6 Left StartCorner)+(0,\strdnoiseunit)$) -- ($(#6 Left EndCorner)+(0,-\strdnoiseunit)$)
+                \fill[strd tubeold] ($(#6 Left StartCorner)+(0,\strdnoiseunit)$) -- ($(#6 Left EndCorner)+(0,-\strdnoiseunit)$)
                     -- ($(#6 Right EndCorner)+(0,-\strdnoiseunit)$) -- ($(#6 Right StartCorner)+(0,\strdnoiseunit)$) --cycle;
             }
-            \strdjumptoC{#6}{#6 Prev End}{#6 Untube End}
+            \strdjumptoC{#6}{#6 Prev End}{#6 Untubeold End}
          }
      }%
 }
 
-\tikzset{strd tubeframe/.style={solid,thin}}
-\newcommand*{\strdtube}{\strdtubeof{strd tubeframe}}
+\tikzset{strd tubeoldframe/.style={solid,thin}}
+\newcommand*{\strdtubeold}{\strdtubeoldof{strd tubeoldframe}}
 
 \newcommand*{\strdxhalfholeunit}{0.125}
 \newcommand*{\strdholecup}{\strdcomposeC\strdholecupC}
@@ -460,6 +799,7 @@
     }%
 }
 
+
 % Roads
 %   Keep scaling away by '--'.
 %
@@ -526,8 +866,14 @@
 \newcommand*{\strdroadraside}{\strdcomposeC\strdroadrasideC}
 
 
+% Shaded box
+
+
+
 % Scoped transformations
 %
+
+\tikzset{strd implicit/.style={very thin,densely dotted}}
 
 \newcommand*{\strdscope@}[2]{\begin{scope}[#1]#2\end{scope}}
 \newcommand*{\strdflip@}{\strdscope@{xscale=-1}}
@@ -539,7 +885,7 @@
 \newcommand*{\strdnolabels@}{\strdscope@{every node/.style=strd none}}
 \newcommand*{\strdpathis@}[1]{\strdscope@{every path/.style=#1}}
 \newcommand*{\strdnodeis@}[1]{\strdscope@{every node/.append style=#1}}
-\newcommand*{\strdimplicit@}{\strdpathis@{densely dotted}}
+\newcommand*{\strdimplicit@}{\strdpathis@{strd implicit}}
 
 \newcommand*{\strdtoC@}[4]{\strduse{#1}{\strduse{#2}{#3}{#4}}}
 \newcommand*{\strdonlayerC}{\Compose\strdtoC@\strdonlayer@}
@@ -547,6 +893,7 @@
 \newcommand*{\strdflipC}{\strdtoC@\strdflip@}
 \newcommand*{\strdinvC}{\strdtoC@\strdinv@}
 \newcommand*{\strdnoneC}{\strdtoC@\strdnone@}
+\newcommand*{\strdpathisC}{\Compose\strdtoC@\strdpathis@}
 \newcommand*{\strdscaleC}[2]{\strdtoC@{\strdscale@{#1}{#2}}}
 \newcommand*{\strdxscaleC}{\Compose\strdtoC@\strdxscale@}
 \newcommand*{\strdyscaleC}{\Compose\strdtoC@\strdyscale@}
@@ -570,6 +917,8 @@
 \newcommand*{\strdinv@@}{\strdtoT@\strdinv@}
 \newcommand*{\strdnone}{\strdseqin\strdnone@@}
 \newcommand*{\strdnone@@}{\strdtoT@\strdnone@}
+\newcommand*{\strdpathis}{\Compose\strdseqin\strdpathis@@}
+\newcommand*{\strdpathis@@}{\Compose\strdtoT@\strdpathis@}
 \newcommand*{\strdscale}[2]{\strdseqin{\strdscale@@{#1}{#2}}}
 \newcommand*{\strdscale@@}[2]{\strdtoT@{\strdscale@{#1}{#2}}}
 \newcommand*{\strdxscale}{\Compose\strdseqin\strdxscale@@}
@@ -614,6 +963,7 @@
     \strduse{#2}{#4 #1}%
 }
 \newcommand*{\strdhere}{\strdwithat{End}}
+\newcommand*{\strddo}[1]{\Compose\strdwith{\Proc{#1}}}
 
 \newcommand*{\strddot}{\strdhere\strdputdot}
 \newcommand*{\strdwhitedot}{\strdwithat{Start}{\strdputwhitedot}}
@@ -639,7 +989,6 @@
 \newcommand*{\strdframelabelat}[2]{\strdwithat{#1}{\strdputframelabel{#2}}}
 \newcommand*{\strdframellabel}{\strdframelabelat{Left}}
 \newcommand*{\strdframerlabel}{\strdframelabelat{Right}}
-\newcommand*{\strdmapframelabel}[1]{\strdframelabelat{Left}{\strdlvert{#1}}}
 
 \newcommand*{\strdroadlabel}[2]{\strdwith{\strdputroadlabel{#1}{#2}}}
 \newcommand*{\strdroadlabelat}[3]{\strdwithat{#1}{\strdputroadlabel{#2}{#3}}}
@@ -665,4 +1014,5 @@
 \newcommand*{\strdlvert}[1]{\rotatebox[origin=c]{90}{\ensuremath{#1}}}
 \newcommand*{\strdrvert}[1]{\rotatebox[origin=c]{-90}{\ensuremath{#1}}}
 \newcommand*{\strdunraise}[1]{\mathstrut\raisebox{-\depth}{\ensuremath{#1}}}
+\newcommand*{\strdhspaced}[2]{\hspace{#1}#2\hspace{#1}}
 

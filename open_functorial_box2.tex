@@ -1,0 +1,137 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+\newcommand*{\proop}[1]{\mytt{\overset{\circ}{#1}}}
+
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdtubemid,\strdframellabel{G},\strdtubestart,\strdtubecloseend,
+            \strdtubemid,\strdframellabel{F},\strdtubeend
+        },
+        \strdmid,
+        \strdcell{f},
+        \strdmid
+    }
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdtubeundilate{1}{1},
+        \strdtubemid,
+        \strdbranch{
+            \strdtubedilate{2}{1},\strdtubestart,\strdframelabelat{Left End}{F},
+            \strdbranch{
+                \strdtubeleft,
+                \strdtubemid,\strdtubeend,
+                \strdtubeunleft
+            },
+            \strdtuberight,
+            \strdtubemid,
+            \strdtubeunright,
+            \strdtubeundilate{1}{1}
+        },
+        \strdmid,\strdrlabel{B},
+        \strdcell{x},
+        \strdbranch{
+            \strdleft,
+            \strddot,
+            \strdmid
+        },
+        \strdright,
+        \strdmid
+    }
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdtubeldilate{1}, \strdtubeundilate{1}{1},
+        \strdtuberdilate{1},\strdframelabelat{Left}{L},\strdframelabelat{Right}{R}
+    }
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdtubedilate{1}{1},
+        \strdtubeunldilate{1}, \strdtubedilate{1}{1}
+    }
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdtubesq{1}{1}{
+            \strdmid,\strdrlabel{B},
+            \strdcell{x},
+            \strdmid,\strdrlabel{A}
+        },\strdframellabel{F},\strdtubestart,\strdtubeend
+    } \mydefeq
+    \strdgathered{
+        \strdyhalf\strdmid,\strdrlabel{FB},
+        \strdframesq{1}{1}{
+            \strdmid,\strdrlabel{B},
+            \strdcell{x},
+            \strdmid,\strdrlabel{A}
+        },\strdframellabel{F},
+        \strdyhalf\strdmid,\strdrlabel{FA}
+    }
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdtubesq{1.7}{1.7}{
+            \strdmid,\strdrlabel{C},
+            \strdcell{x},
+            \strdbranch{\strdframeholecup},
+            \strdcap,\strdrlabelat{Left}{A},\strdrlabelat{Right}{B}
+        },\strdframellabel{F},\strdtubestart
+    } \mydefeq
+    \strdgathered{
+        \strdyhalf\strdmid,\strdrlabel{FC},
+        \strdframesq{1.7}{1.7}{
+            \strdmid,\strdrlabel{C},
+            \strdcell{x},
+            \strdbranch{
+                \strdleft,\strdrlabel{A},
+                \strdyhalf\strdmid,\strdrlabel{FA}
+            },
+            \strdbranch{
+                \strdright,\strdrlabel{B},
+                \strdyhalf\strdmid,\strdrlabel{FB}
+            },
+            \strdnone\strdmid
+        },\strdframellabel{F}
+    }
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdtubesq{2}{2}{
+            \strdmid,\strdrlabel{C},
+            \strdcell{x},
+            \strdbranch{
+                \strdleft,\strdrlabel{A},
+                \strdtubesq{1}{0.75}{
+                    \strdyhalf\strdmid
+                },\strdtubeend
+            },
+            \strdbranch{
+                \strdright,\strdrlabel{B},
+                \strdyhalf\strdmid,\strdrlabel{FB}
+            },
+            \strdframeholecup
+        },\strdframellabel{F},\strdtubestart
+    }
+}
+
+\end{document}
