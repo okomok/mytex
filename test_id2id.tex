@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+\In{preview,math,aligned}{
+    trivial: \\
+    \strdgathered{
+        \strdmid,\strddot,\strdleft,\strddot,
+        \strdbranch{
+            \strdleft,\strddot,\strdmid,\strdrlabel{M}
+        },
+        \strdright,\strddot,\strdmid
+    }
+}
+
+\In{preview,math,aligned}{
+    road:
+    \strdgathered{
+        \strdroad\strdmid,\strddot,\strdroad\strdleft,\strddot,
+        \strdbranch{
+            \strdroad\strdleft,\strddot,\strdroad\strdmid,\strdroadlabel{M}{N}
+        },
+        \strdroad\strdright,\strddot,\strdroad\strdmid
+    }
+}
+
+\In{preview,math,aligned}{
+    tube:
+    \strdgathered{
+        \strdtubestart,
+        \strdtubemid,\strddot,
+        \strdbranch{
+            \strdtuberight,\strdtubemid
+        },
+        \strdtubeleft,\strdtubemid
+    }
+}
+
+\In{preview,math,aligned}{
+    tube:
+    \strdgathered{
+        \strdtubestart,
+        \strdtubemid,\strdtubeendline,
+        \strdbranch{
+            \strdyscale{2}\strdtuberight,\strdtubeendline,\strdyscale{2}\strdtubemid
+        },
+        \strdyscale{2}\strdtubeleft,\strdtubeendline,\strdtubemid
+    }
+}
+
+\end{document}

@@ -74,83 +74,97 @@
 %   An _id_ `id` is a name of tikz nodes.
 %   A _node_ `node` is a node of tikz.
 %   A _string_ `s` is a triple of nodes `s Start`, `s` and `s End`.
-%   A _string constructor_ `sc` is a unit-valued function such that `sc{id}{node}` is valid.
+%   A _string constructor_ `sc` is a unit-valued function such that `sc{newid}{previd}` is valid.
 %   A _string transformation_ `stm` is an endofunction between string constructors.
 
 
 % String constructors
 %
 
-\newcommand*{\strdcoord@}[2]{% {id}{node}
+% helpers
+\newcommand*{\strdcoord@}[2]{% {newid}{node}
     \node[strd coord] (#1) at (#2) {};%
 }
-
-\newcommand*{\strdstringC}[4]{% {id}{start}{middle}{end}
-    \node[strd coord] (#1 Start) at (#2) {};
-    \node[strd coord] (#1 Mid) at (#3) {};
-    \node[strd coord] (#1 End) at (#4) {};
+\newcommand*{\strddraw@}[1]{% {expr}
+    \draw[strd draw]{#1};%
+}
+\newcommand*{\strdstringC}[4]{% {newid}{startnode}{middlenode}{endnode}
+    \strdcoord@{#1 Start}{#2}
+    \strdcoord@{#1 Mid}{#3}
+    \strdcoord@{#1 End}{#4}
     \strdcoord@{#1}{#1 Mid}%
 }
-
-\newcommand*{\strdcomposeC}[4]{% {nextsc}{prevsc}{id}{node}
+\newcommand*{\strdcomposeC}[4]{% {nextsc}{prevsc}{newid}{previd}
     \strduse{#2}{#3 Prev}{#4}
-    \strduse{#1}{#3}{#3 Prev End}%
+    \strduse{#1}{#3}{#3 Prev}%
 }
 
+% origin
 \tikzset{strd origin/.style={inner sep=0pt,outer sep=0pt,minimum width=9pt,minimum height=0pt}}
-
 \newcommand*{\strdorigin}{strdorigin}
 \newcommand*{\strddeclorigin}{%
-    \strdemptyC{strdorigin}{0,0}
+    \strdempty@{strdorigin}{0,0}
     \node[strd origin] at (strdorigin) {};%
 }
 
-\newcommand*{\strdempty}{\strdcomposeC\strdemptyC}
-\newcommand*{\strdemptyC}[2]{% {id}{node}
+% empty
+\newcommand*{\strdempty@}[2]{% {newid}{node}
     \strdstringC{#1}{#2}{#2}{#2}%
 }
+\newcommand*{\strdempty}{\strdcomposeC\strdemptyC}
+\newcommand*{\strdemptyC}[2]{% {newid}{previd}
+    \strdempty@{#1}{#2 End}
+    \ifnodedefined{#2 Left}{
+        \strdempty@{#1 Left}{#2 Left End}
+    }{}
+    \ifnodedefined{#2 Right}{
+        \strdempty@{#1 Right}{#2 Right End}
+    }{}
+}
+% http://tex.stackexchange.com/questions/85528
+\long\def\ifnodedefined#1#2#3{
+    \@ifundefined{pgf@sh@ns@#1}{#3}{#2}%
+}
 
+% left/right
 \newcommand*{\strdleft}{\strdcomposeC\strdleftC}
-\newcommand*{\strdleftC}[2]{% {id}{node}
-    \strdstringC{#1}{#2}{$(#2)+(-\strdxunit,-\strdyhalfunit)$}{$(#2)+(-\strdxunit,-\strdyunit)$}
-    \node[strd coord] (#1 Corner) at ($(#2)+(-\strdxunit,-\strdunitdiff)$) {};
-    \draw[strd draw]{ (#1 Start) parabola (#1 Corner) -- (#1 End) };%
+\newcommand*{\strdleftC}[2]{% {newid}{previd}
+    \strdstringC{#1}{#2 End}{$(#2 End)+(-\strdxunit,-\strdyhalfunit)$}{$(#2 End)+(-\strdxunit,-\strdyunit)$}
+    \strdcoord@{#1 Corner}{$(#2 End)+(-\strdxunit,-\strdunitdiff)$}
+    \strddraw@{ (#1 Start) parabola (#1 Corner) -- (#1 End) }%
 }
 \newcommand*{\strdright}{\strdcomposeC\strdrightC}
 \newcommand*{\strdrightC}{\strdflipC\strdleftC}
 
+% mid
 \newcommand*{\strdmid}{\strdcomposeC\strdmidC}
-\newcommand*{\strdmidC}[2]{% {id}{node}
-    \strdstringC{#1}{#2}{$(#2)+(0,-\strdyhalfunit)$}{$(#2)+(0,-\strdyunit)$}
-    \draw[strd draw]{ (#1 Start) -- (#1 End) };%
+\newcommand*{\strdmidC}[2]{% {newid}{previd}
+    \strdstringC{#1}{#2 End}{$(#2 End)+(0,-\strdyhalfunit)$}{$(#2 End)+(0,-\strdyunit)$}
+    \strddraw@{ (#1 Start) -- (#1 End) }%
 }
 
+% unleft/unright
 \newcommand*{\strdunleft}{\strdcomposeC\strdunleftC}
-\newcommand*{\strdunleftC}[2]{% {id}{node}
-    \strdstringC{#1}{#2}{$(#2)+(0,-\strdyhalfunit)$}{$(#2)+(\strdxunit,-\strdyunit)$}
-    \node[strd coord] (#1 Corner) at ($(#2)+(0,-\strdxunit)$) {};
-    \draw[strd draw]{ (#1 Start) -- (#1 Corner) parabola[bend at end] (#1 End) };%
+\newcommand*{\strdunleftC}[2]{% {newid}{previd}
+    \strdstringC{#1}{#2 End}{$(#2 End)+(0,-\strdyhalfunit)$}{$(#2 End)+(\strdxunit,-\strdyunit)$}
+    \strdcoord@{#1 Corner}{$(#2 End)+(0,-\strdxunit)$}
+    \strddraw@{ (#1 Start) -- (#1 Corner) parabola[bend at end] (#1 End) }%
 }
 \newcommand*{\strdunright}{\strdcomposeC\strdunrightC}
 \newcommand*{\strdunrightC}{\strdflipC\strdunleftC}
 
-% WHATFOR
-% \newcommand*{\strdconnectC}[3]{% {id}{s1}{s2}
-%     \node[strd coord] (#1 Start) at (#2 Start) {};
-%     \node[strd coord] (#1) at (#3 Start) {};
-%     \node[strd coord] (#1 End) at (#3 End) {};%
-% }
-
+% hleft/hright
 \newcommand*{\strdhleft}{\strdcomposeC\strdhleftC}
-\newcommand*{\strdhleftC}[2]{% {id}{node}
-    \strdstringC{#1}{#2}{$(#2)+(-\strdxhalfunit,0)$}{$(#2)+(-\strdxunit,0)$}
-    \draw[strd draw]{ (#1 Start) -- (#1 End) };%
+\newcommand*{\strdhleftC}[2]{% {newid}{previd}
+    \strdstringC{#1}{#2 End}{$(#2 End)+(-\strdxhalfunit,0)$}{$(#2 End)+(-\strdxunit,0)$}
+    \strddraw@{ (#1 Start) -- (#1 End) }%
 }
 \newcommand*{\strdhright}{\strdcomposeC\strdhrightC}
 \newcommand*{\strdhrightC}{\strdflipC\strdhleftC}
 
+% minus
 \newcommand*{\strdminus}{\strdcomposeC\strdminusC}
-\newcommand*{\strdminusC}[2]{% {id}{node}
+\newcommand*{\strdminusC}[2]{% {newid}{previd}
     \strdxscale@{0.5}{
         \strdhleftC{#1 Left}{#2}
         \strdemptyC{#1}{#2}
@@ -158,146 +172,145 @@
     }
 }
 
+% subset/supset
 \newcommand*{\strdsubset}{\strdcomposeC\strdsubsetC}
-\newcommand*{\strdsubsetC}[2]{% {id}{node}
-    \node[strd coord] (#1 Start) at (#2) {};
-    \node[strd coord] (#1 StartCorner) at ($(#2)+(-\strdxunit,-\strdunitdiff)$) {};
-    \node[strd coord] (#1 Mid) at ($(#2)+(-\strdxunit,-\strdyhalfunit)$) {};
-    \node[strd coord] (#1 EndCorner) at ($(#2)+(-\strdxunit,-\strdxunit)$) {};
-    \node[strd coord] (#1 End) at ($(#2)+(0,-\strdyunit)$) {};
+\newcommand*{\strdsubsetC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{#2 End}
+    \strdcoord@{#1 StartCorner}{$(#1 Start)+(-\strdxunit,-\strdunitdiff)$}
+    \strdcoord@{#1 Mid}{$(#1 Start)+(-\strdxunit,-\strdyhalfunit)$}
     \strdcoord@{#1}{#1 Mid}
-    \draw[strd draw]{
-        (#1 Start) parabola (#1 StartCorner) -- (#1 EndCorner) parabola[bend at end] (#1 End)
-    };%
+    \strdcoord@{#1 EndCorner}{$(#1 Start)+(-\strdxunit,-\strdxunit)$}
+    \strdcoord@{#1 End}{$(#1 Start)+(0,-\strdyunit)$}
+    \strddraw@{ (#1 Start) parabola (#1 StartCorner) -- (#1 EndCorner) parabola[bend at end] (#1 End) }%
 }
 \newcommand*{\strdsupset}{\strdcomposeC\strdsupsetC}
 \newcommand*{\strdsupsetC}{\strdflipC\strdsubsetC}
 
+% lint/rint
 \newcommand*{\strdlint}{\strdcomposeC\strdlintC}
-\newcommand*{\strdlintC}[2]{% {id}{node}
-    \node[strd coord] (#1 Start) at (#2) {};
-    \node[strd coord] (#1 StartCorner) at ($(#2)+(-\strdxunit,-\strdunitdiff)$) {};
-    \node[strd coord] (#1 Mid) at ($(#2)+(-\strdxunit,-\strdyhalfunit)$) {};
-    \node[strd coord] (#1 EndCorner) at ($(#2)+(-\strdxunit,-\strdxunit)$) {};
-    \node[strd coord] (#1 End) at ($(#2)+(-1,-\strdyunit)$) {};
+\newcommand*{\strdlintC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{#2 End}
+    \strdcoord@{#1 StartCorner}{$(#1 Start)+(-\strdxunit,-\strdunitdiff)$}
+    \strdcoord@{#1 Mid}{$(#1 Start)+(-\strdxunit,-\strdyhalfunit)$}
     \strdcoord@{#1}{#1 Mid}
-    \draw[strd draw]{
-        (#1 Start) parabola (#1 StartCorner) -- (#1 EndCorner) parabola[bend at end] (#1 End)
-    };%
+    \strdcoord@{#1 EndCorner}{$(#1 Start)+(-\strdxunit,-\strdxunit)$}
+    \strdcoord@{#1 End}{$(#1 Start)+(-1,-\strdyunit)$}
+    \strddraw@{ (#1 Start) parabola (#1 StartCorner) -- (#1 EndCorner) parabola[bend at end] (#1 End) }%
 }
 \newcommand*{\strdrint}{\strdcomposeC\strdrintC}
 \newcommand*{\strdrintC}{\strdflipC\strdlintC}
 
+% lchange/rchange
 \newcommand*{\strdlchange}{\strdcomposeC\strdlchangeC}
-\newcommand*{\strdlchangeC}[2]{% {id}{node}
-    \node[strd coord] (#1 Start) at (#2) {};
-    \node[strd coord] (#1 StartCorner) at ($(#2)+(0,-\strdunitmergin)$) {};
-    \node[strd coord] (#1 Mid) at ($(#2)+(-\strdxunit,-\strdyhalfunit)$) {};
-    \node[strd coord] (#1 EndCorner) at ($(#1)+(-\strdxunit,-\strdunitdiff)$) {};
-    \node[strd coord] (#1 End) at ($(#1)+(-\strdxunit,-\strdyhalfunit)$) {};
+\newcommand*{\strdlchangeC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{#2 End}
+    \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdunitmergin)$}
+    \strdcoord@{#1 Mid}{$(#1 Start)+(-\strdxunit,-\strdyhalfunit)$}
     \strdcoord@{#1}{#1 Mid}
-    \draw[strd draw]{
-        (#1 Start) -- (#1 StartCorner) parabola[bend at end] (#1) parabola (#1 EndCorner) -- (#1 End)
-    };%
+    \strdcoord@{#1 EndCorner}{$(#1)+(-\strdxunit,-\strdunitdiff)$}
+    \strdcoord@{#1 End}{$(#1)+(-\strdxunit,-\strdyhalfunit)$}
+    \strddraw@{ (#1 Start) -- (#1 StartCorner) parabola[bend at end] (#1) parabola (#1 EndCorner) -- (#1 End) }%
 }
 \newcommand*{\strdrchange}{\strdcomposeC\strdrchangeC}
 \newcommand*{\strdrchangeC}{\strdflipC\strdlchangeC}
 
+% jumps
 \newcommand*{\strdjump}{\strdcomposeC\strdjumpC}
 \newcommand*{\strdjumpC}{\strdnoneC\strdmidC}
 \newcommand*{\strdljump}{\strdcomposeC\strdljumpC}
 \newcommand*{\strdljumpC}{\strdnoneC\strdhleftC}
 \newcommand*{\strdrjump}{\strdcomposeC\strdrjumpC}
 \newcommand*{\strdrjumpC}{\strdnoneC\strdhrightC}
+\newcommand*{\strdjumptoC}[3]{% {newid}{previd}{nextid}
+    \strdstringC{#1}{#2 End}{$(#2 End)!.5!(#3 Start)$}{#3 Start}%
+}
+
+% dup
 \newcommand*{\strddup}{\strdcomposeC\strddupC}
 \newcommand*{\strddupC}{\strdnoneC\strdminusC}
 
-\newcommand*{\strdjumptoC}[3]{% {id}{fromnode}{tonode}
-    \strdstringC{#1}{#2}{$(#2)!.5!(#3)$}{#3}%
-}
-
+% lcorner/rcorner
 \newcommand*{\strdlcorner}{\strdcomposeC\strdlcornerC}
-\newcommand*{\strdlcornerC}[2]{% {id}{node}
-    \strdcoord@{#1 Start}{#2}
+\newcommand*{\strdlcornerC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{#2 End}
     \strdcoord@{#1 StartCorner}{$(#1 Start)+(-\strdxunit,0)$}
     \strdcoord@{#1 End}{$(#1 StartCorner)+(0,-\strdyunit)$}
     \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 End)$}
     \strdcoord@{#1}{#1 Mid}
-    \draw[strd draw]{
-        (#1 Start) -- (#1 StartCorner) -- (#1 End)
-    };%
+    \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 End) }%
 }
 \newcommand*{\strdrcorner}{\strdcomposeC\strdrcornerC}
 \newcommand*{\strdrcornerC}{\strdflipC\strdlcornerC}
 
+% unlcorner/unrcorner
 \newcommand*{\strdunlcorner}{\strdcomposeC\strdunlcornerC}
-\newcommand*{\strdunlcornerC}[2]{% {id}{node}
-    \strdcoord@{#1 Start}{#2}
+\newcommand*{\strdunlcornerC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{#2 End}
     \strdcoord@{#1 EndCorner}{$(#1 Start)+(0,-\strdyunit)$}
     \strdcoord@{#1 End}{$(#1 EndCorner)+(\strdxunit,0)$}
     \strdcoord@{#1 Mid}{$(#1 Start)!.5!(#1 EndCorner)$}
     \strdcoord@{#1}{#1 Mid}
-    \draw[strd draw]{
-        (#1 Start) -- (#1 EndCorner) -- (#1 End)
-    };%
+    \strddraw@{ (#1 Start) -- (#1 EndCorner) -- (#1 End) }%
 }
 \newcommand*{\strdunrcorner}{\strdcomposeC\strdunrcornerC}
 \newcommand*{\strdunrcornerC}{\strdflipC\strdunlcornerC}
 
-\newcommand*{\strdsqsubsettoC}[3]{% {id}{fromnode}{tonode}
+% sqsubset/sqsupset
+\newcommand*{\strdsqsubsettoC}[3]{% {newid}{previd}{nextid}
     % Note \getlastxy doesn't work with calc.
-    \node[strd coord] (#1 Start) at (#2) {};
-    \node[strd coord] (#1 End) at (#3) {};
-    \node[strd coord] (#1 StartCorner) at ($(#1 Start)+(-\strdxunit,0)$) {};
-    \node[strd coord] (#1 EndCorner) at ({#1 StartCorner} |- {#1 End}) {};
-    \node[strd coord] (#1 Mid) at ($(#1 StartCorner)!.5!(#1 EndCorner)$) {};
+    \strdcoord@{#1 Start}{#2 End}
+    \strdcoord@{#1 End}{#3 End}
+    \strdcoord@{#1 StartCorner}{$(#1 Start)+(-\strdxunit,0)$}
+    \strdcoord@{(#1 EndCorner}{{#1 StartCorner} |- {#1 End}}
+    \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
     \strdcoord@{#1}{#1 Mid}
-    \draw[strd draw]{
-        (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End)
-    };%
+    \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) }%
 }
 \newcommand*{\strdsqsupsettoC}{\Compose\strdflipC\strdsqsubsettoC}
 
 \newcommand*{\strdsqsubset}{\strdcomposeC\strdsqsubsetC}
-\newcommand*{\strdsqsubsetC}[2]{% {id}{node}
+\newcommand*{\strdsqsubsetC}[2]{% {newid}{previd}
     \strdjumpC{#1 Impl}{#2}
-    \strdsqsubsettoC{#1}{#2}{#1 Impl End}%
+    \strdsqsubsettoC{#1}{#2}{#1 Impl}%
 }
 \newcommand*{\strdsqsupset}{\strdcomposeC\strdsqsupsetC}
 \newcommand*{\strdsqsupsetC}{\strdflipC\strdsqsubsetC}
 
+% square
 \newcommand*{\strdsquare}{\strdcomposeC\strdsquareC}
-\newcommand*{\strdsquareC}[2]{% {id}{node}
+\newcommand*{\strdsquareC}[2]{% {newid}{previd}
     \strdsqsubsetC{#1 Left}{#2}
     \strdsqsupsetC{#1 Right}{#2}
     \strdjumpC{#1}{#2}%
 }
 
+% cap/cup
 \newcommand*{\strdcap}{\strdcomposeC\strdcapC}
-\newcommand*{\strdcapC}[2]{% {id}{node}
+\newcommand*{\strdcapC}[2]{% {newid}{previd}
     \strdleftC{#1 Left}{#2}
     \strdrightC{#1 Right}{#2}
     \strdjumpC{#1}{#2}%
 }
-
 \newcommand*{\strdcup}{\strdcomposeC\strdcupC}
-\newcommand*{\strdcupC}[2]{% {id}{node}
+\newcommand*{\strdcupC}[2]{% {newid}{previd}
     \strdxscale@{2}{\strddupC{#1 Dup}{#2}}
-    \strdunleftC{#1 Left}{#1 Dup Left End}
-    \strdunrightC{#1 Right}{#1 Dup Right End}
+    \strdunleftC{#1 Left}{#1 Dup Left}
+    \strdunrightC{#1 Right}{#1 Dup Right}
     \strdjumpC{#1}{#2}%
 }
 
+% parallel
 \newcommand*{\strdparallel}{\strdcomposeC\strdparallelC}
-\newcommand*{\strdparallelC}[2]{% {id}{node}
+\newcommand*{\strdparallelC}[2]{% {newid}{previd}
     \strddupC{#1 Dup}{#2}
     \strdmidC{#1 Left}{#1 Dup Left}
     \strdmidC{#1 Right}{#1 Dup Right}
     \strdjumpC{#1}{#2}%
 }
 
+% circle
 \newcommand*{\strdcircle}{\strdcomposeC\strdcircleC}
-\newcommand*{\strdcircleC}[2]{% {id}{node}
+\newcommand*{\strdcircleC}[2]{% {newid}{previd}
     \strdsubsetC{#1 Left}{#2}
     \strdsupsetC{#1 Right}{#2}
     \strdjumpC{#1}{#2}%
@@ -305,6 +318,7 @@
 
 
 % Dots
+%
 
 \tikzset{strd dot/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
 \tikzset{strd whitedot/.style={circle,draw=white,fill=white,minimum size=3pt,inner sep=0pt}}
@@ -349,21 +363,21 @@
 \newcommand*{\strdframeone}{\Compose{\strdonlayer{strd framelayer}}{\strdscope{strd frame}}}
 
 \newcommand*{\strdframesqof}[3]{\strdseqin{\strdframesqofone{#1}{#2}{#3}}}
-\newcommand*{\strdframesqofone}[7]{% {style}{xl}{xr}{stm}{sc}{id}{node}
+\newcommand*{\strdframesqofone}[7]{% {style}{xl}{xr}{stm}{sc}{newid}{previd}
     \strduse{#5}{#6 Prev}{#7}
-    \strduse{#4}{\strdemptyC}{#6 Unframe}{#6 Prev End}
+    \strduse{#4}{\strdemptyC}{#6 Unframe}{#6 Prev}
     \strdonlayer@{strd framelayer}{
         \strdpathis@{#1}{
-            \strdxscale@{#2}{ \strdsqsubsettoC{#6 Left}{#6 Prev End}{#6 Unframe End} }
-            \strdxscale@{#3}{ \strdsqsupsettoC{#6 Right}{#6 Prev End}{#6 Unframe End} }
-            \strdjumptoC{#6}{#6 Prev End}{#6 Unframe End}
+            \strdxscale@{#2}{ \strdsqsubsettoC{#6 Left}{#6 Prev}{#6 Unframe} }
+            \strdxscale@{#3}{ \strdsqsupsettoC{#6 Right}{#6 Prev}{#6 Unframe} }
+            \strdjumptoC{#6}{#6 Prev}{#6 Unframe}
          }
      }%
 }
 \newcommand*{\strdframesq}{\strdframesqof{strd frame}}
 \newcommand*{\strdbijframesq}{\strdframesqof{strd bijframe}}
 
-\newcommand*{\strddeclsqsubset}[3]{% {id}{fromnode}{tonode}
+\newcommand*{\strddeclsqsubset}[3]{% {newid}{fromnode}{tonode}
     \strdcoord@{#1 Start}{#2}
     \strdcoord@{#1 StartCorner}{$(#2)+(-\strdxunit,0)$}
     \strdcoord@{#1 EndCorner}{$(#3)+(-\strdxunit,0)$}
@@ -372,44 +386,6 @@
     \strdcoord@{#1 End}{#3}
 }
 \newcommand*{\strddeclsqsupset}[3]{\strdflip@{\strddeclsqsubset{#1}{#2}{#3}}}
-
-\newcommand*{\strdtubesqof}[3]{\strdseqin{\strdtubesqofone{#1}{#2}{#3}}}
-\newcommand*{\strdtubesqofone}[7]{% {style}{xl}{xr}{stm}{sc}{id}{node}
-    \strduse{#5}{#6 Prev}{#7}
-    \strduse{#4}{\strdemptyC}{#6 Unframe}{#6 Prev End}
-    \strdonlayer@{strd framelayer}{
-        \strdpathis@{#1}{
-            \strdxscale@{#2}{
-                \strddeclsqsubset{#6 Left}{#6 Prev End}{#6 Unframe End}
-                \draw[strd draw]{ (#6 Left StartCorner) -- (#6 Left EndCorner) };
-            }
-            \strdxscale@{#3}{
-                \strddeclsqsupset{#6 Right}{#6 Prev End}{#6 Unframe End}
-                \draw[strd draw]{ (#6 Right StartCorner) -- (#6 Right EndCorner) };
-            }
-         }
-        \strdjumptoC{#6}{#6 Prev End}{#6 Unframe End}%
-    }
-    % \draw[strd draw,strd implicit]{ (#6 Left StartCorner) -- (#6 Right StartCorner) };
-    % \draw[strd draw,strd implicit]{ (#6 Left EndCorner) -- (#6 Right EndCorner) };
-}
-\newcommand*{\strdtubesq}{\strdtubesqof{strd frame}}
-
-
-\newcommand*{\strdframeholecup}{\strdcomposeC\strdframeholecupC}
-\newcommand*{\strdframeholecupC}[2]{% {id}{node}
-    \strdstringC{#1}{#2}{$(#2)+(0,\strdyhalfunit)$}{$(#2)+(0,-\strdyunit)$}
-    \strdcoord@{#1 Left StartCorner}{$(#2)+(-\strdxhalfholeunit,-\strdyhalfunit)$}
-    \strdcoord@{#1 Right StartCorner}{$(#2)+(\strdxhalfholeunit,-\strdyhalfunit)$}
-    \strdcoord@{#1 Left EndCorner}{$(#2)+(-\strdxhalfholeunit,-\strdyunit)$}
-    \strdcoord@{#1 Right EndCorner}{$(#2)+(\strdxhalfholeunit,-\strdyunit)$}
-    \strdonlayer@{strd framelayer}{
-        % \fill[white,strd framebase]{ ($(#1 Left EndCorner)+(0,-\strddoublenoiseunit)$) -- (#1 Left StartCorner)
-        %     -- (#1 Right StartCorner) -- ($(#1 Right EndCorner)+(0,-\strddoublenoiseunit)$) };
-        \draw[strd draw,strd framebase]{ (#1 Left EndCorner) --
-            (#1 Left StartCorner) -- (#1 Right StartCorner) -- (#1 Right EndCorner) };
-    }
-}
 
 
 % Tubes
@@ -424,36 +400,13 @@
 
 % start
 \newcommand*{\strdtubestart}{\strdcomposeC\strdtubestartC}
-\newcommand*{\strdtubestartC}[2]{% {id}{node}
-    \strdemptyC{#1 Left}{$(#2)+(-\strdtubexhalfunit,0)$}
-    \strdemptyC{#1}{#2}
-    \strdemptyC{#1 Right}{$(#2)+(\strdtubexhalfunit,0)$}
+\newcommand*{\strdtubestartC}[2]{% {newid}{previd}
+    \strdempty@{#1 Left}{$(#2 End)+(-\strdtubexhalfunit,0)$}
+    \strdempty@{#1}{#2 End}
+    \strdempty@{#1 Right}{$(#2 End)+(\strdtubexhalfunit,0)$}
 }
 
-% util
-\newcommand*{\strdtubeimplC}[4]{% {nextsc}{prevsc}{id}{node}
-    \strduse{#2}{#3 Prev}{#4}
-    \strduse{#1}{#3}{#3 Prev Left End}{#3 Prev End}{#3 Prev Right End}%
-}
-
-% doesn' work.
-\newcommand*{\strdcopynode@}[3]{% {oldid}{id}{_}
-    \pgfnodealias{#2}{#1}
-}
-
-\newcommand*{\strdtubeemptyconst@}[3]{% {tube}{id}{_}
-    \strdemptyC{#2 Left}{#1 Left End}
-    \strdemptyC{#2}{#1 End}
-    \strdemptyC{#2 Right}{#1 Right End}
-}
-
-\newcommand*{\strdtubebranch}{\strdseqin\strdtubebranchone}
-\newcommand*{\strdtubebranchone}[4]{% {stm}{sc}{id}{node}
-    \strduse{#2}{#3}{#4}
-%    \strduse{\strdnonez{#1}}{#2}{#3 Branch}{#4}
-    \strduse{#1}{\strdtubeemptyconst@{#3}}{#3 Branch}{#4}
-}
-
+% helpers
 \newcommand*{\strdtube@}[1]{
     \strdonlayer@{strd framelayer}{
         \strdpathis@{strd frame}{
@@ -463,42 +416,42 @@
 }
 
 % mid
-\newcommand*{\strdtubemid}{\strdtubeimplC\strdtubemidC}
-\newcommand*{\strdtubemidC}[4]{% {id}{lnode}{node}{rnode}
+\newcommand*{\strdtubemid}{\strdcomposeC\strdtubemidC}
+\newcommand*{\strdtubemidC}[2]{% {newid}{previd}
     \strdtube@{
-        \strdmidC{#1 Left}{#2}
-        \strdjumpC{#1}{#3}
-        \strdmidC{#1 Right}{#4}
-    }
+        \strdmidC{#1 Left}{#2 Left}
+        \strdjumpC{#1}{#2}
+        \strdmidC{#1 Right}{#2 Right}
+    }%
 }
 
 % left
-\newcommand*{\strdtubeleft}{\strdtubeimplC\strdtubeleftC}
-\newcommand*{\strdtubeleftC}[4]{% {id}{lnode}{node}{rnode}
+\newcommand*{\strdtubeleft}{\strdcomposeC\strdtubeleftC}
+\newcommand*{\strdtubeleftC}[2]{% {newid}{previd}
     \strdtube@{
-        \strdmidC{#1 Left}{#2}
-        \strdjumpC{#1}{$(#3)+(-\strdxunit,0)$}
-        \strdtubeleftrightC{#1 Right}{#3}
+        \strdmidC{#1 Left}{#2 Left}
+        \strdljumpC{#1 Impl}{#2}
+        \strdjumpC{#1}{#1 Impl}
+        \strdtubeleftrightC{#1 Right}{#2}
     }%
 }
-\newcommand*{\strdtubeleftrightC}[2]{% {id}{node}
-    \strdcoord@{#1 Start}{$(#2)+(0,-\strdtubeyhalfunit)$}
+\newcommand*{\strdtubeleftrightC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{$(#2 End)+(0,-\strdtubeyhalfunit)$}
     \strdcoord@{#1 StartCorner}{$(#1 Start)+(-\strdtubexmagic,0)$}
     \strdcoord@{#1 End}{$(#1 StartCorner)+(0,-\strdtubeyhalfunit)$}
     \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 End)$}
     \strdcoord@{#1}{#1 Mid}
-    \draw[strd draw]{ (#1 Start) -- (#1 StartCorner) -- (#1 End) };%
+    \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 End) }%
 }
 
 % right
-\newcommand*{\strdtuberight}{\strdtubeimplC\strdtuberightC}
-\newcommand*{\strdtuberightC}[4]{% {id}{lnode}{node}{rnode}
-    \strdtube@{
-        \strdflip@{
-            \strdmidC{#1 Right}{#4}
-            \strdjumpC{#1}{$(#3)+(-\strdxunit,0)$}
-            \strdtubeleftrightC{#1 Left}{#3}
-        }
+\newcommand*{\strdtuberight}{\strdcomposeC\strdtuberightC}
+\newcommand*{\strdtuberightC}[2]{% {newid}{previd}
+    \Compose\strdtube@\strdflip@{
+        \strdmidC{#1 Right}{#2 Right}
+        \strdljumpC{#1 Impl}{#2}
+        \strdjumpC{#1}{#1 Impl}
+        \strdtubeleftrightC{#1 Left}{#2}
     }%
 }
 
@@ -592,12 +545,10 @@
 % rdilate
 \newcommand*{\strdtuberdilate}{\strdtubeimplC\strdtuberdilateC}
 \newcommand*{\strdtuberdilateC}[4]{% {id}{lnode}{node}{rnode}
-    \strdtube@{
-        \strdflip@{
-            \strdtubeldilateleftC@{#1 Right}{#4}
-            \strdjumpC{#1}{$(#3)+(-\strdxunit,0)$}
-            \strdmidC{#1 Left}{#2}
-        }
+    \Compose\strdtube@\strdflip@{
+        \strdtubeldilateleftC@{#1 Right}{#4}
+        \strdjumpC{#1}{$(#3)+(-\strdxunit,0)$}
+        \strdmidC{#1 Left}{#2}
     }
 }
 
@@ -623,12 +574,10 @@
 % unrdilate
 \newcommand*{\strdtubeunrdilate}{\strdtubeimplC\strdtubeunrdilateC}
 \newcommand*{\strdtubeunrdilateC}[4]{% {id}{lnode}{node}{rnode}
-    \strdtube@{
-        \strdflip@{
-            \strdtubeunldilateleftC@{#1 Right}{#4}
-            \strdjumpC{#1}{$(#3)+(-\strdxunit,0)$}
-            \strdmidC{#1 Left}{#2}
-        }
+    \Compose\strdtube@\strdflip@{
+        \strdtubeunldilateleftC@{#1 Right}{#4}
+        \strdjumpC{#1}{$(#3)+(-\strdxunit,0)$}
+        \strdmidC{#1 Left}{#2}
     }
 }
 
@@ -648,49 +597,6 @@
 \newcommand*{\strdtubeendclose}{\strdwith\strdtubeendclose@}
 \newcommand*{\strdtubeendclose@}[1]{
     \draw[strd draw,strd framebase]{ (#1 Left End) -- (#1 Right End) };
-}
-
-
-% tubeolds
-%
-
-\tikzset{strd tubeoldcolor/.style={orange!75,text=black}}
-\tikzset{strd tubeold/.style={strd tubeoldcolor,sharp corners}}
-
-\newcommand*{\strdtubeoldof}[3]{\strdseqin{\strdtubeoldofone{#1}{#2}{#3}}}
-\newcommand*{\strdtubeoldofone}[7]{% {style}{xl}{xr}{stm}{sc}{id}{node}
-    \strduse{#5}{#6 Prev}{#7}
-    \strduse{#4}{\strdemptyC}{#6 Untubeold}{#6 Prev End}
-    \strdonlayer@{strd framelayer}{
-        \strdpathis@{}{
-            \strdxscale@{#2}{ \strdnone@{\strdsqsubsettoC{#6 Left}{#6 Prev End}{#6 Untubeold End}} }
-            \strdxscale@{#3}{ \strdnone@{\strdsqsupsettoC{#6 Right}{#6 Prev End}{#6 Untubeold End}} }
-            \draw[strd draw,strd framebase] { (#6 Left StartCorner) -- (#6 Left EndCorner) };
-            \draw[strd draw,strd framebase] { (#6 Right StartCorner) -- (#6 Right EndCorner) };
-            \strdonlayer@{background}{
-                \fill[strd tubeold] ($(#6 Left StartCorner)+(0,\strdnoiseunit)$) -- ($(#6 Left EndCorner)+(0,-\strdnoiseunit)$)
-                    -- ($(#6 Right EndCorner)+(0,-\strdnoiseunit)$) -- ($(#6 Right StartCorner)+(0,\strdnoiseunit)$) --cycle;
-            }
-            \strdjumptoC{#6}{#6 Prev End}{#6 Untubeold End}
-         }
-     }%
-}
-
-\tikzset{strd tubeoldframe/.style={solid,thin}}
-\newcommand*{\strdtubeold}{\strdtubeoldof{strd tubeoldframe}}
-
-\newcommand*{\strdxhalfholeunit}{0.125}
-\newcommand*{\strdholecup}{\strdcomposeC\strdholecupC}
-\newcommand*{\strdholecupC}[2]{% {id}{node}
-    \strdstringC{#1}{#2}{$(#2)+(0,\strdyhalfunit)$}{$(#2)+(0,-\strdyunit)$}
-    \node[strd coord] (#1 Left StartCorner) at ($(#2)+(-\strdxhalfholeunit,-\strdyhalfunit)$) {};
-    \node[strd coord] (#1 Right StartCorner) at ($(#2)+(\strdxhalfholeunit,-\strdyhalfunit)$) {};
-    \node[strd coord] (#1 Left EndCorner) at ($(#2)+(-\strdxhalfholeunit,-\strdyunit)$) {};
-    \node[strd coord] (#1 Right EndCorner) at ($(#2)+(\strdxhalfholeunit,-\strdyunit)$) {};
-    \fill[white,strd framebase]{ ($(#1 Left EndCorner)+(0,-\strddoublenoiseunit)$) -- (#1 Left StartCorner)
-        -- (#1 Right StartCorner) -- ($(#1 Right EndCorner)+(0,-\strddoublenoiseunit)$) };
-    \draw[strd draw,strd framebase]{ (#1 Left EndCorner) --
-        (#1 Left StartCorner) -- (#1 Right StartCorner) -- (#1 Right EndCorner) };
 }
 
 
@@ -787,36 +693,36 @@
 \tikzset{strd roadbase/.style={line width=3.05pt}}
 \tikzset{strd roadpave/.style={line width=2.65pt,strd edgenoise,strd roadcolor}}
 
-\newcommand*{\strdroadC}[3]{% {sc}{id}{node}
+\newcommand*{\strdroadC}[3]{% {sc}{newid}{previd}
     \strdscope@{strd roadbase}{\strduse{#1}{#2}{#3}}
     \strdonlayer@{strd pavelayer}{
         \strdscope@{strd roadpave}{\strduse{#1}{#2 Paved}{#3}}
     }%
 }
-\newcommand*{\strdroad}[4]{% {stm}{sc}{id}{node}
+\newcommand*{\strdroad}[4]{% {stm}{sc}{newid}{previd}
     \strduse{#2}{#3 Prev}{#4}
     \strdscope@{strd roadbase}{
-        \strduse{#1}{\strdemptyC}{#3}{#3 Prev End}
+        \strduse{#1}{\strdemptyC}{#3}{#3 Prev}
     }
     \strdonlayer@{strd pavelayer}{
         \strdscope@{strd roadpave}{
-            \strduse{#1}{\strdemptyC}{#3 Paved}{#3 Prev End}
+            \strduse{#1}{\strdemptyC}{#3 Paved}{#3 Prev}
         }
     }%
 }
 
 % Crossable road; order depends
-\newcommand*{\strdroadxC}[3]{% {sc}{id}{node}
+\newcommand*{\strdroadxC}[3]{% {sc}{newid}{previd}
     \strdscope@{strd roadbase}{\strduse{#1}{#2}{#3}}
     \strdscope@{strd roadpave}{\strduse{#1}{#2 Paved}{#3}}%
 }
-\newcommand*{\strdroadx}[4]{% {stm}{sc}{id}{node}
+\newcommand*{\strdroadx}[4]{% {stm}{sc}{newid}{previd}
     \strduse{#2}{#3 Prev}{#4}
     \strdscope@{strd roadbase}{
-        \strduse{#1}{\strdemptyC}{#3}{#3 Prev End}
+        \strduse{#1}{\strdemptyC}{#3}{#3 Prev}
     }
     \strdscope@{strd roadpave}{
-        \strduse{#1}{\strdemptyC}{#3 Paved}{#3 Prev End}
+        \strduse{#1}{\strdemptyC}{#3 Paved}{#3 Prev}
     }%
 }
 
@@ -839,10 +745,10 @@
     }%
 }
 
-\newcommand*{\strdroadlasideC}[2]{\strdemptyC{#1}{$(#2)+(-0.05,0)$}}
 \newcommand*{\strdroadlaside}{\strdcomposeC\strdroadlasideC}
-\newcommand*{\strdroadrasideC}{\strdflipC\strdroadlasideC}
+\newcommand*{\strdroadlasideC}[2]{\strdempty@{#1}{$(#2 End)+(-0.05,0)$}}
 \newcommand*{\strdroadraside}{\strdcomposeC\strdroadrasideC}
+\newcommand*{\strdroadrasideC}{\strdflipC\strdroadlasideC}
 
 
 % Scoped transformations
@@ -878,16 +784,10 @@
 \newcommand*{\strdydoubleC}{\strdyscaleC{2}}
 \newcommand*{\strdimplicitC}{\strdtoC@\strdimplicit@}
 
-% broken around tubes
-\newcommand*{\strdtoT@}[5]{% {opt}{stm}{sc}{id}{node}
+\newcommand*{\strdtoT@}[5]{% {opt}{stm}{sc}{newid}{previd}
     \strduse{#3}{#4 Prev}{#5}
-    \strduse{#1}{\strduse{#2}{\strdemptyC}{#4}{#4 Prev End}}
+    \strduse{#1}{\strduse{#2}{\strdemptyC}{#4}{#4 Prev}}
 }
-% \newcommand*{\strdtoT@}[5]{% {opt@}{stm}{sc}{id}{node}
-%     \strduse{#1}{
-%         \strduse{#2}{#3}{#4}{#5}
-%     }%
-% }
 \newcommand*{\strdonlayer}{\Compose\strdseqin\strdonlayer@@}
 \newcommand*{\strdonlayer@@}{\Compose\strdtoT@\strdonlayer@}
 \newcommand*{\strdscope}{\Compose\strdseqin\strdscope@@}
@@ -926,7 +826,7 @@
     }%
 }
 
-\newcommand*{\strdassign}[5]{% {name}{stm}{sc}{id}{node}
+\newcommand*{\strdassign}[5]{% {name}{stm}{sc}{newid}{previd}
     \strduse{#2}{#3}{#4}{#5}
     \strdnone{\strduse{#2}}{#3}{#1}{#5}%
 }
@@ -935,11 +835,11 @@
 % String transformations
 %
 
-\newcommand*{\strdwith}[4]{% {h}{sc}{id}{node}
+\newcommand*{\strdwith}[4]{% {h}{sc}{newid}{previd}
     \strduse{#2}{#3}{#4}
     \strduse{#1}{#3}%
 }
-\newcommand*{\strdwithat}[5]{% {at}{h}{sc}{id}{node}
+\newcommand*{\strdwithat}[5]{% {at}{h}{sc}{newid}{previd}
     \strduse{#3}{#4}{#5}
     \strduse{#2}{#4 #1}%
 }
@@ -975,12 +875,12 @@
 \newcommand*{\strdroadlabelat}[3]{\strdwithat{#1}{\strdputroadlabel{#2}{#3}}}
 
 \newcommand*{\strdbranch}{\strdseqin\strdbranch@}
-\newcommand*{\strdbranch@}[4]{% {stm}{sc}{id}{node}
+\newcommand*{\strdbranch@}[4]{% {stm}{sc}{newid}{previd}
     \strduse{#2}{#3}{#4}
-    \strduse{#1}{\strdemptyC}{#3 Branch}{#3 End}
+    \strduse{#1}{\strdemptyC}{#3 Branch}{#3}
 }
 
-\newcommand*{\strdrestart}[4]{% {stm}{sc}{id}{node}
+\newcommand*{\strdrestart}[4]{% {stm}{sc}{newid}{previd}
     \strduse{#2}{#3}{#4}
     \strduse{#1}{\strdemptyC}{#3 Restart}{\strdorigin}%
 }
