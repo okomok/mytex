@@ -878,16 +878,16 @@
 \newcommand*{\strdydoubleC}{\strdyscaleC{2}}
 \newcommand*{\strdimplicitC}{\strdtoC@\strdimplicit@}
 
-% broken
-% \newcommand*{\strdtoT@}[5]{% {opt}{stm}{sc}{id}{node}
-%     \strduse{#3}{#4 Prev}{#5}
-%     \strduse{#1}{\strduse{#2}{\strdemptyC}{#4}{#4 Prev End}}
-% }
-\newcommand*{\strdtoT@}[5]{% {opt@}{stm}{sc}{id}{node}
-    \strduse{#1}{
-        \strduse{#2}{#3}{#4}{#5}
-    }%
+% broken around tubes
+\newcommand*{\strdtoT@}[5]{% {opt}{stm}{sc}{id}{node}
+    \strduse{#3}{#4 Prev}{#5}
+    \strduse{#1}{\strduse{#2}{\strdemptyC}{#4}{#4 Prev End}}
 }
+% \newcommand*{\strdtoT@}[5]{% {opt@}{stm}{sc}{id}{node}
+%     \strduse{#1}{
+%         \strduse{#2}{#3}{#4}{#5}
+%     }%
+% }
 \newcommand*{\strdonlayer}{\Compose\strdseqin\strdonlayer@@}
 \newcommand*{\strdonlayer@@}{\Compose\strdtoT@\strdonlayer@}
 \newcommand*{\strdscope}{\Compose\strdseqin\strdscope@@}

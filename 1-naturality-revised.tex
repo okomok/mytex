@@ -1,0 +1,139 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{A}
+    } \mydefeq \operatorname{id}_A: A \to A \\
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{B},%\strdstart{\mathcal{C}},
+        \strdcell{f},
+        \strdmid,\strdrlabel{A}
+    } \mydefeq f : A \to B \\
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{C},
+        \strdcell{g},
+        \strdmid,\strdrlabel{B},
+        \strdcell{f},
+        \strdmid,\strdrlabel{A}
+    } \mydefeq g \circ f : A \to C
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{B},
+            \strdcell{f},
+            \strdmid,\strdrlabel{A}
+        },
+        \strdtubestart,
+        \strdyscale{2}\strdtubemid,\strdframellabel{F},
+        \strdtubestartline,\strdtubeendline
+    } \mydefeq F(f):FA \to FB
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{A}
+        },
+        \strdtubestart,
+        \strdtubemid,\strdframellabel{F},
+        \strdtubestartline,\strdtubeendline
+    } \ =
+    \strdgathered{
+        \strdmid,\strdrlabel{FA}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{C},
+            \strdcell{g},
+            \strdmid,\strdrlabel{B}
+        },
+        \strdtubestart,
+        \strdyscale{2}\strdtubemid,\strdframellabel{F},
+        \strdtubestartline,\strdtubeendline,
+        \strdyhalf\strdmid,\strdrlabel{FB},
+        \strdbranch{
+            \strdmid,\strdrlabel{B},
+            \strdcell{f},
+            \strdmid,\strdrlabel{A}
+        },
+        \strdtubestart,
+        \strdyscale{2}\strdtubemid,\strdframellabel{F},
+        \strdtubestartline,\strdtubeendline
+    } \ =
+    \strdgathered{
+        \strdtubestart,
+        \strdtubebranch{
+            \strdyscale{3}\strdtubemid,\strdframellabel{F},
+            \strdtubestartline,\strdtubeendline
+        },
+        \strdmid,\strdrlabel{C},
+        \strdcell{g},
+        \strdmid,\strdrlabel{B},
+        \strdcell{f},
+        \strdmid,\strdrlabel{A}
+    } 
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{A},
+            \strdcell{\tau},
+            \strdmid,\strdrlabel{A}
+        },
+        \strdtubestart,
+        \strdtubemid,\strdframellabel{G},\strdtubestartline,
+        \strdcell{\strdhspaced{0.3cm}{\tau}},
+        \strdtubemid,\strdframellabel{F},\strdtubeendline
+    } \mydefeq \tau _A : FA \to GA
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{B},
+            \strdcell{\tau},
+            \strdmid,\strdrlabel{B},
+            \strdcell{h},
+            \strdmid,\strdrlabel{A}
+        },
+        \strdtubestart,
+        \strdtubemid,\strdframellabel{G},\strdtubestartline,
+        \strdcell{\strdhspaced{0.3cm}{\tau}},
+        \strdtubemid,\strdframelabelat{Left End}{F},
+        \strdtubemid,
+        \strdtubeendline
+    }\ = 
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{B},
+            \strdcell{h},
+            \strdmid,\strdrlabel{A},
+            \strdcell{\tau},
+            \strdmid,\strdrlabel{A}
+        },
+        \strdtubestart,
+        \strdtubemid,\strdtubestartline,
+        \strdtubemid,\strdframelabelat{Left Start}{G},
+        \strdcell{\strdhspaced{0.3cm}{\tau}},
+        \strdtubemid,\strdframellabel{F},
+        \strdtubeendline
+    }
+}
+
+\end{document}
