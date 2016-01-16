@@ -7,81 +7,136 @@
 
 \In{preview,math,aligned}{
     \myitem &
+    \text{dilate:}
     \strdgathered{
         \strdtubestart,
-        \strdtubemid,
-        \strdtubemid,
-        \strdtubedilate,
-        \strdtubemid,
-        \strdxscale{1.5}\strdtubedilate,
-        \strdxscale{2}\strdtubeundilate
-    }
-}
-
-\In{preview,math,aligned}{
-    \myitem &
-    \strdgathered{
-        \strdtubestart,
-        \strdtubemid,
-        \strdtubeldilate,
-        \strdtubemid,
-        \strdtubeunldilate,
+        \strdtubemid,\strdtubeendline,
+        \strdtubedilate{1}{1},\strdtubeendline,
         \strdtubemid
     }
 }
 
 \In{preview,math,aligned}{
     \myitem &
+    \text{dilate left:}
     \strdgathered{
         \strdtubestart,
-        \strdtuberdilate,
-        \strdtubemid,
-        \strdtubeunrdilate,
+        \strdtubemid,\strdtubeendline,
+        \strdtubedilate{2}{0},\strdtubeendline,
         \strdtubemid
     }
 }
 
 \In{preview,math,aligned}{
     \myitem &
+    \text{dilate right:}
     \strdgathered{
         \strdtubestart,
-        \strdtubedilate,
-        \strdtuberight,
+        \strdtubemid,\strdtubeendline,
+        \strdtubedilate{0}{2},\strdtubeendline,
         \strdtubemid
     }
 }
 
 \In{preview,math,aligned}{
     \myitem &
+    \text{undilate:}
     \strdgathered{
         \strdtubestart,
-        \strdtubedilate,
-        \strdtubebranch{\strdtuberight,\strdtubemid},
-        \strdtubeleft,\strdtubemid
+        \strdtubeextend{1}{1},
+        \strdtubemid,\strdtubeendline,
+        \strdtubeundilate{1}{1},\strdtubeendline,
+        \strdtubemid
     }
 }
 
 \In{preview,math,aligned}{
     \myitem &
+    \text{undilate left:}
     \strdgathered{
         \strdtubestart,
-        \strdtubedilate,
-        \strdtubemid,
-        \strdtubebranch{\strdtuberight,\strdtubemid},
-        \strdtubeleft,\strdmid,\strdrlabel{A}
+        \strdtubeextend{1}{1},
+        \strdtubemid,\strdtubeendline,
+        \strdtubeundilate{2}{0},\strdtubeendline,
+        \strdtubemid
     }
 }
 
 \In{preview,math,aligned}{
     \myitem &
+    \text{undilate right:}
     \strdgathered{
-        \strdflip{
-            \strdtubestart,
-            \strdtubedilate,
-            \strdtubemid,
-            \strdtubebranch{\strdtuberight,\strdtubemid},
-            \strdtubeleft,\strdmid,\strdrlabel{A}
-        }
+        \strdtubestart,
+        \strdtubeextend{1}{1},
+        \strdtubemid,\strdtubeendline,
+        \strdtubeundilate{0}{2},\strdtubeendline,
+        \strdtubemid
+    }
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \text{extend:}
+    \strdgathered{
+        \strdtubestart,
+        \strdtubemid,\strdtubeendline,
+        \strdtubeextend{1}{1},
+        \strdtubemid
+    }
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \text{extend left:}
+    \strdgathered{
+        \strdtubestart,
+        \strdtubemid,\strdtubeendline,
+        \strdtubeextend{2}{0},
+        \strdtubemid
+    }
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \text{extend right:}
+    \strdgathered{
+        \strdtubestart,
+        \strdtubemid,\strdtubeendline,
+        \strdtubeextend{0}{2},
+        \strdtubemid
+    }
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \text{unextend:}
+    \strdgathered{
+        \strdtubestart,
+        \strdtubedilate{1}{1},\strdtubeendline,
+        \strdtubeunextend{1}{1},\strdtubeendline,
+        \strdtubemid
+    }
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \text{unextend left:}
+    \strdgathered{
+        \strdtubestart,
+        \strdtubedilate{1}{1},\strdtubeendline,
+        \strdtubeunextend{2}{0},\strdtubeendline,
+        \strdtubemid
+    }
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \text{unextend right:}
+    \strdgathered{
+        \strdtubestart,
+        \strdtubedilate{1}{1},\strdtubeendline,
+        \strdtubeunextend{0}{2},\strdtubeendline,
+        \strdtubemid
     }
 }
 

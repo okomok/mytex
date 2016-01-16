@@ -496,13 +496,29 @@
     \strdempty@{#4}{$(#4 Left)!.5!(#4 Right)$}%
 }
 
-% extend{lscale}{rscale}
+% extend{lscale}{rscale} = yscale{0}{dilate{lscale}{rscale}}
 \newcommand*{\strdtubeextend}[2]{\strdcomposeC{\strdtubeextendC{#1}{#2}}}
 \newcommand*{\strdtubeextendC}[4]{% {lscale}{rscale}{newid}{previd}
     \strdtube@{
-        \strdxscale@{#1}{\strdempty@{#3 Left}{$(#4 End)+(-\strdtubexhalfunit,0)+(-\strdxunit,0)$}}
+        \If{\NumEq{#1}{0}}{
+            \strdempty@{#3 Left}{#4 Left End}
+        }{
+            \strdxscale@{#1}{\strdempty@{#3 Left}{$(#4 Left End)+(-\strdxunit,0)$}}
+        }
         \strdempty@{#3}{#4 End}
-        \strdxscale@{#2}{\strdempty@{#3 Right}{$(#4 End)+(\strdtubexhalfunit,0)+(\strdxunit,0)$}}
+        \If{\NumEq{#2}{0}}{
+            \strdempty@{#3 Right}{#4 Right End}
+        }{
+            \strdxscale@{#2}{\strdempty@{#3 Right}{$(#4 Right End)+(\strdxunit,0)$}}
+        }
+    }%
+}
+
+% unextend{lscale}{rscale} = yscale{0}{undilate{lscale}{rscale}}
+\newcommand*{\strdtubeunextend}[2]{\strdcomposeC{\strdtubeunextendC{#1}{#2}}}
+\newcommand*{\strdtubeunextendC}[4]{% {lscale}{rscale}{newid}{previd}
+    \strdflip@{
+        \strdtubeextendC{#1}{#2}{#3}{#4}
     }%
 }
 
@@ -510,9 +526,17 @@
 \newcommand*{\strdtubedilate}[2]{\strdcomposeC{\strdtubedilateC{#1}{#2}}}
 \newcommand*{\strdtubedilateC}[4]{% {lscale}{rscale}{newid}{previd}
     \strdtube@{
-        \strdxscale@{#1}{\strdtubedilateleftC{#3 Left}{#4 Left}}
+        \If{\NumEq{#1}{0}}{
+            \strdmidC{#3 Left}{#4 Left}
+        }{
+            \strdxscale@{#1}{\strdtubedilateleftC{#3 Left}{#4 Left}}
+        }
         \strdjumpC{#3}{#4}
-        \strdxscale@{#2}{\strdflip@{\strdtubedilateleftC{#3 Right}{#4 Right}}}
+        \If{\NumEq{#2}{0}}{
+            \strdmidC{#3 Right}{#4 Right}
+        }{
+            \strdxscale@{#2}{\strdflip@{\strdtubedilateleftC{#3 Right}{#4 Right}}}
+        }
     }%
 }
 \newcommand*{\strdtubedilateleftC}[2]{% {newid}{previd}
@@ -529,9 +553,17 @@
 \newcommand*{\strdtubeundilate}[2]{\strdcomposeC{\strdtubeundilateC{#1}{#2}}}
 \newcommand*{\strdtubeundilateC}[4]{% {lscale}{rscale}{newid}{previd}
     \strdtube@{
-        \strdxscale@{#1}{\strdtubeundilateleftC{#3 Left}{#4 Left}}
+        \If{\NumEq{#1}{0}}{
+            \strdmidC{#3 Left}{#4 Left}
+        }{
+            \strdxscale@{#1}{\strdtubeundilateleftC{#3 Left}{#4 Left}}
+        }
         \strdjumpC{#3}{#4}
-        \strdxscale@{#2}{\strdflip@{\strdtubeundilateleftC{#3 Right}{#4 Right}}}
+        \If{\NumEq{#2}{0}}{
+            \strdmidC{#3 Right}{#4 Right}
+        }{
+            \strdxscale@{#2}{\strdflip@{\strdtubeundilateleftC{#3 Right}{#4 Right}}}
+        }
     }%
 }
 \newcommand*{\strdtubeundilateleftC}[2]{% {newid}{previd}
@@ -544,68 +576,6 @@
     \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) }%
 }
 
-% ldilate
-\newcommand*{\strdtubeldilate}{\strdcomposeC\strdtubeldilateC}
-\newcommand*{\strdtubeldilateC}[2]{% {newid}{previd}
-    \strdtube@{
-        \strdtubeldilateleftC{#1 Left}{#2 Left}
-        \strdljumpC{#1 Impl}{#2}
-        \strdjumpC{#1}{#1 Impl}
-        \strdmidC{#1 Right}{#2 Right}
-    }
-}
-\newcommand*{\strdtubeldilateleftC}[2]{% {newid}{previd}
-    \strdcoord@{#1 Start}{#2 End}
-    \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdtubeyhalfunit)$}
-    \strdcoord@{#1 EndCorner}{$(#1 StartCorner)+(-\strdtubexunit,0)+(-0.25,0)$}
-    \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
-    \strdcoord@{#1}{#1 Mid}
-    \strdcoord@{#1 End}{$(#1 EndCorner)+(0,-\strdtubeyhalfunit)$}
-    \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) };%
-}
-
-% rdilate
-\newcommand*{\strdtuberdilate}{\strdcomposeC\strdtuberdilateC}
-\newcommand*{\strdtuberdilateC}[2]{% {newid}{previd}
-    \Compose\strdtube@\strdflip@{
-        \strdtubeldilateleftC{#1 Right}{#2 Right}
-        \strdljumpC{#1 Impl}{#2}
-        \strdjumpC{#1}{#1 Impl}
-        \strdmidC{#1 Left}{#2 Left}
-    }
-}
-
-% unldilate
-\newcommand*{\strdtubeunldilate}{\strdcomposeC\strdtubeunldilateC}
-\newcommand*{\strdtubeunldilateC}[2]{% {newid}{previd}
-    \strdtube@{
-        \strdtubeunldilateleft@{#1 Left}{#2 Left End}{#2 Right End}
-        \strdrjumpC{#1 Impl}{#2}
-        \strdjumpC{#1}{#1 Impl}
-        \strdmidC{#1 Right}{#2 Right}
-    }
-}
-\newcommand*{\strdtubeunldilateleft@}[3]{% {newid}{lnode}{rnode}
-    \strdcoord@{#1 Start}{#2}
-    \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdtubeyhalfunit)$}
-    \strdcoord@{#1 EndCorner}{$(#3)+(-\strdtubexunit,-\strdtubeyhalfunit)$}
-%   \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
-    \strdcoord@{#1 Mid}{#1 StartCorner}
-    \strdcoord@{#1}{#1 Mid}
-    \strdcoord@{#1 End}{$(#1 EndCorner)+(0,-\strdtubeyhalfunit)$}
-    \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) }%
-}
-
-% unrdilate
-\newcommand*{\strdtubeunrdilate}{\strdcomposeC\strdtubeunrdilateC}
-\newcommand*{\strdtubeunrdilateC}[2]{% {newid}{previd}
-    \Compose\strdtube@\strdflip@{
-        \strdtubeunldilateleft@{#1 Right}{#2 Right End}{#2 Left End}
-        \strdrjumpC{#1 Impl}{#2}
-        \strdjumpC{#1}{#1 Impl}
-        \strdmidC{#1 Left}{#2 Left}
-    }
-}
 
 % start/end lines
 \tikzset{strd tubeedge/.style={very thin,dotted}}
