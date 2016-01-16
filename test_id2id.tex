@@ -52,4 +52,78 @@
     }
 }
 
+\In{preview,math,aligned}{
+    \text{dilate}:
+    \strdgathered{
+        \strdtubestart,
+        \strdtubedilate{1}{1},\strdtubeendline,
+        \strdtubemid,\strdtubeendline,
+        \strdtubedilate{2}{3},\strdtubeendline
+    }
+}
+
+\In{preview,math,aligned}{
+    \text{dilate}:
+    \strdgathered{
+        \strdtubestart,
+        \strdtubedilate{0.5}{0.5},\strdtubeendline,
+        \strdtubemid,\strdtubeendline,
+        \strdtubedilate{0.5}{2},\strdtubeendline,
+        \strdtubeundilate{0.5}{2}
+    }
+}
+
+\In{preview,math,aligned}{
+    \text{ldilate,rdilate}:
+    \strdgathered{
+        \strdtubestart,
+        \strdtubemid,
+        \strdtubeldilate,\strdtubeendline,
+        \strdtubemid,\strdtubeendline, \strdtuberdilate,\strdtubeendline
+    }
+}
+
+\In{preview,math,aligned}{
+    \text{ldilate,rdilate}:
+    \strdgathered{
+        \strdtubestart,
+        \strdtubemid,\strdtubeendline,
+        \strdtubeldilate,\strdtubeendline,
+        \strdtubeunldilate,\strdtubeendline,
+        \strdtubemid,\strdtubeendline,
+        \strdtuberdilate,\strdtubeendline,
+        \strdtubeunrdilate
+    }
+}
+
+\In{preview,math,aligned}{
+    \text{unleft,unright}:
+    \strdgathered{
+        \strdtubestart,
+        \strdtubemid,\strdtubeendline,
+        \strdbranch{
+            \strdtubeleft,\strdtubeendline,
+            \strdtubeunleft,\strdtubeendline
+        },
+        \strdtuberight,\strdtubeendline,
+        \strdtubeunright,\strdtubeendline,
+        \strdtubemid
+    }
+}
+
+
+\In{preview,math,aligned}{
+    \text{merge}:
+    \strdgathered{
+        \strdtubestart,
+        \strdtubemid,\strdtubeendline,
+        \strdtubemerge{
+            \strdseq{ \strdtubeleft,\strdtubeendline,\strdtubeunleft,\strdtubeendline }
+        }{
+            \strdseq{ \strdtuberight,\strdtubeendline,\strdtubeunright,\strdtubeendline }
+        },
+        \strdtubemid
+    }
+}
+
 \end{document}
