@@ -1,0 +1,194 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+% signature
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdbranch{
+                \strdxscale{0.7}\strdljump,
+                \strdyhalf\strdmid,
+                \strdframearound,
+                \strdyhalf\strdmid,\strdrlabel{A}
+            },
+            \strdrjump,
+            \strdmid,\strdrlabel{B}
+        },
+        \strdtubestart,
+        \strdtubeextend{1}{1},\strdtubestartline,
+        \strdtubeunldilate,\strdframellabel{F},\strdtubeendline
+    } \ \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{F(A{\otimes}B)},
+        \strdcell{\operatorname{st}},
+        \strdcap,\strdrlabelat{Left}{A},\strdrlabelat{Right}{FB}
+    }
+}
+
+% naturality
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdbranch{
+                \strdxscale{0.7}\strdljump,
+                \strdmid,\strdrlabel{A\myprime},
+                \strdcell{h},
+                \strdmid,
+                \strdframearound,
+                \strdyhalf\strdmid,\strdrlabel{A}
+            },
+            \strdrjump,
+            \strdmid,\strdrlabelat{End}{B},
+            \strdyscale{1.5}\strdmid
+        },
+        \strdtubestart,
+        \strdtubeextend{1}{1},\strdtubestartline,
+        \strdtubemid,\strdempty,\strdframellabel{F},
+        \strdyhalf\strdtubemid,
+        \strdtubeunldilate,\strdtubeendline,\strdtubestartline,\strdframellabel{F}
+    } \ =
+    \strdgathered{
+        \strdbranch{
+            \strdbranch{
+                \strdxscale{0.7}\strdljump,
+                \strdyhalf\strdmid,\strdrlabel{A\myprime},
+                \strdframearound,
+                \strdmid,
+                \strdcell{h},
+                \strdmid,\strdrlabel{A}
+            },
+            \strdrjump,
+            \strdmid,
+            \strdyscale{1.5}\strdmid,\strdrlabel{B}
+        },
+        \strdtubestart,
+        \strdtubeextend{1}{1},\strdtubestartline,
+        \strdtubeunldilate,\strdframellabel{F},\strdtubeendline,
+        \strdyscale{1.5}\strdtubemid,\strdtubeendline,\strdframellabel{F}
+    } \\ 
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdbranch{
+                \strdxscale{0.7}\strdljump,
+                \strdmid,\strdempty,\strdrlabel{A},
+                \strdmid,
+                \strdframearound,
+                \strdyhalf\strdmid
+            },
+            \strdrjump,
+            \strdmid,\strdrlabel{B\myprime},
+            \strdcell{h},
+            \strdyhalf\strdmid,
+            \strdyscale{1}\strdmid,\strdrlabel{B}
+        },
+        \strdtubestart,
+        \strdtubeextend{1}{1},\strdtubestartline,
+        \strdtubemid,\strdempty,\strdframellabel{F},
+        \strdyhalf\strdtubemid,
+        \strdtubeunldilate,\strdtubeendline,\strdtubestartline,\strdframellabel{F}
+    } \ =
+    \strdgathered{
+        \strdbranch{
+            \strdbranch{
+                \strdxscale{0.7}\strdljump,
+                \strdyhalf\strdmid,
+                \strdframearound,
+                \strdmid,
+                \strdempty,\strdrlabel{A},
+                \strdmid
+            },
+            \strdrjump,
+            \strdyscale{1}\strdmid,\strdrlabel{B\myprime},
+            \strdyhalf\strdmid,
+            \strdcell{h},
+            \strdyscale{1}\strdmid,\strdrlabel{B}
+        },
+        \strdtubestart,
+        \strdtubeextend{1}{1},\strdtubestartline,
+        \strdtubeunldilate,\strdframellabel{F},
+        \strdyscale{1.5}\strdtubemid,\strdtubeendline,\strdtubestartline,\strdframellabel{F}
+    } 
+}
+
+% coherence
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdtubestart,
+            \strdtubeextend{1.3}{1.3},\strdtubestartline,
+            \strdtubeunldilate,\strdtubeendline,\strdframellabel{F}
+        },
+        \strdbranch{
+            \strdxscale{1.5}\strdljump,
+            \strdyhalf\strdmid,\strdframearound,
+            \strdyhalf\strdmid,\strdrlabel{A}
+        },
+        \strdbranch{
+            \strdbranch{
+                \strdxscale{1.5}\strdrjump,
+                \strdmid,\strdrlabel{C}
+            },
+            \strdyhalf\strdmid,\strdframearound,
+            \strdyhalf\strdmid,\strdrlabel{B}
+        }
+    } \ =
+    \strdgathered{
+        \strdbranch{
+            \strdtubestart,
+            \strdtubeextend{1.3}{1.3},\strdtubestartline,
+            \strdxscale{2}\strdtubeunldilate,\strdframellabel{F},\strdtubeendline,
+            \strdxscale{1}\strdtubeunldilate,\strdtubeendline,
+            \strdtubeendline,\strdframellabel{F}
+        },
+        \strdbranch{
+            \strdxscale{1.5}\strdljump,
+            \strdyhalf\strdmid,\strdframearound,
+            \strdyhalf\strdmid,\strdempty,\strdrlabel{A},
+            \strdmid
+        },
+        \strdbranch{
+            \strdbranch{
+                \strdxscale{1.5}\strdrjump,
+                \strdmid,\strdrlabel{C},
+                \strdmid
+            },
+            \strdmid,\strdrlabel{B},
+            \strdyhalf\strdmid,\strdframearound,
+            \strdyhalf\strdmid
+        }
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdbranch{
+                \strdxscale{0.7}\strdljump,
+                \strdimplicit{\strdyhalf\strdmid},
+                \strdframearound,
+                \strdimplicit{\strdyhalf\strdmid},\strdrlabel{I}
+            },
+            \strdrjump,
+            \strdmid,\strdrlabel{A}
+        },
+        \strdtubestart,
+        \strdtubeextend{1}{1},\strdtubestartline,
+        \strdtubeunldilate,\strdframellabel{F},\strdtubeendline
+    } \ =
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{A}
+        },
+        \strdtubestart,
+        \strdtubemid,\strdframellabel{F},\strdtubestartline,\strdtubeendline
+    }
+}
+
+
+\end{document}
