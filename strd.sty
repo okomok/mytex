@@ -576,7 +576,6 @@
     \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) }%
 }
 
-
 % start/end lines
 \tikzset{strd tubeedge/.style={very thin,dotted}}
 \newcommand*{\strdtubestartline}{\strdwith\strdtubestartline@}
@@ -596,6 +595,17 @@
     \draw[strd draw,strd framebase]{ (#1 Left End) -- (#1 Right End) };
 }
 
+% cells
+\tikzset{strd semicellbase/.style={strd cellbase,very thin,sharp corners,rounded rectangle}}
+\tikzset{strd tubelcell/.style={strd semicellbase,rounded rectangle east arc=none}}
+\tikzset{strd tubercell/.style={strd semicellbase,rounded rectangle west arc=none}}
+\newcommand*{\strdtubecell}{\Compose\strdwith\strdputtubecell}
+\newcommand*{\strdputtubecell}[2]{% {text}{id}
+    \strdonlayer@{strd celllayer}{
+        \node[strd tubelcell] at (#2 Left End) {#1};
+        \node[strd tubercell] at (#2 Right End) {\vphantom{#1}};% has some width for some reason. 
+    }% 
+}
 
 % Frame-arounds
 %

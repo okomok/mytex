@@ -75,7 +75,7 @@
     } \ =
     \strdgathered{
         \strdtubestart,
-        \strdtubebranch{
+        \strdbranch{
             \strdyscale{3}\strdtubemid,\strdframellabel{F},
             \strdtubestartline,\strdtubeendline
         },
@@ -92,12 +92,11 @@
     \strdgathered{
         \strdbranch{
             \strdmid,\strdrlabel{A},
-            \strdcell{\tau},
-            \strdmid,\strdrlabel{A}
+            \strdmid%,\strdrlabel{A}
         },
         \strdtubestart,
         \strdtubemid,\strdframellabel{G},\strdtubestartline,
-        \strdcell{\strdhspaced{0.3cm}{\tau}},
+        \strdtubecell{\tau},
         \strdtubemid,\strdframellabel{F},\strdtubeendline
     } \mydefeq \tau _A : FA \to GA
 }
@@ -107,14 +106,13 @@
     \strdgathered{
         \strdbranch{
             \strdmid,\strdrlabel{B},
-            \strdcell{\tau},
-            \strdmid,\strdrlabel{B},
+            \strdmid,%\strdrlabel{B},
             \strdcell{h},
             \strdmid,\strdrlabel{A}
         },
         \strdtubestart,
         \strdtubemid,\strdframellabel{G},\strdtubestartline,
-        \strdcell{\strdhspaced{0.3cm}{\tau}},
+        \strdtubecell{\tau},
         \strdtubemid,\strdframelabelat{Left End}{F},
         \strdtubemid,
         \strdtubeendline
@@ -123,14 +121,13 @@
         \strdbranch{
             \strdmid,\strdrlabel{B},
             \strdcell{h},
-            \strdmid,\strdrlabel{A},
-            \strdcell{\tau},
+            \strdmid,%\strdrlabel{A},
             \strdmid,\strdrlabel{A}
         },
         \strdtubestart,
         \strdtubemid,\strdtubestartline,
         \strdtubemid,\strdframelabelat{Left Start}{G},
-        \strdcell{\strdhspaced{0.3cm}{\tau}},
+        \strdtubecell{\tau},
         \strdtubemid,\strdframellabel{F},
         \strdtubeendline
     }
