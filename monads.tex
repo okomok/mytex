@@ -1,0 +1,133 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+
+% signature
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{A},
+            \strdmid
+        },
+        \strdtubestart,\strdtubeendline,
+        \strdtubemid,\strdtubecdot
+    } \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{TA},
+        \strdcell{\eta},
+        \strdmid,\strdrlabel{A}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{A},
+            \strdmid
+        },
+        \strdtubestart,
+        \strdtubeextend{1}{1},\strdtubeendline,
+        \strdtubemid,
+        \strdbranch{
+            \strdtubeunextend{1}{1},\strdtubecirc,
+            \strdtubemid
+        },
+        \strdtubemid,\strdtubeendline
+    } \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{TA},
+        \strdcell{\mu},
+        \strdmid,\strdrlabel{T^2A}
+    }
+}
+
+% coherence
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{A},
+            \strdmid,
+            \strdmid
+        },
+        \strdtubestart,
+        \strdtubeextend{2}{2},\strdtubeendline,
+        \strdtubemid,
+        \strdbranch{
+            \strdtubeunextend{1}{1},\strdtubecirc,
+            \strdtubemid,
+            \strdbranch{
+                \strdtubeunextend{1}{1},\strdtubecirc,
+                \strdtubemid
+            },
+            \strdtubemid
+        },
+        \strdtubemid,
+        \strdtubemid,\strdtubeendline
+    } =
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{A},
+            \strdmid,
+            \strdmid
+        },
+        \strdtubestart,
+        \strdtubeextend{2}{2},\strdtubeendline,
+        \strdtubemid,
+        \strdbranch{
+            \strdtubeunextend{2}{2},\strdtubecirc,
+            \strdtubemid,
+            \strdbranch{
+                \strdtubeextend{1}{1},\strdtubecirc,
+                \strdtubemid
+            },
+            \strdtubemid
+        },
+        \strdtubemid,
+        \strdtubemid,\strdtubeendline
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{A},
+            \strdmid,
+            \strdmid
+        },
+        \strdtubestart,
+        \strdtubeextend{1}{1},\strdtubeendline,
+        \strdtubemid,
+        \strdbranch{
+            \strdtubeunextend{1}{1},\strdtubecirc,
+            \strdtubemid,\strdtubecdot
+        },
+        \strdtubemid,
+        \strdtubemid,\strdtubeendline
+    } =
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{A}
+        },
+        \strdtubestart,\strdtubeendline,
+        \strdtubemid,\strdtubeendline
+    } =
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{A},
+            \strdmid,
+            \strdmid
+        },
+        \strdtubestart,
+        \strdtubeextend{1}{1},\strdtubeendline,
+        \strdtubemid,
+        \strdbranch{
+            \strdtubeunextend{1}{1},\strdtubecirc,
+            \strdtubemid,
+            \strdtubemid,\strdtubeendline
+        },
+        \strdtubemid,\strdtubecdot 
+    }
+}
+
+\end{document}

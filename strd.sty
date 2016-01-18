@@ -51,7 +51,7 @@
     \end{tikzpicture}%
 }
 \newcommand*{\strdin}[2]{\Foldr{\strdin@}{#2}{\List{#1}}}
-\newcommand*{\strdin@}[2]{\begin{#1}\strd{#2}\end{#1}}
+\newcommand*{\strdin@}[2]{\begin{#1}\!\strd{#2}\end{#1}}
 
 
 % Constants
@@ -355,7 +355,7 @@
 % Frames
 %
 
-\tikzset{strd framebase/.style={solid,thin}}
+\tikzset{strd framebase/.style={solid,semithick}}%thin}}
 \tikzset{strd frame/.style={strd framebase,rounded corners=2pt}}
 \tikzset{strd bijframe/.style={strd framebase,sharp corners}}
 
@@ -604,6 +604,16 @@
     \strdonlayer@{strd celllayer}{
         \node[strd tubelcell] at (#2 Left End) {#1};
         \node[strd tubercell] at (#2 Right End) {\vphantom{#1}};% has some width for some reason. 
+    }% 
+}
+\tikzset{strd tubecdot/.style={circle,semithick,draw=black,fill=black,minimum size=2.8pt,inner sep=0pt}}
+\tikzset{strd tubecirc/.style={circle,semithick,draw=black,fill=white,minimum size=2.8pt,inner sep=0pt}}
+\newcommand*{\strdtubecdot}{\strdwith{\strdputtubeshape@{strd tubecdot}}}
+\newcommand*{\strdtubecirc}{\strdwith{\strdputtubeshape@{strd tubecirc}}}
+\newcommand*{\strdputtubeshape@}[2]{% {opt}{id}
+    \strdonlayer@{strd celllayer}{
+        \node[#1] at (#2 Left End) {};
+        \node[#1] at (#2 Right End) {};
     }% 
 }
 
