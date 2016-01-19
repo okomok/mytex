@@ -48,7 +48,7 @@
     \myitem &
     \strdgathered{
         \strdbranch{
-            \strdmid,\strdrlabel{A},
+            \strdmid,%\strdrlabel{A},
             \strdmid,
             \strdmid
         },
@@ -69,7 +69,7 @@
     } =
     \strdgathered{
         \strdbranch{
-            \strdmid,\strdrlabel{A},
+            \strdmid,%\strdrlabel{A},
             \strdmid,
             \strdmid
         },
@@ -87,11 +87,30 @@
         },
         \strdtubemid,
         \strdtubemid,\strdtubeendline
-    } \\
+    } \myeqdef
+    \strdgathered{
+        \strdbranch{
+            \strdmid,%\strdrlabel{A},
+            \strdmid
+        },
+        \strdtubestart,
+        \strdtubeextend{2}{2},\strdtubeendline,
+        \strdtubemid,
+        \strdbranch{
+            \strdtubeunextend{2}{2},\strdtubecirc,
+            \strdbranch{
+                \strdtubeextend{1}{1},\strdtubecirc,
+                \strdtubemid
+            },
+            \strdtubemid
+        },
+        \strdtubemid,\strdtubeendline
+    }
+    \\
     \myitem &
     \strdgathered{
         \strdbranch{
-            \strdmid,\strdrlabel{A},
+            \strdmid,%\strdrlabel{A},
             \strdmid,
             \strdmid
         },
@@ -107,14 +126,14 @@
     } =
     \strdgathered{
         \strdbranch{
-            \strdmid,\strdrlabel{A}
+            \strdmid%\strdrlabel{A},
         },
         \strdtubestart,\strdtubeendline,
         \strdtubemid,\strdtubeendline
     } =
     \strdgathered{
         \strdbranch{
-            \strdmid,\strdrlabel{A},
+            \strdmid,%\strdrlabel{A},
             \strdmid,
             \strdmid
         },

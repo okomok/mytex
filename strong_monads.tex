@@ -1,0 +1,82 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+
+
+% coherence
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdparallel{\strdxdouble\strdljump}{
+                \strdseq{\strdyhalf\strdmid,\strdframearound,\strdmid},
+                \strdseq{\strdyhalf\strdmid,\strdmid}
+            }
+        },
+        \strdljump,
+        \strdtubestart,
+        \strdtubeextend{1}{1},\strdtubeendline,
+        \strdtubeundilate{2}{0},
+        \strdtubecdot
+    } \ = \ 
+    \strdgathered{
+        \strdbranch{
+            \strdparallel{\strdljump}{
+                \strdseq{\strdyhalf\strdmid,\strdmid},
+                \strdseq{\strdyhalf\strdmid,\strdmid}
+            }
+        },
+        \strdxhalf\strdljump,
+        \strdtubestart,
+        \strdtubeextend{0.5}{0.5},\strdtubeendline,
+        \strdtubemid,
+        \strdtubecdot
+    } \\ 
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdparallel{\strdxscale{2.5}\strdljump}{
+                \strdseq{\strdyhalf\strdmid,\strdframearound,\strdmid},
+                \strdseq{\strdyhalf\strdmid,\strdmid}
+            }
+        },
+        \strdxscale{1.5}\strdljump,
+        \strdtubestart,
+        \strdtubeextend{1}{2},\strdtubeendline,
+        \strdtubeundilate{2}{0},
+        \strdbranch{
+            \strdyhalf\strdtubemid,\strdtubeendline
+        },
+        \strdtubeunextend{0.5}{0.5},
+        \strdtubecirc,
+        \strdyhalf\strdtubemid
+    } \ = \ 
+    \strdgathered{
+        \strdbranch{
+            \strdbranch{
+                \strdljump,
+                \strdmid,\strdframearound,
+                \strdyhalf\strdmid,\strdframearound,
+                \strdyhalf\strdmid
+            },
+            \strdrjump,
+            \strdyscale{2}\strdmid
+        },
+        \strdtubestart,
+        \strdtubeextend{1.5}{1.5},\strdtubestartline,
+        \strdyhalf\strdtubemid,
+        \strdbranch{
+            \strdtubeunextend{0.5}{0.5},
+            \strdtubecirc,
+            \strdtubeundilate{2}{0},
+            \strdyhalf\strdtubemid
+        },
+        \strdyhalf\strdtubemid,
+        \strdtubeundilate{2}{0},\strdtubeendline
+    }
+}
+
+\end{document}

@@ -104,7 +104,7 @@
 \newcommand*{\strdorigin}{strdorigin}
 \newcommand*{\strddeclorigin}{%
     \strdempty@{strdorigin}{0,0}
-    \node[strd origin] at (strdorigin) {};%
+%    \node[strd origin] at (strdorigin) {};%
 }
 
 % empty
@@ -299,14 +299,14 @@
     \strdjumpC{#1}{#2}%
 }
 
-% parallel
-\newcommand*{\strdparallel}{\strdcomposeC\strdparallelC}
-\newcommand*{\strdparallelC}[2]{% {newid}{previd}
-    \strddupC{#1 Dup}{#2}
-    \strdmidC{#1 Left}{#1 Dup Left}
-    \strdmidC{#1 Right}{#1 Dup Right}
-    \strdjumpC{#1}{#2}%
-}
+% % parallel
+% \newcommand*{\strdparallel}{\strdcomposeC\strdparallelC}
+% \newcommand*{\strdparallelC}[2]{% {newid}{previd}
+%     \strddupC{#1 Dup}{#2}
+%     \strdmidC{#1 Left}{#1 Dup Left}
+%     \strdmidC{#1 Right}{#1 Dup Right}
+%     \strdjumpC{#1}{#2}%
+% }
 
 % circle
 \newcommand*{\strdcircle}{\strdcomposeC\strdcircleC}
@@ -355,7 +355,7 @@
 % Frames
 %
 
-\tikzset{strd framebase/.style={solid,semithick}}%thin}}
+\tikzset{strd framebase/.style={solid,semithick}}
 \tikzset{strd frame/.style={strd framebase,rounded corners=2pt}}
 \tikzset{strd bijframe/.style={strd framebase,sharp corners}}
 
@@ -390,6 +390,7 @@
 
 % Tubes
 %
+\tikzset{strd tube/.style={strd framebase}}
 
 % Constants
 \newcommand*{\strdtubexunit}{0.75}
@@ -409,7 +410,7 @@
 % helpers
 \newcommand*{\strdtube@}[1]{
     \strdonlayer@{strd framelayer}{
-        \strdpathis@{strd frame}{
+        \strdpathis@{strd tube}{
             #1 
         }
     }%
@@ -496,17 +497,19 @@
     \strdempty@{#4}{$(#4 Left)!.5!(#4 Right)$}%
 }
 
+\newcommand*{\DimEq}[2]{\Iftex{\ifdim#1=#2 }}
+
 % extend{lscale}{rscale} = yscale{0}{dilate{lscale}{rscale}}
 \newcommand*{\strdtubeextend}[2]{\strdcomposeC{\strdtubeextendC{#1}{#2}}}
 \newcommand*{\strdtubeextendC}[4]{% {lscale}{rscale}{newid}{previd}
     \strdtube@{
-        \If{\NumEq{#1}{0}}{
+        \If{\DimEq{#1pt}{0pt}}{
             \strdempty@{#3 Left}{#4 Left End}
         }{
             \strdxscale@{#1}{\strdempty@{#3 Left}{$(#4 Left End)+(-\strdxunit,0)$}}
         }
         \strdempty@{#3}{#4 End}
-        \If{\NumEq{#2}{0}}{
+        \If{\DimEq{#2pt}{0pt}}{
             \strdempty@{#3 Right}{#4 Right End}
         }{
             \strdxscale@{#2}{\strdempty@{#3 Right}{$(#4 Right End)+(\strdxunit,0)$}}
@@ -526,13 +529,13 @@
 \newcommand*{\strdtubedilate}[2]{\strdcomposeC{\strdtubedilateC{#1}{#2}}}
 \newcommand*{\strdtubedilateC}[4]{% {lscale}{rscale}{newid}{previd}
     \strdtube@{
-        \If{\NumEq{#1}{0}}{
+        \If{\DimEq{#1pt}{0pt}}{
             \strdmidC{#3 Left}{#4 Left}
         }{
             \strdxscale@{#1}{\strdtubedilateleftC{#3 Left}{#4 Left}}
         }
         \strdjumpC{#3}{#4}
-        \If{\NumEq{#2}{0}}{
+        \If{\DimEq{#2pt}{0pt}}{
             \strdmidC{#3 Right}{#4 Right}
         }{
             \strdxscale@{#2}{\strdflip@{\strdtubedilateleftC{#3 Right}{#4 Right}}}
@@ -553,13 +556,13 @@
 \newcommand*{\strdtubeundilate}[2]{\strdcomposeC{\strdtubeundilateC{#1}{#2}}}
 \newcommand*{\strdtubeundilateC}[4]{% {lscale}{rscale}{newid}{previd}
     \strdtube@{
-        \If{\NumEq{#1}{0}}{
+        \If{\DimEq{#1pt}{0pt}}{
             \strdmidC{#3 Left}{#4 Left}
         }{
             \strdxscale@{#1}{\strdtubeundilateleftC{#3 Left}{#4 Left}}
         }
         \strdjumpC{#3}{#4}
-        \If{\NumEq{#2}{0}}{
+        \If{\DimEq{#2pt}{0pt}}{
             \strdmidC{#3 Right}{#4 Right}
         }{
             \strdxscale@{#2}{\strdflip@{\strdtubeundilateleftC{#3 Right}{#4 Right}}}
@@ -620,7 +623,7 @@
 % Frame-arounds
 %
 
-\tikzset{strd framearound/.style={circle,draw=white,fill=white,minimum size=3pt,inner sep=0pt}}
+\tikzset{strd framearound/.style={circle,draw=white,fill=white,minimum size=4pt,inner sep=0pt}}
 \tikzset{strd roadframearound/.style={rectangle,sharp corners,draw=white,fill=white,minimum width=4pt,minimum height=3pt,inner sep=0pt}}
 
 \newcommand*{\strdframearound@}[1]{\strdonlayer@{strd framearoundlayer}{#1}}
@@ -896,6 +899,13 @@
 \newcommand*{\strdbranch@}[4]{% {stm}{sc}{newid}{previd}
     \strduse{#2}{#3}{#4}
     \strduse{#1}{\strdemptyC}{#3 Branch}{#3}
+}
+
+\newcommand*{\strdparallel}[2]{% {stm}{s1,s2,...}
+    \FoldrOne{\strdparallel@{#1}}{\List{#2}}%
+}
+\newcommand*{\strdparallel@}[3]{% {stm}{s}{z}
+    \Then{\strdbranch@{\Then{#1}{#2}}}{#3}%
 }
 
 \newcommand*{\strdrestart}[4]{% {stm}{sc}{newid}{previd}
