@@ -221,8 +221,8 @@
 \newcommand*{\strdljumpC}{\strdnoneC\strdhleftC}
 \newcommand*{\strdrjump}{\strdcomposeC\strdrjumpC}
 \newcommand*{\strdrjumpC}{\strdnoneC\strdhrightC}
-\newcommand*{\strdjumptoC}[3]{% {newid}{previd}{nextid}
-    \strdstringC{#1}{#2 End}{$(#2 End)!.5!(#3 Start)$}{#3 Start}%
+\newcommand*{\strdjumpto@}[3]{% {newid}{prevnode}{nextnode}
+    \strdstringC{#1}{#2}{$(#2)!.5!(#3)$}{#3}%
 }
 
 % dup
@@ -261,7 +261,7 @@
     \strdcoord@{#1 Start}{#2 End}
     \strdcoord@{#1 End}{#3 End}
     \strdcoord@{#1 StartCorner}{$(#1 Start)+(-\strdxunit,0)$}
-    \strdcoord@{(#1 EndCorner}{{#1 StartCorner} |- {#1 End}}
+    \strdcoord@{#1 EndCorner}{{#1 StartCorner} |- {#1 End}}
     \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
     \strdcoord@{#1}{#1 Mid}
     \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) }%
@@ -357,27 +357,33 @@
 
 \tikzset{strd framebase/.style={solid,semithick}}
 \tikzset{strd frame/.style={strd framebase,rounded corners=2pt}}
-\tikzset{strd bijframe/.style={strd framebase,sharp corners}}
 
 \newcommand*{\strdframe}{\Compose\strdseqin\strdframeone}
 \newcommand*{\strdframeone}{\Compose{\strdonlayer{strd framelayer}}{\strdscope{strd frame}}}
 
-\newcommand*{\strdframesqof}[3]{\strdseqin{\strdframesqofone{#1}{#2}{#3}}}
-\newcommand*{\strdframesqofone}[7]{% {style}{xl}{xr}{stm}{sc}{newid}{previd}
+
+% Boxes
+%
+
+\tikzset{strd box/.style={strd framebase,rounded corners=2pt}}
+\tikzset{strd bijbox/.style={strd framebase,sharp corners}}
+
+\newcommand*{\strdboxof}[3]{\strdseqin{\strdboxofone{#1}{#2}{#3}}}
+\newcommand*{\strdboxofone}[7]{% {style}{xl}{xr}{stm}{sc}{newid}{previd}
     \strduse{#5}{#6 Prev}{#7}
     \strduse{#4}{\strdemptyC}{#6 Unframe}{#6 Prev}
     \strdonlayer@{strd framelayer}{
         \strdpathis@{#1}{
             \strdxscale@{#2}{ \strdsqsubsettoC{#6 Left}{#6 Prev}{#6 Unframe} }
             \strdxscale@{#3}{ \strdsqsupsettoC{#6 Right}{#6 Prev}{#6 Unframe} }
-            \strdjumptoC{#6}{#6 Prev}{#6 Unframe}
+            \strdjumpto@{#6}{#6 Prev End}{#6 Unframe End}
          }
      }%
 }
-\newcommand*{\strdframesq}{\strdframesqof{strd frame}}
-\newcommand*{\strdbijframesq}{\strdframesqof{strd bijframe}}
+\newcommand*{\strdbox}{\strdboxof{strd box}}
+\newcommand*{\strdbijbox}{\strdboxof{strd bijbox}}
 
-\newcommand*{\strddeclsqsubset}[3]{% {newid}{fromnode}{tonode}
+\newcommand*{\strddeclsqsubset@}[3]{% {newid}{fromnode}{tonode}
     \strdcoord@{#1 Start}{#2}
     \strdcoord@{#1 StartCorner}{$(#2)+(-\strdxunit,0)$}
     \strdcoord@{#1 EndCorner}{$(#3)+(-\strdxunit,0)$}
@@ -385,11 +391,12 @@
     \strdcoord@{#1}{#1 Mid}
     \strdcoord@{#1 End}{#3}
 }
-\newcommand*{\strddeclsqsupset}[3]{\strdflip@{\strddeclsqsubset{#1}{#2}{#3}}}
+\newcommand*{\strddeclsqsupset}[3]{\strdflip@{\strddeclsqsubset@{#1}{#2}{#3}}}
 
 
 % Tubes
 %
+
 \tikzset{strd tube/.style={strd framebase}}
 
 % Constants

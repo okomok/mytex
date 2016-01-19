@@ -5,37 +5,38 @@
 
 \begin{document}
 
-\myin{preview,math,aligned}{
-    & \text{framelabel test} \\
+
+\In{preview,math,aligned}{
+    \text{framelabel test} \\
     \strdgathered{
         \strdmid, \strdrlabel{\int T\myprime},
-        \strdmapframe{1}{2.3}{
+        \strdbox{1}{2.3}{
             \strdmid, \strdrlabel{T(A,A\myprime)},
             \strdcell{\alpha},
             \strdmid, \strdrlabel{T(A,A\myprime)}
         }, \strdframelabelat{Left}{P},%{\int_{A,A'}},
         \strdmid, \strdrlabel{\int T}
     } \\
-    & \strdgathered{
+    \strdgathered{
         \strdmid,
-        \strdmapframe{2}{2}{
-            \strdmid,\strdmid,
+        \strdbox{2}{2}{
+            \strdmid,\strddot,\strdmid,\strddot,
             \strdmid, \strdrlabel{T(A,A\myprime)},
             \strdcell{\alpha},
             \strdmid, \strdrlabel{T(A,A\myprime)}
         }, \strdframelabelat{Left}{P},
         \strdmid,
         \strdbijcell{fgh},
+        \strdmid,\strddot,
         \strdmid,
-        \strdmid,
-        \strdmapframe{2}{2}{\strdmid,\strdmid},\strdframellabel{g},
+        \strdbox{2}{2}{\strdmid,\strdmid},\strdframellabel{g},
         \strdmid,
         \strdmapcell{f},
-        \strdmid,
+        \strdmid,\strddot,
         \strdmid,
         \strdbranch{
             \strdljump,
-            \strdmid, \strdmid
+            \strdmid, \strddot,\strdmid
         },
         \strdmid, \strdcell{f}, \strdmid
     } \\
