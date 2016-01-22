@@ -1,0 +1,147 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{B},\strdstartlabel{\mathcal{K}l},
+        \strdidbox{1.7}{1.7}{
+            \strdbranch{
+                \strdmid,\strdrlabel{}
+            },
+            \strdtubestart,
+            \strdtubemid,
+            \strdtubecell{1}{k},
+            \strdmid,\strdrlabel{}
+        },
+        \strdmid,\strdrlabel{A}
+    } \\
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{A}
+    } \ \mydefeq\ 
+    \strdgathered{
+        \strdmid,\strdrlabel{A},
+        \strdidbox{1.7}{1.7}{
+            \strdbranch{
+                \strdmid,\strdrlabelat{Mid}{},
+                \strdmid
+            },
+            \strdtubestart,
+            \strdtubemid,
+            \strdtubeedgecdot,
+            \strdjump
+        },
+        \strdmid,\strdrlabel{A}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{C},
+        \strdidbox{1.7}{1.7}{
+            \strdbranch{
+                \strdmid,\strdrlabel{}
+            },
+            \strdtubestart,
+            \strdtubemid,
+            \strdtubecell{1}{l},
+            \strdmid,\strdrlabel{}
+        },
+        \strdmid,\strdrlabel{B},
+        \strdidbox{1.7}{1.7}{
+            \strdbranch{
+                \strdmid,\strdrlabel{}
+            },
+            \strdtubestart,
+            \strdtubemid,
+            \strdtubecell{1}{k},
+            \strdmid,\strdrlabel{}
+        },
+        \strdmid,\strdrlabel{A}
+    } \ \mydefeq \
+    \strdgathered{
+        \strdmid,\strdrlabel{C},
+        \strdidbox{2.7}{2.7}{
+            \strdbranch{
+                \strdmid,
+                \strdbranch{
+                    \strdmid
+                },
+                \strdtubestart,
+                \strdtubeedgecirc,
+                \strdtubemid,
+                \strdtubecell{1}{l},
+                \strdmid,\strdrlabel{B}
+            },
+            \strdtubestart,
+            \strdtubeextend{1}{1},
+            \strdyscale{3}\strdtubemid,
+            \strdtubecell{2}{k},
+            \strdmid
+        },
+        \strdmid,\strdrlabel{A}
+    }
+}
+
+% Kleisli adjunction
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{B},
+        \strdcell{f},
+        \strdmid,\strdrlabel{A}
+    } \ \mapsto \
+    \strdgathered{
+        \strdmid,\strdrlabel{B},
+        \strdidbox{1.7}{1.7}{
+            \strdbranch{
+                \strdmid,
+                \strdcell{f}
+            },
+            \strdtubestart,
+            \strdtubemid,
+            \strdtubeedgecdot,
+            \strdmid
+        },
+        \strdmid,\strdrlabel{A}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{B},
+        \strdidbox{1.7}{1.7}{
+            \strdbranch{
+                \strdmid,\strdrlabel{}
+            },
+            \strdtubestart,
+            \strdtubemid,
+            \strdtubecell{1}{k},
+            \strdmid,\strdrlabel{}
+        },
+        \strdmid,\strdrlabel{A}
+    } \ \mapsto\
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{B},
+            \strdbranch{
+                \strdmid
+            },
+            \strdtubestart,
+            \strdtubeedgecirc,
+            \strdtubemid,
+            \strdtubecell{1}{k},
+            \strdmid,\strdrlabel{A}
+        },
+        \strdtubestart,
+        \strdtubeextend{1}{1},\strdtubestartline,
+        \strdyscale{3}\strdtubemid,\strdtubeendline
+    }
+}
+
+
+\end{document}

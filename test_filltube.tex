@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+\In{preview,math,aligned}{
+    \text{tube}:
+    \strdgathered{
+        \strdtubestart,
+        \strdtubemid,\strdtubeendline,
+        \strdtubemid,\strdtubeendline,
+        \strdbranch{
+            \strdtuberight,\strdtubemid
+        },
+        \strdtubeleft,\strdtubemid
+    }
+}
+
+\In{preview,math,aligned}{
+    \text{symmetry}:
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdlchange,\strdmid
+        },
+        \strdtubestart,
+        \strdyhalf\strdtubemid,\strdtubeendline,
+        \strdtubedilate{2}{0},\strdtubeendline,
+        \strdtubeundilate{0}{2},\strdtubeendline,
+        \strdyhalf\strdtubemid
+    }
+}
+
+\end{document}

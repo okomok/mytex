@@ -323,7 +323,7 @@
 \tikzset{strd dot/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
 \tikzset{strd whitedot/.style={circle,draw=white,fill=white,minimum size=3pt,inner sep=0pt}}
 
-\newcommand*{\strdputdot}[1]{% {node}
+\newcommand*{\strdputcdot}[1]{% {node}
     \strdonlayer@{strd celllayer}{
         \node[strd dot] at (#1) {};
     }%
@@ -367,6 +367,7 @@
 
 \tikzset{strd box/.style={strd framebase,rounded corners=2pt}}
 \tikzset{strd bijbox/.style={strd framebase,sharp corners}}
+\tikzset{strd idbox/.style={strd framebase,thin}}
 
 \newcommand*{\strdboxof}[3]{\strdseqin{\strdboxofone{#1}{#2}{#3}}}
 \newcommand*{\strdboxofone}[7]{% {style}{xl}{xr}{stm}{sc}{newid}{previd}
@@ -382,6 +383,7 @@
 }
 \newcommand*{\strdbox}{\strdboxof{strd box}}
 \newcommand*{\strdbijbox}{\strdboxof{strd bijbox}}
+\newcommand*{\strdidbox}{\strdboxof{strd idbox}}
 
 \newcommand*{\strddeclsqsubset@}[3]{% {newid}{fromnode}{tonode}
     \strdcoord@{#1 Start}{#2}
@@ -431,6 +433,9 @@
         \strdjumpC{#1}{#2}
         \strdmidC{#1 Right}{#2 Right}
     }%
+    % \strdonlayer@{background}{
+    %     \fill[orange,sharp corners,draw]{ (#1 Left Start) -- (#1 Left End) -- (#1 Right End) -- (#1 Right Start) };
+    % }
 }
 
 % left
@@ -606,21 +611,35 @@
 }
 
 % cells
-\tikzset{strd semicellbase/.style={strd cellbase,very thin,sharp corners,rounded rectangle}}
-\tikzset{strd tubelcell/.style={strd semicellbase,rounded rectangle east arc=none}}
-\tikzset{strd tubercell/.style={strd semicellbase,rounded rectangle west arc=none}}
-\newcommand*{\strdtubecell}{\Compose\strdwith\strdputtubecell}
-\newcommand*{\strdputtubecell}[2]{% {text}{id}
+\tikzset{strd tubecellbase/.style={strd cellbase,thin}}
+\tikzset{strd tubecell/.style={strd tubecellbase}}
+\tikzset{strd tubesemicellbase/.style={strd tubecellbase,sharp corners,rounded rectangle}}
+\tikzset{strd tubesemicellleft/.style={strd semicellbase,rounded rectangle east arc=none}}
+\tikzset{strd tubesemicellright/.style={strd semicellbase,rounded rectangle west arc=none}}
+\newcommand*{\strdtubecell}[2]{\strdwith{\strdputtubecell{#1}{#2}}}
+\newcommand*{\strdputtubecell}[3]{% {xscale}{text}{id}
     \strdonlayer@{strd celllayer}{
-        \node[strd tubelcell] at (#2 Left End) {#1};
-        \node[strd tubercell] at (#2 Right End) {\vphantom{#1}};% has some width for some reason. 
+        \node[strd tubecell,minimum width=1cm,xscale=#1] at (#3 End) {};
+        \node[] at (#3 End) {#2};
     }% 
 }
-\tikzset{strd tubecdot/.style={circle,semithick,draw=black,fill=black,minimum size=2.8pt,inner sep=0pt}}
-\tikzset{strd tubecirc/.style={circle,semithick,draw=black,fill=white,minimum size=2.8pt,inner sep=0pt}}
-\newcommand*{\strdtubecdot}{\strdwith{\strdputtubeshape@{strd tubecdot}}}
-\newcommand*{\strdtubecirc}{\strdwith{\strdputtubeshape@{strd tubecirc}}}
-\newcommand*{\strdputtubeshape@}[2]{% {opt}{id}
+\newcommand*{\strdtubesemicell}{\Compose\strdwith\strdputtubesemicell}
+\newcommand*{\strdputtubesemicell}[2]{% {text}{id}
+    \strdonlayer@{strd celllayer}{
+        \node[strd tubesemicellleft] at (#2 Left End) {#1};
+        \node[strd tubesemicellright] at (#2 Right End) {\vphantom{#1}};% has some width for some reason. 
+    }% 
+}
+
+% edges
+\tikzset{strd tubeedgebase/.style={thin,draw=black,fill=white,minimum size=2.8pt,inner sep=0pt}}
+\tikzset{strd tubeedgecdot/.style={strd tubeedgebase,circle,fill=black}}
+\tikzset{strd tubeedgecirc/.style={strd tubeedgebase,circle}}
+\tikzset{strd tubeedgesq/.style={strd tubeedgebase,rectangle,sharp corners}}
+\newcommand*{\strdtubeedgecdot}{\strdwith{\strdputtubeedge@{strd tubeedgecdot}}}
+\newcommand*{\strdtubeedgecirc}{\strdwith{\strdputtubeedge@{strd tubeedgecirc}}}
+\newcommand*{\strdtubeedgesq}{\strdwith{\strdputtubeedge@{strd tubeedgesq}}}
+\newcommand*{\strdputtubeedge@}[2]{% {opt}{id}
     \strdonlayer@{strd celllayer}{
         \node[#1] at (#2 Left End) {};
         \node[#1] at (#2 Right End) {};
@@ -874,7 +893,7 @@
 \newcommand*{\strdhere}{\strdwithat{End}}
 \newcommand*{\strddo}[1]{\Compose\strdwith{\Proc{#1}}}
 
-\newcommand*{\strddot}{\strdhere\strdputdot}
+\newcommand*{\strdcdot}{\strdhere\strdputcdot}
 \newcommand*{\strdwhitedot}{\strdwithat{Start}{\strdputwhitedot}}
 \newcommand*{\strdcell}{\Compose\strdhere\strdputcell}
 \newcommand*{\strdcellat}[2]{\strdwithat{#1}{\strdputcell{#2}}}
@@ -890,8 +909,8 @@
 \newcommand*{\strdregionlabel}{\Compose\strdwith\strdputregionlabel}
 \newcommand*{\strdfamilylabel}{\Compose\strdwith\strdputfamilylabel}
 \newcommand*{\strdunfamilylabel}{\Compose\strdwith\strdputunfamilylabel}
-\newcommand*{\strdstart}{\Compose\strdwith\strdputstartlabel}
-\newcommand*{\strdend}{\Compose\strdwith\strdputendlabel}
+\newcommand*{\strdstartlabel}{\Compose\strdwith\strdputstartlabel}
+\newcommand*{\strdendlabel}{\Compose\strdwith\strdputendlabel}
 
 \newcommand*{\strdllabelat}[2]{\strdwithat{#1}{\strdputllabel{#2}}}
 \newcommand*{\strdrlabelat}[2]{\strdwithat{#1}{\strdputrlabel{#2}}}
