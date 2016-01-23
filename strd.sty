@@ -636,6 +636,11 @@
 \tikzset{strd tubeedgecdot/.style={strd tubeedgebase,circle,fill=black}}
 \tikzset{strd tubeedgecirc/.style={strd tubeedgebase,circle}}
 \tikzset{strd tubeedgesq/.style={strd tubeedgebase,rectangle,sharp corners}}
+\tikzset{strd tubeedgehd/.style={strd tubeedgebase,regular polygon,regular polygon sides=3,sharp corners,minimum size=5pt}}
+\tikzset{strd tubeedgelhd/.style={strd tubeedgehd,rotate=90}}
+\tikzset{strd tubeedgerhd/.style={strd tubeedgehd,rotate=-90}}
+\tikzset{strd tubeedgeblhd/.style={strd tubeedgehd,rotate=90,fill=black}}
+\tikzset{strd tubeedgebrhd/.style={strd tubeedgehd,rotate=-90,fill=black}}
 \newcommand*{\strdtubeedgecdot}{\strdwith{\strdputtubeedge@{strd tubeedgecdot}}}
 \newcommand*{\strdtubeedgecirc}{\strdwith{\strdputtubeedge@{strd tubeedgecirc}}}
 \newcommand*{\strdtubeedgesq}{\strdwith{\strdputtubeedge@{strd tubeedgesq}}}
@@ -643,6 +648,14 @@
     \strdonlayer@{strd celllayer}{
         \node[#1] at (#2 Left End) {};
         \node[#1] at (#2 Right End) {};
+    }% 
+}
+\newcommand*{\strdtubeedgehd}{\strdwith{\strdputtubelredge@{strd tubeedgelhd}{strd tubeedgerhd}}}
+\newcommand*{\strdtubeedgebhd}{\strdwith{\strdputtubelredge@{strd tubeedgeblhd}{strd tubeedgebrhd}}}
+\newcommand*{\strdputtubelredge@}[3]{% {l}{r}{id}
+    \strdonlayer@{strd celllayer}{
+        \node[#1] at (#3 Left End) {};
+        \node[#2] at (#3 Right End) {};
     }% 
 }
 
