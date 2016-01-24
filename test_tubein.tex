@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+\In{preview,math,aligned}{
+    \text{trivial} \\
+    \strdgathered{
+        \strdtubestart,
+        \strdtubedilate{1}{1},
+        \strdparallel{
+            \strdseq{\strdtubeinleft{1},\strdtubeendline,\strdtubemid,\strdmid},
+            \strdseq{\strdtubeinright{1},\strdtubeendline,\strdtubemid,\strdmid}
+        }
+    }
+}
+
+\In{preview,math,aligned}{
+    \text{trivial} \\
+    \strdgathered{
+        \strdtubestart,
+        \strdtubedilate{2}{1},
+        \strdparallel{
+            \strdseq{\strdtubeinleft{2},\strdtubeendline,\strdtubemid,\strdmid},
+            \strdseq{\strdtubeinright{1},\strdtubeendline,\strdtubemid,\strdmid}
+        }
+    }
+}
+
+\In{preview,math,aligned}{
+    \text{trivial} \\
+    \strdgathered{
+        \strdtubestart,
+        \strdtubedilate{3}{2},
+        \strdparallel{
+            \strdtubeinleft{3},
+            \strdtubeinright{2}
+        }
+    }
+}
+
+\In{preview,math,aligned}{
+    \text{trivial} \\
+    \strdgathered{
+        \strdtubestart,
+        \strdtubeunclose,
+        \strdtubedilate{2}{2},
+        \strdparallel{
+            \strdtubeinleft{1},
+            \strdtubeinmid{1}{1},
+            \strdseq{\strdtubeinright{1},\strdtubeclose}
+        }
+    }
+}
+
+\In{preview,math,aligned}{
+    \text{trivial} \\
+    \strdgathered{
+        \strdtubestart,
+        \strdtubedilate{3}{2},
+        \strdparallel{
+            \strdtubeinleft{1},
+            \strdtubeinmid{2}{1},
+            \strdtubeinright{1}
+        }
+    }
+}
+
+\end{document}

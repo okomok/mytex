@@ -1,0 +1,304 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+% signature
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{B},
+            \strdcell{f},
+            \strdmid,\strdrlabel{A}
+        },
+        \strdtubestart,\strdtubeendline,
+        \strdtubemid,
+        \strdtubemid,
+        \strdtubeendline
+    } \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{FB},
+        \strdbox{1}{1}{
+            \strdmid,\strdrlabel{B},
+            \strdcell{f},
+            \strdmid,\strdrlabel{A}
+        },\strdframellabel{F},
+        \strdmid,\strdrlabel{FA}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdparallel{
+                \strdseq{\strdljump,\strdmid,\strdrlabel{A}},
+                \strdseq{\strdrjump,\strdmid,\strdrlabel{B}},
+                \Identity
+            }
+        },
+        \strdtubestart,
+        \strdtubeextend{1}{1},\strdtubeendline,
+        \strdparallel{
+            \strdseq{\strdtubeinleft{1},\strdtubeendline},
+            \strdseq{\strdtubeinright{1},\strdtubeendline}
+        }
+    } \ \mydefeq\
+    \strdgathered{
+        \strdmid,\strdrlabel{F(A{\otimes}B)},
+        \strdcell{\phi},
+        \strdparallel{
+            \strdseq{\strdleft,\strdrlabel{FA}},
+            \strdseq{\strdright,\strdrlabel{FB}}
+        }
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdimplicit\strdmid
+        },
+        \strdtubestart,\strdtubeendline,
+        \strdtubeclose
+    } \ \mydefeq\
+    \strdgathered{
+        \strdmid,\strdrlabel{F(I)},
+        \strdcell{\phi_0},
+        \strdmid,\strdrlabel{I'}
+    } 
+}
+
+% coherence
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdparallel{
+                \strdseq{\strdrjump,\strdydouble\strdmid},
+                \strdseq{\strdljump,\strdydouble\strdmid},
+                \strdseq{\strdljump,\strdxdouble\strdljump,\strdydouble\strdmid}
+            }
+        },
+        \strdtubestart,
+        \strdtubeextend{3}{1},\strdtubeendline,
+        \strdparallel{
+            \strdseq{
+                \strdtubeinleft{3},
+                \strdtubeendline,
+                \strdparallel{
+                    \strdseq{\strdtubeinleft{1},\strdtubeendline},
+                    \strdseq{\strdtubeinright{1},\strdtubeendline}
+                }
+            },
+            \strdseq{
+                \strdtubeinright{1},
+                \strdtubeendline,
+                \strdtubemid,
+                \strdtubeendline
+            }
+        }
+    } =
+    \Compose\strdgathered\strdflip{
+        \strdbranch{
+            \strdparallel{
+                \strdseq{\strdrjump,\strdydouble\strdmid},
+                \strdseq{\strdljump,\strdydouble\strdmid},
+                \strdseq{\strdljump,\strdxdouble\strdljump,\strdydouble\strdmid}
+            }
+        },
+        \strdtubestart,
+        \strdtubeextend{3}{1},\strdtubeendline,
+        \strdparallel{
+            \strdseq{
+                \strdtubeinleft{3},
+                \strdtubeendline,
+                \strdparallel{
+                    \strdseq{\strdtubeinleft{1},\strdtubeendline},
+                    \strdseq{\strdtubeinright{1},\strdtubeendline}
+                }
+            },
+            \strdseq{
+                \strdtubeinright{1},
+                \strdtubeendline,
+                \strdtubemid,
+                \strdtubeendline
+            }
+        }
+    } \myeqdef
+    \strdgathered{
+        \strdbranch{
+            \strdrjump,
+            \strdparallel{
+                \strdseq{\strdrjump,\Identity\strdmid},
+                \strdseq{\strdljump,\Identity\strdmid},
+                \strdseq{\strdljump,\strdxdouble\strdljump,\Identity\strdmid}
+            }
+        },
+        \strdtubestart,
+        \strdtubeextend{2}{2},\strdtubeendline,
+        \strdparallel{
+            \strdseq{
+                \strdtubeinleft{1},
+                \strdtubeendline
+            },
+            \strdseq{
+                \strdtubeinmid{1}{1},
+                \strdtubeendline
+            },
+            \strdseq{
+                \strdtubeinright{1},
+                \strdtubeendline
+            }
+        }
+    } \\ 
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdparallel{
+                \strdseq{\strdrjump,\strdimplicit{\strdyscale{2}\strdmid}},
+                \strdseq{\strdljump,\strdydouble\strdmid},
+                \Identity
+            }
+        },
+        \strdtubestart,
+        \strdtubeextend{1}{1},\strdtubeendline,
+        \strdparallel{
+            \strdseq{
+                \strdtubeinleft{1},
+                \strdtubeendline,
+                \strdtubemid,
+                \strdtubeendline
+            },
+            \strdseq{
+                \strdtubeinright{1},
+                \strdtubeendline,
+                \strdtubeclose
+            }
+        }
+    } =
+    \strdgathered{
+        \strdbranch{
+            \strdmid
+        },
+        \strdtubestart,\strdtubeendline,
+        \strdtubemid,\strdtubeendline
+    } =
+    \Compose\strdgathered\strdflip{
+        \strdbranch{
+            \strdparallel{
+                \strdseq{\strdrjump,\strdimplicit{\strdyscale{2}\strdmid}},
+                \strdseq{\strdljump,\strdydouble\strdmid},
+                \Identity
+            }
+        },
+        \strdtubestart,
+        \strdtubeextend{1}{1},\strdtubeendline,
+        \strdparallel{
+            \strdseq{
+                \strdtubeinleft{1},
+                \strdtubeendline,
+                \strdtubemid,
+                \strdtubeendline
+            },
+            \strdseq{
+                \strdtubeinright{1},
+                \strdtubeendline,
+                \strdtubeclose
+            }
+        }
+    }
+}
+
+
+% signature
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{GA},
+        \strdcell{\tau},
+        \strdmid,\strdrlabel{FA}
+    } \mydefeq\
+    \strdgathered{
+        \strdbranch{
+            \strdmid,\strdrlabel{A},
+            \strdmid
+        },
+        \strdtubestart,\strdtubeendline,
+        \strdtubemid,\strdframellabel{G},
+        \strdtubesemicell{\tau},
+        \strdtubemid,\strdframellabel{F},\strdtubeendline
+    }
+}
+
+% naturality
+\In{preview,math,aligned}{
+    \myitem &
+    \Compose\strdgathered{\strdxscale{1}}{
+        \strdbranch{
+            \strdparallel{
+                \strdseq{\strdrjump,\strdyscale{3}\strdmid},
+                \strdseq{\strdljump,\strdyscale{3}\strdmid},
+                \Identity
+            }
+        },
+        \strdtubestart,
+        \strdtubeextend{1}{1},\strdtubeendline,
+        \strdparallel{
+            \strdseq{
+                \strdtubeinleft{1},\strdtubeendline,
+                \strdtubemid,
+                \strdtubesemicell{\tau},
+                \strdtubemid,\strdtubeendline
+            },
+            \strdseq{
+                \strdtubeinright{1},\strdtubeendline,
+                \strdtubemid,
+                \strdtubesemicell{\tau},
+                \strdtubemid,\strdtubeendline
+            }
+        }
+    } =
+    \strdgathered{
+        \strdbranch{
+            \strdparallel{
+                \strdseq{\strdrjump,\strdyscale{3}\strdmid},
+                \strdseq{\strdljump,\strdyscale{3}\strdmid},
+                \Identity
+            }
+        },
+        \strdtubestart,
+        \strdtubeextend{1}{1},\strdtubeendline,
+        \strdtubemid,
+        \strdtubesemicell{\tau},
+        \strdtubemid,\strdtubeendline,
+        \strdparallel{
+            \strdseq{
+                \strdtubeinleft{1},\strdtubeendline,
+                \Identity
+            },
+            \strdseq{
+                \strdtubeinright{1},\strdtubeendline,
+                \Identity
+            }
+        }
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdbranch{
+            \strdyscale{3}{\strdimplicit\strdmid}
+        },
+        \strdtubestart,\strdtubeendline,
+        \strdtubemid,
+        \strdtubesemicell{\tau},
+        \strdtubemid,\strdtubeendline,
+        \strdtubeclose
+    } = \
+    \strdgathered{
+        \strdbranch{
+            \strdimplicit\strdmid
+        },
+        \strdtubestart,\strdtubeendline,
+        \strdtubeclose
+    }
+}
+
+\end{document}
