@@ -460,8 +460,9 @@
 \newcommand*{\strdtubepartleftC}[3]{% {xscale}{newid}{previd}
     \strdtube@{
         \strdmidC{#2 Left}{#3 Left}
+        \strdjumpC{#2}{#3}
         \strdtubepartleftrightC{#1}{#2 Right}{#3 Left}
-        \strdtubeauxmid@{#2}
+        %\strdtubeauxmid@{#2}
     }%
 }
 \newcommand*{\strdtubepartleftrightC}[3]{% {xscale}{newid}{previd}
@@ -476,20 +477,21 @@
     \strdcoord@{#2}{#2 Mid}
     \strddraw@{ (#2 StartCorner) -- (#2 EndCorner) -- (#2 End) }%
 }
-\newcommand*{\strdtubeunpartleft}[1]{\strdcomposeC{\strdtubeunpartleftC{#1}}}
-\newcommand*{\strdtubeunpartleftC}[1]{\strdtubeundoC@{\strdtubepartleftC{#1}}}
+\newcommand*{\strdtubepartunleft}[1]{\strdcomposeC{\strdtubepartunleftC{#1}}}
+\newcommand*{\strdtubepartunleftC}[1]{\strdtubeundoC@{\strdtubepartleftC{#1}}}
 
 % partright
 \newcommand*{\strdtubepartright}[1]{\strdcomposeC{\strdtubepartrightC{#1}}}
 \newcommand*{\strdtubepartrightC}[3]{% {xscale}{newid}{previd}
     \Compose\strdtube@\strdflip@{
         \strdmidC{#2 Right}{#3 Right}
+        \strdjumpC{#2}{#3}
         \strdtubepartleftrightC{#1}{#2 Left}{#3 Right}
-        \strdtubeauxmid@{#2}
+        %\strdtubeauxmid@{#2}
     }%
 }
-\newcommand*{\strdtubeunpartright}[1]{\strdcomposeC{\strdtubeunpartrightC{#1}}}
-\newcommand*{\strdtubeunpartrightC}[1]{\strdtubeundoC@{\strdtubepartrightC{#1}}}
+\newcommand*{\strdtubepartunright}[1]{\strdcomposeC{\strdtubepartunrightC{#1}}}
+\newcommand*{\strdtubepartunrightC}[1]{\strdtubeundoC@{\strdtubepartrightC{#1}}}
 
 % partmid
 \newcommand*{\strdtubepartmid}[2]{\strdcomposeC{\strdtubepartmidC{#1}{#2}}}
@@ -498,20 +500,50 @@
         \strdflip@{
             \strdtubepartmidrightC{#1}{#3 Left}{#4}
         }
+        \strdjumpC{#3}{#4}
         \strdtubepartmidrightC{#2}{#3 Right}{#4}
-        \strdtubeauxmid@{#3}
+        %\strdtubeauxmid@{#3}
     }%
 }
 \newcommand*{\strdtubepartmidrightC}[3]{% {xscale}{newid}{previd}
     \strdxscale@{#1}{
-        \strdcoord@{#2 Start}{$(#3 End)+(\strdxunit,-\strdtubeyhalfunit)$}
+        \strdcoord@{#2 StartCorner}{$(#3 End)+(\strdxunit,-\strdtubeyhalfunit)$}
     }
-    \strdcoord@{#2 StartCorner}{$(#2 Start)+(-\strdtubexmagic,0)$}
-    \strdcoord@{#2 End}{$(#2 StartCorner)+(0,-\strdtubeyhalfunit)$}
-    \strdcoord@{#2 Mid}{$(#2 StartCorner)!.5!(#2 End)$}
+    \strdcoord@{#2 Start}{$(#2 StartCorner)+(0,\strdtubeyhalfunit)$}
+    \strdcoord@{#2 EndCorner}{$(#2 StartCorner)+(-\strdtubexmagic,0)$}
+    \strdcoord@{#2 End}{$(#2 EndCorner)+(0,-\strdtubeyhalfunit)$}
+    \strdcoord@{#2 Mid}{$(#2 EndCorner)!.5!(#2 End)$}
     \strdcoord@{#2}{#2 Mid}
-    \strddraw@{ (#2 Start) -- (#2 StartCorner) -- (#2 End) }%
+    \strddraw@{ (#2 StartCorner) -- (#2 EndCorner) -- (#2 End) }%
 }
+\newcommand*{\strdtubepartunmid}[2]{\strdcomposeC{\strdtubepartunmidC{#1}{#2}}}
+\newcommand*{\strdtubepartunmidC}[2]{\strdtubeundoC@{\strdtubepartmidC{#1}{#2}}}
+
+% partclose
+\newcommand*{\strdtubepartclose}[2]{\strdcomposeC{\strdtubepartcloseC{#1}{#2}}}
+\newcommand*{\strdtubepartcloseC}[4]{% {lscale}{rscale}{newid}{previd}
+    \strdtube@{
+        \strdflip@{
+            \strdtubepartcloserightC{#1}{#3 Left}{#4}
+        }
+        \strdjumpC{#3}{#4}
+        \strdtubepartcloserightC{#2}{#3 Right}{#4}
+        %\strdtubeauxmid@{#3}
+    }%
+}
+\newcommand*{\strdtubepartcloserightC}[3]{% {xscale}{newid}{previd}
+    \strdxscale@{#1}{
+        \strdcoord@{#2 StartCorner}{$(#3 End)+(\strdxunit,-\strdtubeyhalfunit)$}
+    }
+    \strdcoord@{#2 Start}{$(#2 StartCorner)+(0,\strdtubeyhalfunit)$}
+    \strdcoord@{#2 EndCorner}{$(#3 End)+(0,-\strdtubeyhalfunit)$}
+    \strdcoord@{#2 End}{$(#2 EndCorner)+(0,-\strdtubeyhalfunit)$}
+    \strdcoord@{#2 Mid}{$(#2 EndCorner)!.5!(#2 End)$}
+    \strdcoord@{#2}{#2 Mid}
+    \strddraw@{ (#2 StartCorner) -- (#2 EndCorner) }%
+}
+\newcommand*{\strdtubepartunclose}[2]{\strdcomposeC{\strdtubepartuncloseC{#1}{#2}}}
+\newcommand*{\strdtubepartuncloseC}[2]{\strdtubeundoC@{\strdtubepartcloseC{#1}{#2}}}
 
 % merge todo
 \newcommand*{\strdtubemerge}[5]{% {lstm}{rstm}{sc}{newid}{previd}

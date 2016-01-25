@@ -34,7 +34,7 @@
     \strdgathered{
         \strdtubestart,
         \strdtubepartleft{2}, \strdtubestartline,\strdtubeendline,
-        \strdtubeunpartleft{2},\strdtubeendline,
+        \strdtubepartunleft{2},\strdtubeendline,
         \Identity
     }
 }
@@ -44,7 +44,7 @@
     \strdgathered{
         \strdtubestart,
         \strdtubepartright{2}, \strdtubestartline,\strdtubeendline,
-        \strdtubeunpartright{2},\strdtubeendline,
+        \strdtubepartunright{2},\strdtubeendline,
         \Identity
     }
 }
@@ -59,11 +59,45 @@
     }
 }
 \In{preview,math,aligned}{
-    \text{tubedilate}\\
+    \text{tubeclose}\\
     \strdgathered{
         \strdtubestart,
         \strdtubeclose,\strdtubestartline,\strdtubeendline,
         \strdtubeunclose,\strdtubeendline,
+        \Identity
+    }
+}
+
+\In{preview,math,aligned}{
+    \text{tubepartmid}\\
+    \strdgathered{
+        \strdtubestart,
+        \strdtubedilate{2}{3},
+        \strdparallel{
+            \strdmid,
+            \strdseq{\strdtubepartleft{1},\strdtubeendline,\strdtubepartunleft{1},\strdtubeendline},
+            \strdseq{\strdtubepartmid{1}{2},\strdtubestartline,\strdtubeendline,\strdtubepartunmid{1}{2},\strdtubeendline},
+            \strdseq{\strdtubepartright{1},\strdtubeendline,\strdtubepartunright{1},\strdtubeendline},
+            \Identity
+        },
+%        \strdyscale{2}\strdtubejump,\strdtubeendline,
+        \Identity
+    }
+}
+
+\In{preview,math,aligned}{
+    \text{tubepartclose}\\
+    \strdgathered{
+        \strdtubestart,
+        \strdtubedilate{2}{3},
+        \strdparallel{
+            \strdmid,
+            \strdseq{\strdtubepartleft{1},\strdtubeendline,\strdtubepartunleft{1},\strdtubeendline},
+            \strdseq{\strdtubepartclose{1}{2},\strdtubestartline,\strdtubeendline,\strdtubepartunclose{1}{2},\strdtubeendline},
+            \strdseq{\strdtubepartright{1},\strdtubeendline,\strdtubepartunright{1},\strdtubeendline},
+            \Identity
+        },
+%        \strdyscale{2}\strdtubejump,\strdtubeendline,
         \Identity
     }
 }
