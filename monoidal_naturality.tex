@@ -40,8 +40,8 @@
         \strdtubestart,
         \strdtubeextend{1}{1},\strdtubeendline,
         \strdparallel{
-            \strdseq{\strdtubeinleft{1},\strdtubeendline},
-            \strdseq{\strdtubeinright{1},\strdtubeendline}
+            \strdseq{\strdtubepartleft{1},\strdtubeendline},
+            \strdseq{\strdtubepartright{1},\strdtubeendline}
         }
     } \ \mydefeq\
     \strdgathered{
@@ -82,15 +82,15 @@
         \strdtubeextend{3}{1},\strdtubeendline,
         \strdparallel{
             \strdseq{
-                \strdtubeinleft{3},
+                \strdtubepartleft{3},
                 \strdtubeendline,
                 \strdparallel{
-                    \strdseq{\strdtubeinleft{1},\strdtubeendline},
-                    \strdseq{\strdtubeinright{1},\strdtubeendline}
+                    \strdseq{\strdtubepartleft{1},\strdtubeendline},
+                    \strdseq{\strdtubepartright{1},\strdtubeendline}
                 }
             },
             \strdseq{
-                \strdtubeinright{1},
+                \strdtubepartright{1},
                 \strdtubeendline,
                 \strdtubemid,
                 \strdtubeendline
@@ -109,15 +109,15 @@
         \strdtubeextend{3}{1},\strdtubeendline,
         \strdparallel{
             \strdseq{
-                \strdtubeinleft{3},
+                \strdtubepartleft{3},
                 \strdtubeendline,
                 \strdparallel{
-                    \strdseq{\strdtubeinleft{1},\strdtubeendline},
-                    \strdseq{\strdtubeinright{1},\strdtubeendline}
+                    \strdseq{\strdtubepartleft{1},\strdtubeendline},
+                    \strdseq{\strdtubepartright{1},\strdtubeendline}
                 }
             },
             \strdseq{
-                \strdtubeinright{1},
+                \strdtubepartright{1},
                 \strdtubeendline,
                 \strdtubemid,
                 \strdtubeendline
@@ -137,15 +137,15 @@
         \strdtubeextend{2}{2},\strdtubeendline,
         \strdparallel{
             \strdseq{
-                \strdtubeinleft{1},
+                \strdtubepartleft{1},
                 \strdtubeendline
             },
             \strdseq{
-                \strdtubeinmid{1}{1},
+                \strdtubepartmid{1}{1},
                 \strdtubeendline
             },
             \strdseq{
-                \strdtubeinright{1},
+                \strdtubepartright{1},
                 \strdtubeendline
             }
         }
@@ -163,13 +163,13 @@
         \strdtubeextend{1}{1},\strdtubeendline,
         \strdparallel{
             \strdseq{
-                \strdtubeinleft{1},
+                \strdtubepartleft{1},
                 \strdtubeendline,
                 \strdtubemid,
                 \strdtubeendline
             },
             \strdseq{
-                \strdtubeinright{1},
+                \strdtubepartright{1},
                 \strdtubeendline,
                 \strdtubeclose
             }
@@ -194,13 +194,13 @@
         \strdtubeextend{1}{1},\strdtubeendline,
         \strdparallel{
             \strdseq{
-                \strdtubeinleft{1},
+                \strdtubepartleft{1},
                 \strdtubeendline,
                 \strdtubemid,
                 \strdtubeendline
             },
             \strdseq{
-                \strdtubeinright{1},
+                \strdtubepartright{1},
                 \strdtubeendline,
                 \strdtubeclose
             }
@@ -208,15 +208,9 @@
     }
 }
 
-
 % signature
 \In{preview,math,aligned}{
     \myitem &
-    \strdgathered{
-        \strdmid,\strdrlabel{GA},
-        \strdcell{\tau},
-        \strdmid,\strdrlabel{FA}
-    } \mydefeq\
     \strdgathered{
         \strdbranch{
             \strdmid,\strdrlabel{A},
@@ -226,6 +220,11 @@
         \strdtubemid,\strdframellabel{G},
         \strdtubesemicell{\tau},
         \strdtubemid,\strdframellabel{F},\strdtubeendline
+    } \mydefeq\
+    \strdgathered{
+        \strdmid,\strdrlabel{GA},
+        \strdcell{\tau},
+        \strdmid,\strdrlabel{FA}
     }
 }
 
@@ -244,13 +243,13 @@
         \strdtubeextend{1}{1},\strdtubeendline,
         \strdparallel{
             \strdseq{
-                \strdtubeinleft{1},\strdtubeendline,
+                \strdtubepartleft{1},\strdtubeendline,
                 \strdtubemid,
                 \strdtubesemicell{\tau},
                 \strdtubemid,\strdtubeendline
             },
             \strdseq{
-                \strdtubeinright{1},\strdtubeendline,
+                \strdtubepartright{1},\strdtubeendline,
                 \strdtubemid,
                 \strdtubesemicell{\tau},
                 \strdtubemid,\strdtubeendline
@@ -272,11 +271,11 @@
         \strdtubemid,\strdtubeendline,
         \strdparallel{
             \strdseq{
-                \strdtubeinleft{1},\strdtubeendline,
+                \strdtubepartleft{1},\strdtubeendline,
                 \Identity
             },
             \strdseq{
-                \strdtubeinright{1},\strdtubeendline,
+                \strdtubepartright{1},\strdtubeendline,
                 \Identity
             }
         }

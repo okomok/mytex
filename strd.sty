@@ -98,6 +98,22 @@
     \strduse{#2}{#3 Prev}{#4}
     \strduse{#1}{#3}{#3 Prev}%
 }
+\newcommand*{\strdundoC@}[3]{% {sc}{newid}{previd}
+    \strdnone@{\strdflip@{ \strduse{#1}{#2 None}{#3} }}
+    \strdinv@{ \strduse{#1}{#2 Inv}{#2 None} }
+    \strdstringC{#2}{#2 Inv End}{#2 Inv}{#2 Inv Start}
+    \strdcopyextra@{#2}{#2 Inv}%
+}
+\newcommand*{\strdcopyfield@}[3]{% {field}{to}{from}
+    \ifnodedefined{#3 #1}{
+        \strdcoord@{#2 #1}{#3 #1}
+    }{}
+}
+\newcommand*{\strdcopyextra@}[2]{% {to}{from}
+    \strdcopyfield@{StartCorner}{#1}{#2}
+    \strdcopyfield@{EndCorner}{#1}{#2}
+}
+
 
 % origin
 \tikzset{strd origin/.style={inner sep=0pt,outer sep=0pt,minimum width=9pt,minimum height=0pt}}
@@ -111,6 +127,7 @@
 \newcommand*{\strdempty@}[2]{% {newid}{node}
     \strdstringC{#1}{#2}{#2}{#2}%
 }
+% You can't (deep-)copy nodes, so we define...
 \newcommand*{\strdempty}{\strdcomposeC\strdemptyC}
 \newcommand*{\strdemptyC}[2]{% {newid}{previd}
     \strdempty@{#1}{#2 End}
@@ -135,6 +152,10 @@
 }
 \newcommand*{\strdright}{\strdcomposeC\strdrightC}
 \newcommand*{\strdrightC}{\strdflipC\strdleftC}
+\newcommand*{\strdunleft}{\strdcomposeC\strdunleftC}
+\newcommand*{\strdunleftC}{\strdundoC@\strdleftC}
+\newcommand*{\strdunright}{\strdcomposeC\strdunrightC}
+\newcommand*{\strdunrightC}{\strdundoC@\strdrightC}
 
 % mid
 \newcommand*{\strdmid}{\strdcomposeC\strdmidC}
@@ -142,16 +163,6 @@
     \strdstringC{#1}{#2 End}{$(#2 End)+(0,-\strdyhalfunit)$}{$(#2 End)+(0,-\strdyunit)$}
     \strddraw@{ (#1 Start) -- (#1 End) }%
 }
-
-% unleft/unright
-\newcommand*{\strdunleft}{\strdcomposeC\strdunleftC}
-\newcommand*{\strdunleftC}[2]{% {newid}{previd}
-    \strdstringC{#1}{#2 End}{$(#2 End)+(0,-\strdyhalfunit)$}{$(#2 End)+(\strdxunit,-\strdyunit)$}
-    \strdcoord@{#1 Corner}{$(#2 End)+(0,-\strdxunit)$}
-    \strddraw@{ (#1 Start) -- (#1 Corner) parabola[bend at end] (#1 End) }%
-}
-\newcommand*{\strdunright}{\strdcomposeC\strdunrightC}
-\newcommand*{\strdunrightC}{\strdflipC\strdunleftC}
 
 % hleft/hright
 \newcommand*{\strdhleft}{\strdcomposeC\strdhleftC}
@@ -241,19 +252,10 @@
 }
 \newcommand*{\strdrcorner}{\strdcomposeC\strdrcornerC}
 \newcommand*{\strdrcornerC}{\strdflipC\strdlcornerC}
-
-% unlcorner/unrcorner
 \newcommand*{\strdunlcorner}{\strdcomposeC\strdunlcornerC}
-\newcommand*{\strdunlcornerC}[2]{% {newid}{previd}
-    \strdcoord@{#1 Start}{#2 End}
-    \strdcoord@{#1 EndCorner}{$(#1 Start)+(0,-\strdyunit)$}
-    \strdcoord@{#1 End}{$(#1 EndCorner)+(\strdxunit,0)$}
-    \strdcoord@{#1 Mid}{$(#1 Start)!.5!(#1 EndCorner)$}
-    \strdcoord@{#1}{#1 Mid}
-    \strddraw@{ (#1 Start) -- (#1 EndCorner) -- (#1 End) }%
-}
+\newcommand*{\strdunlcornerC}{\strdundoC@\strdlcornerC}
 \newcommand*{\strdunrcorner}{\strdcomposeC\strdunrcornerC}
-\newcommand*{\strdunrcornerC}{\strdflipC\strdunlcornerC}
+\newcommand*{\strdunrcornerC}{\strdundoC@\strdrcornerC}
 
 % sqsubset/sqsupset
 \newcommand*{\strdsqsubsettoC}[3]{% {newid}{previd}{nextid}
@@ -298,15 +300,6 @@
     \strdunrightC{#1 Right}{#1 Dup Right}
     \strdjumpC{#1}{#2}%
 }
-
-% % parallel
-% \newcommand*{\strdparallel}{\strdcomposeC\strdparallelC}
-% \newcommand*{\strdparallelC}[2]{% {newid}{previd}
-%     \strddupC{#1 Dup}{#2}
-%     \strdmidC{#1 Left}{#1 Dup Left}
-%     \strdmidC{#1 Right}{#1 Dup Right}
-%     \strdjumpC{#1}{#2}%
-% }
 
 % circle
 \newcommand*{\strdcircle}{\strdcomposeC\strdcircleC}
@@ -428,6 +421,16 @@
     \strdcoord@{#1 End}{$(#1 Left End)!.5!(#1 Right End)$}
     \strdstringC{#1}{$(#1 End)+(0,\strdyunit)$}{$(#1 End)+(0,\strdyhalfunit)$}{#1 End} 
 }
+\newcommand*{\strdtubeundoC@}[3]{% {sc}{newid}{previd}
+    \strdtubejumpC{#2 Jump}{#3}
+    \strdinv@{ \strduse{#1}{#2 Inv}{#2 Jump} }%
+    \strdstringC{#2 Left}{#2 Inv Left End}{#2 Inv}{#2 Inv Left Start}
+    \strdstringC{#2}{#2 Inv End}{#2 Inv}{#2 Inv Start}
+    \strdstringC{#2 Right}{#2 Inv Right End}{#2 Inv}{#2 Inv Right Start}%
+    \strdcopyextra@{#2 Left}{#2 Inv Left}
+    \strdcopyextra@{#2}{#2 Inv}
+    \strdcopyextra@{#2 Right}{#2 Inv Right}%
+}
 
 % mid
 \newcommand*{\strdtubemid}{\strdcomposeC\strdtubemidC}
@@ -452,49 +455,54 @@
     }%
 }
 
-% inleft
-\newcommand*{\strdtubeinleft}[1]{\strdcomposeC{\strdtubeinleftC{#1}}}
-\newcommand*{\strdtubeinleftC}[3]{% {xscale}{newid}{previd}
+% partleft
+\newcommand*{\strdtubepartleft}[1]{\strdcomposeC{\strdtubepartleftC{#1}}}
+\newcommand*{\strdtubepartleftC}[3]{% {xscale}{newid}{previd}
     \strdtube@{
         \strdmidC{#2 Left}{#3 Left}
-        \strdtubeinleftrightC{#1}{#2 Right}{#3 Left}
+        \strdtubepartleftrightC{#1}{#2 Right}{#3 Left}
         \strdtubeauxmid@{#2}
     }%
 }
-\newcommand*{\strdtubeinleftrightC}[3]{% {xscale}{newid}{previd}
+\newcommand*{\strdtubepartleftrightC}[3]{% {xscale}{newid}{previd}
     \strdcoord@{#2 StartOrigin}{$(#3 End)+(0.25,0)$}
     \strdxscale@{#1}{
-        \strdcoord@{#2 StartCorner}{$(#2 StartOrigin)+(\strdxunit,-\strdtubeyhalfunit)$}
+        \strdcoord@{#2 EndCorner}{$(#2 StartOrigin)+(\strdxunit,-\strdtubeyhalfunit)$}
     }
-    \strdcoord@{#2 Start}{$(#2 StartCorner)+(\strdtubexmagic,0)$}
-    \strdcoord@{#2 End}{$(#2 StartCorner)+(0,-\strdtubeyhalfunit)$}
-    \strdcoord@{#2 Mid}{$(#2 StartCorner)!.5!(#2 End)$}
+    \strdcoord@{#2 StartCorner}{$(#2 EndCorner)+(\strdtubexmagic,0)$}
+    \strdcoord@{#2 Start}{$(#2 StartCorner)+(0,\strdtubeyhalfunit)$}
+    \strdcoord@{#2 End}{$(#2 EndCorner)+(0,-\strdtubeyhalfunit)$}
+    \strdcoord@{#2 Mid}{$(#2 EndCorner)!.5!(#2 End)$}
     \strdcoord@{#2}{#2 Mid}
-    \strddraw@{ (#2 Start) -- (#2 StartCorner) -- (#2 End) }%
+    \strddraw@{ (#2 StartCorner) -- (#2 EndCorner) -- (#2 End) }%
 }
+\newcommand*{\strdtubeunpartleft}[1]{\strdcomposeC{\strdtubeunpartleftC{#1}}}
+\newcommand*{\strdtubeunpartleftC}[1]{\strdtubeundoC@{\strdtubepartleftC{#1}}}
 
-% inright
-\newcommand*{\strdtubeinright}[1]{\strdcomposeC{\strdtubeinrightC{#1}}}
-\newcommand*{\strdtubeinrightC}[3]{% {xscale}{newid}{previd}
+% partright
+\newcommand*{\strdtubepartright}[1]{\strdcomposeC{\strdtubepartrightC{#1}}}
+\newcommand*{\strdtubepartrightC}[3]{% {xscale}{newid}{previd}
     \Compose\strdtube@\strdflip@{
         \strdmidC{#2 Right}{#3 Right}
-        \strdtubeinleftrightC{#1}{#2 Left}{#3 Right}
+        \strdtubepartleftrightC{#1}{#2 Left}{#3 Right}
         \strdtubeauxmid@{#2}
     }%
 }
+\newcommand*{\strdtubeunpartright}[1]{\strdcomposeC{\strdtubeunpartrightC{#1}}}
+\newcommand*{\strdtubeunpartrightC}[1]{\strdtubeundoC@{\strdtubepartrightC{#1}}}
 
-% inmid
-\newcommand*{\strdtubeinmid}[2]{\strdcomposeC{\strdtubeinmidC{#1}{#2}}}
-\newcommand*{\strdtubeinmidC}[4]{% {lscale}{rscale}{newid}{previd}
+% partmid
+\newcommand*{\strdtubepartmid}[2]{\strdcomposeC{\strdtubepartmidC{#1}{#2}}}
+\newcommand*{\strdtubepartmidC}[4]{% {lscale}{rscale}{newid}{previd}
     \strdtube@{
         \strdflip@{
-            \strdtubeinmidrightC{#1}{#3 Left}{#4}
+            \strdtubepartmidrightC{#1}{#3 Left}{#4}
         }
-        \strdtubeinmidrightC{#2}{#3 Right}{#4}
+        \strdtubepartmidrightC{#2}{#3 Right}{#4}
         \strdtubeauxmid@{#3}
     }%
 }
-\newcommand*{\strdtubeinmidrightC}[3]{% {xscale}{newid}{previd}
+\newcommand*{\strdtubepartmidrightC}[3]{% {xscale}{newid}{previd}
     \strdxscale@{#1}{
         \strdcoord@{#2 Start}{$(#3 End)+(\strdxunit,-\strdtubeyhalfunit)$}
     }
@@ -503,37 +511,6 @@
     \strdcoord@{#2 Mid}{$(#2 StartCorner)!.5!(#2 End)$}
     \strdcoord@{#2}{#2 Mid}
     \strddraw@{ (#2 Start) -- (#2 StartCorner) -- (#2 End) }%
-}
-
-% uninleft todo
-\newcommand*{\strdtubeuninleft}{\strdcomposeC\strdtubeuninleftC}
-\newcommand*{\strdtubeuninleftC}[2]{% {newid}{previd}
-    \strdtube@{
-        \strdmidC{#1 Left}{#2 Left}
-        \strdrjumpC{#1 Impl}{#2}
-        \strdjumpC{#1}{#1 Impl}
-        \strdtubeuninleftrightC{#1 Right}{#2 Right}
-    }%
-}
-\newcommand*{\strdtubeuninleftrightC}[2]{% {newid}{previd}
-    \strdcoord@{#1 Start}{#2 End}
-    \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdtubeyhalfunit)$}
-    \strdcoord@{#1 EndCorner}{$(#1 StartCorner)+(\strdtubexmagic,0)$}
-    \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
-    \strdcoord@{#1}{#1 Mid}
-    \strdcoord@{#1 End}{$(#1 EndCorner)+(0,-\strdtubeyhalfunit)$}%+(0.7625,0)$}
-    \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) }
-}
-
-% uninright todo
-\newcommand*{\strdtubeuninright}{\strdcomposeC\strdtubeuninrightC}
-\newcommand*{\strdtubeuninrightC}[2]{% {newid}{previd}
-    \Compose\strdtube@\strdflip@{
-        \strdmidC{#1 Right}{#2 Right}
-        \strdrjumpC{#1 Impl}{#2}
-        \strdjumpC{#1}{#1 Impl}
-        \strdtubeuninleftrightC{#1 Left}{#2 Left}
-    }%
 }
 
 % merge todo
@@ -636,15 +613,8 @@
         \strddraw@{ (#1 Left Start) -- (#1 Left) -- (#1 Right) -- (#1 Right Start) }%
     }%
 }
-
-% unclose
 \newcommand*{\strdtubeunclose}{\strdcomposeC\strdtubeuncloseC}
-\newcommand*{\strdtubeuncloseC}[2]{% {newid}{previd}
-    \strdtube@{
-        \strdtubejumpC{#1}{#2}
-        \strddraw@{ (#1 Left End) -- (#1 Left) -- (#1 Right) -- (#1 Right End) }%
-    }%
-}
+\newcommand*{\strdtubeuncloseC}{\strdtubeundoC@\strdtubecloseC}
 
 % start/end lines
 \tikzset{strd tubeedge/.style={very thin,dotted}}
@@ -713,6 +683,7 @@
         \node[#2] at (#3 Right End) {};
     }% 
 }
+
 
 % Frame-arounds
 %
@@ -992,14 +963,15 @@
 \newcommand*{\strdbranch}{\strdseqin\strdbranch@}
 \newcommand*{\strdbranch@}[4]{% {stm}{sc}{newid}{previd}
     \strduse{#2}{#3}{#4}
-    \strduse{#1}{\strdemptyC}{#3 Branch}{#3}
+    \strduse{#1}{\strdemptyC}{#3 Branch}{#3}%
 }
 
-\newcommand*{\strdparallel}[1]{% {s1,s2,...}
-    \FoldrOne\strdparallel@{\List{#1}}%
+\newcommand*{\strdparallel}{\strdparallelwith\Identity}
+\newcommand*{\strdparallelwith}[2]{% {stm}{s1,s2,...}
+    \FoldrOne{\strdparallelwith@{#1}}{\List{#2}}%
 }
-\newcommand*{\strdparallel@}[2]{% {s}{z}
-    \Then{\strdbranch@{#1}}{#2}%
+\newcommand*{\strdparallelwith@}[3]{% {stm}{s}{z}
+    \Then{\strdbranch@{\Then{#1}{#2}}}{#3}%
 }
 
 \newcommand*{\strdrestart}[4]{% {stm}{sc}{newid}{previd}

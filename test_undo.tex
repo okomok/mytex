@@ -1,0 +1,71 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+\In{preview,math,aligned}{
+    \text{left and right}\\
+    \strdgathered{
+        \strdcdot,
+        \strdleft, \strdcdot,
+        \strdunleft,\strdcdot,
+        \strdmid,\strdcdot,
+        \strdright,\strdcdot,
+        \strdunright,\strdcdot
+    }
+}
+
+\In{preview,math,aligned}{
+    \text{lcorner and rcorner}\\
+    \strdgathered{
+        \strdcdot,
+        \strdlcorner, \strdcdot,
+        \strdunlcorner,\strdcdot,
+        \strdmid,\strdcdot,
+        \strdrcorner,\strdcdot,
+        \strdunrcorner,\strdcdot,
+        \Identity
+    }
+}
+
+\In{preview,math,aligned}{
+    \text{tubepartleft}\\
+    \strdgathered{
+        \strdtubestart,
+        \strdtubepartleft{2}, \strdtubestartline,\strdtubeendline,
+        \strdtubeunpartleft{2},\strdtubeendline,
+        \Identity
+    }
+}
+
+\In{preview,math,aligned}{
+    \text{tubepartright}\\
+    \strdgathered{
+        \strdtubestart,
+        \strdtubepartright{2}, \strdtubestartline,\strdtubeendline,
+        \strdtubeunpartright{2},\strdtubeendline,
+        \Identity
+    }
+}
+
+\In{preview,math,aligned}{
+    \text{tubedilate}\\
+    \strdgathered{
+        \strdtubestart,
+        \strdtubedilate{1}{2},\strdtubestartline,\strdtubeendline,
+        \strdtubeundilate{1}{2},\strdtubeendline,
+        \Identity
+    }
+}
+\In{preview,math,aligned}{
+    \text{tubedilate}\\
+    \strdgathered{
+        \strdtubestart,
+        \strdtubeclose,\strdtubestartline,\strdtubeendline,
+        \strdtubeunclose,\strdtubeendline,
+        \Identity
+    }
+}
+
+\end{document}
