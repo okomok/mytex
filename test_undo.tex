@@ -5,6 +5,19 @@
 \begin{document}
 
 \In{preview,math,aligned}{
+    \text{parallel}\\
+    \strdgathered{
+        \strdparallelwith{\strdrjump}{
+            \strdseq{\strdmid,\strdrlabel{A}},
+            \strdseq{\strdmid,\strdrlabel{B}},
+            \strdseq{\strdmid,\strdrlabel{C}},
+            \Identity
+        },
+        \strdmid
+    }
+}
+
+\In{preview,math,aligned}{
     \text{left and right}\\
     \strdgathered{
         \strdcdot,
@@ -35,7 +48,7 @@
         \strdtubestart,
         \strdtubepartleft{2}, \strdtubestartline,\strdtubeendline,
         \strdtubepartunleft{2},\strdtubeendline,
-        \Identity
+        \strdcdot
     }
 }
 
@@ -45,7 +58,7 @@
         \strdtubestart,
         \strdtubepartright{2}, \strdtubestartline,\strdtubeendline,
         \strdtubepartunright{2},\strdtubeendline,
-        \Identity
+        \strdcdot
     }
 }
 
@@ -54,7 +67,7 @@
     \strdgathered{
         \strdtubestart,
         \strdtubedilate{1}{2},\strdtubestartline,\strdtubeendline,
-        \strdtubeundilate{1}{2},\strdtubeendline,
+        \strdtubeundilate{0.5}{2},\strdtubeendline,
         \Identity
     }
 }
@@ -73,11 +86,10 @@
     \strdgathered{
         \strdtubestart,
         \strdtubedilate{2}{3},
-        \strdparallel{
-            \strdmid,
-            \strdseq{\strdtubepartleft{1},\strdtubeendline,\strdtubepartunleft{1},\strdtubeendline},
-            \strdseq{\strdtubepartmid{1}{2},\strdtubestartline,\strdtubeendline,\strdtubepartunmid{1}{2},\strdtubeendline},
-            \strdseq{\strdtubepartright{1},\strdtubeendline,\strdtubepartunright{1},\strdtubeendline},
+        \strdtubeparallel{
+            \strdseq{\strdbranch{\strdmid},\strdtubepartleft{1},\strdtubeendline,\strdtubepartunleft{1},\strdtubeendline},
+            \strdseq{\strdbranch{\strdmid},\strdtubepartmid{1}{2},\strdtubestartline,\strdtubeendline,\strdtubepartunmid{1}{2},\strdtubeendline},
+            \strdseq{\strdbranch{\strdmid},\strdxhalf\strdtuberjump,\strdtubepartright{1},\strdtubeendline,\strdtubepartunright{1},\strdtubeendline},
             \Identity
         },
 %        \strdyscale{2}\strdtubejump,\strdtubeendline,
@@ -90,15 +102,59 @@
     \strdgathered{
         \strdtubestart,
         \strdtubedilate{2}{3},
-        \strdparallel{
-            \strdmid,
+        \strdtubeparallel{
             \strdseq{\strdtubepartleft{1},\strdtubeendline,\strdtubepartunleft{1},\strdtubeendline},
             \strdseq{\strdtubepartclose{1}{2},\strdtubestartline,\strdtubeendline,\strdtubepartunclose{1}{2},\strdtubeendline},
-            \strdseq{\strdtubepartright{1},\strdtubeendline,\strdtubepartunright{1},\strdtubeendline},
+            \strdseq{\strdxhalf\strdtuberjump,\strdtubepartright{1},\strdtubeendline,\strdtubepartunright{1},\strdtubeendline},
             \Identity
         },
 %        \strdyscale{2}\strdtubejump,\strdtubeendline,
         \Identity
+    }
+}
+
+\In{preview,math,aligned}{
+    &\text{tubepartmid with parallel jump}\\
+    &\strdgathered{
+        \strdtubestart,
+        \strdtubedilate{2}{5},
+        \strdtubeparallel{
+            \strdseq{\strdbranch{\strdmid},\strdtubepartleft{2},\strdtubeendline,\strdtubepartunleft{2},\strdtubeendline},
+            \strdmid,
+            \strdseq{\strdbranch{\strdmid},\strdtubepartmid{2}{1},\strdtubestartline,\strdtubeendline,\strdtubepartunmid{2}{1},\Identity},
+            \strdseq{\strdbranch{\strdmid},\strdtubepartright{2},\strdtubeendline,\strdtubepartunright{2},\strdtubeendline},
+            \Identity
+        },
+        \strdtubeextend{0}{7},
+        \strdtubeundilate{1}{3},
+%        \strdyscale{2}\strdtubejump,\strdtubeendline,
+        \Identity
+    }
+}
+
+\In{preview,math,aligned}{
+    &\text{tubepartmid with parallel jump}\\
+    &\strdgathered{
+        \strdtubestart,
+        \strdtubedilate{1}{1},
+        \strdtubeparallel{
+            \strdseq{\strdbranch{\strdmid},\strdtubepartleft{1},\strdtubeendline,\strdtubepartunleft{1},\strdtubeendline},
+            \strdseq{\strdbranch{\strdmid},\strdtubepartright{1},\strdtubeendline,\strdtubepartunright{1},\strdtubeendline},
+            \Identity
+        },
+        \strdtubeextend{0}{2},
+        \strdtubeundilate{1}{1},
+        \Identity
+    }
+}
+
+\In{preview,math,aligned}{
+    &\text{tubelend}\\
+    &\strdgathered{
+        \strdtubestart,
+        \strdtubedilate{2}{3},
+        \strdtubelend,
+        \strdmid
     }
 }
 
