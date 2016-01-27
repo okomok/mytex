@@ -432,7 +432,7 @@
     \strdcopyextra@{#2 Right}{#2 Inv Right}%
 }
 
-\newcommand*{\strdtubeparallel}[1]{\strdseq{\strdtubelend,\strdtubestart,\strdparallelwith{\strdtuberjump}{#1},\strdtubelend,\strdtubestart}}
+\newcommand*{\strdtubeparallel}[2]{\strdseq{\strdtubelend,\strdtubestart,\strdparallelwith{\strdxscale{#1}\strdtuberjump}{#2},\strdtubelend,\strdtubestart}}
 
 \newcommand*{\strdtubelend}{\strdcomposeC\strdtubelendC}
 \newcommand*{\strdtubelendC}[2]{% {newid}{previd}
@@ -709,14 +709,14 @@
 \newcommand*{\strdtubeuncloseC}{\strdtubeundoC@\strdtubecloseC}
 
 % start/end lines
-\tikzset{strd tubeedge/.style={very thin,dotted}}
+\tikzset{strd tubebound/.style={very thin,dash pattern=on 2pt off 2pt}}
 \newcommand*{\strdtubestartline}{\strdwith\strdtubestartline@}
 \newcommand*{\strdtubestartline@}[1]{
-    \draw[strd draw,strd tubeedge]{ (#1 Left Start) -- (#1 Right Start) };
+    \draw[strd draw,strd tubebound]{ (#1 Left Start) -- (#1 Right Start) };
 }
 \newcommand*{\strdtubeendline}{\strdwith\strdtubeendline@}
 \newcommand*{\strdtubeendline@}[1]{
-    \draw[strd draw,strd tubeedge]{ (#1 Left End) -- (#1 Right End) };
+    \draw[strd draw,strd tubebound]{ (#1 Left End) -- (#1 Right End) };
 }
 \newcommand*{\strdtubestartclose}{\strdwith\strdtubestartclose@}
 \newcommand*{\strdtubestartclose@}[1]{
@@ -932,7 +932,7 @@
 % Scoped transformations
 %
 
-\tikzset{strd implicit/.style={very thin,dash pattern=on 1pt off 2pt}}
+\tikzset{strd implicit/.style={very thin,densely dotted}}
 
 \newcommand*{\strdscope@}[2]{\begin{scope}[#1]#2\end{scope}}
 \newcommand*{\strdflip@}{\strdscope@{xscale=-1}}
@@ -1060,10 +1060,11 @@
 
 \newcommand*{\strdparallel}{\strdparallelwith\Identity}
 \newcommand*{\strdparallelwith}[2]{\strdparallelwith@{#1}{\List{#2}}}
-\newcommand*{\strdparallelwith@}[2]{% {stm}{ss}
-    \Then{\Foldr{\strdparallelwith@@{#1}}{\Identity}{\Tail{#2}}}{\Head{#2}}%
+\newcommand*{\strdparallelwith@}[2]{\Then{\strdparallelwith@@{#1}{\Tail{#2}}}{\Head{#2}}}
+\newcommand*{\strdparallelwith@@}[2]{% {stm}{ss}
+    \Foldr{\strdparallelwith@@@{#1}}{\Identity}{#2}
 }
-\newcommand*{\strdparallelwith@@}[3]{% {stm}{s}{z}
+\newcommand*{\strdparallelwith@@@}[3]{% {stm}{s}{z}
     \strdbranch{#1,#3,#2}%
 }
 
