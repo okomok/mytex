@@ -1,0 +1,184 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdparallel{
+            \strdimplicit{\strdydouble\strdmid},
+            \strdseq{
+                \strdtubestart,\strdyhalf\strdtubejump,\strdtubeedgebhd,
+                \strdyhalf\strdtubemid,\strdtubeendline,\strdtubeclose
+            }
+        }
+    } =\
+    \strdgathered{
+        \strdimplicit\strdmid
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdparallel{
+            \strdseq{
+                \strdljump,
+                \strdparallelwith{\strdxdouble\strdrjump}{
+                    \strdyscale{2}\strdmid,
+                    \strdyscale{2}\strdmid
+                }
+            },
+            \strdseq{
+                \strdtubestart,
+                \strdyhalf\strdtubejump,\strdtubeextend{1}{1},
+                \strdtubeedgebhd,
+                \strdyhalf\strdtubemid,\strdtubeendline,
+                \strdtubeparallel{1}{
+                    \strdseq{\strdtubepartleft{1},\strdtubeendline},
+                    \strdseq{\strdtubepartright{1},\strdtubeendline}
+                }
+            },
+            \Identity
+        }
+    } =\
+    \strdgathered{
+        \strdparallelwith{\strdxscale{2}\strdrjump}{
+            \strdparallel{
+                \strdyscale{1}\strdmid,
+                \strdseq{
+                    \strdtubestart,
+                    \strdyhalf\strdtubejump,
+                    \strdtubeedgebhd,
+                    \strdyhalf\strdtubemid,\strdtubeendline
+                }
+            },
+            \strdparallel{
+                \strdyscale{1}\strdmid,
+                \strdseq{
+                    \strdtubestart,
+                    \strdyhalf\strdtubejump,
+                    \strdtubeedgebhd,
+                    \strdyhalf\strdtubemid,\strdtubeendline
+                }
+            },
+            \Identity
+        }
+    }
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdparallel{
+            \strdseq{
+                \strdtubestart,
+                \strdtubeextend{1}{1},\strdtubestartline,
+                \strdtubemid,\strdtubeendline,
+                \strdtubeclose
+            },
+            \strdseq{
+                \strdtubestart,
+                \strdyhalf\strdtubemid,\strdtubeedgehd
+            },
+            \strdseq{
+                \strdyscale{2}{\strdimplicit\strdmid}
+            }
+        }
+    } =
+    \strdgathered{
+        \strdparallel{
+            \strdseq{
+                \strdtubestart,
+                \strdtubeextend{1}{1},\strdtubestartline,
+                \strdtubemid,\strdtubeendline,
+                \strdtubeclose
+            },
+            \strdseq{
+                \strdtubestart,
+                \strdtubeclose
+            },
+            \strdseq{
+                \strdyscale{2}{\strdimplicit\strdmid}
+            }
+        }
+    }\\
+    \myitem &
+    \strdgathered{
+        \strdparallel{
+            \strdseq{
+                \strdtubestart,
+                \strdtubeextend{3}{3},\strdtubestartline,
+                \strdtubemid,\strdtubeendline,
+                \strdtubeparallel{2}{
+                    \strdseq{
+                        \strdtubepartleft{3},\strdtubeendline,
+                        \strdtubemid,\strdtubeendline
+                    },
+                    \strdseq{
+                        \strdtubepartright{3},\strdtubeendline,
+                        \strdtubemid,\strdtubeendline
+                    }
+                }
+            },
+            \strdseq{
+                \strdtubestart,
+                \strdtubeextend{2}{2},
+                \strdtubeparallel{1}{
+                    \strdseq{
+                        \strdtubepartleft{1},
+                        \strdtubemid,
+                        \strdyhalf\strdtubemid,
+                        \strdtubeedgehd
+                    },
+                    \strdtubepartclose{1}{1},
+                    \strdseq{
+                        \strdtubepartright{1},
+                        \strdtubemid,
+                        \strdyhalf\strdtubemid,
+                        \strdtubeedgehd
+                    }
+                }
+            },
+            \strdseq{
+                \strdxscale{2}\strdljump,
+                \strdparallelwith{\strdxscale{4}\strdrjump}{
+                    \strdyscale{3}\strdmid,
+                    \strdyscale{3}\strdmid
+                }
+            }
+        }
+    } =\
+    \strdgathered{
+        \strdparallel{
+            \strdseq{
+                \strdtubestart,
+                \strdtubeextend{2}{2},\strdtubestartline,
+                \strdtubemid,\strdtubeendline,
+                \strdtubeparallel{1.5}{
+                    \strdseq{
+                        \strdtubepartleft{2},\strdtubeendline
+                    },
+                    \strdseq{
+                        \strdtubepartright{2},\strdtubeendline
+                    }
+                }
+            },
+            \strdseq{
+                \strdtubestart,
+                \strdtubeextend{1}{1},
+                \strdyhalf\strdtubemid,
+                \strdtubeedgehd
+            },
+            \strdseq{
+                \strdxscale{1}{\strdljump},
+                \strdparallelwith{\strdxscale{2}\strdrjump}{
+                    \strdyscale{2}\strdmid,
+                    \strdyscale{2}\strdmid
+                }
+            }
+        }
+    }
+}
+
+
+\end{document}
