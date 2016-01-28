@@ -12,8 +12,8 @@
         \strdtubestart,
         \strdtubedilate{1}{1},
         \strdparallel{
-            \strdseq{\strdtubeinleft{1},\strdtubeendline,\strdtubemid,\strdmid},
-            \strdseq{\strdtubeinright{1},\strdtubeendline,\strdtubemid,\strdmid}
+            \strdseq{\strdtubepartleft{1},\strdtubeendline,\strdtubemid,\strdmid},
+            \strdseq{\strdtubepartright{1},\strdtubeendline,\strdtubemid,\strdmid}
         }
     }
 }
@@ -24,8 +24,8 @@
         \strdtubestart,
         \strdtubedilate{2}{1},
         \strdparallel{
-            \strdseq{\strdtubeinleft{2},\strdtubeendline,\strdtubemid,\strdmid},
-            \strdseq{\strdtubeinright{1},\strdtubeendline,\strdtubemid,\strdmid}
+            \strdseq{\strdtubepartleft{2},\strdtubeendline,\strdtubemid,\strdmid},
+            \strdseq{\strdtubepartright{1},\strdtubeendline,\strdtubemid,\strdmid}
         }
     }
 }
@@ -36,8 +36,8 @@
         \strdtubestart,
         \strdtubedilate{3}{2},
         \strdparallel{
-            \strdtubeinleft{3},
-            \strdtubeinright{2}
+            \strdtubepartleft{3},
+            \strdtubepartright{2}
         }
     }
 }
@@ -49,23 +49,61 @@
         \strdtubeunclose,
         \strdtubedilate{2}{2},
         \strdparallel{
-            \strdtubeinleft{1},
-            \strdtubeinmid{1}{1},
-            \strdseq{\strdtubeinright{1},\strdtubeclose}
+            \strdtubepartleft{1},
+            \strdtubepartmid{1}{1},
+            \strdseq{\strdtubepartright{1},\strdtubeclose}
         }
     }
 }
 
 \In{preview,math,aligned}{
-    \text{trivial} \\
+    \text{tubepartmid} \\
     \strdgathered{
         \strdtubestart,
         \strdtubedilate{3}{2},
         \strdparallel{
-            \strdtubeinleft{1},
-            \strdtubeinmid{2}{1},
-            \strdtubeinright{1}
+            \strdtubepartleft{1},
+            \strdtubepartmid{2}{1},
+            \strdtubepartright{1}
         }
+    }
+}
+
+\In{preview,math,aligned}{
+    \text{tubepartclose} \\
+    \strdgathered{
+        \strdtubestart,
+        \strdtubedilate{3}{2},
+        \strdparallel{
+            \strdseq{\strdtubepartleft{1},\strdtubepartunleft{1}},
+            \strdseq{\strdtubepartclose{2}{1},\strdtubepartunclose{2}{1}},
+            \strdseq{\strdtubepartright{1},\strdtubepartunright{1}}
+        }
+    }
+}
+\In{preview,math,aligned}{
+    \text{tubepartclose} \\
+    \strdgathered{
+        \strdtubestart,
+        \strdtubedilate{3}{2},
+        \strdparallel{
+            \strdtubepartleft{1},
+            \strdseq{
+                \strdtubestart,
+                \strdtubeextend{2}{0},
+                \strdtubemid
+            },
+            \strdtubepartright{1}
+        }
+    }
+}
+
+\In{preview,math,aligned}{
+    \text{tubepartmid} \\
+    \strdgathered{
+        \strdmid,
+        \strdtubepartmid{2}{1},
+        \strdmid
     }
 }
 
