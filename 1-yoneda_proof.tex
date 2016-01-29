@@ -1,0 +1,114 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax,stmaryrd}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+\newcommand*{\usd}[1]{\rotatebox[origin=c]{180}{\ensuremath{#1}}}
+
+% upsidedown
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{A},
+        \strdcell{\bar{g}},
+        \strdmid,\strdrlabel{B}
+    } \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{A},
+        \strdcell{\usd{g}},
+        \strdmid,\strdrlabel{B}
+    } 
+}
+
+
+% signature
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdparallel{
+            \strdseq{\strdmid,\strdrlabel{X}},
+            \strdseq{\strdtubestart,\strdtubeendline,\strdtubemid,\strdframellabel{F}}
+        },
+        \strdbox{1}{1}{
+            \strdframearound,\strdmid,\strdrlabel{X},
+            \strdcell{\bar{x}},
+            \strdmid,\strdrlabel{C}
+        },\strdframellabel{\vartheta}
+    }
+}
+
+% naturality
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdparallel{
+            \strdseq{\strdmid,\strdrlabel{Y},\strdcell{\bar{h}},\strdmid,\strdrlabel{}},
+            \strdseq{\strdtubestart,\strdtubeendline,\strdtubemid,\strdframelabelat{Left End}{F},\strdtubemid}
+        },
+        \strdbox{1}{1}{
+            \strdframearound,\strdmid,\strdrlabel{X},
+            \strdcell{\bar{x}},
+            \strdmid,\strdrlabel{C}
+        },\strdframellabel{\vartheta}
+    } =
+    \strdgathered{
+        \strdparallel{
+            \strdseq{\strdmid,\strdrlabel{Y}},
+            \strdseq{\strdtubestart,\strdtubeendline,\strdtubemid,\strdframellabel{F}}
+        },
+        \strdbox{1}{1}{
+            \strdframearound,\strdmid,
+            \strdcell{\bar{h}},
+            \strdmid,\strdrlabel{X},
+            \strdcell{\bar{x}},
+            \strdmid,\strdrlabel{C}
+        },\strdframellabel{\vartheta}
+    }
+}
+
+% Yoneda bijection
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdparallel{
+            \strdseq{\strdmid,\strdrlabel{X}},
+            \strdseq{\strdtubestart,\strdtubeendline,\strdtubemid,\strdframellabel{F}}
+        },
+        \strdbox{1}{1}{
+            \strdframearound,\strdmid,\strdrlabel{},
+            \strdcell{\bar{x}},
+            \strdmid,\strdrlabel{C}
+        },\strdframellabel{\vartheta}
+    } \mapsto
+    \strdgathered{
+        \strdparallel{
+            \strdseq{\strdmid,\strdrlabel{C}},
+            \strdseq{\strdtubestart,\strdtubeendline,\strdtubemid,\strdframellabel{F}}
+        },
+        \strdbox{1}{1}{
+            \strdframearound,
+            \strdyscale{0.7}\strdmid,\strdrlabel{}
+        },\strdframellabel{\vartheta}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdparallel{
+            \strdseq{\strdmid,\strdrlabel{X},\strdcell{\bar{x}},\strdmid,\strdrlabel{C}},
+            \strdseq{\strdtubestart,\strdtubeendline,\strdtubemid,\strdtubemid,\strdframelabelat{Left Start}{F}}
+        },
+        \strdcell{\strdhspaced{0.35cm}{a}}
+    } \mapsfrom
+    \strdgathered{
+        \strdparallel{
+            \strdseq{\strdmid,\strdrlabel{C}},
+            \strdseq{\strdtubestart,\strdtubeendline,\strdtubemid,\strdframellabel{F}}
+        },
+        \strdcell{\strdhspaced{0.35cm}{a}}
+    }
+}
+
+
+
+
+\end{document}
