@@ -23,18 +23,24 @@
     } \\
     \myitem &
     \strdgathered{
-        \strdbranch{
-            \strdmid,\strdrlabel{A},
-            \strdmid
-        },
-        \strdtubestart,
-        \strdtubeextend{1}{1},\strdtubeendline,
-        \strdtubemid,
-        \strdbranch{
-            \strdtubeunextend{1}{1},\strdtubeedgehd,
-            \strdtubemid
-        },
-        \strdtubemid,\strdtubeendline
+        \strdparallel{
+            \strdseq{
+                \strdmid,\strdrlabel{A},
+                \strdmid
+            },
+            \strdseq{
+                \strdtubestart,\strdtubeendline,
+                \strdtubemid,\strdtubeedgehd,
+                \strdparallel{
+                    \strdseq{
+                        \strdtubemid
+                    },
+                    \strdseq{
+                        \strdtubefork{1}{1},\strdtubeendline
+                    }
+                }
+            }
+        }
     } \mydefeq
     \strdgathered{
         \strdmid,\strdrlabel{TA},
@@ -52,20 +58,17 @@
             \strdmid,
             \strdmid
         },
-        \strdtubestart,
-        \strdtubeextend{2}{2},\strdtubeendline,
-        \strdtubemid,
+        \strdtubestart,\strdtubeendline,
+        \strdtubemid,\strdtubeedgehd,
         \strdbranch{
-            \strdtubeunextend{1}{1},\strdtubeedgehd,
-            \strdtubemid,
-            \strdbranch{
-                \strdtubeunextend{1}{1},\strdtubeedgehd,
-                \strdtubemid
-            },
-            \strdtubemid
+            \strdydouble{\strdtubefork{2}{2}},
+            \strdtubeendline
         },
-        \strdtubemid,
-        \strdtubemid,\strdtubeendline
+        \strdtubemid,\strdtubeedgehd,
+        \strdbranch{
+            \strdtubefork{1}{1}
+        },
+        \strdtubemid
     } =
     \strdgathered{
         \strdbranch{
@@ -73,38 +76,33 @@
             \strdmid,
             \strdmid
         },
-        \strdtubestart,
-        \strdtubeextend{2}{2},\strdtubeendline,
-        \strdtubemid,
+        \strdtubestart,\strdtubeendline,
+        \strdtubemid,\strdtubeedgehd,
         \strdbranch{
-            \strdtubeunextend{2}{2},\strdtubeedgehd,
-            \strdtubemid,
+            \strdtubefork{1}{1},\strdtubeedgehd,
             \strdbranch{
-                \strdtubeextend{1}{1},\strdtubeedgehd,
-                \strdtubemid
+                \strdtubefork{1}{1},
+                \strdtubeendline
             },
             \strdtubemid
         },
         \strdtubemid,
-        \strdtubemid,\strdtubeendline
+        \strdtubemid
     } \myeqdef
     \strdgathered{
         \strdbranch{
             \strdmid,%\strdrlabel{A},
             \strdmid
         },
-        \strdtubestart,
-        \strdtubeextend{2}{2},\strdtubeendline,
-        \strdtubemid,
-        \strdbranch{
-            \strdtubeunextend{2}{2},\strdtubeedgehd,
-            \strdbranch{
-                \strdtubeextend{1}{1},\strdtubeedgehd,
-                \strdtubemid
+        \strdtubestart,\strdtubeendline,
+        \strdtubemid,\strdtubeedgehd,
+        \strdparallel{
+            \strdseq{
+                \strdtubefork{2}{2},\strdtubeendline
             },
+            \strdtubefork{1}{1},
             \strdtubemid
-        },
-        \strdtubemid,\strdtubeendline
+        }
     }
     \\
     \myitem &
@@ -112,17 +110,15 @@
         \strdbranch{
             \strdmid,%\strdrlabel{A},
             \strdmid,
-            \strdmid
+            \strdyhalf\strdmid
         },
-        \strdtubestart,
-        \strdtubeextend{1}{1},\strdtubeendline,
-        \strdtubemid,
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,\strdtubeedgehd,
         \strdbranch{
-            \strdtubeunextend{1}{1},\strdtubeedgehd,
-            \strdtubemid,\strdtubeedgebhd
+            \strdtubefork{1}{1},
+            \strdyhalf\strdtubemid,\strdtubebound
         },
-        \strdtubemid,
-        \strdtubemid,\strdtubeendline
+        \strdtubemid,\strdtubeedgebhd
     } =
     \strdgathered{
         \strdbranch{
@@ -135,17 +131,15 @@
         \strdbranch{
             \strdmid,%\strdrlabel{A},
             \strdmid,
-            \strdmid
+            \strdyhalf\strdmid
         },
-        \strdtubestart,
-        \strdtubeextend{1}{1},\strdtubeendline,
-        \strdtubemid,
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,\strdtubeedgehd,
         \strdbranch{
-            \strdtubeunextend{1}{1},\strdtubeedgehd,
-            \strdtubemid,
-            \strdtubemid,\strdtubeendline
+            \strdtubefork{1}{1},\strdtubeedgebhd
         },
-        \strdtubemid,\strdtubeedgebhd 
+        \strdyhalf\strdtubemid,
+        \strdtubemid,\strdtubebound
     }
 }
 

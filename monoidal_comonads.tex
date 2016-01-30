@@ -33,7 +33,7 @@
                 \strdyhalf\strdtubejump,\strdtubeextend{1}{1},
                 \strdtubeedgebhd,
                 \strdyhalf\strdtubemid,\strdtubeendline,
-                \strdtubeparallel{1}{
+                \strdparallel{
                     \strdseq{\strdtubepartleft{1},\strdtubeendline},
                     \strdseq{\strdtubepartright{1},\strdtubeendline}
                 }
@@ -72,16 +72,17 @@
         \strdparallel{
             \strdseq{
                 \strdtubestart,
-                \strdtubeextend{1}{1},\strdtubestartline,
-                \strdtubemid,\strdtubeendline,
+                \strdtubemid,\strdtubeedgehd,
+                \strdyhalf\strdtubemid,\strdtubebound,
                 \strdtubeclose
             },
             \strdseq{
                 \strdtubestart,
-                \strdyhalf\strdtubemid,\strdtubeedgehd
+                \strdtubeextend{1}{1},\strdtubebound,
+                \strdtubecup{1}{1}
             },
             \strdseq{
-                \strdyscale{2}{\strdimplicit\strdmid}
+                \strdyscale{2.5}{\strdimplicit\strdmid}
             }
         }
     } =
@@ -109,41 +110,40 @@
                 \strdtubestart,
                 \strdtubeextend{3}{3},\strdtubestartline,
                 \strdtubemid,\strdtubeendline,
-                \strdtubeparallel{2}{
-                    \strdseq{
-                        \strdtubepartleft{3},\strdtubeendline,
-                        \strdtubemid,\strdtubeendline
-                    },
-                    \strdseq{
-                        \strdtubepartright{3},\strdtubeendline,
-                        \strdtubemid,\strdtubeendline
-                    }
-                }
+                \strdtubemid,\strdtubebound,
+                \strdtubecup{1}{1}
             },
             \strdseq{
                 \strdtubestart,
                 \strdtubeextend{2}{2},
-                \strdtubeparallel{1}{
+                \strdparallel{
                     \strdseq{
                         \strdtubepartleft{1},
                         \strdtubemid,
-                        \strdyhalf\strdtubemid,
-                        \strdtubeedgehd
+                        \strdtubemid,
+                        \strdtubeedgehd,
+                        \strdtubemid,\strdtubebound
                     },
-                    \strdtubepartclose{1}{1},
+                    \strdseq{
+                        \strdtubepartclose{1}{1},
+                        \strdxscale{0.25}\strdtubestart,
+                        \strdtubeunclose,
+                        \strdtubeunvee{1}{1}
+                    },
                     \strdseq{
                         \strdtubepartright{1},
                         \strdtubemid,
-                        \strdyhalf\strdtubemid,
-                        \strdtubeedgehd
+                        \strdtubemid,
+                        \strdtubeedgehd,
+                        \strdtubemid,\strdtubebound
                     }
                 }
             },
             \strdseq{
                 \strdxscale{2}\strdljump,
                 \strdparallelwith{\strdxscale{4}\strdrjump}{
-                    \strdyscale{3}\strdmid,
-                    \strdyscale{3}\strdmid
+                    \strdyscale{4}\strdmid,
+                    \strdyscale{4}\strdmid
                 }
             }
         }
@@ -153,27 +153,27 @@
             \strdseq{
                 \strdtubestart,
                 \strdtubeextend{2}{2},\strdtubestartline,
-                \strdtubemid,\strdtubeendline,
-                \strdtubeparallel{1.5}{
-                    \strdseq{
-                        \strdtubepartleft{2},\strdtubeendline
-                    },
-                    \strdseq{
-                        \strdtubepartright{2},\strdtubeendline
-                    }
-                }
+                \strdtubecup{1}{1}
             },
             \strdseq{
                 \strdtubestart,
                 \strdtubeextend{1}{1},
-                \strdyhalf\strdtubemid,
-                \strdtubeedgehd
+                \strdtubemid,\strdtubeedgehd,
+                \strdtubemid,\strdtubebound,
+                \strdparallel{
+                    \strdseq{
+                        \strdtubepartleft{1},\strdtubeendline
+                    },
+                    \strdseq{
+                        \strdtubepartright{1},\strdtubeendline
+                    }
+                }
             },
             \strdseq{
                 \strdxscale{1}{\strdljump},
                 \strdparallelwith{\strdxscale{2}\strdrjump}{
-                    \strdyscale{2}\strdmid,
-                    \strdyscale{2}\strdmid
+                    \strdyscale{3}\strdmid,
+                    \strdyscale{3}\strdmid
                 }
             }
         }

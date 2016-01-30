@@ -671,6 +671,87 @@
     \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) }%
 }
 
+% tubecap{lscale}{rscale}
+\newcommand*{\strdtubecap}[2]{\strdcomposeC{\strdtubecapC{#1}{#2}}}
+\newcommand*{\strdtubecapC}[4]{% {lscale}{rscale}{newid}{previd}
+    \strdtube@{
+        \If{\DimEq{#1pt}{0pt}}{
+            \strdmidC{#3 Left}{#4 Left}
+        }{
+            \strdxscale@{#1}{\strdtubecapleftC{#3 Left}{#4 Left}}
+        }
+        \strdjumpC{#3}{#4}
+        \If{\DimEq{#2pt}{0pt}}{
+            \strdmidC{#3 Right}{#4 Right}
+        }{
+            \strdxscale@{#2}{\strdflip@{\strdtubecapleftC{#3 Right}{#4 Right}}}
+        }
+    }%
+}
+\newcommand*{\strdtubecapleftC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{#2 End}
+    \strdcoord@{#1 StartCorner}{$(#1 Start)+(-\strdxunit,-\strdtubeyhalfunit)$}
+    \strdcoord@{#1 EndCorner}{#1 StartCorner}
+    \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strdcoord@{#1 End}{$(#1 EndCorner)+(0,-\strdtubeyhalfunit)$}
+    \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 End) }%
+}
+
+% tubeunvee{lscale}{rscale}
+\newcommand*{\strdtubeunvee}[2]{\strdcomposeC{\strdtubeunveeC{#1}{#2}}}
+\newcommand*{\strdtubeunveeC}[4]{% {lscale}{rscale}{newid}{previd}
+    \strdtube@{
+        \If{\DimEq{#1pt}{0pt}}{
+            \strdmidC{#3 Left}{#4 Left}
+        }{
+            \strdxscale@{#1}{\strdtubeunveeleftC{#3 Left}{#4 Left}}
+        }
+        \strdjumpC{#3}{#4}
+        \If{\DimEq{#2pt}{0pt}}{
+            \strdmidC{#3 Right}{#4 Right}
+        }{
+            \strdxscale@{#2}{\strdflip@{\strdtubeunveeleftC{#3 Right}{#4 Right}}}
+        }
+    }%
+}
+\newcommand*{\strdtubeunveeleftC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{#2 End}
+    \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdtubeyhalfunit)$}
+    \strdcoord@{#1 EndCorner}{#1 StartCorner}
+    \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strdcoord@{#1 End}{$(#1 EndCorner)+(-\strdxunit,-\strdtubeyhalfunit)$}
+    \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 End) }%
+}
+
+% tubecup{lscale}{rscale}
+\newcommand*{\strdtubecup}[2]{\strdcomposeC{\strdtubecupC{#1}{#2}}}
+\newcommand*{\strdtubecupC}[4]{% {lscale}{rscale}{newid}{previd}
+    \strdtube@{
+        \If{\DimEq{#1pt}{0pt}}{
+            \strdmidC{#3 Left}{#4 Left}
+        }{
+            \strdxscale@{#1}{\strdtubecupleftC{#3 Left}{#4 Left}}
+        }
+        \strdjumpC{#3}{#4}
+        \If{\DimEq{#2pt}{0pt}}{
+            \strdmidC{#3 Right}{#4 Right}
+        }{
+            \strdxscale@{#2}{\strdflip@{\strdtubecupleftC{#3 Right}{#4 Right}}}
+        }
+    }%
+}
+\newcommand*{\strdtubecupleftC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{#2 End}
+    \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdtubeyhalfunit)$}
+    \strdcoord@{#1 EndCorner}{#1 StartCorner}
+    \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strdcoord@{#1 End}{$(#1 EndCorner)+(\strdxunit,-\strdtubeyhalfunit)$}
+    \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 End) }%
+}
+
 % undilate{lscale}{rscale}
 \newcommand*{\strdtubeundilate}[2]{\strdcomposeC{\strdtubeundilateC{#1}{#2}}}
 \newcommand*{\strdtubeundilateC}[4]{% {lscale}{rscale}{newid}{previd}
@@ -715,6 +796,7 @@
 \newcommand*{\strdtubestartline@}[1]{
     \draw[strd draw,strd tubebound]{ (#1 Left Start) -- (#1 Right Start) };
 }
+\newcommand*{\strdtubebound}{\strdtubeendline}
 \newcommand*{\strdtubeendline}{\strdwith\strdtubeendline@}
 \newcommand*{\strdtubeendline@}[1]{
     \draw[strd draw,strd tubebound]{ (#1 Left End) -- (#1 Right End) };

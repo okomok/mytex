@@ -4,7 +4,7 @@
 
 \begin{document}
 
-
+% signature
 \In{preview,math,aligned}{
     \myitem &
     \strdgathered{
@@ -22,6 +22,7 @@
     } \\
 }
 
+% Kleisli category
 \In{preview,math,aligned}{
     \myitem &
     \strdgathered{
@@ -69,21 +70,15 @@
         \strdmid,\strdrlabel{C},
         \strdidbox{2.7}{2.7}{
             \strdbranch{
-                \strdmid,
-                \strdbranch{
-                    \strdmid
-                },
                 \strdtubestart,
-                \strdtubeedgehd,
-                \strdtubemid,
-                \strdtubecell{1}{l},
-                \strdmid,\strdrlabel{B}
+                \strdtubemid,\strdtubeedgehd,
+                \strdbranch{
+                    \strdtubemid,\strdtubecell{1}{l}
+                },
+                \strdtubefork{1}{1},
+                \strdtubemid,\strdtubecell{2}{k}
             },
-            \strdtubestart,
-            \strdtubeextend{1}{1},
-            \strdyscale{3}\strdtubemid,
-            \strdtubecell{2}{k},
-            \strdmid
+            \strdyscale{4}\strdmid
         },
         \strdmid,\strdrlabel{A}
     }
@@ -128,19 +123,16 @@
     } \ \mapsto\
     \strdgathered{
         \strdbranch{
-            \strdmid,\strdrlabel{B},
+            \strdtubestart,\strdtubebound,
+            \strdtubemid,\strdtubeedgehd,
             \strdbranch{
-                \strdmid
+                \strdtubemid,\strdtubecell{1}{k}
             },
-            \strdtubestart,
-            \strdtubeedgehd,
-            \strdtubemid,
-            \strdtubecell{1}{k},
-            \strdmid,\strdrlabel{A}
+            \strdtubefork{1}{1},\strdtubemid,\strdtubebound
         },
-        \strdtubestart,
-        \strdtubeextend{1}{1},\strdtubestartline,
-        \strdyscale{3}\strdtubemid,\strdtubeendline
+        \strdmid,\strdrlabel{B},
+        \strdmid,
+        \strdmid,\strdrlabel{A}
     }
 }
 
