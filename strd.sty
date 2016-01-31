@@ -130,13 +130,16 @@
 % You can't (deep-)copy nodes, so we define...
 \newcommand*{\strdempty}{\strdcomposeC\strdemptyC}
 \newcommand*{\strdemptyC}[2]{% {newid}{previd}
-    \strdempty@{#1}{#2 End}
+    \strdemptyC@{#1}{#2}
     \ifnodedefined{#2 Left}{
         \strdempty@{#1 Left}{#2 Left End}
     }{}
     \ifnodedefined{#2 Right}{
         \strdempty@{#1 Right}{#2 Right End}
     }{}
+}
+\newcommand*{\strdemptyC@}[2]{% {newid}{previd}
+    \strdempty@{#1}{#2 End}
 }
 % http://tex.stackexchange.com/questions/85528
 \long\def\ifnodedefined#1#2#3{
@@ -417,6 +420,7 @@
         }
     }%
 }
+% deprecate me
 \newcommand*{\strdtubeauxmid@}[1]{% {id} 
     \strdcoord@{#1 End}{$(#1 Left End)!.5!(#1 Right End)$}
     \strdstringC{#1}{$(#1 End)+(0,\strdyunit)$}{$(#1 End)+(0,\strdyhalfunit)$}{#1 End} 
@@ -431,6 +435,39 @@
     \strdcopyextra@{#2}{#2 Inv}
     \strdcopyextra@{#2 Right}{#2 Inv Right}%
 }
+\newcommand*{\strdtubeC@}[6]{% {lC}{rC}{lscale}{rscale}{newid}{previd}
+    \strdtube@{
+        \If{\DimEq{#3pt}{0pt}}{
+            \strdmidC{#5 Left}{#6 Left}
+        }{
+            \strdxscale@{#3}{\strduse{#1}{#5 Left}{#6 Left}}
+        }
+        \strdjumpC{#5}{#6}
+        \If{\DimEq{#4pt}{0pt}}{
+            \strdmidC{#5 Right}{#6 Right}
+        }{
+            \strdxscale@{#4}{\strduse{#2}{#5 Right}{#6 Right}}
+        }
+    }%
+}
+\newcommand*{\strdtubesymC@}[1]{\strdtubeC@{#1}{\strdflipC{#1}}}
+% yscale{0} doesn't work, so we define...
+\newcommand*{\strdtubezeroC@}[6]{% {lC}{rC}{lscale}{rscale}{newid}{previd}
+    \strdtube@{
+        \If{\DimEq{#3pt}{0pt}}{
+            \strdemptyC@{#5 Left}{#6 Left}
+        }{
+            \strdxscale@{#3}{\strduse{#1}{#5 Left}{#6 Left}}
+        }
+        \strdemptyC@{#5}{#6}
+        \If{\DimEq{#4pt}{0pt}}{
+            \strdemptyC@{#5 Right}{#6 Right}
+        }{
+            \strdxscale@{#4}{\strduse{#2}{#5 Right}{#6 Right}}
+        }
+    }%
+}
+\newcommand*{\strdtubezerosymC@}[1]{\strdtubezeroC@{#1}{\strdflipC{#1}}}
 
 % deprecate me
 \newcommand*{\strdtubeparallel}[2]{\strdseq{\strdtubelend,\strdtubestart,\strdparallelwith{\strdxscale{#1}\strdtuberjump}{#2},\strdtubelend,\strdtubestart}}
@@ -447,9 +484,8 @@
 \newcommand*{\strdtubeendatC}[3]{% {at}{newid}{previd}
     \strdemptyC{#2}{#3 #1}%
 }
-    
 
-% mid
+% tubemid
 \newcommand*{\strdtubemid}{\strdcomposeC\strdtubemidC}
 \newcommand*{\strdtubemidC}[2]{% {newid}{previd}
     \strdtube@{
@@ -462,7 +498,7 @@
     % }
 }
 
-% jump
+% tubejump
 \newcommand*{\strdtubejump}{\strdcomposeC\strdtubejumpC}
 \newcommand*{\strdtubejumpC}[2]{% {newid}{previd}
     \strdtube@{
@@ -472,8 +508,7 @@
     }%
 }
 
-
-% ljump/rjump
+% tubeljump/tuberjump
 \newcommand*{\strdtubeljump}{\strdcomposeC\strdtubeljumpC}
 \newcommand*{\strdtubeljumpC}[2]{% {newid}{previd}
     \strdtube@{
@@ -491,7 +526,7 @@
         {$(#2 End)+(\strdtubexhalfunit,-\strdtubeyunit)$}
 }
 
-% partleft
+% tubepartleft
 \newcommand*{\strdtubepartleft}[1]{\strdcomposeC{\strdtubepartleftC{#1}}}
 \newcommand*{\strdtubepartleftC}[3]{% {xscale}{newid}{previd}
     \strdtube@{
@@ -517,7 +552,7 @@
 \newcommand*{\strdtubepartunleft}[1]{\strdcomposeC{\strdtubepartunleftC{#1}}}
 \newcommand*{\strdtubepartunleftC}[1]{\strdtubeundoC@{\strdtubepartleftC{#1}}}
 
-% % partright
+% % tubepartright
 % \newcommand*{\strdtubepartright}[1]{\strdcomposeC{\strdtubepartrightC{#1}}}
 % \newcommand*{\strdtubepartrightC}[3]{% {xscale}{newid}{previd}
 %     \strdtube@{
@@ -540,7 +575,7 @@
 % \newcommand*{\strdtubepartunright}[1]{\strdcomposeC{\strdtubepartunrightC{#1}}}
 % \newcommand*{\strdtubepartunrightC}[1]{\strdtubeundoC@{\strdtubepartrightC{#1}}}
 
-% partright
+% tubepartright
 \newcommand*{\strdtubepartright}[1]{\strdcomposeC{\strdtubepartrightC{#1}}}
 \newcommand*{\strdtubepartrightC}[3]{% {xscale}{newid}{previd}
     \Compose\strdtube@\strdflip@{
@@ -554,7 +589,7 @@
 \newcommand*{\strdtubepartunright}[1]{\strdcomposeC{\strdtubepartunrightC{#1}}}
 \newcommand*{\strdtubepartunrightC}[1]{\strdtubeundoC@{\strdtubepartrightC{#1}}}
 
-% partmid
+% tubepartmid
 \newcommand*{\strdtubepartmid}[2]{\strdcomposeC{\strdtubepartmidC{#1}{#2}}}
 \newcommand*{\strdtubepartmidC}[4]{% {lscale}{rscale}{newid}{previd}
     \strdtube@{
@@ -580,7 +615,7 @@
 \newcommand*{\strdtubepartunmid}[2]{\strdcomposeC{\strdtubepartunmidC{#1}{#2}}}
 \newcommand*{\strdtubepartunmidC}[2]{\strdtubeundoC@{\strdtubepartmidC{#1}{#2}}}
 
-% partclose
+% tubepartclose
 \newcommand*{\strdtubepartclose}[2]{\strdcomposeC{\strdtubepartcloseC{#1}{#2}}}
 \newcommand*{\strdtubepartcloseC}[4]{% {lscale}{rscale}{newid}{previd}
     \strdtube@{
@@ -618,25 +653,12 @@
 
 \newcommand*{\DimEq}[2]{\Iftex{\ifdim#1=#2 }}
 
-% extend{lscale}{rscale} = yscale{0}{dilate{lscale}{rscale}}
-\newcommand*{\strdtubeextend}[2]{\strdcomposeC{\strdtubeextendC{#1}{#2}}}
-\newcommand*{\strdtubeextendC}[4]{% {lscale}{rscale}{newid}{previd}
-    \strdtube@{
-        \If{\DimEq{#1pt}{0pt}}{
-            \strdempty@{#3 Left}{#4 Left End}
-        }{
-            \strdxscale@{#1}{\strdempty@{#3 Left}{$(#4 Left End)+(-\strdxunit,0)$}}
-        }
-        \strdempty@{#3}{#4 End}
-        \If{\DimEq{#2pt}{0pt}}{
-            \strdempty@{#3 Right}{#4 Right End}
-        }{
-            \strdxscale@{#2}{\strdempty@{#3 Right}{$(#4 Right End)+(\strdxunit,0)$}}
-        }
-    }%
-}
 
-% unextend{lscale}{rscale} = yscale{0}{undilate{lscale}{rscale}}
+% tubeextend{lscale}{rscale} = yscale{0}{dilate{lscale}{rscale}}
+\newcommand*{\strdtubeextend}[2]{\strdcomposeC{\strdtubeextendC{#1}{#2}}}
+\newcommand*{\strdtubeextendC}{\strdtubezerosymC@\strdljumpC}
+
+% tubeunextend{lscale}{rscale} = yscale{0}{undilate{lscale}{rscale}}
 \newcommand*{\strdtubeunextend}[2]{\strdcomposeC{\strdtubeunextendC{#1}{#2}}}
 \newcommand*{\strdtubeunextendC}[4]{% {lscale}{rscale}{newid}{previd}
     \strdflip@{
@@ -644,23 +666,9 @@
     }%
 }
 
-% dilate{lscale}{rscale}
+% tubedilate{lscale}{rscale}
 \newcommand*{\strdtubedilate}[2]{\strdcomposeC{\strdtubedilateC{#1}{#2}}}
-\newcommand*{\strdtubedilateC}[4]{% {lscale}{rscale}{newid}{previd}
-    \strdtube@{
-        \If{\DimEq{#1pt}{0pt}}{
-            \strdmidC{#3 Left}{#4 Left}
-        }{
-            \strdxscale@{#1}{\strdtubedilateleftC{#3 Left}{#4 Left}}
-        }
-        \strdjumpC{#3}{#4}
-        \If{\DimEq{#2pt}{0pt}}{
-            \strdmidC{#3 Right}{#4 Right}
-        }{
-            \strdxscale@{#2}{\strdflip@{\strdtubedilateleftC{#3 Right}{#4 Right}}}
-        }
-    }%
-}
+\newcommand*{\strdtubedilateC}{\strdtubesymC@\strdtubedilateleftC}
 \newcommand*{\strdtubedilateleftC}[2]{% {newid}{previd}
     \strdcoord@{#1 Start}{#2 End}
     \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdtubeyhalfunit)$}
@@ -673,21 +681,7 @@
 
 % tubecap{lscale}{rscale}
 \newcommand*{\strdtubecap}[2]{\strdcomposeC{\strdtubecapC{#1}{#2}}}
-\newcommand*{\strdtubecapC}[4]{% {lscale}{rscale}{newid}{previd}
-    \strdtube@{
-        \If{\DimEq{#1pt}{0pt}}{
-            \strdmidC{#3 Left}{#4 Left}
-        }{
-            \strdxscale@{#1}{\strdtubecapleftC{#3 Left}{#4 Left}}
-        }
-        \strdjumpC{#3}{#4}
-        \If{\DimEq{#2pt}{0pt}}{
-            \strdmidC{#3 Right}{#4 Right}
-        }{
-            \strdxscale@{#2}{\strdflip@{\strdtubecapleftC{#3 Right}{#4 Right}}}
-        }
-    }%
-}
+\newcommand*{\strdtubecapC}{\strdtubesymC@\strdtubecapleftC}
 \newcommand*{\strdtubecapleftC}[2]{% {newid}{previd}
     \strdcoord@{#1 Start}{#2 End}
     \strdcoord@{#1 StartCorner}{$(#1 Start)+(-\strdxunit,-\strdtubeyhalfunit)$}
@@ -700,21 +694,7 @@
 
 % tubeunvee{lscale}{rscale}
 \newcommand*{\strdtubeunvee}[2]{\strdcomposeC{\strdtubeunveeC{#1}{#2}}}
-\newcommand*{\strdtubeunveeC}[4]{% {lscale}{rscale}{newid}{previd}
-    \strdtube@{
-        \If{\DimEq{#1pt}{0pt}}{
-            \strdmidC{#3 Left}{#4 Left}
-        }{
-            \strdxscale@{#1}{\strdtubeunveeleftC{#3 Left}{#4 Left}}
-        }
-        \strdjumpC{#3}{#4}
-        \If{\DimEq{#2pt}{0pt}}{
-            \strdmidC{#3 Right}{#4 Right}
-        }{
-            \strdxscale@{#2}{\strdflip@{\strdtubeunveeleftC{#3 Right}{#4 Right}}}
-        }
-    }%
-}
+\newcommand*{\strdtubeunveeC}{\strdtubesymC@\strdtubeunveeleftC}
 \newcommand*{\strdtubeunveeleftC}[2]{% {newid}{previd}
     \strdcoord@{#1 Start}{#2 End}
     \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdtubeyhalfunit)$}
@@ -727,21 +707,7 @@
 
 % tubecup{lscale}{rscale}
 \newcommand*{\strdtubecup}[2]{\strdcomposeC{\strdtubecupC{#1}{#2}}}
-\newcommand*{\strdtubecupC}[4]{% {lscale}{rscale}{newid}{previd}
-    \strdtube@{
-        \If{\DimEq{#1pt}{0pt}}{
-            \strdmidC{#3 Left}{#4 Left}
-        }{
-            \strdxscale@{#1}{\strdtubecupleftC{#3 Left}{#4 Left}}
-        }
-        \strdjumpC{#3}{#4}
-        \If{\DimEq{#2pt}{0pt}}{
-            \strdmidC{#3 Right}{#4 Right}
-        }{
-            \strdxscale@{#2}{\strdflip@{\strdtubecupleftC{#3 Right}{#4 Right}}}
-        }
-    }%
-}
+\newcommand*{\strdtubecupC}{\strdtubesymC@\strdtubecupleftC}
 \newcommand*{\strdtubecupleftC}[2]{% {newid}{previd}
     \strdcoord@{#1 Start}{#2 End}
     \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdtubeyhalfunit)$}
@@ -754,21 +720,7 @@
 
 % undilate{lscale}{rscale}
 \newcommand*{\strdtubeundilate}[2]{\strdcomposeC{\strdtubeundilateC{#1}{#2}}}
-\newcommand*{\strdtubeundilateC}[4]{% {lscale}{rscale}{newid}{previd}
-    \strdtube@{
-        \If{\DimEq{#1pt}{0pt}}{
-            \strdmidC{#3 Left}{#4 Left}
-        }{
-            \strdxscale@{#1}{\strdtubeundilateleftC{#3 Left}{#4 Left}}
-        }
-        \strdjumpC{#3}{#4}
-        \If{\DimEq{#2pt}{0pt}}{
-            \strdmidC{#3 Right}{#4 Right}
-        }{
-            \strdxscale@{#2}{\strdflip@{\strdtubeundilateleftC{#3 Right}{#4 Right}}}
-        }
-    }%
-}
+\newcommand*{\strdtubeundilateC}{\strdtubesymC@\strdtubeundilateleftC}
 \newcommand*{\strdtubeundilateleftC}[2]{% {newid}{previd}
     \strdcoord@{#1 Start}{#2 End}
     \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdtubeyhalfunit)$}
@@ -779,7 +731,7 @@
     \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) }%
 }
 
-% close
+% tubeclose
 \newcommand*{\strdtubeclose}{\strdcomposeC\strdtubecloseC}
 \newcommand*{\strdtubecloseC}[2]{% {newid}{previd}
     \strdtube@{
@@ -790,7 +742,7 @@
 \newcommand*{\strdtubeunclose}{\strdcomposeC\strdtubeuncloseC}
 \newcommand*{\strdtubeuncloseC}{\strdtubeundoC@\strdtubecloseC}
 
-% start/end lines
+% tubestart/tubeend lines
 \tikzset{strd tubebound/.style={very thin,dash pattern=on 2pt off 2pt}}
 \newcommand*{\strdtubestartline}{\strdwith\strdtubestartline@}
 \newcommand*{\strdtubestartline@}[1]{
@@ -810,7 +762,7 @@
     \draw[strd draw,strd framebase]{ (#1 Left End) -- (#1 Right End) };
 }
 
-% cells
+% tubecells
 \tikzset{strd tubecellbase/.style={strd cellbase,thin}}
 \tikzset{strd tubecell/.style={strd tubecellbase}}
 \tikzset{strd tubesemicellbase/.style={strd tubecellbase,sharp corners,rounded rectangle}}
@@ -831,7 +783,7 @@
     }% 
 }
 
-% edges
+% tubeedges
 \tikzset{strd tubeedgebase/.style={thin,draw=black,fill=white,minimum size=2.8pt,inner sep=0pt}}
 \tikzset{strd tubeedgecdot/.style={strd tubeedgebase,circle,fill=black}}
 \tikzset{strd tubeedgecirc/.style={strd tubeedgebase,circle}}

@@ -42,8 +42,8 @@
     \myitem &
     \text{undilate:}
     \strdgathered{
-        \strdtubestart,
-        \strdtubeextend{1}{1},
+        \strdtubestart,\strdtubeedgehd,
+        \strdtubeextend{1}{1},\strdtubeedgebhd,
         \strdtubemid,\strdtubeendline,
         \strdtubeundilate{1}{1},\strdtubeendline,
         \strdtubemid
@@ -81,7 +81,7 @@
         \strdtubestart,
         \strdtubemid,\strdtubeendline,
         \strdtubeextend{1}{1},
-        \strdtubemid
+        \strdtubemid,\strdtubeendline
     }
 }
 
@@ -91,8 +91,8 @@
     \strdgathered{
         \strdtubestart,
         \strdtubemid,\strdtubeendline,
-        \strdtubeextend{2}{0},
-        \strdtubemid
+        \strdtubeextend{2}{0},\strdtubeedgehd,
+        \strdtubemid,\strdtubeendline
     }
 }
 
@@ -112,7 +112,7 @@
     \text{unextend:}
     \strdgathered{
         \strdtubestart,
-        \strdtubedilate{1}{1},\strdtubeendline,
+        \strdtubedilate{1}{1},
         \strdtubeunextend{1}{1},\strdtubeendline,
         \strdtubemid
     }

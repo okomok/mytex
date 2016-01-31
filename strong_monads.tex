@@ -5,7 +5,6 @@
 \begin{document}
 
 
-
 % coherence
 \In{preview,math,aligned}{
     \myitem &
@@ -39,25 +38,24 @@
     \strdgathered{
         \strdbranch{
             \strdparallelwith{\strdxscale{2.5}\strdljump}{
-                \strdseq{\strdyhalf\strdmid,\strdmid},
-                \strdseq{\strdyhalf\strdmid,\strdframearound,\strdmid}
+                \strdseq{\strdmid,\strdmid},
+                \strdseq{\strdyhalf\strdmid,\strdframearound,\strdyscale{1.5}\strdmid}
             }
         },
         \strdxscale{1.5}\strdljump,
         \strdtubestart,
         \strdtubeextend{1}{2},\strdtubeendline,
         \strdtubeundilate{2}{0},
-        \strdbranch{
-            \strdyhalf\strdtubemid,\strdtubeendline
-        },
-        \strdtubeunextend{0.5}{0.5},
         \strdtubeedgehd,
-        \strdyhalf\strdtubemid
+        \strdbranch{
+            \strdtubemid
+        },
+        \strdtubecap{0.5}{0.5},\strdtubeendline
     } \ = \ 
     \strdgathered{
         \strdbranch{
             \strdbranch{
-                \strdljump,
+                \strdxscale{1.5}\strdljump,
                 \strdmid,\strdframearound,
                 \strdyhalf\strdmid,\strdframearound,
                 \strdyhalf\strdmid
@@ -68,13 +66,12 @@
         \strdtubestart,
         \strdtubeextend{1.5}{1.5},\strdtubestartline,
         \strdyhalf\strdtubemid,
+        \strdtubeedgehd,
         \strdbranch{
-            \strdtubeunextend{0.5}{0.5},
-            \strdtubeedgehd,
             \strdtubeundilate{2}{0},
             \strdyhalf\strdtubemid
         },
-        \strdyhalf\strdtubemid,
+        \strdyhalf{\strdtubecap{0.5}{0.5}},
         \strdtubeundilate{2}{0},\strdtubeendline
     }
 }
