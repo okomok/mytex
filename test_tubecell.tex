@@ -1,0 +1,22 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+\In{preview,math,aligned}{
+    & \text{tubecell test} 
+    \strdgathered{
+        \strdmid,
+        \strdtubestart,
+        \strdtubecell{1}{f},
+        \strdtubemid,
+        \strdtubecell{2}{a},
+        \strdtubeextend{1}{1},
+        \strdtubemid
+    }
+}
+
+\end{document}
