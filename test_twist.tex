@@ -1,0 +1,28 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+\In{preview,math,aligned}{
+    \text{tubecell test} \\
+    \strdgathered{
+        \strdxscale{0.3}\strdrturn,
+        \strdcell{f},
+        \strdxscale{0.3}\strdunlturn
+    }
+}
+
+\In{preview,math,aligned}{
+    \text{tubecell test} \\
+    \strdgathered{
+        \strdlchange,
+        \strdlbend,
+        \strdflip\strdunlbend,
+       % \strdcell{f},
+        \strdmid
+    }
+}
+
+\end{document}

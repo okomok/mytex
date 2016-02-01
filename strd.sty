@@ -110,6 +110,7 @@
     }{}
 }
 \newcommand*{\strdcopyextra@}[2]{% {to}{from}
+    \strdcopyfield@{Corner}{#1}{#2}
     \strdcopyfield@{StartCorner}{#1}{#2}
     \strdcopyfield@{EndCorner}{#1}{#2}
 }
@@ -166,6 +167,50 @@
     \strdstringC{#1}{#2 End}{$(#2 End)+(0,-\strdyhalfunit)$}{$(#2 End)+(0,-\strdyunit)$}
     \strddraw@{ (#1 Start) -- (#1 End) }%
 }
+
+% lbend/rbend
+\newcommand*{\strdlbend}{\strdcomposeC\strdlbendC}
+\newcommand*{\strdlbendC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{#2 End}
+    \strdcoord@{#1 Corner}{$(#1 Start)+(0,-\strdunitmergin)$}
+    \strdcoord@{#1 Mid}{$(#1 Start)+(-\strdxhalfunit,-\strdyhalfunit)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strdcoord@{#1 End}{$(#1 Start)+(-\strdxunit,-\strdyhalfunit)$}
+    \strddraw@{ (#1 Start) -- (#1 Corner) parabola[bend at end] (#1 End) }%
+}
+\newcommand*{\strdunlbend}{\strdcomposeC\strdunlbendC}
+\newcommand*{\strdunlbendC}{\strdundoC@\strdlbendC}
+\newcommand*{\strdrbend}{\strdcomposeC\strdrbendC}
+\newcommand*{\strdrbendC}{\strdflipC\strdlbendC}
+\newcommand*{\strdunrbend}{\strdcomposeC\strdunrbendC}
+\newcommand*{\strdunrbendC}{\strdundoC@\strdrbendC}
+
+
+% lturn/rturn
+\newcommand*{\strdlturn}{\strdcomposeC\strdlturnC}
+\newcommand*{\strdlturnC}[2]{% {newid}{previd}
+    \strdxscale@{1}{
+        \strdlbendC{#1 Impl1}{#2}
+        \strdunrbendC{#1 Impl2}{#1 Impl1}
+        \strdrbendC{#1 Impl3}{#1 Impl2}
+        \strdinv@{ \strdunlbendC{#1 Impl4}{#1 Impl3} }
+        \strdstringC{#1}{#2 End}{#1 Impl2 End}{#1 Impl4 End}
+    }
+}
+\newcommand*{\strdrturn}{\strdcomposeC\strdrturnC}
+\newcommand*{\strdrturnC}{\strdflipC\strdlturnC}
+\newcommand*{\strdunlturn}{\strdcomposeC\strdunlturnC}
+\newcommand*{\strdunlturnC}[2]{% {newid}{previd}
+    \strdxscale@{1}{
+        \strdinv@{ \strdlbendC{#1 Impl1}{#2} }
+        \strdunrbendC{#1 Impl2}{#1 Impl1}
+        \strdrbendC{#1 Impl3}{#1 Impl2}
+        \strdunlbendC{#1 Impl4}{#1 Impl3}
+        \strdstringC{#1}{#2 End}{#1 Impl2 End}{#1 Impl4 End}
+    }
+}
+\newcommand*{\strdunrturn}{\strdcomposeC\strdunrturnC}
+\newcommand*{\strdunrturnC}{\strdflipC\strdunlturnC}
 
 % hleft/hright
 \newcommand*{\strdhleft}{\strdcomposeC\strdhleftC}
