@@ -1,0 +1,42 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+\In{preview,math,aligned}{
+    \text{change test} \\ 
+    \strdgathered{
+        \strdmid,\strdcdot,
+        \strdlchange,
+        \strdcdot,
+        \strdrchange,\strdcdot,
+        \strdmid
+    } \\
+}
+
+\In{preview,math,aligned}{
+    \text{int test} \\ 
+    \strdgathered{
+        \strdmid,\strdcdot,
+        \strdlint,
+        \strdcdot,
+        \strdrint,\strdcdot,
+        \strdmid
+    } \\
+}
+
+\In{preview,math,aligned}{
+    \text{corner test} \\ 
+    \strdgathered{
+        \strdmid,\strdcdot,
+        \strdlcorner,
+        \strdcdot,
+        \strdrcorner,\strdcdot,
+        \strdmid
+    } \\
+}
+
+\end{document}
