@@ -1087,20 +1087,21 @@
 \newcommand*{\strdroadlabel}[2]{\strdwith{\strdputroadlabel{#1}{#2}}}
 \newcommand*{\strdroadlabelat}[3]{\strdwithat{#1}{\strdputroadlabel{#2}{#3}}}
 
-\newcommand*{\strdbranch}{\strdseqin\strdbranch@}
-\newcommand*{\strdbranch@}[4]{% {stm}{sc}{newid}{previd}
+\newcommand*{\strdfork}{\strdseqin\strdfork@}
+\newcommand*{\strdfork@}[4]{% {stm}{sc}{newid}{previd}
     \strduse{#2}{#3}{#4}
-    \strduse{#1}{\strdemptyC}{#3 Branch}{#3}%
+    \strduse{#1}{\strdemptyC}{#3 Fork}{#3}%
 }
 
+% right-biased
 \newcommand*{\strdparallel}{\strdparallelwith\Identity}
-\newcommand*{\strdparallelwith}[2]{\strdparallelwith@{#1}{\List{#2}}}
-\newcommand*{\strdparallelwith@}[2]{\Then{\strdparallelwith@@{#1}{\Tail{#2}}}{\Head{#2}}}
-\newcommand*{\strdparallelwith@@}[2]{% {stm}{ss}
-    \Foldr{\strdparallelwith@@@{#1}}{\Identity}{#2}
+\newcommand*{\strdparallelwith}[2]{% {fstm}{s1,s2,...}
+    \FoldrOne{\strdparallelwith@{#1}}{\List{#2}}
 }
-\newcommand*{\strdparallelwith@@@}[3]{% {stm}{s}{z}
-    \strdbranch{#1,#3,#2}%
+\newcommand*{\strdparallelwith@}[6]{% {fstm}{lstm}{rstm}{sc}{newid}{previd}
+    \strduse{#4}{#5 Prev}{#6}
+    \strduse{#2}{\strdemptyC}{#5 Parallel}{#5 Prev}
+    \Then{\strduse{#1}}{\strduse{#3}}{\strdemptyC}{#5}{#5 Prev}
 }
 
 \newcommand*{\strdrestart}[4]{% {stm}{sc}{newid}{previd}
