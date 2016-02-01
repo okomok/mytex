@@ -768,7 +768,8 @@
 \newcommand*{\strdtubecell}[2]{\strdwith{\strdputtubecell{#1}{#2}}}
 \newcommand*{\strdputtubecell}[3]{% {xscale}{text}{id}
     \strdonlayer@{strd celllayer}{
-        \node[strd tubecell,minimum width=1cm,xscale=#1] at (#3 End) {};
+        % letter too is scaled.
+        \node[strd tubecell,minimum width=1cm,xscale=#1] at (#3 End) {\vphantom{#2}};
         \node[] at (#3 End) {#2};
     }% 
 }
