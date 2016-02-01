@@ -1,0 +1,71 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+% signature
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{A},
+        \strdtubestart,
+        \strdtubecell{1}{\alpha},
+        \strdfork{
+            \strdmid,\strdrlabel{A}
+        },
+        \strdtubemid,\strdframellabel{T},\strdtubebound
+    }
+}
+
+
+% coherence
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{},
+        \strdtubestart,
+        \strdtubecell{2}{\alpha},
+        \strdtubeextend{1}{1},
+        \strdfork{
+            \strdmid,\strdrlabel{},
+            \strdtubestart,\strdtubecell{1}{\alpha},
+            \strdfork{
+                \strdmid,\strdrlabel{}
+            },
+            \strdtubemid
+        },
+        \strdtubemid,\strdtubemid,\strdtubebound
+    } =
+    \strdgathered{
+        \strdmid,
+        \strdtubecell{1}{\alpha},
+        \strdfork{
+            \strdmid,\strdmid
+        },
+        \strdtubestart,
+        \strdtubemid,
+        \strdfork{
+            \strdtubecap{1}{1},\strdtubebound
+        },
+        \strdtwins{strd twin white},
+        \strdtubemid
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdmid,
+        \strdtubecell{1}{\alpha},
+        \strdtubestart,
+        \strdfork{
+            \strdyscale{1.5}\strdmid
+        },
+        \strdtubemid,\strdtwins{strd twin black}
+    } =\
+    \strdgathered{
+        \strdmid
+    }
+}
+
+\end{document}

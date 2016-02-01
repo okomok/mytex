@@ -762,12 +762,9 @@
     \draw[strd draw,strd framebase]{ (#1 Left End) -- (#1 Right End) };
 }
 
-% tubecells
+% tubecell
 \tikzset{strd tubecellbase/.style={strd cellbase,thin}}
 \tikzset{strd tubecell/.style={strd tubecellbase}}
-\tikzset{strd tubesemicellbase/.style={strd tubecellbase,sharp corners,rounded rectangle}}
-\tikzset{strd tubesemicellleft/.style={strd tubesemicellbase,rounded rectangle east arc=none}}
-\tikzset{strd tubesemicellright/.style={strd tubesemicellbase,rounded rectangle west arc=none}}
 \newcommand*{\strdtubecell}[2]{\strdwith{\strdputtubecell{#1}{#2}}}
 \newcommand*{\strdputtubecell}[3]{% {xscale}{text}{id}
     \strdonlayer@{strd celllayer}{
@@ -775,39 +772,35 @@
         \node[] at (#3 End) {#2};
     }% 
 }
-\newcommand*{\strdtubesemicell}{\Compose\strdwith\strdputtubesemicell}
-\newcommand*{\strdputtubesemicell}[2]{% {text}{id}
+
+% twincell
+\tikzset{strd twincellbase/.style={strd tubecellbase,sharp corners,rounded rectangle}}
+\tikzset{strd twincellleft/.style={strd twincellbase,rounded rectangle east arc=none}}
+\tikzset{strd twincellright/.style={strd twincellbase,rounded rectangle west arc=none}}
+\newcommand*{\strdtwincell}{\strdtwincellat{End}}
+\newcommand*{\strdtwincellat}[2]{\strdwith{\strdputtwincellat{#1}{#2}}}
+\newcommand*{\strdputtwincellat}[3]{% {at}{text}{id}
     \strdonlayer@{strd celllayer}{
-        \node[strd tubesemicellleft] at (#2 Left End) {#1};
-        \node[strd tubesemicellright] at (#2 Right End) {\vphantom{#1}};% has some width for some reason. 
+        \node[strd twincellleft] at (#3 Left #1) {#2};
+        \node[strd twincellright] at (#3 Right #1) {\vphantom{#2}};% has some width for some reason. 
     }% 
 }
 
-% tubeedges
-\tikzset{strd tubeedgebase/.style={thin,draw=black,fill=white,minimum size=2.8pt,inner sep=0pt}}
-\tikzset{strd tubeedgecdot/.style={strd tubeedgebase,circle,fill=black}}
-\tikzset{strd tubeedgecirc/.style={strd tubeedgebase,circle}}
-\tikzset{strd tubeedgesq/.style={strd tubeedgebase,rectangle,sharp corners}}
-\tikzset{strd tubeedgehd/.style={strd tubeedgebase,regular polygon,regular polygon sides=3,sharp corners,minimum size=5pt}}
-\tikzset{strd tubeedgelhd/.style={strd tubesemicellleft,minimum size=4pt}}
-\tikzset{strd tubeedgerhd/.style={strd tubesemicellright,minimum size=4pt}}
-\tikzset{strd tubeedgeblhd/.style={strd tubeedgelhd,fill=black}}
-\tikzset{strd tubeedgebrhd/.style={strd tubeedgerhd,fill=black}}
-\newcommand*{\strdtubeedgecdot}{\strdwith{\strdputtubeedge@{strd tubeedgecdot}}}
-\newcommand*{\strdtubeedgecirc}{\strdwith{\strdputtubeedge@{strd tubeedgecirc}}}
-\newcommand*{\strdtubeedgesq}{\strdwith{\strdputtubeedge@{strd tubeedgesq}}}
-\newcommand*{\strdputtubeedge@}[2]{% {opt}{id}
+% twins
+\tikzset{strd twinsbase/.style={thin,draw=black,fill=white,minimum size=2.8pt,inner sep=0pt}}
+\tikzset{strd twincdot/.style={strd twinsbase,circle,fill=black}}
+\tikzset{strd twincirc/.style={strd twinsbase,circle}}
+\tikzset{strd twinsq/.style={strd twinsbase,rectangle,sharp corners}}
+\tikzset{strd twin white left/.style={strd twincellleft,minimum size=4pt}}
+\tikzset{strd twin white right/.style={strd twincellright,minimum size=4pt}}
+\tikzset{strd twin black left/.style={strd twin white left,fill=black}}
+\tikzset{strd twin black right/.style={strd twin white right,fill=black}}
+\newcommand*{\strdtwins}{\strdtwinsat{End}}
+\newcommand*{\strdtwinsat}[2]{\strdwith{\strdputtwinsat{#1}{#2}}}
+\newcommand*{\strdputtwinsat}[3]{% {at}{opt}{id}
     \strdonlayer@{strd celllayer}{
-        \node[#1] at (#2 Left End) {};
-        \node[#1] at (#2 Right End) {};
-    }% 
-}
-\newcommand*{\strdtubeedgehd}{\strdwith{\strdputtubelredge@{strd tubeedgelhd}{strd tubeedgerhd}}}
-\newcommand*{\strdtubeedgebhd}{\strdwith{\strdputtubelredge@{strd tubeedgeblhd}{strd tubeedgebrhd}}}
-\newcommand*{\strdputtubelredge@}[3]{% {l}{r}{id}
-    \strdonlayer@{strd celllayer}{
-        \node[#1] at (#3 Left End) {};
-        \node[#2] at (#3 Right End) {};
+        \node[#2 left] at (#3 Left #1) {};
+        \node[#2 right] at (#3 Right #1) {};
     }% 
 }
 
