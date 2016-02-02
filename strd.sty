@@ -283,8 +283,8 @@
 \newcommand*{\strdljumpC}{\strdnoneC\strdhleftC}
 \newcommand*{\strdrjump}{\strdcomposeC\strdrjumpC}
 \newcommand*{\strdrjumpC}{\strdnoneC\strdhrightC}
-\newcommand*{\strdjumpto@}[3]{% {newid}{prevnode}{nextnode}
-    \strdstringC@{#1}{#2}{$(#2)!.5!(#3)$}{#3}%
+\newcommand*{\strdjumpto@}[3]{% {nextnode}{newid}{prevnode}
+    \strdstringmidC@{#2}{#3}{#1}%
 }
 
 % dup
@@ -309,22 +309,22 @@
 \newcommand*{\strdunrcornerC}{\strdundoC@\strdrcornerC}
 
 % sqsubset/sqsupset
-\newcommand*{\strdsqsubsettoC}[3]{% {newid}{previd}{nextid}
+\newcommand*{\strdsqsubsettoC}[3]{% {nextid}{newid}{previd}
     % Note \getlastxy doesn't work with calc.
-    \strdcoord@{#1 Start}{#2 End}
-    \strdcoord@{#1 End}{#3 End}
-    \strdcoord@{#1 StartCorner}{$(#1 Start)+(-\strdxunit,0)$}
-    \strdcoord@{#1 EndCorner}{{#1 StartCorner} |- {#1 End}}
-    \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
-    \strdcoord@{#1}{#1 Mid}
-    \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) }%
+    \strdcoord@{#2 Start}{#3 End}
+    \strdcoord@{#2 End}{#1 End}
+    \strdcoord@{#2 StartCorner}{$(#2 Start)+(-\strdxunit,0)$}
+    \strdcoord@{#2 EndCorner}{{#2 StartCorner} |- {#2 End}}
+    \strdcoord@{#2 Mid}{$(#2 StartCorner)!.5!(#2 EndCorner)$}
+    \strdcoord@{#2}{#2 Mid}
+    \strddraw@{ (#2 Start) -- (#2 StartCorner) -- (#2 EndCorner) -- (#2 End) }%
 }
 \newcommand*{\strdsqsupsettoC}{\Compose\strdflipC\strdsqsubsettoC}
 
 \newcommand*{\strdsqsubset}{\strdcomposeC\strdsqsubsetC}
 \newcommand*{\strdsqsubsetC}[2]{% {newid}{previd}
-    \strdjumpC{#1 Impl}{#2}
-    \strdsqsubsettoC{#1}{#2}{#1 Impl}%
+    \strdjumpC{#1 0}{#2}
+    \strdsqsubsettoC{#1 0}{#1}{#2}%
 }
 \newcommand*{\strdsqsupset}{\strdcomposeC\strdsqsupsetC}
 \newcommand*{\strdsqsupsetC}{\strdflipC\strdsqsubsetC}
@@ -346,9 +346,9 @@
 }
 \newcommand*{\strdcup}{\strdcomposeC\strdcupC}
 \newcommand*{\strdcupC}[2]{% {newid}{previd}
-    \strdxscale@{2}{\strddupC{#1 Dup}{#2}}
-    \strdunleftC{#1 Left}{#1 Dup Left}
-    \strdunrightC{#1 Right}{#1 Dup Right}
+    \strdxscale@{2}{ \strddupC{#1 0}{#2} }
+    \strdunleftC{#1 Left}{#1 0 Left}
+    \strdunrightC{#1 Right}{#1 0 Right}
     \strdjumpC{#1}{#2}%
 }
 
@@ -368,7 +368,7 @@
 \tikzset{strd whitedot/.style={circle,draw=white,fill=white,minimum size=3pt,inner sep=0pt}}
 
 \newcommand*{\strdputcdot}[1]{% {node}
-    \strdonlayer@{strd celllayer}{
+    \strdcell@{
         \node[strd dot] at (#1) {};
     }%
 }
@@ -386,8 +386,10 @@
 \tikzset{strd mapcell/.style={strd cellbase,thin}}
 \tikzset{strd bijcell/.style={strd cellbase,very thin,sharp corners}}
 
+\newcommand*{\strdcell@}[1]{\strdonlayer@{strd celllayer}{#1}}
+
 \newcommand*{\strdputcellof}[3]{% {style}{text}{node}
-    \strdonlayer@{strd celllayer}{
+    \strdcell@{
         \node[#1] at (#3) {#2};
     }% 
 }
@@ -419,25 +421,15 @@
     \strduse{#4}{\strdemptyC}{#6 Unframe}{#6 Prev}
     \strdonlayer@{strd framelayer}{
         \strdpathis@{#1}{
-            \strdxscale@{#2}{ \strdsqsubsettoC{#6 Left}{#6 Prev}{#6 Unframe} }
-            \strdxscale@{#3}{ \strdsqsupsettoC{#6 Right}{#6 Prev}{#6 Unframe} }
-            \strdjumpto@{#6}{#6 Prev End}{#6 Unframe End}
+            \strdxscale@{#2}{ \strdsqsubsettoC{#6 Unframe}{#6 Left}{#6 Prev} }
+            \strdxscale@{#3}{ \strdsqsupsettoC{#6 Unframe}{#6 Right}{#6 Prev} }
+            \strdjumpto@{#6 Unframe End}{#6}{#6 Prev End}
          }
      }%
 }
 \newcommand*{\strdbox}{\strdboxof{strd box}}
 \newcommand*{\strdbijbox}{\strdboxof{strd bijbox}}
 \newcommand*{\strdidbox}{\strdboxof{strd idbox}}
-
-\newcommand*{\strddeclsqsubset@}[3]{% {newid}{fromnode}{tonode}
-    \strdcoord@{#1 Start}{#2}
-    \strdcoord@{#1 StartCorner}{$(#2)+(-\strdxunit,0)$}
-    \strdcoord@{#1 EndCorner}{$(#3)+(-\strdxunit,0)$}
-    \strdcoord@{#1 Mid}{$(#1 StartCorner)!.5!(#1 EndCorner)$}
-    \strdcoord@{#1}{#1 Mid}
-    \strdcoord@{#1 End}{#3}
-}
-\newcommand*{\strddeclsqsupset}[3]{\strdflip@{\strddeclsqsubset@{#1}{#2}{#3}}}
 
 
 % Tubes
@@ -676,18 +668,17 @@
 \newcommand*{\strdtubepartunclose}[2]{\strdcomposeC{\strdtubepartuncloseC{#1}{#2}}}
 \newcommand*{\strdtubepartuncloseC}[2]{\strdtubeundoC@{\strdtubepartcloseC{#1}{#2}}}
 
-% merge todo
-\newcommand*{\strdtubemerge}[5]{% {lstm}{rstm}{sc}{newid}{previd}
-    \strduse{#3}{#4 Prev}{#5}
-    \strduse{#1}{\strdemptyC}{#4 LeftBranch}{#4 Prev}
-    \strduse{#2}{\strdemptyC}{#4 RightBranch}{#4 Prev}
-    \strdempty@{#4 Left}{#4 LeftBranch Left End}
-    \strdempty@{#4 Right}{#4 RightBranch Right End}
-    \strdempty@{#4}{$(#4 Left)!.5!(#4 Right)$}%
-}
+% % merge deprecated
+% \newcommand*{\strdtubemerge}[5]{% {lstm}{rstm}{sc}{newid}{previd}
+%     \strduse{#3}{#4 Prev}{#5}
+%     \strduse{#1}{\strdemptyC}{#4 LeftBranch}{#4 Prev}
+%     \strduse{#2}{\strdemptyC}{#4 RightBranch}{#4 Prev}
+%     \strdempty@{#4 Left}{#4 LeftBranch Left End}
+%     \strdempty@{#4 Right}{#4 RightBranch Right End}
+%     \strdempty@{#4}{$(#4 Left)!.5!(#4 Right)$}%
+% }
 
 \newcommand*{\DimEq}[2]{\Iftex{\ifdim#1=#2 }}
-
 
 % tubeextend{lscale}{rscale} = yscale{0}{dilate{lscale}{rscale}}
 \newcommand*{\strdtubeextend}[2]{\strdcomposeC{\strdtubeextendC{#1}{#2}}}
@@ -802,7 +793,7 @@
 \tikzset{strd tubecell/.style={strd tubecellbase}}
 \newcommand*{\strdtubecell}[2]{\strdwith{\strdputtubecell{#1}{#2}}}
 \newcommand*{\strdputtubecell}[3]{% {xscale}{text}{id}
-    \strdonlayer@{strd celllayer}{
+    \strdcell@{
         % letter too is scaled.
         \node[strd tubecell,minimum width=1cm,xscale=#1] at (#3 End) {\vphantom{#2}};
         \node[] at (#3 End) {#2};
@@ -816,7 +807,7 @@
 \newcommand*{\strdtwincell}{\strdtwincellat{End}}
 \newcommand*{\strdtwincellat}[2]{\strdwith{\strdputtwincellat{#1}{#2}}}
 \newcommand*{\strdputtwincellat}[3]{% {at}{text}{id}
-    \strdonlayer@{strd celllayer}{
+    \strdcell@{
         \node[strd twincellleft] at (#3 Left #1) {#2};
         \node[strd twincellright] at (#3 Right #1) {\vphantom{#2}};% has some width for some reason. 
     }% 
@@ -834,7 +825,7 @@
 \newcommand*{\strdtwins}{\strdtwinsat{End}}
 \newcommand*{\strdtwinsat}[2]{\strdwith{\strdputtwinsat{#1}{#2}}}
 \newcommand*{\strdputtwinsat}[3]{% {at}{opt}{id}
-    \strdonlayer@{strd celllayer}{
+    \strdcell@{
         \node[#2 left] at (#3 Left #1) {};
         \node[#2 right] at (#3 Right #1) {};
     }% 
