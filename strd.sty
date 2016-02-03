@@ -27,7 +27,8 @@
 \pgfdeclarelayer{strd labellayer}
 \pgfdeclarelayer{strd framelayer}
 \pgfdeclarelayer{strd framearoundlayer}
-\pgfsetlayers{background,main,strd pavelayer,strd framearoundlayer,strd gradedlayer,strd whitelayer,strd framelayer,strd celllayer,strd labellayer}
+\pgfdeclarelayer{strd tubelayer}
+\pgfsetlayers{background,main,strd tubelayer,strd pavelayer,strd framearoundlayer,strd gradedlayer,strd whitelayer,strd framelayer,strd celllayer,strd labellayer}
 
 % Layers forget surrounding line styles, so we define...
 \newcommand*{\strdresetlinewidth}{\pgfsetlinewidth{\strdstringwidth}}
@@ -453,7 +454,7 @@
 
 % helpers
 \newcommand*{\strdtube@}[1]{
-    \strdonlayer@{strd framelayer}{
+    \strdonlayer@{strd tubelayer}{
         \strdpathis@{strd tube}{
             #1 
         }
@@ -837,10 +838,27 @@
 
 \tikzset{strd framearound/.style={circle,draw=white,fill=white,minimum size=4pt,inner sep=0pt}}
 \tikzset{strd roadframearound/.style={rectangle,sharp corners,draw=white,fill=white,minimum width=4pt,minimum height=3pt,inner sep=0pt}}
-
 \newcommand*{\strdframearound@}[1]{\strdonlayer@{strd framearoundlayer}{#1}}
-\newcommand*{\strdputframearound}[1]{\strdframearound@{\node[strd framearound] at (#1) {};}}
-\newcommand*{\strdputroadframearound}[1]{\strdframearound@{\node[strd roadframearound] at (#1) {};}}
+\newcommand*{\strdputframearound}[1]{
+    \strdframearound@{
+        \node[strd framearound] at (#1) {};
+    }%
+}
+\newcommand*{\strdputroadframearound}[1]{
+    \strdframearound@{
+        \node[strd roadframearound] at (#1) {};
+    }%
+}
+\newcommand*{\strdputtubeframearound}[1]{
+    \strdframearound@{
+        \node[strd framearound] at (#1 Left End) {};
+        \node[strd framearound] at (#1 Right End) {};
+    }% 
+}
+
+\newcommand*{\strdframearound}{\strdhere\strdputframearound}
+\newcommand*{\strdroadframearound}{\strdhere\strdputroadframearound}
+\newcommand*{\strdtubeframearound}{\strdwith\strdputtubeframearound}
 
 
 % Labels
@@ -1085,8 +1103,6 @@
 \newcommand*{\strdcellat}[2]{\strdwithat{#1}{\strdputcell{#2}}}
 \newcommand*{\strdmapcell}{\Compose\strdhere\strdputmapcell}
 \newcommand*{\strdbijcell}{\Compose\strdhere\strdputbijcell}
-\newcommand*{\strdframearound}{\strdhere\strdputframearound}
-\newcommand*{\strdroadframearound}{\strdhere\strdputroadframearound}
 \newcommand*{\strddeadend}{\strdhere\strdputdeadend}
 
 \newcommand*{\strdllabel}{\Compose\strdwith\strdputllabel}

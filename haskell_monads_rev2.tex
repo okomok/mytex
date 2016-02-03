@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+% signature
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{a},
+            \strdmid,\strdrlabel{a}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,\strdframellabel{\strdlvert{m}},
+        \strdcell{\texttt{return}}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{b},
+            \strdframearound,
+            \strdbox{1.5}{1.5}{
+                \strdmid,
+                \strdmid,
+                \strdframearound
+            },\strdframellabel{\strdlvert{\texttt{=<<}}},
+            \strdmid,\strdrlabel{a}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,\strdframellabel{\strdlvert{m}},
+        \strdtubemid,
+        \strdtubecell{1}{k},
+        \strdtubejump,
+        \strdtubemid,\strdframellabel{\strdlvert{m}},\strdtubebound
+    }
+}
+
+% to triple
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,
+            \strdmid
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,
+        \strdtwins{strd twin cdot}
+    } \mydefeq
+    \strdgathered{
+        \strdfork{
+            \strdmid,
+            \strdmid
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,
+        \strdtubecell{1.2}{\texttt{return}}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,
+            \strdmid
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,
+        \strdtwins{strd twin circ},
+        \strdparallel{
+            \strdseq{\strdtubecap{1}{1},\strdtubebound},
+            \strdtubemid
+        }
+    } \mydefeq
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdframearound,
+            \strdbox{2}{2}{
+                \strdmid,\strdframearound
+            },\strdframellabel{\strdlvert{\texttt{=<<}}},
+            \strdmid
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,
+        \strdtubemid,\strdtubeframearound,
+        \strdfork{
+            \strdtubemid
+        },
+        \strdtubeextend{1}{1},
+        \strdtubemid,\strdtubebound
+    } \\
+}
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdmid
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,
+        \strdtwins{strd twin circ},
+        \strdfork{
+            \strdtubemid,
+            \strdtubecell{1}{k},
+            \strdmid
+        },
+        \strdtubecap{1}{1},
+        \strdtubemid,\strdtubebound
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdframearound,
+            \strdbox{1.5}{1.5}{
+                \strdmid,\strdmid,\strdframearound
+            },\strdframellabel{\strdlvert{\texttt{=<<}}},
+            \strdmid
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,
+        \strdtubemid,
+        \strdtubecell{1}{k},
+        \strdtubejump,
+        \strdtubemid,\strdtubebound
+    }
+}
+
+
+\end{document}
