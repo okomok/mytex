@@ -86,18 +86,17 @@
     \draw[strd draw]{#1};%
 }
 
-\newcommand*{\strdstringC@}[4]{% {newid}{startnode}{middlenode}{endnode}
+\newcommand*{\strdstring@}[4]{% {newid}{startnode}{middlenode}{endnode}
     \strdcoord@{#1 Start}{#2}
     \strdcoord@{#1 Mid}{#3}
     \strdcoord@{#1 End}{#4}
-    \strdcoord@{#1}{#1 Mid}%
+    \pgfnodealias{#1}{#1 Mid}%
 }
-
-\newcommand*{\strdstringmidC@}[3]{% {newid}{startnode}{endnode}
+\newcommand*{\strdstringmid@}[3]{% {newid}{startnode}{endnode}
     \strdcoord@{#1 Start}{#2}
     \strdcoord@{#1 End}{#3}
     \strdcoord@{#1 Mid}{$(#1 Start)!.5!(#1 End)$}
-    \strdcoord@{#1}{#1 Mid}%
+    \pgfnodealias{#1}{#1 Mid}%
 }
 
 \newcommand*{\strdcomposeC}[4]{% {nextsc}{prevsc}{newid}{previd}
@@ -108,20 +107,13 @@
 \newcommand*{\strdundoC@}[3]{% {sc}{newid}{previd}
     \strdnone@{\strdflip@{ \strduse{#1}{#2 None}{#3} }}
     \strdinv@{ \strduse{#1}{#2 Inv}{#2 None} }
-    \strdstringC@{#2}{#2 Inv End}{#2 Inv}{#2 Inv Start}
+    \strdstring@{#2}{#2 Inv End}{#2 Inv}{#2 Inv Start}
     \strdcopyundo@{#2}{#2 Inv}%
 }
-
 \newcommand*{\strdcopyundo@}[2]{% {to}{from}
-    \ifnodedefined{#2 Corner}{
-        \strdcoord@{#1 Corner}{#2 Corner}
-    }{}
-    \ifnodedefined{#2 StartCorner}{
-        \strdcoord@{#1 EndCorner}{#2 StartCorner}
-    }{}
-    \ifnodedefined{#2 EndCorner}{
-        \strdcoord@{#1 StartCorner}{#2 EndCorner}
-    }{}
+    \ifnodedefined{#2 Corner}{ \strdcoord@{#1 Corner}{#2 Corner} }{}
+    \ifnodedefined{#2 StartCorner}{ \strdcoord@{#1 EndCorner}{#2 StartCorner} }{}
+    \ifnodedefined{#2 EndCorner}{ \strdcoord@{#1 StartCorner}{#2 EndCorner} }{}
 }
 
 
@@ -163,25 +155,44 @@
 
 % empty
 \newcommand*{\strdempty@}[2]{% {newid}{node}
-    \strdstringC@{#1}{#2}{#2}{#2}%
+    \strdstring@{#1}{#2}{#2}{#2}%
 }
-% You can't (deep-)copy nodes, so we define...
 \newcommand*{\strdempty}{\strdcomposeC\strdemptyC}
 \newcommand*{\strdemptyC}[2]{% {newid}{previd}
-    \strdemptyC@{#1}{#2}
-    \ifnodedefined{#2 Left}{
-        \strdempty@{#1 Left}{#2 Left End}
-    }{}
-    \ifnodedefined{#2 Right}{
-        \strdempty@{#1 Right}{#2 Right End}
-    }{}
-}
-\newcommand*{\strdemptyC@}[2]{% {newid}{previd}
     \strdempty@{#1}{#2 End}
 }
+% \newcommand*{\strdemptyC}[2]{% {newid}{previd}
+%     \strdemptyC@{#1}{#2}
+%     \ifnodedefined{#2 Left}{
+%         \strdempty@{#1 Left}{#2 Left End}
+%     }{}
+%     \ifnodedefined{#2 Right}{
+%         \strdempty@{#1 Right}{#2 Right End}
+%     }{}
+% }
+
 % http://tex.stackexchange.com/questions/85528
 \long\def\ifnodedefined#1#2#3{
     \@ifundefined{pgf@sh@ns@#1}{#3}{#2}%
+}
+
+% Polymorphic for tubes. Deep-copy is infeasible, though.
+\newcommand*{\strdcopyC}[2]{% {newid}{previd}
+    \strdcopyC@{#1}{#2}
+    \ifnodedefined{#2 Left}{ \strdcopyC{#1 Left}{#2 Left} }{}
+    \ifnodedefined{#2 Right}{ \strdcopyC{#1 Right}{#2 Right} }{}
+}
+\newcommand*{\strdcopyC@}[2]{% {newid}{previd}
+    \pgfnodealias{#1}{#2}
+    \strdcopyfield@{Start}{#1}{#2}
+    \strdcopyfield@{StartCorner}{#1}{#2}
+    \strdcopyfield@{Mid}{#1}{#2}
+    \strdcopyfield@{Corner}{#1}{#2}
+    \strdcopyfield@{EndCorner}{#1}{#2}
+    \strdcopyfield@{End}{#1}{#2}%
+}
+\newcommand*{\strdcopyfield@}[3]{% {field}{newid}{previd}
+    \ifnodedefined{#3 #1}{ \pgfnodealias{#2 #1}{#3 #1} }{}
 }
 
 % left/right
@@ -189,7 +200,7 @@
 \newcommand*{\strdleftC}[2]{% {newid}{previd}
     \strdunrbendC{#1 1}{#2}
     \strdhalfmidC{#1 2}{#1 1}
-    \strdstringC@{#1}{#1 1 Start}{#1 1 End}{#1 2 End}%
+    \strdstring@{#1}{#1 1 Start}{#1 1 End}{#1 2 End}%
 }
 \newcommand*{\strdright}{\strdcomposeC\strdrightC}
 \newcommand*{\strdrightC}{\strdflipC\strdleftC}
@@ -201,9 +212,10 @@
 % mid
 \newcommand*{\strdmid}{\strdcomposeC\strdmidC}
 \newcommand*{\strdmidC}[2]{% {newid}{previd}
-    \strdhalfmidC{#1 1}{#2}
-    \strdhalfmidC{#1 2}{#1 1}
-    \strdstringC@{#1}{#1 1 Start}{#1 1 End}{#1 2 End}%
+    \strdyscale@{2}{ \strdhalfmidC{#1}{#2} }%
+    % \strdhalfmidC{#1 1}{#2}
+    % \strdhalfmidC{#1 2}{#1 1}
+    % \strdstring@{#1}{#1 1 Start}{#1 1 End}{#1 2 End}%
 }
 
 % lturn/rturn
@@ -213,7 +225,7 @@
     \strdunrbendC{#1 2}{#1 1}
     \strdrbendC{#1 3}{#1 2}
     \strdinv@{ \strdunlbendC{#1 4}{#1 3} }
-    \strdstringC@{#1}{#2 End}{#1 2 End}{#1 4 End}
+    \strdstring@{#1}{#2 End}{#1 2 End}{#1 4 End}
 }
 \newcommand*{\strdrturn}{\strdcomposeC\strdrturnC}
 \newcommand*{\strdrturnC}{\strdflipC\strdlturnC}
@@ -223,7 +235,7 @@
     \strdunrbendC{#1 2}{#1 1}
     \strdrbendC{#1 3}{#1 2}
     \strdunlbendC{#1 4}{#1 3}
-    \strdstringC@{#1}{#2 End}{#1 2 End}{#1 4 End}
+    \strdstring@{#1}{#2 End}{#1 2 End}{#1 4 End}
 }
 \newcommand*{\strdunrturn}{\strdcomposeC\strdunrturnC}
 \newcommand*{\strdunrturnC}{\strdflipC\strdunlturnC}
@@ -231,7 +243,7 @@
 % hleft/hright
 \newcommand*{\strdhleft}{\strdcomposeC\strdhleftC}
 \newcommand*{\strdhleftC}[2]{% {newid}{previd}
-    \strdstringmidC@{#1}{#2 End}{$(#2 End)+(-\strdxunit,0)$}
+    \strdstringmid@{#1}{#2 End}{$(#2 End)+(-\strdxunit,0)$}
     \strddraw@{ (#1 Start) -- (#1 End) }%
 }
 \newcommand*{\strdhright}{\strdcomposeC\strdhrightC}
@@ -252,7 +264,7 @@
 \newcommand*{\strdsubsetC}[2]{% {newid}{previd}
     \strdunrbendC{#1 1}{#2}
     \strdrbendC{#1 2}{#1 1}
-    \strdstringC@{#1}{#1 1 Start}{#1 1 End}{#1 2 End}
+    \strdstring@{#1}{#1 1 Start}{#1 1 End}{#1 2 End}
 }
 \newcommand*{\strdsupset}{\strdcomposeC\strdsupsetC}
 \newcommand*{\strdsupsetC}{\strdflipC\strdsubsetC}
@@ -262,7 +274,7 @@
 \newcommand*{\strdlintC}[2]{% {newid}{previd}
     \strdunrbendC{#1 1}{#2}
     \strdlbendC{#1 2}{#1 1}
-    \strdstringmidC@{#1}{#1 1 Start}{#1 2 End}
+    \strdstringmid@{#1}{#1 1 Start}{#1 2 End}
 }
 \newcommand*{\strdrint}{\strdcomposeC\strdrintC}
 \newcommand*{\strdrintC}{\strdflipC\strdlintC}
@@ -272,7 +284,7 @@
 \newcommand*{\strdlchangeC}[2]{% {newid}{previd}
     \strdlbendC{#1 1}{#2}
     \strdunrbendC{#1 2}{#1 1}
-    \strdstringmidC@{#1}{#1 1 Start}{#1 2 End}
+    \strdstringmid@{#1}{#1 1 Start}{#1 2 End}
 }
 \newcommand*{\strdrchange}{\strdcomposeC\strdrchangeC}
 \newcommand*{\strdrchangeC}{\strdflipC\strdlchangeC}
@@ -285,7 +297,7 @@
 \newcommand*{\strdrjump}{\strdcomposeC\strdrjumpC}
 \newcommand*{\strdrjumpC}{\strdnoneC\strdhrightC}
 \newcommand*{\strdjumpto@}[3]{% {nextnode}{newid}{prevnode}
-    \strdstringmidC@{#2}{#3}{#1}%
+    \strdstringmid@{#2}{#3}{#1}%
 }
 
 % dup
@@ -419,7 +431,7 @@
 \newcommand*{\strdboxof}[3]{\strdseqin{\strdboxofone{#1}{#2}{#3}}}
 \newcommand*{\strdboxofone}[7]{% {style}{xl}{xr}{stm}{sc}{newid}{previd}
     \strduse{#5}{#6 Prev}{#7}
-    \strduse{#4}{\strdemptyC}{#6 Unframe}{#6 Prev}
+    \strduse{#4}{\strdcopyC}{#6 Unframe}{#6 Prev}
     \strdonlayer@{strd framelayer}{
         \strdpathis@{#1}{
             \strdxscale@{#2}{ \strdsqsubsettoC{#6 Unframe}{#6 Left}{#6 Prev} }
@@ -463,9 +475,9 @@
 \newcommand*{\strdtubeundoC@}[3]{% {sc}{newid}{previd}
     \strdtubejumpC{#2 Jump}{#3}
     \strdinv@{ \strduse{#1}{#2 Inv}{#2 Jump} }%
-    \strdstringC@{#2 Left}{#2 Inv Left End}{#2 Inv}{#2 Inv Left Start}
-    \strdstringC@{#2}{#2 Inv End}{#2 Inv}{#2 Inv Start}
-    \strdstringC@{#2 Right}{#2 Inv Right End}{#2 Inv}{#2 Inv Right Start}%
+    \strdstring@{#2 Left}{#2 Inv Left End}{#2 Inv}{#2 Inv Left Start}
+    \strdstring@{#2}{#2 Inv End}{#2 Inv}{#2 Inv Start}
+    \strdstring@{#2 Right}{#2 Inv Right End}{#2 Inv}{#2 Inv Right Start}%
     \strdcopyundo@{#2 Left}{#2 Inv Left}
     \strdcopyundo@{#2}{#2 Inv}
     \strdcopyundo@{#2 Right}{#2 Inv Right}%
@@ -490,13 +502,13 @@
 \newcommand*{\strdtubezeroC@}[6]{% {lC}{rC}{lscale}{rscale}{newid}{previd}
     \strdtube@{
         \If{\DimEq{#3pt}{0pt}}{
-            \strdemptyC@{#5 Left}{#6 Left}
+            \strdemptyC{#5 Left}{#6 Left}
         }{
             \strdxscale@{#3}{\strduse{#1}{#5 Left}{#6 Left}}
         }
-        \strdemptyC@{#5}{#6}
+        \strdemptyC{#5}{#6}
         \If{\DimEq{#4pt}{0pt}}{
-            \strdemptyC@{#5 Right}{#6 Right}
+            \strdemptyC{#5 Right}{#6 Right}
         }{
             \strdxscale@{#4}{\strduse{#2}{#5 Right}{#6 Right}}
         }
@@ -552,7 +564,7 @@
 \newcommand*{\strdtuberjumpC}{\strdflipC\strdtubeljumpC}
 
 \newcommand*{\strdtubepart@}[2]{% {newid}{previd}
-    \strdstringC@{#1}
+    \strdstring@{#1}
         {$(#2 End)+(\strdtubexhalfunit,0)$}
         {$(#2 End)+(\strdtubexhalfunit,-\strdyunit)$}
         {$(#2 End)+(\strdtubexhalfunit,-\strdtubeyunit)$}
@@ -668,16 +680,6 @@
 }
 \newcommand*{\strdtubepartunclose}[2]{\strdcomposeC{\strdtubepartuncloseC{#1}{#2}}}
 \newcommand*{\strdtubepartuncloseC}[2]{\strdtubeundoC@{\strdtubepartcloseC{#1}{#2}}}
-
-% % merge deprecated
-% \newcommand*{\strdtubemerge}[5]{% {lstm}{rstm}{sc}{newid}{previd}
-%     \strduse{#3}{#4 Prev}{#5}
-%     \strduse{#1}{\strdemptyC}{#4 LeftBranch}{#4 Prev}
-%     \strduse{#2}{\strdemptyC}{#4 RightBranch}{#4 Prev}
-%     \strdempty@{#4 Left}{#4 LeftBranch Left End}
-%     \strdempty@{#4 Right}{#4 RightBranch Right End}
-%     \strdempty@{#4}{$(#4 Left)!.5!(#4 Right)$}%
-% }
 
 \newcommand*{\DimEq}[2]{\Iftex{\ifdim#1=#2 }}
 
@@ -899,38 +901,38 @@
 %   You must wrap each string because of layers-reset-line-width bug.
 %   BTW, tikz/double doesn't work with scopes.
 
-\newcommand*{\strdgradedC}[3]{% {sc}{id}{node}
+\newcommand*{\strdgradedC}[3]{% {sc}{newid}{previd}
     \strdonlayer@{strd gradedlayer}{
         \strdscope@{strd white}{\strduse{#1}{#2 Graded}{#3}}
         \strdscope@{strd edgenoise}{\strduse{#1}{#2}{#3}}
     }%
 }
-\newcommand*{\strdgraded}[4]{% {stm}{sc}{id}{node}
+\newcommand*{\strdgraded}[4]{% {stm}{sc}{newid}{previd}
     \strduse{#2}{#3 Prev}{#4}
     \strdonlayer@{strd gradedlayer}{
         \strdscope@{strd white}{
-            \strduse{#1}{\strdemptyC}{#3 Graded}{#3 Prev End}
+            \strduse{#1}{\strdcopyC}{#3 Graded}{#3 Prev}
         }
         \strdscope@{strd edgenoise}{
-            \strduse{#1}{\strdemptyC}{#3}{#3 Prev End}
+            \strduse{#1}{\strdcopyC}{#3}{#3 Prev}
         }
     }%
 }
 
-\newcommand*{\strdroadgradedC}[3]{% {sc}{id}{node}
+\newcommand*{\strdroadgradedC}[3]{% {sc}{newid}{previd}
     \strdonlayer@{strd gradedlayer}{
         \strdscope@{strd roadbase}{\strduse{#1}{#2}{#3}}
         \strdscope@{strd roadpave}{\strduse{#1}{#2 Paved}{#3}}
     }%
 }
-\newcommand*{\strdroadgraded}[4]{% {stm}{sc}{id}{node}
+\newcommand*{\strdroadgraded}[4]{% {stm}{sc}{newid}{previd}
     \strduse{#2}{#3 Prev}{#4}
     \strdonlayer@{strd gradedlayer}{
         \strdscope@{strd roadbase}{
-            \strduse{#1}{\strdemptyC}{#3}{#3 Prev End}
+            \strduse{#1}{\strcopyC}{#3}{#3 Prev}
         }
         \strdscope@{strd roadpave}{
-            \strduse{#1}{\strdemptyC}{#3 Paved}{#3 Prev End}
+            \strduse{#1}{\strdcopy}{#3 Paved}{#3 Prev}
         }
     }%
 }
@@ -953,11 +955,11 @@
 \newcommand*{\strdroad}[4]{% {stm}{sc}{newid}{previd}
     \strduse{#2}{#3 Prev}{#4}
     \strdscope@{strd roadbase}{
-        \strduse{#1}{\strdemptyC}{#3}{#3 Prev}
+        \strduse{#1}{\strdcopyC}{#3}{#3 Prev}
     }
     \strdonlayer@{strd pavelayer}{
         \strdscope@{strd roadpave}{
-            \strduse{#1}{\strdemptyC}{#3 Paved}{#3 Prev}
+            \strduse{#1}{\strdcopyC}{#3 Paved}{#3 Prev}
         }
     }%
 }
@@ -970,10 +972,10 @@
 \newcommand*{\strdroadx}[4]{% {stm}{sc}{newid}{previd}
     \strduse{#2}{#3 Prev}{#4}
     \strdscope@{strd roadbase}{
-        \strduse{#1}{\strdemptyC}{#3}{#3 Prev}
+        \strduse{#1}{\strdcopyC}{#3}{#3 Prev}
     }
     \strdscope@{strd roadpave}{
-        \strduse{#1}{\strdemptyC}{#3 Paved}{#3 Prev}
+        \strduse{#1}{\strdcopyC}{#3 Paved}{#3 Prev}
     }%
 }
 
@@ -1037,7 +1039,7 @@
 
 \newcommand*{\strdtoT@}[5]{% {opt}{stm}{sc}{newid}{previd}
     \strduse{#3}{#4 Prev}{#5}
-    \strduse{#1}{\strduse{#2}{\strdemptyC}{#4}{#4 Prev}}
+    \strduse{#1}{\strduse{#2}{\strdcopyC}{#4}{#4 Prev}}
 }
 \newcommand*{\strdonlayer}{\Compose\strdseqin\strdonlayer@@}
 \newcommand*{\strdonlayer@@}{\Compose\strdtoT@\strdonlayer@}
@@ -1073,7 +1075,7 @@
 
 \newcommand*{\strdgathered}[1]{% {sa1,sa2,..,saN}
     \strdin{gathered}{
-        \strdseq{#1}{\strdemptyC}{TheStrd}{\strdorigin}
+        \strdseq{#1}{\strdcopyC}{TheStrd}{\strdorigin}
     }%
 }
 
@@ -1126,7 +1128,7 @@
 \newcommand*{\strdfork}{\strdseqin\strdfork@}
 \newcommand*{\strdfork@}[4]{% {stm}{sc}{newid}{previd}
     \strduse{#2}{#3}{#4}
-    \strduse{#1}{\strdemptyC}{#3 Fork}{#3}%
+    \strduse{#1}{\strdcopyC}{#3 Fork}{#3}%
 }
 
 % right-biased
@@ -1136,13 +1138,13 @@
 }
 \newcommand*{\strdparallelwith@}[6]{% {fstm}{lstm}{rstm}{sc}{newid}{previd}
     \strduse{#4}{#5 Prev}{#6}
-    \strduse{#2}{\strdemptyC}{#5 Parallel}{#5 Prev}
-    \Then{\strduse{#1}}{\strduse{#3}}{\strdemptyC}{#5}{#5 Prev}
+    \strduse{#2}{\strdcopyC}{#5 Parallel}{#5 Prev}
+    \Then{\strduse{#1}}{\strduse{#3}}{\strdcopyC}{#5}{#5 Prev}
 }
 
 \newcommand*{\strdrestart}[4]{% {stm}{sc}{newid}{previd}
     \strduse{#2}{#3}{#4}
-    \strduse{#1}{\strdemptyC}{#3 Restart}{\strdorigin}%
+    \strduse{#1}{\strdcopyC}{#3 Restart}{\strdorigin}%
 }
 
 
