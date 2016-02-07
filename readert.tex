@@ -1,0 +1,85 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+% definition
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{a}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,
+        \strdcell{\texttt{return}},
+        \strdfork{
+            \strdleft,\strdrlabel{a},\strdcell{a}
+        },
+        \strdright,\strdrlabel{r},\strdcell{}
+    } \mydefeq
+    \strdgathered{
+        \strdfork{
+            \strdparallel{
+                \strdseq{\strdmid,\strdrlabel{a},\strdcell{a}},
+                \strdseq{\strdtubestart,\strdtubebound,\strdtubemid,\strdtwins{strd twin cdot}}
+            }
+        }%,
+        % \strdxscale{1.7}\strdrjump,\strdjump,
+        % \strdcell{!},
+        % \strdmid,\strdrlabel{r}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{b},\strdframearound
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,%\strdtubeframearound,
+        \strdbox{2}{2}{
+            \strdfork{\strdtubemid},
+            \strdmid,\strdrlabel{},
+            \strdtubecell{1}{k},
+            \strdfork{
+                \strdleft,\strdrlabel{a}
+            },
+            \strdright,\strdrlabel{r}%,\strdframearound
+        },\strdframellabel{\strdlvert{\texttt{=<<}}},
+        \strdparallel{
+            \strdseq{\strdxdouble\strdljump,\strdroad\strdmid,\strdroadlabel{ma}{r},\strdcell{m}},
+            \strdseq{\strdmid,\strdrlabel{r},\strdcell{r}}
+        }
+    } \mydefeq
+    \strdgathered{
+        % \strdfork{
+        %     \strdmid,\strdrlabel{b},\strdframearound
+        % },
+        % \strdtubestart,
+        % \strdtubemid,\strdtubeframearound,
+%        \strdbox{2.7}{2.7}{
+            \strdfork{
+                \strdmid,\strdrlabel{b},\strdmid,\strdtubecell{1}{k},
+                \strdfork{\strdright,\strdrlabel{r},\strdcell{r}},
+                \strdyscale{1.5}\strdmid,\strdrlabel{a}
+            },
+            \strdtubestart,\strdtubebound,
+            \strdtubemid,
+            \strdtwins{strd twin circ},
+            \strdfork{
+                \strdtubemid
+            },
+            \strdtubecap{1}{1},
+            \strdyscale{1.5}\strdtubemid,
+            \strdtubecell{2}{m},
+            \strdright,\strdrlabel{r},\strdcell{r},
+            \strdyhalf\strdjump
+%        },\strdframelabelat{Left EndCorner}{\Lambda\strdrlap{^{m,r}}},
+        % \strdparallel{
+        %     \strdseq{\strdxscale{2}\strdljump,\strdroad\strdmid,\strdroadlabel{ma}{r}},
+        %     \strdseq{\strdmid,\strdrlabel{r}}
+        % }
+    }
+}
+
+\end{document}
