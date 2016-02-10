@@ -1,0 +1,271 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax,hask}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+% comma
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdljump,\strdmid,\strdrlabel{a}
+        },
+        \strdmid,\strdrlabel{b},
+        \strdxhalf\strdljump,
+        \strdwidecell{0.8}{0.8}{\texttt{,}},
+        \strdxhalf\strdrjump,
+        \strdfork{
+            \strdljump,\strdmid,\strdrlabel{a}
+        },
+        \strdmid,\strdrlabel{b}
+    } \mydefeq\,
+    \strdgathered{
+        \strdfork{
+            \strdljump,\strdmid,\strdrlabel{a}
+        },
+        \strdmid,\strdrlabel{b}
+    }\\
+}
+
+% evaluation
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdroad\strdmid,\strdroadlabel{b}{a},
+        \strdcell{\texttt{\$}},
+        \strdroad\strdmid,\strdroadlabel{b}{a}
+    } \mydefeq
+    \strdgathered{
+        \strdroad\strdmid,\strdroadlabel{b}{a}
+    }\\
+    % \myitem &
+    % \strdgathered{
+    %     \strdmid,\strdrlabel{b},
+    %     \strdcell{\texttt{\$}},
+    %     \strdfork{
+    %         \strdroad\strdleft,\strdroadlabel{b}{a}
+    %     },
+    %     \strdright,\strdrlabel{a}
+    % } \mydefeq
+    % \strdgathered{
+    %     \strdmid,\strdrlabel{b},
+    %     \strdroadraside,
+    %     \strdbox{1}{1}{
+    %         \strdroad\strdmid,\strdroadlabel{b}{a}
+    %     },\strdframellabel{\strdlvert{\texttt{curry}}},
+    %     \strdfork{
+    %         \strdxhalf\strdljump,\strdroad\strdmid,\strdroadlabel{b}{a}
+    %     },
+    %     \strdxhalf\strdrjump,\strdmid,\strdrlabel{a},
+    %     \Identity
+    % } \\
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{c},
+        \strdcell{\texttt{\$}},
+        \strdfork{
+            \strdroad\strdleft,\strdroadlabel{c}{b},
+            \strdcell{h},
+            \strdmid,\strdrlabel{a}
+        },
+        \strdright,\strdrlabel{b}
+    } =
+    \strdgathered{
+        \strdmid,\strdrlabel{c},
+        \strdcell{h},
+        \strdfork{
+            \strdleft,\strdrlabel{a}
+        },
+        \strdright,\strdrlabel{b}
+    }
+}
+
+
+% signature
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{a},
+            \strdmid,\strdrlabel{a}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,\strdframellabel{f},
+        \strdwidecell{1}{1}{\texttt{pure}}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{b},
+            \strdwidecell{2}{2}{\texttt{<*>}},
+            \strdfork{
+                \strdljump,\strdroad\strdmid,\strdroadlabel{b}{a}
+            },
+            \strdrjump,
+            \strdmid,\strdrlabel{a}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,\strdframellabel{f},
+        \strdfork{
+            \strdxscale{1}\strdtubeljump,\strdtubemid,\strdtubebound,\strdframellabel{f}
+        },
+        \strdxscale{1}\strdtuberjump,\strdtubemid,\strdtubebound,\strdframellabel{f}
+    }
+}
+
+% To monoidal functors
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdyscale{0.5}{\strdimplicit\strdmid},
+            \strdimplicit\strdmid,\strdrlabel{\texttt{()}}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubeclose
+    } \mydefeq
+    \strdgathered{
+        \strdfork{
+            \strdyscale{1}{\strdimplicit\strdmid},\strdrlabel{\texttt{()}},
+            \strdimplicit\strdmid,\strdrlabel{\texttt{()}}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,
+        \strdwidecell{1}{1}{\texttt{pure}}
+    }\\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdparallel{
+                \strdseq{\strdljump,\strdmid,\strdrlabel{a}},
+                \strdseq{\strdrjump,\strdmid,\strdrlabel{b}}
+            }
+        },
+        \strdtubestart,
+        \strdtubeextend{1}{1},\strdtubebound,
+        \strdparallel{
+            \strdseq{\strdtubepartleft{1},\strdtubebound},
+            \strdseq{\strdtubepartright{1},\strdtubebound}
+        }
+    } \mydefeq
+    \strdgathered{
+        \strdfork{
+            \strdparallel{
+                \strdseq{
+                    \strdljump,\strdmid,\strdrlabel{a},
+                    \strdroad\strdmid,\strdroadlabel{\haskprod{a}{b}}{b},
+                    \strdcell{\texttt{,}},
+                    \strdmid,\strdrlabel{a}
+                },
+                \strdseq{\strdrjump,\strdmid,\strdrlabel{b},\strdmid,\strdrlabel{b}}
+            }
+        },
+        \strdtubestart,
+        \strdtubeextend{2}{1},\strdtubemid,\strdtubeboundat{Start},
+    %    \strdxhalf\strdtubeljump,
+        \strdwidecell{3}{2}{\texttt{<*>}},
+    %    \strdxhalf\strdtuberjump,
+        \strdtubestart,
+        %\strdtubeunextend{2}{1},
+        \strdparallel{
+            \strdseq{
+                \strdxscale{1}\strdtubeljump,\strdtubeextend{1}{0},
+                \strdtubemid,\strdframelabelat{Left End}{\strdlvert{\texttt{fmap}^f\!}},
+                \strdtubemid,\strdtubebound
+            },
+            \strdseq{\strdtuberjump,\strdtubemid,\strdtubebound}
+        }
+    }
+}
+
+% After all
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{a},
+            \strdwidecell{1}{1}{\texttt{pure}},
+            \strdmid,\strdrlabel{a},
+            \strdcell{a}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{a},
+            \strdcell{a},
+            % \strdimplicit{\strdyscale{1}\strdmid},
+            % \strdimplicit{\strdyhalf\strdmid},\strdrlabel{\texttt{()}},
+            \Identity
+        },
+        \strdtubestart,\strdtubebound,
+        \strdyscale{1.5}\strdtubemid,\strdtubebound,\strdtubelabelat{Left}{\strdlvert{\texttt{fmap}^f\!}},
+        \strdtubeclose
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{b},
+            \strdwidecell{2}{2}{\texttt{<*>}},
+            \strdfork{
+                \strdljump,\strdroad\strdmid,\strdroadlabel{b}{a}
+            },
+            \strdrjump,
+            \strdmid,\strdrlabel{a}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,
+        \strdfork{
+            \strdxscale{1}\strdtubeljump,\strdtubemid,\strdtubebound
+        },
+        \strdxscale{1}\strdtuberjump,\strdtubemid,\strdtubebound
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{b},
+            \strdcell{\texttt{\$}},
+            \strdfork{
+                \strdroad\strdleft,\strdroad\strdmid,\strdroadlabel{b}{a}
+            },
+            \strdright,\strdmid,\strdrlabel{a}
+        },
+        \strdtubestart,
+        \strdtubeextend{1}{1},\strdtubebound,
+        \strdtubemid,\strdtubellabel{\strdlvert{\texttt{fmap}^f\!}},
+        \strdtubemid,
+        \strdtubebound,
+        \strdfork{
+            \strdtubepartleft{1},\strdtubebound
+        },
+        \strdtubepartright{1},\strdtubebound,
+        \Identity
+    }
+}
+
+
+% liftA2
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{c},
+            \strdcell{h},
+            \strdfork{
+                \strdleft,\strdrlabel{a}
+            },
+            \strdright,\strdrlabel{b}
+        },
+        \strdtubestart,
+        \strdtubeextend{1}{1},\strdtubebound,
+        \strdtubemid,
+        \strdfork{
+            \strdtubepartleft{1},\strdtubeend,\strdwidecell{1}{1}{x}
+        },
+        \strdtubepartright{1},\strdtubeend,\strdwidecell{1}{1}{y},
+        \Identity
+    } = h \haskop{<\$>} x \haskop{<*>} y
+}
+
+\end{document}

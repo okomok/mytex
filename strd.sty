@@ -28,7 +28,7 @@
 \pgfdeclarelayer{strd framelayer}
 \pgfdeclarelayer{strd framearoundlayer}
 \pgfdeclarelayer{strd tubelayer}
-\pgfsetlayers{background,main,strd tubelayer,strd pavelayer,strd framearoundlayer,strd gradedlayer,strd whitelayer,strd framelayer,strd celllayer,strd labellayer}
+\pgfsetlayers{background,main,strd pavelayer,strd framearoundlayer,strd gradedlayer,strd whitelayer,strd tubelayer,strd framelayer,strd celllayer,strd labellayer}
 
 % Layers forget surrounding line styles, so we define...
 \newcommand*{\strdresetlinewidth}{\pgfsetlinewidth{\strdstringwidth}}
@@ -410,6 +410,18 @@
 \newcommand*{\strdputmapcell}{\strdputcellof{strd mapcell}}
 \newcommand*{\strdputbijcell}{\strdputcellof{strd bijcell}}
 
+% widecell
+\tikzset{strd widecellbase/.style={strd cellbase,very thin}}
+\tikzset{strd widecell/.style={strd widecellbase}}
+\newcommand*{\strdwidecell}[3]{\strdwith{\strdputwidecell{#1}{#2}{#3}}}
+\newcommand*{\strdputwidecell}[4]{% {lscale}{rscale}{text}{id}
+    \strdcell@{
+        % letter too is scaled.
+        \node[strd widecell,minimum width=\the\dimexpr (#1cm + #2cm - 0.2cm)/2,xshift=\the\dimexpr (#2cm - #1cm)/4\relax] at (#4 End) {\vphantom{#3}};
+        \node[] at (#4 End) {#3};
+    }% 
+}
+
 
 % Frames
 %
@@ -516,18 +528,18 @@
 }
 \newcommand*{\strdtubezerosymC@}[1]{\strdtubezeroC@{#1}{\strdflipC{#1}}}
 
-\newcommand*{\strdtubelend}{\strdcomposeC\strdtubelendC}
-\newcommand*{\strdtubelendC}[2]{% {newid}{previd}
-    \strdemptyC{#1}{$(#2 Left End)+(\strdtubexhalfunit,0)$}%
-}
-\newcommand*{\strdtubeend}{\strdcomposeC\strdtubeendC}
-\newcommand*{\strdtubeendC}[2]{% {newid}{previd}
-    \strdemptyC{#1}{#2 End}%
-}
-\newcommand*{\strdtubeendat}[1]{\strdcomposeC{\strdtubeendatC{#1}}}
-\newcommand*{\strdtubeendatC}[3]{% {at}{newid}{previd}
-    \strdemptyC{#2}{#3 #1}%
-}
+% \newcommand*{\strdtubelend}{\strdcomposeC\strdtubelendC}
+% \newcommand*{\strdtubelendC}[2]{% {newid}{previd}
+%     \strdemptyC{#1}{$(#2 Left End)+(\strdtubexhalfunit,0)$}%
+% }
+% \newcommand*{\strdtubeend}{\strdcomposeC\strdtubeendC}
+% \newcommand*{\strdtubeendC}[2]{% {newid}{previd}
+%     \strdemptyC{#1}{#2 End}%
+% }
+% \newcommand*{\strdtubeendat}[1]{\strdcomposeC{\strdtubeendatC{#1}}}
+% \newcommand*{\strdtubeendatC}[3]{% {at}{newid}{previd}
+%     \strdemptyC{#2}{#3 #1}%
+% }
 
 % tubemid
 \newcommand*{\strdtubemid}{\strdcomposeC\strdtubemidC}
@@ -556,8 +568,9 @@
 \newcommand*{\strdtubeljump}{\strdcomposeC\strdtubeljumpC}
 \newcommand*{\strdtubeljumpC}[2]{% {newid}{previd}
     \strdtube@{
-        \strdxscale@{2}{ \strdljumpC{#1 Impl}{#2} }
-        \strdtubestartC{#1}{#1 Impl}
+        \strdljumpC{#1 Left}{#2 Left}
+        \strdljumpC{#1}{#2}
+        \strdljumpC{#1 Right}{#2 Right}
     }%
 }
 \newcommand*{\strdtuberjump}{\strdcomposeC\strdtuberjumpC}
@@ -681,8 +694,6 @@
 \newcommand*{\strdtubepartunclose}[2]{\strdcomposeC{\strdtubepartuncloseC{#1}{#2}}}
 \newcommand*{\strdtubepartuncloseC}[2]{\strdtubeundoC@{\strdtubepartcloseC{#1}{#2}}}
 
-\newcommand*{\DimEq}[2]{\Iftex{\ifdim#1=#2 }}
-
 % tubeextend{lscale}{rscale} = yscale{0}{dilate{lscale}{rscale}}
 \newcommand*{\strdtubeextend}[2]{\strdcomposeC{\strdtubeextendC{#1}{#2}}}
 \newcommand*{\strdtubeextendC}{\strdtubezerosymC@\strdljumpC}
@@ -771,40 +782,22 @@
 \newcommand*{\strdtubeunclose}{\strdcomposeC\strdtubeuncloseC}
 \newcommand*{\strdtubeuncloseC}{\strdtubeundoC@\strdtubecloseC}
 
-% tubestart/tubeend lines
-\tikzset{strd tubebound/.style={very thin,dash pattern=on 2pt off 2pt}}
-\newcommand*{\strdtubestartline}{\strdwith\strdtubestartline@}
-\newcommand*{\strdtubestartline@}[1]{
-    \draw[strd draw,strd tubebound]{ (#1 Left Start) -- (#1 Right Start) };
-}
-\newcommand*{\strdtubebound}{\strdtubeendline}
-\newcommand*{\strdtubeendline}{\strdwith\strdtubeendline@}
-\newcommand*{\strdtubeendline@}[1]{
-    \draw[strd draw,strd tubebound]{ (#1 Left End) -- (#1 Right End) };
-}
-\newcommand*{\strdtubestartclose}{\strdwith\strdtubestartclose@}
-\newcommand*{\strdtubestartclose@}[1]{
-    \draw[strd draw,strd framebase]{ (#1 Left Start) -- (#1 Right Start) };
-}
-\newcommand*{\strdtubeendclose}{\strdwith\strdtubeendclose@}
-\newcommand*{\strdtubeendclose@}[1]{
-    \draw[strd draw,strd framebase]{ (#1 Left End) -- (#1 Right End) };
+% tubeend
+\newcommand*{\strdtubeend}{\strdcomposeC\strdtubeendC}
+\newcommand*{\strdtubeendC}[2]{% {newid}{previd}
+    \strdemptyC{#1}{$(#2 Left End)!.5!(#2 Right End)$}%
 }
 
-% tubecell
-\tikzset{strd tubecellbase/.style={strd cellbase,very thin}}
-\tikzset{strd tubecell/.style={strd tubecellbase}}
-\newcommand*{\strdtubecell}[2]{\strdwith{\strdputtubecell{#1}{#2}}}
-\newcommand*{\strdputtubecell}[3]{% {xscale}{text}{id}
-    \strdcell@{
-        % letter too is scaled.
-        \node[strd tubecell,minimum width=1cm,xscale=#1] at (#3 End) {\vphantom{#2}};
-        \node[] at (#3 End) {#2};
-    }% 
+% tubebound
+\tikzset{strd tubebound/.style={very thin,dash pattern=on 2pt off 2pt}}
+\newcommand*{\strdtubebound}{\strdtubeboundat{End}}
+\newcommand*{\strdtubeboundat}[1]{\strdwith{\strdputtubeboundat{#1}}}
+\newcommand*{\strdputtubeboundat}[2]{
+    \draw[strd draw,strd tubebound]{ (#2 Left #1) -- (#2 Right #1) };%
 }
 
 % twincell
-\tikzset{strd twincellbase/.style={strd tubecellbase,sharp corners,rounded rectangle}}
+\tikzset{strd twincellbase/.style={strd widecellbase,sharp corners,rounded rectangle}}
 \tikzset{strd twincellleft/.style={strd twincellbase,rounded rectangle east arc=none}}
 \tikzset{strd twincellright/.style={strd twincellbase,rounded rectangle west arc=none}}
 \newcommand*{\strdtwincell}{\strdtwincellat{End}}
@@ -833,6 +826,11 @@
         \node[#2 right] at (#3 Right #1) {};
     }% 
 }
+
+% tubelabel
+\newcommand*{\strdtubelabelat}{\strdframelabelat}
+\newcommand*{\strdtubellabel}{\strdtubelabelat{Left End}}
+\newcommand*{\strdtuberlabel}{\strdtubelabelat{Right End}}
 
 
 % Frame-arounds
