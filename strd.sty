@@ -793,7 +793,9 @@
 \newcommand*{\strdtubebound}{\strdtubeboundat{End}}
 \newcommand*{\strdtubeboundat}[1]{\strdwith{\strdputtubeboundat{#1}}}
 \newcommand*{\strdputtubeboundat}[2]{
-    \draw[strd draw,strd tubebound]{ (#2 Left #1) -- (#2 Right #1) };%
+    \strdtube@{
+        \draw[strd draw,strd tubebound]{ (#2 Left #1) -- (#2 Right #1) };
+    }%
 }
 
 % twincell
