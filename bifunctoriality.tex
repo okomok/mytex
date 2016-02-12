@@ -1,0 +1,89 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax,hask}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+% product of categories
+
+% morphism
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdljump,\strdempty,\strdstartlabel{\mathcal{A}},\strdmid,\strdcell{f},\strdmid
+        },
+        \strdstartlabel{\mathcal{B}},\strdmid,\strdcell{g},\strdmid
+    }\\
+}
+
+% identity
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdljump,\strdmid
+        },
+        \strdmid
+    }\\
+}
+
+% composition
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdyscale{1.5}\strdjump,\strdonlayer{strd tubelayer}{\strdpathis{strd tubebound}{\strdxscale{2}\strdminus}}
+        },
+        \strdfork{
+            \strdxhalf\strdljump,\strdmid,\strdcell{f\myprime},\strdmid,\strdcell{f},\strdmid
+        },
+        \strdxhalf\strdrjump,\strdmid,\strdcell{g\myprime},\strdmid,\strdcell{g},\strdmid
+    } \mydefeq
+    \strdgathered{
+        \strdfork{
+            \strdxscale{0.5}\strdljump,\strdyscale{3}{\strdpathis{strd tubebound}\strdmid}
+        },
+        \strdfork{
+            \strdljump,\strdmid,\strdcell{f\myprime},\strdmid,\strdcell{f},\strdmid
+        },
+        \strdmid,\strdcell{g\myprime},\strdmid,\strdcell{g},\strdmid
+    }
+}
+
+% bifunctoriality
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdtubestart,\strdtubeextend{0.8}{0.8},\strdtubebound,
+            \strdyscale{1.5}\strdtubemid,\strdtubellabel{F},
+            \strdyscale{1.5}\strdtubemid,\strdtubebound
+        },
+        \strdfork{
+            \strdxscale{1.15}\strdljump,\strdyscale{3}{\strdpathis{strd tubebound}\strdmid}
+        },
+        \strdfork{
+            \strdxscale{1.15}\strdrjump,\strdyscale{3}{\strdpathis{strd tubebound}\strdmid}
+        },
+        \strdfork{
+            \strdxhalf\strdljump,\strdmid,\strdcell{f\myprime},\strdmid,\strdcell{f},\strdmid
+        },
+        \strdxhalf\strdrjump,\strdmid,\strdcell{g\myprime},\strdmid,\strdcell{g},\strdmid
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdtubestart,\strdtubeextend{0.8}{0.8},\strdtubebound,
+            \strdyscale{1.5}\strdtubemid,\strdframellabel{F},\strdtubebound,
+            \strdyscale{1.5}\strdtubemid,\strdframellabel{F},\strdtubebound
+        },
+        \strdfork{
+            \strdxhalf\strdljump,\strdmid,\strdcell{f\myprime},\strdmid,\strdcell{f},\strdmid
+        },
+        \strdxhalf\strdrjump,\strdmid,\strdcell{g\myprime},\strdmid,\strdcell{g},\strdmid
+    }
+}
+
+
+
+\end{document}

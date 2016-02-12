@@ -252,11 +252,8 @@
 % minus
 \newcommand*{\strdminus}{\strdcomposeC\strdminusC}
 \newcommand*{\strdminusC}[2]{% {newid}{previd}
-    \strdxscale@{0.5}{
-        \strdhleftC{#1 1}{#2}
-        \strdemptyC{#1}{#2}
-        \strdhrightC{#1 2}{#2}
-    }
+    \strdxscale@{0.5}{ \strdljumpC{#1 Impl}{#2} }
+    \strdhrightC{#1}{#1 Impl}
 }
 
 % subset/supset
