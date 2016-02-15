@@ -28,7 +28,9 @@
 \pgfdeclarelayer{strd framelayer}
 \pgfdeclarelayer{strd framearoundlayer}
 \pgfdeclarelayer{strd tubelayer}
-\pgfsetlayers{background,main,strd pavelayer,strd framearoundlayer,strd gradedlayer,strd whitelayer,strd tubelayer,strd framelayer,strd celllayer,strd labellayer}
+\pgfdeclarelayer{strd tubeframearoundlayer}
+\pgfsetlayers{background,main,strd pavelayer,strd framearoundlayer,strd gradedlayer,strd whitelayer,%
+    strd tubelayer,strd tubeframearoundlayer,strd framelayer,strd celllayer,strd labellayer}
 
 % Layers forget surrounding line styles, so we define...
 \newcommand*{\strdresetlinewidth}{\pgfsetlinewidth{\strdstringwidth}}
@@ -413,9 +415,7 @@
 \newcommand*{\strdwidecell}[3]{\strdwith{\strdputwidecell{#1}{#2}{#3}}}
 \newcommand*{\strdputwidecell}[4]{% {lscale}{rscale}{text}{id}
     \strdcell@{
-        % letter too is scaled.
-        \node[strd widecell,minimum width=\the\dimexpr (#1cm + #2cm - 0.2cm)/2,xshift=\the\dimexpr (#2cm - #1cm)/4\relax] at (#4 End) {\vphantom{#3}};
-        \node[] at (#4 End) {#3};
+        \node[strd widecell,minimum width=\the\dimexpr (#1cm + #2cm - 0.2cm)/2,xshift=\the\dimexpr (#2cm - #1cm)/4\relax] at (#4 End) {#3};
     }% 
 }
 
@@ -827,6 +827,7 @@
 }
 
 % tubelabel
+%   @deprecated
 \newcommand*{\strdtubelabelat}{\strdframelabelat}
 \newcommand*{\strdtubellabel}{\strdtubelabelat{Left End}}
 \newcommand*{\strdtuberlabel}{\strdtubelabelat{Right End}}
@@ -837,19 +838,18 @@
 
 \tikzset{strd framearound/.style={circle,draw=white,fill=white,minimum size=4pt,inner sep=0pt}}
 \tikzset{strd roadframearound/.style={rectangle,sharp corners,draw=white,fill=white,minimum width=4pt,minimum height=3pt,inner sep=0pt}}
-\newcommand*{\strdframearound@}[1]{\strdonlayer@{strd framearoundlayer}{#1}}
 \newcommand*{\strdputframearound}[1]{
-    \strdframearound@{
+    \strdonlayer@{strd framearoundlayer}{
         \node[strd framearound] at (#1) {};
     }%
 }
 \newcommand*{\strdputroadframearound}[1]{
-    \strdframearound@{
+    \strdonlayer@{strd framearoundlayer}{
         \node[strd roadframearound] at (#1) {};
     }%
 }
 \newcommand*{\strdputtubeframearound}[1]{
-    \strdframearound@{
+    \strdonlayer@{strd tubeframearoundlayer}{
         \node[strd framearound] at (#1 Left End) {};
         \node[strd framearound] at (#1 Right End) {};
     }% 

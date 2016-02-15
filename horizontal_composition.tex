@@ -1,0 +1,95 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax,hask}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+% vertical composition
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdyscale{3}\strdmid
+        },
+        \strdtubestart,
+        \strdtubebound,
+        \strdtubemid,
+        \strdtwincell{\tau},
+        \strdtubemid,
+%        \strdtubeboundat{Mid},
+        \strdtwincell{\sigma},
+        \strdtubemid,
+        \strdtubebound
+    } \\
+}
+
+% horizontal composition
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdyscale{2}\strdmid
+        },
+        \strdfork{
+            \strdtubestart,
+            \strdtubemid,
+            \strdtwincell{\sigma},
+            \strdtubemid
+        },
+        \strdfork{
+            \strdtubestart,
+            \strdtubeextend{1}{1},
+            \strdtubebound,
+            \strdtubemid,
+            \strdtwincell{\tau},
+            \strdtubemid,
+            \strdtubebound
+        }
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdyscale{3}\strdmid
+        },
+        \strdfork{
+            \strdtubestart,
+            \strdtubemid,
+            \strdtubemid,
+            \strdtwincell{\sigma},
+            \strdtubemid
+        },
+        \strdfork{
+            \strdtubestart,
+            \strdtubeextend{1}{1},
+            \strdtubebound,
+            \strdtubemid,
+            \strdtwincell{\tau},
+            \strdtubemid,
+            \strdtubemid,
+            \strdtubebound
+        }
+    } = 
+    \Compose\strdgathered\strdinv{
+        \strdfork{
+            \strdyscale{3}\strdmid
+        },
+        \strdfork{
+            \strdtubestart,
+            \strdtubemid,
+            \strdtubemid,
+            \strdtwincell{\sigma},
+            \strdtubemid
+        },
+        \strdfork{
+            \strdtubestart,
+            \strdtubeextend{1}{1},
+            \strdtubebound,
+            \strdtubemid,
+            \strdtwincell{\tau},
+            \strdtubemid,
+            \strdtubemid,
+            \strdtubebound
+        }
+    }
+}
+
+\end{document}

@@ -1,0 +1,209 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax,hask}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+% Counit-unit adjunctions
+\In{preview,math,aligned}{
+    \myitem &
+    \Compose\strdgathered\strdinv{
+        \strdfork{
+            \strdmid,\strdmid,\strdmid
+        },
+        \strdtubestart,
+        \strdfork{
+            \strdtubejump,
+            \strdtwincell{\eta},
+            \strdfork{
+                \strdtubemid,\strdtubemid,\strdframelabelat{Left}{F},\strdtubebound
+            },
+            \strdtubecap{1}{1},\strdframelabelat{Left}{G},
+            \strdtwincell{\epsilon}
+        },
+        \strdtubeextend{2}{2},\strdtubebound,
+        \strdtubemid,\strdframelabelat{Left}{F},
+        \strdtubecup{1}{1}
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdmid
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,\strdtubebound,\strdframelabelat{Left}{F}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdmid,\strdmid
+        },
+        \strdtubestart,
+        \strdfork{
+            \strdtubejump,
+            \strdtwincell{\epsilon},
+            \strdfork{
+                \strdtubemid,\strdtubemid,\strdframelabelat{Left}{G},\strdtubebound
+            },
+            \strdtubecap{1}{1},\strdframelabelat{Left}{F},
+            \strdtwincell{\eta}
+        },
+        \strdtubeextend{2}{2},\strdtubebound,
+        \strdtubemid,\strdframelabelat{Left}{G},
+        \strdtubecup{1}{1}
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdmid
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,\strdtubebound,\strdframelabelat{Left}{G}
+    }\\
+}
+
+% To counit-unit adjunctions
+\In{preview,math,aligned}{
+    \myitem &
+    \Compose\strdgathered\strdinv{
+        \strdfork{
+            \strdmid,\strdmid
+        },
+        \strdtubestart,
+        \strdfork{
+            \strdtubemid,\strdtubelabelat{Left Mid}{G},
+            \strdtwincell{\epsilon}
+        },
+        \strdfork{
+            \strdtubeextend{1}{1},\strdtubebound,
+            \strdtubecup{1}{1},\strdtubelabelat{Left Mid}{F}
+        }
+    } \mydefeq
+    \Compose\strdgathered\strdinv{
+        \strdfork{
+            \strdmid,\strdframearound,
+            \strdbox{2}{2}{
+                \strdmid,\strdframearound
+            },\strdframellabel{\cong},
+            \strdmid
+        },
+        \strdtubestart,
+        \strdfork{
+            \strdtubemid,\strdtubeframearound,\strdtubelabelat{Left}{G},
+            \strdtubemid
+        },
+        \strdfork{
+            \strdtubeextend{1}{1},\strdtubebound,
+            \strdtubemid,\strdtubelabelat{Left}{F}
+        }
+    }\\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdmid
+        },
+        \strdtubestart,
+        \strdfork{
+            \strdtubemid,\strdtubelabelat{Left Mid}{F},
+            \strdtwincell{\eta}
+        },
+        \strdfork{
+            \strdtubeextend{1}{1},\strdtubebound,
+            \strdtubecup{1}{1},\strdtubelabelat{Left Mid}{G}
+        }
+    } \mydefeq
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdframearound,
+            \strdbox{2}{2}{
+                \strdmid,\strdframearound
+            },\strdframellabel{\cong},
+            \strdmid
+        },
+        \strdtubestart,
+        \strdfork{
+            \strdtubemid,\strdtubeframearound,\strdtubelabelat{Left}{F},
+            \strdtubemid
+        },
+        \strdfork{
+            \strdtubeextend{1}{1},\strdtubebound,
+            \strdtubemid,\strdtubelabelat{Left}{G}
+        }
+    }\\
+}
+
+% After all,
+\In{preview,math,aligned}{
+    \myitem &
+    \Compose\strdgathered\strdinv{
+        \strdfork{
+            \strdmid,\strdframearound,
+            \strdbox{1.5}{1.5}{
+                \strdmid,
+                \strdwidecell{1}{1}{g},
+                \strdfork{
+                    \strdmid,\strdframearound
+                },
+                \strdtubestart,
+                \strdtubemid,\strdtubelabelat{Left}{G}
+            },\strdframelabelat{Left}{\cong},
+            \strdmid
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,\strdframellabel{F}
+    } =
+    \Compose\strdgathered\strdinv{
+        \strdfork{
+            \strdmid,
+            \strdwidecell{1}{1}{g},
+            \strdfork{
+                \strdmid,
+                \strdmid
+            },
+            \strdtubestart,
+            \strdtubemid,\strdframellabel{G},
+            \strdtwincell{\epsilon}
+        },
+        \strdtubestart,
+        \strdtubeextend{1}{1},\strdtubebound,
+        \strdtubemid,\strdframelabelat{Left}{F},
+        \strdtubecup{1}{1},
+        \Identity
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdframearound,
+            \strdbox{1.5}{1.5}{
+                \strdmid,
+                \strdwidecell{1}{1}{f},
+                \strdfork{
+                    \strdmid,\strdframearound
+                },
+                \strdtubestart,
+                \strdtubemid,\strdtubelabelat{Left}{F}
+            },\strdframelabelat{Left}{\cong},
+            \strdmid
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,\strdframellabel{G}
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdmid,
+            \strdwidecell{1}{1}{f},
+            \strdfork{
+                \strdmid,
+                \strdmid
+            },
+            \strdtubestart,
+            \strdtubemid,\strdframellabel{F},
+            \strdtwincell{\eta}
+        },
+        \strdtubestart,
+        \strdtubeextend{1}{1},\strdtubebound,
+        \strdtubemid,\strdframelabelat{Left}{G},
+        \strdtubecup{1}{1},
+        \Identity
+    } \\
+}
+
+\end{document}
