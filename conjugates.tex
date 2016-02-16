@@ -1,0 +1,137 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdmid,\strdrlabel{},\strdmid
+        },
+        \strdtubestart,
+        \strdtubejump,
+        \strdtwincell{\epsilon},
+        \strdfork{
+            \strdtubecap{1}{1},\strdtubemid,\strdtubebound
+        },
+        \strdtubemid,
+        \strdtwincell{\tau},
+        \strdtubemid
+    } \ \Second{\forall x}{=} 
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdmid,\strdrlabel{},\strdmid
+        },
+        \strdtubestart,
+        \strdtubejump,
+        \strdtwincell{\epsilon\strdrlap{\myprime}},
+        \strdfork{
+            \strdtubecap{1}{1},
+            \strdtwincell{\sigma},
+            \strdtubemid,\strdtubebound
+        },
+        \strdtubemid,
+        \strdtubemid
+    }\\
+    \myitem &
+    \Compose\strdgathered\strdinv{
+        \strdfork{
+            \strdmid,\strdmid,\strdrlabel{},\strdmid
+        },
+        \strdtubestart,
+        \strdtubejump,
+        \strdtwincell{\eta},
+        \strdfork{
+            \strdtubecap{1}{1},\strdtubemid,\strdtubebound
+        },
+        \strdtubemid,
+        \strdtwincell{\sigma},
+        \strdtubemid
+    } \ \Second{\forall x}{=} 
+    \Compose\strdgathered\strdinv{
+        \strdfork{
+            \strdmid,\strdmid,\strdrlabel{},\strdmid
+        },
+        \strdtubestart,
+        \strdtubejump,
+        \strdtwincell{\eta\strdrlap{\myprime}},
+        \strdfork{
+            \strdtubecap{1}{1},
+            \strdtwincell{\tau},
+            \strdtubemid,\strdtubebound
+        },
+        \strdtubemid,
+        \strdtubemid
+    }\\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdmid
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,
+        \strdtwincell{\tau},
+        \strdtubemid,\strdtubebound
+    } \ \Second{\forall x}{=}\
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdmid,\strdrlabel{},\strdmid,\strdmid
+        },
+        \strdtubestart,
+        \strdfork{
+            \strdtubeextend{2}{2},\strdtubebound,
+            \strdtubemid,
+            \strdtubemid,
+            \strdtubecup{1}{1},
+            \strdtwincell{\eta}
+        },
+        \strdtubejump,
+        \strdtwincell{\epsilon\strdrlap{\myprime}},
+        \strdfork{
+            \strdtubecap{1}{1},
+            \strdtwincell{\sigma},
+            \strdtubemid
+        },
+        \strdtubemid,
+        \strdtubemid,
+        \strdtubemid,\strdtubebound
+    }\\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdmid
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,
+        \strdtwincell{\sigma},
+        \strdtubemid,\strdtubebound
+    } \ \Second{\forall x}{=}\ 
+    \Compose\strdgathered\strdinv{
+        \strdfork{
+            \strdmid,\strdmid,\strdrlabel{},\strdmid,\strdmid
+        },
+        \strdtubestart,
+        \strdfork{
+            \strdtubeextend{2}{2},\strdtubebound,
+            \strdtubemid,
+            \strdtubemid,
+            \strdtubecup{1}{1},
+            \strdtwincell{\epsilon}
+        },
+        \strdtubejump,
+        \strdtwincell{\eta\strdrlap{\myprime}},
+        \strdfork{
+            \strdtubecap{1}{1},
+            \strdtwincell{\tau},
+            \strdtubemid
+        },
+        \strdtubemid,
+        \strdtubemid,
+        \strdtubemid,\strdtubebound
+    }\\
+}
+
+\end{document}
