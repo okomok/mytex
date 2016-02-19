@@ -755,6 +755,30 @@
     \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 End) }%
 }
 
+% tubesqcap{lscale}{rscale}
+\newcommand*{\strdtubesqcap}[2]{\strdcomposeC{\strdtubesqcapC{#1}{#2}}}
+\newcommand*{\strdtubesqcapC}{\strdtubesymC@\strdtubesqcapleftC}
+\newcommand*{\strdtubesqcapleftC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{#2 End}
+    \strdcoord@{#1 Corner}{$(#1 Start)+(-\strdxunit,0)$}
+    \strdcoord@{#1 Mid}{$(#1 Corner)+(0,-\strdyunit)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strdcoord@{#1 End}{$(#1 Mid)+(0,-\strdyunit)$}
+    \strddraw@{ (#1 Start) -- (#1 Corner) -- (#1 End) }%
+}
+
+% tubesqcup{lscale}{rscale}
+\newcommand*{\strdtubesqcup}[2]{\strdcomposeC{\strdtubesqcupC{#1}{#2}}}
+\newcommand*{\strdtubesqcupC}{\strdtubesymC@\strdtubesqcupleftC}
+\newcommand*{\strdtubesqcupleftC}[2]{% {newid}{previd}
+    \strdcoord@{#1 Start}{#2 End}
+    \strdcoord@{#1 Mid}{$(#1 Start)+(0,-\strdyunit)$}
+    \strdcoord@{#1 Corner}{$(#1 Mid)+(0,-\strdyunit)$}
+    \strdcoord@{#1}{#1 Mid}
+    \strdcoord@{#1 End}{$(#1 Corner)+(\strdxunit,0)$}
+    \strddraw@{ (#1 Start) -- (#1 Corner) -- (#1 End) }%
+}
+
 % undilate{lscale}{rscale}
 \newcommand*{\strdtubeundilate}[2]{\strdcomposeC{\strdtubeundilateC{#1}{#2}}}
 \newcommand*{\strdtubeundilateC}{\strdtubesymC@\strdtubeundilateleftC}

@@ -1,0 +1,200 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+% faithfulness
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{b},
+            \strdcell{f},
+            \strdmid,\strdrlabel{a}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,
+        \strdframelabelat{Left End}{F},
+        \strdtubemid,\strdtubebound
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{b},
+            \strdcell{f\myprime},
+            \strdmid,\strdrlabel{a}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,
+        \strdframelabelat{Left End}{F},
+        \strdtubemid,\strdtubebound
+    } \implies
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{b},
+            \strdcell{f},
+            \strdmid,\strdrlabel{a}
+        },
+        \Identity
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{b},
+            \strdcell{f\myprime},
+            \strdmid,\strdrlabel{a}
+        },
+        \Identity
+    }
+}
+
+
+% signature
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{b},\strdmid,
+            \strdmid,\strdmid,\strdrlabel{a}
+        },
+        \strdtubestart,
+        \strdtubejump,\strdtubebound,
+        \strdfork{
+            \strdtubemid,
+            \strdwidecell{1}{1}{g},
+            \strdtubemid
+        },
+        \strdtubesqcap{1}{1},
+        \strdtubesqcup{1}{1},\strdtubebound
+    } \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{b},
+        \strdbox{1.8}{1.8}{
+            \strdfork{
+                \strdmid,
+                \strdmid
+            },
+            \strdtubestart,
+            \strdtubemid,\strdframellabel{F},
+            \strdwidecell{1}{1}{g},
+            \strdtubemid,\strdframellabel{F}
+        },\strdframellabel{F_{a,b}^{-1}},
+        \strdmid,\strdrlabel{a}
+    } \\
+}
+
+% Laws
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{b},\strdmid,
+            \strdmid,\strdmid,\strdrlabel{a}
+        },
+        \strdtubestart,
+        \strdtubejump,
+        \strdfork{
+            \strdtubemid,
+            \strdcell{f},
+            \strdtubemid
+        },
+        \strdtubesqcap{1}{1},
+        \strdtubesqcup{1}{1}
+    } \ =\
+    \strdgathered{
+        \strdmid,\strdrlabel{b},
+        \strdcell{f},
+        \strdmid,\strdrlabel{a}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdtubestart,
+            \strdtubeextend{2}{2},\strdtubebound,
+            \strdtubemid,\strdtubemid,\strdtubemid,
+            \strdtubemid,\strdtubebound
+        },
+        \strdfork{
+            \strdmid,\strdrlabel{b},\strdmid,
+            \strdmid,\strdmid,\strdrlabel{a}
+        },
+        \strdtubestart,
+        \strdtubejump,
+        \strdfork{
+            \strdtubemid,
+            \strdwidecell{1}{1}{g},
+            \strdtubemid
+        },
+        \strdtubesqcap{1}{1},
+        \strdtubesqcup{1}{1}
+    } \ =\
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{b},
+            \strdmid,\strdrlabel{a}
+        },
+        \strdtubestart,
+        \strdtubebound,
+        \strdfork{
+            \strdtubemid,
+            \strdwidecell{1}{1}{g},
+            \strdtubemid,\strdtubebound
+        }
+    }
+}
+
+% Functoriality
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{c},\strdmid,
+            \strdmid,\strdmid,\strdrlabel{b}
+        },
+        \strdtubestart,
+        \strdtubejump,
+        \strdfork{
+            \strdtubemid,
+            \strdwidecell{1}{1}{g\myprime},
+            \strdtubemid
+        },
+        \strdtubesqcap{1}{1},
+        \strdtubesqcup{1}{1},
+        \strdtubejump,
+        \strdfork{
+            \strdmid,
+            \strdmid,
+            \strdmid,\strdrlabel{a}
+        },
+        \strdfork{
+            \strdtubemid,
+            \strdwidecell{1}{1}{g},
+            \strdtubemid
+        },
+        \strdtubesqcap{1}{1},
+        \strdtubesqcup{1}{1},
+        \Identity
+    } \ =\
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{c},
+            \strdmid,
+            \strdmid,\strdrlabelat{Mid}{b},
+            \strdmid,
+            \strdmid,\strdrlabel{a}
+        },
+        \strdtubestart,
+        \strdtubejump,
+        \strdfork{
+            \strdtubemid,
+            \strdwidecell{1}{1}{g\myprime},
+            \strdtubemid,
+            \strdwidecell{1}{1}{g},
+            \strdtubemid
+        },
+        \strdtubesqcap{1}{1},
+        \strdtubemid,
+        \strdtubesqcup{1}{1}
+    }
+}
+
+\end{document}

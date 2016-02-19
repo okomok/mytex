@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage{strd,cat,my,lambdax}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+% signature
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdmid,\strdrlabel{a}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,
+        \strdtwins{strd twin cdot},
+        \strdtubebound
+    } \mydefeq
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{a},
+            \strdmid,\strdrlabel{a}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,\strdframellabel{\strdlvert{m}},
+        \strdcell{\texttt{return}}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,
+            \strdmid
+        },
+        \strdtubestart,
+        \strdtubemid,
+        \strdfork{
+            \strdtubemid,
+            \strdwidecell{1}{1}{k}
+        },
+        \strdtubecap{1}{1},
+        \strdtubemid,
+        \strdtubebound
+    }
+    \mydefeq
+    \strdgathered{
+        \strdfork{
+            \strdmid
+        }
+    }
+}
+
+\end{document}
