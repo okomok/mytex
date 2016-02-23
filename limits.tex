@@ -1,0 +1,187 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+
+\begin{document}
+
+
+% A cone
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{c}
+        },
+        \strdtubestart,
+        \strdtubebound,
+        \strdtubecup{0.7}{0.7},\strdframellabel{F},
+        \strdcellof{strd natcell}{v},
+        \strdmid,\strdrlabel{d}
+    }\\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{c\myprime},
+            \strdcell{h},
+            \strdmid,\strdrlabel{c}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,\strdframelabelat{Left End}{F},
+        \strdtubecup{0.7}{0.7},
+        \strdcellof{strd natcell}{v},
+        \strdmid,\strdrlabel{d}
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{c\myprime}
+        },
+        \strdtubestart,
+        \strdtubebound,
+        \strdtubecup{0.7}{0.7},\strdframellabel{F},
+        \strdcellof{strd natcell}{v},
+        \strdmid,\strdrlabel{d}
+    }
+}
+
+
+% The limiting cone
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,\strdtubebound,\strdframellabel{F}
+    } \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{{\lim _ c}Fc}
+    }\\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{c},
+            \strdsymbol{strd blacksq}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,\strdframelabelat{Left End}{F},
+        \strdtubemid,\strdtubebound
+    } \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{Fc},
+        \strdcell{\lim},
+        \strdmid,\strdrlabel{{\lim _ c}Fc}
+    }\\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdyhalf\strdjump,
+            \strdsymbol{strd whitesq},
+            \strdmid,\strdrlabel{c}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdyhalf\strdtubemid,\strdframelabelat{Left End}{F},
+        \strdtubecup{0.7}{0.7},
+        \strdcellof{strd natcell}{v},
+        \strdmid,\strdrlabel{d}
+    } \mydefeq
+    \strdgathered{
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,\strdframellabel{F},
+        \strdbox{1.3}{1.3}{
+            \strdfork{
+                \strdmid,\strdrlabel{c}
+            },
+            \strdtubestart,
+            \strdtubebound,
+            \strdtubecup{0.7}{0.7},
+            \strdcellof{strd natcell}{v},
+            \strdmid
+        },\strdframellabel{\cong _ c},
+        \strdframearound,
+        \strdmid,\strdrlabel{d}
+    }
+}
+
+% Laws 
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdyhalf\strdjump,
+            \strdsymbol{strd whitesq},
+            \strdmid,
+            \strdsymbol{strd blacksq}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdyhalf\strdtubemid,
+        \strdyhalf\strdtubemid,
+        \strdtubemid,\strdtubebound
+    } =
+    \strdgathered{
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,\strdtubebound
+    }\\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdyhalf\strdmid,\strdsymbol{strd blacksq},
+            \strdjump,
+            \strdsymbol{strd whitesq},
+            \strdmid,
+            \strdcellof{strd natcell}{v},
+            \strdmid
+        },
+        \strdtubestart,\strdtubebound,
+        \strdyscale{1}\strdtubemid,\strdtubebound,
+        \strdyscale{0.5}\strdtubemid,
+        \strdtubecup{0.7}{0.7}
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdmid
+        },
+        \strdtubestart,
+        \strdtubebound,
+        \strdtubecup{0.7}{0.7},
+        \strdcellof{strd natcell}{v},
+        \strdmid
+    }
+}
+
+
+% Limit functor
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdempty,\strdrlabel{c},
+            \strdmid
+        },
+        \strdtubestart,
+        \strdfork{
+            \strdtubemid,\strdframellabel{F\myprime},
+            \strdtwincell{\tau},
+            \strdtubemid,\strdframellabel{F\myprime}
+        },
+        \strdfork{
+            \strdtubeextend{1}{1},\strdtubebound,
+            \strdtubemid,\strdframelabelat{Left End}{\lim _ c},
+            \strdtubemid,\strdtubebound
+        }
+    } \mydefeq
+    \strdgathered{
+        \strdfork{
+            \strdyhalf\strdjump,
+            \strdsymbol{strd whitesq},
+            \strdmid,\strdrlabel{c},
+            \strdsymbol{strd blacksq}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,\strdframellabel{F\myprime},
+        \strdtwincell{\tau},
+        \strdtubemid,\strdtubebound,\strdframellabel{F}
+    }
+}
+
+
+
+\end{document}

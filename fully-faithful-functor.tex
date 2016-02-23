@@ -197,4 +197,37 @@
     }
 }
 
+% Proposition
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{b},
+            \strdmid,\strdrlabel{a}
+        },
+        \strdtubestart,
+        \strdtubebound,
+        \strdfork{
+            \strdtubemid,
+            \strdwidecell{1}{1}{g},
+            \strdtubemid,\strdtubebound
+        }
+    }: \text{iso}\iff
+    \strdgathered{
+        \strdfork{
+            \strdmid,\strdrlabel{b},\strdmid,
+            \strdmid,\strdmid,\strdrlabel{a}
+        },
+        \strdtubestart,
+        \strdtubejump,
+        \strdfork{
+            \strdtubemid,
+            \strdwidecell{1}{1}{g},
+            \strdtubemid
+        },
+        \strdtubesqcap{1}{1},
+        \strdtubesqcup{1}{1}
+    }: \text{iso}
+}
+
 \end{document}

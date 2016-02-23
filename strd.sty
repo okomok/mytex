@@ -373,22 +373,33 @@
 }
 
 
-% Dots
+% Symbols
 %
 
-\tikzset{strd dot/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
-\tikzset{strd whitedot/.style={circle,draw=white,fill=white,minimum size=3pt,inner sep=0pt}}
+\tikzset{strd cdot/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
+\tikzset{strd circ/.style={circle,draw=white,fill=white,minimum size=3pt,inner sep=0pt}}
+\tikzset{strd whitesq/.style={rectangle,thin,rounded corners=1pt,draw=black,fill=white,minimum size=3pt,inner sep=0pt}}
+\tikzset{strd blacksq/.style={rectangle,rounded corners=1pt,draw=black,fill=black,minimum size=3pt,inner sep=0pt}}
 
+% deprecate me
 \newcommand*{\strdputcdot}[1]{% {node}
     \strdcell@{
-        \node[strd dot] at (#1) {};
+        \node[strd cdot] at (#1) {};
     }%
 }
 
-\newcommand*{\strdputwhitedot}[1]{% {node}
-    \node[strd whitedot] at (#1) {};%
+% deprecate me
+\newcommand*{\strdputcirc}[1]{% {node}
+    \strdcell@{
+        \node[strd circ] at (#1) {};
+    }%
 }
 
+\newcommand*{\strdputsymbol}[2]{% {style}{node}
+    \strdcell@{
+        \node[#1] at (#2) {};
+    }%
+}
 
 % Cells
 %
@@ -397,6 +408,7 @@
 \tikzset{strd cell/.style={strd cellbase,very thin}}
 \tikzset{strd mapcell/.style={strd cellbase,thin}}
 \tikzset{strd bijcell/.style={strd cellbase,very thin,sharp corners}}
+\tikzset{strd natcell/.style={strd cellbase,minimum width=15pt,rounded rectangle,rounded corners=0pt,rounded rectangle arc length=180,very thin}}
 
 \newcommand*{\strdcell@}[1]{\strdonlayer@{strd celllayer}{#1}}
 
@@ -1120,9 +1132,12 @@
 \newcommand*{\strdhere}{\strdwithat{End}}
 \newcommand*{\strddo}[1]{\Compose\strdwith{\Proc{#1}}}
 
+\newcommand*{\strdsymbol}{\Compose\strdhere\strdputsymbol}
+\newcommand*{\strdsymbolat}[2]{\strdwithat{#1}{\strdputsymbol{#2}}}
 \newcommand*{\strdcdot}{\strdhere\strdputcdot}
-\newcommand*{\strdwhitedot}{\strdwithat{Start}{\strdputwhitedot}}
+\newcommand*{\strdcirc}{\strdwithat{Start}{\strdputcirc}}
 \newcommand*{\strdcell}{\Compose\strdhere\strdputcell}
+\newcommand*{\strdcellof}[2]{\strdhere{\strdputcellof{#1}{#2}}}
 \newcommand*{\strdcellat}[2]{\strdwithat{#1}{\strdputcell{#2}}}
 \newcommand*{\strdmapcell}{\Compose\strdhere\strdputmapcell}
 \newcommand*{\strdbijcell}{\Compose\strdhere\strdputbijcell}
