@@ -160,9 +160,7 @@
     \strdstring@{#1}{#2}{#2}{#2}%
 }
 \newcommand*{\strdempty}{\strdcomposeC\strdemptyC}
-\newcommand*{\strdemptyC}[2]{% {newid}{previd}
-    \strdempty@{#1}{#2 End}
-}
+\newcommand*{\strdemptyC}{\strdemptyatC{End}}
 % \newcommand*{\strdemptyC}[2]{% {newid}{previd}
 %     \strdemptyC@{#1}{#2}
 %     \ifnodedefined{#2 Left}{
@@ -172,6 +170,10 @@
 %         \strdempty@{#1 Right}{#2 Right End}
 %     }{}
 % }
+\newcommand*{\strdemptyat}[1]{\strdcomposeC{\strdemptyatC{#1}}}
+\newcommand*{\strdemptyatC}[3]{% {at}{newid}{previd}
+    \strdempty@{#2}{#3 #1}
+}
 
 % http://tex.stackexchange.com/questions/85528
 \long\def\ifnodedefined#1#2#3{
@@ -1124,6 +1126,10 @@
 
 % String transformations
 %
+
+\newcommand*{\strdat}[2]{% {at}{stm}
+    \strdfork@{\Then{\strdemptyat{#1}}{#2}}%
+}
 
 \newcommand*{\strdwith}[4]{% {h}{sc}{newid}{previd}
     \strduse{#2}{#3}{#4}
