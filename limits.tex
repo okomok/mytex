@@ -11,35 +11,43 @@
     \myitem &
     \strdgathered{
         \strdfork{
-            \strdmid,\strdrlabel{c}
+            \strdyhalf\strdmid,\strdrlabel{c},
+            \strdsymbol{strd blacksquare}
         },
         \strdtubestart,
         \strdtubebound,
-        \strdtubecup{0.7}{0.7},\strdframellabel{F},
-        \strdcellof{strd natcell}{v},
+        \strdtubemid,
+        \strdframellabel{F},
+        \strdwidecell{1}{1}{v},
         \strdmid,\strdrlabel{d}
     }\\
+}
+
+% Conicality (naturality)
+\In{preview,math,aligned}{
     \myitem &
     \strdgathered{
         \strdfork{
             \strdmid,\strdrlabel{c\myprime},
             \strdcell{h},
-            \strdmid,\strdrlabel{c}
+            \strdmid,\strdrlabel{c},
+            \strdsymbol{strd blacksquare}
         },
         \strdtubestart,\strdtubebound,
-        \strdtubemid,\strdframelabelat{Left End}{F},
-        \strdtubecup{0.7}{0.7},
-        \strdcellof{strd natcell}{v},
+        \strdyscale{2.5}\strdtubemid,\strdframellabel{F},
+        \strdwidecell{1}{1}{v},
         \strdmid,\strdrlabel{d}
     } =
     \strdgathered{
         \strdfork{
-            \strdmid,\strdrlabel{c\myprime}
+            \strdyhalf\strdmid,\strdrlabel{c\myprime},
+            \strdsymbol{strd blacksquare}
         },
         \strdtubestart,
         \strdtubebound,
-        \strdtubecup{0.7}{0.7},\strdframellabel{F},
-        \strdcellof{strd natcell}{v},
+        \strdtubemid,
+        \strdframellabel{F},
+        \strdwidecell{1}{1}{v},
         \strdmid,\strdrlabel{d}
     }
 }
@@ -75,27 +83,29 @@
         \strdfork{
             \strdyhalf\strdjump,
             \strdsymbol{strd triangledown},
-            \strdmid,\strdrlabel{c}
+            \strdmid,\strdrlabel{c},
+            \strdsymbol{strd blacksquare}
         },
         \strdtubestart,\strdtubebound,
-        \strdyhalf\strdtubemid,\strdframelabelat{Left End}{F},
-        \strdtubecup{0.7}{0.7},
-        \strdcellof{strd natcell}{v},
+        \strdyscale{2}\strdtubemid,\strdframellabel{F},
+        \strdwidecell{1}{1}{v},
         \strdmid,\strdrlabel{d}
     } \mydefeq
     \strdgathered{
         \strdtubestart,\strdtubebound,
         \strdtubemid,\strdframellabel{F},
-        \strdbox{1.3}{1.3}{
+        \strdbox{1.6}{1.6}{
             \strdfork{
-                \strdmid,\strdrlabel{c}
+                \strdyhalf\strdmid,\strdrlabel{c},
+                \strdsymbol{strd blacksquare}
             },
             \strdtubestart,
             \strdtubebound,
-            \strdtubecup{0.7}{0.7},
-            \strdcellof{strd natcell}{v},
+            \strdtubemid,
+            \strdframellabel{F},
+            \strdwidecell{1}{1}{v},
             \strdmid
-        },\strdframellabel{\cong _ c},
+        },\strdframellabel{{\cong}\strdrlap{_ c}},
         \strdframearound,
         \strdmid,\strdrlabel{d}
     }
@@ -126,23 +136,25 @@
             \strdyhalf\strdmid,\strdsymbol{strd blacktriangledown},
             \strdjump,
             \strdsymbol{strd triangledown},
-            \strdmid,
-            \strdcellof{strd natcell}{v},
-            \strdmid
-        },
-        \strdtubestart,\strdtubebound,
-        \strdyscale{1}\strdtubemid,\strdtubebound,
-        \strdyscale{0.5}\strdtubemid,
-        \strdtubecup{0.7}{0.7}
-    } =
-    \strdgathered{
-        \strdfork{
-            \strdmid
+            \strdyhalf\strdmid,
+            \strdsymbol{strd blacksquare}
         },
         \strdtubestart,
         \strdtubebound,
-        \strdtubecup{0.7}{0.7},
-        \strdcellof{strd natcell}{v},
+        \strdtubemid,\strdtubebound,
+        \strdyscale{1.5}\strdtubemid,
+        \strdwidecell{1}{1}{v},
+        \strdmid
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdyhalf\strdmid,
+            \strdsymbol{strd blacksquare}
+        },
+        \strdtubestart,
+        \strdtubebound,
+        \strdtubemid,
+        \strdwidecell{1}{1}{v},
         \strdmid
     }
 }
