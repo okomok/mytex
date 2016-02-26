@@ -380,26 +380,14 @@
 
 \tikzset{strd cdot/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
 \tikzset{strd circ/.style={circle,draw=white,fill=white,minimum size=3pt,inner sep=0pt}}
+\tikzset{strd circle/.style={circle,thin,sharp corners,draw=black,fill=white,minimum size=3pt,inner sep=0pt}}
+\tikzset{strd blackcircle/.style={strd circle,fill=black}}
 \tikzset{strd square/.style={rectangle,thin,sharp corners,draw=black,fill=white,minimum size=3pt,inner sep=0pt}}
-\tikzset{strd blacksquare/.style={rectangle,thin,sharp corners,draw=black,fill=black,minimum size=3pt,inner sep=0pt}}
+\tikzset{strd blacksquare/.style={strd square,fill=black}}
 \tikzset{strd triangle/.style={regular polygon,regular polygon sides=3,thin,sharp corners,draw=black,fill=white,minimum size=4.5pt,inner sep=0pt}}
 \tikzset{strd blacktriangle/.style={strd triangle,fill=black}}
 \tikzset{strd triangledown/.style={strd triangle,shape border rotate=180}}
 \tikzset{strd blacktriangledown/.style={strd triangledown,fill=black}}
-
-% deprecate me
-\newcommand*{\strdputcdot}[1]{% {node}
-    \strdcell@{
-        \node[strd cdot] at (#1) {};
-    }%
-}
-
-% deprecate me
-\newcommand*{\strdputcirc}[1]{% {node}
-    \strdcell@{
-        \node[strd circ] at (#1) {};
-    }%
-}
 
 \newcommand*{\strdputsymbol}[2]{% {style}{node}
     \strdcell@{
@@ -410,7 +398,7 @@
 % Cells
 %
 
-\tikzset{strd cellbase/.style={font=\normalsize,solid,draw,fill=white,rectangle,minimum size=9pt,inner xsep=1pt,inner ysep=1.2pt}}
+\tikzset{strd cellbase/.style={font=\normalsize,very thin,solid,draw,fill=white,rectangle,minimum size=9pt,inner xsep=1pt,inner ysep=1.2pt}}
 \tikzset{strd cell/.style={strd cellbase,very thin}}
 \tikzset{strd mapcell/.style={strd cellbase,thin}}
 \tikzset{strd bijcell/.style={strd cellbase,very thin,sharp corners}}
@@ -424,8 +412,6 @@
     }% 
 }
 \newcommand*{\strdputcell}{\strdputcellof{strd cell}}
-\newcommand*{\strdputmapcell}{\strdputcellof{strd mapcell}}% deprecated
-\newcommand*{\strdputbijcell}{\strdputcellof{strd bijcell}}% deprecated
 
 % widecell
 \tikzset{strd widecellbase/.style={strd cellbase,very thin}}
@@ -870,12 +856,6 @@
     }% 
 }
 
-% tubelabel
-%   @deprecated
-\newcommand*{\strdtubelabelat}{\strdframelabelat}
-\newcommand*{\strdtubellabel}{\strdtubelabelat{Left End}}
-\newcommand*{\strdtuberlabel}{\strdtubelabelat{Right End}}
-
 
 % Frame-arounds
 %
@@ -1145,14 +1125,8 @@
 \newcommand*{\strddo}[1]{\Compose\strdwith{\Proc{#1}}}
 
 \newcommand*{\strdsymbol}{\Compose\strdhere\strdputsymbol}
-\newcommand*{\strdsymbolat}[2]{\strdwithat{#1}{\strdputsymbol{#2}}}% deprecated
-\newcommand*{\strdcdot}{\strdhere\strdputcdot}% deprecated
-\newcommand*{\strdcirc}{\strdwithat{Start}{\strdputcirc}}% deprecated
 \newcommand*{\strdcell}{\Compose\strdhere\strdputcell}
 \newcommand*{\strdcellof}[2]{\strdhere{\strdputcellof{#1}{#2}}}
-\newcommand*{\strdcellat}[2]{\strdwithat{#1}{\strdputcell{#2}}}% deprecated
-\newcommand*{\strdmapcell}{\Compose\strdhere\strdputmapcell}% deprecated
-\newcommand*{\strdbijcell}{\Compose\strdhere\strdputbijcell}% deprecated
 \newcommand*{\strddeadend}{\strdhere\strdputdeadend}
 
 \newcommand*{\strdllabel}{\Compose\strdwith\strdputllabel}
@@ -1164,14 +1138,7 @@
 \newcommand*{\strdstartlabel}{\Compose\strdwith\strdputstartlabel}
 \newcommand*{\strdendlabel}{\Compose\strdwith\strdputendlabel}
 
-\newcommand*{\strdllabelat}[2]{\strdwithat{#1}{\strdputllabel{#2}}}% deprecated
-\newcommand*{\strdrlabelat}[2]{\strdwithat{#1}{\strdputrlabel{#2}}}% deprecated
-\newcommand*{\strdframelabelat}[2]{\strdwithat{#1}{\strdputframelabel{#2}}}% deprecated
-\newcommand*{\strdframellabel}{\strdframelabelat{Left}}% deprecated
-\newcommand*{\strdframerlabel}{\strdframelabelat{Right}}% deprecated
-
 \newcommand*{\strdroadlabel}[2]{\strdwith{\strdputroadlabel{#1}{#2}}}
-\newcommand*{\strdroadlabelat}[3]{\strdwithat{#1}{\strdputroadlabel{#2}{#3}}}% deprecated
 
 \newcommand*{\strdfork}{\strdseqin\strdfork@}
 \newcommand*{\strdfork@}[4]{% {stm}{sc}{newid}{previd}

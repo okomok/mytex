@@ -6,19 +6,20 @@
 \begin{document}
 
 
+
 % A cone
 \In{preview,math,aligned}{
     \myitem &
     \strdgathered{
         \strdfork{
             \strdyhalf\strdmid,\strdrlabel{c},
-            \strdsymbol{strd blacksquare}
+            \strdsymbol{strd blackcircle}
         },
         \strdtubestart,
         \strdtubebound,
         \strdtubemid,
-        \strdframellabel{F},
-        \strdwidecell{1}{1}{v},
+        \strdat{Left}{\strdframelabel{F}},
+        \strdwidecellof{strd natcell}{1}{1}{v},
         \strdmid,\strdrlabel{d}
     }\\
 }
@@ -31,23 +32,23 @@
             \strdmid,\strdrlabel{c\myprime},
             \strdcell{h},
             \strdmid,\strdrlabel{c},
-            \strdsymbol{strd blacksquare}
+            \strdsymbol{strd blackcircle}
         },
         \strdtubestart,\strdtubebound,
-        \strdyscale{2.5}\strdtubemid,\strdframellabel{F},
-        \strdwidecell{1}{1}{v},
+        \strdyscale{2.5}\strdtubemid,\strdat{Left}{\strdframelabel{F}},
+        \strdwidecellof{strd natcell}{1}{1}{v},
         \strdmid,\strdrlabel{d}
     } =
     \strdgathered{
         \strdfork{
             \strdyhalf\strdmid,\strdrlabel{c\myprime},
-            \strdsymbol{strd blacksquare}
+            \strdsymbol{strd blackcircle}
         },
         \strdtubestart,
         \strdtubebound,
         \strdtubemid,
-        \strdframellabel{F},
-        \strdwidecell{1}{1}{v},
+        \strdat{Left}{\strdframelabel{F}},
+        \strdwidecellof{strd natcell}{1}{1}{v},
         \strdmid,\strdrlabel{d}
     }
 }
@@ -58,7 +59,7 @@
     \myitem &
     \strdgathered{
         \strdtubestart,\strdtubebound,
-        \strdtubemid,\strdtubebound,\strdframellabel{F}
+        \strdtubemid,\strdtubebound,\strdat{Left}{\strdframelabel{F}}
     } \mydefeq
     \strdgathered{
         \strdmid,\strdrlabel{{\lim _ c}Fc}
@@ -70,7 +71,7 @@
             \strdsymbol{strd blacktriangledown}
         },
         \strdtubestart,\strdtubebound,
-        \strdtubemid,\strdframelabelat{Left End}{F},
+        \strdtubemid,\strdat{Left End}{\strdframelabel{F}},
         \strdtubemid,\strdtubebound
     } \mydefeq
     \strdgathered{
@@ -84,28 +85,28 @@
             \strdyhalf\strdjump,
             \strdsymbol{strd triangledown},
             \strdmid,\strdrlabel{c},
-            \strdsymbol{strd blacksquare}
+            \strdsymbol{strd blackcircle}
         },
         \strdtubestart,\strdtubebound,
-        \strdyscale{2}\strdtubemid,\strdframellabel{F},
-        \strdwidecell{1}{1}{v},
+        \strdyscale{2}\strdtubemid,\strdat{Left}{\strdframelabel{F}},
+        \strdwidecellof{strd natcell}{1}{1}{v},
         \strdmid,\strdrlabel{d}
     } \mydefeq
     \strdgathered{
         \strdtubestart,\strdtubebound,
-        \strdtubemid,\strdframellabel{F},
+        \strdtubemid,\strdat{Left}{\strdframelabel{F}},
         \strdbox{1.6}{1.6}{
             \strdfork{
                 \strdyhalf\strdmid,\strdrlabel{c},
-                \strdsymbol{strd blacksquare}
+                \strdsymbol{strd blackcircle}
             },
             \strdtubestart,
             \strdtubebound,
             \strdtubemid,
-            \strdframellabel{F},
-            \strdwidecell{1}{1}{v},
+            \strdat{Left}{\strdframelabel{F}},
+            \strdwidecellof{strd natcell}{1}{1}{v},
             \strdmid
-        },\strdframellabel{{\cong}\strdrlap{_ c}},
+        },\strdat{Left}{\strdframelabel{{\cong}\strdrlap{_ c}}},
         \strdframearound,
         \strdmid,\strdrlabel{d}
     }
@@ -137,24 +138,24 @@
             \strdjump,
             \strdsymbol{strd triangledown},
             \strdyhalf\strdmid,
-            \strdsymbol{strd blacksquare}
+            \strdsymbol{strd blackcircle}
         },
         \strdtubestart,
         \strdtubebound,
         \strdtubemid,\strdtubebound,
         \strdyscale{1.5}\strdtubemid,
-        \strdwidecell{1}{1}{v},
+        \strdwidecellof{strd natcell}{1}{1}{v},
         \strdmid
     } =
     \strdgathered{
         \strdfork{
             \strdyhalf\strdmid,
-            \strdsymbol{strd blacksquare}
+            \strdsymbol{strd blackcircle}
         },
         \strdtubestart,
         \strdtubebound,
         \strdtubemid,
-        \strdwidecell{1}{1}{v},
+        \strdwidecellof{strd natcell}{1}{1}{v},
         \strdmid
     }
 }
@@ -170,13 +171,13 @@
         },
         \strdtubestart,
         \strdfork{
-            \strdtubemid,\strdframellabel{F\myprime},
+            \strdtubemid,\strdat{Left}{\strdframelabel{F\myprime}},
             \strdtwincell{\tau},
-            \strdtubemid,\strdframellabel{F}
+            \strdtubemid,\strdat{Left}{\strdframelabel{F}}
         },
         \strdfork{
             \strdtubeextend{1}{1},\strdtubebound,
-            \strdtubemid,\strdframelabelat{Left End}{\lim _ c},
+            \strdtubemid,\strdat{Left End}{\strdframelabel{\lim _ c}},
             \strdtubemid,\strdtubebound
         }
     } \mydefeq
@@ -188,9 +189,9 @@
             \strdsymbol{strd blacktriangledown}
         },
         \strdtubestart,\strdtubebound,
-        \strdtubemid,\strdframellabel{F\myprime},
+        \strdtubemid,\strdat{Left}{\strdframelabel{F\myprime}},
         \strdtwincell{\tau},
-        \strdtubemid,\strdtubebound,\strdframellabel{F}
+        \strdtubemid,\strdtubebound,\strdat{Left}{\strdframelabel{F}}
     }
 }
 
