@@ -5,7 +5,6 @@
 
 \begin{document}
 
-
 \In{preview,math,aligned}{
     \text{at test} \\ 
     \strdgathered{
@@ -14,6 +13,23 @@
         \strdat{End}{\strdcell{e}},
         \strdat{Mid}{\strdcell{m}},
         \strdmid
+    } \\
+}
+
+\In{preview,math,aligned}{
+    \text{at test} \\ 
+    \strdgathered{
+        \strdbox{1}{1}{
+            \strdmid
+        },
+        \strdat{Left StartCorner}{\strdframelabel{S}},
+        \strdat{Left}{\strdframelabel{M}},
+        \strdat{Left EndCorner}{\strdframelabel{E}},
+        \strdmid,
+        \strdwidecell{1}{1}{w},
+        \strdmid,
+        \strdwidecellof{strd widecellbase,thin,sharp corners}{1}{1}{w},
+        \Identity
     } \\
 }
 

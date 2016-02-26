@@ -424,16 +424,18 @@
     }% 
 }
 \newcommand*{\strdputcell}{\strdputcellof{strd cell}}
-\newcommand*{\strdputmapcell}{\strdputcellof{strd mapcell}}
-\newcommand*{\strdputbijcell}{\strdputcellof{strd bijcell}}
+\newcommand*{\strdputmapcell}{\strdputcellof{strd mapcell}}% deprecated
+\newcommand*{\strdputbijcell}{\strdputcellof{strd bijcell}}% deprecated
 
 % widecell
 \tikzset{strd widecellbase/.style={strd cellbase,very thin}}
 \tikzset{strd widecell/.style={strd widecellbase}}
 \newcommand*{\strdwidecell}[3]{\strdwith{\strdputwidecell{#1}{#2}{#3}}}
-\newcommand*{\strdputwidecell}[4]{% {lscale}{rscale}{text}{id}
+\newcommand*{\strdwidecellof}[4]{\strdwith{\strdputwidecellof{#1}{#2}{#3}{#4}}}
+\newcommand*{\strdputwidecell}{\strdputwidecellof{strd widecell}}
+\newcommand*{\strdputwidecellof}[5]{% {style}{lscale}{rscale}{text}{id}
     \strdcell@{
-        \node[strd widecell,minimum width=\the\dimexpr (#1cm + #2cm - 0.2cm)/2,xshift=\the\dimexpr (#2cm - #1cm)/4\relax] at (#4 End) {#3};
+        \node[#1,minimum width=\the\dimexpr (#2cm + #3cm - 0.2cm)/2\relax,xshift=\the\dimexpr (#3cm - #2cm)/4\relax] at (#5 End) {#4};
     }% 
 }
 
@@ -1143,14 +1145,14 @@
 \newcommand*{\strddo}[1]{\Compose\strdwith{\Proc{#1}}}
 
 \newcommand*{\strdsymbol}{\Compose\strdhere\strdputsymbol}
-\newcommand*{\strdsymbolat}[2]{\strdwithat{#1}{\strdputsymbol{#2}}}
-\newcommand*{\strdcdot}{\strdhere\strdputcdot}
-\newcommand*{\strdcirc}{\strdwithat{Start}{\strdputcirc}}
+\newcommand*{\strdsymbolat}[2]{\strdwithat{#1}{\strdputsymbol{#2}}}% deprecated
+\newcommand*{\strdcdot}{\strdhere\strdputcdot}% deprecated
+\newcommand*{\strdcirc}{\strdwithat{Start}{\strdputcirc}}% deprecated
 \newcommand*{\strdcell}{\Compose\strdhere\strdputcell}
 \newcommand*{\strdcellof}[2]{\strdhere{\strdputcellof{#1}{#2}}}
-\newcommand*{\strdcellat}[2]{\strdwithat{#1}{\strdputcell{#2}}}
-\newcommand*{\strdmapcell}{\Compose\strdhere\strdputmapcell}
-\newcommand*{\strdbijcell}{\Compose\strdhere\strdputbijcell}
+\newcommand*{\strdcellat}[2]{\strdwithat{#1}{\strdputcell{#2}}}% deprecated
+\newcommand*{\strdmapcell}{\Compose\strdhere\strdputmapcell}% deprecated
+\newcommand*{\strdbijcell}{\Compose\strdhere\strdputbijcell}% deprecated
 \newcommand*{\strddeadend}{\strdhere\strdputdeadend}
 
 \newcommand*{\strdllabel}{\Compose\strdwith\strdputllabel}
@@ -1162,14 +1164,14 @@
 \newcommand*{\strdstartlabel}{\Compose\strdwith\strdputstartlabel}
 \newcommand*{\strdendlabel}{\Compose\strdwith\strdputendlabel}
 
-\newcommand*{\strdllabelat}[2]{\strdwithat{#1}{\strdputllabel{#2}}}
-\newcommand*{\strdrlabelat}[2]{\strdwithat{#1}{\strdputrlabel{#2}}}
-\newcommand*{\strdframelabelat}[2]{\strdwithat{#1}{\strdputframelabel{#2}}}
-\newcommand*{\strdframellabel}{\strdframelabelat{Left}}
-\newcommand*{\strdframerlabel}{\strdframelabelat{Right}}
+\newcommand*{\strdllabelat}[2]{\strdwithat{#1}{\strdputllabel{#2}}}% deprecated
+\newcommand*{\strdrlabelat}[2]{\strdwithat{#1}{\strdputrlabel{#2}}}% deprecated
+\newcommand*{\strdframelabelat}[2]{\strdwithat{#1}{\strdputframelabel{#2}}}% deprecated
+\newcommand*{\strdframellabel}{\strdframelabelat{Left}}% deprecated
+\newcommand*{\strdframerlabel}{\strdframelabelat{Right}}% deprecated
 
 \newcommand*{\strdroadlabel}[2]{\strdwith{\strdputroadlabel{#1}{#2}}}
-\newcommand*{\strdroadlabelat}[3]{\strdwithat{#1}{\strdputroadlabel{#2}{#3}}}
+\newcommand*{\strdroadlabelat}[3]{\strdwithat{#1}{\strdputroadlabel{#2}{#3}}}% deprecated
 
 \newcommand*{\strdfork}{\strdseqin\strdfork@}
 \newcommand*{\strdfork@}[4]{% {stm}{sc}{newid}{previd}
