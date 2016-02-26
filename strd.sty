@@ -889,13 +889,13 @@
 
 \tikzset{strd sidelabel/.style={font=\scriptsize,inner sep=0.2pt,strd scripttextvaligned}}
 \tikzset{strd familylabel/.style={font=\scriptsize,inner xsep=0.2pt,inner ysep=-0.4pt,strd scripttextvaligned}}
-\tikzset{strd framelabel/.style={font=\scriptsize,fill=white,inner sep=0.4pt,inner ysep=0.8pt}}
+\tikzset{strd overlabel/.style={font=\scriptsize,fill=white,inner sep=0.4pt,inner ysep=0.8pt}}
 \tikzset{strd edgelabel/.style={font=\normalsize,inner sep=1.2pt}}%,strd normaltextvaligned}}
 
 \newcommand*{\strdlabel@}[1]{\strdonlayer@{strd labellayer}{#1}}
 \newcommand*{\strdputllabel}[2]{\strdlabel@{\node[strd sidelabel,left] at (#2) {#1};}}
 \newcommand*{\strdputrlabel}[2]{\strdlabel@{\node[strd sidelabel,right] at (#2) {#1};}}
-\newcommand*{\strdputframelabel}[2]{\strdlabel@{\node[strd framelabel] at (#2) {#1};}}
+\newcommand*{\strdputoverlabel}[2]{\strdlabel@{\node[strd overlabel] at (#2) {#1};}}
 \newcommand*{\strdputfamilylabel}[2]{\strdlabel@{\node[strd familylabel,above right] at (#2 Right EndCorner) {#1};}}
 \newcommand*{\strdputunfamilylabel}[2]{\strdlabel@{\node[strd familylabel,above right] at (#2 Left EndCorner) {#1};}}
 \newcommand*{\strdputregionlabel}[2]{\strdlabel@{\node[strd familylabel,below left] at (#2 Right StartCorner) {#1};}}
@@ -1131,7 +1131,7 @@
 
 \newcommand*{\strdllabel}{\Compose\strdwith\strdputllabel}
 \newcommand*{\strdrlabel}{\Compose\strdwith\strdputrlabel}
-\newcommand*{\strdframelabel}{\Compose\strdwith\strdputframelabel}
+\newcommand*{\strdoverlabel}{\Compose\strdwith\strdputoverlabel}
 \newcommand*{\strdregionlabel}{\Compose\strdwith\strdputregionlabel}
 \newcommand*{\strdfamilylabel}{\Compose\strdwith\strdputfamilylabel}
 \newcommand*{\strdunfamilylabel}{\Compose\strdwith\strdputunfamilylabel}
