@@ -1,7 +1,7 @@
 \ProvidesPackage{strd}
 
 \usepackage{tikz,lambdax,mathtools,graphicx}
-\usetikzlibrary{shapes,calc,backgrounds,calc}
+\usetikzlibrary{shapes,calc,backgrounds,calc,shapes.misc}
 
 
 % Styles
@@ -378,13 +378,14 @@
 % Symbols
 %
 
-\tikzset{strd cdot/.style={circle,draw=black,fill=black,minimum size=1.5pt,inner sep=0pt}}
-\tikzset{strd circ/.style={circle,draw=white,fill=white,minimum size=3pt,inner sep=0pt}}
-\tikzset{strd circle/.style={circle,thin,sharp corners,draw=black,fill=white,minimum size=3pt,inner sep=0pt}}
+\tikzset{strd symbolbase/.style={sharp corners,thin,draw=black,fill=white,minimum size=2pt,inner sep=0pt}}
+\tikzset{strd circ/.style={strd symbolbase,circle,minimum size=1.5pt}}
+\tikzset{strd cdot/.style={circ,fill=black}}
+\tikzset{strd circle/.style={strd symbolbase,circle}}
 \tikzset{strd blackcircle/.style={strd circle,fill=black}}
-\tikzset{strd square/.style={rectangle,thin,sharp corners,draw=black,fill=white,minimum size=3pt,inner sep=0pt}}
+\tikzset{strd square/.style={strd symbolbase,rectangle}}
 \tikzset{strd blacksquare/.style={strd square,fill=black}}
-\tikzset{strd triangle/.style={regular polygon,regular polygon sides=3,thin,sharp corners,draw=black,fill=white,minimum size=4.5pt,inner sep=0pt}}
+\tikzset{strd triangle/.style={strd symbolbase,regular polygon,regular polygon sides=3,minimum size=4pt}}
 \tikzset{strd blacktriangle/.style={strd triangle,fill=black}}
 \tikzset{strd triangledown/.style={strd triangle,shape border rotate=180}}
 \tikzset{strd blacktriangledown/.style={strd triangledown,fill=black}}
@@ -402,7 +403,7 @@
 \tikzset{strd cell/.style={strd cellbase,very thin}}
 \tikzset{strd mapcell/.style={strd cellbase,thin}}
 \tikzset{strd bijcell/.style={strd cellbase,very thin,sharp corners}}
-\tikzset{strd natcell/.style={strd cellbase,minimum width=15pt,rounded rectangle,rounded corners=0pt,rounded rectangle arc length=180,very thin}}
+\tikzset{strd natcell/.style={strd cellbase,rounded rectangle,sharp corners,very thin}}
 
 \newcommand*{\strdcell@}[1]{\strdonlayer@{strd celllayer}{#1}}
 

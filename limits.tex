@@ -1,11 +1,14 @@
 \documentclass{article}
 \usepackage{strd,cat,my}
 \usepackage[active,tightpage]{preview}
-
+\usetikzlibrary{shapes.geometric}
 
 \begin{document}
 
-
+% \tikzset{cone start/.style={inner sep=1pt,rounded corners=0pt,minimum size=2pt,draw=black,fill=black,%
+%     trapezium,trapezium stretches body,trapezium left angle=70,trapezium right angle=70}}
+\tikzset{cone/.style={strd widecellbase,draw=black,fill=white,%
+    trapezium,trapezium stretches body,trapezium left angle=110,trapezium right angle=110}}
 
 % A cone
 \In{preview,math,aligned}{
@@ -13,13 +16,13 @@
     \strdgathered{
         \strdfork{
             \strdyhalf\strdmid,\strdrlabel{c},
-            \strdsymbol{strd blackcircle}
+            \strdsymbol{strd blacksquare}
         },
         \strdtubestart,
         \strdtubebound,
         \strdtubemid,
         \strdat{Left}{\strdoverlabel{F}},
-        \strdwidecellof{strd natcell}{1}{1}{v},
+        \strdwidecellof{cone}{1}{1}{v},
         \strdmid,\strdrlabel{d}
     }\\
 }
@@ -32,23 +35,23 @@
             \strdmid,\strdrlabel{c\myprime},
             \strdcell{h},
             \strdmid,\strdrlabel{c},
-            \strdsymbol{strd blackcircle}
+            \strdsymbol{strd blacksquare}
         },
         \strdtubestart,\strdtubebound,
         \strdyscale{2.5}\strdtubemid,\strdat{Left}{\strdoverlabel{F}},
-        \strdwidecellof{strd natcell}{1}{1}{v},
+        \strdwidecellof{cone}{1}{1}{v},
         \strdmid,\strdrlabel{d}
     } =
     \strdgathered{
         \strdfork{
             \strdyhalf\strdmid,\strdrlabel{c\myprime},
-            \strdsymbol{strd blackcircle}
+            \strdsymbol{strd blacksquare}
         },
         \strdtubestart,
         \strdtubebound,
         \strdtubemid,
         \strdat{Left}{\strdoverlabel{F}},
-        \strdwidecellof{strd natcell}{1}{1}{v},
+        \strdwidecellof{cone}{1}{1}{v},
         \strdmid,\strdrlabel{d}
     }
 }
@@ -85,11 +88,11 @@
             \strdyhalf\strdjump,
             \strdsymbol{strd triangledown},
             \strdmid,\strdrlabel{c},
-            \strdsymbol{strd blackcircle}
+            \strdsymbol{strd blacksquare}
         },
         \strdtubestart,\strdtubebound,
         \strdyscale{2}\strdtubemid,\strdat{Left}{\strdoverlabel{F}},
-        \strdwidecellof{strd natcell}{1}{1}{v},
+        \strdwidecellof{cone}{1}{1}{v},
         \strdmid,\strdrlabel{d}
     } \mydefeq
     \strdgathered{
@@ -98,13 +101,13 @@
         \strdbox{1.6}{1.6}{
             \strdfork{
                 \strdyhalf\strdmid,\strdrlabel{c},
-                \strdsymbol{strd blackcircle}
+                \strdsymbol{strd blacksquare}
             },
             \strdtubestart,
             \strdtubebound,
             \strdtubemid,
             \strdat{Left}{\strdoverlabel{F}},
-            \strdwidecellof{strd natcell}{1}{1}{v},
+            \strdwidecellof{cone}{1}{1}{v},
             \strdmid
         },\strdat{Left}{\strdoverlabel{{\cong}\strdrlap{_ c}}},
         \strdframearound,
@@ -112,8 +115,52 @@
     }
 }
 
-% Laws 
+% Universality 
 \In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdyhalf\strdmid,
+            \strdsymbol{strd blacktriangledown}
+        },
+        \strdtubestart,
+        \strdtubebound,
+        \strdtubemid,
+        \strdwidecell{1}{1}{h},
+        \strdmid
+    }= 
+    \strdgathered{
+        \strdfork{
+            \strdyhalf\strdmid,
+            \strdsymbol{strd blacksquare}
+        },
+        \strdtubestart,
+        \strdtubebound,
+        \strdtubemid,
+        \strdwidecellof{cone}{1}{1}{v},
+        \strdmid
+    } \iff
+    \strdgathered{
+        \strdtubestart,
+        \strdtubebound,
+        \strdtubemid,
+        \strdwidecell{1}{1}{h},
+        \strdmid
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdyhalf\strdjump,
+            \strdsymbol{strd triangledown},
+            \strdyhalf\strdmid,
+            \strdsymbol{strd blacksquare}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,
+        \strdyhalf\strdtubemid,
+        \strdwidecellof{cone}{1}{1}{v},
+        \strdmid
+    }
+    \\
     \myitem &
     \strdgathered{
         \strdfork{
@@ -138,24 +185,24 @@
             \strdjump,
             \strdsymbol{strd triangledown},
             \strdyhalf\strdmid,
-            \strdsymbol{strd blackcircle}
+            \strdsymbol{strd blacksquare}
         },
         \strdtubestart,
         \strdtubebound,
         \strdtubemid,\strdtubebound,
         \strdyscale{1.5}\strdtubemid,
-        \strdwidecellof{strd natcell}{1}{1}{v},
+        \strdwidecellof{cone}{1}{1}{v},
         \strdmid
     } =
     \strdgathered{
         \strdfork{
             \strdyhalf\strdmid,
-            \strdsymbol{strd blackcircle}
+            \strdsymbol{strd blacksquare}
         },
         \strdtubestart,
         \strdtubebound,
         \strdtubemid,
-        \strdwidecellof{strd natcell}{1}{1}{v},
+        \strdwidecellof{cone}{1}{1}{v},
         \strdmid
     }
 }
