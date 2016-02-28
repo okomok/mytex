@@ -1,0 +1,211 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+\usetikzlibrary{shapes.geometric}
+
+\begin{document}
+
+\tikzset{conex/.style={strd widecellbase,%
+chamfered rectangle,chamfered rectangle angle=45,%
+chamfered rectangle xsep=4pt,chamfered rectangle ysep=4pt,rounded corners=2pt,%
+chamfered rectangle corners={south east,south west}}}
+\tikzset{cone/.style={strd widecellbase,%
+    trapezium,trapezium stretches body,trapezium left angle=110,trapezium right angle=110}}
+
+
+% 1
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdyhalf\strdmid,
+            \strdsymbol{strd blacksquare}
+        },
+        \strdtubestart,
+        \strdfork{
+            \strdtubemid
+        },
+        \strdfork{
+            \strdtubeextend{1}{1},\strdtubebound,
+            \strdtubemid,
+            \strdwidecellof{cone}{2}{2}{\sigma},
+            \strdmid
+        }
+    }
+    =
+    \strdgathered{
+        \strdfork{
+            \strdyhalf\strdmid,
+            \strdsymbol{strd blacktriangledown}
+        },
+        \strdtubestart,
+        \strdfork{
+            \strdtubemid
+        },
+        \strdfork{
+            \strdtubeextend{1}{1},\strdtubebound,
+            \strdtubemid,
+            \strdwidecell{2}{2}{h},
+            \strdmid
+        }
+    } \\
+}
+
+% 2
+\In{preview,math,aligned}{
+    \iff &
+    \strdgathered{
+        \strdfork{
+            \strdmid,
+            \strdsymbol{strd blacksquare}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdfork{
+            \strdyhalf\strdtubemid,
+            \strdtubemid,
+            \strdwidecellof{cone}{2}{2}{\sigma},
+            \strdmid
+        },
+        \strdfork{
+            \strdyhalf\strdtubejump,
+            \strdtubeextend{1}{1},
+            \strdtwincell{\epsilon},
+            \strdfork{
+                \strdtubemid
+            },
+            \strdtubecap{1}{1},
+            \strdtubemid,\strdtubebound
+        }
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdmid,
+            \strdsymbol{strd blacktriangledown}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdfork{
+            \strdyhalf\strdtubemid,
+            \strdtubemid,
+            \strdwidecell{2}{2}{h},
+            \strdmid
+        },
+        \strdfork{
+            \strdyhalf\strdtubejump,
+            \strdtubeextend{1}{1},
+            \strdtwincell{\epsilon},
+            \strdfork{
+                \strdtubemid
+            },
+            \strdtubecap{1}{1},
+            \strdtubemid,\strdtubebound
+        }
+    } \\
+}
+
+% 3
+\In{preview,math,aligned}{
+    \iff &
+    \strdgathered{
+        \strdtubestart,\strdtubebound,
+        \strdyhalf\strdtubemid,
+        \strdbox{3.5}{3.5}{
+            \strdfork{
+                \strdmid,
+                \strdsymbol{strd blacksquare}
+            },
+            \strdtubestart,
+            \strdfork{
+                \strdyhalf\strdtubemid,
+                \strdtubemid,
+                \strdwidecellof{cone}{2}{2}{\sigma},
+                \strdmid,\strdframearound,
+                \strdyhalf\strdmid
+            },
+            \strdyhalf\strdtubejump,
+            \strdtubeextend{1}{1},
+            \strdtwincell{\epsilon},
+            \strdfork{
+                \strdtubemid
+            },
+            \strdtubecap{1}{1},
+            \strdtubemid,\strdtubeframearound,
+            \strdfork{
+                \strdyhalf\strdtubemid,\strdtubebound
+            }
+        },\strdat{Left StartCorner}{\strdoverlabel{\lim}}
+    } =
+    \strdgathered{
+        \strdtubestart,\strdtubebound,
+        \strdfork{
+            \strdyhalf\strdtubemid,
+            \strdtubemid,
+            \strdwidecell{2}{2}{h},
+            \strdmid
+        },
+        \strdfork{
+            \strdyhalf\strdtubejump,
+            \strdtubeextend{1}{1},
+            \strdtwincell{\epsilon},
+            \strdfork{
+                \strdtubemid
+            },
+            \strdtubecap{1}{1},
+            \strdtubemid,\strdtubebound
+        }
+    } \\
+}
+
+% 4
+\In{preview,math,aligned}{
+    \iff &
+    \strdgathered{
+        \strdtubestart,
+        \strdyhalf\strdtubemid,
+        \strdbox{3.5}{3.5}{
+            \strdfork{
+                \strdmid,
+                \strdsymbol{strd blacksquare}
+            },
+            \strdtubestart,
+            \strdfork{
+                \strdyhalf\strdtubemid,
+                \strdtubemid,
+                \strdwidecellof{cone}{2}{2}{\sigma},
+                \strdmid,\strdframearound,
+                \strdmid,
+                \strdyhalf\strdmid
+            },
+            \strdyhalf\strdtubejump,
+            \strdtubeextend{1}{1},
+            \strdtwincell{\epsilon},
+            \strdfork{
+                \strdtubemid
+            },
+            \strdtubecap{1}{1},
+            \strdtubemid,
+            \strdfork{
+                \strdtubeframearound,
+                \strdtubemid,
+                \strdtwincell{\eta},
+                \strdinv{
+                    \strdtubecap{1.5}{1.5},
+                    \strdyscale{3}\strdtubemid,\strdtubebound
+                }
+            }
+        },\strdat{Left StartCorner}{\strdoverlabel{\lim}}
+    } =
+    \strdgathered{
+        \strdtubestart,
+        \strdfork{
+            \strdtubemid,
+            \strdwidecell{2}{2}{h},
+            \strdmid
+        },
+        \strdfork{
+            \strdtubeextend{1}{1},\strdtubebound,
+            \strdtubemid
+        }
+    } \\
+}
+
+\end{document}
