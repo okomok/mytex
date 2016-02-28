@@ -555,6 +555,15 @@
     }%
 }
 
+\newcommand*{\strdtubex}[6]{% {lstm}{mstm}{rstm}{sc}{newid}{previd}
+    \strduse{#4}{#5 Prev}{#6}
+    \strdonlayer@{strd tubelayer}{
+        \strduse{#1}{\strdcopyC}{#5 Left}{#5 Prev Left}
+        \strduse{#2}{\strdcopyC}{#5}{#5 Prev}
+        \strduse{#3}{\strdcopyC}{#5 Right}{#5 Prev Right}
+    }%
+}
+
 % tubemid
 \newcommand*{\strdtubemid}{\strdcomposeC\strdtubemidC}
 \newcommand*{\strdtubemidC}[2]{% {newid}{previd}
@@ -868,13 +877,13 @@
 }
 
 % right-angled triangles
-\tikzset{strd righttrianglebase/.style={strd symbolbase,isosceles triangle,isosceles triangle stretches=false,isosceles triangle apex angle=90,shape border uses incircle}}
+\tikzset{strd righttrianglebase/.style={strd symbolbase,very thin,isosceles triangle,isosceles triangle stretches=false,isosceles triangle apex angle=90,shape border uses incircle}}
+\tikzset{strd righttriangle/.style={strd righttrianglebase,shape border rotate=90}}
 \tikzset{strd righttriangledown/.style={strd righttrianglebase,shape border rotate=-90}}
-\tikzset{strd righttriangle right/.style={strd righttrianglebase,xshift=-0.82pt,shape border rotate=-45}}
+\tikzset{strd righttriangle right/.style={strd righttrianglebase,shape border rotate=-45,xshift=-0.82pt}}
 \tikzset{strd righttriangle left/.style={strd righttriangle right,shape border rotate=-135,xshift=1.65pt}}
 \tikzset{strd righttriangledown right/.style={strd righttriangle right,shape border rotate=45}}
 \tikzset{strd righttriangledown left/.style={strd righttriangle left,shape border rotate=135}}
-\newcommand*{\strdblack}{fill=black}
 
 
 % Frame-arounds
