@@ -108,31 +108,32 @@ chamfered rectangle corners={south east,south west}}}
     \strdgathered{
         \strdtubestart,\strdtubebound,
         \strdyhalf\strdtubemid,
-        \strdbox{3.5}{3.5}{
-            \strdfork{
-                \strdmid,
-                \strdsymbol{strd blacksquare}
-            },
-            \strdtubestart,
-            \strdfork{
-                \strdyhalf\strdtubemid,
-                \strdtubemid,
-                \strdwidecellof{cone}{2}{2}{\sigma},
-                \strdmid,\strdframearound,
-                \strdyhalf\strdmid
-            },
-            \strdyhalf\strdtubejump,
-            \strdtubeextend{1}{1},
-            \strdtwincell{\epsilon},
-            \strdfork{
-                \strdtubemid
-            },
-            \strdtubecap{1}{1},
-            \strdtubemid,\strdtubeframearound,
-            \strdfork{
-                \strdyhalf\strdtubemid,\strdtubebound
-            }
-        },\strdat{Left StartCorner}{\strdoverlabel{\lim}}
+        \strdfork{
+            \strdtubeextend{2.7}{2.7},
+            \strdsymbol{strd righttriangledown},
+            \strdtwins{strd righttriangledown},
+            \ComposeList{\strdyscale{2},\strdtube,\strdscope{strd frame}}\strdmid,
+            \strdtwins{strd righttriangle}
+        },
+        \strdfork{
+            \strdmid,
+            \strdsymbol{strd blacksquare}
+        },
+        \strdtubestart,
+        \strdfork{
+            \strdyhalf\strdtubemid,
+            \strdtubemid,
+            \strdwidecellof{cone}{2}{2}{\sigma},
+            \strdmid
+        },
+        \strdyhalf\strdtubejump,
+        \strdtubeextend{1}{1},
+        \strdtwincell{\epsilon},
+        \strdfork{
+            \strdtubemid
+        },
+        \strdtubecap{1}{1},
+        \strdtubemid,\strdtubebound
     } =
     \strdgathered{
         \strdtubestart,\strdtubebound,
@@ -161,38 +162,40 @@ chamfered rectangle corners={south east,south west}}}
     \strdgathered{
         \strdtubestart,
         \strdyhalf\strdtubemid,
-        \strdbox{3.5}{3.5}{
-            \strdfork{
-                \strdmid,
-                \strdsymbol{strd blacksquare}
-            },
-            \strdtubestart,
-            \strdfork{
-                \strdyhalf\strdtubemid,
-                \strdtubemid,
-                \strdwidecellof{cone}{2}{2}{\sigma},
-                \strdmid,\strdframearound,
-                \strdmid,
-                \strdyhalf\strdmid
-            },
-            \strdyhalf\strdtubejump,
-            \strdtubeextend{1}{1},
-            \strdtwincell{\epsilon},
-            \strdfork{
-                \strdtubemid
-            },
-            \strdtubecap{1}{1},
+        \strdfork{
+            \strdtubeextend{2.7}{2.7},
+            \strdsymbol{strd righttriangledown},
+            \strdtwins{strd righttriangledown},
+            \ComposeList{\strdyscale{2},\strdtube,\strdscope{strd frame}}\strdmid,
+            \strdtwins{strd righttriangle}
+        },
+        \strdfork{
+            \strdmid,
+            \strdsymbol{strd blacksquare}
+        },
+        \strdtubestart,
+        \strdfork{
+            \strdyhalf\strdtubemid,
             \strdtubemid,
-            \strdfork{
-                \strdtubeframearound,
-                \strdtubemid,
-                \strdtwincell{\eta},
-                \strdinv{
-                    \strdtubecap{1.5}{1.5},
-                    \strdyscale{3}\strdtubemid,\strdtubebound
-                }
+            \strdwidecellof{cone}{2}{2}{\sigma},
+            \strdmid,
+            \strdyhalf\strdmid
+        },
+        \strdyhalf\strdtubejump,
+        \strdtubeextend{1}{1},
+        \strdtwincell{\epsilon},
+        \strdfork{
+            \strdtubemid
+        },
+        \strdtubecap{1}{1},
+        \strdtubemid,
+        \strdfork{
+            \strdtwincell{\eta},
+            \strdinv{
+                \strdtubecap{1.5}{1.5},
+                \strdyscale{2}\strdtubemid,\strdtubebound
             }
-        },\strdat{Left StartCorner}{\strdoverlabel{\lim}}
+        }
     } =
     \strdgathered{
         \strdtubestart,

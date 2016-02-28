@@ -86,17 +86,38 @@ chamfered rectangle corners={south east,south west}}}
     }\\
 }
 
-% Failed
+\tikzset{righttrianglebase/.style={strd symbolbase,
+isosceles triangle,%
+isosceles triangle stretches=false,%
+isosceles triangle apex angle=90,shape border uses incircle}}
+
+\tikzset{righttriangle right/.style={righttrianglebase,xshift=-0.82pt,shape border rotate=-45}}
+\tikzset{righttriangle left/.style={righttriangle right,shape border rotate=-135,xshift=1.65pt}}
+
+\tikzset{righttriangledown right/.style={righttriangle right,shape border rotate=45}}
+\tikzset{righttriangledown left/.style={righttriangle left,shape border rotate=135}}
+
+\tikzset{righttriangledown/.style={righttrianglebase,shape border rotate=-90}}
+
+% mediator
 \In{preview,math,aligned}{
     \myitem &
     \strdgathered{
         \strdfork{
             \strdyhalf\strdjump,
-            \strdsymbol{strd triangledown},
+            \strdsymbol{righttriangledown},
             \strdmid,\strdrlabel{c},
             \strdsymbol{strd blacksquare}
         },
         \strdtubestart,\strdtubebound,
+        \strdfork{
+            \strdtubeextend{0.8}{0.8},
+            \strdyhalf\strdtubejump,
+            \strdtwins{righttriangledown},
+            \strdtube{\strdscope{strd frame}\strdmid},
+            \strdtube{\strdscope{strd frame}\strdmid},
+            \strdtwins{righttriangle}
+        },
         \strdyscale{2}\strdtubemid,\strdat{Left}{\strdoverlabel{F}},
         \strdwidecellof{cone}{1}{1}{v},
         \strdmid,\strdrlabel{d}
@@ -110,7 +131,6 @@ chamfered rectangle corners={south east,south west}}}
                 \strdsymbol{strd blacksquare}
             },
             \strdtubestart,
-            \strdtubebound,
             \strdtubemid,
             \strdat{Left}{\strdoverlabel{F}},
             \strdwidecellof{cone}{1}{1}{v},
@@ -156,61 +176,69 @@ chamfered rectangle corners={south east,south west}}}
     \strdgathered{
         \strdfork{
             \strdyhalf\strdjump,
-            \strdsymbol{strd triangledown},
+            \strdsymbol{righttriangledown},
             \strdyhalf\strdmid,
             \strdsymbol{strd blacksquare}
         },
         \strdtubestart,\strdtubebound,
+        \strdfork{
+            \strdtubeextend{0.8}{0.8},
+            \strdyhalf\strdtubejump,
+            \strdtwins{righttriangledown},
+            \strdtube{\strdscope{strd frame}\strdmid},
+            \strdyhalf{\strdtube{\strdscope{strd frame}\strdmid}},
+            \strdtwins{righttriangle}
+        },
         \strdtubemid,
         \strdyhalf\strdtubemid,
         \strdwidecellof{cone}{1}{1}{v},
         \strdmid
     }
-    \\
-    \myitem &
-    \strdgathered{
-        \strdfork{
-            \strdyhalf\strdjump,
-            \strdsymbol{strd triangledown},
-            \strdmid,
-            \strdsymbol{strd blacktriangledown}
-        },
-        \strdtubestart,\strdtubebound,
-        \strdyhalf\strdtubemid,
-        \strdyhalf\strdtubemid,
-        \strdtubemid,\strdtubebound
-    } =
-    \strdgathered{
-        \strdtubestart,\strdtubebound,
-        \strdtubemid,\strdtubebound
-    }\\
-    \myitem &
-    \strdgathered{
-        \strdfork{
-            \strdyhalf\strdmid,\strdsymbol{strd blacktriangledown},
-            \strdjump,
-            \strdsymbol{strd triangledown},
-            \strdyhalf\strdmid,
-            \strdsymbol{strd blacksquare}
-        },
-        \strdtubestart,
-        \strdtubebound,
-        \strdtubemid,\strdtubebound,
-        \strdyscale{1.5}\strdtubemid,
-        \strdwidecellof{cone}{1}{1}{v},
-        \strdmid
-    } =
-    \strdgathered{
-        \strdfork{
-            \strdyhalf\strdmid,
-            \strdsymbol{strd blacksquare}
-        },
-        \strdtubestart,
-        \strdtubebound,
-        \strdtubemid,
-        \strdwidecellof{cone}{1}{1}{v},
-        \strdmid
-    }
+    % \\
+    % \myitem &
+    % \strdgathered{
+    %     \strdfork{
+    %         \strdyhalf\strdjump,
+    %         \strdsymbol{righttriangledown},
+    %         \strdmid,
+    %         \strdsymbol{strd blacktriangledown}
+    %     },
+    %     \strdtubestart,\strdtubebound,
+    %     \strdyhalf\strdtubemid,
+    %     \strdyhalf\strdtubemid,
+    %     \strdtubemid,\strdtubebound
+    % } =
+    % \strdgathered{
+    %     \strdtubestart,\strdtubebound,
+    %     \strdtubemid,\strdtubebound
+    % }\\
+    % \myitem &
+    % \strdgathered{
+    %     \strdfork{
+    %         \strdyhalf\strdmid,\strdsymbol{strd blacktriangledown},
+    %         \strdjump,
+    %         \strdsymbol{righttriangledown},
+    %         \strdyhalf\strdmid,
+    %         \strdsymbol{strd blacksquare}
+    %     },
+    %     \strdtubestart,
+    %     \strdtubebound,
+    %     \strdtubemid,\strdtubebound,
+    %     \strdyscale{1.5}\strdtubemid,
+    %     \strdwidecellof{cone}{1}{1}{v},
+    %     \strdmid
+    % } =
+    % \strdgathered{
+    %     \strdfork{
+    %         \strdyhalf\strdmid,
+    %         \strdsymbol{strd blacksquare}
+    %     },
+    %     \strdtubestart,
+    %     \strdtubebound,
+    %     \strdtubemid,
+    %     \strdwidecellof{cone}{1}{1}{v},
+    %     \strdmid
+    % }
 }
 
 % Limit functor
@@ -236,14 +264,22 @@ chamfered rectangle corners={south east,south west}}}
     \strdgathered{
         \strdfork{
             \strdyhalf\strdjump,
-            \strdsymbol{strd triangledown},
+            \strdsymbol{righttriangledown},
             \strdmid,\strdrlabel{c},
             \strdsymbol{strd blacktriangledown}
         },
         \strdtubestart,\strdtubebound,
+        \strdfork{
+            \strdtubeextend{0.8}{0.8},
+            \strdyhalf\strdtubejump,
+            \strdtwins{righttriangledown},
+            \strdtube{\strdscope{strd frame}\strdmid},
+            \strdyhalf{\strdtube{\strdscope{strd frame}\strdmid}},
+            \strdtwins{righttriangle}
+        },
         \strdtubemid,\strdat{Left}{\strdoverlabel{F\myprime}},
         \strdtwincell{\tau},
-        \strdtubemid,\strdtubebound,\strdat{Left}{\strdoverlabel{F}}
+        \strdyscale{1.5}\strdtubemid,\strdtubebound,\strdat{Left}{\strdoverlabel{F}}
     }
 }
 

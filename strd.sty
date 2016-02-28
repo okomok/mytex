@@ -545,6 +545,16 @@
 %     \strdemptyC{#2}{#3 #1}%
 % }
 
+% tube
+\newcommand*{\strdtube}[4]{% {stm}{sc}{newid}{previd}
+    \strduse{#2}{#3 Prev}{#4}
+    \strdonlayer@{strd tubelayer}{
+        \strduse{#1}{\strdcopyC}{#3 Left}{#3 Prev Left}
+        \strdjumpC{#3}{#3 Prev}
+        \strduse{#1}{\strdcopyC}{#3 Right}{#3 Prev Right}
+    }%
+}
+
 % tubemid
 \newcommand*{\strdtubemid}{\strdcomposeC\strdtubemidC}
 \newcommand*{\strdtubemidC}[2]{% {newid}{previd}
@@ -840,7 +850,7 @@
 }
 
 % twins
-\tikzset{strd twinsbase/.style={thin,draw=black,fill=white,minimum size=2.8pt,inner sep=0pt}}
+\tikzset{strd twinsbase/.style={sharp corners,thin,draw=black,fill=white,minimum size=2.8pt,inner sep=0pt}}
 \tikzset{strd twincdot/.style={strd twinsbase,circle,fill=black}}
 \tikzset{strd twincirc/.style={strd twinsbase,circle}}
 \tikzset{strd twinsq/.style={strd twinsbase,rectangle,sharp corners}}
@@ -856,6 +866,15 @@
         \node[#2 right] at (#3 Right #1) {};
     }% 
 }
+
+% right-angled triangles
+\tikzset{strd righttrianglebase/.style={strd symbolbase,isosceles triangle,isosceles triangle stretches=false,isosceles triangle apex angle=90,shape border uses incircle}}
+\tikzset{strd righttriangledown/.style={strd righttrianglebase,shape border rotate=-90}}
+\tikzset{strd righttriangle right/.style={strd righttrianglebase,xshift=-0.82pt,shape border rotate=-45}}
+\tikzset{strd righttriangle left/.style={strd righttriangle right,shape border rotate=-135,xshift=1.65pt}}
+\tikzset{strd righttriangledown right/.style={strd righttriangle right,shape border rotate=45}}
+\tikzset{strd righttriangledown left/.style={strd righttriangle left,shape border rotate=135}}
+\newcommand*{\strdblack}{fill=black}
 
 
 % Frame-arounds
@@ -1092,7 +1111,7 @@
 % Sequence-style construction
 %
 
-\newcommand*{\strdseq}[1]{\Foldr\Then\Identity{\List{#1}}}
+\newcommand*{\strdseq}{\ThenList}
 \newcommand*{\strdseqin}[2]{\strduse{#1}{\strdseq{#2}}}
 
 \newcommand*{\strdgathered}[1]{% {sa1,sa2,..,saN}
