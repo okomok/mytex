@@ -17,8 +17,7 @@ chamfered rectangle corners={south east,south west}}}
     \myitem &
     \strdgathered{
         \strdfork{
-            \strdyhalf\strdmid,\strdrlabel{c},
-            \strdsymbol{strd righttriangle}
+            \strdmid,\strdrlabel{c}
         },
         \strdtubestart,
         \strdtubebound,
@@ -36,18 +35,16 @@ chamfered rectangle corners={south east,south west}}}
         \strdfork{
             \strdmid,\strdrlabel{c\myprime},
             \strdcell{h},
-            \strdmid,\strdrlabel{c},
-            \strdsymbol{strd righttriangle}
+            \strdmid,\strdrlabel{c}
         },
         \strdtubestart,\strdtubebound,
-        \strdyscale{2.5}\strdtubemid,\strdat{Left}{\strdoverlabel{F}},
+        \strdyscale{2}\strdtubemid,\strdat{Left}{\strdoverlabel{F}},
         \strdwidecellof{cone}{1}{1}{v},
         \strdmid,\strdrlabel{d}
     } =
     \strdgathered{
         \strdfork{
-            \strdyhalf\strdmid,\strdrlabel{c\myprime},
-            \strdsymbol{strd righttriangle}
+            \strdmid,\strdrlabel{c\myprime}
         },
         \strdtubestart,
         \strdtubebound,
@@ -81,7 +78,7 @@ chamfered rectangle corners={south east,south west}}}
     \strdgathered{
         \strdfork{
             \strdmid,\strdrlabel{c},
-            \strdsymbol{strd righttriangle,fill=black}
+            \strdsymbol{strd triangledown}
         },
         \strdtubestart,\strdtubebound,
         \strdtubemid,\strdat{Left End}{\strdoverlabel{F}},
@@ -94,18 +91,6 @@ chamfered rectangle corners={south east,south west}}}
     }\\
 }
 
-\tikzset{righttrianglebase/.style={strd symbolbase,
-isosceles triangle,%
-isosceles triangle stretches=false,%
-isosceles triangle apex angle=90,shape border uses incircle}}
-
-\tikzset{righttriangle right/.style={righttrianglebase,xshift=-0.82pt,shape border rotate=-45}}
-\tikzset{righttriangle left/.style={righttriangle right,shape border rotate=-135,xshift=1.65pt}}
-
-\tikzset{righttriangledown right/.style={righttriangle right,shape border rotate=45}}
-\tikzset{righttriangledown left/.style={righttriangle left,shape border rotate=135}}
-
-\tikzset{righttriangledown/.style={righttrianglebase,shape border rotate=-90}}
 
 % mediator
 \In{preview,math,aligned}{
@@ -113,32 +98,12 @@ isosceles triangle apex angle=90,shape border uses incircle}}
     \strdgathered{
         \strdfork{
             \strdyhalf\strdjump,
-%            \strdsymbol{righttriangledown},
-            \strdmid,\strdrlabel{c},
-            \strdsymbol{strd righttriangle}
-        },
-        \strdfork{
-            \strdyhalf\strdjump,
-            \strdxscale{1.5}\strdlcorner,
-            \strdyhalf\strdmid,
-            \strdsymbol{strd righttriangle left}
-        },
-        \strdfork{
-            \strdyhalf\strdjump,
-            \strdxscale{1.5}\strdrcorner,
-            \strdyhalf\strdmid,
-            \strdsymbol{strd righttriangle right}
+            \strdboxof{very thin}{1.5}{1.5}{
+                \strdmid,\strdrlabel{c}
+            }
         },
         \strdtubestart,\strdtubebound,
-        % \strdfork{
-        %     \strdtubeextend{0.8}{0.8},
-        %     \strdyhalf\strdtubejump,
-        %     \strdtwins{righttriangledown},
-        %     \strdtube{\strdscope{strd frame}\strdmid},
-        %     \strdtube{\strdscope{strd frame}\strdmid},
-        %     \strdtwins{righttriangle}
-        % },
-        \strdyscale{2}\strdtubemid,\strdat{Left}{\strdoverlabel{F}},
+        \strdyscale{1.5}\strdtubemid,\strdat{Left}{\strdoverlabel{F}},
         \strdwidecellof{cone}{1}{1}{v},
         \strdmid,\strdrlabel{d}
     } \mydefeq
@@ -147,12 +112,10 @@ isosceles triangle apex angle=90,shape border uses incircle}}
         \strdtubemid,\strdat{Left}{\strdoverlabel{F}},
         \strdbox{1.5}{1.5}{
             \strdfork{
-                \strdyhalf\strdmid,\strdrlabel{c},
-                \strdsymbol{strd righttriangle}
+                \strdmid,\strdrlabel{c}
             },
             \strdtubestart,
             \strdtubemid,
-            \strdat{Left}{\strdoverlabel{F}},
             \strdwidecellof{cone}{1}{1}{v},
             \strdmid
         },\strdat{Left}{\strdoverlabel{{\cong}\strdrlap{_ c}}},
@@ -167,7 +130,7 @@ isosceles triangle apex angle=90,shape border uses incircle}}
     \strdgathered{
         \strdfork{
             \strdyhalf\strdmid,
-            \strdsymbol{strd righttriangle,fill=black}
+            \strdsymbol{strd triangledown}
         },
         \strdtubestart,
         \strdtubebound,
@@ -177,8 +140,7 @@ isosceles triangle apex angle=90,shape border uses incircle}}
     }= 
     \strdgathered{
         \strdfork{
-            \strdyhalf\strdmid,
-            \strdsymbol{strd righttriangle}
+            \strdmid
         },
         \strdtubestart,
         \strdtubebound,
@@ -196,79 +158,63 @@ isosceles triangle apex angle=90,shape border uses incircle}}
     \strdgathered{
         \strdfork{
             \strdyhalf\strdjump,
-         %   \strdsymbol{righttriangledown},
-            \strdyhalf\strdmid,
-            \strdsymbol{strd righttriangle}
-        },
-        \strdfork{
-            \strdyhalf\strdjump,
-            \strdxscale{1.5}\strdlcorner,
-            \strdsymbol{strd righttriangle left}
-        },
-        \strdfork{
-            \strdyhalf\strdjump,
-            \strdxscale{1.5}\strdrcorner,
-            \strdsymbol{strd righttriangle right}
+            \strdboxof{very thin}{1.5}{1.5}{
+                \strdmid
+            }
         },
         \strdtubestart,\strdtubebound,
-        % \strdfork{
-        %     \strdtubeextend{0.8}{0.8},
-        %     \strdyhalf\strdtubejump,
-        %     \strdtwins{righttriangledown},
-        %     \strdtube{\strdscope{strd frame}\strdmid},
-        %     \strdyhalf{\strdtube{\strdscope{strd frame}\strdmid}},
-        %     \strdtwins{righttriangle}
-        % },
         \strdtubemid,
         \strdyhalf\strdtubemid,
         \strdwidecellof{cone}{1}{1}{v},
         \strdmid
     }
-    % \\
-    % \myitem &
-    % \strdgathered{
-    %     \strdfork{
-    %         \strdyhalf\strdjump,
-    %         \strdsymbol{righttriangledown},
-    %         \strdmid,
-    %         \strdsymbol{strd blacktriangledown}
-    %     },
-    %     \strdtubestart,\strdtubebound,
-    %     \strdyhalf\strdtubemid,
-    %     \strdyhalf\strdtubemid,
-    %     \strdtubemid,\strdtubebound
-    % } =
-    % \strdgathered{
-    %     \strdtubestart,\strdtubebound,
-    %     \strdtubemid,\strdtubebound
-    % }\\
-    % \myitem &
-    % \strdgathered{
-    %     \strdfork{
-    %         \strdyhalf\strdmid,\strdsymbol{strd blacktriangledown},
-    %         \strdjump,
-    %         \strdsymbol{righttriangledown},
-    %         \strdyhalf\strdmid,
-    %         \strdsymbol{strd righttriangle,fill=black}
-    %     },
-    %     \strdtubestart,
-    %     \strdtubebound,
-    %     \strdtubemid,\strdtubebound,
-    %     \strdyscale{1.5}\strdtubemid,
-    %     \strdwidecellof{cone}{1}{1}{v},
-    %     \strdmid
-    % } =
-    % \strdgathered{
-    %     \strdfork{
-    %         \strdyhalf\strdmid,
-    %         \strdsymbol{strd righttriangle,fill=black}
-    %     },
-    %     \strdtubestart,
-    %     \strdtubebound,
-    %     \strdtubemid,
-    %     \strdwidecellof{cone}{1}{1}{v},
-    %     \strdmid
-    % }
+}
+
+% Universality 2
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdtubestart,\strdtubebound,
+        \strdyhalf\strdtubemid,
+        \strdfork{
+            \strdboxof{}{1.5}{1.5}{
+                \strdmid,
+                \strdsymbol{strd triangledown}
+            }
+        },
+        \strdyhalf\strdtubemid,
+        \strdtubemid,\strdtubebound
+    } =
+    \strdgathered{
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,\strdtubebound
+    }\\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdyhalf\strdmid,\strdsymbol{strd triangledown},
+            \strdyhalf\strdjump,
+            \strdboxof{}{1.5}{1.5}{
+                \strdmid
+            }
+        },
+        \strdtubestart,
+        \strdtubebound,
+        \strdtubemid,
+        \strdyscale{1}\strdtubemid,
+        \strdwidecellof{cone}{1}{1}{v},
+        \strdmid
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdmid
+        },
+        \strdtubestart,
+        \strdtubebound,
+        \strdtubemid,
+        \strdwidecellof{cone}{1}{1}{v},
+        \strdmid
+    }
 }
 
 % Limit functor
@@ -294,31 +240,12 @@ isosceles triangle apex angle=90,shape border uses incircle}}
     \strdgathered{
         \strdfork{
             \strdyhalf\strdjump,
-%            \strdsymbol{righttriangledown},
-            \strdmid,\strdrlabel{c},
-            \strdsymbol{strd righttriangle,fill=black}
-        },
-        \strdfork{
-            \strdyhalf\strdjump,
-            \strdxscale{1.5}\strdlcorner,
-            \strdyhalf\strdmid,
-            \strdsymbol{strd righttriangle left}
-        },
-        \strdfork{
-            \strdyhalf\strdjump,
-            \strdxscale{1.5}\strdrcorner,
-            \strdyhalf\strdmid,
-            \strdsymbol{strd righttriangle right}
+            \strdboxof{very thin}{1.5}{1.5}{
+                \strdmid,\strdrlabel{c},
+                \strdsymbol{strd triangledown}
+            }
         },
         \strdtubestart,\strdtubebound,
-        % \strdfork{
-        %     \strdtubeextend{0.8}{0.8},
-        %     \strdyhalf\strdtubejump,
-        %     \strdtwins{righttriangledown},
-        %     \strdtube{\strdscope{strd frame}\strdmid},
-        %     \strdyhalf{\strdtube{\strdscope{strd frame}\strdmid}},
-        %     \strdtwins{righttriangle}
-        % },
         \strdtubemid,\strdat{Left}{\strdoverlabel{F\myprime}},
         \strdtwincell{\tau},
         \strdyscale{1}\strdtubemid,\strdtubebound,\strdat{Left}{\strdoverlabel{F}}

@@ -378,17 +378,17 @@
 % Symbols
 %
 
-\tikzset{strd symbolbase/.style={sharp corners,thin,draw=black,fill=white,minimum size=2pt,inner sep=0pt}}
+\tikzset{strd symbolbase/.style={sharp corners,draw=black,fill=white,minimum size=2pt,inner sep=0pt}}
 \tikzset{strd circ/.style={strd symbolbase,circle,minimum size=1.5pt}}
 \tikzset{strd cdot/.style={circ,fill=black}}
 \tikzset{strd circle/.style={strd symbolbase,circle}}
-\tikzset{strd blackcircle/.style={strd circle,fill=black}}
+\tikzset{strd blackcircle/.style={strd circle,fill=black}}% deprecated
 \tikzset{strd square/.style={strd symbolbase,rectangle}}
-\tikzset{strd blacksquare/.style={strd square,fill=black}}
+\tikzset{strd blacksquare/.style={strd square,fill=black}}% deprecated
 \tikzset{strd triangle/.style={strd symbolbase,regular polygon,regular polygon sides=3,minimum size=4pt}}
-\tikzset{strd blacktriangle/.style={strd triangle,fill=black}}
+\tikzset{strd blacktriangle/.style={strd triangle,fill=black}}% deprecated
 \tikzset{strd triangledown/.style={strd triangle,shape border rotate=180}}
-\tikzset{strd blacktriangledown/.style={strd triangledown,fill=black}}
+\tikzset{strd blacktriangledown/.style={strd triangledown,fill=black}}% deprecated
 
 \newcommand*{\strdputsymbol}[2]{% {style}{node}
     \strdcell@{
