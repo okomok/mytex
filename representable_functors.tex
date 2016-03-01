@@ -1,0 +1,115 @@
+\documentclass{article}
+\usepackage{strd,cat,my,stmaryrd}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+% Signature
+\In{preview,math,aligned}{
+    \myitem 
+    FX & \cong \operatorname{Hom}(A,X) \\
+    \strdgathered{
+        \strdfork{
+            \strdmid
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubemid,
+        \strdwidecell{1}{1}{a}
+    } & \mapsto
+    \strdgathered{
+        \strdyhalf\strdmid,
+        \strdfork{
+            \strdtubestart,
+            \strdfork{
+                \strdtubemid,
+                \strdwidecell{1}{1}{a}
+            },
+            \strdtubesqcap{1}{1},
+            \strdyhalf{\strdtubesqcup{1}{1}},
+            \strdtubeboundof{strd tube},
+            \strdmid,\strdrlabel{A}
+        },
+        \strdmid
+    } \\
+    \strdgathered{
+        \strdfork{
+            \strdmid,
+            \strdcell{f},
+            \strdmid,\strdrlabel{A}
+        },
+        \strdtubestart,\strdtubebound,
+        \strdtubedilate{0.5}{0.5},
+        \strdyscale{1}{\strdtubesqcup{0.5}{0.5}},
+        \strdtubeboundof{strd tube}
+    } & \mapsfrom
+    \strdgathered{
+        \strdmid,
+        \strdcell{f},
+        \strdmid,\strdrlabel{A}
+    }
+}
+
+
+% Signature
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdyhalf\strdmid
+        ,\strdfork{
+            \strdmid
+            ,\strdcell{f}
+            ,\strdyhalf\strdmid
+        }
+        ,\strdtubestart
+        ,\strdfork{
+            \strdtubedilate{0.5}{0.5}
+            ,\strdyhalf{\strdtubesqcup{0.5}{0.5}}
+            ,\strdtubeboundof{strd tube}
+        }
+        ,\strdtubesqcap{1}{1}
+        ,\strdtubesqcup{1}{1}
+        ,\strdtubeboundof{strd tube}
+    } =
+    \strdgathered{
+        \strdmid,
+        \strdcell{f},
+        \strdmid
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdtubestart
+            ,\strdtubebound
+            ,\strdtubedilate{2}{2}
+            ,\strdtubemid
+            ,\strdtubesqcup{2}{2}
+            ,\strdtubeboundof{strd tube}
+        },
+        \strdmid,
+        \strdfork{
+            \strdtubestart,
+            \strdfork{
+                \strdtubemid,
+                \strdwidecell{1}{1}{a}
+            },
+            \strdtubesqcap{1}{1},
+            \strdyhalf{\strdtubesqcup{1}{1}},
+            \strdtubeboundof{strd tube},
+            \strdyhalf\strdmid
+        },
+        \strdmid
+    }=
+    \strdgathered{
+        \strdfork{
+            \strdmid
+        }
+        ,\strdtubestart
+        ,\strdtubebound
+        ,\strdtubemid
+        ,\strdwidecell{1}{1}{a}
+    }
+}
+
+
+
+\end{document}

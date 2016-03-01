@@ -170,7 +170,7 @@
 %         \strdempty@{#1 Right}{#2 Right End}
 %     }{}
 % }
-\newcommand*{\strdemptyat}[1]{\strdcomposeC{\strdemptyatC{#1}}}
+\newcommand*{\strdemptyat}{\Compose\strdcomposeC\strdemptyatC}
 \newcommand*{\strdemptyatC}[3]{% {at}{newid}{previd}
     \strdempty@{#2}{#3 #1}
 }
@@ -577,6 +577,20 @@
     % }
 }
 
+% tubeemptyat
+\newcommand*{\strdtubeemptyat}{\Compose\strdcomposeC\strdtubeemptyatC}
+\newcommand*{\strdtubeemptyatC}[3]{% {at}{newid}{previd}
+    \strdtube@{
+        \strdemptyatC{#1}{#2 Left}{#3 Left}
+        \strdemptyatC{#1}{#2}{#3}
+        \strdemptyatC{#1}{#2 Right}{#3 Right}
+    }%
+}
+
+% tubeempty
+\newcommand*{\strdtubeempty}{\strdcomposeC\strdtubeemptyatC}
+\newcommand*{\strdtubeemptyC}{\strdtubeemptyat{End}}
+
 % tubejump
 \newcommand*{\strdtubejump}{\strdcomposeC\strdtubejumpC}
 \newcommand*{\strdtubejumpC}[2]{% {newid}{previd}
@@ -837,11 +851,11 @@
 
 % tubebound
 \tikzset{strd tubebound/.style={very thin,dash pattern=on 2pt off 2pt}}
-\newcommand*{\strdtubebound}{\strdtubeboundat{End}}
-\newcommand*{\strdtubeboundat}[1]{\strdwith{\strdputtubeboundat{#1}}}
-\newcommand*{\strdputtubeboundat}[2]{
+\newcommand*{\strdtubebound}{\strdtubeboundof{strd tubebound}}
+\newcommand*{\strdtubeboundof}{\Compose\strdwith\strdputtubeboundof}
+\newcommand*{\strdputtubeboundof}[2]{%
     \strdtube@{
-        \draw[strd draw,strd tubebound]{ (#2 Left #1) -- (#2 Right #1) };
+        \draw[strd draw,#1]{ (#2 Left End) -- (#2 Right End) };
     }%
 }
 
@@ -1140,6 +1154,9 @@
 
 \newcommand*{\strdat}[2]{% {at}{stm}
     \strdfork@{\Then{\strdemptyat{#1}}{#2}}%
+}
+\newcommand*{\strdtubeat}[2]{% {at}{stm}
+    \strdfork@{\Then{\strdtubeemptyat{#1}}{#2}}%
 }
 
 \newcommand*{\strdwith}[4]{% {h}{sc}{newid}{previd}
