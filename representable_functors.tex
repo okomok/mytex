@@ -7,26 +7,31 @@
 % Signature
 \In{preview,math,aligned}{
     \myitem 
-    FX & \cong \operatorname{Hom}(A,X) \\
+    \tau_X : FX & \cong \operatorname{Hom}(A,X) \\
     \strdgathered{
         \strdfork{
             \strdmid
         },
-        \strdtubestart,\strdtubebound,
-        \strdtubemid,
-        \strdwidecell{1}{1}{a}
+        \strdtube{
+            \strdtubestart,\strdtubebound,
+            \strdtubemid,
+            \strdwidecell{1}{1}{a}
+        }
     } & \mapsto
     \strdgathered{
         \strdyhalf\strdmid,
         \strdfork{
             \strdtubestart,
-            \strdfork{
-                \strdtubemid,
-                \strdwidecell{1}{1}{a}
+            \strdtube{
+                \strdfork{
+                    \strdtubemid,
+                    \strdwidecell{1}{1}{a}
+                },
+                \strdtwincell{\tau}
             },
-            \strdtubesqcap{1}{1},
-            \strdyhalf{\strdtubesqcup{1}{1}},
-            \strdtubeboundof{strd tube},
+            \strdtubesqcap{0.8}{0.8},
+            \strdyhalf{\strdtubesqcup{0.8}{0.8}},
+            \strdtubeboundof{strd default},
             \strdmid,\strdrlabel{A}
         },
         \strdmid
@@ -38,9 +43,13 @@
             \strdmid,\strdrlabel{A}
         },
         \strdtubestart,\strdtubebound,
-        \strdtubedilate{0.5}{0.5},
-        \strdyscale{1}{\strdtubesqcup{0.5}{0.5}},
-        \strdtubeboundof{strd tube}
+        \strdtube{
+            \strdyhalf\strdtubemid
+        },
+        \strdtwincell{\tau},
+        \strdtubesqcap{0.8}{0.8},
+        \strdyhalf{\strdtubesqcup{0.8}{0.8}},
+        \strdtubeboundof{strd default}
     } & \mapsfrom
     \strdgathered{
         \strdmid,
@@ -50,26 +59,35 @@
 }
 
 
-% Signature
+% Bijectivity
 \In{preview,math,aligned}{
     \myitem &
     \strdgathered{
         \strdyhalf\strdmid
         ,\strdfork{
             \strdmid
+            ,\strdyhalf\strdmid
             ,\strdcell{f}
             ,\strdyhalf\strdmid
         }
         ,\strdtubestart
         ,\strdfork{
-            \strdtubedilate{0.5}{0.5}
-            ,\strdyhalf{\strdtubesqcup{0.5}{0.5}}
-            ,\strdtubeboundof{strd tube}
+            \strdtwincell{\tau},
+            \strdtubesqcap{1.6}{1.6},
+            \strdyhalf\strdtubemid,
+            \strdtubesqcup{1.6}{1.6},
+            \strdtubeboundof{strd default},
+            \strdyhalf\strdmid
         }
-        ,\strdtubesqcap{1}{1}
-        ,\strdtubesqcup{1}{1}
-        ,\strdtubeboundof{strd tube}
-        ,\strdyhalf\strdmid
+        ,\strdtube{
+            \strdtubemid
+        },
+        \strdtwincell{\tau},
+        \strdyhalf{
+            \strdtubesqcap{0.8}{0.8},
+            \strdtubesqcup{0.8}{0.8}
+        },
+        \strdtubeboundof{strd default}
     } =
     \strdgathered{
         \strdmid,
@@ -81,21 +99,26 @@
         \strdfork{
             \strdtubestart
             ,\strdtubebound
-            ,\strdtubedilate{2}{2}
-            ,\strdtubemid
-            ,\strdtubesqcup{2}{2}
-            ,\strdtubeboundof{strd tube}
+            ,\strdtube{
+                \strdyhalf\strdtubemid
+            }
+            ,\strdtwincell{\tau}
+            ,\strdtubesqcap{1.6}{1.6}
+            ,\strdyhalf\strdtubemid
+            ,\strdtubesqcup{1.6}{1.6}
+            ,\strdtubeboundof{strd default}
         },
         \strdmid,
         \strdfork{
             \strdtubestart,
             \strdfork{
-                \strdtubemid,
+                \strdtwincell{\tau},
+                \strdtube\strdtubemid,
                 \strdwidecell{1}{1}{a}
             },
-            \strdtubesqcap{1}{1},
-            \strdyhalf{\strdtubesqcup{1}{1}},
-            \strdtubeboundof{strd tube},
+            \strdtubesqcap{0.8}{0.8},
+            \strdyhalf{\strdtubesqcup{0.8}{0.8}},
+            \strdtubeboundof{strd default},
             \strdyhalf\strdmid
         },
         \strdmid
@@ -104,13 +127,87 @@
         \strdfork{
             \strdmid
         }
-        ,\strdtubestart
-        ,\strdtubebound
-        ,\strdtubemid
-        ,\strdwidecell{1}{1}{a}
+        ,\strdtube{
+            \strdtubestart
+            ,\strdtubebound
+            ,\strdtubemid
+            ,\strdwidecell{1}{1}{a}
+        }
     }
 }
 
+
+% uniqueness
+\In{preview,math,aligned}{
+    &
+    \strdgathered{
+        \strdmid
+        ,\strdcell{}
+        ,\strdmid,\strdrlabel{B}
+        ,\strdcell{\varphi}
+        ,\strdmid,\strdrlabel{A}
+    } =
+    \strdgathered{
+        \strdyhalf\strdmid
+        ,\strdfork{
+            \strdmid
+            ,\strdyhalf\strdmid
+            ,\strdcell{}
+            ,\strdyscale{0.75}\strdmid,\strdrlabel{B}
+        }
+        ,\strdtubestart
+        ,\strdfork{
+            \strdtwincell{\tau},
+            \strdtubesqcap{1.6}{1.6},
+            \strdyhalf\strdtubemid,
+            \strdtubesqcup{1.6}{1.6},
+            \strdtubeboundof{strd default},
+            \strdyhalf\strdmid,\strdrlabel{A}
+        }
+        ,\strdtube{
+            \strdtubemid
+        },
+        \strdtwincell{\tau},
+        \strdyhalf{
+            \strdtubesqcap{0.8}{0.8},
+            \strdyhalf\strdtubemid,
+            \strdtubesqcup{0.8}{0.8}
+        },
+        \strdtubeboundof{strd default}
+    } :\text{iso}\\
+    \iff &
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdcell{\varphi}
+        ,\strdmid,\strdrlabel{A}
+    } =
+    \strdgathered{
+        \strdyhalf\strdmid
+        ,\strdfork{
+            \strdmid,\strdrlabel{B}
+            ,\strdyhalf\strdmid
+            ,\strdyhalf\strdmid
+        }
+        ,\strdtubestart
+        ,\strdfork{
+            \strdtwincell{\tau},
+            \strdtubesqcap{1.6}{1.6},
+            \strdyhalf\strdtubemid,
+            \strdtubesqcup{1.6}{1.6},
+            \strdtubeboundof{strd default},
+            \strdyhalf\strdmid,\strdrlabel{A}
+        }
+        ,\strdtube{
+            \strdtubemid
+        },
+        \strdtwincell{\tau},
+        \strdyhalf{
+            \strdtubesqcap{0.8}{0.8},
+            \strdtubesqcup{0.8}{0.8}
+        },
+        \strdtubeboundof{strd default}
+    } :\text{iso}\\
+}
 
 
 \end{document}

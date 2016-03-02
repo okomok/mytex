@@ -402,11 +402,11 @@
 % Cells
 %
 
-\tikzset{strd cellbase/.style={font=\normalsize,strd default,solid,draw,fill=white,rectangle,minimum size=9pt,inner xsep=1pt,inner ysep=1.2pt}}
-\tikzset{strd cell/.style={strd cellbase,strd default}}
-\tikzset{strd mapcell/.style={strd cellbase,thin}}
-\tikzset{strd bijcell/.style={strd cellbase,strd default,sharp corners}}
-\tikzset{strd natcell/.style={strd cellbase,rounded rectangle,sharp corners,strd default}}
+\tikzset{strd cellbase/.style={font=\normalsize,thin,solid,draw,fill=white,rectangle,minimum size=9pt,inner xsep=1pt,inner ysep=1.2pt}}
+\tikzset{strd cell/.style={strd cellbase}}
+\tikzset{strd mapcell/.style={strd cellbase}}
+\tikzset{strd bijcell/.style={strd cellbase,sharp corners}}
+\tikzset{strd natcell/.style={strd cellbase,rounded rectangle,sharp corners}}
 
 \newcommand*{\strdcell@}[1]{\strdonlayer@{strd celllayer}{#1}}
 
@@ -418,7 +418,7 @@
 \newcommand*{\strdputcell}{\strdputcellof{strd cell}}
 
 % widecell
-\tikzset{strd widecellbase/.style={strd cellbase,strd default}}
+\tikzset{strd widecellbase/.style={strd cellbase}}
 \tikzset{strd widecell/.style={strd widecellbase}}
 \newcommand*{\strdwidecell}[3]{\strdwith{\strdputwidecell{#1}{#2}{#3}}}
 \newcommand*{\strdwidecellof}[4]{\strdwith{\strdputwidecellof{#1}{#2}{#3}{#4}}}
@@ -475,6 +475,17 @@
 \newcommand*{\strdtubexhalfunit}{0.375}
 \newcommand*{\strdtubexmagic}{0.125}
 
+% tube
+\newcommand*{\strdtube}{\strdtubeof{strd tube}}
+\newcommand*{\strdtubeof}{\Compose\strdseqin\strdtubeofone}
+\newcommand*{\strdtubeofone}[2]{
+    \strdonlayer{strd tubelayer}{
+        \strdpathis{#1}{
+            #2
+        }
+    }%
+}
+
 % start
 \newcommand*{\strdtubestart}{\strdcomposeC\strdtubestartC}
 \newcommand*{\strdtubestartC}[2]{% {newid}{previd}
@@ -484,13 +495,6 @@
 }
 
 % helpers
-\newcommand*{\strdtube@}[1]{
-    \strdonlayer@{strd tubelayer}{
-        \strdpathis@{strd tube}{
-            #1 
-        }
-    }%
-}
 \newcommand*{\strdtubeundoC@}[3]{% {sc}{newid}{previd}
     \strdtubejumpC{#2 Jump}{#3}
     \strdinv@{ \strduse{#1}{#2 Inv}{#2 Jump} }%
@@ -502,7 +506,7 @@
     \strdcopyundo@{#2 Right}{#2 Inv Right}%
 }
 \newcommand*{\strdtubeC@}[6]{% {lC}{rC}{lscale}{rscale}{newid}{previd}
-    \strdtube@{
+%    \strdtube@{
         \If{\DimEq{#3pt}{0pt}}{
             \strdmidC{#5 Left}{#6 Left}
         }{
@@ -514,12 +518,12 @@
         }{
             \strdxscale@{#4}{\strduse{#2}{#5 Right}{#6 Right}}
         }
-    }%
+%    }%
 }
 \newcommand*{\strdtubesymC@}[1]{\strdtubeC@{#1}{\strdflipC{#1}}}
 % yscale{0} doesn't work, so we define...
 \newcommand*{\strdtubezeroC@}[6]{% {lC}{rC}{lscale}{rscale}{newid}{previd}
-    \strdtube@{
+%    \strdtube@{
         \If{\DimEq{#3pt}{0pt}}{
             \strdemptyC{#5 Left}{#6 Left}
         }{
@@ -531,7 +535,7 @@
         }{
             \strdxscale@{#4}{\strduse{#2}{#5 Right}{#6 Right}}
         }
-    }%
+%    }%
 }
 \newcommand*{\strdtubezerosymC@}[1]{\strdtubezeroC@{#1}{\strdflipC{#1}}}
 
@@ -548,33 +552,33 @@
 %     \strdemptyC{#2}{#3 #1}%
 % }
 
-% tube
-\newcommand*{\strdtube}[4]{% {stm}{sc}{newid}{previd}
-    \strduse{#2}{#3 Prev}{#4}
-    \strdonlayer@{strd tubelayer}{
-        \strduse{#1}{\strdcopyC}{#3 Left}{#3 Prev Left}
-        \strdjumpC{#3}{#3 Prev}
-        \strduse{#1}{\strdcopyC}{#3 Right}{#3 Prev Right}
-    }%
-}
-
-\newcommand*{\strdtubex}[6]{% {lstm}{mstm}{rstm}{sc}{newid}{previd}
-    \strduse{#4}{#5 Prev}{#6}
-    \strdonlayer@{strd tubelayer}{
-        \strduse{#1}{\strdcopyC}{#5 Left}{#5 Prev Left}
-        \strduse{#2}{\strdcopyC}{#5}{#5 Prev}
-        \strduse{#3}{\strdcopyC}{#5 Right}{#5 Prev Right}
-    }%
-}
+% % tube
+% \newcommand*{\strdtube}[4]{% {stm}{sc}{newid}{previd}
+%     \strduse{#2}{#3 Prev}{#4}
+%     \strdonlayer@{strd tubelayer}{
+%         \strduse{#1}{\strdcopyC}{#3 Left}{#3 Prev Left}
+%         \strdjumpC{#3}{#3 Prev}
+%         \strduse{#1}{\strdcopyC}{#3 Right}{#3 Prev Right}
+%     }%
+% }
+%
+% \newcommand*{\strdtubex}[6]{% {lstm}{mstm}{rstm}{sc}{newid}{previd}
+%     \strduse{#4}{#5 Prev}{#6}
+%     \strdonlayer@{strd tubelayer}{
+%         \strduse{#1}{\strdcopyC}{#5 Left}{#5 Prev Left}
+%         \strduse{#2}{\strdcopyC}{#5}{#5 Prev}
+%         \strduse{#3}{\strdcopyC}{#5 Right}{#5 Prev Right}
+%     }%
+% }
 
 % tubemid
 \newcommand*{\strdtubemid}{\strdcomposeC\strdtubemidC}
 \newcommand*{\strdtubemidC}[2]{% {newid}{previd}
-    \strdtube@{
+%    \strdtube@{
         \strdmidC{#1 Left}{#2 Left}
         \strdjumpC{#1}{#2}
         \strdmidC{#1 Right}{#2 Right}
-    }%
+%    }%
     % \strdonlayer@{background}{
     %     \fill[orange,sharp corners,draw]{ (#1 Left Start) -- (#1 Left End) -- (#1 Right End) -- (#1 Right Start) };
     % }
@@ -583,11 +587,11 @@
 % tubeemptyat
 \newcommand*{\strdtubeemptyat}{\Compose\strdcomposeC\strdtubeemptyatC}
 \newcommand*{\strdtubeemptyatC}[3]{% {at}{newid}{previd}
-    \strdtube@{
+%    \strdtube@{
         \strdemptyatC{#1}{#2 Left}{#3 Left}
         \strdemptyatC{#1}{#2}{#3}
         \strdemptyatC{#1}{#2 Right}{#3 Right}
-    }%
+%    }%
 }
 
 % tubeempty
@@ -597,21 +601,21 @@
 % tubejump
 \newcommand*{\strdtubejump}{\strdcomposeC\strdtubejumpC}
 \newcommand*{\strdtubejumpC}[2]{% {newid}{previd}
-    \strdtube@{
+%    \strdtube@{
         \strdjumpC{#1 Left}{#2 Left}
         \strdjumpC{#1}{#2}
         \strdjumpC{#1 Right}{#2 Right}
-    }%
+%    }%
 }
 
 % tubeljump/tuberjump
 \newcommand*{\strdtubeljump}{\strdcomposeC\strdtubeljumpC}
 \newcommand*{\strdtubeljumpC}[2]{% {newid}{previd}
-    \strdtube@{
+%    \strdtube@{
         \strdljumpC{#1 Left}{#2 Left}
         \strdljumpC{#1}{#2}
         \strdljumpC{#1 Right}{#2 Right}
-    }%
+%    }%
 }
 \newcommand*{\strdtuberjump}{\strdcomposeC\strdtuberjumpC}
 \newcommand*{\strdtuberjumpC}{\strdflipC\strdtubeljumpC}
@@ -626,12 +630,12 @@
 % tubepartleft
 \newcommand*{\strdtubepartleft}[1]{\strdcomposeC{\strdtubepartleftC{#1}}}
 \newcommand*{\strdtubepartleftC}[3]{% {xscale}{newid}{previd}
-    \strdtube@{
+%    \strdtube@{
         \strdmidC{#2 Left}{#3 Left}
         %\strdtubepart@{#2}{#3 Left}
         \strdjumpC{#2}{#3}
         \strdtubepartleftrightC{#1}{#2 Right}{#3 Left}
-    }%
+%    }%
 }
 \newcommand*{\strdtubepartleftrightC}[3]{% {xscale}{newid}{previd}
     \strdcoord@{#2 StartOrigin}{$(#3 End)+(0.25,0)$}
@@ -674,7 +678,7 @@
 % tubepartright
 \newcommand*{\strdtubepartright}[1]{\strdcomposeC{\strdtubepartrightC{#1}}}
 \newcommand*{\strdtubepartrightC}[3]{% {xscale}{newid}{previd}
-    \Compose\strdtube@\strdflip@{
+    \Compose\strdflip@{
         \strdmidC{#2 Right}{#3 Right}
         %\strdtubepart@{#2}{#3 Right}
         \strdjumpC{#2}{#3}
@@ -687,13 +691,13 @@
 % tubepartmid
 \newcommand*{\strdtubepartmid}[2]{\strdcomposeC{\strdtubepartmidC{#1}{#2}}}
 \newcommand*{\strdtubepartmidC}[4]{% {lscale}{rscale}{newid}{previd}
-    \strdtube@{
+%    \strdtube@{
         \strdflip@{
             \strdtubepartmidrightC{#1}{#3 Left}{#4}
         }
         \strdjumpC{#3}{#4}
         \strdtubepartmidrightC{#2}{#3 Right}{#4}
-    }%
+%    }%
 }
 \newcommand*{\strdtubepartmidrightC}[3]{% {xscale}{newid}{previd}
     \strdxscale@{#1}{
@@ -712,13 +716,13 @@
 % tubepartclose
 \newcommand*{\strdtubepartclose}[2]{\strdcomposeC{\strdtubepartcloseC{#1}{#2}}}
 \newcommand*{\strdtubepartcloseC}[4]{% {lscale}{rscale}{newid}{previd}
-    \strdtube@{
+%    \strdtube@{
         \strdflip@{
             \strdtubepartcloserightC{#1}{#3 Left}{#4}
         }
         \strdjumpC{#3}{#4}
         \strdtubepartcloserightC{#2}{#3 Right}{#4}
-    }%
+%    }%
 }
 \newcommand*{\strdtubepartcloserightC}[3]{% {xscale}{newid}{previd}
     \strdxscale@{#1}{
@@ -838,10 +842,10 @@
 % tubeclose
 \newcommand*{\strdtubeclose}{\strdcomposeC\strdtubecloseC}
 \newcommand*{\strdtubecloseC}[2]{% {newid}{previd}
-    \strdtube@{
+%    \strdtube@{
         \strdtubejumpC{#1}{#2}
         \strddraw@{ (#1 Left Start) -- (#1 Left) -- (#1 Right) -- (#1 Right Start) }%
-    }%
+%    }%
 }
 \newcommand*{\strdtubeunclose}{\strdcomposeC\strdtubeuncloseC}
 \newcommand*{\strdtubeuncloseC}{\strdtubeundoC@\strdtubecloseC}
@@ -857,13 +861,13 @@
 \newcommand*{\strdtubebound}{\strdtubeboundof{strd tubebound}}
 \newcommand*{\strdtubeboundof}{\Compose\strdwith\strdputtubeboundof}
 \newcommand*{\strdputtubeboundof}[2]{%
-    \strdtube@{
+%    \strdtube@{
         \draw[strd draw,#1]{ (#2 Left End) -- (#2 Right End) };
-    }%
+%    }%
 }
 
 % twincell
-\tikzset{strd twincellbase/.style={strd widecellbase,sharp corners,rounded rectangle}}
+\tikzset{strd twincellbase/.style={strd cellbase,sharp corners,rounded rectangle}}
 \tikzset{strd twincellleft/.style={strd twincellbase,rounded rectangle east arc=none}}
 \tikzset{strd twincellright/.style={strd twincellbase,rounded rectangle west arc=none}}
 \newcommand*{\strdtwincell}{\strdtwincellat{End}}
@@ -1206,7 +1210,7 @@
     \strduse{#2}{#3 Prev}{#4}
     \strduse{#1}{\strdcopyC}{#3 Left}{#3 Prev Left}
     \strdflip@{ \strduse{#1}{\strdcopyC}{#3 Right}{#3 Prev Right} }
-    \strdstringmid@{#3}{#3 Prev End}{#3 Left End}
+    \strdstringmid@{#3}{#3 Prev End}{$(#3 Left End)!.5!(#3 Right End)$}
 }
 
 
