@@ -13,7 +13,7 @@
 \tikzset{strd mathnodes/.style={execute at begin node=$,execute at end node=$}}
 \tikzset{strd none/.style={opacity=0,text opacity=0,fill opacity=0}}
 \tikzset{strd picturevaligned/.style={baseline={([yshift=-0.5ex]current bounding box.center)}}}
-\tikzset{strd picture/.style={strd picturevaligned,strd mathnodes,very thin,rounded corners=2pt}}
+\tikzset{strd picture/.style={strd picturevaligned,strd mathnodes,strd default,rounded corners=2pt}}
 \tikzset{strd draw/.style={}}
 
 
@@ -59,6 +59,9 @@
 
 % Constants
 %
+
+\tikzset{strd default/.style={very thin}}
+\tikzset{strd black/.style={fill=black}}
 
 \newcommand*{\strdstringwidth}{0.2pt}% very thin
 \newcommand*{\strdxunit}{0.5}
@@ -399,11 +402,11 @@
 % Cells
 %
 
-\tikzset{strd cellbase/.style={font=\normalsize,very thin,solid,draw,fill=white,rectangle,minimum size=9pt,inner xsep=1pt,inner ysep=1.2pt}}
-\tikzset{strd cell/.style={strd cellbase,very thin}}
+\tikzset{strd cellbase/.style={font=\normalsize,strd default,solid,draw,fill=white,rectangle,minimum size=9pt,inner xsep=1pt,inner ysep=1.2pt}}
+\tikzset{strd cell/.style={strd cellbase,strd default}}
 \tikzset{strd mapcell/.style={strd cellbase,thin}}
-\tikzset{strd bijcell/.style={strd cellbase,very thin,sharp corners}}
-\tikzset{strd natcell/.style={strd cellbase,rounded rectangle,sharp corners,very thin}}
+\tikzset{strd bijcell/.style={strd cellbase,strd default,sharp corners}}
+\tikzset{strd natcell/.style={strd cellbase,rounded rectangle,sharp corners,strd default}}
 
 \newcommand*{\strdcell@}[1]{\strdonlayer@{strd celllayer}{#1}}
 
@@ -415,7 +418,7 @@
 \newcommand*{\strdputcell}{\strdputcellof{strd cell}}
 
 % widecell
-\tikzset{strd widecellbase/.style={strd cellbase,very thin}}
+\tikzset{strd widecellbase/.style={strd cellbase,strd default}}
 \tikzset{strd widecell/.style={strd widecellbase}}
 \newcommand*{\strdwidecell}[3]{\strdwith{\strdputwidecell{#1}{#2}{#3}}}
 \newcommand*{\strdwidecellof}[4]{\strdwith{\strdputwidecellof{#1}{#2}{#3}{#4}}}
@@ -850,7 +853,7 @@
 }
 
 % tubebound
-\tikzset{strd tubebound/.style={very thin,dash pattern=on 2pt off 2pt}}
+\tikzset{strd tubebound/.style={strd default,dash pattern=on 2pt off 2pt}}
 \newcommand*{\strdtubebound}{\strdtubeboundof{strd tubebound}}
 \newcommand*{\strdtubeboundof}{\Compose\strdwith\strdputtubeboundof}
 \newcommand*{\strdputtubeboundof}[2]{%
@@ -872,18 +875,18 @@
     }% 
 }
 
-% twins
-\tikzset{strd twinsbase/.style={sharp corners,thin,draw=black,fill=white,minimum size=2.8pt,inner sep=0pt}}
-\tikzset{strd twincdot/.style={strd twinsbase,circle,fill=black}}
-\tikzset{strd twincirc/.style={strd twinsbase,circle}}
-\tikzset{strd twinsq/.style={strd twinsbase,rectangle,sharp corners}}
-\tikzset{strd twin circ left/.style={strd twincellleft,minimum size=4pt}}
-\tikzset{strd twin circ right/.style={strd twincellright,minimum size=4pt}}
-\tikzset{strd twin cdot left/.style={strd twin circ left,fill=black}}
-\tikzset{strd twin cdot right/.style={strd twin circ right,fill=black}}
-\newcommand*{\strdtwins}{\strdtwinsat{End}}
-\newcommand*{\strdtwinsat}[2]{\strdwith{\strdputtwinsat{#1}{#2}}}
-\newcommand*{\strdputtwinsat}[3]{% {at}{opt}{id}
+% twinsymbol
+\tikzset{strd twinsymbolbase/.style={sharp corners,thin,draw=black,fill=white,minimum size=2.8pt,inner sep=0pt}}
+% \tikzset{strd twincdot/.style={strd twinsymbolbase,circle,fill=black}}
+% \tikzset{strd twincirc/.style={strd twinsymbolbase,circle}}
+% \tikzset{strd twinsymbolq/.style={strd twinsymbolbase,rectangle,sharp corners}}
+\tikzset{strd circ left/.style={strd twincellleft,minimum size=4pt}}
+\tikzset{strd circ right/.style={strd twincellright,minimum size=4pt}}
+\tikzset{strd cdot left/.style={strd circ left,fill=black}}
+\tikzset{strd cdot right/.style={strd circ right,fill=black}}
+\newcommand*{\strdtwinsymbol}{\strdtwinsymbolat{End}}
+\newcommand*{\strdtwinsymbolat}[2]{\strdwith{\strdputtwinsymbolat{#1}{#2}}}
+\newcommand*{\strdputtwinsymbolat}[3]{% {at}{opt}{id}
     \strdcell@{
         \node[#2 left] at (#3 Left #1) {};
         \node[#2 right] at (#3 Right #1) {};
@@ -891,7 +894,7 @@
 }
 
 % right-angled triangles
-\tikzset{strd righttrianglebase/.style={strd symbolbase,very thin,isosceles triangle,isosceles triangle stretches=false,isosceles triangle apex angle=90,shape border uses incircle}}
+\tikzset{strd righttrianglebase/.style={strd symbolbase,strd default,isosceles triangle,isosceles triangle stretches=false,isosceles triangle apex angle=90,shape border uses incircle}}
 \tikzset{strd righttriangle/.style={strd righttrianglebase,shape border rotate=90}}
 \tikzset{strd righttriangledown/.style={strd righttrianglebase,shape border rotate=-90}}
 \tikzset{strd righttriangle right/.style={strd righttrianglebase,shape border rotate=-45,xshift=-0.82pt}}
@@ -1071,7 +1074,7 @@
 % Scoped transformations
 %
 
-\tikzset{strd implicit/.style={very thin,densely dotted}}
+\tikzset{strd implicit/.style={strd default,densely dotted}}
 
 \newcommand*{\strdscope@}[2]{\begin{scope}[#1]#2\end{scope}}
 \newcommand*{\strdflip@}{\strdscope@{xscale=-1}}
@@ -1191,6 +1194,21 @@
     \strduse{#2}{#3}{#4}
     \strduse{#1}{\strdcopyC}{#3 Fork}{#3}%
 }
+
+\newcommand*{\strdsym}[4]{% {stml}{sc}{newid}{previd}
+    \strduse{#2}{#3 Prev}{#4}
+    \strduse{#1}{\strdcopyC}{#3 Left}{#3 Prev}
+    \strdflip@{ \strduse{#1}{\strdcopyC}{#3 Right}{#3 Prev} }
+    \strdstringmid@{#3}{#3 Prev End}{#3 Left End}
+}
+
+\newcommand*{\strdsymlr}[4]{% {stml}{sc}{newid}{previd}
+    \strduse{#2}{#3 Prev}{#4}
+    \strduse{#1}{\strdcopyC}{#3 Left}{#3 Prev Left}
+    \strdflip@{ \strduse{#1}{\strdcopyC}{#3 Right}{#3 Prev Right} }
+    \strdstringmid@{#3}{#3 Prev End}{#3 Left End}
+}
+
 
 % right-biased
 \newcommand*{\strdparallel}{\strdparallelwith\Identity}

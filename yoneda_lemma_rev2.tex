@@ -1,0 +1,288 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+
+\tikzset{strd semicircle left/.style={
+    trapezium
+    ,trapezium stretches body=true
+    ,trapezium left angle=45
+    ,trapezium right angle=0
+    ,minimum size=4pt}}
+\tikzset{strd semicircle right/.style={strd twincellright,minimum size=4pt}}
+
+% Signature
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdyscale{1.5}\strdmid
+            ,\strdcell{}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtubestart
+        ,\strdtubebound
+        ,\strdtubemid
+        ,\strdat{Left}{\strdoverlabel{F}}
+        ,\strdtwincell{\tau}
+        ,\strdscope{strd default}{
+            \strdxscale{0.7}{
+                \strdsymlr\strdlcorner
+                ,\strdsymlr{\strdyhalf\strdmid}
+                ,\strdsymlr\strdunlcorner
+            }
+        }
+        ,\strdtubeboundof{strd default}
+    } \mydefeq
+    \Lambda_X\Lambda_f
+    \strdgathered{
+        \strdfork{
+            \strdyscale{1}\strdmid,\strdrlabel{X}
+        }
+        ,\strdtubestart
+        ,\strdtubebound
+        ,\strdtubemid
+        ,\strdat{Left}{\strdoverlabel{F}}
+        ,\strdframearound
+        ,\strdbox{1.2}{1.2}{
+            \strdmid
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{A}
+        },\strdat{Left}{\strdoverlabel{\tau}}
+    }
+}
+
+% naturality
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdyscale{1}\strdmid,\strdrlabel{X\myprime}
+            ,\strdcell{h}
+            ,\strdmid,\strdrlabel{X}
+        }
+        ,\strdtubestart
+        ,\strdtubebound
+        ,\strdyscale{2}\strdtubemid
+        ,\strdat{Left}{\strdoverlabel{F}}
+        ,\strdframearound
+        ,\strdbox{1.2}{1.2}{
+            \strdmid
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{A}
+        },\strdat{Left}{\strdoverlabel{\tau}}
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdyscale{1}\strdmid,\strdrlabel{X\myprime}
+        }
+        ,\strdtubestart
+        ,\strdtubebound
+        ,\strdtubemid
+        ,\strdat{Left}{\strdoverlabel{F}}
+        ,\strdframearound
+        ,\strdbox{1.2}{1.2}{
+            \strdmid
+            ,\strdcell{h}
+            ,\strdmid,\strdrlabel{X}
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{A}
+        },\strdat{Left}{\strdoverlabel{\tau}}
+    }
+}
+
+% Yoneda bijection
+\In{preview,math,aligned}{
+    \myitem & \varphi : \operatorname{Nat} _ X (\operatorname{Hom}(A,X),FX) \cong FA \\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid
+            ,\strdcell{}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtubestart
+        ,\strdtubebound
+        ,\strdyhalf\strdtubemid
+        ,\strdtwincell{\tau}
+        ,\strdscope{strd default}{
+            \strdxscale{0.7}{
+                \strdsymlr\strdlcorner
+                ,\strdsymlr{\strdyhalf\strdmid}
+                ,\strdsymlr\strdunlcorner
+            }
+        }
+        ,\strdtubeboundof{strd default}
+    } \overset{\varphi}{\mapsto}
+    \strdgathered{
+        \strdfork{
+            \strdyhalf\strdmid
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtubestart
+        ,\strdtubebound
+        ,\strdyhalf\strdtubemid
+        ,\strdtwincell{\tau}
+        ,\strdscope{strd default}{
+            \strdxscale{0.7}{
+                \strdsymlr\strdlcorner
+                ,\strdsymlr\strdunlcorner
+            }
+        }
+        ,\strdtubeboundof{strd default}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid
+            ,\strdcell{}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtubestart
+        ,\strdtubebound
+        ,\strdtubemid
+        ,\strdtubemid
+        ,\strdwidecell{1}{1}{a}
+    } \mymapsfrom
+    \strdgathered{
+        \strdfork{
+            \strdmid
+            ,\strdrlabel{A}
+        }
+        ,\strdtubestart
+        ,\strdtubebound
+        ,\strdtubemid
+        ,\strdwidecell{1}{1}{a}
+    }
+}
+
+% bijectivity
+\In{preview,math,aligned}{
+    \myitem&
+    \strdgathered{
+        \strdfork{
+            \strdyscale{1.5}\strdmid
+            ,\strdat{Mid}{\strdcell{}}
+            ,\strdmid
+        }
+        ,\strdtubestart,\strdtubebound
+        ,\strdyscale{1.5}\strdtubemid
+        ,\strdtwincell{\tau}
+        ,\strdxscale{0.7}{
+            \strdsymlr\strdlcorner
+            ,\strdsymlr\strdunlcorner
+        }
+        ,\strdtubeboundof{strd default}
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdyhalf\strdmid
+            ,\strdmid
+            ,\strdat{Mid}{\strdcell{}}
+        }
+        ,\strdtubestart,\strdtubebound
+        ,\strdyhalf\strdtubemid
+        ,\strdtwincell{\tau}
+        ,\strdxscale{0.7}{
+            \strdsymlr\strdlcorner
+            ,\strdsymlr\strdunlcorner
+        }
+        ,\strdtubeboundof{strd default}
+    }\\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdyscale{1.5}\strdmid
+            ,\strdat{Mid}{\strdcell{}}
+        }
+        ,\strdtubestart
+        ,\strdtubebound
+        ,\strdyscale{1.5}\strdtubemid
+        ,\strdwidecell{1}{1}{a}
+    } \overset{\varphi}{\mapsto}
+    \strdgathered{
+        \strdfork{
+            \strdmid
+        }
+        ,\strdtubestart
+        ,\strdtubebound
+        ,\strdtubemid
+        ,\strdwidecell{1}{1}{a}
+    }
+}
+
+% naturality in A
+\In{preview,math,aligned}{
+    \myitem&
+    \strdgathered{
+        \strdfork{
+            \strdmid
+            ,\strdcell{h}
+            ,\strdyhalf\strdmid
+        }
+        ,\strdtubestart,\strdtubebound
+        ,\strdyhalf\strdtubemid
+        ,\strdtwincell{\tau}
+        ,\strdxscale{0.7}{
+            \strdsymlr\strdlcorner
+            ,\strdsymlr\strdunlcorner
+        }
+        ,\strdtubeboundof{strd default}
+    } =
+    \strdgathered{
+        \strdfork{
+            \strdmid
+            ,\strdat{Mid}{\strdcell{h}}
+            ,\strdmid
+        }
+        ,\strdtubestart,\strdtubebound
+        ,\strdtubemid
+        ,\strdtwincell{\tau}
+        ,\strdxscale{0.7}{
+            \strdsymlr\strdlcorner
+            ,\strdsymlr\strdunlcorner
+        }
+        ,\strdtubeboundof{strd default}
+    }
+}
+
+% naturality in F
+\In{preview,math,aligned}{
+    \myitem&
+    \strdgathered{
+        \strdfork{
+            \strdyscale{1.5}\strdmid
+            ,\strdmid
+            ,\strdat{Mid}{\strdcell{}}
+        }
+        ,\strdtubestart,\strdtubebound
+        ,\strdyscale{1.5}\strdtubemid
+        ,\strdtubeat{Mid}{\strdtwincell{\tau\strdrlap\myprime}}
+        ,\strdtwincell{\tau}
+        ,\strdxscale{0.7}{
+            \strdsymlr\strdlcorner
+            ,\strdsymlr\strdunlcorner
+        }
+        ,\strdtubeboundof{strd default}
+    } \overset{\varphi}{\mapsto}
+    \strdgathered{
+        \strdfork{
+            \strdyscale{1.5}\strdmid
+            ,\strdmid
+        }
+        ,\strdtubestart,\strdtubebound
+        ,\strdyscale{1.5}\strdtubemid
+        ,\strdtubeat{Mid}{\strdtwincell{\tau\strdrlap\myprime}}
+        ,\strdtwincell{\tau}
+        ,\strdxscale{0.7}{
+            \strdsymlr\strdlcorner
+            ,\strdsymlr\strdunlcorner
+        }
+        ,\strdtubeboundof{strd default}
+    }
+}
+
+    
+\end{document}
