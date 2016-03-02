@@ -385,19 +385,16 @@
 \tikzset{strd circ/.style={strd symbolbase,circle,minimum size=1.5pt}}
 \tikzset{strd cdot/.style={circ,fill=black}}
 \tikzset{strd circle/.style={strd symbolbase,circle}}
-\tikzset{strd blackcircle/.style={strd circle,fill=black}}% deprecated
 \tikzset{strd square/.style={strd symbolbase,rectangle}}
-\tikzset{strd blacksquare/.style={strd square,fill=black}}% deprecated
 \tikzset{strd triangle/.style={strd symbolbase,regular polygon,regular polygon sides=3,minimum size=4pt}}
-\tikzset{strd blacktriangle/.style={strd triangle,fill=black}}% deprecated
 \tikzset{strd triangledown/.style={strd triangle,shape border rotate=180}}
-\tikzset{strd blacktriangledown/.style={strd triangledown,fill=black}}% deprecated
 
 \newcommand*{\strdputsymbol}[2]{% {style}{node}
     \strdcell@{
         \node[#1] at (#2) {};
     }%
 }
+
 
 % Cells
 %
@@ -506,79 +503,41 @@
     \strdcopyundo@{#2 Right}{#2 Inv Right}%
 }
 \newcommand*{\strdtubeC@}[6]{% {lC}{rC}{lscale}{rscale}{newid}{previd}
-%    \strdtube@{
-        \If{\DimEq{#3pt}{0pt}}{
-            \strdmidC{#5 Left}{#6 Left}
-        }{
-            \strdxscale@{#3}{\strduse{#1}{#5 Left}{#6 Left}}
-        }
-        \strdjumpC{#5}{#6}
-        \If{\DimEq{#4pt}{0pt}}{
-            \strdmidC{#5 Right}{#6 Right}
-        }{
-            \strdxscale@{#4}{\strduse{#2}{#5 Right}{#6 Right}}
-        }
-%    }%
+    \If{\DimEq{#3pt}{0pt}}{
+        \strdmidC{#5 Left}{#6 Left}
+    }{
+        \strdxscale@{#3}{\strduse{#1}{#5 Left}{#6 Left}}
+    }
+    \strdjumpC{#5}{#6}
+    \If{\DimEq{#4pt}{0pt}}{
+        \strdmidC{#5 Right}{#6 Right}
+    }{
+        \strdxscale@{#4}{\strduse{#2}{#5 Right}{#6 Right}}
+    }%
 }
 \newcommand*{\strdtubesymC@}[1]{\strdtubeC@{#1}{\strdflipC{#1}}}
 % yscale{0} doesn't work, so we define...
 \newcommand*{\strdtubezeroC@}[6]{% {lC}{rC}{lscale}{rscale}{newid}{previd}
-%    \strdtube@{
-        \If{\DimEq{#3pt}{0pt}}{
-            \strdemptyC{#5 Left}{#6 Left}
-        }{
-            \strdxscale@{#3}{\strduse{#1}{#5 Left}{#6 Left}}
-        }
-        \strdemptyC{#5}{#6}
-        \If{\DimEq{#4pt}{0pt}}{
-            \strdemptyC{#5 Right}{#6 Right}
-        }{
-            \strdxscale@{#4}{\strduse{#2}{#5 Right}{#6 Right}}
-        }
-%    }%
+    \If{\DimEq{#3pt}{0pt}}{
+        \strdemptyC{#5 Left}{#6 Left}
+    }{
+        \strdxscale@{#3}{\strduse{#1}{#5 Left}{#6 Left}}
+    }
+    \strdemptyC{#5}{#6}
+    \If{\DimEq{#4pt}{0pt}}{
+        \strdemptyC{#5 Right}{#6 Right}
+    }{
+        \strdxscale@{#4}{\strduse{#2}{#5 Right}{#6 Right}}
+    }%
 }
 \newcommand*{\strdtubezerosymC@}[1]{\strdtubezeroC@{#1}{\strdflipC{#1}}}
-
-% \newcommand*{\strdtubelend}{\strdcomposeC\strdtubelendC}
-% \newcommand*{\strdtubelendC}[2]{% {newid}{previd}
-%     \strdemptyC{#1}{$(#2 Left End)+(\strdtubexhalfunit,0)$}%
-% }
-% \newcommand*{\strdtubeend}{\strdcomposeC\strdtubeendC}
-% \newcommand*{\strdtubeendC}[2]{% {newid}{previd}
-%     \strdemptyC{#1}{#2 End}%
-% }
-% \newcommand*{\strdtubeendat}[1]{\strdcomposeC{\strdtubeendatC{#1}}}
-% \newcommand*{\strdtubeendatC}[3]{% {at}{newid}{previd}
-%     \strdemptyC{#2}{#3 #1}%
-% }
-
-% % tube
-% \newcommand*{\strdtube}[4]{% {stm}{sc}{newid}{previd}
-%     \strduse{#2}{#3 Prev}{#4}
-%     \strdonlayer@{strd tubelayer}{
-%         \strduse{#1}{\strdcopyC}{#3 Left}{#3 Prev Left}
-%         \strdjumpC{#3}{#3 Prev}
-%         \strduse{#1}{\strdcopyC}{#3 Right}{#3 Prev Right}
-%     }%
-% }
-%
-% \newcommand*{\strdtubex}[6]{% {lstm}{mstm}{rstm}{sc}{newid}{previd}
-%     \strduse{#4}{#5 Prev}{#6}
-%     \strdonlayer@{strd tubelayer}{
-%         \strduse{#1}{\strdcopyC}{#5 Left}{#5 Prev Left}
-%         \strduse{#2}{\strdcopyC}{#5}{#5 Prev}
-%         \strduse{#3}{\strdcopyC}{#5 Right}{#5 Prev Right}
-%     }%
-% }
 
 % tubemid
 \newcommand*{\strdtubemid}{\strdcomposeC\strdtubemidC}
 \newcommand*{\strdtubemidC}[2]{% {newid}{previd}
-%    \strdtube@{
-        \strdmidC{#1 Left}{#2 Left}
-        \strdjumpC{#1}{#2}
-        \strdmidC{#1 Right}{#2 Right}
-%    }%
+    \strdmidC{#1 Left}{#2 Left}
+    \strdjumpC{#1}{#2}
+    \strdmidC{#1 Right}{#2 Right}%
     % \strdonlayer@{background}{
     %     \fill[orange,sharp corners,draw]{ (#1 Left Start) -- (#1 Left End) -- (#1 Right End) -- (#1 Right Start) };
     % }
@@ -587,11 +546,9 @@
 % tubeemptyat
 \newcommand*{\strdtubeemptyat}{\Compose\strdcomposeC\strdtubeemptyatC}
 \newcommand*{\strdtubeemptyatC}[3]{% {at}{newid}{previd}
-%    \strdtube@{
-        \strdemptyatC{#1}{#2 Left}{#3 Left}
-        \strdemptyatC{#1}{#2}{#3}
-        \strdemptyatC{#1}{#2 Right}{#3 Right}
-%    }%
+    \strdemptyatC{#1}{#2 Left}{#3 Left}
+    \strdemptyatC{#1}{#2}{#3}
+    \strdemptyatC{#1}{#2 Right}{#3 Right}%
 }
 
 % tubeempty
@@ -601,41 +558,27 @@
 % tubejump
 \newcommand*{\strdtubejump}{\strdcomposeC\strdtubejumpC}
 \newcommand*{\strdtubejumpC}[2]{% {newid}{previd}
-%    \strdtube@{
-        \strdjumpC{#1 Left}{#2 Left}
-        \strdjumpC{#1}{#2}
-        \strdjumpC{#1 Right}{#2 Right}
-%    }%
+    \strdjumpC{#1 Left}{#2 Left}
+    \strdjumpC{#1}{#2}
+    \strdjumpC{#1 Right}{#2 Right}%
 }
 
 % tubeljump/tuberjump
 \newcommand*{\strdtubeljump}{\strdcomposeC\strdtubeljumpC}
 \newcommand*{\strdtubeljumpC}[2]{% {newid}{previd}
-%    \strdtube@{
-        \strdljumpC{#1 Left}{#2 Left}
-        \strdljumpC{#1}{#2}
-        \strdljumpC{#1 Right}{#2 Right}
-%    }%
+    \strdljumpC{#1 Left}{#2 Left}
+    \strdljumpC{#1}{#2}
+    \strdljumpC{#1 Right}{#2 Right}%
 }
 \newcommand*{\strdtuberjump}{\strdcomposeC\strdtuberjumpC}
 \newcommand*{\strdtuberjumpC}{\strdflipC\strdtubeljumpC}
 
-\newcommand*{\strdtubepart@}[2]{% {newid}{previd}
-    \strdstring@{#1}
-        {$(#2 End)+(\strdtubexhalfunit,0)$}
-        {$(#2 End)+(\strdtubexhalfunit,-\strdyunit)$}
-        {$(#2 End)+(\strdtubexhalfunit,-\strdtubeyunit)$}
-}
-
 % tubepartleft
 \newcommand*{\strdtubepartleft}[1]{\strdcomposeC{\strdtubepartleftC{#1}}}
 \newcommand*{\strdtubepartleftC}[3]{% {xscale}{newid}{previd}
-%    \strdtube@{
-        \strdmidC{#2 Left}{#3 Left}
-        %\strdtubepart@{#2}{#3 Left}
-        \strdjumpC{#2}{#3}
-        \strdtubepartleftrightC{#1}{#2 Right}{#3 Left}
-%    }%
+    \strdmidC{#2 Left}{#3 Left}
+    \strdjumpC{#2}{#3}
+    \strdtubepartleftrightC{#1}{#2 Right}{#3 Left}%
 }
 \newcommand*{\strdtubepartleftrightC}[3]{% {xscale}{newid}{previd}
     \strdcoord@{#2 StartOrigin}{$(#3 End)+(0.25,0)$}
@@ -652,35 +595,11 @@
 \newcommand*{\strdtubepartunleft}[1]{\strdcomposeC{\strdtubepartunleftC{#1}}}
 \newcommand*{\strdtubepartunleftC}[1]{\strdtubeundoC@{\strdtubepartleftC{#1}}}
 
-% % tubepartright
-% \newcommand*{\strdtubepartright}[1]{\strdcomposeC{\strdtubepartrightC{#1}}}
-% \newcommand*{\strdtubepartrightC}[3]{% {xscale}{newid}{previd}
-%     \strdtube@{
-%         \strdtubepartlcorner@{#2 Left}{$(#3 End)+(-\strdxunit,0)$}
-%         \strdjumpC{#2}{#3}
-%         \strdxscale@{#1}{ \strdrjumpC{#2 RightImpl}{#3} }
-%         \strdxscale@{0.25}{ \strdljumpC{#2 RightImpl2}{#2 RightImpl} }
-%         \strdmidC{#2 Right}{#2 RightImpl2}
-%     }%
-% }
-% \newcommand*{\strdtubepartlcorner@}[2]{% {newid}{node}
-%     \strdcoord@{#1 Start}{#2}
-%     \strdcoord@{#1 StartCorner}{$(#1 Start)+(0,-\strdyunit)$}
-%     \strdcoord@{#1 EndCorner}{$(#1 StartCorner)+(\strdtubexmagic,0)$}
-%     \strdcoord@{#1 End}{$(#1 EndCorner)+(0,-\strdyunit)$}
-%     \strdcoord@{#1 Mid}{$(#1 EndCorner)!.5!(#1 End)$}
-%     \strdcoord@{#1}{#1 Mid}
-%     \strddraw@{ (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) }%
-% }
-% \newcommand*{\strdtubepartunright}[1]{\strdcomposeC{\strdtubepartunrightC{#1}}}
-% \newcommand*{\strdtubepartunrightC}[1]{\strdtubeundoC@{\strdtubepartrightC{#1}}}
-
 % tubepartright
 \newcommand*{\strdtubepartright}[1]{\strdcomposeC{\strdtubepartrightC{#1}}}
 \newcommand*{\strdtubepartrightC}[3]{% {xscale}{newid}{previd}
-    \Compose\strdflip@{
+    \strdflip@{
         \strdmidC{#2 Right}{#3 Right}
-        %\strdtubepart@{#2}{#3 Right}
         \strdjumpC{#2}{#3}
         \strdtubepartleftrightC{#1}{#2 Left}{#3 Right}
     }%
@@ -691,13 +610,9 @@
 % tubepartmid
 \newcommand*{\strdtubepartmid}[2]{\strdcomposeC{\strdtubepartmidC{#1}{#2}}}
 \newcommand*{\strdtubepartmidC}[4]{% {lscale}{rscale}{newid}{previd}
-%    \strdtube@{
-        \strdflip@{
-            \strdtubepartmidrightC{#1}{#3 Left}{#4}
-        }
-        \strdjumpC{#3}{#4}
-        \strdtubepartmidrightC{#2}{#3 Right}{#4}
-%    }%
+    \strdflip@{ \strdtubepartmidrightC{#1}{#3 Left}{#4} }
+    \strdjumpC{#3}{#4}
+    \strdtubepartmidrightC{#2}{#3 Right}{#4}%
 }
 \newcommand*{\strdtubepartmidrightC}[3]{% {xscale}{newid}{previd}
     \strdxscale@{#1}{
@@ -716,13 +631,9 @@
 % tubepartclose
 \newcommand*{\strdtubepartclose}[2]{\strdcomposeC{\strdtubepartcloseC{#1}{#2}}}
 \newcommand*{\strdtubepartcloseC}[4]{% {lscale}{rscale}{newid}{previd}
-%    \strdtube@{
-        \strdflip@{
-            \strdtubepartcloserightC{#1}{#3 Left}{#4}
-        }
-        \strdjumpC{#3}{#4}
-        \strdtubepartcloserightC{#2}{#3 Right}{#4}
-%    }%
+    \strdflip@{ \strdtubepartcloserightC{#1}{#3 Left}{#4} }
+    \strdjumpC{#3}{#4}
+    \strdtubepartcloserightC{#2}{#3 Right}{#4}%
 }
 \newcommand*{\strdtubepartcloserightC}[3]{% {xscale}{newid}{previd}
     \strdxscale@{#1}{
@@ -842,10 +753,8 @@
 % tubeclose
 \newcommand*{\strdtubeclose}{\strdcomposeC\strdtubecloseC}
 \newcommand*{\strdtubecloseC}[2]{% {newid}{previd}
-%    \strdtube@{
-        \strdtubejumpC{#1}{#2}
-        \strddraw@{ (#1 Left Start) -- (#1 Left) -- (#1 Right) -- (#1 Right Start) }%
-%    }%
+    \strdtubejumpC{#1}{#2}
+    \strddraw@{ (#1 Left Start) -- (#1 Left) -- (#1 Right) -- (#1 Right Start) }%
 }
 \newcommand*{\strdtubeunclose}{\strdcomposeC\strdtubeuncloseC}
 \newcommand*{\strdtubeuncloseC}{\strdtubeundoC@\strdtubecloseC}
@@ -861,9 +770,7 @@
 \newcommand*{\strdtubebound}{\strdtubeboundof{strd tubebound}}
 \newcommand*{\strdtubeboundof}{\Compose\strdwith\strdputtubeboundof}
 \newcommand*{\strdputtubeboundof}[2]{%
-%    \strdtube@{
-        \draw[strd draw,#1]{ (#2 Left End) -- (#2 Right End) };
-%    }%
+    \draw[strd draw,#1]{ (#2 Left End) -- (#2 Right End) };%
 }
 
 % twincell
@@ -880,10 +787,6 @@
 }
 
 % twinsymbol
-\tikzset{strd twinsymbolbase/.style={sharp corners,thin,draw=black,fill=white,minimum size=2.8pt,inner sep=0pt}}
-% \tikzset{strd twincdot/.style={strd twinsymbolbase,circle,fill=black}}
-% \tikzset{strd twincirc/.style={strd twinsymbolbase,circle}}
-% \tikzset{strd twinsymbolq/.style={strd twinsymbolbase,rectangle,sharp corners}}
 \tikzset{strd circ left/.style={strd twincellleft,minimum size=4pt}}
 \tikzset{strd circ right/.style={strd twincellright,minimum size=4pt}}
 \tikzset{strd cdot left/.style={strd circ left,fill=black}}
