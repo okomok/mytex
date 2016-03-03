@@ -18,23 +18,24 @@
     \myitem &
     \strdgathered{
         \strdfork{
-            \strdyscale{1.5}\strdmid
-            ,\strdcell{}
+            \strdyscale{1}\strdmid
+            ,\strdcell{?}
             ,\strdmid,\strdrlabel{A}
         }
         ,\strdtubestart
         ,\strdtubebound
-        ,\strdtubemid
+        ,\strdtube{
+            \strdtubemid
+        }
         ,\strdat{Left}{\strdoverlabel{F}}
         ,\strdtwincell{\tau}
-        ,\strdscope{strd default}{
+        ,\strdscope{strd frame}{
             \strdxscale{0.7}{
                 \strdsymlr\strdlcorner
-                ,\strdsymlr{\strdyhalf\strdmid}
                 ,\strdsymlr\strdunlcorner
             }
         }
-        ,\strdtubeboundof{strd default}
+        ,\strdtubeboundof{strd frame}
     } \mydefeq
     \Lambda_X\Lambda_f
     \strdgathered{
@@ -43,14 +44,14 @@
         }
         ,\strdtubestart
         ,\strdtubebound
-        ,\strdtubemid
+        ,\strdtube\strdtubemid
         ,\strdat{Left}{\strdoverlabel{F}}
         ,\strdframearound
         ,\strdbox{1.2}{1.2}{
             \strdmid
             ,\strdcell{f}
             ,\strdmid,\strdrlabel{A}
-        },\strdat{Left}{\strdoverlabel{\tau}}
+        },\strdat{Left}{\strdcellof{strd overlabel,font=\normalsize}{\tau}}
     }
 }
 
@@ -65,14 +66,14 @@
         }
         ,\strdtubestart
         ,\strdtubebound
-        ,\strdyscale{2}\strdtubemid
+        ,\strdtube{\strdyscale{2}\strdtubemid}
         ,\strdat{Left}{\strdoverlabel{F}}
         ,\strdframearound
         ,\strdbox{1.2}{1.2}{
             \strdmid
             ,\strdcell{f}
             ,\strdmid,\strdrlabel{A}
-        },\strdat{Left}{\strdoverlabel{\tau}}
+        },\strdat{Left}{\strdcellof{strd overlabel,font=\normalsize}{\tau}}
     } =
     \strdgathered{
         \strdfork{
@@ -80,7 +81,7 @@
         }
         ,\strdtubestart
         ,\strdtubebound
-        ,\strdtubemid
+        ,\strdtube\strdtubemid
         ,\strdat{Left}{\strdoverlabel{F}}
         ,\strdframearound
         ,\strdbox{1.2}{1.2}{
@@ -89,7 +90,7 @@
             ,\strdmid,\strdrlabel{X}
             ,\strdcell{f}
             ,\strdmid,\strdrlabel{A}
-        },\strdat{Left}{\strdoverlabel{\tau}}
+        },\strdat{Left}{\strdcellof{strd overlabel,font=\normalsize}{\tau}}
     }
 }
 
@@ -99,51 +100,54 @@
     \myitem &
     \strdgathered{
         \strdfork{
-            \strdmid
-            ,\strdcell{}
+            \strdyscale{1}\strdmid
+            ,\strdcell{?}
             ,\strdmid,\strdrlabel{A}
         }
         ,\strdtubestart
         ,\strdtubebound
-        ,\strdyhalf\strdtubemid
+        ,\strdtube{
+            \strdtubemid
+        }
         ,\strdtwincell{\tau}
-        ,\strdscope{strd default}{
+        ,\strdscope{strd frame}{
             \strdxscale{0.7}{
                 \strdsymlr\strdlcorner
-                ,\strdsymlr{\strdyhalf\strdmid}
                 ,\strdsymlr\strdunlcorner
             }
         }
-        ,\strdtubeboundof{strd default}
+        ,\strdtubeboundof{strd frame}
     } \overset{\varphi}{\mapsto}
     \strdgathered{
         \strdfork{
-            \strdyhalf\strdmid
+            \strdmid
             ,\strdmid,\strdrlabel{A}
         }
         ,\strdtubestart
         ,\strdtubebound
-        ,\strdyhalf\strdtubemid
+        ,\strdtube{\strdtubemid}
         ,\strdtwincell{\tau}
-        ,\strdscope{strd default}{
+        ,\strdscope{strd frame}{
             \strdxscale{0.7}{
                 \strdsymlr\strdlcorner
                 ,\strdsymlr\strdunlcorner
             }
         }
-        ,\strdtubeboundof{strd default}
+        ,\strdtubeboundof{strd frame}
     } \\
     \myitem &
     \strdgathered{
         \strdfork{
             \strdmid
-            ,\strdcell{}
+            ,\strdcell{?}
             ,\strdmid,\strdrlabel{A}
         }
         ,\strdtubestart
         ,\strdtubebound
-        ,\strdtubemid
-        ,\strdtubemid
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtubemid
+        }
         ,\strdwidecell{1}{1}{a}
     } \mymapsfrom
     \strdgathered{
@@ -153,7 +157,7 @@
         }
         ,\strdtubestart
         ,\strdtubebound
-        ,\strdtubemid
+        ,\strdtube\strdtubemid
         ,\strdwidecell{1}{1}{a}
     }
 }
@@ -164,42 +168,49 @@
     \strdgathered{
         \strdfork{
             \strdyscale{1.5}\strdmid
-            ,\strdat{Mid}{\strdcell{}}
+            ,\strdat{Mid}{\strdcell{?}}
             ,\strdmid
         }
         ,\strdtubestart,\strdtubebound
-        ,\strdyscale{1.5}\strdtubemid
+        ,\strdtube{\strdyscale{1.5}\strdtubemid}
         ,\strdtwincell{\tau}
-        ,\strdxscale{0.7}{
-            \strdsymlr\strdlcorner
-            ,\strdsymlr\strdunlcorner
+        ,\strdscope{strd frame}{
+            \strdxscale{0.7}{
+                \strdsymlr\strdlcorner
+                ,\strdsymlr\strdunlcorner
+            }
         }
-        ,\strdtubeboundof{strd default}
+        ,\strdtubeboundof{strd frame}
     } =
     \strdgathered{
         \strdfork{
-            \strdyhalf\strdmid
+            \strdmid
+            ,\strdcell{?}
             ,\strdmid
-            ,\strdat{Mid}{\strdcell{}}
         }
-        ,\strdtubestart,\strdtubebound
-        ,\strdyhalf\strdtubemid
+        ,\strdtubestart
+        ,\strdtubebound
+        ,\strdtube{
+            \strdtubemid
+        }
         ,\strdtwincell{\tau}
-        ,\strdxscale{0.7}{
-            \strdsymlr\strdlcorner
-            ,\strdsymlr\strdunlcorner
+        ,\strdscope{strd frame}{
+            \strdxscale{0.7}{
+                \strdsymlr\strdlcorner
+                ,\strdsymlr\strdunlcorner
+            }
         }
-        ,\strdtubeboundof{strd default}
-    }\\
+        ,\strdtubeboundof{strd frame}
+    } \\
     \myitem &
     \strdgathered{
         \strdfork{
             \strdyscale{1.5}\strdmid
-            ,\strdat{Mid}{\strdcell{}}
+            ,\strdat{Mid}{\strdcell{?}}
         }
         ,\strdtubestart
         ,\strdtubebound
-        ,\strdyscale{1.5}\strdtubemid
+        ,\strdtube{\strdyscale{1.5}\strdtubemid}
         ,\strdwidecell{1}{1}{a}
     } \overset{\varphi}{\mapsto}
     \strdgathered{
@@ -208,7 +219,7 @@
         }
         ,\strdtubestart
         ,\strdtubebound
-        ,\strdtubemid
+        ,\strdtube\strdtubemid
         ,\strdwidecell{1}{1}{a}
     }
 }
@@ -220,31 +231,38 @@
         \strdfork{
             \strdmid
             ,\strdcell{h}
-            ,\strdyhalf\strdmid
+            ,\strdmid
         }
-        ,\strdtubestart,\strdtubebound
-        ,\strdyhalf\strdtubemid
+        ,\strdtubestart
+        ,\strdtubebound
+        ,\strdtube{
+            \strdtubemid
+        }
         ,\strdtwincell{\tau}
-        ,\strdxscale{0.7}{
-            \strdsymlr\strdlcorner
-            ,\strdsymlr\strdunlcorner
+        ,\strdscope{strd frame}{
+            \strdxscale{0.7}{
+                \strdsymlr\strdlcorner
+                ,\strdsymlr\strdunlcorner
+            }
         }
-        ,\strdtubeboundof{strd default}
-    } =
+        ,\strdtubeboundof{strd frame}
+    } = 
     \strdgathered{
         \strdfork{
-            \strdmid
+            \strdyscale{1.5}\strdmid
             ,\strdat{Mid}{\strdcell{h}}
             ,\strdmid
         }
         ,\strdtubestart,\strdtubebound
-        ,\strdtubemid
+        ,\strdtube{\strdyscale{1.5}\strdtubemid}
         ,\strdtwincell{\tau}
-        ,\strdxscale{0.7}{
-            \strdsymlr\strdlcorner
-            ,\strdsymlr\strdunlcorner
+        ,\strdscope{strd frame}{
+            \strdxscale{0.7}{
+                \strdsymlr\strdlcorner
+                ,\strdsymlr\strdunlcorner
+            }
         }
-        ,\strdtubeboundof{strd default}
+        ,\strdtubeboundof{strd frame}
     }
 }
 
@@ -255,17 +273,19 @@
         \strdfork{
             \strdyscale{1.5}\strdmid
             ,\strdmid
-            ,\strdat{Mid}{\strdcell{}}
+            ,\strdat{Start}{\strdcell{?}}
         }
         ,\strdtubestart,\strdtubebound
-        ,\strdyscale{1.5}\strdtubemid
+        ,\strdtube{\strdyscale{1.5}\strdtubemid}
         ,\strdtubeat{Mid}{\strdtwincell{\sigma}}
         ,\strdtwincell{\tau}
-        ,\strdxscale{0.7}{
-            \strdsymlr\strdlcorner
-            ,\strdsymlr\strdunlcorner
+        ,\strdscope{strd frame}{
+            \strdxscale{0.7}{
+                \strdsymlr\strdlcorner
+                ,\strdsymlr\strdunlcorner
+            }
         }
-        ,\strdtubeboundof{strd default}
+        ,\strdtubeboundof{strd frame}
     } \overset{\varphi}{\mapsto}
     \strdgathered{
         \strdfork{
@@ -273,14 +293,16 @@
             ,\strdmid
         }
         ,\strdtubestart,\strdtubebound
-        ,\strdyscale{1.5}\strdtubemid
+        ,\strdtube{\strdyscale{1.5}\strdtubemid}
         ,\strdtubeat{Mid}{\strdtwincell{\sigma}}
         ,\strdtwincell{\tau}
-        ,\strdxscale{0.7}{
-            \strdsymlr\strdlcorner
-            ,\strdsymlr\strdunlcorner
+        ,\strdscope{strd frame}{
+            \strdxscale{0.7}{
+                \strdsymlr\strdlcorner
+                ,\strdsymlr\strdunlcorner
+            }
         }
-        ,\strdtubeboundof{strd default}
+        ,\strdtubeboundof{strd frame}
     }
 }
 
