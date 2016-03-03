@@ -750,14 +750,12 @@
     \strddraw@{ (#1 Start) -- (#1 StartCorner) -- (#1 EndCorner) -- (#1 End) }%
 }
 
-% tubeclose
-\newcommand*{\strdtubeclose}{\strdcomposeC\strdtubecloseC}
-\newcommand*{\strdtubecloseC}[2]{% {newid}{previd}
+% tubejoin
+\newcommand*{\strdtubejoin}{\strdcomposeC\strdtubejoinC}
+\newcommand*{\strdtubejoinC}[2]{% {newid}{previd}
     \strdtubejumpC{#1}{#2}
     \strddraw@{ (#1 Left Start) -- (#1 Left) -- (#1 Right) -- (#1 Right Start) }%
 }
-\newcommand*{\strdtubeunclose}{\strdcomposeC\strdtubeuncloseC}
-\newcommand*{\strdtubeuncloseC}{\strdtubeundoC@\strdtubecloseC}
 
 % tubeend
 \newcommand*{\strdtubeend}{\strdcomposeC\strdtubeendC}
@@ -766,12 +764,16 @@
 }
 
 % tubebound
-\tikzset{strd tubebound/.style={strd default,dash pattern=on 2pt off 2pt}}
-\newcommand*{\strdtubebound}{\strdtubeboundof{strd tubebound}}
-\newcommand*{\strdtubeboundof}{\Compose\strdwith\strdputtubeboundof}
-\newcommand*{\strdputtubeboundof}[2]{%
-    \draw[strd draw,#1]{ (#2 Left End) -- (#2 Right End) };%
+\tikzset{strd cutoff/.style={strd default,dash pattern=on 2pt off 2pt}}
+\newcommand*{\strdcutoff}{\strdpathis{strd cutoff}}
+\newcommand*{\strdtubebound}{\strdwith\strdputtubebound}
+\newcommand*{\strdputtubebound}[1]{%
+    \draw[strd draw]{ (#1 Left End) -- (#1 Right End) };%
 }
+
+% tubeopen/tubeclose
+\newcommand*{\strdtubeopen}{\Then\strdtubestart{\strdcutoff\strdtubebound}}
+\newcommand*{\strdtubeclose}{\Then{\strdcutoff\strdtubebound}\strdtubeend}
 
 % twincell
 \tikzset{strd twincellbase/.style={strd cellbase,sharp corners,rounded rectangle}}
