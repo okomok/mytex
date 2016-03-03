@@ -1,0 +1,184 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+% Yoneda bijection
+\In{preview,math,aligned}{
+    \myitem & F : \mathcal{C} ^ {\operatorname{op}} \to \mathcal{S}et \\
+    \myitem & \varphi : \operatorname{Nat} _ X (\operatorname{Hom}(X,A),FX) \cong FA \\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid
+            ,\strdcell{\strdupsidedown{?}}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtubestart
+        ,\strdtubebound
+        ,\strdtube{
+            \strdtubemid
+        }
+        ,\strdtwincell{\tau}
+        ,\strdscope{strd frame}{
+            \strdxscale{0.7}{
+                \strdsymlr\strdlcorner
+                ,\strdsymlr\strdunlcorner
+            }
+        }
+        ,\strdtubeboundof{strd frame}
+    } \overset{\varphi}{\mapsto}
+    \strdgathered{
+        \strdfork{
+            \strdmid
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtubestart
+        ,\strdtubebound
+        ,\strdtube{
+            \strdtubemid
+        }
+        ,\strdtwincell{\tau}
+        ,\strdscope{strd frame}{
+            \strdxscale{0.7}{
+                \strdsymlr\strdlcorner
+                ,\strdsymlr\strdunlcorner
+            }
+        }
+        ,\strdtubeboundof{strd frame}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdfork{
+            \strdmid
+            ,\strdcell{\strdupsidedown{?}}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtubestart
+        ,\strdtubebound
+        ,\strdtube{
+            \strdtubemid
+            ,\strdtubemid
+        }
+        ,\strdwidecell{1}{1}{a}
+    } \mymapsfrom
+    \strdgathered{
+        \strdfork{
+            \strdmid
+            ,\strdrlabel{A}
+        }
+        ,\strdtubestart
+        ,\strdtubebound
+        ,\strdtube{
+            \strdtubemid
+        }
+        ,\strdwidecell{1}{1}{a}
+    }
+}
+
+
+% Yoneda embedding
+\In{preview,math,aligned}{
+    \myitem &
+    \Lambda_A\Lambda_X \operatorname{Hom}(X,A) : \mathcal{C} \to [\mathcal{C}^{\operatorname{op}},\mathcal{S}et] \\
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdcell{f}
+        ,\strdmid,\strdrlabel{A}
+    } \mapsto
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdcell{f}
+        ,\strdmid,\strdrlabel{A}
+        ,\strdcell{?}
+        ,\strdmid
+    }
+}
+
+% Signature
+\In{preview,math,aligned}{
+    \myitem &
+    \Compose\strdgathered\strdinv{
+        \strdfork{
+            \strdyhalf\strdmid
+            ,\strdcell{\Identity{?}}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtubestart
+        ,\strdtube{
+            \strdyhalf\strdtubejump
+        }
+        ,\strdtwincell{\tau}
+        ,\strdscope{strd frame}{
+            \strdxscale{0.7}{
+                \strdsymlr\strdlcorner
+                ,\strdsymlr\strdunlcorner
+            }
+        }
+        ,\strdtubeboundof{strd frame}
+        ,\strdyhalf\strdmid,\strdrlabel{B}
+    }
+}
+
+% Yoneda lemma for embedding
+\In{preview,math,aligned}{
+    \myitem & \varphi : \operatorname{Nat} _ X (\operatorname{Hom}(X,A),\operatorname{Hom}(X,B)) \cong \operatorname{Hom}(A,B) \\
+    \myitem &
+    \Compose\strdgathered\strdinv{
+        \strdfork{
+            \strdyhalf\strdmid
+            ,\strdcell{\Identity{?}}
+            ,\strdmid,\strdrlabel{A}
+        }
+        ,\strdtubestart
+        ,\strdtube{
+            \strdyhalf\strdtubejump
+        }
+        ,\strdtwincell{\tau}
+        ,\strdscope{strd frame}{
+            \strdxscale{0.7}{
+                \strdsymlr\strdlcorner
+                ,\strdsymlr\strdunlcorner
+            }
+        }
+        ,\strdtubeboundof{strd frame}
+        ,\strdyhalf\strdmid,\strdrlabel{B}
+    } \overset{\varphi}\mapsto
+    \Compose\strdgathered\strdinv{
+        \strdfork{
+            \strdmid
+            ,\strdmid,\strdat{Start}{\strdrlabel{A}}
+        }
+        ,\strdtubestart
+        ,\strdtube{
+            \strdyhalf\strdtubejump
+        }
+        ,\strdtwincell{\tau}
+        ,\strdscope{strd frame}{
+            \strdxscale{0.7}{
+                \strdsymlr\strdlcorner
+                ,\strdsymlr\strdunlcorner
+            }
+        }
+        ,\strdtubeboundof{strd frame}
+        ,\strdyhalf\strdmid,\strdrlabel{B}
+    } \\
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdcell{f}
+        ,\strdmid,\strdrlabel{A}
+        ,\strdcell{?}
+        ,\strdmid
+    } \overset{\varphi^{\mathrlap{{\text{-}}1}}}\mymapsfrom
+    \strdgathered{
+        \strdmid,\strdrlabel{B}
+        ,\strdcell{f}
+        ,\strdmid,\strdrlabel{A}
+    }
+}
+
+    
+\end{document}
