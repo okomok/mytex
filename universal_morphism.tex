@@ -1,0 +1,189 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+
+% Signature
+\In{preview,math,aligned}{
+    \myitem &
+    \operatorname{Hom}(x,c) \cong \operatorname{Hom}(Fx,d) \\
+    \myitem &
+    % \strdgathered{
+    %     \strdmid,\strdrlabel{d}
+    %     ,\strdcell{\epsilon}
+    %     ,\strdfork{
+    %         \strdtube{ \strdtubezero
+    %             ,\strdtubesqcap{0.8}{0.8},\strdat{Left}{\strdoverlabel{F}}
+    %             ,\strdtubeendline
+    %         }
+    %     }
+    %     ,\strdmid,\strdrlabel{c}
+    % } \mydefeq
+    \strdgathered{ \strdmid,\strdrlabel{d}
+        ,\strdwidecell{1}{1}{\epsilon}
+        ,\strdfork{
+            \strdmid,\strdrlabel{c}
+        }
+        ,\strdtube{ \strdtubestart
+            ,\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+            ,\strdtubeendline
+        }
+    }\\
+    \myitem&
+    \strdgathered{
+        \strdmid,\strdrlabel{c}
+        ,\strdfork{\strdmid,\strdrlabel{d}
+            ,\strdfork{
+                \strdmid
+            }
+            ,\strdtube{\strdtubestart
+                ,\strdwidecell{1}{1}{g}
+                ,\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+            }
+        }
+        ,\strdtube{\strdtubestart
+            ,\strdtubebound
+            ,\strdtubesqcap{0.8}{0.8}
+            ,\strdtubesqcup{0.8}{0.8}
+            ,\strdtwincell{\epsilon}
+        }
+        ,\strdmid,\strdrlabel{x}
+    } \mydefeq
+    \strdgathered{
+        \strdmid,\strdrlabel{c}
+        ,\strdfork{\strdmid,\strdrlabel{d}
+            ,\strdfork{
+                \strdmid,\strdframearound
+            }
+            ,\strdtube{\strdtubestart
+                ,\strdwidecell{1}{1}{g}
+                ,\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+            }
+        }
+        ,\strdtube{\strdtubestart
+            ,\strdtubebound
+            ,\strdtubesqcap{0.8}{0.8},\strdat{Left End}{\strdoverlabel{\cong}}
+            ,\strdtubesqcup{0.8}{0.8}
+            ,\strdtubebound
+        }
+        ,\strdmid,\strdrlabel{x}
+    }
+}
+
+% universality
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{d}
+        ,\strdwidecell{1}{1}{\epsilon}
+        ,\strdfork{
+            \strdtube{ \strdtubestart
+                ,\strdtubemid,\strdat{Left End}{\strdoverlabel{F}}
+                ,\strdtubemid
+                ,\strdtubeendline
+            }
+        }
+        ,\strdmid,\strdrlabel{c}
+        ,\strdcell{f}
+        ,\strdmid,\strdrlabel{x}
+    } =
+    \strdgathered{\strdmid,\strdrlabel{d}
+        ,\strdwidecell{1}{1}{g}
+        ,\strdfork{\strdmid,\strdrlabel{x}}
+        ,\strdtube{\strdtubestart
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    } \iff
+    \strdgathered{\strdmid,\strdrlabel{c}
+        ,\strdcell{f}
+        ,\strdmid,\strdrlabel{x}
+    } =
+    \strdgathered{
+        \strdmid,\strdrlabel{c}
+        ,\strdfork{\strdmid,\strdrlabel{d}
+            ,\strdfork{
+                \strdmid
+            }
+            ,\strdtube{\strdtubestart
+                ,\strdwidecell{1}{1}{g}
+                ,\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+            }
+        }
+        ,\strdtube{\strdtubestart
+            ,\strdtubebound
+            ,\strdtubesqcap{0.8}{0.8}
+            ,\strdtubesqcup{0.8}{0.8}
+            ,\strdtwincell{\epsilon}
+        }
+        ,\strdmid,\strdrlabel{x}
+    }
+}
+
+% bijectivity
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdmid,\strdrlabel{d}
+        ,\strdwidecell{2.5}{2.5}{\epsilon}
+        ,\strdfork{
+            \strdtube{ \strdtubestart
+                ,\strdtubeextend{1.5}{1.5}
+                ,\strdyscale{4}\strdtubemid
+                ,\strdtubeendline
+            }
+        }
+        ,\strdmid,\strdrlabel{c}
+        ,\strdfork{\strdmid,\strdrlabel{d}
+            ,\strdfork{
+                \strdmid
+            }
+            ,\strdtube{\strdtubestart
+                ,\strdwidecell{1}{1}{g}
+                ,\strdtubemid
+            }
+        }
+        ,\strdtube{\strdtubestart
+            ,\strdtubebound
+            ,\strdtubesqcap{0.8}{0.8}
+            ,\strdtubesqcup{0.8}{0.8}
+            ,\strdtwincell{\epsilon}
+        }
+        ,\strdmid,\strdrlabel{x}
+    } =
+    \strdgathered{\strdmid,\strdrlabel{d}
+        ,\strdwidecell{1}{1}{g}
+        ,\strdfork{\strdmid,\strdrlabel{x}}
+        ,\strdtube{\strdtubestart
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    }\\
+    \myitem&
+    \strdgathered{\strdmid,\strdrlabel{c}
+        ,\strdfork{\strdmid,\strdrlabel{d}
+            ,\strdfork{\strdmid
+                ,\strdmid,\strdrlabel{c}
+            }
+            ,\strdtube{\strdtubestart
+                ,\strdwidecell{1}{1}{\epsilon}
+                ,\strdtubemid
+                ,\strdtwincell{\epsilon}
+            }
+        }
+        ,\strdtube{\strdtubestart
+            ,\strdtubebound
+            ,\strdtubesqcap{1}{1}
+            ,\strdtubesqcup{1}{1}
+        }
+    } =\
+    \strdgathered{\strdmid,\strdrlabel{c}
+    } 
+}
+
+
+
+\end{document}
+

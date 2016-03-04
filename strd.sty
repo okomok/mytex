@@ -491,6 +491,13 @@
     \strdempty@{#1 Right}{$(#2 End)+(\strdtubexhalfunit,0)$}
 }
 
+\newcommand*{\strdtubezero}{\strdcomposeC\strdtubezeroC}
+\newcommand*{\strdtubezeroC}[2]{% {newid}{previd}
+    \strdempty@{#1 Left}{#2 End}
+    \strdempty@{#1}{#2 End}
+    \strdempty@{#1 Right}{#2 End}
+}
+
 % helpers
 \newcommand*{\strdtubeundoC@}[3]{% {sc}{newid}{previd}
     \strdtubejumpC{#2 Jump}{#3}
@@ -771,9 +778,9 @@
     \draw[strd draw]{ (#1 Left End) -- (#1 Right End) };%
 }
 
-% tubeopen/tubeclose
-\newcommand*{\strdtubeopen}{\Then\strdtubestart{\strdcutoff\strdtubebound}}
-\newcommand*{\strdtubeclose}{\Then{\strdcutoff\strdtubebound}\strdtubeend}
+% tubestartline/endline
+\newcommand*{\strdtubestartline}{\Then\strdtubestart{\strdcutoff\strdtubebound}}
+\newcommand*{\strdtubeendline}{\Then{\strdcutoff\strdtubebound}\strdtubeend}
 
 % twincell
 \tikzset{strd twincellbase/.style={strd cellbase,sharp corners,rounded rectangle}}
