@@ -1,0 +1,96 @@
+\documentclass{article}
+\usepackage{strd,cat,my}
+\usepackage[active,tightpage]{preview}
+\usetikzlibrary{shapes.geometric}
+
+\begin{document}
+
+% Hom functors
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{ \strdfork{
+            \strdmid,\strdrlabel{b}
+            ,\strdcell{f}
+            ,\strdmid,\strdrlabel{a}
+        }
+        ,\strdtube{\strdtubestartline
+            ,\strdtubemid
+            ,\strdat{Left End}{\strdoverlabel{\strdlvert{\operatorname{Hom}(d,\texttt{-})}}}
+            ,\strdtubemid
+            ,\strdtubeendline
+        }
+    } =
+    \strdgathered{
+        \strdroad\strdmid,\strdroadlabel{b}{},\strdat{End}{\strdroadlabel{}{d}}
+        ,\strdfork{
+            \strdyhalf{\strdroad\strdleft},\strdcell{f}
+        }
+        ,\strdroad\strdmid,\strdroadlabel{a}{}
+    }
+}
+
+% HPL
+\In{preview,math,aligned}{
+     &
+    \strdgathered{
+        \strdroad\strdmid,\strdroadlabel{Fx}{d}%,\strdat{End}{\strdroadlabel{}{d}}
+        ,\strdfork{
+            \Identity{\strdroad\strdleft},\strdcell{\scriptstyle\lim_x}
+        }
+        ,\strdroad\strdright,\strdroadlabel{{\lim}F}{}
+        ,\strdcell{h}
+        ,\strdmid,\strdrlabel{a}
+    } = 
+    \strdgathered{
+        \strdroad\strdmid,\strdroadlabel{Fx}{d}
+        ,\strdcell{v}
+        ,\strdmid,\strdrlabel{a}
+    } \\
+    \iff &
+    \strdgathered{
+        \strdmid,\strdrlabel{Fx}
+        ,\strdcell{\scriptstyle\lim _x}
+        ,\strdmid,\strdrlabel{{\lim}F}
+        ,\strdcell{h}
+        ,\strdfork{
+            \strdleft,\strdrlabel{a}
+        }
+        ,\strdright,\strdrlabel{d}
+    } =
+    \strdgathered{
+        \strdmid,\strdrlabel{Fx}
+        ,\strdcell{v}
+        ,\strdfork{
+            \strdleft,\strdrlabel{a}
+        }
+        ,\strdright,\strdrlabel{d}
+    } \\
+    \iff &
+    \strdgathered{
+        \strdmid,\strdrlabel{{\lim}F}
+        ,\strdcell{h}
+        ,\strdfork{
+            \strdleft,\strdrlabel{a}
+        }
+        ,\strdright,\strdrlabel{d}
+    } =
+    \strdgathered{
+        \strdmid,\strdrlabel{{\lim}F}
+        ,\strdbox{1.8}{1.8}{
+            \strdmid,\strdrlabel{Fx}
+            ,\strdcell{v}
+            ,\strdfork{
+                \strdleft,\strdrlabel{}
+                ,\strdframearound
+                ,\strdmid,\strdrlabel{a}
+            }
+            ,\strdright,\strdrlabel{}
+        }
+        ,\strdat{Left StartCorner}{\strdoverlabel{{\lim}\strdrlap{_x}}}
+        ,\strdframearound
+        ,\strdmid,\strdrlabel{d}
+    }
+}
+
+
+\end{document}
