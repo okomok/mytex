@@ -779,6 +779,19 @@
     \draw[strd draw]{ (#1 Left End) -- (#1 Right End) };%
 }
 
+% tubebackground
+\newcommand*{\strdbackground}{\Compose\strdwith\strdputbackground}
+\newcommand*{\strdputbackground}[2]{%
+    \strdonlayer@{background}{
+        \fill[sharp corners,draw,#1]{
+            ($(#2 Left Start)+(0,\strdnoiseunit)$)
+            -- ($(#2 Left End)-(0,\strdnoiseunit)$)
+            -- ($(#2 Right End)-(0,\strdnoiseunit)$)
+            -- ($(#2 Right Start)+(0,\strdnoiseunit)$)
+        };
+    }%
+}
+
 % tubestartline/endline
 \newcommand*{\strdtubestartline}{\Then\strdtubestart{\strdcutoff\strdtubebound}}
 \newcommand*{\strdtubeendline}{\Then{\strdcutoff\strdtubebound}\strdtubeend}
