@@ -5,9 +5,24 @@
 
 \begin{document}
 
+\tikzset{cone/.style={strd widecellbase,%
+    trapezium,trapezium stretches body,trapezium left angle=110,trapezium right angle=110}}
+
 % Hom functors
 \In{preview,math,aligned}{
     \myitem &
+    \strdgathered{
+        \strdtubeof{}{
+            \strdtubestartline
+            ,\strdtubemid
+            ,\strdat{Left}{\strdrlabel{b}}
+            ,\strdat{Left End}{\strdcell{f}}
+            ,\strdat{Right End}{\strdrlabel{d}}
+            ,\strdtubemid
+            ,\strdat{Left}{\strdrlabel{a}}
+            ,\strdtubeendline
+        }
+    } \mydefeq
     \strdgathered{ \strdfork{
             \strdmid,\strdrlabel{b}
             ,\strdcell{f}
@@ -19,13 +34,6 @@
             ,\strdtubemid
             ,\strdtubeendline
         }
-    } =
-    \strdgathered{
-        \strdroad\strdmid,\strdroadlabel{b}{},\strdat{End}{\strdroadlabel{}{d}}
-        ,\strdfork{
-            \strdyhalf{\strdroad\strdleft},\strdcell{f}
-        }
-        ,\strdroad\strdmid,\strdroadlabel{a}{}
     }
 }
 
@@ -33,63 +41,96 @@
 \In{preview,math,aligned}{
      &
     \strdgathered{
-        \strdroad\strdmid,\strdroadlabel{Fx}{d}%,\strdat{End}{\strdroadlabel{}{d}}
-        ,\strdfork{
-            \Identity{\strdroad\strdleft},\strdcell{\scriptstyle\lim_x}
+        \strdtubeof{}{
+            \strdtubestartline
+            ,\strdtubemid
+            ,\strdat{Left}{\strdrlabel{Fx}}
+            ,\strdat{Left End}{\strdcell{\scriptstyle\lim_x}}
+            ,\strdat{Right End}{\strdrlabel{d}}
+            ,\strdtubemid
+            ,\strdat{Left}{\strdrlabel{{\lim}F}}
+            ,\strdtubeendline
         }
-        ,\strdroad\strdright,\strdroadlabel{{\lim}F}{}
-        ,\strdcell{h}
+        ,\strdwidecell{1}{1}{h}
         ,\strdmid,\strdrlabel{a}
     } = 
     \strdgathered{
-        \strdroad\strdmid,\strdroadlabel{Fx}{d}
-        ,\strdcell{v}
+        \strdtubeof{}{
+            \strdtubestartline
+            ,\strdtubemid
+            ,\strdat{Left}{\strdrlabel{Fx}}
+            ,\strdat{Right}{\strdrlabel{d}}
+        }
+        ,\strdwidecellof{cone}{1}{1}{v}
         ,\strdmid,\strdrlabel{a}
     } \\
-    \iff &
+    \underset{\myreason{curry}}{\iff} &
     \strdgathered{
-        \strdmid,\strdrlabel{Fx}
-        ,\strdcell{\scriptstyle\lim _x}
-        ,\strdmid,\strdrlabel{{\lim}F}
-        ,\strdcell{h}
+        \strdfork{
+            \strdyhalf\strdmid,\strdrlabel{x}
+            ,\strdsymbol{strd triangledown}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+        }
+        ,\strdwidecell{1}{1}{h}
         ,\strdfork{
             \strdleft,\strdrlabel{a}
         }
         ,\strdright,\strdrlabel{d}
     } =
     \strdgathered{
-        \strdmid,\strdrlabel{Fx}
-        ,\strdcell{v}
+        \strdfork{
+            \strdmid,\strdrlabel{x}
+        }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+        }
+        ,\strdwidecellof{cone}{1}{1}{v}
         ,\strdfork{
             \strdleft,\strdrlabel{a}
         }
         ,\strdright,\strdrlabel{d}
     } \\
-    \iff &
+    \underset{\myreason{limit}}{\iff} &
     \strdgathered{
-        \strdmid,\strdrlabel{{\lim}F}
-        ,\strdcell{h}
+        \strdtube{
+            \strdtubestartline
+            ,\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+        }
+        ,\strdwidecell{1}{1}{h}
         ,\strdfork{
             \strdleft,\strdrlabel{a}
         }
         ,\strdright,\strdrlabel{d}
     } =
     \strdgathered{
-        \strdmid,\strdrlabel{{\lim}F}
-        ,\strdbox{1.8}{1.8}{
-            \strdmid,\strdrlabel{Fx}
-            ,\strdcell{v}
+        \strdfork{
+            \strdyhalf\strdjump
             ,\strdfork{
-                \strdleft,\strdrlabel{}
-                ,\strdframearound
-                ,\strdmid,\strdrlabel{a}
+                \strdmid,\strdrlabel{x}
             }
-            ,\strdright,\strdrlabel{}
+            ,\strdyhalf{
+                \strdtubeof{}{
+                    \strdtubestart
+                    ,\strdtubebound
+                    ,\strdtubesqcap{0.8}{0.8}
+                    ,\strdtubesqcup{0.8}{0.8}
+                }
+            }
         }
-        ,\strdat{Left StartCorner}{\strdoverlabel{{\lim}\strdrlap{_x}}}
-        ,\strdframearound
-        ,\strdmid,\strdrlabel{d}
-    }
+        ,\strdtube{
+            \strdtubestartline
+            ,\strdyscale{1.5}\strdtubemid,\strdat{Left}{\strdoverlabel{F}}
+        }
+        ,\strdwidecellof{cone}{1}{1}{v}
+        ,\strdfork{
+            \strdleft,\strdrlabel{a}
+        }
+        ,\strdright,\strdrlabel{d}
+    } \\
 }
 
 
