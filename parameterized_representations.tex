@@ -1,0 +1,142 @@
+\documentclass{article}
+\usepackage{strd,cat,my,stmaryrd}
+\usepackage[active,tightpage]{preview}
+
+\begin{document}
+
+% Signature
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdtubestart
+        ,\strdfork{
+            \strdtubemid
+            ,\strdfork{\strdemptyat{Right Start},\strdinv{\strdmid,\strdrlabel{X}}}
+            ,\strdfork{\strdemptyat{Left Start},\strdscope{}\strdhleft}
+            ,\strdat{Left}{\strdrlabel{B}}
+            ,\strdwidecell{2}{2}{?}
+        }
+        ,\strdtubeextend{1}{1}
+        ,\strdtwincell{\tau}
+        ,\strdfork{
+            \strdtube{
+                \strdtubemid
+            }
+        }
+        ,\strdfork{
+            \strdtubeof{strd frame}{
+                \strdtubesqcap{0.8}{0.8}
+                ,\strdyscale{0.7}{\strdtubesqcup{1}{1}}
+                ,\strdtubebound
+                ,\strdtubeend
+            }
+            ,\strdmid,\strdrlabel{S_B}
+        }
+    } \\ 
+    \myitem &
+    \strdgathered{
+        \strdtubestart
+        ,\strdfork{
+            \strdtubemid
+            ,\strdat{Right}{\strdrlabel{X}}
+            ,\strdfork{\strdemptyat{Right End},\strdcell{?},\strdmid,\strdrlabel{S_B}}
+            ,\strdfork{\strdemptyat{Left End},\strdscope{}\strdhleft}
+            ,\strdat{Left}{\strdrlabel{B}}
+        }
+        ,\strdtubeextend{1}{1}
+        ,\strdcutoff\strdtubebound
+        ,\strdfork{
+            \strdtube{
+                \strdtubemid
+                ,\strdtwincell{\tau}
+                ,\strdtubeof{strd frame}{
+                    \strdyhalf{\strdtubesqcap{0.8}{0.8},\strdtubesqcup{1}{1}}
+                    ,\strdtubebound
+                    ,\strdtubeend
+                }
+            }
+        }
+    } \\ 
+    % \myitem &
+    % \strdgathered{
+    %     \strdfork{
+    %         \strdmid,\strdrlabel{X}
+    %         ,\strdcell{?}
+    %         ,\strdmid,\strdrlabel{S_B}
+    %     },
+    %     \strdfork{
+    %         \strdxscale{1}\strdljump
+    %         ,\strdmid,\strdrlabel{B}
+    %         ,\strdhleft
+    %     }
+    %     ,\strdfork{
+    %         \strdtube{
+    %             \strdtubestart
+    %             ,\strdtubeextend{1.3}{0.3},\strdcutoff\strdtubebound
+    %             ,\strdtubemid
+    %             ,\strdtwincell{\tau}
+    %             ,\strdtubeof{}{
+    %                 \strdyhalf{
+    %                     \strdtubesqcap{0.8}{0.8}
+    %                     ,\strdtubesqcup{0.8}{0.8}
+    %                     ,\strdtubebound
+    %                 }
+    %             }
+    %         }
+    %     }
+    % } 
+}
+
+
+% Functor
+\In{preview,math,aligned}{
+    \myitem &
+    \strdgathered{
+        \strdtubestart
+        ,\strdfork{
+            \strdtubemid
+            ,\strdfork{\strdemptyat{Right Start},\strdinv{\strdmid,\strdrlabel{S_{B\myprime}}}}
+            ,\strdfork{\strdemptyat{Left Start},\strdscope{}\strdhleft}
+            ,\strdat{Left}{\strdrlabel{B}}
+            ,\strdat{Left End}{\strdcell{\strdupsidedown{?}}}
+            ,\strdfork{
+                \strdtubemid
+                ,\strdfork{\strdemptyat{Right End},\strdmid}
+                ,\strdfork{\strdemptyat{Left End},\strdscope{}\strdhleft}
+                ,\strdat{Left}{\strdrlabel{B\myprime}}
+            }
+            ,\strdtubeextend{1}{1}
+            ,\strdfork{
+                \strdtube{
+                    \strdtubemid
+                    ,\strdtwincell{\tau}
+                    ,\strdtubeof{strd frame}{
+                        \strdyhalf{\strdtubesqcap{0.8}{0.8},\strdtubesqcup{1}{1}}
+                        ,\strdtubebound
+                        ,\strdtubeend
+                    }
+                }
+            }
+        }
+        ,\strdtubeextend{1}{1}
+        ,\strdtwincell{\tau}
+        ,\strdfork{
+            \strdtube{
+                \strdtubemid
+            }
+        }
+        ,\strdfork{
+            \strdyscale{2}{
+                \strdtubeof{strd frame}{
+                    \strdtubesqcap{1.4}{1.4}
+                    ,\strdyscale{0.7}{\strdtubesqcup{1}{1}}
+                    ,\strdtubebound
+                    ,\strdtubeend
+                }
+            }
+            ,\strdmid,\strdrlabel{S_B}
+        }
+    } \\ 
+}
+
+\end{document}
